@@ -2,7 +2,6 @@ package it.unibo.artrat.game;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.logging.Logger;
 
 import it.unibo.artrat.utils.Converter;
 import it.unibo.artrat.utils.ResourceLoader;
