@@ -20,6 +20,7 @@ repositories { // Where to search for dependencies
 }
 
 dependencies {
+    implementation("org.yaml:snakeyaml:2.3")
     // Suppressions for SpotBugs
     compileOnly("com.github.spotbugs:spotbugs-annotations:4.8.6")
 
@@ -45,7 +46,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass.set("it.unibo.sampleapp.RateAMovie")
+    mainClass.set("it.unibo.artrat.ArtRat")
 }
 
 tasks.test {
