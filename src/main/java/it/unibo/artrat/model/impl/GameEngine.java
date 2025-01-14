@@ -1,4 +1,4 @@
-package it.unibo.artrat.game;
+package it.unibo.artrat.model.impl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
