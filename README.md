@@ -1,4 +1,5 @@
-# Sample Gradle Project
+# OOP24-ArtRat
 
-This is a repository that can be used as a base to develop an OOP project.
-The tools seen in the lab are pre-integrated in the build file.
+ArtRat vuole essere un gioco di azione stealth , ispirato al gioco già esistente
+”Robbery Bob”, in cui il giocatore veste i panni di un ladro d’appartamento
+appassionato di quadri.
