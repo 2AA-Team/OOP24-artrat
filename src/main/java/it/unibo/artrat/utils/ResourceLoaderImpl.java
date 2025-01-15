@@ -2,7 +2,7 @@ package it.unibo.artrat.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
@@ -21,12 +21,13 @@ public final class ResourceLoaderImpl implements ResourceLoader {
      * 
      * @param configPath
      *                   if configPath not represent anything:
-     * @throws FileNotFoundException
+     * @throws IOException
      */
-    public ResourceLoaderImpl(final String configPath) throws FileNotFoundException {
+    public ResourceLoaderImpl(final String configPath) throws IOException {
         final Yaml yaml = new Yaml();
         final InputStream inputStream = new FileInputStream(new File(configPath));
         this.obj = Map.copyOf(yaml.load(inputStream));
+        inputStream.close();
     }
 
     @Override

@@ -1,7 +1,7 @@
 package it.unibo.artrat.model.impl;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import it.unibo.artrat.utils.Converter;
 import it.unibo.artrat.utils.ResourceLoader;
@@ -72,9 +72,9 @@ public final class GameEngine implements Runnable {
     private boolean initiateResources() {
         try {
             resourceLoader = new ResourceLoaderImpl(configPath);
-            return false;
-        } catch (FileNotFoundException e) {
             return true;
+        } catch (IOException e) {
+            return false;
         }
     }
 
