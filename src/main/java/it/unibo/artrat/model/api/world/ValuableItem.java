@@ -7,7 +7,7 @@ import it.unibo.artrat.model.api.GameObject;
  */
 public interface ValuableItem extends GameObject {
     /**
-     * Steal valuable item
+     * Steal valuable item.
      * 
      * @return true: stealed, false: not stealed
      */

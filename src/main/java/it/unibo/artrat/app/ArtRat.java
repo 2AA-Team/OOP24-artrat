@@ -5,11 +5,19 @@ import it.unibo.artrat.model.impl.GameEngine;
 /**
  * Class that rappresents the whole application and starts the game engine.
  */
-public class ArtRat {
+public final class ArtRat {
+    /**
+     * 
+     */
     private ArtRat() {
     }
 
-    public static void main(String[] args) {
+    /**
+     * Main method that starts the application.
+     * 
+     * @param args
+     */
+    public static void main(final String[] args) {
         final Runnable gameEngine = new GameEngine();
         gameEngine.run();
     }

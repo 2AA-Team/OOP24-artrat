@@ -10,7 +10,7 @@ import it.unibo.artrat.utils.ResourceLoaderImpl;
 /**
  * GameEngine is the class designed to manage the game loop.
  */
-public class GameEngine implements Runnable {
+public final class GameEngine implements Runnable {
 
     private enum GameStatus {
         STOPPED, RUNNING
@@ -28,6 +28,9 @@ public class GameEngine implements Runnable {
     private GameStatus status;
     private ResourceLoader resourceLoader;
 
+    /**
+     * Game engine constructor.
+     */
     public GameEngine() {
         this.status = GameStatus.STOPPED;
     }
@@ -42,7 +45,7 @@ public class GameEngine implements Runnable {
      * Game loop method.
      */
     private void mainLoop() {
-        if (initiateResources() != false) {
+        if (initiateResources()) {
             System.exit(1);
         }
         final double drawInterval = Converter.fpsToNanos((int) resourceLoader.getConfig("FPS"));
@@ -64,7 +67,7 @@ public class GameEngine implements Runnable {
     /**
      * Init resources.
      * 
-     * @return
+     * @return true if initialization done succesfully false otherwise
      */
     private boolean initiateResources() {
         try {
@@ -76,11 +79,11 @@ public class GameEngine implements Runnable {
     }
 
     private void render() {
-        System.out.println("render");
+        System.out.println("render"); // NOPMD
     }
 
     private void update() {
-        System.out.println("update");
+        System.out.println("update"); // NOPMD
     }
 
 }

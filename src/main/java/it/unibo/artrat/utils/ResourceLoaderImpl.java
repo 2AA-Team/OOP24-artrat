@@ -12,7 +12,7 @@ import org.yaml.snakeyaml.Yaml;
  * Implementation of a resource loader responsible for fetching and loading
  * resources such as files, configurations, or other data types.
  */
-public class ResourceLoaderImpl implements ResourceLoader {
+public final class ResourceLoaderImpl implements ResourceLoader {
 
     private final Map<String, Object> obj;
 

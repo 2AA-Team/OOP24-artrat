@@ -5,6 +5,12 @@ package it.unibo.artrat.utils;
  */
 public interface ResourceLoader {
 
+    /**
+     * Get the configuration object.
+     * 
+     * @param conf config file
+     * @return configuration object
+     */
     Object getConfig(String conf);
 
 }
