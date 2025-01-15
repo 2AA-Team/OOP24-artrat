@@ -1,11 +1,11 @@
-package it.unibo.artrat.model.impl;
+package it.unibo.artrat.app;
 
 import java.io.File;
 import java.io.IOException;
 
-import it.unibo.artrat.utils.Converter;
-import it.unibo.artrat.utils.ResourceLoader;
-import it.unibo.artrat.utils.ResourceLoaderImpl;
+import it.unibo.artrat.utils.api.ResourceLoader;
+import it.unibo.artrat.utils.impl.Converter;
+import it.unibo.artrat.utils.impl.ResourceLoaderImpl;
 
 /**
  * GameEngine is the class designed to manage the game loop.
@@ -85,5 +85,4 @@ public final class GameEngine implements Runnable {
     private void update() {
         System.out.println("update"); // NOPMD
     }
-
 }

@@ -1,4 +1,4 @@
-package it.unibo.artrat.utils;
+package it.unibo.artrat.utils.impl;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.util.Map;
 
 import org.yaml.snakeyaml.Yaml;
+
+import it.unibo.artrat.utils.api.ResourceLoader;
 
 /***
  * Implementation of a resource loader responsible for fetching and loading

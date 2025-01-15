@@ -1,7 +1,5 @@
 package it.unibo.artrat.app;
 
-import it.unibo.artrat.model.impl.GameEngine;
-
 /**
  * Class that rappresents the whole application and starts the game engine.
  */

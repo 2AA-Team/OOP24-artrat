@@ -1,4 +1,4 @@
-package it.unibo.artrat.utils;
+package it.unibo.artrat.utils.api;
 
 /**
  * ResourceLoader is responsible for fetching and loading data.

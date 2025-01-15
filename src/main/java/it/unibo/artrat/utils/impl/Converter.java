@@ -1,14 +1,10 @@
-package it.unibo.artrat.utils;
+package it.unibo.artrat.utils.impl;
 
 /**
  * Converter class.
  */
 public final class Converter {
     private static final long BILLION = 1_000_000_000;
-
-    private Converter() {
-
-    }
 
     /**
      * Converts nano seconds to FPS.
