@@ -1,10 +1,13 @@
 package it.unibo.artrat.model.api.market;
 
+/**
+ * Class that rappresents the item shop.
+ */
 public interface Shop {
     /**
-     * @param <T>
+     * @param <T>  item type
      * @param item item to buy
      * @return purchased item
      */
-    public <T> T buy(T item);
+    <T> T buy(T item);
 }

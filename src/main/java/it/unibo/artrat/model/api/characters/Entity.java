@@ -1,5 +1,11 @@
 package it.unibo.artrat.model.api.characters;
 
+/**
+ * Class that rappresents every "alive" object.
+ */
 public interface Entity {
-    public void move();
+    /**
+     * Movement handling.
+     */
+    void move();
 }

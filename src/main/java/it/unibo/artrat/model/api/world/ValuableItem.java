@@ -2,8 +2,21 @@ package it.unibo.artrat.model.api.world;
 
 import it.unibo.artrat.model.api.GameObject;
 
+/**
+ * Class that rappresents an item that entities can interact with.
+ */
 public interface ValuableItem extends GameObject {
-    public boolean stealed();
+    /**
+     * Steal valuable item
+     * 
+     * @return true: stealed, false: not stealed
+     */
+    boolean stealed();
 
-    public double getValue();
+    /**
+     * Get the value of the item.
+     * 
+     * @return value of the item
+     */
+    double getValue();
 }

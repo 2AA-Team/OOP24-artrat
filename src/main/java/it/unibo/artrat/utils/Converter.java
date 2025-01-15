@@ -1,13 +1,32 @@
 package it.unibo.artrat.utils;
 
+/**
+ * Converter class.
+ */
 public class Converter {
-    private static final long billion = 1_000_000_000;
+    private Converter() {
 
-    public static int nanosToFps(final int nanos) {
-        return Math.toIntExact(billion / nanos);
     }
 
+    private static final long BILLION = 1_000_000_000;
+
+    /**
+     * Converts nano seconds to FPS.
+     * 
+     * @param nanos
+     * @return int rappresenting FPS
+     */
+    public static int nanosToFps(final int nanos) {
+        return Math.toIntExact(BILLION / nanos);
+    }
+
+    /**
+     * Converts FPS to nano seconds.
+     * 
+     * @param fps
+     * @return nano seconds
+     */
     public static int fpsToNanos(final int fps) {
-        return Math.toIntExact(billion / fps);
+        return Math.toIntExact(BILLION / fps);
     }
 }

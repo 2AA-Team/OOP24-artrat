@@ -8,7 +8,7 @@ import it.unibo.artrat.utils.ResourceLoader;
 import it.unibo.artrat.utils.ResourceLoaderImpl;
 
 /**
- * GameEngine is the class designed to manage the game loop
+ * GameEngine is the class designed to manage the game loop.
  */
 public class GameEngine implements Runnable {
 
@@ -38,11 +38,14 @@ public class GameEngine implements Runnable {
         mainLoop();
     }
 
+    /**
+     * Game loop method.
+     */
     private void mainLoop() {
-        if (InitiateResources() != 0) {
+        if (initiateResources() != false) {
             System.exit(1);
         }
-        double drawInterval = Converter.fpsToNanos((int) resourceLoader.getConfig("FPS"));
+        final double drawInterval = Converter.fpsToNanos((int) resourceLoader.getConfig("FPS"));
         double delta = 0;
         double lastTime = System.nanoTime();
         long currentTime;
@@ -58,12 +61,17 @@ public class GameEngine implements Runnable {
         }
     }
 
-    private int InitiateResources() {
+    /**
+     * Init resources.
+     * 
+     * @return
+     */
+    private boolean initiateResources() {
         try {
             resourceLoader = new ResourceLoaderImpl(configPath);
-            return 0;
+            return false;
         } catch (FileNotFoundException e) {
-            return 1;
+            return true;
         }
     }
 

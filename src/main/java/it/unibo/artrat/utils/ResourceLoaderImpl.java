@@ -14,7 +14,7 @@ import org.yaml.snakeyaml.Yaml;
  */
 public class ResourceLoaderImpl implements ResourceLoader {
 
-    private Map<String, Object> obj;
+    private final Map<String, Object> obj;
 
     /**
      * constructor that load all configPath data.
@@ -23,16 +23,16 @@ public class ResourceLoaderImpl implements ResourceLoader {
      *                   if configPath not represent anything:
      * @throws FileNotFoundException
      */
-    public ResourceLoaderImpl(String configPath) throws FileNotFoundException {
-        Yaml yaml = new Yaml();
-        InputStream inputStream = new FileInputStream(new File(configPath));
+    public ResourceLoaderImpl(final String configPath) throws FileNotFoundException {
+        final Yaml yaml = new Yaml();
+        final InputStream inputStream = new FileInputStream(new File(configPath));
         this.obj = Map.copyOf(yaml.load(inputStream));
     }
 
     @Override
-    public Object getConfig(String conf) {
-        Object ob = obj.get(conf);
-        if (!ob.equals(null)) {
+    public Object getConfig(final String conf) {
+        final Object ob = obj.get(conf);
+        if (ob != null) {
             return obj.get(conf);
         } else {
             throw new IllegalStateException();
