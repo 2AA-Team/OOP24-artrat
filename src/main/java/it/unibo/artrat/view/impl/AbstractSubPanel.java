@@ -2,21 +2,21 @@ package it.unibo.artrat.view.impl;
 
 import javax.swing.JPanel;
 
-import it.unibo.artrat.controller.api.Requester;
+import it.unibo.artrat.controller.api.MainController;
 
 /**
  * abstract class to make panel.
  * each stage have his own panel.
  */
-abstract class AbstractView {
+abstract class AbstractSubPanel {
     protected JPanel panel;
-    protected Requester requester;
+    protected MainController controller;
 
     /**
      * abstract view constructor.
      * initialize the panel
      */
-    AbstractView() {
+    AbstractSubPanel() {
         panel = new JPanel();
     }
 
@@ -34,11 +34,11 @@ abstract class AbstractView {
     public abstract void initComponents();
 
     /**
-     * set the requester to communicate with model.
+     * set the controller to communicate with model.
      * 
-     * @param requester
+     * @param controller
      */
-    public void setSubController(Requester requester) {
-        this.requester = requester;
+    public void setSubController(MainController controller) {
+        this.controller = controller;
     }
 }

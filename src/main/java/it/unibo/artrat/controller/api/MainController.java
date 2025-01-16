@@ -1,5 +1,6 @@
 package it.unibo.artrat.controller.api;
 
+import it.unibo.artrat.model.impl.Request;
 import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.view.api.MainView;
 
@@ -29,6 +30,12 @@ public interface MainController {
     /**
      * @return subcontroller.
      */
-    Requester getRequester();
+    Object getData(Request request);
+
+    /**
+     * 
+     * @param newStage
+     */
+    void setStage(Stage newStage);
 
 }

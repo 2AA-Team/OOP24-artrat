@@ -65,7 +65,7 @@ public class MainViewImpl implements MainView {
 
     @Override
     public void reconduceFromStage() {
-        AbstractView newPanel;
+        AbstractSubPanel newPanel;
         switch (currentStage) {
             case MENU:
                 newPanel = new MenuSubView();
@@ -79,7 +79,7 @@ public class MainViewImpl implements MainView {
             default:
                 throw new IllegalStateException();
         }
-        newPanel.setSubController(this.controller.getRequester());
+        newPanel.setSubController(this.controller);
         frame.setContentPane(newPanel.getPanel());
     }
 }

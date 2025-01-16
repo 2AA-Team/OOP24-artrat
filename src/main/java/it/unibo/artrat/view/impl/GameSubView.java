@@ -6,14 +6,14 @@ import it.unibo.artrat.model.impl.Stage;
 
 import java.awt.BorderLayout;
 
-public class GameSubView extends AbstractView {
+public class GameSubView extends AbstractSubPanel {
 
     @Override
     public void initComponents() {
         panel.setLayout(new BorderLayout());
         JButton jb = new JButton("Game");
         jb.addActionListener((e) -> {
-            requester.setStage(Stage.MENU);
+            controller.setStage(Stage.MENU);
         });
         panel.add(jb);
         panel.setVisible(true);
