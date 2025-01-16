@@ -8,7 +8,6 @@ import it.unibo.artrat.controller.impl.MainControllerImpl;
 import it.unibo.artrat.utils.api.ResourceLoader;
 import it.unibo.artrat.utils.impl.Converter;
 import it.unibo.artrat.utils.impl.ResourceLoaderImpl;
-import it.unibo.artrat.view.api.MainView;
 import it.unibo.artrat.view.impl.MainViewImpl;
 
 /**

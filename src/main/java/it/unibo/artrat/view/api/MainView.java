@@ -30,9 +30,8 @@ public interface MainView {
     void setStage(Stage currentStage);
 
     /**
-     * temporary method for testing.
-     * 
-     * @param s
+     * force to update all his component.
      */
-    void SetContent(String s);
+    void forceUpdate();
+
 }

@@ -8,34 +8,48 @@ import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.view.api.MainView;
 
 /**
- * 
+ * implementation of class MainController.
  */
 public class MainControllerImpl implements MainController {
 
     private Stage currentStage;
     private final List<MainView> views = new ArrayList<>(0);
 
+    /**
+     * MainController constructor.
+     * set the current Stage to the initial menu
+     */
     public MainControllerImpl() {
         this.currentStage = Stage.MENU;
     }
 
+    /**
+     * Add a new view connected to the application.
+     */
     @Override
-    public void addMainView(MainView newView) {
+    public void addMainView(final MainView newView) {
         views.add(newView);
         newView.setController(this);
         newView.setStage(currentStage);
         newView.initiate();
     }
 
+    /**
+     * Gracefully quits from the application.
+     */
     @Override
     public void quit() {
         System.exit(0);
     }
 
+    /**
+     * Send the signal to his view to update.
+     * The command is used to use in frame.
+     */
     @Override
     public void update() {
-        for (MainView mainView : views) {
-            mainView.SetContent("");
+        for (final MainView mainView : views) {
+            mainView.forceUpdate();
         }
     }
 
