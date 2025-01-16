@@ -65,18 +65,21 @@ public class MainViewImpl implements MainView {
 
     @Override
     public void reconduceFromStage() {
+        AbstractView newPanel;
         switch (currentStage) {
             case MENU:
-                frame.setContentPane(new MenuSubView().getPanel());
+                newPanel = new MenuSubView();
                 break;
             case GAME:
-                frame.setContentPane(new MenuSubView().getPanel());
+                newPanel = new GameSubView();
                 break;
             case STORE:
-                frame.setContentPane(new MenuSubView().getPanel());
+                newPanel = new MenuSubView();
                 break;
             default:
                 throw new IllegalStateException();
         }
+        newPanel.setSubController(this.controller.getRequester());
+        frame.setContentPane(newPanel.getPanel());
     }
 }

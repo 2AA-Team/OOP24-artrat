@@ -1,5 +1,6 @@
 package it.unibo.artrat.controller.api;
 
+import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.view.api.MainView;
 
 /**
@@ -24,4 +25,10 @@ public interface MainController {
      * The command is used to use in frame.
      */
     void update();
+
+    /**
+     * @return subcontroller.
+     */
+    Requester getRequester();
+
 }
