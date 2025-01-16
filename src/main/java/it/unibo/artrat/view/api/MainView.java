@@ -34,4 +34,9 @@ public interface MainView {
      */
     void forceUpdate();
 
+    /**
+     * translate from stage to his relative JPanel.
+     */
+    void reconduceFromStage();
+
 }

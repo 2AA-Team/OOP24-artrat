@@ -33,6 +33,7 @@ public class MainViewImpl implements MainView {
     @Override
     public void initiate() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 300);
         frame.setVisible(true);
     }
 
@@ -44,6 +45,15 @@ public class MainViewImpl implements MainView {
     @Override
     public void setStage(final Stage currentStage) {
         this.currentStage = currentStage;
+        switchToCurrentPanel();
+    }
+
+    /**
+     * set up the setted stage.
+     */
+    private void switchToCurrentPanel() {
+        reconduceFromStage();
+        frame.revalidate();
     }
 
     /**
@@ -51,8 +61,22 @@ public class MainViewImpl implements MainView {
      */
     @Override
     public void forceUpdate() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'forceUpdate'");
     }
 
+    @Override
+    public void reconduceFromStage() {
+        switch (currentStage) {
+            case MENU:
+                frame.setContentPane(new MenuSubView().getPanel());
+                break;
+            case GAME:
+                frame.setContentPane(new MenuSubView().getPanel());
+                break;
+            case STORE:
+                frame.setContentPane(new MenuSubView().getPanel());
+                break;
+            default:
+                throw new IllegalStateException();
+        }
+    }
 }
