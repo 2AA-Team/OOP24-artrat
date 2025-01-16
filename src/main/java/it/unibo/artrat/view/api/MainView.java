@@ -1,6 +1,7 @@
 package it.unibo.artrat.view.api;
 
 import it.unibo.artrat.controller.api.MainController;
+import it.unibo.artrat.model.impl.Stage;
 
 /**
  * mainView interface.
@@ -21,4 +22,17 @@ public interface MainView {
      */
     void initiate();
 
+    /**
+     * This method is used to set the stage in a view.
+     * 
+     * @param currentStage
+     */
+    void setStage(Stage currentStage);
+
+    /**
+     * temporary method for testing.
+     * 
+     * @param s
+     */
+    void SetContent(String s);
 }

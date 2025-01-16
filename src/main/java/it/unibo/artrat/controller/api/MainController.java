@@ -18,4 +18,10 @@ public interface MainController {
      * Gracefully quits from the application.
      */
     void quit();
+
+    /**
+     * Send the signal to his view to update.
+     * The command is used to use in frame.
+     */
+    void update();
 }

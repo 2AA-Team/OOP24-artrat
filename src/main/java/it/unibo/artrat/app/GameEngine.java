@@ -3,9 +3,13 @@ package it.unibo.artrat.app;
 import java.io.File;
 import java.io.IOException;
 
+import it.unibo.artrat.controller.api.MainController;
+import it.unibo.artrat.controller.impl.MainControllerImpl;
 import it.unibo.artrat.utils.api.ResourceLoader;
 import it.unibo.artrat.utils.impl.Converter;
 import it.unibo.artrat.utils.impl.ResourceLoaderImpl;
+import it.unibo.artrat.view.api.MainView;
+import it.unibo.artrat.view.impl.MainViewImpl;
 
 /**
  * GameEngine is the class designed to manage the game loop.
@@ -27,6 +31,7 @@ public final class GameEngine implements Runnable {
             + "config.yaml";
     private GameStatus status;
     private final ResourceLoader resourceLoader;
+    private MainController mainController;
 
     /**
      * Game engine constructor.
@@ -38,6 +43,8 @@ public final class GameEngine implements Runnable {
 
     @Override
     public void run() {
+        mainController = new MainControllerImpl();
+        mainController.addMainView(new MainViewImpl());
         this.status = GameStatus.RUNNING;
         mainLoop();
     }
@@ -84,6 +91,6 @@ public final class GameEngine implements Runnable {
     }
 
     private void update() {
-        System.out.println("update"); // NOPMD
+        mainController.update();
     }
 }
