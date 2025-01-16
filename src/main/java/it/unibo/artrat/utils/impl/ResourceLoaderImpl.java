@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.yaml.snakeyaml.Yaml;
@@ -16,16 +17,10 @@ import it.unibo.artrat.utils.api.ResourceLoader;
  */
 public final class ResourceLoaderImpl implements ResourceLoader {
 
-    private final Map<String, Object> obj;
+    private Map<String, Object> obj = new HashMap<>();
 
-    /**
-     * constructor that load all configPath data.
-     * 
-     * @param configPath
-     *                   if configPath not represent anything:
-     * @throws IOException
-     */
-    public ResourceLoaderImpl(final String configPath) throws IOException {
+    @Override
+    public void setConfigPath(final String configPath) throws IOException {
         final Yaml yaml = new Yaml();
         final InputStream inputStream = new FileInputStream(new File(configPath));
         this.obj = Map.copyOf(yaml.load(inputStream));

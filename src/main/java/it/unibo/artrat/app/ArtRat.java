@@ -5,7 +5,7 @@ package it.unibo.artrat.app;
  */
 public final class ArtRat {
     /**
-     * 
+     * private constructor.
      */
     private ArtRat() {
     }

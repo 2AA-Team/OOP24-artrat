@@ -7,6 +7,12 @@ public final class Converter {
     private static final long BILLION = 1_000_000_000;
 
     /**
+     * private constructor.
+     */
+    private Converter() {
+    }
+
+    /**
      * Converts nano seconds to FPS.
      * 
      * @param nanos

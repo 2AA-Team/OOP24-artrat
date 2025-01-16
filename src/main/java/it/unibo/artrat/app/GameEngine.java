@@ -26,13 +26,14 @@ public final class GameEngine implements Runnable {
             + "config" + File.separator
             + "config.yaml";
     private GameStatus status;
-    private ResourceLoader resourceLoader;
+    private final ResourceLoader resourceLoader;
 
     /**
      * Game engine constructor.
      */
     public GameEngine() {
         this.status = GameStatus.STOPPED;
+        this.resourceLoader = new ResourceLoaderImpl();
     }
 
     @Override
@@ -45,7 +46,7 @@ public final class GameEngine implements Runnable {
      * Game loop method.
      */
     private void mainLoop() {
-        if (initiateResources()) {
+        if (!initiateResources()) {
             System.exit(1);
         }
         final double drawInterval = Converter.fpsToNanos((int) resourceLoader.getConfig("FPS"));
@@ -71,7 +72,7 @@ public final class GameEngine implements Runnable {
      */
     private boolean initiateResources() {
         try {
-            resourceLoader = new ResourceLoaderImpl(configPath);
+            resourceLoader.setConfigPath(configPath);
             return true;
         } catch (IOException e) {
             return false;
