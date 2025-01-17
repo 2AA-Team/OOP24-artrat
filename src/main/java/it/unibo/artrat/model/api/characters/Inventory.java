@@ -1,8 +1,32 @@
 package it.unibo.artrat.model.api.characters;
 
+import java.util.List;
+import it.unibo.artrat.model.api.market.Item;
+
 /**
  * Class that rappresents entity's inventory.
+ * @author Cristian Di Donato
  */
 public interface Inventory {
+
+    /**
+     * 
+     * @return a list of all element that player have.
+     */
+    public List<Item> getStoredItem();
+
+   /**
+    * 
+    * @param newItem is the new item to add to inventory.
+    * @return true: if the item can be add correctly. false: if the item can't be add.
+    */
+    public boolean addItem(Item newItem);
+
+    /**
+     * 
+     * @param itemToUse is the item that player want to use.
+     * @return true: if the item is used correctly. false: if the item can't be used.
+     */
+    public boolean useItem(Item itemToUse);
 
 }

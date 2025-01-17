@@ -1,4 +1,4 @@
-package it.unibo.artrat.model.impl;
+package it.unibo.artrat.model.impl.market;
 
 /**
  * This enum rappresent all type of the marketitem.

@@ -7,5 +7,5 @@ public interface Consumable extends Item {
     /**
      * Consume a consumable item.
      */
-    void consume();
+    //void consume();
 }
