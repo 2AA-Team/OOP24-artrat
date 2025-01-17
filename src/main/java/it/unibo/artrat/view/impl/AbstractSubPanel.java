@@ -6,6 +6,8 @@ import it.unibo.artrat.controller.api.MainController;
 /**
  * abstract class to make panel.
  * each stage have his own panel.
+ * 
+ * @author Matteo Tonelli
  */
 abstract class AbstractSubPanel {
     protected final JPanel panel;

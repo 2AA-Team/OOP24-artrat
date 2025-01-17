@@ -7,6 +7,8 @@ import it.unibo.artrat.view.api.MainView;
 
 /**
  * implementation of class mainView.
+ * 
+ * @author Matteo Tonelli
  */
 public class MainViewImpl implements MainView {
 
@@ -79,13 +81,13 @@ public class MainViewImpl implements MainView {
     public void reconduceFromStage() {
         switch (currentStage) {
             case MENU:
-                subPanel = new MenuSubView();
+                subPanel = new MenuSubPanel();
                 break;
             case GAME:
-                subPanel = new GameSubView();
+                subPanel = new GameSubPanel();
                 break;
             case STORE:
-                subPanel = new MenuSubView();
+                subPanel = new MenuSubPanel();
                 break;
             default:
                 throw new IllegalStateException();

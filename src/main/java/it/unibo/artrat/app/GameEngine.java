@@ -12,6 +12,8 @@ import it.unibo.artrat.view.impl.MainViewImpl;
 
 /**
  * GameEngine is the class designed to manage the game loop.
+ * 
+ * @author Matteo Tonelli
  */
 public final class GameEngine implements Runnable {
 

@@ -5,6 +5,8 @@ import it.unibo.artrat.view.api.MainView;
 
 /**
  * Controller interface.
+ * 
+ * @author Matteo Tonelli
  */
 public interface MainController {
 

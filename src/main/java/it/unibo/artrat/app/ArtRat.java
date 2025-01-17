@@ -2,6 +2,8 @@ package it.unibo.artrat.app;
 
 /**
  * Class that rappresents the whole application and starts the game engine.
+ * 
+ * @author Matteo Tonelli
  */
 public final class ArtRat {
     /**

@@ -2,6 +2,8 @@ package it.unibo.artrat.utils.impl;
 
 /**
  * Converter class.
+ * 
+ * @author Matteo Tonelli
  */
 public final class Converter {
     private static final long BILLION = 1_000_000_000;

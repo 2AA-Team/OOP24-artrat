@@ -9,6 +9,8 @@ import it.unibo.artrat.view.api.MainView;
 
 /**
  * implementation of class MainController.
+ * 
+ * @author Matteo Tonelli
  */
 public class MainControllerImpl implements MainController {
 

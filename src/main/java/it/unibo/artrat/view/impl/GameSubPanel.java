@@ -3,7 +3,7 @@ package it.unibo.artrat.view.impl;
 /**
  * 
  */
-public class GameSubView extends AbstractSubPanel {
+public class GameSubPanel extends AbstractSubPanel {
 
     /**
      * 

@@ -10,8 +10,10 @@ import java.awt.Insets;
 
 /**
  * panel for the initial Menu.
+ * 
+ * @author Matteo Tonelli
  */
-public class MenuSubView extends AbstractSubPanel {
+public class MenuSubPanel extends AbstractSubPanel {
 
     /**
      * construct the panel to add at the mainView.
@@ -33,14 +35,14 @@ public class MenuSubView extends AbstractSubPanel {
         });
         panel.add(jbGame, gbc);
 
-        gbc.gridy = 1; // Secondo pulsante
+        gbc.gridy = 1;
         final JButton jbShop = new JButton("Shop");
         jbShop.addActionListener((e) -> {
             controller.setStage(Stage.STORE);
         });
         panel.add(jbShop, gbc);
 
-        gbc.gridy = 2; // Terzo pulsante
+        gbc.gridy = 2;
         final JButton jbExit = new JButton("Exit");
         jbExit.addActionListener((e) -> {
             controller.quit();

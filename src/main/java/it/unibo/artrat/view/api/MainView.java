@@ -6,6 +6,8 @@ import it.unibo.artrat.model.impl.Stage;
 /**
  * mainView interface.
  * a mainview is the view capable of alternating the various stages.
+ * 
+ * @author Matteo Tonelli
  */
 public interface MainView {
 
