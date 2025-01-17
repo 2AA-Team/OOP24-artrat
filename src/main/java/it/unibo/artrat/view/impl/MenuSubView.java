@@ -1,7 +1,6 @@
 package it.unibo.artrat.view.impl;
 
 import javax.swing.JButton;
-import javax.swing.JPanel;
 
 import it.unibo.artrat.model.impl.Stage;
 
@@ -19,7 +18,7 @@ public class MenuSubView extends AbstractSubPanel {
      */
     @Override
     public void initComponents() {
-        panel = new JPanel(new GridBagLayout());
+        panel.setLayout(new GridBagLayout());
         final GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.weightx = 1.0;

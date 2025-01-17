@@ -8,7 +8,7 @@ import it.unibo.artrat.controller.api.MainController;
  * each stage have his own panel.
  */
 abstract class AbstractSubPanel {
-    protected JPanel panel;
+    protected final JPanel panel;
     protected MainController controller;
 
     /**
@@ -20,7 +20,7 @@ abstract class AbstractSubPanel {
     }
 
     /**
-     * @return his own panel.
+     * @return his own starter panel.
      */
     public JPanel getPanel() {
         initComponents();

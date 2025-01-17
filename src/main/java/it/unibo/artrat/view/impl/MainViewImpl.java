@@ -16,7 +16,13 @@ public class MainViewImpl implements MainView {
 
     private final JFrame frame = new JFrame();
 
-    public MainViewImpl(int width, int heigth) {
+    /**
+     * constructor set the size of the frame.
+     * 
+     * @param width
+     * @param heigth
+     */
+    public MainViewImpl(final int width, final int heigth) {
         frame.setSize(width, heigth);
     }
 
