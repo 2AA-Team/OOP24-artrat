@@ -1,22 +1,20 @@
 package it.unibo.artrat.view.impl;
 
-import javax.swing.*;
-
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import it.unibo.artrat.model.api.characters.Inventory;
-import java.awt.*;
-import java.awt.event.*;
 
-public class InventoryViewImpl extends JFrame {
-    private JPanel myJPanel;
+/** 
+ * A base view for inventory
+ * @author Cristian Di Donato
+*/
+public class InventorySubPanel extends AbstractSubPanel{
 
-    public InventoryViewImpl(Inventory inv) {
-        super("Invetory Player");
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(450,700);
-
-        // Creazione del pannello principale
-        myJPanel = new JPanel();
-        myJPanel.setLayout(new GridLayout(0, 2, 10, 10)); // Disposizione griglia con 2 colonne
+    @Override
+    public void initComponents() {
+        /** 
+        panel.setLayout(new GridLayout(0, 2, 10, 10)); // Disposizione griglia con 2 colonne
 
         // Aggiunta di un pulsante per ogni item dell'inventario
         for (var item : inv.getStoredItem()) {
@@ -33,13 +31,13 @@ public class InventoryViewImpl extends JFrame {
     
                 itemPanel.add(itemButton, BorderLayout.CENTER);
 
-            myJPanel.add(itemPanel);
+            panel.add(itemPanel);
         }
 
         // Aggiunta del pannello alla finestra
-        this.add(myJPanel);
+        this.add(panel);
         this.setVisible(true);
-
+        */
     }
-
+    
 }

@@ -1,7 +1,6 @@
 package it.unibo.artrat.model.impl.market;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import it.unibo.artrat.model.api.characters.Inventory;
