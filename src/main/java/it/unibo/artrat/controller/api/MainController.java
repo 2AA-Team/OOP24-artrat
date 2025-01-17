@@ -1,5 +1,6 @@
 package it.unibo.artrat.controller.api;
 
+import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.view.api.MainView;
 
 /**
@@ -20,8 +21,20 @@ public interface MainController {
     void quit();
 
     /**
-     * Send the signal to his view to update.
-     * The command is used to use in frame.
+     * Send the signal to his model to update.
      */
     void update();
+
+    /**
+     * set the current stage to a new stage.
+     * 
+     * @param newStage
+     */
+    void setStage(Stage newStage);
+
+    /**
+     * Send the signal to his view to redraw.
+     */
+    void redraw();
+
 }

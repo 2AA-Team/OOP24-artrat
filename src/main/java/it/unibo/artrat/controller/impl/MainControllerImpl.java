@@ -43,14 +43,33 @@ public class MainControllerImpl implements MainController {
     }
 
     /**
-     * Send the signal to his view to update.
-     * The command is used to use in frame.
+     * Send the signal to his model to update.
      */
     @Override
     public void update() {
+
+    }
+
+    /**
+     * set the current stage to a new stage.
+     * 
+     * @param newStage
+     */
+    @Override
+    public void setStage(final Stage newStage) {
+        currentStage = newStage;
         for (final MainView mainView : views) {
-            mainView.forceUpdate();
+            mainView.setStage(currentStage);
         }
     }
 
+    /**
+     * Send the signal to his view to update.
+     */
+    @Override
+    public void redraw() {
+        for (final MainView mainView : views) {
+            mainView.forceRedraw();
+        }
+    }
 }

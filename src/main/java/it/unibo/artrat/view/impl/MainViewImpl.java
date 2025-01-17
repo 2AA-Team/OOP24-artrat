@@ -1,7 +1,6 @@
 package it.unibo.artrat.view.impl;
 
 import javax.swing.JFrame;
-
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.view.api.MainView;
@@ -13,8 +12,19 @@ public class MainViewImpl implements MainView {
 
     private Stage currentStage;
     private MainController controller;
+    private AbstractSubPanel subPanel;
 
     private final JFrame frame = new JFrame();
+
+    /**
+     * constructor set the size of the frame.
+     * 
+     * @param width
+     * @param heigth
+     */
+    public MainViewImpl(final int width, final int heigth) {
+        frame.setSize(width, heigth);
+    }
 
     /**
      * Sets the controller controlled by this view (if works as input).
@@ -44,15 +54,43 @@ public class MainViewImpl implements MainView {
     @Override
     public void setStage(final Stage currentStage) {
         this.currentStage = currentStage;
+        switchToCurrentPanel();
+    }
+
+    /**
+     * set up the setted stage.
+     */
+    private void switchToCurrentPanel() {
+        reconduceFromStage();
+        frame.revalidate();
     }
 
     /**
      * force to update all his component.
      */
     @Override
-    public void forceUpdate() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'forceUpdate'");
+    public void forceRedraw() {
     }
 
+    /**
+     * 
+     */
+    @Override
+    public void reconduceFromStage() {
+        switch (currentStage) {
+            case MENU:
+                subPanel = new MenuSubView();
+                break;
+            case GAME:
+                subPanel = new GameSubView();
+                break;
+            case STORE:
+                subPanel = new MenuSubView();
+                break;
+            default:
+                throw new IllegalStateException();
+        }
+        subPanel.setSubController(this.controller);
+        frame.setContentPane(subPanel.getPanel());
+    }
 }
