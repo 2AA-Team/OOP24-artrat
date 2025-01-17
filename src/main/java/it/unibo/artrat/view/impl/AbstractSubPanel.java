@@ -1,7 +1,6 @@
 package it.unibo.artrat.view.impl;
 
 import javax.swing.JPanel;
-
 import it.unibo.artrat.controller.api.MainController;
 
 /**
@@ -38,7 +37,7 @@ abstract class AbstractSubPanel {
      * 
      * @param controller
      */
-    public void setSubController(MainController controller) {
+    public void setSubController(final MainController controller) {
         this.controller = controller;
     }
 }

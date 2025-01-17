@@ -32,7 +32,7 @@ public interface MainView {
     /**
      * force to update all his component.
      */
-    void forceUpdate();
+    void forceRedraw();
 
     /**
      * translate from stage to his relative JPanel.

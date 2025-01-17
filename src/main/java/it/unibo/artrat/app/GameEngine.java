@@ -42,8 +42,13 @@ public final class GameEngine implements Runnable {
 
     @Override
     public void run() {
+        if (!initiateResources()) {
+            System.exit(1);
+        }
         mainController = new MainControllerImpl();
-        mainController.addMainView(new MainViewImpl());
+        mainController.addMainView(new MainViewImpl(
+                (int) resourceLoader.getConfig("WIDTH"),
+                (int) resourceLoader.getConfig("HEIGHT")));
         this.status = GameStatus.RUNNING;
         mainLoop();
     }
@@ -52,9 +57,6 @@ public final class GameEngine implements Runnable {
      * Game loop method.
      */
     private void mainLoop() {
-        if (!initiateResources()) {
-            System.exit(1);
-        }
         final double drawInterval = Converter.fpsToNanos((int) resourceLoader.getConfig("FPS"));
         double delta = 0;
         double lastTime = System.nanoTime();
@@ -65,7 +67,7 @@ public final class GameEngine implements Runnable {
             lastTime = currentTime;
             if (delta >= 1) {
                 this.update();
-                this.render();
+                this.redraw();
                 delta--;
             }
         }
@@ -85,11 +87,10 @@ public final class GameEngine implements Runnable {
         }
     }
 
-    private void render() {
-        System.out.println("render"); // NOPMD
+    private void redraw() {
+        mainController.redraw();
     }
 
     private void update() {
-        mainController.update();
     }
 }

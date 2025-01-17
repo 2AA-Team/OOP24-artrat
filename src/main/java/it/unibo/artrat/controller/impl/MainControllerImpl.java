@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.unibo.artrat.controller.api.MainController;
-import it.unibo.artrat.model.impl.Request;
 import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.view.api.MainView;
 
@@ -44,25 +43,33 @@ public class MainControllerImpl implements MainController {
     }
 
     /**
-     * Send the signal to his view to update.
-     * The command is used to use in frame.
+     * Send the signal to his model to update.
      */
     @Override
     public void update() {
-        for (final MainView mainView : views) {
-            mainView.forceUpdate();
-        }
+
     }
 
-    public Object getData(Request request) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getData'");
-    }
-
-    public void setStage(Stage newStage) {
+    /**
+     * set the current stage to a new stage.
+     * 
+     * @param newStage
+     */
+    @Override
+    public void setStage(final Stage newStage) {
         currentStage = newStage;
         for (final MainView mainView : views) {
             mainView.setStage(currentStage);
+        }
+    }
+
+    /**
+     * Send the signal to his view to update.
+     */
+    @Override
+    public void redraw() {
+        for (final MainView mainView : views) {
+            mainView.forceRedraw();
         }
     }
 }
