@@ -1,9 +1,9 @@
-package it.unibo.artrat.model.api;
+package it.unibo.artrat.utils.impl;
 
 /**
  * Point is used to define the space where game objects can be.
  */
-public class Point {
+public final class Point {
     private double x;
     private double y;
 
@@ -16,6 +16,10 @@ public class Point {
     public Point(final double x, final double y) {
         this.x = x;
         this.y = y;
+    }
+
+    public Point sum(final Vector2d v) {
+        return new Point(this.x + v.getX(), this.y + v.getY());
     }
 
     /**
@@ -62,6 +66,12 @@ public class Point {
     @Override
     public String toString() {
         return "( X: " + this.x + "; Y: " + this.y + " )";
+    }
+
+    public double getDistance(final Point p) {
+        final double distX = this.x - p.x;
+        final double distY = this.y - p.y;
+        return Math.sqrt(distX * distX + distY * distY);
     }
 
 }
