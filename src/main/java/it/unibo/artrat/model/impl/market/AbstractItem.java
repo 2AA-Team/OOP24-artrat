@@ -1,23 +1,13 @@
-package it.unibo.artrat.model.impl;
+package it.unibo.artrat.model.impl.market;
 
 import it.unibo.artrat.model.api.market.Item;
 
-/**
- * This class is an abstract rappresentation of an market item.
- * Others item extends this class and implement consume.
- * @author Cristian Di Donato
- */
 public abstract class AbstractItem implements Item{
 
-    private final String description;
-    private final double price;
-    private final ItemType itemType;
-    
-    public AbstractItem(final String description, final double price, final ItemType itemType) {
-        this.description = description;
-        this.price = price;
-        this.itemType = itemType;
-    }
+    private final String description="";
+    private final double price=0.0;
+    private final ItemType itemType=null;
+
 
     @Override
     public String getDescription() {

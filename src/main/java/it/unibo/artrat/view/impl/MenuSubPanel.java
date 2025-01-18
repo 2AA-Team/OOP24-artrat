@@ -11,7 +11,7 @@ import java.awt.Insets;
 /**
  * panel for the initial Menu.
  */
-public class MenuSubView extends AbstractSubPanel {
+public class MenuSubPanel extends AbstractSubPanel {
 
     /**
      * construct the panel to add at the mainView.

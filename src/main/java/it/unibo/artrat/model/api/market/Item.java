@@ -1,6 +1,6 @@
 package it.unibo.artrat.model.api.market;
 
-import it.unibo.artrat.model.impl.ItemType;
+import it.unibo.artrat.model.impl.market.ItemType;
 
 /**
  * Class that rappresents shop/inventory item.
