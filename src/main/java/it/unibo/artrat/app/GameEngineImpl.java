@@ -3,6 +3,7 @@ package it.unibo.artrat.app;
 import java.io.File;
 import java.io.IOException;
 
+import it.unibo.artrat.app.api.GameEngine;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
 import it.unibo.artrat.utils.api.ResourceLoader;
@@ -11,11 +12,11 @@ import it.unibo.artrat.utils.impl.ResourceLoaderImpl;
 import it.unibo.artrat.view.impl.MainViewImpl;
 
 /**
- * GameEngine is the class designed to manage the game loop.
+ * Implement game engine.
  * 
  * @author Matteo Tonelli
  */
-public final class GameEngine implements Runnable {
+public final class GameEngineImpl implements GameEngine {
 
     private enum GameStatus {
         STOPPED, RUNNING
@@ -37,7 +38,7 @@ public final class GameEngine implements Runnable {
     /**
      * Game engine constructor.
      */
-    public GameEngine() {
+    public GameEngineImpl() {
         this.status = GameStatus.STOPPED;
         this.resourceLoader = new ResourceLoaderImpl();
         mainController = new MainControllerImpl(this);
@@ -100,6 +101,7 @@ public final class GameEngine implements Runnable {
     /**
      * chenge the status to stop the gameloop.
      */
+    @Override
     public void forceStop() {
         this.status = GameStatus.STOPPED;
     }
@@ -107,6 +109,7 @@ public final class GameEngine implements Runnable {
     /**
      * chenge the status to start the gameloop.
      */
+    @Override
     public void forceStart() {
         this.status = GameStatus.RUNNING;
     }

@@ -3,7 +3,7 @@ package it.unibo.artrat.controller.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.unibo.artrat.app.GameEngine;
+import it.unibo.artrat.app.api.GameEngine;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.view.api.MainView;
