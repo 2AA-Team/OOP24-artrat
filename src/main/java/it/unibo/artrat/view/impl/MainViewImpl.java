@@ -26,6 +26,7 @@ public class MainViewImpl implements MainView {
      */
     public MainViewImpl(final int width, final int heigth) {
         frame.setSize(width, heigth);
+        this.currentStage = Stage.MENU;
     }
 
     /**
@@ -35,7 +36,7 @@ public class MainViewImpl implements MainView {
      */
     @Override
     public void setController(final MainController observer) {
-        controller = observer;
+        controller = observer == null ? controller : observer;
     }
 
     /**
@@ -72,6 +73,7 @@ public class MainViewImpl implements MainView {
      */
     @Override
     public void forceRedraw() {
+
     }
 
     /**
@@ -87,7 +89,7 @@ public class MainViewImpl implements MainView {
                 subPanel = new GameSubPanel();
                 break;
             case STORE:
-                subPanel = new MenuSubPanel();
+                subPanel = new EmptySubPanel();
                 break;
             default:
                 throw new IllegalStateException();

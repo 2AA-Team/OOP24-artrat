@@ -3,6 +3,7 @@ package it.unibo.artrat.controller.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.unibo.artrat.app.GameEngine;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.view.api.MainView;
@@ -16,13 +17,17 @@ public class MainControllerImpl implements MainController {
 
     private Stage currentStage;
     private final List<MainView> views = new ArrayList<>(0);
+    private final GameEngine engine;
 
     /**
      * MainController constructor.
      * set the current Stage to the initial menu
+     * 
+     * @param engine game engine.
      */
-    public MainControllerImpl() {
+    public MainControllerImpl(final GameEngine engine) {
         this.currentStage = Stage.MENU;
+        this.engine = engine;
     }
 
     /**
@@ -41,7 +46,8 @@ public class MainControllerImpl implements MainController {
      */
     @Override
     public void quit() {
-        System.exit(0);
+        engine.forceStop();
+        Runtime.getRuntime().exit(1);
     }
 
     /**
@@ -60,6 +66,11 @@ public class MainControllerImpl implements MainController {
     @Override
     public void setStage(final Stage newStage) {
         currentStage = newStage;
+        if (newStage.equals(Stage.GAME)) {
+            engine.forceStart();
+        } else {
+            engine.forceStop();
+        }
         for (final MainView mainView : views) {
             mainView.setStage(currentStage);
         }

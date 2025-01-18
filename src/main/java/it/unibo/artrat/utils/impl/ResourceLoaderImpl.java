@@ -24,7 +24,6 @@ public final class ResourceLoaderImpl implements ResourceLoader {
         final Yaml yaml = new Yaml();
         final InputStream inputStream = new FileInputStream(new File(configPath));
         this.obj = Map.copyOf(yaml.load(inputStream));
-        System.out.println("culo");
         inputStream.close();
     }
 

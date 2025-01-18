@@ -32,7 +32,7 @@ public final class GameEngine implements Runnable {
             + "config.yaml";
     private GameStatus status;
     private final ResourceLoader resourceLoader;
-    private MainController mainController;
+    private final MainController mainController;
 
     /**
      * Game engine constructor.
@@ -40,14 +40,14 @@ public final class GameEngine implements Runnable {
     public GameEngine() {
         this.status = GameStatus.STOPPED;
         this.resourceLoader = new ResourceLoaderImpl();
+        mainController = new MainControllerImpl(this);
     }
 
     @Override
     public void run() {
         if (!initiateResources()) {
-            System.exit(1);
+            Runtime.getRuntime().exit(1);
         }
-        mainController = new MainControllerImpl();
         mainController.addMainView(new MainViewImpl(
                 (int) resourceLoader.getConfig("WIDTH"),
                 (int) resourceLoader.getConfig("HEIGHT")));
@@ -94,5 +94,20 @@ public final class GameEngine implements Runnable {
     }
 
     private void update() {
+
+    }
+
+    /**
+     * chenge the status to stop the gameloop.
+     */
+    public void forceStop() {
+        this.status = GameStatus.STOPPED;
+    }
+
+    /**
+     * chenge the status to start the gameloop.
+     */
+    public void forceStart() {
+        this.status = GameStatus.RUNNING;
     }
 }

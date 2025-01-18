@@ -10,8 +10,8 @@ import it.unibo.artrat.controller.api.MainController;
  * @author Matteo Tonelli
  */
 abstract class AbstractSubPanel {
-    protected final JPanel panel;
-    protected MainController controller;
+    private JPanel panel;
+    private MainController controller;
 
     /**
      * abstract view constructor.
@@ -30,6 +30,16 @@ abstract class AbstractSubPanel {
     }
 
     /**
+     * set the current panel.
+     * This approach applies the concept of 'information hiding'.
+     * 
+     * @param newPanel
+     */
+    protected void setPanel(final JPanel newPanel) {
+        panel = newPanel;
+    }
+
+    /**
      * initializes the panel components.
      */
     public abstract void initComponents();
@@ -42,4 +52,14 @@ abstract class AbstractSubPanel {
     public void setSubController(final MainController controller) {
         this.controller = controller;
     }
+
+    /**
+     * this method return the controller to use in the panel.
+     * 
+     * @return subController
+     */
+    protected MainController getSubController() {
+        return controller;
+    }
+
 }

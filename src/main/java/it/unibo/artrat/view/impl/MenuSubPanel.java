@@ -1,7 +1,9 @@
 package it.unibo.artrat.view.impl;
 
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
+import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.model.impl.Stage;
 
 import java.awt.GridBagConstraints;
@@ -20,13 +22,17 @@ public class MenuSubPanel extends AbstractSubPanel {
      */
     @Override
     public void initComponents() {
+        final int verticalInsets = 10;
+        final int orizzontalInsets = 20;
+        final JPanel panel = new JPanel();
+        final MainController controller = getSubController();
         panel.setLayout(new GridBagLayout());
         final GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
-        gbc.insets = new Insets(10, 20, 10, 20);
+        gbc.insets = new Insets(verticalInsets, orizzontalInsets, verticalInsets, orizzontalInsets);
         panel.revalidate();
         panel.repaint();
         final JButton jbGame = new JButton("Game");
@@ -48,6 +54,7 @@ public class MenuSubPanel extends AbstractSubPanel {
             controller.quit();
         });
         panel.add(jbExit, gbc);
+        setPanel(panel);
     }
 
 }
