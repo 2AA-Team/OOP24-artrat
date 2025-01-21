@@ -2,15 +2,20 @@ package it.unibo.artrat.app;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 import it.unibo.artrat.utils.api.ResourceLoader;
+import it.unibo.artrat.utils.api.commands.Command;
+import it.unibo.artrat.utils.api.commands.Sender;
 import it.unibo.artrat.utils.impl.Converter;
 import it.unibo.artrat.utils.impl.ResourceLoaderImpl;
 
 /**
  * GameEngine is the class designed to manage the game loop.
  */
-public final class GameEngine implements Runnable {
+public final class GameEngine implements Runnable, Sender {
+    private List<Command> commands = new LinkedList<Command>();
 
     private enum GameStatus {
         STOPPED, RUNNING
@@ -58,6 +63,8 @@ public final class GameEngine implements Runnable {
             delta += (currentTime - lastTime) / drawInterval;
             lastTime = currentTime;
             if (delta >= 1) {
+                this.commands.stream().forEach(cmd -> cmd.execute());
+                this.commands.clear();
                 this.update();
                 this.render();
                 delta--;
@@ -85,5 +92,10 @@ public final class GameEngine implements Runnable {
 
     private void update() {
         System.out.println("update"); // NOPMD
+    }
+
+    @Override
+    public void notifyCommand(final Command cmd) {
+        commands.add(cmd);
     }
 }

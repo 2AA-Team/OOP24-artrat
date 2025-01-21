@@ -31,6 +31,15 @@ public final class Vector2d {
     }
 
     /**
+     * Vector module to avoid diagonal movement speed up.
+     * 
+     * @return
+     */
+    public double module() {
+        return Math.sqrt(Math.pow(this.x, this.x) + Math.pow(this.y, this.y));
+    }
+
+    /**
      * Sum of two vector2d.
      * 
      * @param vector2d
