@@ -2,11 +2,15 @@ package it.unibo.artrat.app;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 import it.unibo.artrat.app.api.GameEngine;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
 import it.unibo.artrat.utils.api.ResourceLoader;
+import it.unibo.artrat.utils.api.commands.Command;
+import it.unibo.artrat.utils.api.commands.Sender;
 import it.unibo.artrat.utils.impl.Converter;
 import it.unibo.artrat.utils.impl.ResourceLoaderImpl;
 import it.unibo.artrat.view.impl.MainViewImpl;
@@ -16,7 +20,8 @@ import it.unibo.artrat.view.impl.MainViewImpl;
  * 
  * @author Matteo Tonelli
  */
-public final class GameEngineImpl implements GameEngine {
+public final class GameEngineImpl implements GameEngine, Sender {
+    private List<Command> commands = new LinkedList<Command>();
 
     private enum GameStatus {
         STOPPED, RUNNING
@@ -69,6 +74,8 @@ public final class GameEngineImpl implements GameEngine {
                 delta += (currentTime - lastTime) / drawInterval;
                 lastTime = currentTime;
                 if (delta >= 1) {
+                    this.commands.stream().forEach(cmd -> cmd.execute());
+                    this.commands.clear();
                     this.update();
                     this.redraw();
                     delta--;
@@ -114,5 +121,10 @@ public final class GameEngineImpl implements GameEngine {
     @Override
     public void forceStart() {
         this.status = GameStatus.RUNNING;
+    }
+
+    @Override
+    public void notifyCommand(final Command cmd) {
+        commands.add(cmd);
     }
 }
