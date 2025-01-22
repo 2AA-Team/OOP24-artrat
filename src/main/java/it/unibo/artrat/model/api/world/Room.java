@@ -4,6 +4,7 @@ import java.util.Set;
 
 import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.impl.world.Position;
+import it.unibo.artrat.utils.impl.Pair;
 
 /**
  * Class that rappresents a room.
@@ -22,5 +23,5 @@ public interface Room {
      * 
      * @return all the object (without repetion)
      */
-    Set<GameObject> getObjects();
+    Set<Pair<GameObject, Position>> getObjects();
 }
