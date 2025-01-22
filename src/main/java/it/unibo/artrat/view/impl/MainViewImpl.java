@@ -73,7 +73,7 @@ public class MainViewImpl implements MainView {
      */
     @Override
     public void forceRedraw() {
-
+        subPanel.forceRedraw();
     }
 
     /**
@@ -86,7 +86,7 @@ public class MainViewImpl implements MainView {
                 subPanel = new MenuSubPanel();
                 break;
             case GAME:
-                subPanel = new GameSubPanel();
+                subPanel = new EmptySubPanel();
                 break;
             case STORE:
                 subPanel = new EmptySubPanel();

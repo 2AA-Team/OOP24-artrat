@@ -62,4 +62,9 @@ abstract class AbstractSubPanel {
         return controller;
     }
 
+    /**
+     * force to update all his component.
+     */
+    protected abstract void forceRedraw();
+
 }

@@ -12,4 +12,8 @@ public class GameSubPanel extends AbstractSubPanel {
     public void initComponents() {
     }
 
+    @Override
+    protected void forceRedraw() {
+    }
+
 }

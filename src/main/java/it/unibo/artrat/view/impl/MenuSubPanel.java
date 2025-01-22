@@ -57,4 +57,8 @@ public class MenuSubPanel extends AbstractSubPanel {
         setPanel(panel);
     }
 
+    @Override
+    protected void forceRedraw() {
+    }
+
 }

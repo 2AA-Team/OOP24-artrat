@@ -52,7 +52,6 @@ public final class GameEngineImpl implements GameEngine {
         mainController.addMainView(new MainViewImpl(
                 (int) resourceLoader.getConfig("WIDTH"),
                 (int) resourceLoader.getConfig("HEIGHT")));
-        this.status = GameStatus.RUNNING;
         mainLoop();
     }
 
@@ -60,20 +59,23 @@ public final class GameEngineImpl implements GameEngine {
      * Game loop method.
      */
     private void mainLoop() {
-        final double drawInterval = Converter.fpsToNanos((int) resourceLoader.getConfig("FPS"));
-        double delta = 0;
-        double lastTime = System.nanoTime();
-        long currentTime;
-        while (status.equals(GameStatus.RUNNING)) {
-            currentTime = System.nanoTime();
-            delta += (currentTime - lastTime) / drawInterval;
-            lastTime = currentTime;
-            if (delta >= 1) {
-                this.update();
-                this.redraw();
-                delta--;
+        while (true) {
+            final double drawInterval = Converter.fpsToNanos((int) resourceLoader.getConfig("FPS"));
+            double delta = 0;
+            double lastTime = System.nanoTime();
+            long currentTime;
+            while (status.equals(GameStatus.RUNNING)) {
+                currentTime = System.nanoTime();
+                delta += (currentTime - lastTime) / drawInterval;
+                lastTime = currentTime;
+                if (delta >= 1) {
+                    this.update();
+                    this.redraw();
+                    delta--;
+                }
             }
         }
+
     }
 
     /**
