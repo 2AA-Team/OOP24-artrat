@@ -34,6 +34,5 @@ public interface MissionManager {
     List<BaseMission> filterBaseMissions();
 
     List<AdvancedMission> filterAdvancedMissions();
-    
 
 }
