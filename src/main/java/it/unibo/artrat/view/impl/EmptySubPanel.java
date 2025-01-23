@@ -1,6 +1,5 @@
 package it.unibo.artrat.view.impl;
 
-import javax.print.attribute.standard.JobHoldUntil;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -16,8 +15,8 @@ public class EmptySubPanel extends AbstractSubPanel {
      */
     @Override
     public void initComponents() {
-        JPanel panel = new JPanel();
-        JButton btn = new JButton();
+        final JPanel panel = new JPanel();
+        final JButton btn = new JButton();
         btn.addActionListener((e) -> {
             this.getSubController().setStage(Stage.MENU);
         });

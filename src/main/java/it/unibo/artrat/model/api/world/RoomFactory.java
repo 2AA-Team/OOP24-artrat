@@ -1,5 +1,8 @@
 package it.unibo.artrat.model.api.world;
 
+/**
+ * Room factory.
+ */
 public interface RoomFactory {
 
     /**
