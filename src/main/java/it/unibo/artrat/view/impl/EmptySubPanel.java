@@ -1,6 +1,5 @@
 package it.unibo.artrat.view.impl;
 
-import javax.print.attribute.standard.JobHoldUntil;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
