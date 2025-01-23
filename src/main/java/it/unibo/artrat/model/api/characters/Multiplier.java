@@ -6,18 +6,18 @@ package it.unibo.artrat.model.api.characters;
  * @author Cristian Di Donato.
  */
 public interface Multiplier {
-
     /**
      * 
      * @param coins the coins that player get at the end of the game.
      * @return the trasformed coin, after the multiplication.
      */
-    public double multipleTheCoins(double coins);
+    double multipleTheCoins(final double coins);
 
     /**
      * 
-     * Change the current multiplier
+     * Change the current multiplier.
+     * @param multipler is the new multiplier.
      */
-    public void changeCurrentMultiplier(double multipler);
+    void changeCurrentMultiplier(final double multipler);
 
 }

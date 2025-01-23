@@ -12,44 +12,60 @@ public class CoinImpl implements Coin {
     private double amount;
     private Multiplier multiplier;
 
+    public CoinImpl() {
+        this.amount = 0.0;
+        this.multiplier = new MultiplierImpl();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public double getCurrentAmount() {
         return this.amount;
     }
 
+     /**
+     * {@inheritDoc}
+     */
     @Override
-    public void addCoins(double coins) {
-        if(coins>=0.0) {
-            amount+=coins;
-        }
-        else {
+    public void addCoins(final double coins) {
+        if (coins >= 0.0) {
+            amount += coins;
+        } else {
             throw new IllegalArgumentException();
         }
     }
 
+     /**
+     * {@inheritDoc}
+     */
     @Override
-    public void spendCoins(double coins) {
-        if(coins>=0.0 && coins<=amount){
-            amount-=coins;
-        }
-        else {
+    public void spendCoins(final double coins) {
+        if (coins >= 0.0 && coins <= amount) {
+            amount -= coins;
+        } else {
             throw new IllegalArgumentException();
         }
     }
 
+     /**
+     * {@inheritDoc}
+     */
     @Override
     public Multiplier getCurrentMultiplier() {
         return this.multiplier;
     }
 
+     /**
+     * {@inheritDoc}
+     */
     @Override
-    public void changePlayerMultipler(double multipler) {
-        if(multipler>=0.0){
+    public void changePlayerMultipler(final double multipler) {
+        if (multipler >= 0.0) {
             this.multiplier.changeCurrentMultiplier(multipler);
-        }
-        else{
+        } else {
             throw new IllegalArgumentException();
         }
     }
-    
 }

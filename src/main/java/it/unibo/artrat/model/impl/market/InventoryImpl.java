@@ -7,33 +7,44 @@ import it.unibo.artrat.model.api.characters.Inventory;
 import it.unibo.artrat.model.api.market.Item;
 
 /**
- * An implementation of Inventory
+ * An implementation of Inventory.
  * @author Cristian Di Donato
  */
-public class InventoryImpl implements Inventory{
+public class InventoryImpl implements Inventory {
 
     private final List<Item> storedItem;
 
+    /**
+     * A constructor that initializes an instance of an empty list of items
+     */
     public InventoryImpl(){
-        storedItem = new ArrayList<>();
+        this.storedItem = new ArrayList<>();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Item> getStoredItem() {
-        return this.storedItem;
+        return List.copyOf(storedItem);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean addItem(Item newItem) {
+    public boolean addItem(final Item newItem) {
         return storedItem.add(newItem);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public boolean useItem(Item itemToUse) {
-        if(storedItem.contains(itemToUse)){
+    public boolean useItem(final Item itemToUse) {
+        if (storedItem.contains(itemToUse)) {
             return storedItem.remove(itemToUse);
         }
         return false;
     }
-    
 }

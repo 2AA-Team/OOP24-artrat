@@ -5,5 +5,12 @@ package it.unibo.artrat.model.impl.market;
  * @author Cristian Di Donato
  */
 public enum ItemType {
-    CONSUMABLE, POWERUP
+    /**
+     * Represents the Consumable category for various items.
+     */
+    CONSUMABLE, 
+    /**
+     * Represents the PowerUp category for various items.
+     */
+    POWERUP
 }

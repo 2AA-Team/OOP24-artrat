@@ -4,33 +4,33 @@ import it.unibo.artrat.model.impl.market.ItemType;
 
 /**
  * Class that rappresents shop/inventory item.
- * @author Cristian Di Donato
+ * @author Cristian Di Donato.
  */
 public interface Item {
 
     /**
      * 
-     * @return String that rappresent the description of object: Effect, Story, Curiosity
+     * @return String that rappresent the description of object: Effect, Story, Curiosity.
      */
-    public String getDescription();
+    String getDescription();
 
     /**
      * 
      * @return the price of the item.
      */
-    public double getPrice();
+    double getPrice();
 
     /**
      * 
-     * @return the ItemType of the current Item: can be Consumable or PowerUp
+     * @return the ItemType of the current Item: can be Consumable or PowerUp.
      */
-    public ItemType getType();
+    ItemType getType();
 
     /**
      * 
-     * @return true: if the item is consume; false: if the item can't be consume for some reason;
+     * @return true: if the item is consume; false: if the item can't be consume for some reason.
      */
-    public boolean consume();
+    boolean consume();
 
 
 }
