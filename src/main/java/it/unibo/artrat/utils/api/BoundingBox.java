@@ -8,10 +8,10 @@ import it.unibo.artrat.utils.impl.BoundingBoxImpl;
 public interface BoundingBox {
 
     /**
-     * Collision detection.
+     * Check circles collision.
      * 
-     * @param box game object bounding box
-     * @return
+     * @param box box to check collision with
+     * @return true if boundingbox is colliding false otherwise.
      */
-    boolean isColliding(final BoundingBoxImpl box);
+    boolean isColliding(BoundingBoxImpl box);
 }

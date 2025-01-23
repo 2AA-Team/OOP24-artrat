@@ -10,11 +10,21 @@ public final class Vector2d {
     private double x;
     private double y;
 
+    /**
+     * Vector constructor.
+     * 
+     * @param x x axis
+     * @param y y axis
+     */
     public Vector2d(final double x, final double y) {
         this.x = x;
         this.y = y;
     }
 
+    /**
+     * Vector default constructor: V(x=1;y=1).
+     *
+     */
     public Vector2d() {
         this.x = 1;
         this.y = 1;
@@ -24,7 +34,7 @@ public final class Vector2d {
      * Multiplication of a vector2d.
      * 
      * @param coefficient
-     * @return
+     * @return vector multiplied for @coefficient.
      */
     public Vector2d mul(final double coefficient) {
         return new Vector2d(this.x * coefficient, this.y * coefficient);
@@ -33,7 +43,7 @@ public final class Vector2d {
     /**
      * Vector module to avoid diagonal movement speed up.
      * 
-     * @return
+     * @return vector module value.
      */
     public double module() {
         return Math.sqrt(Math.pow(this.x, this.x) + Math.pow(this.y, this.y));
@@ -43,25 +53,43 @@ public final class Vector2d {
      * Sum of two vector2d.
      * 
      * @param vector2d
-     * @return
+     * @return sum result
      */
     public Vector2d summVector2d(final Vector2d vector2d) {
         return new Vector2d(this.x + vector2d.x, this.y * vector2d.y);
     }
 
+    /**
+     * 
+     * @return x axis
+     */
     public double getX() {
         return x;
     }
 
-    public void setX(double x) {
+    /**
+     * Set x axis.
+     * 
+     * @param x
+     */
+    public void setX(final double x) {
         this.x = x;
     }
 
+    /**
+     * 
+     * @return y axis.
+     */
     public double getY() {
         return y;
     }
 
-    public void setY(double y) {
+    /**
+     * Set y axis.
+     * 
+     * @param y
+     */
+    public void setY(final double y) {
         this.y = y;
     }
 }

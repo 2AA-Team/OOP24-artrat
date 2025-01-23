@@ -7,7 +7,7 @@ import it.unibo.artrat.utils.impl.Point;
  * Abstract class that implements default instructions.
  */
 public abstract class AbstractGameObject implements GameObject {
-    private BoundingBoxImpl hitBox;
+    private final BoundingBoxImpl hitBox;
 
     /**
      * Abstract GameObject constructor without parameters.

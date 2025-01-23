@@ -9,7 +9,9 @@ import it.unibo.artrat.utils.impl.Vector2d;
  * Standard enemy creator.
  */
 public final class CreatorBaseEnemy implements EnemyFactory {
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Enemy createEnemy(final Point p, final double radius, final Vector2d v) {
         return new BaseEnemy(p, radius, v);

@@ -18,6 +18,20 @@ public final class Point {
         this.y = y;
     }
 
+    /**
+     * Point constructor.
+     */
+    public Point() {
+        this.x = 0;
+        this.y = 0;
+    }
+
+    /**
+     * Sum of point with a vector (Point Movement).
+     * 
+     * @param v direction vector.
+     * @return return new position.
+     */
     public Point sum(final Vector2d v) {
         return new Point(this.x + v.getX(), this.y + v.getY());
     }
@@ -68,6 +82,12 @@ public final class Point {
         return "( X: " + this.x + "; Y: " + this.y + " )";
     }
 
+    /**
+     * Get distance from other point.
+     * 
+     * @param p point used to compute the distance
+     * @return distance
+     */
     public double getDistance(final Point p) {
         final double distX = this.x - p.x;
         final double distY = this.y - p.y;

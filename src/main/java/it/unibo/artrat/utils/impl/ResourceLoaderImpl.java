@@ -19,6 +19,9 @@ public final class ResourceLoaderImpl implements ResourceLoader {
 
     private Map<String, Object> obj = new HashMap<>();
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setConfigPath(final String configPath) throws IOException {
         final Yaml yaml = new Yaml();
@@ -27,6 +30,9 @@ public final class ResourceLoaderImpl implements ResourceLoader {
         inputStream.close();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Object getConfig(final String conf) {
         final Object ob = obj.get(conf);

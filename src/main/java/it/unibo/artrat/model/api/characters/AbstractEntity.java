@@ -8,7 +8,7 @@ import it.unibo.artrat.utils.impl.Vector2d;
  * Essential implementetion of an entity.
  */
 public abstract class AbstractEntity extends AbstractGameObject implements Entity {
-    private final Vector2d speed;
+    private final Vector2d speed = new Vector2d();
 
     /**
      * Entity constructor.
@@ -29,7 +29,8 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
      */
     public AbstractEntity(final Point p, final double radius, final Vector2d v) {
         super(p, radius);
-        this.speed = v;
+        this.speed.setX(v.getX());
+        this.speed.setY(v.getY());
     }
 
     /**
