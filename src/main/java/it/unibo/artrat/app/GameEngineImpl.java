@@ -21,7 +21,7 @@ import it.unibo.artrat.view.impl.MainViewImpl;
  * @author Matteo Tonelli
  */
 public final class GameEngineImpl implements GameEngine, Sender {
-    private List<Command> commands = new LinkedList<Command>();
+    private final List<Command> commands = new LinkedList<>();
 
     private enum GameStatus {
         STOPPED, RUNNING
@@ -74,7 +74,7 @@ public final class GameEngineImpl implements GameEngine, Sender {
                 delta += (currentTime - lastTime) / drawInterval;
                 lastTime = currentTime;
                 if (delta >= 1) {
-                    this.commands.stream().forEach(cmd -> cmd.execute());
+                    this.commands.stream().forEach(Command::execute);
                     this.commands.clear();
                     this.update();
                     this.redraw();

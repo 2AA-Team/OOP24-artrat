@@ -6,15 +6,18 @@ import it.unibo.artrat.utils.api.BoundingBox;
  * Class of bounding box as a circle.
  */
 public class BoundingBoxImpl implements BoundingBox {
-    private Point center;
+    private final Point center = new Point();
     private double radius;
 
     /**
+     * Bounding box constructor.
+     * 
      * @param p      box center
      * @param radius circle radius
      */
     public BoundingBoxImpl(final Point p, final double radius) {
-        this.center = p;
+        this.center.setX(p.getX());
+        this.center.setY(p.getY());
         this.radius = radius;
     }
 
@@ -22,11 +25,17 @@ public class BoundingBoxImpl implements BoundingBox {
      * @return bounding box center
      */
     public Point getCenter() {
-        return center;
+        return new Point(this.center.getX(), this.center.getY());
     }
 
-    public void setCenter(Point center) {
-        this.center = center;
+    /**
+     * Set box center.
+     * 
+     * @param center
+     */
+    public void setCenter(final Point center) {
+        this.center.setX(center.getX());
+        this.center.setY(center.getY());
     }
 
     /**
@@ -36,17 +45,20 @@ public class BoundingBoxImpl implements BoundingBox {
         return radius;
     }
 
-    public void setRadius(double radius) {
+    /**
+     * Set box radius.
+     * 
+     * @param radius
+     */
+    public void setRadius(final double radius) {
         this.radius = radius;
     }
 
     /**
-     * Check circles collision.
-     * 
-     * @param box box to check collision with
+     * {@inheritDoc}
      */
     @Override
-    public boolean isColliding(BoundingBoxImpl box) {
+    public boolean isColliding(final BoundingBoxImpl box) {
         return Math.floor(this.center.getDistance(box.getCenter())) <= box.getRadius() + this.getRadius();
     }
 

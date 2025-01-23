@@ -15,8 +15,8 @@ public class EmptySubPanel extends AbstractSubPanel {
      */
     @Override
     public void initComponents() {
-        JPanel panel = new JPanel();
-        JButton btn = new JButton();
+        final JPanel panel = new JPanel();
+        final JButton btn = new JButton();
         btn.addActionListener((e) -> {
             this.getSubController().setStage(Stage.MENU);
         });
