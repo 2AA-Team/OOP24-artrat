@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.io.FileWriter;
 
 import org.junit.jupiter.api.Test;
@@ -43,33 +44,23 @@ class ResourceLoaderTest {
     @Test
     void testReading() {
         final ResourceLoader resLoad = new ResourceLoaderImpl();
-        FileWriter writer = null;
         try {
-            writer = new FileWriter(configPath);
-            writer.write("");
-            writer.close();
+            try (FileWriter writer = new FileWriter(configPath, StandardCharsets.UTF_8)) {
+                writer.write("");
+            }
             assertThrows(NullPointerException.class, () -> resLoad.setConfigPath(configPath));
-            writer = new FileWriter(configPath);
-            writer.write("NULL: ");
-            writer.close();
+            try (FileWriter writer = new FileWriter(configPath, StandardCharsets.UTF_8)) {
+                writer.write("NULL: ");
+            }
             assertThrows(NullPointerException.class, () -> resLoad.setConfigPath(configPath));
-            writer = new FileWriter(configPath);
-            writer.write("ONE: 1");
-            writer.close();
+            try (FileWriter writer = new FileWriter(configPath, StandardCharsets.UTF_8)) {
+                writer.write("ONE: 1");
+            }
             resLoad.setConfigPath(configPath);
             assertEquals(1, resLoad.getConfig("ONE"));
             assertThrows(IllegalStateException.class, () -> resLoad.getConfig("TWO"));
         } catch (IOException e) {
             fail();
-        } finally {
-            if (writer != null) {
-                try {
-                    writer.close();
-                } catch (IOException e) {
-                    fail();
-                }
-            }
         }
-
     }
 }

@@ -28,6 +28,7 @@ public class MainViewImpl implements MainView {
         frame.setSize(width, heigth);
         this.currentStage = Stage.MENU;
         this.subPanel = new EmptySubPanel();
+        this.controller = null;
     }
 
     /**

@@ -19,12 +19,17 @@ public class MenuSubPanel extends AbstractSubPanel {
 
     private final MenuSubController menuSubController;
 
-    public MenuSubPanel(MenuSubController menuSubController) {
+    /**
+     * constructor to set the sub controller of the sub panel.
+     * 
+     * @param menuSubController
+     */
+    public MenuSubPanel(final MenuSubController menuSubController) {
         this.menuSubController = menuSubController;
     }
 
     /**
-     * construct the panel to add at the mainView.
+     * {@inheritDoc}
      */
     @Override
     public void initComponents() {
@@ -62,6 +67,9 @@ public class MenuSubPanel extends AbstractSubPanel {
         setPanel(panel);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void forceRedraw() {
     }

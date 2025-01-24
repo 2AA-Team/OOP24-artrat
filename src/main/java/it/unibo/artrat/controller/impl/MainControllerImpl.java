@@ -98,13 +98,24 @@ public class MainControllerImpl implements MainController {
     /**
      * abstract class that implements subcontroller.
      */
-    public abstract class AbstractSubController implements SubController {
+    public abstract static class AbstractSubController implements SubController {
+        private final MainControllerImpl mainController;
+
+        /**
+         * constructor to define mainController.
+         * 
+         * @param mainController
+         */
+        protected AbstractSubController(final MainControllerImpl mainController) {
+            this.mainController = mainController;
+        }
+
         /**
          * {@inheritDoc}
          */
         @Override
-        public void setStage(Stage newStage) {
-            MainControllerImpl.this.setStage(newStage);
+        public void setStage(final Stage newStage) {
+            mainController.setStage(newStage);
         }
 
         /**
@@ -112,7 +123,7 @@ public class MainControllerImpl implements MainController {
          */
         @Override
         public void quit() {
-            MainControllerImpl.this.quit();
+            mainController.quit();
         }
     }
 

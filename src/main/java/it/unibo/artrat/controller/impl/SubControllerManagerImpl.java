@@ -11,7 +11,7 @@ import it.unibo.artrat.controller.impl.subcontroller.MenuSubControllerImpl;
 import it.unibo.artrat.controller.impl.subcontroller.StoreSubControllerImpl;
 
 /**
- * {@inheritDoc}
+ * implementation of SubControllerManager.
  */
 public class SubControllerManagerImpl implements SubControllerManager {
 
@@ -21,11 +21,11 @@ public class SubControllerManagerImpl implements SubControllerManager {
     private final StoreSubController storeSubController;
 
     /**
-     * constructor that define all subController
+     * constructor that define all subController.
      * 
      * @param mainController
      */
-    public SubControllerManagerImpl(MainControllerImpl mainController) {
+    public SubControllerManagerImpl(final MainControllerImpl mainController) {
         this.menuSubController = new MenuSubControllerImpl(mainController);
         this.floorSubController = new FloorSubControllerImpl(mainController);
         this.inventorySubController = new InventorySubControllerImpl(mainController);
@@ -37,7 +37,7 @@ public class SubControllerManagerImpl implements SubControllerManager {
      */
     @Override
     public FloorSubController getFloorSubController() {
-        return floorSubController;
+        return this.floorSubController != null ? this.floorSubController : null;
     }
 
     /**
@@ -45,7 +45,7 @@ public class SubControllerManagerImpl implements SubControllerManager {
      */
     @Override
     public MenuSubController getMenuSubController() {
-        return this.menuSubController;
+        return this.menuSubController != null ? this.menuSubController : null;
     }
 
     /**
@@ -53,7 +53,7 @@ public class SubControllerManagerImpl implements SubControllerManager {
      */
     @Override
     public InventorySubController getInventorySubController() {
-        return inventorySubController;
+        return this.inventorySubController != null ? this.inventorySubController : null;
     }
 
     /**
@@ -61,7 +61,7 @@ public class SubControllerManagerImpl implements SubControllerManager {
      */
     @Override
     public StoreSubController getStoreSubController() {
-        return storeSubController;
+        return this.storeSubController != null ? this.storeSubController : null;
     }
 
 }

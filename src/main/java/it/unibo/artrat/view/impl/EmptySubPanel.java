@@ -13,16 +13,24 @@ public class EmptySubPanel extends AbstractSubPanel {
 
     private final MenuSubController menuSubController;
 
-    public EmptySubPanel(MenuSubController menuSubController) {
+    /**
+     * constructor to set the sub controller of the sub panel.
+     * 
+     * @param menuSubController
+     */
+    public EmptySubPanel(final MenuSubController menuSubController) {
         this.menuSubController = menuSubController;
     }
 
+    /**
+     * contructor only for test purpose.
+     */
     public EmptySubPanel() {
         this.menuSubController = null;
     }
 
     /**
-     * construct the panel to add at the mainView.
+     * {@inheritDoc}
      */
     @Override
     public void initComponents() {
@@ -36,6 +44,9 @@ public class EmptySubPanel extends AbstractSubPanel {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void forceRedraw() {
     }
