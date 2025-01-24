@@ -5,6 +5,7 @@ import java.util.List;
 
 import it.unibo.artrat.app.api.GameEngine;
 import it.unibo.artrat.controller.api.MainController;
+import it.unibo.artrat.controller.api.SubControllerManager;
 import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.view.api.MainView;
 
@@ -18,6 +19,7 @@ public class MainControllerImpl implements MainController {
     private Stage currentStage;
     private final List<MainView> views = new ArrayList<>(0);
     private final GameEngine engine;
+    private final SubControllerManager subControllerManager;
 
     /**
      * MainController constructor.
@@ -28,10 +30,11 @@ public class MainControllerImpl implements MainController {
     public MainControllerImpl(final GameEngine engine) {
         this.currentStage = Stage.MENU;
         this.engine = engine;
+        this.subControllerManager = new SubControllerManagerImpl(this);
     }
 
     /**
-     * Add a new view connected to the application.
+     * {@inheritDoc}
      */
     @Override
     public void addMainView(final MainView newView) {
@@ -42,7 +45,7 @@ public class MainControllerImpl implements MainController {
     }
 
     /**
-     * Gracefully quits from the application.
+     * {@inheritDoc}
      */
     @Override
     public void quit() {
@@ -51,7 +54,7 @@ public class MainControllerImpl implements MainController {
     }
 
     /**
-     * Send the signal to his model to update.
+     * {@inheritDoc}
      */
     @Override
     public void update() {
@@ -59,9 +62,7 @@ public class MainControllerImpl implements MainController {
     }
 
     /**
-     * set the current stage to a new stage.
-     * 
-     * @param newStage
+     * {@inheritDoc}
      */
     @Override
     public void setStage(final Stage newStage) {
@@ -77,7 +78,7 @@ public class MainControllerImpl implements MainController {
     }
 
     /**
-     * Send the signal to his view to update.
+     * {@inheritDoc}
      */
     @Override
     public void redraw() {
@@ -85,4 +86,34 @@ public class MainControllerImpl implements MainController {
             mainView.forceRedraw();
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SubControllerManager getControllerManager() {
+        return subControllerManager;
+    }
+
+    /**
+     * abstract class that implements subcontroller.
+     */
+    public abstract class AbstractSubController implements SubController {
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void setStage(Stage newStage) {
+            MainControllerImpl.this.setStage(newStage);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void quit() {
+            MainControllerImpl.this.quit();
+        }
+    }
+
 }

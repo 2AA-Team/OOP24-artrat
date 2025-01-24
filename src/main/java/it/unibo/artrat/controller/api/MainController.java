@@ -39,4 +39,28 @@ public interface MainController {
      */
     void redraw();
 
+    /**
+     * get the manager of all sub controllers of the main controller.
+     * 
+     * @return sub controller manager
+     */
+    public SubControllerManager getControllerManager();
+
+    /**
+     * interface to describe basic subController.
+     */
+    public interface SubController {
+        /**
+         * method to set the frame stage.
+         * 
+         * @param newStage
+         */
+        public void setStage(Stage newStage);
+
+        /**
+         * Gracefully quits from the application.
+         */
+        public void quit();
+    }
+
 }
