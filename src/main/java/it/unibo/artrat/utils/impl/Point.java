@@ -27,6 +27,16 @@ public final class Point {
     }
 
     /**
+     * Point constructor starting from a given point.
+     * 
+     * @param p point to be copied
+     */
+    public Point(final Point p) {
+        this.x = p.x;
+        this.y = p.y;
+    }
+
+    /**
      * Sum of point with a vector (Point Movement).
      * 
      * @param v direction vector.

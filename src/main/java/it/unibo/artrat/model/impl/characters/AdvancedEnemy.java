@@ -13,22 +13,22 @@ public final class AdvancedEnemy extends AbstractEntity implements Enemy {
     /**
      * Advanced enemy constructor.
      * 
-     * @param p
-     * @param radius
+     * @param bottomLeft
+     * @param topRight
      * @param v
      */
-    public AdvancedEnemy(final Point p, final double radius, final Vector2d v) {
-        super(p, radius, v);
+    public AdvancedEnemy(final Point bottomLeft, final Point topRight, final Vector2d v) {
+        super(bottomLeft, topRight, v);
     }
 
     /**
      * Advanced enemy constructor.
      * 
-     * @param p
-     * @param radius
+     * @param bottomLeft
+     * @param topRight
      */
-    public AdvancedEnemy(final Point p, final double radius) {
-        super(p, radius);
+    public AdvancedEnemy(final Point bottomLeft, final Point topRight) {
+        super(bottomLeft, topRight);
     }
 
     @Override

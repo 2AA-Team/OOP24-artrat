@@ -11,11 +11,11 @@ public interface EnemyFactory {
     /**
      * FactoryMethod for enemies creation.
      * 
-     * @param p      center of the bounding box
-     * @param radius raidus of the bounding box
-     * @param v      enemy vector
+     * @param bottomLeft bottom left corner of the bounding box
+     * @param topRight   top right corner the bounding box
+     * @param v          enemy vector
      * @return created enemy
      */
-    Enemy createEnemy(Point p, double radius, Vector2d v);
+    Enemy createEnemy(Point bottomLeft, Point topRight, Vector2d v);
 
 }

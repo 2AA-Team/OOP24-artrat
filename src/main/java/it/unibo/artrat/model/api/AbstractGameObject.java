@@ -13,17 +13,17 @@ public abstract class AbstractGameObject implements GameObject {
      * Abstract GameObject constructor without parameters.
      */
     public AbstractGameObject() {
-        this.hitBox = new BoundingBoxImpl(new Point(0, 0), 0);
+        this.hitBox = new BoundingBoxImpl(new Point(0, 0), new Point(0, 0));
     }
 
     /**
      * Abstract GameObject constructor.
      * 
-     * @param p      center of the game object's bounding box
-     * @param radius radius of the game object's bounding box
+     * @param bottomLeft bottomm left corner of the game object's bounding box
+     * @param topRight   top right corner of the game object's bounding box
      */
-    public AbstractGameObject(final Point p, final double radius) {
-        this.hitBox = new BoundingBoxImpl(p, radius);
+    public AbstractGameObject(final Point bottomLeft, final Point topRight) {
+        this.hitBox = new BoundingBoxImpl(bottomLeft, topRight);
     }
 
     /**
