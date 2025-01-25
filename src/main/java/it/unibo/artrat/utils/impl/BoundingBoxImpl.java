@@ -6,22 +6,38 @@ import it.unibo.artrat.utils.api.BoundingBox;
  * Class of bounding box as a rectangle.
  */
 public class BoundingBoxImpl implements BoundingBox {
-    private Point bottomLeft;
-    private Point topRight;
+    private Point topLeft;
+    private Point bottomRight;
     private final double height;
     private final double width;
 
     /**
+     * 
+     * @return rectangle height
+     */
+    public double getHeight() {
+        return this.height;
+    }
+
+    /**
+     * 
+     * @return rectangle width
+     */
+    public double getWidth() {
+        return this.width;
+    }
+
+    /**
      * Bounding box constructor.
      * 
-     * @param bottomLeft bottom left bounding box corner center
-     * @param topRight   top right bounding box corner center
+     * @param topLeft     top left bounding box corner center
+     * @param bottomRight bottom right bounding box corner center
      */
-    public BoundingBoxImpl(final Point bottomLeft, final Point topRight) {
-        this.topRight = new Point(topRight);
-        this.bottomLeft = new Point(bottomLeft);
-        this.width = Math.abs(this.topRight.getY() - this.bottomLeft.getY());
-        this.height = Math.abs(this.bottomLeft.getX() - this.topRight.getX());
+    public BoundingBoxImpl(final Point topLeft, final Point bottomRight) {
+        this.bottomRight = new Point(bottomRight);
+        this.topLeft = new Point(topLeft);
+        this.width = Math.abs(this.bottomRight.getY() - this.topLeft.getY());
+        this.height = Math.abs(this.topLeft.getX() - this.bottomRight.getX());
     }
 
     /**
@@ -32,24 +48,25 @@ public class BoundingBoxImpl implements BoundingBox {
      * @param height rectangle height
      */
     public BoundingBoxImpl(final Point center, final double width, final double height) {
-        this.topRight = new Point(center.getX() + width / 2, center.getY() - height / 2);
-        this.bottomLeft = new Point(center.getX() - width / 2, center.getY() + height / 2);
         this.width = width;
         this.height = height;
+        this.topLeft = new Point(center.getX() - width / 2, center.getY() - height / 2);
+        this.bottomRight = new Point(center.getX() + width / 2, center.getY() + height / 2);
+
     }
 
     /**
      * @return bottom left bounding box corner
      */
-    public Point getbottomLeft() {
-        return new Point(this.bottomLeft);
+    public Point getTopLeft() {
+        return new Point(this.topLeft);
     }
 
     /**
      * @return Bottom right bounding box corner
      */
-    public Point getTopRight() {
-        return new Point(this.topRight);
+    public Point getBottomRight() {
+        return new Point(this.bottomRight);
     }
 
     /**
@@ -57,9 +74,10 @@ public class BoundingBoxImpl implements BoundingBox {
      */
     @Override
     public boolean isColliding(final BoundingBoxImpl box) {
-        return this.getTopRight().getY() < box.bottomLeft.getY()
-                || this.bottomLeft.getY() > box.topRight.getY() && this.topRight.getX() < box.bottomLeft.getX()
-                || this.bottomLeft.getX() > box.topRight.getX();
+        return !(this.topLeft.getX() > box.getBottomRight().getX()
+                || this.bottomRight.getX() < box.getTopLeft().getX()
+                || this.topLeft.getY() > box.getBottomRight().getY()
+                || this.bottomRight.getY() < box.getTopLeft().getY());
     }
 
     /**
@@ -68,7 +86,7 @@ public class BoundingBoxImpl implements BoundingBox {
      */
     public Point getCenter() {
 
-        return new Point(this.bottomLeft.getX() + width / 2, this.bottomLeft.getY() + height / 2);
+        return new Point(this.topLeft.getX() + this.getWidth() / 2, this.topLeft.getY() + height / 2);
     }
 
     /**
@@ -77,8 +95,8 @@ public class BoundingBoxImpl implements BoundingBox {
      * @param center center point
      */
     public void setCenter(final Point center) {
-        this.topRight = new Point(center.getX() + this.width / 2, center.getY() - this.height / 2);
-        this.bottomLeft = new Point(center.getX() - this.width / 2, center.getY() + this.height / 2);
+        this.topLeft = new BoundingBoxImpl(center, this.getWidth(), this.getHeight()).getTopLeft();
+        this.bottomRight = new BoundingBoxImpl(center, this.getWidth(), this.getHeight()).getBottomRight();
     }
 
 }
