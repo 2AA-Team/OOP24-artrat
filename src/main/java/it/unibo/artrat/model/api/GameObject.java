@@ -7,8 +7,10 @@ public interface GameObject {
 
     /**
      * updates the object data.
+     * 
+     * @param delta delta time
      */
-    void update();
+    void update(int delta);
 
     /**
      * reloads the object view.

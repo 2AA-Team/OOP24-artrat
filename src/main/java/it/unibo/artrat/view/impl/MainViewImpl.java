@@ -7,6 +7,8 @@ import it.unibo.artrat.view.api.MainView;
 
 /**
  * implementation of class mainView.
+ * 
+ * @author Matteo Tonelli
  */
 public class MainViewImpl implements MainView {
 
@@ -24,6 +26,9 @@ public class MainViewImpl implements MainView {
      */
     public MainViewImpl(final int width, final int heigth) {
         frame.setSize(width, heigth);
+        this.currentStage = Stage.MENU;
+        this.subPanel = new EmptySubPanel();
+        this.controller = null;
     }
 
     /**
@@ -33,7 +38,7 @@ public class MainViewImpl implements MainView {
      */
     @Override
     public void setController(final MainController observer) {
-        controller = observer;
+        controller = observer == null ? controller : observer;
     }
 
     /**
@@ -70,6 +75,7 @@ public class MainViewImpl implements MainView {
      */
     @Override
     public void forceRedraw() {
+        subPanel.forceRedraw();
     }
 
     /**
@@ -79,21 +85,20 @@ public class MainViewImpl implements MainView {
     public void reconduceFromStage() {
         switch (currentStage) {
             case MENU:
-                subPanel = new MenuSubPanel();
+                //subPanel = new MenuSubPanel(controller.getControllerManager().getMenuSubController());
                 break;
             case GAME:
-                subPanel = new GameSubPanel();
+                subPanel = new EmptySubPanel(controller.getControllerManager().getMenuSubController());
                 break;
             case STORE:
-                subPanel = new MenuSubPanel();
+                subPanel = new EmptySubPanel(controller.getControllerManager().getMenuSubController());
                 break;
             case INVENTORY:
-                subPanel = new InventorySubPanel();
+                subPanel = new InventorySubPanel(controller.getControllerManager().getInventorySubController());
                 break;
             default:
                 throw new IllegalStateException();
         }
-        subPanel.setSubController(this.controller);
         frame.setContentPane(subPanel.getPanel());
     }
 }

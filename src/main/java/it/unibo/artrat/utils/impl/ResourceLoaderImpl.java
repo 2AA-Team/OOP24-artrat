@@ -19,15 +19,20 @@ public final class ResourceLoaderImpl implements ResourceLoader {
 
     private Map<String, Object> obj = new HashMap<>();
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setConfigPath(final String configPath) throws IOException {
         final Yaml yaml = new Yaml();
         final InputStream inputStream = new FileInputStream(new File(configPath));
         this.obj = Map.copyOf(yaml.load(inputStream));
-        System.out.println("culo");
         inputStream.close();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Object getConfig(final String conf) {
         final Object ob = obj.get(conf);

@@ -2,18 +2,26 @@ package it.unibo.artrat.app;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
+import it.unibo.artrat.app.api.GameEngine;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
 import it.unibo.artrat.utils.api.ResourceLoader;
+import it.unibo.artrat.utils.api.commands.Command;
+import it.unibo.artrat.utils.api.commands.Sender;
 import it.unibo.artrat.utils.impl.Converter;
 import it.unibo.artrat.utils.impl.ResourceLoaderImpl;
 import it.unibo.artrat.view.impl.MainViewImpl;
 
 /**
- * GameEngine is the class designed to manage the game loop.
+ * Implement game engine.
+ * 
+ * @author Matteo Tonelli
  */
-public final class GameEngine implements Runnable {
+public final class GameEngineImpl implements GameEngine, Sender {
+    private final List<Command> commands = new LinkedList<>();
 
     private enum GameStatus {
         STOPPED, RUNNING
@@ -30,26 +38,25 @@ public final class GameEngine implements Runnable {
             + "config.yaml";
     private GameStatus status;
     private final ResourceLoader resourceLoader;
-    private MainController mainController;
+    private final MainController mainController;
 
     /**
      * Game engine constructor.
      */
-    public GameEngine() {
+    public GameEngineImpl() {
         this.status = GameStatus.STOPPED;
         this.resourceLoader = new ResourceLoaderImpl();
+        mainController = new MainControllerImpl(this);
     }
 
     @Override
     public void run() {
         if (!initiateResources()) {
-            System.exit(1);
+            Runtime.getRuntime().exit(1);
         }
-        mainController = new MainControllerImpl();
         mainController.addMainView(new MainViewImpl(
                 (int) resourceLoader.getConfig("WIDTH"),
                 (int) resourceLoader.getConfig("HEIGHT")));
-        this.status = GameStatus.RUNNING;
         mainLoop();
     }
 
@@ -57,20 +64,25 @@ public final class GameEngine implements Runnable {
      * Game loop method.
      */
     private void mainLoop() {
-        final double drawInterval = Converter.fpsToNanos((int) resourceLoader.getConfig("FPS"));
-        double delta = 0;
-        double lastTime = System.nanoTime();
-        long currentTime;
-        while (status.equals(GameStatus.RUNNING)) {
-            currentTime = System.nanoTime();
-            delta += (currentTime - lastTime) / drawInterval;
-            lastTime = currentTime;
-            if (delta >= 1) {
-                this.update();
-                this.redraw();
-                delta--;
+        while (true) {
+            final double drawInterval = Converter.fpsToNanos((int) resourceLoader.getConfig("FPS"));
+            double delta = 0;
+            double lastTime = System.nanoTime();
+            long currentTime;
+            while (status.equals(GameStatus.RUNNING)) {
+                currentTime = System.nanoTime();
+                delta += (currentTime - lastTime) / drawInterval;
+                lastTime = currentTime;
+                if (delta >= 1) {
+                    this.commands.stream().forEach(Command::execute);
+                    this.commands.clear();
+                    this.update();
+                    this.redraw();
+                    delta--;
+                }
             }
         }
+
     }
 
     /**
@@ -92,5 +104,27 @@ public final class GameEngine implements Runnable {
     }
 
     private void update() {
+
+    }
+
+    /**
+     * chenge the status to stop the gameloop.
+     */
+    @Override
+    public void forceStop() {
+        this.status = GameStatus.STOPPED;
+    }
+
+    /**
+     * chenge the status to start the gameloop.
+     */
+    @Override
+    public void forceStart() {
+        this.status = GameStatus.RUNNING;
+    }
+
+    @Override
+    public void notifyCommand(final Command cmd) {
+        commands.add(cmd);
     }
 }

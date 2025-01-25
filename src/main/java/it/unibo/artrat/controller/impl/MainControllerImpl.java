@@ -3,28 +3,38 @@ package it.unibo.artrat.controller.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.unibo.artrat.app.api.GameEngine;
 import it.unibo.artrat.controller.api.MainController;
+import it.unibo.artrat.controller.api.SubControllerManager;
 import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.view.api.MainView;
 
 /**
  * implementation of class MainController.
+ * 
+ * @author Matteo Tonelli
  */
 public class MainControllerImpl implements MainController {
 
     private Stage currentStage;
     private final List<MainView> views = new ArrayList<>(0);
+    private final GameEngine engine;
+    private final SubControllerManager subControllerManager;
 
     /**
      * MainController constructor.
      * set the current Stage to the initial menu
+     * 
+     * @param engine game engine.
      */
-    public MainControllerImpl() {
+    public MainControllerImpl(final GameEngine engine) {
         this.currentStage = Stage.MENU;
+        this.engine = engine;
+        this.subControllerManager = new SubControllerManagerImpl(this);
     }
 
     /**
-     * Add a new view connected to the application.
+     * {@inheritDoc}
      */
     @Override
     public void addMainView(final MainView newView) {
@@ -35,15 +45,16 @@ public class MainControllerImpl implements MainController {
     }
 
     /**
-     * Gracefully quits from the application.
+     * {@inheritDoc}
      */
     @Override
     public void quit() {
-        System.exit(0);
+        engine.forceStop();
+        Runtime.getRuntime().exit(1);
     }
 
     /**
-     * Send the signal to his model to update.
+     * {@inheritDoc}
      */
     @Override
     public void update() {
@@ -51,20 +62,23 @@ public class MainControllerImpl implements MainController {
     }
 
     /**
-     * set the current stage to a new stage.
-     * 
-     * @param newStage
+     * {@inheritDoc}
      */
     @Override
     public void setStage(final Stage newStage) {
         currentStage = newStage;
+        if (newStage.equals(Stage.GAME)) {
+            engine.forceStart();
+        } else {
+            engine.forceStop();
+        }
         for (final MainView mainView : views) {
             mainView.setStage(currentStage);
         }
     }
 
     /**
-     * Send the signal to his view to update.
+     * {@inheritDoc}
      */
     @Override
     public void redraw() {
@@ -72,4 +86,45 @@ public class MainControllerImpl implements MainController {
             mainView.forceRedraw();
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SubControllerManager getControllerManager() {
+        return subControllerManager;
+    }
+
+    /**
+     * abstract class that implements subcontroller.
+     */
+    public abstract static class AbstractSubController implements SubController {
+        private final MainControllerImpl mainController;
+
+        /**
+         * constructor to define mainController.
+         * 
+         * @param mainController
+         */
+        protected AbstractSubController(final MainControllerImpl mainController) {
+            this.mainController = mainController;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void setStage(final Stage newStage) {
+            mainController.setStage(newStage);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void quit() {
+            mainController.quit();
+        }
+    }
+
 }

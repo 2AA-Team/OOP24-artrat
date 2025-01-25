@@ -4,6 +4,8 @@ import java.io.IOException;
 
 /**
  * ResourceLoader is responsible for fetching and loading data.
+ * 
+ * @author Matteo Tonelli
  */
 public interface ResourceLoader {
 

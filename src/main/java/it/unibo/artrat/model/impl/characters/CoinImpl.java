@@ -12,6 +12,9 @@ public class CoinImpl implements Coin {
     private double amount;
     private Multiplier multiplier;
 
+    /**
+     * A constructor that initializes the current funds to zero and instantiates a new money multiplier.
+     */
     public CoinImpl() {
         this.amount = 0.0;
         this.multiplier = new MultiplierImpl();

@@ -1,15 +1,15 @@
 package it.unibo.artrat.view.impl;
 
 import javax.swing.JPanel;
-import it.unibo.artrat.controller.api.MainController;
 
 /**
  * abstract class to make panel.
  * each stage have his own panel.
+ * 
+ * @author Matteo Tonelli
  */
 abstract class AbstractSubPanel {
-    protected final JPanel panel;
-    protected MainController controller;
+    private JPanel panel;
 
     /**
      * abstract view constructor.
@@ -28,16 +28,23 @@ abstract class AbstractSubPanel {
     }
 
     /**
+     * set the current panel.
+     * This approach applies the concept of 'information hiding'.
+     * 
+     * @param newPanel
+     */
+    protected void setPanel(final JPanel newPanel) {
+        panel = newPanel;
+    }
+
+    /**
      * initializes the panel components.
      */
     public abstract void initComponents();
 
     /**
-     * set the controller to communicate with model.
-     * 
-     * @param controller
+     * force to update all his component.
      */
-    public void setSubController(final MainController controller) {
-        this.controller = controller;
-    }
+    protected abstract void forceRedraw();
+
 }

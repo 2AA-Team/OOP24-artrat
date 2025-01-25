@@ -3,111 +3,113 @@ package it.unibo.artrat.view.impl;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Objects;
+
+import it.unibo.artrat.controller.api.subcontroller.InventorySubController;
 import it.unibo.artrat.model.api.characters.Inventory;
 
 /** 
  * A base view for inventory
  * @author Cristian Di Donato
 */
-public class InventorySubPanel extends AbstractSubPanel{
+public class InventorySubPanel extends AbstractSubPanel {
+
+    private final InventorySubController controller;
+
+    public InventorySubPanel(final InventorySubController controller) {
+        this.controller = controller;
+    }
 
     @Override
     public void initComponents() {
-        /*
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(700, 700);
     
-        // Creazione del pannello principale
-        myJPanel = new JPanel();
-        myJPanel.setLayout(new BoxLayout(myJPanel, BoxLayout.Y_AXIS)); // Disposizione verticale dei pannelli
-    
+        JPanel myJPanel = new JPanel();
+        myJPanel.setLayout(new GridLayout(0, 1, 5, 5)); // Una colonna, spazio verticale 5px
+
         // Aggiunta di un pannello per ogni item dell'inventario
-        for (var item : inv.getStoredItem()) {
-            JPanel itemPanel = new JPanel();
-            itemPanel.setLayout(new BorderLayout());
-    
-            JButton itemButton = new JButton(item.getType().name());
-            itemButton.setPreferredSize(new Dimension(300, (myJPanel.getHeight()/5))); // questo riadatta l'altezza quindi rende tutto "scalabile" 
-            //itemButton.setPreferredSize(new Dimension(300, 100)); Questa versione mantiene l'altezza fissa ed è congeniale all'approccio con lo scroll panel
-    
+        for (var item : controller.getStoredItem()) { //observer.getStoredItem() {
+            JPanel itemPanel = new JPanel(new GridLayout(1, 2, 5, 0)); // Due colonne: itemButton e useButton
+
+            JButton itemButton = new JButton(controller.getTypeName(item));
             JButton useButton = new JButton("Usa");
-            useButton.setPreferredSize(new Dimension(150, (myJPanel.getHeight()/5))); // Stesso discorso dell'item button
-            //useButton.setPreferredSize(new Dimension(150, 100)); Stesso discorso dell'item button
+
+            itemButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    controller.getDescription(item);
+                }
+            });
 
             useButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    int result = JOptionPane.showConfirmDialog(
-                        InventoryViewImpl.this,
-                        "Vuoi far si che LuPino utilizzi questo oggetto?",
-                        "Utilizza oggetto",
-                        JOptionPane.YES_NO_OPTION
-                    );
-    
-                    if (result == JOptionPane.YES_OPTION) {
-                        if(inv.useItem(item)){
+                    /*if(confirmDialog("Vuoi far si che LuPino utilizzi questo oggetto?", "Utilizza oggetto")) {
+                        if (controller.useItem(item)) { //observer.useItem()
                             myJPanel.remove(itemPanel);
-                            myJPanel.revalidate();
-                            myJPanel.repaint();
-                            JOptionPane.showMessageDialog(
-                                InventoryViewImpl.this,
-                                "L'oggetto è stato utilizzato da LuPino con successo e perciò rimosso dall'inventario",
-                                "Uno in meno bello",
-                                JOptionPane.INFORMATION_MESSAGE
-                            );
                         }
-                    }
+                    }*/
                 }
             });
-    
-            itemButton.addActionListener(new ActionListener() {
+
+            /*this.addComponentListener(new ComponentAdapter() {
+                public void componentResized(ComponentEvent e) {
+                    Dimension newSize = getSize();
+                    int buttonWidth = newSize.width / 5;
+                    int buttonHeight = newSize.height / 10;
+
+                    itemButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+                    useButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+
+                    itemPanel.revalidate();
+                    itemPanel.repaint();
+                }
+            });*/
+
+            itemPanel.add(itemButton);
+            itemPanel.add(useButton);
+            myJPanel.add(itemPanel);
+
+            JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+            JButton closeButton = new JButton("Chiudi inventario");
+            closeButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    JOptionPane.showMessageDialog(
-                        InventoryViewImpl.this,
-                        item.getDescription(),
-                        "Descrizione",
-                        JOptionPane.CLOSED_OPTION
-                    );
+                    /*if(confirmDialog("Vuoi davvero chiudere la borsa di LuPino e proseguire le tue scorribande?", "Chiudi inventario")) {
+                        controller.quit();
+                    }*/
                 }
             });
+
+            bottomPanel.add(closeButton);
+
+            // Creazione dello scroll panel scalabile
+            JScrollPane scrollPane = new JScrollPane(myJPanel);
+            scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+            scrollPane.getVerticalScrollBar().setUnitIncrement(16); // Velocità di scrolling
+        };
     
-            itemPanel.add(itemButton, BorderLayout.WEST);
-            itemPanel.add(useButton, BorderLayout.CENTER);
-    
-            myJPanel.add(itemPanel);
-        }
-    
-        // Aggiunta di un pulsante per chiudere la finestra
-        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        JButton closeButton = new JButton("Chiudi inventario");
-        closeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int result = JOptionPane.showConfirmDialog(
-                    InventoryViewImpl.this,
-                    "Vuoi davvero chiudere la borsa di LuPino e proseguire le tue scorribande?",
-                    "Chiudi inventario",
-                    JOptionPane.YES_NO_OPTION
-                );
-    
-                if (result == JOptionPane.YES_OPTION) {
-                    //InventoryViewImpl.this.setVisible(false); Non chiude la finestra ma bensì la nasconde bisogna decidere che approccio usare
-                    //dispose(); chiude la finestra corrente senza influenzare quelel sotto, potrebbe essere utile nella versione finale
-                    System.exit(0);
-                }
-            }
-        });
-        bottomPanel.add(closeButton);
-    
-        // Il pannello di scroll permette di scorrere in verticale per vedere i vari pulsanti in caso di dimensioni troppo piccole
-        //JScrollPane scrollPane = new JScrollPane(myJPanel);
-        //this.add(scrollPane, BorderLayout.CENTER);
-        this.add(myJPanel, BorderLayout.CENTER); //Version con altezza scalabile
-        this.add(bottomPanel, BorderLayout.SOUTH);
-    
-        this.setVisible(true);
-        */
     }
+
+    @Override
+    protected void forceRedraw() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'forceRedraw'");
+    }
+
+    /*private boolean confirmDialog(final String question, final String name) {
+        return JOptionPane.showConfirmDialog(this, question, name, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+    }
+
+    @Override
+    public void displayMessage(String message, String title) {
+        JOptionPane.showMessageDialog(this, message, title, JOptionPane.INFORMATION_MESSAGE);
+        myJPanel.revalidate();
+        myJPanel.repaint();
+    }
+
+    @Override
+    public void closeWindow() {
+        this.dispose();
+    }*/
     
 }

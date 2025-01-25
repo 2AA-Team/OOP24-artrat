@@ -5,6 +5,8 @@ import it.unibo.artrat.view.api.MainView;
 
 /**
  * Controller interface.
+ * 
+ * @author Matteo Tonelli
  */
 public interface MainController {
 
@@ -36,5 +38,29 @@ public interface MainController {
      * Send the signal to his view to redraw.
      */
     void redraw();
+
+    /**
+     * get the manager of all sub controllers of the main controller.
+     * 
+     * @return sub controller manager
+     */
+    SubControllerManager getControllerManager();
+
+    /**
+     * interface to describe basic subController.
+     */
+    interface SubController {
+        /**
+         * method to set the frame stage.
+         * 
+         * @param newStage
+         */
+        void setStage(Stage newStage);
+
+        /**
+         * Gracefully quits from the application.
+         */
+        void quit();
+    }
 
 }
