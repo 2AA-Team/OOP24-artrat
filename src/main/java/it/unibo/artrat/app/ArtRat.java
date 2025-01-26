@@ -15,7 +15,7 @@ public final class ArtRat {
     /**
      * Main method that starts the application.
      * 
-     * @param args
+     * @param args main arguments
      */
     public static void main(final String[] args) {
         final Runnable gameEngine = new GameEngineImpl();

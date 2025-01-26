@@ -13,8 +13,8 @@ public final class CreatorBaseEnemy implements EnemyFactory {
      * {@inheritDoc}
      */
     @Override
-    public Enemy createEnemy(final Point bottomLeft, final Point topRight, final Vector2d v) {
-        return new BaseEnemy(bottomLeft, topRight, v);
+    public Enemy createEnemy(final Point topLeft, final Point bottomRight, final Vector2d v) {
+        return new BaseEnemy(topLeft, bottomRight, v);
     }
 
 }

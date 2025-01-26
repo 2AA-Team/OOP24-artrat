@@ -27,6 +27,8 @@ public abstract class AbstractGameObject implements GameObject {
     }
 
     /**
+     * Get current positio.
+     * 
      * @return current game object position
      */
     public Point getPosition() {
@@ -36,7 +38,7 @@ public abstract class AbstractGameObject implements GameObject {
     /**
      * Set the current game object position.
      * 
-     * @param position
+     * @param position current position
      */
     public void setPosition(final Point position) {
         this.hitBox.setCenter(position);

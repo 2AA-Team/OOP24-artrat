@@ -12,6 +12,7 @@ public class BoundingBoxImpl implements BoundingBox {
     private final double width;
 
     /**
+     * Get rectangle height.
      * 
      * @return rectangle height
      */
@@ -20,6 +21,7 @@ public class BoundingBoxImpl implements BoundingBox {
     }
 
     /**
+     * Get box width.
      * 
      * @return rectangle width
      */
@@ -56,13 +58,17 @@ public class BoundingBoxImpl implements BoundingBox {
     }
 
     /**
-     * @return bottom left bounding box corner
+     * Get top left corner.
+     * 
+     * @return top left bounding box corner
      */
     public Point getTopLeft() {
         return new Point(this.topLeft);
     }
 
     /**
+     * Get bottom right corner.
+     * 
      * @return Bottom right bounding box corner
      */
     public Point getBottomRight() {
@@ -81,6 +87,7 @@ public class BoundingBoxImpl implements BoundingBox {
     }
 
     /**
+     * Get box center.
      * 
      * @return Center point of the bounding box.
      */
