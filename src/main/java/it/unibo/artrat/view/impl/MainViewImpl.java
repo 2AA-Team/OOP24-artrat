@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.view.api.MainView;
+import java.awt.*;
 
 /**
  * implementation of class mainView.
@@ -24,8 +25,9 @@ public class MainViewImpl implements MainView {
      * @param width
      * @param heigth
      */
-    public MainViewImpl(final int width, final int heigth) {
-        frame.setSize(width, heigth);
+    public MainViewImpl(final double width, final double heigth) {
+        frame.setSize((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),
+                (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * heigth));
         this.currentStage = Stage.MENU;
         this.subPanel = new EmptySubPanel();
         this.controller = null;

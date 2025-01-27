@@ -3,7 +3,6 @@ package it.unibo.artrat.model.api.world;
 import java.util.Set;
 
 import it.unibo.artrat.model.api.GameObject;
-import it.unibo.artrat.utils.impl.Point;
 
 /**
  * Class that rappresents a room.
@@ -11,19 +10,27 @@ import it.unibo.artrat.utils.impl.Point;
 public interface Room {
 
     /**
-     * Add objects in the room.
+     * method to return the room obstacles.
      * 
-     * @param pos
-     * @param tile
-     * @throws IllegalStateException if you try to add the same type of object in
-     *                               the same spot
+     * @return all the object
      */
-    void addObject(Point pos, GameObject tile);
+    Set<GameObject> getObstacles();
 
     /**
-     * method to return the room objects.
+     * method to return the room enemies.
      * 
-     * @return all the object (without repetion)
+     * @return all the enemies
      */
-    Set<GameObject> getObjects();
+    Set<GameObject> getEnemies();
+
+    /**
+     * method to return the room valuable item.
+     * 
+     * @return all the valuable item
+     */
+    Set<GameObject> getValuableItem();
+
+    public static interface RoomBuilder {
+
+    }
 }

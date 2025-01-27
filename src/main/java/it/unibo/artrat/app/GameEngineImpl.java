@@ -55,8 +55,8 @@ public final class GameEngineImpl implements GameEngine, Sender {
             Runtime.getRuntime().exit(1);
         }
         mainController.addMainView(new MainViewImpl(
-                (int) resourceLoader.getConfig("WIDTH"),
-                (int) resourceLoader.getConfig("HEIGHT")));
+                (double) resourceLoader.getConfig("MENU_WIDTH"),
+                (double) resourceLoader.getConfig("MENU_HEIGHT")));
         mainLoop();
     }
 
