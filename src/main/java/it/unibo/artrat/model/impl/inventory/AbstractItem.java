@@ -1,6 +1,8 @@
-package it.unibo.artrat.model.impl.market;
+package it.unibo.artrat.model.impl.inventory;
 
-import it.unibo.artrat.model.api.market.Item;
+import it.unibo.artrat.model.api.inventory.ItemType;
+
+import it.unibo.artrat.model.api.inventory.Item;
 
 /**
  * An abstract class that will be the base class for implementing other objects and consumables.

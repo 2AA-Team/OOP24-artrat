@@ -8,8 +8,23 @@ import it.unibo.artrat.model.api.characters.Multiplier;
  */
 public class MultiplierImpl implements Multiplier {
 
-    private double multipler = 1.0;
+    private static final double DEFAULT_MULTIPLIER = 1.0;
+    private double multipler;
 
+    /**
+     * A constructor that initialize a new istance of multiplier with the default value.
+     */
+    public MultiplierImpl() {
+        this.multipler  = DEFAULT_MULTIPLIER;
+    }
+
+    /**
+     * A constructor that initialize a new istance from a exist Multiplier.
+     * @param mpd the passed Multiplier.
+     */
+    public MultiplierImpl(Multiplier mpd) {
+        this.multipler = mpd.getCurrentMultiplier();
+    }
      /**
      * {@inheritDoc}
      */
@@ -21,7 +36,6 @@ public class MultiplierImpl implements Multiplier {
             throw new IllegalArgumentException();
         }
     }
-
      /**
      * {@inheritDoc}
      */
@@ -29,9 +43,13 @@ public class MultiplierImpl implements Multiplier {
     public void changeCurrentMultiplier(final double multipler) {
         if (multipler < 0.0) {
             this.multipler = multipler;
-        }
-        else { 
+        } else { 
             throw new IllegalArgumentException();
         }
+    }
+
+    @Override
+    public double getCurrentMultiplier() {
+        return this.multipler;
     }
 }

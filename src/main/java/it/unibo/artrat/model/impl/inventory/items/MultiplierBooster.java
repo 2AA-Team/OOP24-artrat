@@ -1,7 +1,7 @@
 package it.unibo.artrat.model.impl.inventory.items;
 
 import it.unibo.artrat.model.impl.inventory.AbstractItem;
-import it.unibo.artrat.model.impl.inventory.ItemType;
+import it.unibo.artrat.model.api.inventory.ItemType;;;
 
 public class MultiplierBooster extends AbstractItem{
 

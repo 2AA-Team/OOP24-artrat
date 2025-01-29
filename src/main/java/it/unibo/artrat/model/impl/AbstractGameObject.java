@@ -1,5 +1,6 @@
-package it.unibo.artrat.model.api;
+package it.unibo.artrat.model.impl;
 
+import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.utils.impl.BoundingBoxImpl;
 import it.unibo.artrat.utils.impl.Point;
 

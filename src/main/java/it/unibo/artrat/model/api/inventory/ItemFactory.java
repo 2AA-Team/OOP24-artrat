@@ -5,8 +5,7 @@ import java.io.IOException;
 /**
  * Factory to create items.
  */
-public interface ItemFactory {
-    
+public interface ItemFactory {    
     /**
      * Method to properly initialize the factory (the itemReader within it).
      * @throws IOException

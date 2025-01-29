@@ -3,15 +3,14 @@ package it.unibo.artrat.utils.impl;
 import java.io.IOException;
 import java.util.List;
 
-import it.unibo.artrat.model.impl.market.ItemType;
+import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.utils.api.ItemReader;
 import it.unibo.artrat.utils.api.ResourceLoader;
 
 /**
- * An implementation of ItemReader
+ * An implementation of ItemReader.
  */
-public class ItemReaderImpl implements ItemReader{
-
+public class ItemReaderImpl implements ItemReader {
     /**
      * The actual reader from yaml
      */
@@ -32,7 +31,7 @@ public class ItemReaderImpl implements ItemReader{
         this.valueOfYaml.setConfigPath(itemPath);
     }
 
-    private String getSpecificField(String nameOfItem, int field) {
+    private String getSpecificField(String nameOfItem, final int field) {
         return ((List<String>)(valueOfYaml.getConfig(nameOfItem))).get(field);
     } 
 

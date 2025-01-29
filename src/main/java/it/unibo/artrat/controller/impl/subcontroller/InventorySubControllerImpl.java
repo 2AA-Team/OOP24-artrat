@@ -4,7 +4,7 @@ import java.util.List;
 
 import it.unibo.artrat.controller.api.subcontroller.InventorySubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
-import it.unibo.artrat.model.api.market.Item;
+import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.view.api.InventoryView;
 
 /**

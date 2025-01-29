@@ -3,10 +3,8 @@ package it.unibo.artrat.view.impl;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Objects;
 
 import it.unibo.artrat.controller.api.subcontroller.InventorySubController;
-import it.unibo.artrat.model.api.characters.Inventory;
 
 /** 
  * A base view for inventory
@@ -23,15 +21,15 @@ public class InventorySubPanel extends AbstractSubPanel {
     @Override
     public void initComponents() {
     
-        JPanel myJPanel = new JPanel();
+        final JPanel myJPanel = new JPanel();
         myJPanel.setLayout(new GridLayout(0, 1, 5, 5)); // Una colonna, spazio verticale 5px
 
         // Aggiunta di un pannello per ogni item dell'inventario
         for (var item : controller.getStoredItem()) { //observer.getStoredItem() {
-            JPanel itemPanel = new JPanel(new GridLayout(1, 2, 5, 0)); // Due colonne: itemButton e useButton
+            final JPanel itemPanel = new JPanel(new GridLayout(1, 2, 5, 0)); // Due colonne: itemButton e useButton
 
-            JButton itemButton = new JButton(controller.getTypeName(item));
-            JButton useButton = new JButton("Usa");
+            final JButton itemButton = new JButton(controller.getTypeName(item));
+            final JButton useButton = new JButton("Usa");
 
             itemButton.addActionListener(new ActionListener() {
                 @Override
@@ -69,8 +67,8 @@ public class InventorySubPanel extends AbstractSubPanel {
             itemPanel.add(useButton);
             myJPanel.add(itemPanel);
 
-            JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-            JButton closeButton = new JButton("Chiudi inventario");
+            final JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+            final JButton closeButton = new JButton("Chiudi inventario");
             closeButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -83,11 +81,10 @@ public class InventorySubPanel extends AbstractSubPanel {
             bottomPanel.add(closeButton);
 
             // Creazione dello scroll panel scalabile
-            JScrollPane scrollPane = new JScrollPane(myJPanel);
+            final JScrollPane scrollPane = new JScrollPane(myJPanel);
             scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
             scrollPane.getVerticalScrollBar().setUnitIncrement(16); // Velocità di scrolling
-        };
-    
+        };    
     }
 
     @Override
@@ -110,6 +107,5 @@ public class InventorySubPanel extends AbstractSubPanel {
     @Override
     public void closeWindow() {
         this.dispose();
-    }*/
-    
+    }*/    
 }

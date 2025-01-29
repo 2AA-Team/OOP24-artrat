@@ -10,6 +10,9 @@ import it.unibo.artrat.model.impl.inventory.items.MultiplierBooster;
 import it.unibo.artrat.utils.api.ItemReader;
 import it.unibo.artrat.utils.impl.ItemReaderImpl;
 
+/**
+ * An implementation of ItemFactory.
+ */
 public class ItemFactoryImpl implements ItemFactory {
 
     private final String itemPath = "src" + File.separator
@@ -43,7 +46,9 @@ public class ItemFactoryImpl implements ItemFactory {
      */
     @Override
     public Item multiplierBooster() {
-        return new MultiplierBooster(itemReader.getDescription("MULTIPLIERBOOSTER"), itemReader.getPrice("MULTIPLIERBOOSTER"), itemReader.getItemType("MULTIPLIERBOOSTER"));
+        return new MultiplierBooster(itemReader.getDescription("MULTIPLIERBOOSTER"), 
+            itemReader.getPrice("MULTIPLIERBOOSTER"), 
+            itemReader.getItemType("MULTIPLIERBOOSTER"));
     }
 
     /**
@@ -51,7 +56,9 @@ public class ItemFactoryImpl implements ItemFactory {
      */
     @Override
     public Item luckyTicket() {
-        return new LuckyTicket(itemReader.getDescription("LUCKYTICKET"), itemReader.getPrice("LUCKYTICKET"), itemReader.getItemType("LUCKYTICKET"));
+        return new LuckyTicket(itemReader.getDescription("LUCKYTICKET"), 
+            itemReader.getPrice("LUCKYTICKET"), 
+            itemReader.getItemType("LUCKYTICKET"));
     }
     
 }

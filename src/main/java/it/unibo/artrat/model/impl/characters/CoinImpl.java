@@ -9,6 +9,7 @@ import it.unibo.artrat.model.api.characters.Multiplier;
  */
 public class CoinImpl implements Coin {
 
+    private static final double RESET_AMOUNT = 0.0;
     private double amount;
     private Multiplier multiplier;
 
@@ -16,8 +17,13 @@ public class CoinImpl implements Coin {
      * A constructor that initializes the current funds to zero and instantiates a new money multiplier.
      */
     public CoinImpl() {
-        this.amount = 0.0;
+        this.amount = RESET_AMOUNT;
         this.multiplier = new MultiplierImpl();
+    }
+
+    public CoinImpl(Coin coin) {
+        this.amount = coin.getCurrentAmount();
+        this.multiplier = coin.getCurrentMultiplier();
     }
 
     /**

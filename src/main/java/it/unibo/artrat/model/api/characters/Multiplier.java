@@ -8,6 +8,11 @@ package it.unibo.artrat.model.api.characters;
 public interface Multiplier {
     /**
      * 
+     * @return the current value of multiplier.
+     */
+    double getCurrentMultiplier();
+    /**
+     * 
      * @param coins the coins that player get at the end of the game.
      * @return the trasformed coin, after the multiplication.
      */

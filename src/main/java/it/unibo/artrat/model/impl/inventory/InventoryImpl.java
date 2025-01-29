@@ -1,10 +1,10 @@
-package it.unibo.artrat.model.impl.market;
+package it.unibo.artrat.model.impl.inventory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import it.unibo.artrat.model.api.characters.Inventory;
-import it.unibo.artrat.model.api.market.Item;
+import it.unibo.artrat.model.api.inventory.Inventory;
+import it.unibo.artrat.model.api.inventory.Item;
 
 /**
  * An implementation of Inventory.
@@ -15,10 +15,17 @@ public class InventoryImpl implements Inventory {
     private final List<Item> storedItem;
 
     /**
-     * A constructor that initializes an instance of an empty list of items
+     * A constructor that initializes an instance of an empty list of items.
      */
-    public InventoryImpl(){
+    public InventoryImpl() {
         this.storedItem = new ArrayList<>();
+    }
+
+    /**
+     * A constructor that initializes an instance.
+     */
+    public InventoryImpl(final Inventory inv) {
+        this.storedItem = inv.getStoredItem();
     }
 
     /**

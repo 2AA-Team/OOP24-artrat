@@ -1,7 +1,6 @@
-package it.unibo.artrat.model.api.characters;
+package it.unibo.artrat.model.api.inventory;
 
 import java.util.List;
-import it.unibo.artrat.model.api.market.Item;
 
 /**
  * Class that rappresents entity's inventory.
