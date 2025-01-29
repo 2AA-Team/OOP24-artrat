@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.view.api.MainView;
-import java.awt.*;
+import java.awt.Toolkit;
 
 /**
  * implementation of class mainView.

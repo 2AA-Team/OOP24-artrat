@@ -18,7 +18,7 @@ public abstract class AbstractObservedModel implements Subject {
      */
     @Override
     public void notifyOb() {
-        for (Observer observer : observers) {
+        for (final Observer observer : observers) {
             observer.update(null); // [TO-DO]
         }
     }
@@ -27,7 +27,7 @@ public abstract class AbstractObservedModel implements Subject {
      * {@inheritDoc}
      */
     @Override
-    public void add(Observer ob) {
+    public void add(final Observer ob) {
         observers.add(ob);
     }
 
@@ -35,7 +35,7 @@ public abstract class AbstractObservedModel implements Subject {
      * {@inheritDoc}
      */
     @Override
-    public void remove(Observer ob) {
+    public void remove(final Observer ob) {
         observers.remove(ob);
     }
 

@@ -29,8 +29,4 @@ public interface Room {
      * @return all the valuable item
      */
     Set<GameObject> getValuableItem();
-
-    public static interface RoomBuilder {
-
-    }
 }
