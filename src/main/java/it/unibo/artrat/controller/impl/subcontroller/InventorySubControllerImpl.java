@@ -13,7 +13,7 @@ public class InventorySubControllerImpl extends AbstractSubController
     /**
      * constructor to initialize mainController.
      * 
-     * @param mainController
+     * @param mainController main controller
      */
     public InventorySubControllerImpl(final MainControllerImpl mainController) {
         super(mainController);

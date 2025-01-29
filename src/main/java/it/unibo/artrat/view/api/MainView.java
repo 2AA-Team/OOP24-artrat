@@ -27,7 +27,7 @@ public interface MainView {
     /**
      * This method is used to set the stage in a view.
      * 
-     * @param currentStage
+     * @param currentStage new stage to set
      */
     void setStage(Stage currentStage);
 

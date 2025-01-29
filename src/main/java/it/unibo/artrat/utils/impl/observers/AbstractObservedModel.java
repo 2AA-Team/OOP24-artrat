@@ -6,9 +6,6 @@ import java.util.Set;
 import it.unibo.artrat.utils.api.observers.Observer;
 import it.unibo.artrat.utils.api.observers.Subject;
 
-/**
- * abstract implementation of subject.
- */
 public abstract class AbstractObservedModel implements Subject {
 
     Set<Observer> observers = new HashSet<>();

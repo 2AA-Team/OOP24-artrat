@@ -22,8 +22,8 @@ public class MainViewImpl implements MainView {
     /**
      * constructor set the size of the frame.
      * 
-     * @param width
-     * @param heigth
+     * @param width  width of the frame
+     * @param heigth height of the frame
      */
     public MainViewImpl(final double width, final double heigth) {
         frame.setSize((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),
@@ -34,9 +34,7 @@ public class MainViewImpl implements MainView {
     }
 
     /**
-     * Sets the controller controlled by this view (if works as input).
-     *
-     * @param observer the controller to attach
+     * {@inheritDoc}
      */
     @Override
     public void setController(final MainController observer) {
@@ -44,8 +42,7 @@ public class MainViewImpl implements MainView {
     }
 
     /**
-     * This method is called before the UI is used. It should finalize its status.
-     * (if needed).
+     * {@inheritDoc}
      */
     @Override
     public void initiate() {
@@ -54,9 +51,7 @@ public class MainViewImpl implements MainView {
     }
 
     /**
-     * This method is used to set the stage in a view.
-     * 
-     * @param currentStage
+     * {@inheritDoc}
      */
     @Override
     public void setStage(final Stage currentStage) {
@@ -73,7 +68,7 @@ public class MainViewImpl implements MainView {
     }
 
     /**
-     * force to update all his component.
+     * {@inheritDoc}
      */
     @Override
     public void forceRedraw() {
@@ -81,7 +76,7 @@ public class MainViewImpl implements MainView {
     }
 
     /**
-     * 
+     * {@inheritDoc}
      */
     @Override
     public void reconduceFromStage() {

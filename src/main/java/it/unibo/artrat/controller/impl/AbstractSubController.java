@@ -10,9 +10,9 @@ public abstract class AbstractSubController implements SubController {
     private final MainControllerImpl mainController;
 
     /**
-     * constructor to define mainController.
+     * constructor to define main controller.
      * 
-     * @param mainController
+     * @param mainController main controller
      */
     protected AbstractSubController(final MainControllerImpl mainController) {
         this.mainController = mainController;

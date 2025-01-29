@@ -12,7 +12,7 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     /**
      * constructor to initialize mainController.
      * 
-     * @param mainController
+     * @param mainController main controller
      */
     public StoreSubControllerImpl(final MainControllerImpl mainController) {
         super(mainController);

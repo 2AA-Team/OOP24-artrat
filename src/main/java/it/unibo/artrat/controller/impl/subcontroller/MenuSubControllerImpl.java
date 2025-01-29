@@ -12,7 +12,7 @@ public class MenuSubControllerImpl extends AbstractSubController implements Menu
     /**
      * constructor to initialize mainController.
      * 
-     * @param mainController
+     * @param mainController main controller
      */
     public MenuSubControllerImpl(final MainControllerImpl mainController) {
         super(mainController);

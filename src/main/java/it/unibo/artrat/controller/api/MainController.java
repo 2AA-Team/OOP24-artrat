@@ -30,7 +30,7 @@ public interface MainController {
     /**
      * set the current stage to a new stage.
      * 
-     * @param newStage
+     * @param newStage new stage
      */
     void setStage(Stage newStage);
 

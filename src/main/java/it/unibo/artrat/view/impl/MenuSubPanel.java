@@ -22,7 +22,7 @@ public class MenuSubPanel extends AbstractSubPanel {
     /**
      * constructor to set the sub controller of the sub panel.
      * 
-     * @param menuSubController
+     * @param menuSubController sub controller
      */
     public MenuSubPanel(final MenuSubController menuSubController) {
         this.menuSubController = menuSubController;

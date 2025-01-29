@@ -20,9 +20,8 @@ public interface ResourceLoader {
     /**
      * method that load all configPath data.
      * 
-     * @param configPath
-     *                   if configPath not represent anything:
-     * @throws IOException
+     * @param configPath path of the config file
+     * @throws IOException if configPath not represent anything
      */
     void setConfigPath(String configPath) throws IOException;
 
