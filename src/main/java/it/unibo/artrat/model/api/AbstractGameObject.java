@@ -19,11 +19,11 @@ public abstract class AbstractGameObject implements GameObject {
     /**
      * Abstract GameObject constructor.
      * 
-     * @param bottomLeft bottomm left corner of the game object's bounding box
-     * @param topRight   top right corner of the game object's bounding box
+     * @param topLeft     top left corner of the game object's bounding box
+     * @param bottomRight bottom right corner of the game object's bounding box
      */
-    public AbstractGameObject(final Point bottomLeft, final Point topRight) {
-        this.hitBox = new BoundingBoxImpl(bottomLeft, topRight);
+    public AbstractGameObject(final Point topLeft, final Point bottomRight) {
+        this.hitBox = new BoundingBoxImpl(topLeft, bottomRight);
     }
 
     /**
