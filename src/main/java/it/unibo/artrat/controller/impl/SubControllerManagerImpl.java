@@ -37,7 +37,7 @@ public class SubControllerManagerImpl implements SubControllerManager {
      */
     @Override
     public FloorSubController getFloorSubController() {
-        return this.floorSubController != null ? this.floorSubController : null;
+        return this.floorSubController;
     }
 
     /**
