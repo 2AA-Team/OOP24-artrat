@@ -6,6 +6,8 @@ import it.unibo.artrat.model.impl.Stage;
 /**
  * mainView interface.
  * a mainview is the view capable of alternating the various stages.
+ * 
+ * @author Matteo Tonelli
  */
 public interface MainView {
 
@@ -30,9 +32,13 @@ public interface MainView {
     void setStage(Stage currentStage);
 
     /**
-     * temporary method for testing.
-     * 
-     * @param s
+     * force to update all his component.
      */
-    void SetContent(String s);
+    void forceRedraw();
+
+    /**
+     * translate from stage to his relative JPanel.
+     */
+    void reconduceFromStage();
+
 }
