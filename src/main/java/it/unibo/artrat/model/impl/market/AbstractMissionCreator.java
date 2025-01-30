@@ -4,6 +4,7 @@ import it.unibo.artrat.model.api.market.Mission;
 
 /**
  * An abstract mission class, used to respect DRY princible.
+ * @author Manuel Benagli
  */
 public abstract class AbstractMissionCreator implements Mission{
     private final String name;
@@ -31,7 +32,6 @@ public abstract class AbstractMissionCreator implements Mission{
     public double getReward(){
         return this.reward;
     }
-
 
     public abstract boolean isDone();
 

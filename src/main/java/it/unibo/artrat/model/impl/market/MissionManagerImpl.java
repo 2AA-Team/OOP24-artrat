@@ -10,7 +10,9 @@ import it.unibo.artrat.model.api.market.Mission.MissionCategory;
 import it.unibo.artrat.model.api.market.MissionManager;
 
 /**
- * Mission manager class carries out all the common management logics of a market with a large quantity of elements.
+ * Mission manager class carries out all the common management logics of a market with a large quantity 
+ * of missions with different categories, difficulties and rewards.
+ * @author Manuel Benagli
  */
 public class MissionManagerImpl implements MissionManager{
     private final List<AbstractMissionCreator> missions;

@@ -5,10 +5,11 @@ import java.util.List;
 public interface ItemManager {
 
     
-    List<Item> sortPowerupLevel();       //STESSO DISCORSO PER IL MISSION MANAGER
+    List<Item> sortItemLevel();       //STESSO DISCORSO PER IL MISSION MANAGER
 
-    List<Item> sortPowerupCost();
+    List<Item> sortItemCost();
 
-    List<Item> filterPowerupLevel();     //forse
+    List<Item> filterItemLevel();     //forse
 
+    List<Item> filterItem();
 }

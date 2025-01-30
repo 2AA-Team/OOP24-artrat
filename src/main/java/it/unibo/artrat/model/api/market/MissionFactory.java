@@ -11,10 +11,11 @@ public interface MissionFactory {
 
     BaseMission createBaseMission();        //returns a base mission
     AdvancedMission createAdvancedMission();            //returns an advanced mission
+    /*
     TimeChallengeMission createtimeChallengeMission();
     GatheringMission createGatheringMission();
     StealthMission createStealthMission();
-
+    */
 
     enum MissionCategory{  //la categoria p
         TIMECHALLENGE, GATHERING, STEALTH
