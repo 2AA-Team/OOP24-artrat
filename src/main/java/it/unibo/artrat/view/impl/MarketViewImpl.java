@@ -4,33 +4,35 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
+
 /** 
  *  Market View, here you can buy items (powerup and consumable), and sort them in base of price, level and type.  
  * 
 */
-public class MarketViewImpl extends JFrame{
-    private final JPanel marketPanel = new JPanel();
-    private final JButton playAgain = new JButton("Play");
-    private final JButton showMission = new JButton("M");
-    
-    //per il filter e il sort posso anche usare un menù a tendina, OPPURE GROUP LAYOUT
-    //SONO BOTTONI PROVVISO
-    private final JButton filterButton = new JButton("Filter");
-    private final JButton sortButton = new JButton("Sort");
-    private final JButton searchItemButton = new JButton();     //serve l'apposito per fare la search
+public class MarketViewImpl extends JFrame{   
+    private final StoreSubController contr;
 
-    //private final JButton saveButton = new JButton("save game");    //per salvare, ancora opzionale
-    
-    public MarketViewImpl(){        
-        this.setTitle("State of Art Market");
-        this.setSize(900,900);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE); 
+    public MarketViewImpl(StoreSubController contr){    
+        this.contr = contr;
+    }
 
-        /*
-        * metto un BorderLayout per impostare in alto i bottoni per ItemManager, 
-        * in basso per il newGame, Missioni e punteggio player, al centro per comprare
-        */
+    public void initComponents(){
+        final JPanel marketPanel = new JPanel();
+        
+        //per il filter e il sort posso anche usare un menù a tendina, OPPURE GROUP LAYOUT
+        //SONO BOTTONI PROVVISORI
+        final JButton filterButton = new JButton("Filter");
+        final JButton sortButton = new JButton("Sort");
+        final JButton searchItemButton = new JButton();     //serve l'apposito per fare la search
+        final JButton playAgain = new JButton("Play");
+        final JButton showMission = new JButton("M");
+
         marketPanel.setLayout(new BorderLayout());     
+
+        for(var purchItem : contr.purchasableItems()){
+            
+        }
 
         final JPanel bottomPan = new JPanel();
         bottomPan.setLayout(new FlowLayout());
