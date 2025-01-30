@@ -1,7 +1,6 @@
 package it.unibo.artrat.controller.api.subcontroller;
 
 import java.util.List;
-
 import it.unibo.artrat.controller.api.MainController.SubController;
 import it.unibo.artrat.model.api.inventory.Item;
 
@@ -24,8 +23,10 @@ public interface StoreSubController extends SubController {
     boolean buyItem(Item itemToBuy);
 
     /*      da fare poi eventualmente
-    boolean missionAccomplished();
-    
+    boolean missionAccomplished();   
     int newPlayerLevel();
     */
+
+    
+
 }

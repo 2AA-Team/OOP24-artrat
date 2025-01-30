@@ -25,13 +25,21 @@ public class MarketViewImpl extends JFrame{
         final JButton filterButton = new JButton("Filter");
         final JButton sortButton = new JButton("Sort");
         final JButton searchItemButton = new JButton();     //serve l'apposito per fare la search
-        final JButton playAgain = new JButton("Play");
         final JButton showMission = new JButton("M");
 
-        marketPanel.setLayout(new BorderLayout());     
+        marketPanel.setLayout(new BorderLayout(7,7));     
 
         for(var purchItem : contr.purchasableItems()){
-            
+            final JPanel purchItemPanel = new JPanel(new GridLayout());      //da capire se usare un flowLay o grid
+            final JButton buyItem= new JButton("Buy");
+            final JButton itemButton = new JButton();       //DA CAPIRE COME LEGGERE OGNI ITEM (se da file ...)
+            purchItemPanel.add(itemButton);
+            purchItemPanel.add(buyItem);
+
+            buyItem.addActionListener(e ->{
+
+
+            });
         }
 
         final JPanel bottomPan = new JPanel();
@@ -40,6 +48,7 @@ public class MarketViewImpl extends JFrame{
 
         final JPanel upperJPanel = new JPanel();
         upperJPanel.setLayout(new GridLayout());    //da vedere meglio
+        final JButton playAgain = new JButton("Play");
 
         playAgain.addActionListener(e->{
             //da switchare panel, nuova partita

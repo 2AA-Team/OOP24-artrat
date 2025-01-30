@@ -20,18 +20,16 @@ public class InventorySubPanel extends AbstractSubPanel {
 
     @Override
     public void initComponents() {
-    
         final JPanel myJPanel = new JPanel();
         myJPanel.setLayout(new GridLayout(0, 1, 5, 5)); // Una colonna, spazio verticale 5px
 
         // Aggiunta di un pannello per ogni item dell'inventario
         for (var item : controller.getStoredItem()) { //observer.getStoredItem() {
             final JPanel itemPanel = new JPanel(new GridLayout(1, 2, 5, 0)); // Due colonne: itemButton e useButton
-
             final JButton itemButton = new JButton(controller.getTypeName(item));
             final JButton useButton = new JButton("Usa");
 
-            itemButton.addActionListener(new ActionListener() {
+            itemButton.addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     controller.getDescription(item);

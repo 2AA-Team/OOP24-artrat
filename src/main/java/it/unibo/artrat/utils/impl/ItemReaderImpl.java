@@ -67,4 +67,11 @@ public class ItemReaderImpl implements ItemReader {
         return null;
     }
     
+    /*
+    ogni opggettto nello yaml è una lista di stringhe
+    game factory si piuò riusare, mi scorro la riga 
+
+    devo passare una lista intera 
+    publico
+    */
 }
