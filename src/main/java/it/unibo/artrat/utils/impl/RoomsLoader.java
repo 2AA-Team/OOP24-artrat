@@ -14,19 +14,9 @@ import it.unibo.artrat.utils.api.ResourceLoader;
 /**
  * implementation of resource loader for take pre-made rooms from a file.
  */
-public class RoomsLoader implements ResourceLoader {
+public class RoomsLoader implements ResourceLoader<Integer, char[][]> {
 
-    private Translator translator;
     private Map<Integer, List<char[][]>> roomsMap = new HashMap<>();
-
-    /**
-     * constructor that initiate translator.
-     * 
-     * @param translator class to implement the translate method
-     */
-    public RoomsLoader(Translator translator) {
-        this.translator = translator;
-    }
 
     /**
      * get a random room with a determinated size.
@@ -35,11 +25,11 @@ public class RoomsLoader implements ResourceLoader {
      * @return Object representing a set<GameObject>
      */
     @Override
-    public Object getConfig(String conf) {
-        int size = Integer.parseInt(conf);
+    public char[][] getConfig(Integer conf) {
+        int size = conf;
         List<char[][]> roomsTmp = roomsMap.getOrDefault(size, List.of());
         if (roomsTmp.size() != 0) {
-            return translator.translate(roomsTmp.get(new Random().nextInt(roomsTmp.size())));
+            return roomsTmp.get(new Random().nextInt(roomsTmp.size()));
         } else {
             throw new IllegalStateException();
         }

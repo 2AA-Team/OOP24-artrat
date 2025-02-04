@@ -37,7 +37,7 @@ public final class GameEngineImpl implements GameEngine, Sender {
             + "config" + File.separator
             + "config.yaml";
     private GameStatus status;
-    private final ResourceLoader resourceLoader;
+    private final ResourceLoader<String, Integer> resourceLoader;
     private final MainController mainController;
 
     /**

@@ -11,9 +11,9 @@ import org.yaml.snakeyaml.Yaml;
 
 import it.unibo.artrat.utils.api.ResourceLoader;
 
-public final class ResourceLoaderImpl implements ResourceLoader {
+public final class ResourceLoaderImpl implements ResourceLoader<String, Integer> {
 
-    private Map<String, Object> obj = new HashMap<>();
+    private Map<String, Integer> obj = new HashMap<>();
 
     /**
      * {@inheritDoc}
@@ -30,8 +30,8 @@ public final class ResourceLoaderImpl implements ResourceLoader {
      * {@inheritDoc}
      */
     @Override
-    public Object getConfig(final String conf) {
-        final Object ob = obj.get(conf);
+    public Integer getConfig(final String conf) {
+        final Integer ob = obj.get(conf);
         if (ob != null) {
             return obj.get(conf);
         } else {
