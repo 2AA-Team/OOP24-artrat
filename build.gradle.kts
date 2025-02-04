@@ -20,6 +20,8 @@ repositories { // Where to search for dependencies
 }
 
 dependencies {
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.18.2")
+
     implementation("org.yaml:snakeyaml:2.3")
     // Suppressions for SpotBugs
     compileOnly("com.github.spotbugs:spotbugs-annotations:4.8.6")

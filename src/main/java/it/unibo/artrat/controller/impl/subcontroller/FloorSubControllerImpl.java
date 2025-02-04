@@ -13,7 +13,7 @@ public class FloorSubControllerImpl extends AbstractSubController
     /**
      * constructor to initialize mainController.
      * 
-     * @param mainController
+     * @param mainController main controller
      */
     public FloorSubControllerImpl(final MainControllerImpl mainController) {
         super(mainController);
