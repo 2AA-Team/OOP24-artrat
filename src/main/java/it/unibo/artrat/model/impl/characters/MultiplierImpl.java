@@ -25,6 +25,7 @@ public class MultiplierImpl implements Multiplier {
     public MultiplierImpl(Multiplier mpd) {
         this.multipler = mpd.getCurrentMultiplier();
     }
+
      /**
      * {@inheritDoc}
      */
@@ -36,6 +37,7 @@ public class MultiplierImpl implements Multiplier {
             throw new IllegalArgumentException();
         }
     }
+
      /**
      * {@inheritDoc}
      */
@@ -48,6 +50,9 @@ public class MultiplierImpl implements Multiplier {
         }
     }
 
+     /**
+     * {@inheritDoc}
+     */
     @Override
     public double getCurrentMultiplier() {
         return this.multipler;

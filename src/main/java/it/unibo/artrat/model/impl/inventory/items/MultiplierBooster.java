@@ -1,9 +1,11 @@
 package it.unibo.artrat.model.impl.inventory.items;
 
 import it.unibo.artrat.model.impl.inventory.AbstractItem;
-import it.unibo.artrat.model.api.inventory.ItemType;;;
-
-public class MultiplierBooster extends AbstractItem{
+import it.unibo.artrat.model.api.inventory.ItemType;
+/**
+ * A specific item.
+ */
+public class MultiplierBooster extends AbstractItem {
 
     /**
      * A constructor to initialize the new item Multiplier Booster.

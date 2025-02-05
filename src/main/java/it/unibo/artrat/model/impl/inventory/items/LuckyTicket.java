@@ -1,9 +1,11 @@
 package it.unibo.artrat.model.impl.inventory.items;
 
 import it.unibo.artrat.model.impl.inventory.AbstractItem;
-import it.unibo.artrat.model.api.inventory.ItemType;;
-
-public class LuckyTicket extends AbstractItem{
+import it.unibo.artrat.model.api.inventory.ItemType;
+/**
+ * A specific Item.
+ */
+public class LuckyTicket extends AbstractItem {
 
      /**
      * A constructor to initialize the new item Lucky Ticket.

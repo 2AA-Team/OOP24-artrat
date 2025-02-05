@@ -16,13 +16,13 @@ public interface Multiplier {
      * @param coins the coins that player get at the end of the game.
      * @return the trasformed coin, after the multiplication.
      */
-    double multipleTheCoins(final double coins);
+    double multipleTheCoins(double coins);
 
     /**
      * 
      * Change the current multiplier.
      * @param multipler is the new multiplier.
      */
-    void changeCurrentMultiplier(final double multipler);
+    void changeCurrentMultiplier(double multipler);
 
 }

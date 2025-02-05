@@ -2,13 +2,12 @@ package it.unibo.artrat.controller.api.subcontroller;
 
 import java.util.List;
 
-import it.unibo.artrat.controller.api.MainController.SubController;
-import it.unibo.artrat.model.api.inventory.Item;
+import it.unibo.artrat.model.api.inventory.Item;;
 
 /**
  * Controller for the seguent model: inventory.
  */
-public interface InventorySubController extends SubController {
+public interface InventorySubController{
 
     /**
      * 

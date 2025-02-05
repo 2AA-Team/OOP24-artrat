@@ -7,7 +7,7 @@ import java.io.IOException;
  * 
  * @author Matteo Tonelli
  */
-public interface ResourceLoader {
+public interface ResourceLoader<I, O> {
 
     /**
      * Get the configuration object.
@@ -15,14 +15,13 @@ public interface ResourceLoader {
      * @param conf config file
      * @return configuration object
      */
-    Object getConfig(String conf);
+    O getConfig(I conf);
 
     /**
      * method that load all configPath data.
      * 
-     * @param configPath
-     *                   if configPath not represent anything:
-     * @throws IOException
+     * @param configPath path of the config file
+     * @throws IOException if configPath not represent anything
      */
     void setConfigPath(String configPath) throws IOException;
 

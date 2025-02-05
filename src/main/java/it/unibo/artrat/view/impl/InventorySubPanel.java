@@ -25,18 +25,18 @@ public class InventorySubPanel extends AbstractSubPanel {
         myJPanel.setLayout(new GridLayout(0, 1, 5, 5)); // Una colonna, spazio verticale 5px
 
         // Aggiunta di un pannello per ogni item dell'inventario
-        for (var item : controller.getStoredItem()) { //observer.getStoredItem() {
+        //for (var item : controller.getStoredItem()) { //observer.getStoredItem() {
             final JPanel itemPanel = new JPanel(new GridLayout(1, 2, 5, 0)); // Due colonne: itemButton e useButton
 
-            final JButton itemButton = new JButton(controller.getTypeName(item));
+            //final JButton itemButton = new JButton(controller.getTypeName(item));
             final JButton useButton = new JButton("Usa");
 
-            itemButton.addActionListener(new ActionListener() {
+            /*itemButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     controller.getDescription(item);
                 }
-            });
+            });*/
 
             useButton.addActionListener(new ActionListener() {
                 @Override
@@ -63,7 +63,7 @@ public class InventorySubPanel extends AbstractSubPanel {
                 }
             });*/
 
-            itemPanel.add(itemButton);
+            //itemPanel.add(itemButton);
             itemPanel.add(useButton);
             myJPanel.add(itemPanel);
 
@@ -85,7 +85,6 @@ public class InventorySubPanel extends AbstractSubPanel {
             scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
             scrollPane.getVerticalScrollBar().setUnitIncrement(16); // Velocità di scrolling
         };    
-    }
 
     @Override
     protected void forceRedraw() {

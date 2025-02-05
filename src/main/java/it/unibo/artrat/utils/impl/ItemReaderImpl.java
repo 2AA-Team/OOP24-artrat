@@ -14,14 +14,14 @@ public class ItemReaderImpl implements ItemReader {
     /**
      * The actual reader from yaml
      */
-    private final ResourceLoader valueOfYaml;
+    private final ResourceLoader<String,List<String>> valueOfYaml;
 
 
     /**
      * A constructor that initializes an instance of Resource Loader.
      */
     public ItemReaderImpl() {
-        this.valueOfYaml = new ResourceLoaderImpl();
+        this.valueOfYaml = new ResourceLoaderImpl<>();
     }
 
     /**
@@ -32,7 +32,7 @@ public class ItemReaderImpl implements ItemReader {
     }
 
     private String getSpecificField(String nameOfItem, final int field) {
-        return ((List<String>)(valueOfYaml.getConfig(nameOfItem))).get(field);
+        return ((List<String>) (valueOfYaml.getConfig(nameOfItem))).get(field);
     } 
 
     /**
@@ -56,7 +56,7 @@ public class ItemReaderImpl implements ItemReader {
      */
     @Override
     public ItemType getItemType(String nameOfItem) {
-        switch(getSpecificField(nameOfItem, 2)) {
+        switch (getSpecificField(nameOfItem, 2)) {
             case "CONSUMABLE":
                 return ItemType.CONSUMABLE;
             case "POWERUP":
@@ -65,6 +65,5 @@ public class ItemReaderImpl implements ItemReader {
                 break;
         }
         return null;
-    }
-    
+    }    
 }

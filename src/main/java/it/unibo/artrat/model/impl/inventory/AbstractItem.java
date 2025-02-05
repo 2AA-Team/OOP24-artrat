@@ -13,6 +13,12 @@ public abstract class AbstractItem implements Item {
     private final double price;
     private final ItemType itemType;
 
+    /**
+     * A constructor that initialize a new istance of Item with passed variable.
+     * @param desc the description of new item.
+     * @param price the price of new item.
+     * @param itemType the itemtype of new item.
+     */
     protected AbstractItem(final String desc, final double price, final ItemType itemType) {
         this.description = desc;
         this.price = price;

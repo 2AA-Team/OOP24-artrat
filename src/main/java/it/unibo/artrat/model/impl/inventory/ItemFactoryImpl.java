@@ -53,7 +53,7 @@ public class ItemFactoryImpl implements ItemFactory {
 
     /**
      * {@inheritDoc}
-     */
+    */
     @Override
     public Item luckyTicket() {
         return new LuckyTicket(itemReader.getDescription("LUCKYTICKET"), 

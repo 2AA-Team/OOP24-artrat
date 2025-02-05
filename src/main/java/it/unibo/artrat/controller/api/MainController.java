@@ -30,7 +30,7 @@ public interface MainController {
     /**
      * set the current stage to a new stage.
      * 
-     * @param newStage
+     * @param newStage new stage
      */
     void setStage(Stage newStage);
 
@@ -45,22 +45,5 @@ public interface MainController {
      * @return sub controller manager
      */
     SubControllerManager getControllerManager();
-
-    /**
-     * interface to describe basic subController.
-     */
-    interface SubController {
-        /**
-         * method to set the frame stage.
-         * 
-         * @param newStage
-         */
-        void setStage(Stage newStage);
-
-        /**
-         * Gracefully quits from the application.
-         */
-        void quit();
-    }
 
 }

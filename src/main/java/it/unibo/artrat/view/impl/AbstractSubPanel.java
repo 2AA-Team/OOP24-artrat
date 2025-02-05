@@ -20,6 +20,8 @@ abstract class AbstractSubPanel {
     }
 
     /**
+     * getter for the jpanel.
+     * 
      * @return his own starter panel.
      */
     public JPanel getPanel() {
@@ -28,10 +30,9 @@ abstract class AbstractSubPanel {
     }
 
     /**
-     * set the current panel.
-     * This approach applies the concept of 'information hiding'.
+     * set a new Jpanel.
      * 
-     * @param newPanel
+     * @param newPanel panel to set
      */
     protected void setPanel(final JPanel newPanel) {
         panel = newPanel;

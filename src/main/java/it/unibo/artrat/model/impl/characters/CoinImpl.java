@@ -21,7 +21,10 @@ public class CoinImpl implements Coin {
         this.multiplier = new MultiplierImpl();
     }
 
-    public CoinImpl(Coin coin) {
+     /**
+     * A constructor that initializes the current funds and money multiplier from a passed Coin instance.
+     */
+    public CoinImpl(final Coin coin) {
         this.amount = coin.getCurrentAmount();
         this.multiplier = coin.getCurrentMultiplier();
     }

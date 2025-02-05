@@ -1,21 +1,17 @@
 package it.unibo.artrat.view.impl;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-
-/**
- * 
- */
 public class GameSubPanel extends AbstractSubPanel {
 
     /**
-     * 
+     * {@inheritDoc}
      */
     @Override
     public void initComponents() {
-        
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void forceRedraw() {
     }
