@@ -13,22 +13,22 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
     /**
      * Entity constructor.
      * 
-     * @param p      entity position
-     * @param radius entity bounding box radius
+     * @param bottomLeft bottom left corner entity boundingbox
+     * @param topRight   top right corner entity boundingbox
      */
-    public AbstractEntity(final Point p, final double radius) {
-        this(p, radius, new Vector2d());
+    public AbstractEntity(final Point bottomLeft, final Point topRight) {
+        this(bottomLeft, topRight, new Vector2d());
     }
 
     /**
      * Entity constructor passing direction (vector).
      * 
-     * @param p      bounding box center
-     * @param radius bounding box radius
-     * @param v      direction
+     * @param bottomLeft bottom left corner entity boundingbox
+     * @param topRight   top right corner entity boundingbox
+     * @param v          direction
      */
-    public AbstractEntity(final Point p, final double radius, final Vector2d v) {
-        super(p, radius);
+    public AbstractEntity(final Point bottomLeft, final Point topRight, final Vector2d v) {
+        super(bottomLeft, topRight);
         this.speed.setX(v.getX());
         this.speed.setY(v.getY());
     }

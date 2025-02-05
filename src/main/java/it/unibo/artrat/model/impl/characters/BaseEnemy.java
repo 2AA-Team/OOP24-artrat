@@ -13,22 +13,22 @@ public final class BaseEnemy extends AbstractEntity implements Enemy {
     /**
      * Base enemy constructor.
      * 
-     * @param p
-     * @param radius
+     * @param bottomLeft bottom left corner enemy boundingbox
+     * @param topRight   top right corner enemy boundingbox
      */
-    public BaseEnemy(final Point p, final double radius) {
-        super(p, radius);
+    public BaseEnemy(final Point bottomLeft, final Point topRight) {
+        super(bottomLeft, topRight);
     }
 
     /**
      * Base enemy constructor.
      * 
-     * @param p
-     * @param radius
+     * @param bottomLeft
+     * @param topRight
      * @param v
      */
-    public BaseEnemy(final Point p, final double radius, final Vector2d v) {
-        super(p, radius, v);
+    public BaseEnemy(final Point bottomLeft, final Point topRight, final Vector2d v) {
+        super(bottomLeft, topRight, v);
     }
 
     /**
