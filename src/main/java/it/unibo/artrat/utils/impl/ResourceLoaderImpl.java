@@ -11,7 +11,7 @@ import org.yaml.snakeyaml.Yaml;
 
 import it.unibo.artrat.utils.api.ResourceLoader;
 
-public final class ResourceLoaderImpl implements ResourceLoader<String, Integer> {
+public final class ResourceLoaderImpl<I, O> implements ResourceLoader<I, O> {
 
     private Map<String, Integer> obj = new HashMap<>();
 
@@ -29,14 +29,14 @@ public final class ResourceLoaderImpl implements ResourceLoader<String, Integer>
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     @Override
-    public Integer getConfig(final String conf) {
-        final Integer ob = obj.get(conf);
+    public O getConfig(final I conf) {
+        final Object ob = obj.get(conf);
         if (ob != null) {
-            return obj.get(conf);
+            return (O) obj.get(conf);
         } else {
             throw new IllegalStateException();
         }
     }
-
 }

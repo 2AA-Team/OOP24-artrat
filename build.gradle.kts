@@ -48,7 +48,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass.set("it.unibo.artrat.ArtRat")
+    mainClass.set("it.unibo.artrat.app.ArtRat")
 }
 
 tasks.test {
