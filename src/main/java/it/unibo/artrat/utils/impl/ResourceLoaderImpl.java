@@ -13,7 +13,7 @@ import it.unibo.artrat.utils.api.ResourceLoader;
 
 public final class ResourceLoaderImpl<I, O> implements ResourceLoader<I, O> {
 
-    private Map<String, Integer> obj = new HashMap<>();
+    private Map<I, O> obj = new HashMap<>();
 
     /**
      * {@inheritDoc}
@@ -29,7 +29,6 @@ public final class ResourceLoaderImpl<I, O> implements ResourceLoader<I, O> {
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("unchecked")
     @Override
     public O getConfig(final I conf) {
         final Object ob = obj.get(conf);

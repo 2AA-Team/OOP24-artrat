@@ -17,7 +17,7 @@ public class RoomImpl implements Room {
             room = builder.insertStrat.insertSingleObject(room, RoomSymbols.ENEMY.getSymbol());
         }
         for (int i = 0; i < builder.numValues; i++) {
-            room = builder.insertStrat.insertSingleObject(room, RoomSymbols.ENEMY.getSymbol());
+            room = builder.insertStrat.insertSingleObject(room, RoomSymbols.VALUE.getSymbol());
         }
     }
 
@@ -77,5 +77,15 @@ public class RoomImpl implements Room {
     @Override
     public char[][] getRoomLaout() {
         return room.clone();
+    }
+
+    @Override
+    public void print() {
+        for (int i = 0; i < room.length; i++) {
+            for (int j = 0; j < room.length; j++) {
+                System.out.print(room[i][j]);
+            }
+            System.out.println("");
+        }
     }
 }
