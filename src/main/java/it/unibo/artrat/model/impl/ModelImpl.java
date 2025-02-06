@@ -36,7 +36,7 @@ public class ModelImpl implements Model{
 
     @Override
     public void setInventory(final Inventory inv) {
-        this.inventory = inv;
+        this.inventory = new InventoryImpl(inv);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class ModelImpl implements Model{
 
     @Override
     public void setPlayer(final Player player) {
-        this.player = player;
+        this.player = new PlayerImpl(player);
     }
     
 }

@@ -1,5 +1,6 @@
 package it.unibo.artrat.controller.api;
 
+import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.impl.Stage;
 
 /**
@@ -17,4 +18,15 @@ public interface SubController {
      * Gracefully quits from the application.
      */
     void quit();
+
+    /**
+     * Method that allows obtaining a copy of the current instance of the model.
+     * @return a copy of the current istance of method.
+     */
+    Model getModel();
+
+    /**
+     * Method that allows notifying the main controller that something has changed and that it needs to update the centralized model with passed version.
+     */
+    void updateCentralizeModel(final Model model);
 }

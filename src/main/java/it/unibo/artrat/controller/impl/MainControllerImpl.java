@@ -9,9 +9,6 @@ import it.unibo.artrat.controller.api.SubControllerManager;
 import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.impl.ModelImpl;
 import it.unibo.artrat.model.impl.Stage;
-import it.unibo.artrat.utils.api.observers.Observer;
-import it.unibo.artrat.utils.api.observers.Subject;
-import it.unibo.artrat.utils.impl.observers.SubjectImpl;
 import it.unibo.artrat.view.api.MainView;
 
 /**
@@ -25,7 +22,7 @@ public class MainControllerImpl implements MainController {
     private final List<MainView> views;
     private final GameEngine engine;
     private final SubControllerManager subControllerManager;
-    private final Subject subject;
+    private Model model;
 
     /**
      * MainController constructor.
@@ -37,14 +34,10 @@ public class MainControllerImpl implements MainController {
         this.currentStage = Stage.MENU;
         this.engine = engine;
         this.views = new ArrayList<>();
-        this.subject = new SubjectImpl();
+        this.model = new ModelImpl();
         this.subControllerManager = new SubControllerManagerImpl(this);
-        this.subject.add((Observer)subControllerManager.getFloorSubController());
-        this.subject.add((Observer)subControllerManager.getInventorySubController());
-        this.subject.add((Observer)subControllerManager.getMenuSubController());
-        this.subject.add((Observer)subControllerManager.getStoreSubController());
-        this.subject.notifyOb(new ModelImpl());
     }
+    
 
     /**
      * {@inheritDoc}
@@ -64,15 +57,6 @@ public class MainControllerImpl implements MainController {
     public void quit() {
         engine.forceStop();
         Runtime.getRuntime().exit(1);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void update(final Model model) {
-        System.out.println("updated");
-        this.subject.notifyOb(model);
     }
 
     /**
@@ -107,6 +91,27 @@ public class MainControllerImpl implements MainController {
     @Override
     public SubControllerManager getControllerManager() {
         return subControllerManager;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Model getModel() {
+        return new ModelImpl(this.model);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setModel(final Model model) {
+        if(model!=null) {
+            this.model = new ModelImpl(model);
+        }
+        else {
+            throw new IllegalArgumentException("The new istance of model passed by the controller is null");
+        }
     }
 
 }

@@ -24,11 +24,6 @@ public interface MainController {
     void quit();
 
     /**
-     * Send the signal to his model to update.
-     */
-    void update(Model model);
-
-    /**
      * set the current stage to a new stage.
      * 
      * @param newStage new stage
@@ -39,6 +34,18 @@ public interface MainController {
      * Send the signal to his view to redraw.
      */
     void redraw();
+
+    /**
+     * A method that return a copy of the current model.
+     * @return a copy of current Model.
+     */
+    Model getModel();
+
+    /**
+     * A method that permit to re-set the current istance of Model with a new one, passed.
+     * @param model the new Model istance to set.
+     */
+    void setModel(final Model model);
 
     /**
      * get the manager of all sub controllers of the main controller.

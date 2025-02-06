@@ -6,6 +6,7 @@ import java.util.List;
 import it.unibo.artrat.controller.api.subcontroller.InventorySubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
+import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.api.inventory.Inventory;
 import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.impl.ModelImpl;
@@ -44,9 +45,12 @@ public class InventorySubControllerImpl extends AbstractSubController
      */
     @Override
     public boolean useItem(Item passedItem) {
-        Inventory inv = this.getModel().getInventory();
+        //The idea is to obtain the current model, modify the desired parameter, and then update the centralized model in the main controller.
+        Model model = this.getModel();
+        Inventory inv = model.getInventory();
         if(inv.useItem(passedItem)) {
-            this.getModel().setInventory(inv);
+            model.setInventory(inv);
+            this.updateCentralizeModel(new ModelImpl(model));
             return true;
         }
         return false;
