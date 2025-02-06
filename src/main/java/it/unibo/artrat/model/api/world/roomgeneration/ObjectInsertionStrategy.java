@@ -20,4 +20,11 @@ public interface ObjectInsertionStrategy {
      */
     Set<AbstractGameObject> insertMultipleObject(Set<AbstractGameObject> baseRoom, int roomSize, RoomSymbols obj,
             int addNumber);
+
+    /**
+     * create a new copy instance of the strategy.
+     * 
+     * @return new instance of the strategy
+     */
+    ObjectInsertionStrategy cloneStrategy();
 }

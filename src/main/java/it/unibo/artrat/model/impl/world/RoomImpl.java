@@ -46,11 +46,22 @@ public final class RoomImpl implements Room {
      */
     public static class RoomBuilder {
 
-        private RoomGenerationStrategy generationStrat = new RoomGenerationEmpty();
-        private ObjectInsertionStrategy insertStrat = new ObjectInsertionRandom();
-        private int numEnemies = 0;
-        private int numValues = 0;
-        private int size = 4;
+        private RoomGenerationStrategy generationStrat;
+        private ObjectInsertionStrategy insertStrat;
+        private int numEnemies;
+        private int numValues;
+        private int size;
+
+        /**
+         * constructor that defines standard variable.
+         */
+        public RoomBuilder() {
+            generationStrat = new RoomGenerationEmpty();
+            insertStrat = new ObjectInsertionRandom();
+            numEnemies = 0;
+            numValues = 0;
+            size = 4;
+        }
 
         /**
          * set the room size.
@@ -118,7 +129,7 @@ public final class RoomImpl implements Room {
             if (insertStrat == null) {
                 throw new IllegalArgumentException("Insertion strategy cannot be null.");
             }
-            this.insertStrat = insertStrat;
+            this.insertStrat = insertStrat.cloneStrategy();
             return this;
         }
 

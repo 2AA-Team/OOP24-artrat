@@ -14,6 +14,8 @@ import it.unibo.artrat.model.impl.world.RoomSymbols;
  */
 public class ObjectInsertionRandom implements ObjectInsertionStrategy {
 
+    private static final Random RANDOM = new Random();
+
     /**
      * {@inheritDoc}
      */
@@ -24,13 +26,12 @@ public class ObjectInsertionRandom implements ObjectInsertionStrategy {
             final RoomSymbols obj,
             final int addNumber) {
         final Set<AbstractGameObject> newObjects = new HashSet<>();
-        final Random rd = new Random();
         while (newObjects.size() < addNumber) {
-            final int x = rd.nextInt(roomSize - 2) + 1;
-            final int y = rd.nextInt(roomSize - 2) + 1;
+            final int x = RANDOM.nextInt(1, roomSize - 1);
+            final int y = RANDOM.nextInt(1, roomSize - 1);
 
             if (baseRoom.stream().noneMatch((o) -> {
-                return o.getPosition().getX() == x && o.getPosition().getY() == y;
+                return ((int) o.getPosition().getX()) == x && ((int) o.getPosition().getY()) == y;
             })) {
                 final GameObjectFactory factory = new GameObjectFactoryImpl();
                 switch (obj) {
@@ -46,6 +47,14 @@ public class ObjectInsertionRandom implements ObjectInsertionStrategy {
             }
         }
         return newObjects;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ObjectInsertionStrategy cloneStrategy() {
+        return new ObjectInsertionRandom();
     }
 
 }

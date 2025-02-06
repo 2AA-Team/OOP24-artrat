@@ -17,6 +17,7 @@ import it.unibo.artrat.utils.api.ResourceLoader;
 public class RoomsLoader implements ResourceLoader<Integer, char[][]> {
 
     private Map<Integer, List<char[][]>> roomsMap = new HashMap<>();
+    private final Random rd = new Random();
 
     /**
      * get a random room with a determinated size.
@@ -29,7 +30,7 @@ public class RoomsLoader implements ResourceLoader<Integer, char[][]> {
         final int size = conf;
         final List<char[][]> roomsTmp = roomsMap.getOrDefault(size, List.of());
         if (roomsTmp.isEmpty()) {
-            return roomsTmp.get(new Random().nextInt(roomsTmp.size()));
+            return roomsTmp.get(rd.nextInt(roomsTmp.size()));
         } else {
             throw new IllegalStateException();
         }

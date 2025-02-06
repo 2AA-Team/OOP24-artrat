@@ -16,6 +16,7 @@ import it.unibo.artrat.utils.impl.ResourceLoaderImpl;
  */
 public class FloorImpl implements Floor {
 
+    private static final Random RANDOM = new Random();
     private final Set<AbstractGameObject> roomStructure = new HashSet<>();
     private final Set<AbstractGameObject> roomEnemies = new HashSet<>();
     private final Set<AbstractGameObject> roomValues = new HashSet<>();
@@ -43,19 +44,18 @@ public class FloorImpl implements Floor {
      * @param maxFloorSize max floor size
      * @param maxRoomSize  max room size
      */
-    private void generateFloorSet(final Integer maxFloorSize, final Integer maxRoomSize) {
+    private void generateFloorSet(final int maxFloorSize, final int maxRoomSize) {
         final boolean[][] floorMap;
-        final Random rd = new Random();
         final int[][] directions = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
-        final int floorSize = rd.nextInt(1, maxFloorSize);
-        final int roomSize = rd.nextInt(5, maxRoomSize + 1);
-        int numberOfRooms = (int) Math.ceil(maxFloorSize * maxFloorSize / 2);
-        int i = (int) Math.floor(floorSize / 2);
+        final int floorSize = RANDOM.nextInt(1, maxFloorSize);
+        final int roomSize = RANDOM.nextInt(5, maxRoomSize + 1);
+        int numberOfRooms = (int) Math.ceil((double) maxFloorSize * maxFloorSize / 2);
+        int i = (int) Math.floor((double) floorSize / 2);
         int j = 0;
         final RoomBuilder roomBuilder = new RoomBuilder();
         floorMap = new boolean[floorSize][floorSize];
         while (numberOfRooms > 0) {
-            final int[] dir = directions[rd.nextInt(directions.length)];
+            final int[] dir = directions[RANDOM.nextInt(directions.length)];
             final int newI = i + dir[0];
             final int newJ = j + dir[1];
             if (newI >= 0 && newI < floorSize && newJ >= 0 && newJ < floorSize) {
@@ -65,8 +65,8 @@ public class FloorImpl implements Floor {
             if (!floorMap[i][j]) {
                 final Room newRoom = roomBuilder
                         .insertRoomSize(roomSize)
-                        .insertNumberOfEnemy(rd.nextInt(maxRoomSize))
-                        .insertNumberOfValues(rd.nextInt(maxRoomSize))
+                        .insertNumberOfEnemy(RANDOM.nextInt(maxRoomSize))
+                        .insertNumberOfValues(RANDOM.nextInt(maxRoomSize))
                         .build();
                 addNewRoom(newRoom, i, j, roomSize);
                 numberOfRooms--;
