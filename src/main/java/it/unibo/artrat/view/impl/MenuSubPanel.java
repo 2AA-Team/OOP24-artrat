@@ -59,6 +59,13 @@ public class MenuSubPanel extends AbstractSubPanel {
         panel.add(jbShop, gbc);
 
         gbc.gridy = 2;
+        final JButton jbInvetory = new JButton("Inventory");
+        jbInvetory.addActionListener((e) -> {
+            menuSubController.setStage(Stage.INVENTORY);
+        });
+        panel.add(jbInvetory, gbc);
+
+        gbc.gridy = 3;
         final JButton jbExit = new JButton("Exit");
         jbExit.addActionListener((e) -> {
             menuSubController.quit();

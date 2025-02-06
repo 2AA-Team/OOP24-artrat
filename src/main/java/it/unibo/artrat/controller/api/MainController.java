@@ -1,5 +1,6 @@
 package it.unibo.artrat.controller.api;
 
+import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.view.api.MainView;
 
@@ -25,7 +26,7 @@ public interface MainController {
     /**
      * Send the signal to his model to update.
      */
-    void update();
+    void update(Model model);
 
     /**
      * set the current stage to a new stage.

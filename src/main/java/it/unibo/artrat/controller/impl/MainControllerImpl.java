@@ -6,7 +6,12 @@ import java.util.List;
 import it.unibo.artrat.app.api.GameEngine;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.controller.api.SubControllerManager;
+import it.unibo.artrat.model.api.Model;
+import it.unibo.artrat.model.impl.ModelImpl;
 import it.unibo.artrat.model.impl.Stage;
+import it.unibo.artrat.utils.api.observers.Observer;
+import it.unibo.artrat.utils.api.observers.Subject;
+import it.unibo.artrat.utils.impl.observers.SubjectImpl;
 import it.unibo.artrat.view.api.MainView;
 
 /**
@@ -17,9 +22,10 @@ import it.unibo.artrat.view.api.MainView;
 public class MainControllerImpl implements MainController {
 
     private Stage currentStage;
-    private final List<MainView> views = new ArrayList<>(0);
+    private final List<MainView> views;
     private final GameEngine engine;
     private final SubControllerManager subControllerManager;
+    private final Subject subject;
 
     /**
      * MainController constructor.
@@ -30,7 +36,14 @@ public class MainControllerImpl implements MainController {
     public MainControllerImpl(final GameEngine engine) {
         this.currentStage = Stage.MENU;
         this.engine = engine;
+        this.views = new ArrayList<>();
+        this.subject = new SubjectImpl();
         this.subControllerManager = new SubControllerManagerImpl(this);
+        this.subject.add((Observer)subControllerManager.getFloorSubController());
+        this.subject.add((Observer)subControllerManager.getInventorySubController());
+        this.subject.add((Observer)subControllerManager.getMenuSubController());
+        this.subject.add((Observer)subControllerManager.getStoreSubController());
+        this.subject.notifyOb(new ModelImpl());
     }
 
     /**
@@ -57,8 +70,9 @@ public class MainControllerImpl implements MainController {
      * {@inheritDoc}
      */
     @Override
-    public void update() {
-
+    public void update(final Model model) {
+        System.out.println("updated");
+        this.subject.notifyOb(model);
     }
 
     /**

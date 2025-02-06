@@ -30,7 +30,7 @@ public final class Converter {
      * @param fps frame per second
      * @return nano seconds
      */
-    public static int fpsToNanos(final int fps) {
-        return Math.toIntExact(BILLION / fps);
+    public static double fpsToNanos(final int fps) {
+        return BILLION / fps;
     }
 }

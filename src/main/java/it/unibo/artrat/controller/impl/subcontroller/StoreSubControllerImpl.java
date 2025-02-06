@@ -17,4 +17,5 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     public StoreSubControllerImpl(final MainControllerImpl mainController) {
         super(mainController);
     }
+
 }

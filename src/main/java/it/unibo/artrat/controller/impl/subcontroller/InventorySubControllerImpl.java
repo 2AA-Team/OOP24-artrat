@@ -1,12 +1,16 @@
 package it.unibo.artrat.controller.impl.subcontroller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.unibo.artrat.controller.api.subcontroller.InventorySubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
+import it.unibo.artrat.model.api.inventory.Inventory;
 import it.unibo.artrat.model.api.inventory.Item;
+import it.unibo.artrat.model.impl.ModelImpl;
 import it.unibo.artrat.view.api.InventoryView;
+import it.unibo.artrat.view.impl.InventorySubPanel;
 
 /**
  * implementation of the sub controller for the inventory.
@@ -14,9 +18,8 @@ import it.unibo.artrat.view.api.InventoryView;
 public class InventorySubControllerImpl extends AbstractSubController
         implements InventorySubController {
 
-        //private InventoryView inventoryView;
+        private final InventoryView inventoryView;
 
-        //model
 
     /**
      * constructor to initialize mainController.
@@ -25,6 +28,7 @@ public class InventorySubControllerImpl extends AbstractSubController
      */
     public InventorySubControllerImpl(final MainControllerImpl mainController) {
         super(mainController);
+        this.inventoryView = new InventorySubPanel(this);
     }
 
     /**
@@ -32,8 +36,7 @@ public class InventorySubControllerImpl extends AbstractSubController
      */
     @Override
     public List<Item> getStoredItem() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getStoredItem'");
+        return new ArrayList<>(this.getModel().getInventory().getStoredItem());
     }
 
     /**
@@ -41,8 +44,12 @@ public class InventorySubControllerImpl extends AbstractSubController
      */
     @Override
     public boolean useItem(Item passedItem) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'useItem'");
+        Inventory inv = this.getModel().getInventory();
+        if(inv.useItem(passedItem)) {
+            this.getModel().setInventory(inv);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -50,8 +57,7 @@ public class InventorySubControllerImpl extends AbstractSubController
      */
     @Override
     public String getTypeName(Item passedItem) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getTypeName'");
+        return super.getModel().getInventory().getStoredItem().stream().filter(x -> x.equals(passedItem)).map(x -> x.getType().name()).findAny().get();
     }
 
     /**
@@ -59,7 +65,7 @@ public class InventorySubControllerImpl extends AbstractSubController
      */
     @Override
     public void getDescription(Item passedItem) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getDescription'");
+        this.inventoryView.displayMessage(super.getModel().getInventory().getStoredItem().stream().filter(x -> x.equals(passedItem)).map(x -> x.getDescription()).findAny().get(), "Descrizione Oggetto");
     }
+
 }

@@ -12,7 +12,7 @@ import it.unibo.artrat.model.api.inventory.Item;
  */
 public class InventoryImpl implements Inventory {
 
-    private final List<Item> storedItem;
+    private List<Item> storedItem;
 
     /**
      * A constructor that initializes an instance of an empty list of items.
@@ -33,7 +33,7 @@ public class InventoryImpl implements Inventory {
      */
     @Override
     public List<Item> getStoredItem() {
-        return List.copyOf(storedItem);
+        return new ArrayList<>(storedItem);
     }
 
     /**
@@ -50,7 +50,9 @@ public class InventoryImpl implements Inventory {
     @Override
     public boolean useItem(final Item itemToUse) {
         if (storedItem.contains(itemToUse)) {
-            return storedItem.remove(itemToUse);
+            storedItem.remove(itemToUse);
+
+            return true;
         }
         return false;
     }
