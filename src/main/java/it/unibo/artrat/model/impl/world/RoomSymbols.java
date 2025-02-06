@@ -1,7 +1,6 @@
 package it.unibo.artrat.model.impl.world;
 
 public enum RoomSymbols {
-    EMPTY_SPACE(' '),
     WALL('#'),
     ENEMY('E'),
     VALUE('V');

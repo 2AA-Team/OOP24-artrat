@@ -1,5 +1,10 @@
 package it.unibo.artrat.model.impl.world;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import it.unibo.artrat.model.api.AbstractGameObject;
 import it.unibo.artrat.model.api.world.Room;
 import it.unibo.artrat.model.api.world.RoomBuilder;
 import it.unibo.artrat.model.api.world.roomgeneration.ObjectInsertionStrategy;
@@ -9,16 +14,24 @@ import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationEmpty;
 
 public class RoomImpl implements Room {
 
-    private char[][] room;
+    private Set<AbstractGameObject> roomStructure = new HashSet<>();
+    private Set<AbstractGameObject> roomEnemies = new HashSet<>();
+    private Set<AbstractGameObject> roomValues = new HashSet<>();
 
     private RoomImpl(RoomBuilderImpl builder) {
-        room = builder.generationStrat.generateCharRoom(builder.size);
-        for (int i = 0; i < builder.numEnemies; i++) {
-            room = builder.insertStrat.insertSingleObject(room, RoomSymbols.ENEMY.getSymbol());
-        }
-        for (int i = 0; i < builder.numValues; i++) {
-            room = builder.insertStrat.insertSingleObject(room, RoomSymbols.VALUE.getSymbol());
-        }
+        roomStructure = builder.generationStrat.generateRoomSet(builder.size);
+        roomEnemies = builder.insertStrat.insertMultipleObject(
+                Stream.concat(roomStructure.stream(), roomValues.stream())
+                        .collect(Collectors.toSet()),
+                builder.size,
+                RoomSymbols.ENEMY,
+                builder.numEnemies);
+        roomValues = builder.insertStrat.insertMultipleObject(
+                Stream.concat(roomStructure.stream(), roomEnemies.stream())
+                        .collect(Collectors.toSet()),
+                builder.size,
+                RoomSymbols.VALUE,
+                builder.numValues);
     }
 
     public static class RoomBuilderImpl implements RoomBuilder {
@@ -75,17 +88,17 @@ public class RoomImpl implements Room {
     }
 
     @Override
-    public char[][] getRoomLaout() {
-        return room.clone();
+    public Set<AbstractGameObject> getStructure() {
+        return new HashSet<>(this.roomStructure);
     }
 
     @Override
-    public void print() {
-        for (int i = 0; i < room.length; i++) {
-            for (int j = 0; j < room.length; j++) {
-                System.out.print(room[i][j]);
-            }
-            System.out.println("");
-        }
+    public Set<AbstractGameObject> getEnemies() {
+        return new HashSet<>(this.roomEnemies);
+    }
+
+    @Override
+    public Set<AbstractGameObject> getValues() {
+        return new HashSet<>(this.roomValues);
     }
 }

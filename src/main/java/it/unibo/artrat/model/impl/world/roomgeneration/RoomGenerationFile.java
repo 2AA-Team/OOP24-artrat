@@ -1,25 +1,50 @@
 package it.unibo.artrat.model.impl.world.roomgeneration;
 
 import java.io.IOException;
-
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import it.unibo.artrat.model.api.AbstractGameObject;
+import it.unibo.artrat.model.api.GameObjectFactory;
 import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;
+import it.unibo.artrat.model.impl.GameObjectFactoryImpl;
+import it.unibo.artrat.model.impl.world.RoomSymbols;
 import it.unibo.artrat.utils.impl.RoomsLoader;
 
+/**
+ * 
+ */
 public class RoomGenerationFile implements RoomGenerationStrategy {
 
     RoomsLoader rl = null;
 
+    /**
+     * constructor for the room generation.
+     * 
+     * @param filePath path to the file containing the default mazes
+     * @throws IOException if the file has any loading problem
+     */
     public RoomGenerationFile(String filePath) throws IOException {
         rl = new RoomsLoader();
         rl.setConfigPath(filePath);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public char[][] generateCharRoom(int size) {
+    public Set<AbstractGameObject> generateRoomSet(int size) {
         if (rl != null) {
-            return rl.getConfig(size);
+            GameObjectFactory factory = new GameObjectFactoryImpl();
+            char[][] tmp = rl.getConfig(size);
+            return IntStream.range(0, tmp.length)
+                    .boxed()
+                    .flatMap(i -> IntStream.range(0, tmp[i].length)
+                            .filter(j -> tmp[i][j] == RoomSymbols.WALL.getSymbol())
+                            .mapToObj(j -> factory.getWall(i, j)))
+                    .collect(Collectors.toSet());
         } else {
-            return new char[0][0];
+            return new RoomGenerationEmpty().generateRoomSet(size);
         }
     }
 }

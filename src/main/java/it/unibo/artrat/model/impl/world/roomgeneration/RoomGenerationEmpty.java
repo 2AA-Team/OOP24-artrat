@@ -1,23 +1,27 @@
 package it.unibo.artrat.model.impl.world.roomgeneration;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import it.unibo.artrat.model.api.AbstractGameObject;
+import it.unibo.artrat.model.api.GameObjectFactory;
 import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;
-import it.unibo.artrat.model.impl.world.RoomSymbols;
+import it.unibo.artrat.model.impl.GameObjectFactoryImpl;
 
 public class RoomGenerationEmpty implements RoomGenerationStrategy {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public char[][] generateCharRoom(int size) {
-        char[][] room = new char[size][size];
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                if (i == size - 1 || j == size - 1 || i == 0 || j == 0) {
-                    room[i][j] = RoomSymbols.WALL.getSymbol();
-                } else {
-                    room[i][j] = RoomSymbols.EMPTY_SPACE.getSymbol();
-                }
-            }
-        }
-        return room;
+    public Set<AbstractGameObject> generateRoomSet(int size) {
+        GameObjectFactory factory = new GameObjectFactoryImpl();
+        return IntStream.range(0, size)
+                .boxed()
+                .flatMap(i -> IntStream.range(0, size)
+                        .filter(j -> i == 0 || j == 0 || i == size - 1 || j == size - 1)
+                        .mapToObj(j -> factory.getWall(i, j)))
+                .collect(Collectors.toSet());
     }
 
 }
