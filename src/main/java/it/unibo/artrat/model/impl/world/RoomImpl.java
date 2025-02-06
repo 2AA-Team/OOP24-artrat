@@ -16,7 +16,7 @@ import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationEmpty;
  */
 public final class RoomImpl implements Room {
 
-    private final Set<AbstractGameObject> roomStructure;
+    private final Set<AbstractGameObject> roomStructure = new HashSet<>();
     private final Set<AbstractGameObject> roomEnemies = new HashSet<>();
     private final Set<AbstractGameObject> roomValues = new HashSet<>();
 
@@ -26,7 +26,7 @@ public final class RoomImpl implements Room {
      * @param builder room builder
      */
     private RoomImpl(final RoomBuilder builder) {
-        roomStructure = new HashSet<>(builder.generationStrat.generateRoomSet(builder.size));
+        roomStructure.addAll(builder.generationStrat.generateRoomSet(builder.size));
         roomEnemies.addAll(builder.insertStrat.insertMultipleObject(
                 Stream.concat(roomStructure.stream(), roomValues.stream())
                         .collect(Collectors.toSet()),

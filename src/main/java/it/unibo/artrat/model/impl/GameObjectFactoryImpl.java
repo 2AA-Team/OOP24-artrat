@@ -2,6 +2,7 @@ package it.unibo.artrat.model.impl;
 
 import it.unibo.artrat.model.api.AbstractGameObject;
 import it.unibo.artrat.model.api.GameObjectFactory;
+import it.unibo.artrat.utils.impl.Point;
 
 /**
  * factory for standard game object.
@@ -13,8 +14,17 @@ public class GameObjectFactoryImpl implements GameObjectFactory {
      */
     @Override
     public AbstractGameObject getWall(final int x, final int y) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getWall'");
+        AbstractGameObject a = new AbstractGameObject() {
+
+            @Override
+            public void redraw() {
+                // TODO Auto-generated method stub
+                throw new UnsupportedOperationException("Unimplemented method 'redraw'");
+            }
+
+        };
+        a.setPosition(new Point(x, y));
+        return a;
     }
 
     /**
@@ -22,8 +32,7 @@ public class GameObjectFactoryImpl implements GameObjectFactory {
      */
     @Override
     public AbstractGameObject getPlayer(final int x, final int y) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPlayer'");
+        return getWall(x, y);
     }
 
     /**
@@ -31,8 +40,7 @@ public class GameObjectFactoryImpl implements GameObjectFactory {
      */
     @Override
     public AbstractGameObject getEnemy(final int x, final int y) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getEnemy'");
+        return getWall(x, y);
     }
 
     /**
@@ -40,8 +48,7 @@ public class GameObjectFactoryImpl implements GameObjectFactory {
      */
     @Override
     public AbstractGameObject getValue(final int x, final int y) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getValue'");
+        return getWall(x, y);
     }
 
 }

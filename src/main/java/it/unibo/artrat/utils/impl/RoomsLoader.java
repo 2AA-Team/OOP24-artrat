@@ -23,16 +23,17 @@ public class RoomsLoader implements ResourceLoader<Integer, char[][]> {
      * get a random room with a determinated size.
      * 
      * @param conf String of the size
-     * @return Object representing a set<GameObject>
+     * @return char maze representing the room, null if doesnt exist a premade room
+     *         with that size
      */
     @Override
     public char[][] getConfig(final Integer conf) {
         final int size = conf;
         final List<char[][]> roomsTmp = roomsMap.getOrDefault(size, List.of());
-        if (roomsTmp.isEmpty()) {
+        if (!roomsTmp.isEmpty()) {
             return roomsTmp.get(rd.nextInt(roomsTmp.size()));
         } else {
-            throw new IllegalStateException();
+            return null;
         }
     }
 

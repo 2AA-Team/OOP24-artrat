@@ -36,6 +36,9 @@ public class RoomGenerationFile implements RoomGenerationStrategy {
         if (rl != null) {
             final GameObjectFactory factory = new GameObjectFactoryImpl();
             final char[][] tmp = rl.getConfig(size);
+            if (tmp == null) {
+                return (new RoomGenerationEmpty()).generateRoomSet(size);
+            }
             return IntStream.range(0, tmp.length)
                     .boxed()
                     .flatMap(i -> IntStream.range(0, tmp[i].length)
@@ -43,7 +46,7 @@ public class RoomGenerationFile implements RoomGenerationStrategy {
                             .mapToObj(j -> factory.getWall(i, j)))
                     .collect(Collectors.toSet());
         } else {
-            return new RoomGenerationEmpty().generateRoomSet(size);
+            return (new RoomGenerationEmpty()).generateRoomSet(size);
         }
     }
 }

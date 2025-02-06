@@ -7,7 +7,10 @@ import java.util.Set;
 import it.unibo.artrat.model.api.AbstractGameObject;
 import it.unibo.artrat.model.api.world.Floor;
 import it.unibo.artrat.model.api.world.Room;
+import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;
 import it.unibo.artrat.model.impl.world.RoomImpl.RoomBuilder;
+import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationEmpty;
+import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationFile;
 import it.unibo.artrat.utils.api.ResourceLoader;
 import it.unibo.artrat.utils.impl.ResourceLoaderImpl;
 
@@ -48,12 +51,23 @@ public class FloorImpl implements Floor {
         final boolean[][] floorMap;
         final int[][] directions = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
         final int floorSize = RANDOM.nextInt(1, maxFloorSize);
-        final int roomSize = RANDOM.nextInt(5, maxRoomSize + 1);
+        final int roomSize = RANDOM.nextInt(8, maxRoomSize + 1);
         int numberOfRooms = (int) Math.ceil((double) maxFloorSize * maxFloorSize / 2);
         int i = (int) Math.floor((double) floorSize / 2);
         int j = 0;
         final RoomBuilder roomBuilder = new RoomBuilder();
         floorMap = new boolean[floorSize][floorSize];
+        /**
+         * to remove
+         */
+        RoomGenerationStrategy rg = new RoomGenerationEmpty();
+        try {
+            rg = new RoomGenerationFile(
+                    "src/main/java/it/unibo/artrat/resources/premademaze/rooms.json");
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         while (numberOfRooms > 0) {
             final int[] dir = directions[RANDOM.nextInt(directions.length)];
             final int newI = i + dir[0];
@@ -63,7 +77,9 @@ public class FloorImpl implements Floor {
                 j = newJ;
             }
             if (!floorMap[i][j]) {
-                final Room newRoom = roomBuilder
+                Room newRoom;
+                newRoom = roomBuilder
+                        .insertGenerationStrategy(rg)
                         .insertRoomSize(roomSize)
                         .insertNumberOfEnemy(RANDOM.nextInt(maxRoomSize))
                         .insertNumberOfValues(RANDOM.nextInt(maxRoomSize))
@@ -72,6 +88,7 @@ public class FloorImpl implements Floor {
                 numberOfRooms--;
             }
         }
+        this.print(floorSize * roomSize);
     }
 
     /**
@@ -94,5 +111,21 @@ public class FloorImpl implements Floor {
         final Set<AbstractGameObject> tmpEnemies = room.getEnemies();
         tmpEnemies.forEach((w) -> w.movedPosition(roomX * roomSize, roomY * roomSize));
         this.roomEnemies.addAll(tmpEnemies);
+    }
+
+    private void print(double sizeTot) {
+        for (double i = 0; i < sizeTot; i++) {
+            for (double j = 0; j < sizeTot; j++) {
+                final double x = i;
+                final double y = j;
+                if (this.roomStructure.stream()
+                        .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y)) {
+                    System.out.print("#");
+                } else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
     }
 }
