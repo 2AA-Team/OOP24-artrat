@@ -12,11 +12,11 @@ import it.unibo.artrat.model.impl.world.RoomSymbols;
 import it.unibo.artrat.utils.impl.RoomsLoader;
 
 /**
- * 
+ * room generation that take premade room from a file.
  */
 public class RoomGenerationFile implements RoomGenerationStrategy {
 
-    RoomsLoader rl = null;
+    private final RoomsLoader rl = new RoomsLoader();
 
     /**
      * constructor for the room generation.
@@ -24,8 +24,7 @@ public class RoomGenerationFile implements RoomGenerationStrategy {
      * @param filePath path to the file containing the default mazes
      * @throws IOException if the file has any loading problem
      */
-    public RoomGenerationFile(String filePath) throws IOException {
-        rl = new RoomsLoader();
+    public RoomGenerationFile(final String filePath) throws IOException {
         rl.setConfigPath(filePath);
     }
 
@@ -33,10 +32,10 @@ public class RoomGenerationFile implements RoomGenerationStrategy {
      * {@inheritDoc}
      */
     @Override
-    public Set<AbstractGameObject> generateRoomSet(int size) {
+    public Set<AbstractGameObject> generateRoomSet(final int size) {
         if (rl != null) {
-            GameObjectFactory factory = new GameObjectFactoryImpl();
-            char[][] tmp = rl.getConfig(size);
+            final GameObjectFactory factory = new GameObjectFactoryImpl();
+            final char[][] tmp = rl.getConfig(size);
             return IntStream.range(0, tmp.length)
                     .boxed()
                     .flatMap(i -> IntStream.range(0, tmp[i].length)

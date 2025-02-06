@@ -25,10 +25,10 @@ public class RoomsLoader implements ResourceLoader<Integer, char[][]> {
      * @return Object representing a set<GameObject>
      */
     @Override
-    public char[][] getConfig(Integer conf) {
-        int size = conf;
-        List<char[][]> roomsTmp = roomsMap.getOrDefault(size, List.of());
-        if (roomsTmp.size() != 0) {
+    public char[][] getConfig(final Integer conf) {
+        final int size = conf;
+        final List<char[][]> roomsTmp = roomsMap.getOrDefault(size, List.of());
+        if (roomsTmp.isEmpty()) {
             return roomsTmp.get(new Random().nextInt(roomsTmp.size()));
         } else {
             throw new IllegalStateException();
@@ -40,18 +40,18 @@ public class RoomsLoader implements ResourceLoader<Integer, char[][]> {
      */
     @SuppressWarnings("unchecked")
     @Override
-    public void setConfigPath(String configPath) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, List<Map<String, Object>>> jsonMap = objectMapper.readValue(new File(configPath), Map.class);
+    public void setConfigPath(final String configPath) throws IOException {
+        final ObjectMapper objectMapper = new ObjectMapper();
+        final Map<String, List<Map<String, Object>>> jsonMap = objectMapper.readValue(new File(configPath), Map.class);
         this.roomsMap = new HashMap<>();
-        for (Map<String, Object> entry : jsonMap.get("mazes")) {
-            Integer size = (Integer) entry.get("size");
-            List<List<String>> layouts = (List<List<String>>) entry.get("layouts");
-            List<char[][]> roomsList = new ArrayList<>();
-            for (List<String> layout : layouts) {
-                int rows = layout.size();
-                int cols = layout.get(0).length();
-                char[][] roomMatrix = new char[rows][cols];
+        for (final Map<String, Object> entry : jsonMap.get("mazes")) {
+            final Integer size = (Integer) entry.get("size");
+            final List<List<String>> layouts = (List<List<String>>) entry.get("layouts");
+            final List<char[][]> roomsList = new ArrayList<>();
+            for (final List<String> layout : layouts) {
+                final int rows = layout.size();
+                final int cols = layout.get(0).length();
+                final char[][] roomMatrix = new char[rows][cols];
                 for (int i = 0; i < rows; i++) {
                     roomMatrix[i] = layout.get(i).toCharArray();
                 }

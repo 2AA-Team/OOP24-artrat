@@ -7,8 +7,7 @@ import java.util.Set;
 import it.unibo.artrat.model.api.AbstractGameObject;
 import it.unibo.artrat.model.api.world.Floor;
 import it.unibo.artrat.model.api.world.Room;
-import it.unibo.artrat.model.api.world.RoomBuilder;
-import it.unibo.artrat.model.impl.world.RoomImpl.RoomBuilderImpl;
+import it.unibo.artrat.model.impl.world.RoomImpl.RoomBuilder;
 import it.unibo.artrat.utils.api.ResourceLoader;
 import it.unibo.artrat.utils.impl.ResourceLoaderImpl;
 
@@ -17,20 +16,21 @@ import it.unibo.artrat.utils.impl.ResourceLoaderImpl;
  */
 public class FloorImpl implements Floor {
 
-    boolean[][] floorMap;
-    private Set<AbstractGameObject> roomStructure = new HashSet<>();
-    private Set<AbstractGameObject> roomEnemies = new HashSet<>();
-    private Set<AbstractGameObject> roomValues = new HashSet<>();
+    private final Set<AbstractGameObject> roomStructure = new HashSet<>();
+    private final Set<AbstractGameObject> roomEnemies = new HashSet<>();
+    private final Set<AbstractGameObject> roomValues = new HashSet<>();
 
     /**
      * constructor that set the configuration file path.
      * config file is used to get stantard values.
+     * 
+     * @param configPath configuration file path
      */
-    public FloorImpl(String configPath) throws IOException {
-        ResourceLoader<String, Integer> rl = new ResourceLoaderImpl<>();
+    public FloorImpl(final String configPath) throws IOException {
+        final ResourceLoader<String, Integer> rl = new ResourceLoaderImpl<>();
         rl.setConfigPath(configPath);
-        int maxFloorSize = rl.getConfig("MAXFLOORSIZE");
-        int maxRoomSize = rl.getConfig("MAXROOMSIZE");
+        final int maxFloorSize = rl.getConfig("MAXFLOORSIZE");
+        final int maxRoomSize = rl.getConfig("MAXROOMSIZE");
         if (maxFloorSize <= 1 || maxRoomSize <= 4) {
             throw new IllegalStateException("Floor or Room size has been modified.");
         }
@@ -43,29 +43,30 @@ public class FloorImpl implements Floor {
      * @param maxFloorSize max floor size
      * @param maxRoomSize  max room size
      */
-    private void generateFloorSet(Integer maxFloorSize, Integer maxRoomSize) {
-        Random rd = new Random();
-        int[][] directions = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
-        int floorSize = rd.nextInt(1, maxFloorSize);
-        int roomSize = rd.nextInt(5, maxRoomSize + 1);
+    private void generateFloorSet(final Integer maxFloorSize, final Integer maxRoomSize) {
+        final boolean[][] floorMap;
+        final Random rd = new Random();
+        final int[][] directions = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+        final int floorSize = rd.nextInt(1, maxFloorSize);
+        final int roomSize = rd.nextInt(5, maxRoomSize + 1);
         int numberOfRooms = (int) Math.ceil(maxFloorSize * maxFloorSize / 2);
         int i = (int) Math.floor(floorSize / 2);
         int j = 0;
-        RoomBuilder roomBuilder = new RoomBuilderImpl();
+        final RoomBuilder roomBuilder = new RoomBuilder();
         floorMap = new boolean[floorSize][floorSize];
         while (numberOfRooms > 0) {
-            int[] dir = directions[rd.nextInt(directions.length)];
-            int newI = i + dir[0];
-            int newJ = j + dir[1];
+            final int[] dir = directions[rd.nextInt(directions.length)];
+            final int newI = i + dir[0];
+            final int newJ = j + dir[1];
             if (newI >= 0 && newI < floorSize && newJ >= 0 && newJ < floorSize) {
                 i = newI;
                 j = newJ;
             }
-            if (floorMap[i][j] == false) {
-                Room newRoom = roomBuilder
-                        .setRoomSize(roomSize)
-                        .setNumberOfEnemy(rd.nextInt(maxRoomSize))
-                        .setNumberOfValues(rd.nextInt(maxRoomSize))
+            if (!floorMap[i][j]) {
+                final Room newRoom = roomBuilder
+                        .insertRoomSize(roomSize)
+                        .insertNumberOfEnemy(rd.nextInt(maxRoomSize))
+                        .insertNumberOfValues(rd.nextInt(maxRoomSize))
                         .build();
                 addNewRoom(newRoom, i, j, roomSize);
                 numberOfRooms--;
@@ -81,16 +82,16 @@ public class FloorImpl implements Floor {
      * @param roomY    the Y of the room in the matrix floor
      * @param roomSize the size of the room
      */
-    private void addNewRoom(Room room, int roomX, int roomY, int roomSize) {
-        Set<AbstractGameObject> tmpStruct = room.getStructure();
+    private void addNewRoom(final Room room, final int roomX, final int roomY, final int roomSize) {
+        final Set<AbstractGameObject> tmpStruct = room.getStructure();
         tmpStruct.forEach((w) -> w.movedPosition(roomX * roomSize, roomY * roomSize));
         this.roomStructure.addAll(tmpStruct);
 
-        Set<AbstractGameObject> tmpValues = room.getValues();
+        final Set<AbstractGameObject> tmpValues = room.getValues();
         tmpValues.forEach((w) -> w.movedPosition(roomX * roomSize, roomY * roomSize));
         this.roomValues.addAll(tmpValues);
 
-        Set<AbstractGameObject> tmpEnemies = room.getEnemies();
+        final Set<AbstractGameObject> tmpEnemies = room.getEnemies();
         tmpEnemies.forEach((w) -> w.movedPosition(roomX * roomSize, roomY * roomSize));
         this.roomEnemies.addAll(tmpEnemies);
     }

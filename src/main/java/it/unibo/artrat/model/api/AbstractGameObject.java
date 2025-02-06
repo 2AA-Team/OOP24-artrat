@@ -42,10 +42,19 @@ public abstract class AbstractGameObject implements GameObject {
         this.hitBox.setCenter(position);
     }
 
-    public void movedPosition(int x, int y) {
+    /**
+     * moved the current game object position.
+     * 
+     * @param x x position to moved
+     * @param y y position to moved
+     */
+    public void movedPosition(final int x, final int y) {
         this.hitBox.setCenter(new Point(hitBox.getCenter().getX() + x, hitBox.getCenter().getY() + y));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update(final int delta) {
 

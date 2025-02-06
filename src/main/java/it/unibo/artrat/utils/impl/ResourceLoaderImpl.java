@@ -11,6 +11,9 @@ import org.yaml.snakeyaml.Yaml;
 
 import it.unibo.artrat.utils.api.ResourceLoader;
 
+/**
+ * resource loader for base resource "key --> value".
+ */
 public final class ResourceLoaderImpl<I, O> implements ResourceLoader<I, O> {
 
     private Map<I, O> obj = new HashMap<>();
@@ -33,7 +36,7 @@ public final class ResourceLoaderImpl<I, O> implements ResourceLoader<I, O> {
     public O getConfig(final I conf) {
         final Object ob = obj.get(conf);
         if (ob != null) {
-            return (O) obj.get(conf);
+            return obj.get(conf);
         } else {
             throw new IllegalStateException();
         }

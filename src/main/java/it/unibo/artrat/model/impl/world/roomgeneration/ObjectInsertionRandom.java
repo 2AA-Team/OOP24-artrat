@@ -18,18 +18,21 @@ public class ObjectInsertionRandom implements ObjectInsertionStrategy {
      * {@inheritDoc}
      */
     @Override
-    public Set<AbstractGameObject> insertMultipleObject(Set<AbstractGameObject> baseRoom, int roomSize, RoomSymbols obj,
-            int addNumber) {
-        Set<AbstractGameObject> newObjects = new HashSet<>();
-        Random rd = new Random();
+    public Set<AbstractGameObject> insertMultipleObject(
+            final Set<AbstractGameObject> baseRoom,
+            final int roomSize,
+            final RoomSymbols obj,
+            final int addNumber) {
+        final Set<AbstractGameObject> newObjects = new HashSet<>();
+        final Random rd = new Random();
         while (newObjects.size() < addNumber) {
-            int x = rd.nextInt(roomSize - 2) + 1;
-            int y = rd.nextInt(roomSize - 2) + 1;
+            final int x = rd.nextInt(roomSize - 2) + 1;
+            final int y = rd.nextInt(roomSize - 2) + 1;
 
             if (baseRoom.stream().noneMatch((o) -> {
                 return o.getPosition().getX() == x && o.getPosition().getY() == y;
             })) {
-                GameObjectFactory factory = new GameObjectFactoryImpl();
+                final GameObjectFactory factory = new GameObjectFactoryImpl();
                 switch (obj) {
                     case RoomSymbols.ENEMY:
                         newObjects.add(factory.getEnemy(x, y));
@@ -42,7 +45,6 @@ public class ObjectInsertionRandom implements ObjectInsertionStrategy {
                 }
             }
         }
-
         return newObjects;
     }
 

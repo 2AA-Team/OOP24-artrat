@@ -8,14 +8,17 @@ import it.unibo.artrat.model.api.GameObjectFactory;
 import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;
 import it.unibo.artrat.model.impl.GameObjectFactoryImpl;
 
+/**
+ * room generation that generate a room with only border walls.
+ */
 public class RoomGenerationEmpty implements RoomGenerationStrategy {
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Set<AbstractGameObject> generateRoomSet(int size) {
-        GameObjectFactory factory = new GameObjectFactoryImpl();
+    public Set<AbstractGameObject> generateRoomSet(final int size) {
+        final GameObjectFactory factory = new GameObjectFactoryImpl();
         return IntStream.range(0, size)
                 .boxed()
                 .flatMap(i -> IntStream.range(0, size)
