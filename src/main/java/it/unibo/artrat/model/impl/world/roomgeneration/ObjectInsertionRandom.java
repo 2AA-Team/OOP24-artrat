@@ -26,7 +26,8 @@ public class ObjectInsertionRandom implements ObjectInsertionStrategy {
             final RoomSymbols obj,
             final int addNumber) {
         final Set<AbstractGameObject> newObjects = new HashSet<>();
-        while (newObjects.size() < addNumber) {
+        boolean exit = false;
+        while (newObjects.size() < addNumber && !exit) {
             final int x = RANDOM.nextInt(1, roomSize - 1);
             final int y = RANDOM.nextInt(1, roomSize - 1);
 
@@ -42,8 +43,10 @@ public class ObjectInsertionRandom implements ObjectInsertionStrategy {
                         newObjects.add(factory.getValue(x, y));
                         break;
                     default:
-                        throw new IllegalArgumentException(obj + " not implemented.");
+                        throw new IllegalArgumentException(obj + " insertion not implemented.");
                 }
+            } else {
+                exit = true;
             }
         }
         return newObjects;

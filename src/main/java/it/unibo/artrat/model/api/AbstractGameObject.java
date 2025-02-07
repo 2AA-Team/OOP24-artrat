@@ -52,12 +52,4 @@ public abstract class AbstractGameObject implements GameObject {
         this.hitBox.setCenter(new Point(hitBox.getCenter().getX() + x, hitBox.getCenter().getY() + y));
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void update(final int delta) {
-
-    }
-
 }

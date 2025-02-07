@@ -22,6 +22,12 @@ public class GameObjectFactoryImpl implements GameObjectFactory {
                 throw new UnsupportedOperationException("Unimplemented method 'redraw'");
             }
 
+            @Override
+            public void update(int delta) {
+                // TODO Auto-generated method stub
+                throw new UnsupportedOperationException("Unimplemented method 'update'");
+            }
+
         };
         a.setPosition(new Point(x, y));
         return a;

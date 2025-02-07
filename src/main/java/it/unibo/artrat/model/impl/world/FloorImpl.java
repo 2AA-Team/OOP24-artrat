@@ -53,6 +53,7 @@ public class FloorImpl implements Floor {
     private void generateFloorSet(final int maxFloorSize, final int maxRoomSize) {
         final int floorSize = RANDOM.nextInt(1, maxFloorSize);
         final int roomSize = RANDOM.nextInt(8, maxRoomSize + 1);
+        System.out.println(roomSize);
         this.generateRoomsStructure(floorSize);
         try {
             this.generateEffectiveRooms(roomSize);
