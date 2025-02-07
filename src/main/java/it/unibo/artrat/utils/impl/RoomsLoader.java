@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.unibo.artrat.utils.api.ResourceLoader;
 
@@ -44,23 +45,38 @@ public class RoomsLoader implements ResourceLoader<Integer, char[][]> {
     @Override
     public void setConfigPath(final String configPath) throws IOException {
         final ObjectMapper objectMapper = new ObjectMapper();
-        final Map<String, List<Map<String, Object>>> jsonMap = objectMapper.readValue(new File(configPath), Map.class);
+        final Map<String, List<Map<String, Object>>> jsonMap = objectMapper.readValue(
+                new File(configPath), new TypeReference<Map<String, List<Map<String, Object>>>>() {
+                });
         this.roomsMap = new HashMap<>();
-        for (final Map<String, Object> entry : jsonMap.get("mazes")) {
-            final Integer size = (Integer) entry.get("size");
+        List<Map<String, Object>> rooms = jsonMap.get("rooms");
+        if (rooms == null) {
+            throw new IllegalArgumentException("Error: rooms file doesnt contains rooms record.");
+        }
+        for (final Map<String, Object> entry : rooms) {
+            final Integer size = (entry.get("size") instanceof Number) ? ((Number) entry.get("size")).intValue() : null;
+            if (size == null) {
+                throw new IllegalArgumentException("Error: rooms file doesnt contains size record.");
+            }
             final List<List<String>> layouts = (List<List<String>>) entry.get("layouts");
+            if (layouts == null || layouts.isEmpty()) {
+                throw new IllegalArgumentException("Error: rooms file doesnt contains layoutrs record.");
+            }
             final List<char[][]> roomsList = new ArrayList<>();
             for (final List<String> layout : layouts) {
                 final int rows = layout.size();
                 final int cols = layout.get(0).length();
-                final char[][] roomMatrix = new char[rows][cols];
+                final char[][] roomMatrix = new char[cols][rows];
                 for (int i = 0; i < rows; i++) {
-                    roomMatrix[i] = layout.get(i).toCharArray();
+                    for (int j = 0; j < cols; j++) {
+                        roomMatrix[j][i] = layout.get(i).charAt(j);
+                    }
                 }
                 roomsList.add(roomMatrix);
             }
             roomsMap.put(size, roomsList);
         }
+
     }
 
 }
