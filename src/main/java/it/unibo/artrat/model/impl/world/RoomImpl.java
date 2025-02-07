@@ -10,6 +10,7 @@ import it.unibo.artrat.model.api.world.roomgeneration.ObjectInsertionStrategy;
 import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;
 import it.unibo.artrat.model.impl.world.roomgeneration.ObjectInsertionRandom;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationEmpty;
+import it.unibo.artrat.utils.impl.Point;
 
 /**
  * class that implements room interface to rapresent a square room.
@@ -39,6 +40,39 @@ public final class RoomImpl implements Room {
                 builder.size,
                 RoomSymbols.VALUE,
                 builder.numValues));
+        this.createPassage(
+                builder.upPassage,
+                builder.rightPassage,
+                builder.downPassage,
+                builder.leftPassage,
+                builder.size);
+    }
+
+    private void createPassage(boolean upPassage, boolean rightPassage, boolean downPassage,
+            boolean leftPassage, int roomSize) {
+        double averagePassage = Math.ceil(roomSize / 2);
+        boolean tmpU = upPassage;
+        boolean tmpR = rightPassage;
+        boolean tmpD = downPassage;
+        boolean tmpL = leftPassage;
+        for (int i = 0; i < roomSize - 1 && (tmpU || tmpR || tmpD || tmpL); i++) {
+            final int tmpI = i;
+            if (tmpU) {
+                tmpU = this.roomStructure.removeIf((o) -> o.getPosition().equals(new Point(averagePassage, tmpI)));
+            }
+            if (tmpR) {
+                tmpU = this.roomStructure
+                        .removeIf((o) -> o.getPosition().equals(new Point(roomSize - tmpI, averagePassage)));
+            }
+            if (tmpD) {
+                tmpU = this.roomStructure.removeIf((o) -> o.getPosition().equals(new Point(averagePassage,
+                        roomSize - tmpI)));
+            }
+            if (tmpL) {
+                tmpU = this.roomStructure.removeIf((o) -> o.getPosition().equals(new Point(tmpI, averagePassage)));
+            }
+        }
+
     }
 
     /**
@@ -51,6 +85,10 @@ public final class RoomImpl implements Room {
         private int numEnemies;
         private int numValues;
         private int size;
+        private boolean upPassage;
+        private boolean rightPassage;
+        private boolean downPassage;
+        private boolean leftPassage;
 
         /**
          * constructor that defines standard variable.
@@ -130,6 +168,14 @@ public final class RoomImpl implements Room {
                 throw new IllegalArgumentException("Insertion strategy cannot be null.");
             }
             this.insertStrat = insertStrat.cloneStrategy();
+            return this;
+        }
+
+        public RoomBuilder insertPassages(boolean upRoom, boolean rightRoom, boolean downRoom, boolean leftRoom) {
+            this.upPassage = upRoom;
+            this.rightPassage = rightRoom;
+            this.downPassage = downRoom;
+            this.leftPassage = leftRoom;
             return this;
         }
 
