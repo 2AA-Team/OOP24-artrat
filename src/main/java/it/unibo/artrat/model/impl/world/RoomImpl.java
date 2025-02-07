@@ -62,11 +62,11 @@ public final class RoomImpl implements Room {
             }
             if (tmpR) {
                 tmpR = this.roomStructure
-                        .removeIf((o) -> o.getPosition().equals(new Point(roomSize - tmpI, averagePassage)));
+                        .removeIf((o) -> o.getPosition().equals(new Point(roomSize - tmpI - 1, averagePassage)));
             }
             if (tmpD) {
                 tmpD = this.roomStructure.removeIf((o) -> o.getPosition().equals(new Point(averagePassage,
-                        roomSize - tmpI)));
+                        roomSize - tmpI - 1)));
             }
             if (tmpL) {
                 tmpL = this.roomStructure.removeIf((o) -> o.getPosition().equals(new Point(tmpI, averagePassage)));
