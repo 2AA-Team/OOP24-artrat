@@ -27,12 +27,13 @@ public class ItemReaderImpl implements ItemReader {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void readFromItemFile(final String itemPath) throws IOException {
         this.valueOfYaml.setConfigPath(itemPath);
     }
 
-    private String getSpecificField(String nameOfItem, final int field) {
-        return ((List<String>) (valueOfYaml.getConfig(nameOfItem))).get(field);
+    private String getSpecificField(final String nameOfItem, final int field) {
+        return (valueOfYaml.getConfig(nameOfItem)).get(field);
     } 
 
     /**

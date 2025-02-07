@@ -37,6 +37,7 @@ public class ItemFactoryImpl implements ItemFactory {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void initialize() throws IOException {
         this.itemReader.readFromItemFile(itemPath);
     }

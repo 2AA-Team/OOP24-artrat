@@ -31,6 +31,7 @@ public abstract  class AbstractSubController implements SubController {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Model getModel() {
         return new ModelImpl(this.mainController.getModel());
     }
@@ -51,6 +52,5 @@ public abstract  class AbstractSubController implements SubController {
     public void quit() {
         mainController.quit();
     }
-
     
 }

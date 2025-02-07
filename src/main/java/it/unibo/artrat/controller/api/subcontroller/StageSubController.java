@@ -17,4 +17,5 @@ public interface StageSubController {
      * Gracefully quits from the application.
      */
     void quit();
+    
 }

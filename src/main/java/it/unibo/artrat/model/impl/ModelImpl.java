@@ -7,46 +7,49 @@ import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.model.impl.characters.PlayerImpl;
 import it.unibo.artrat.model.impl.inventory.InventoryImpl;
 import it.unibo.artrat.model.impl.inventory.items.LuckyTicket;
+import it.unibo.artrat.model.impl.inventory.items.MagicBackpack;
 import it.unibo.artrat.model.impl.inventory.items.MultiplierBooster;
+import it.unibo.artrat.model.impl.inventory.items.MysteriousStaff;
 
-public class ModelImpl implements Model{
+/**
+ * An implementation of model interface.
+ */
+public class ModelImpl implements Model {
 
-    Inventory inventory;
-    Player player;
+    private Player player;
 
     public ModelImpl() {
-        this.inventory = new InventoryImpl();
         this.player = new PlayerImpl();
-        this.inventory.addItem(new LuckyTicket("1", 0, ItemType.CONSUMABLE));
-        this.inventory.addItem(new MultiplierBooster("2", 0, ItemType.POWERUP));
+        initInventory(); // temporaneo per i test, andrà tolto in quanto all'inizio l'inventario sarà vuoto.
     }
 
     public ModelImpl(final Model m) {
-        System.out.println(m.getInventory().getStoredItem());
-        this.inventory = m.getInventory();
-        System.out.println(this.inventory.getStoredItem());
         this.player = m.getPlayer();
     }
 
 
-    @Override
-    public Inventory getInventory() {
-        return new InventoryImpl(inventory);
+    private void initInventory() {
+        final Inventory inv = this.player.getInventory();
+        inv.addItem(new LuckyTicket("LuckyTicket", 0, ItemType.POWERUP));
+        inv.addItem(new MultiplierBooster("MultiplierBooster", 0, ItemType.POWERUP));
+        inv.addItem(new MagicBackpack("MagicBackpack", 0, ItemType.CONSUMABLE));
+        inv.addItem(new MysteriousStaff("MysteriousStaff", 0, ItemType.CONSUMABLE));
+        this.player.setInventory(new InventoryImpl(inv));
     }
 
-    @Override
-    public void setInventory(final Inventory inv) {
-        this.inventory = new InventoryImpl(inv);
-    }
-
+    /**
+     * {@inheritDoc}
+    */
     @Override
     public Player getPlayer() {
         return new PlayerImpl(player);
     }
 
+    /**
+     * {@inheritDoc}
+    */
     @Override
     public void setPlayer(final Player player) {
         this.player = new PlayerImpl(player);
     }
-    
 }

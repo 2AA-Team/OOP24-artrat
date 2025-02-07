@@ -73,9 +73,9 @@ public class CoinImpl implements Coin {
      * {@inheritDoc}
      */
     @Override
-    public void changePlayerMultipler(final double multipler) {
-        if (multipler >= 0.0) {
-            this.multiplier.changeCurrentMultiplier(multipler);
+    public void changePlayerMultipler(final Multiplier multipler) {
+        if (multipler.getCurrentMultiplier() >= 0.0) {
+            this.multiplier = new MultiplierImpl(multipler);
         } else {
             throw new IllegalArgumentException();
         }

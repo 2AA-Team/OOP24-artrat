@@ -1,7 +1,7 @@
 package it.unibo.artrat.model.impl.inventory;
 
 import it.unibo.artrat.model.api.inventory.ItemType;
-
+import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.inventory.Item;
 
 /**
@@ -53,5 +53,5 @@ public abstract class AbstractItem implements Item {
      * {@inheritDoc}
      */
     @Override
-    public abstract boolean consume();
+    public abstract Player consume(final Player player);
 }

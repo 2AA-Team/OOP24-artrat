@@ -43,7 +43,7 @@ public class MultiplierImpl implements Multiplier {
      */
     @Override
     public void changeCurrentMultiplier(final double multipler) {
-        if (multipler < 0.0) {
+        if (multipler > 0.0) {
             this.multipler = multipler;
         } else { 
             throw new IllegalArgumentException();

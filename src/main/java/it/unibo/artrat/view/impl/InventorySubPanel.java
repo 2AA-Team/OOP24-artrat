@@ -9,13 +9,13 @@ import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.view.api.InventoryView;
 
 /** 
- * A base view for inventory
+ * A base view for inventory.
  * @author Cristian Di Donato
 */
 public class InventorySubPanel extends AbstractSubPanel implements InventoryView {
 
     private final InventorySubController controller;
-    final JPanel myJPanel = new JPanel();
+    private final JPanel myJPanel = new JPanel();
 
     public InventorySubPanel(final InventorySubController controller) {
         this.controller = controller;
@@ -23,6 +23,7 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
 
     @Override
     protected void forceRedraw() {
+        fillWithItems();
         myJPanel.revalidate();
         myJPanel.repaint();
     }
@@ -32,19 +33,16 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
     }
 
     @Override
-    public void displayMessage(String message, String title) {
+    public void displayMessage(final String message, final String title) {
         JOptionPane.showMessageDialog(myJPanel, message, title, JOptionPane.INFORMATION_MESSAGE);
         myJPanel.revalidate();
         myJPanel.repaint();
     }
 
-    @Override
-    public void initComponents() {
-        myJPanel.setLayout(new GridLayout(0, 1, 5, 5)); // Una colonna, spazio verticale 5px
+    private void fillWithItems() {
+        myJPanel.removeAll();
 
-        // Aggiunta di un pannello per ogni item dell'inventario
-        for (var item : controller.getStoredItem()) { //observer.getStoredItem() {
-            System.out.println(item.getType());
+        for (final var item : controller.getStoredItem()) { //observer.getStoredItem() {
             final JPanel itemPanel = new JPanel(new GridLayout(1, 2, 5, 0)); // Due colonne: itemButton e useButton
 
             final JButton itemButton = new JButton(controller.getTypeName(item));
@@ -52,14 +50,14 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
 
             itemButton.addActionListener(new ActionListener() {
                 @Override
-                public void actionPerformed(ActionEvent e) {
-                    controller.getDescription(item);
+                public void actionPerformed(final ActionEvent e) {
+                    controller.obtainDescription(item);
                 }
             });
 
             useButton.addActionListener(new ActionListener() {
                 @Override
-                public void actionPerformed(ActionEvent e) {
+                public void actionPerformed(final ActionEvent e) {
                     if(confirmDialog("Vuoi far si che LuPino utilizzi questo oggetto?", "Utilizza oggetto")) {
                         if (controller.useItem(item)) { //observer.useItem()
                             myJPanel.remove(itemPanel);
@@ -91,12 +89,18 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
             scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
             scrollPane.getVerticalScrollBar().setUnitIncrement(16); // Velocità di scrolling*/
         }
+
         final JButton btn = new JButton();
         btn.addActionListener((e) -> {
             this.controller.setStage(Stage.MENU);
         });
         myJPanel.add(btn);
+    }
 
+    @Override
+    public void initComponents() {
+        myJPanel.setLayout(new GridLayout(0, 1, 5, 5)); // Una colonna, spazio verticale 5px
+        fillWithItems();
         setPanel(myJPanel);
     }
 }

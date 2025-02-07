@@ -7,9 +7,11 @@ import it.unibo.artrat.controller.api.subcontroller.InventorySubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
 import it.unibo.artrat.model.api.Model;
+import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.inventory.Inventory;
 import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.impl.ModelImpl;
+import it.unibo.artrat.model.impl.characters.PlayerImpl;
 import it.unibo.artrat.view.api.InventoryView;
 import it.unibo.artrat.view.impl.InventorySubPanel;
 
@@ -37,19 +39,23 @@ public class InventorySubControllerImpl extends AbstractSubController
      */
     @Override
     public List<Item> getStoredItem() {
-        return new ArrayList<>(this.getModel().getInventory().getStoredItem());
+        return new ArrayList<>(this.getModel().getPlayer().getInventory().getStoredItem());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean useItem(Item passedItem) {
-        //The idea is to obtain the current model, modify the desired parameter, and then update the centralized model in the main controller.
-        Model model = this.getModel();
-        Inventory inv = model.getInventory();
-        if(inv.useItem(passedItem)) {
-            model.setInventory(inv);
+    public boolean useItem(final Item passedItem) {
+        //The idea is to obtain the current model, modify the desired parameter
+        //and then update the centralized model in the main controller.
+        final Model model = this.getModel();
+        final Player player = model.getPlayer();
+        final Inventory inv = player.getInventory();
+        if (inv.useItem(passedItem)) {
+            player.setInventory(inv);
+            final Player modifiedPlayer = passedItem.consume(new PlayerImpl(player));
+            model.setPlayer(new PlayerImpl(modifiedPlayer));
             this.updateCentralizeModel(new ModelImpl(model));
             return true;
         }
@@ -60,16 +66,18 @@ public class InventorySubControllerImpl extends AbstractSubController
      * {@inheritDoc}
      */
     @Override
-    public String getTypeName(Item passedItem) {
-        return super.getModel().getInventory().getStoredItem().stream().filter(x -> x.equals(passedItem)).map(x -> x.getType().name()).findAny().get();
+    public String getTypeName(final Item passedItem) {
+        return super.getModel().getPlayer().getInventory().getStoredItem().stream().filter(x -> x.equals(passedItem))
+        .map(x -> x.getType().name()).findAny().get();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void getDescription(Item passedItem) {
-        this.inventoryView.displayMessage(super.getModel().getInventory().getStoredItem().stream().filter(x -> x.equals(passedItem)).map(x -> x.getDescription()).findAny().get(), "Descrizione Oggetto");
+    public void getDescription(final Item passedItem) {
+        this.inventoryView.displayMessage(super.getModel().getPlayer().getInventory().getStoredItem().stream()
+        .filter(x -> x.equals(passedItem)).map(x -> x.getDescription()).findAny().get(), "Descrizione Oggetto");
     }
 
 }
