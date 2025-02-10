@@ -27,10 +27,10 @@ public interface Item {
     ItemType getType();
 
     /**
-     * 
+     * @param player the player where the item operate.
      * @return true: if the item is consume; false: if the item can't be consume for some reason.
      */
-    Player consume(final Player player);
+    Player consume(Player player);
 
 
 }

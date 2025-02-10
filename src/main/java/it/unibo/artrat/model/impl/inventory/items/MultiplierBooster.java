@@ -13,7 +13,7 @@ import it.unibo.artrat.model.api.inventory.ItemType;
 public class MultiplierBooster extends AbstractItem {
 
     private Random rd;
-    
+
     /**
      * A constructor to initialize the new item Multiplier Booster.
      * @param desc the description of Multiplier Booster
@@ -32,6 +32,5 @@ public class MultiplierBooster extends AbstractItem {
     public Player consume(final Player player) {
         player.increaseMultiplier(1.0 + rd.nextInt(5));
         return new PlayerImpl(player);
-    }
-    
+    }    
 }

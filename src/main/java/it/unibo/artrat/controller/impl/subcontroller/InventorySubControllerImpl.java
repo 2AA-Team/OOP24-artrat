@@ -66,18 +66,22 @@ public class InventorySubControllerImpl extends AbstractSubController
      * {@inheritDoc}
      */
     @Override
-    public String getTypeName(final Item passedItem) {
-        return super.getModel().getPlayer().getInventory().getStoredItem().stream().filter(x -> x.equals(passedItem))
+    public String getItemName(Item passedItem) {
+        return passedItem.getClass().getSimpleName();
+    }
+
+    private String getTypeName(Item passedItem) {
+        return this.getModel().getPlayer().getInventory().getStoredItem().stream().filter(x -> x.equals(passedItem))
         .map(x -> x.getType().name()).findAny().get();
     }
 
-    /**
+      /**
      * {@inheritDoc}
      */
     @Override
-    public void getDescription(final Item passedItem) {
-        this.inventoryView.displayMessage(super.getModel().getPlayer().getInventory().getStoredItem().stream()
-        .filter(x -> x.equals(passedItem)).map(x -> x.getDescription()).findAny().get(), "Descrizione Oggetto");
+    public void obtainDescription(Item passedItem) {
+        this.inventoryView.displayMessage(this.getModel().getPlayer().getInventory().getStoredItem().stream()
+        .filter(x -> x.equals(passedItem)).map(Item::getDescription).findAny().get() + "\nTYPE: " +getTypeName(passedItem), "Descrizione Oggetto");
     }
 
 }

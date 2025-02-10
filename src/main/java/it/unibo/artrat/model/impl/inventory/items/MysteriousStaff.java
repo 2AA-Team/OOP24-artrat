@@ -9,7 +9,7 @@ import it.unibo.artrat.model.impl.inventory.InventoryImpl;
 /**
  * A specific item.
  */
-public class MysteriousStaff extends AbstractItem{
+public class MysteriousStaff extends AbstractItem {
 
      /**
      * A constructor to initialize the new item Mysterious Staff.

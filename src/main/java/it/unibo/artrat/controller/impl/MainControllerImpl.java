@@ -36,8 +36,7 @@ public class MainControllerImpl implements MainController {
         this.views = new ArrayList<>();
         this.model = new ModelImpl();
         this.subControllerManager = new SubControllerManagerImpl(this);
-    }
-    
+    }    
 
     /**
      * {@inheritDoc}
@@ -106,10 +105,9 @@ public class MainControllerImpl implements MainController {
      */
     @Override
     public void setModel(final Model model) {
-        if(model!=null) {
+        if (model != null) {
             this.model = new ModelImpl(model);
-        }
-        else {
+        } else {
             throw new IllegalArgumentException("The new istance of model passed by the controller is null");
         }
     }

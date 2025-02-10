@@ -12,7 +12,7 @@ import it.unibo.artrat.model.api.inventory.Item;
  */
 public class InventoryImpl implements Inventory {
 
-    private List<Item> storedItem;
+    private List<Item> storedItem = new ArrayList<>();
 
     /**
      * A constructor that initializes an instance of an empty list of items.
@@ -23,6 +23,7 @@ public class InventoryImpl implements Inventory {
 
     /**
      * A constructor that initializes an instance.
+     * @param the invetory where get the list of item.
      */
     public InventoryImpl(final Inventory inv) {
         this.storedItem = inv.getStoredItem();

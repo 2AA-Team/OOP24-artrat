@@ -3,12 +3,12 @@ package it.unibo.artrat.controller.api.subcontroller;
 import java.util.List;
 
 import it.unibo.artrat.controller.api.SubController;
-import it.unibo.artrat.model.api.inventory.Item;;
+import it.unibo.artrat.model.api.inventory.Item;
 
 /**
  * Controller for the seguent model: inventory.
  */
-public interface InventorySubController extends SubController{
+public interface InventorySubController extends SubController {
 
     /**
      * 
@@ -23,18 +23,18 @@ public interface InventorySubController extends SubController{
      */
     boolean useItem(Item passedItem);
 
-    /**
+       /**
      * 
-     * @param passedItem the item that we want the typeName.
-     * @return the type name of desired item.
+     * @param passedItem the item that we want the name.
+     * @return the name of desired item.
      */
-    String getTypeName(Item passedItem);
+    String getItemName(Item passedItem);
 
-    /**
+       /**
      * 
      * @param passedItem the item that we want the typeName.
      */
-    void getDescription(Item passedItem);
+    void obtainDescription(Item passedItem);
 
     //void quit();
 

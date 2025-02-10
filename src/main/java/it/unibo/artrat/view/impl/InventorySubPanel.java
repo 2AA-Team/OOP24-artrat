@@ -16,6 +16,12 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
 
     private final InventorySubController controller;
     private final JPanel myJPanel = new JPanel();
+    private final JPanel containerPanel = new JPanel(new BorderLayout());
+    /**
+     * Si può pensare a toglierlo e lasciare il resize automatico, ma così è più carino se si hanno
+     * tanti tanti oggetti.
+     */
+    private final JScrollPane scrollPane = new JScrollPane(myJPanel); 
 
     public InventorySubPanel(final InventorySubController controller) {
         this.controller = controller;
@@ -45,7 +51,7 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
         for (final var item : controller.getStoredItem()) { //observer.getStoredItem() {
             final JPanel itemPanel = new JPanel(new GridLayout(1, 2, 5, 0)); // Due colonne: itemButton e useButton
 
-            final JButton itemButton = new JButton(controller.getTypeName(item));
+            final JButton itemButton = new JButton(controller.getItemName(item));
             final JButton useButton = new JButton("Usa");
 
             itemButton.addActionListener(new ActionListener() {
@@ -58,7 +64,7 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
             useButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(final ActionEvent e) {
-                    if(confirmDialog("Vuoi far si che LuPino utilizzi questo oggetto?", "Utilizza oggetto")) {
+                    if (confirmDialog("Vuoi far si che LuPino utilizzi questo oggetto?", "Utilizza oggetto")) {
                         if (controller.useItem(item)) { //observer.useItem()
                             myJPanel.remove(itemPanel);
                             forceRedraw();
@@ -70,37 +76,27 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
             itemPanel.add(itemButton);
             itemPanel.add(useButton);
             myJPanel.add(itemPanel);
-
-            /*final JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-            final JButton closeButton = new JButton("Chiudi inventario");
-            closeButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if(confirmDialog("Vuoi davvero chiudere la borsa di LuPino e proseguire le tue scorribande?", "Chiudi inventario")) {
-                        controller.quit();
-                    }
-                }
-            });
-
-            bottomPanel.add(closeButton);
-
-            //Creazione dello scroll panel scalabile
-            final JScrollPane scrollPane = new JScrollPane(myJPanel);
-            scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-            scrollPane.getVerticalScrollBar().setUnitIncrement(16); // Velocità di scrolling*/
         }
 
-        final JButton btn = new JButton();
-        btn.addActionListener((e) -> {
-            this.controller.setStage(Stage.MENU);
+        JButton closeButton = new JButton("Chiudi inventario");
+        closeButton.addActionListener(e -> {
+            if (confirmDialog("Vuoi davvero chiudere la borsa di LuPino e proseguire le tue scorribande?", "Chiudi inventario")) {
+                controller.setStage(Stage.MENU); //tenere a mente che con GAME si torna nel gioco.
+            }
         });
-        myJPanel.add(btn);
+
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        bottomPanel.add(closeButton);
+        containerPanel.add(bottomPanel, BorderLayout.SOUTH);
     }
 
     @Override
     public void initComponents() {
         myJPanel.setLayout(new GridLayout(0, 1, 5, 5)); // Una colonna, spazio verticale 5px
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        containerPanel.add(scrollPane, BorderLayout.CENTER);
         fillWithItems();
-        setPanel(myJPanel);
+        setPanel(containerPanel);
     }
 }

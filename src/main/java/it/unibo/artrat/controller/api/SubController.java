@@ -26,9 +26,10 @@ public interface SubController {
     Model getModel();
 
     /**
-     * Method allows to notifying the main controller that something
+     * Method allows to notifying the main controller that something.
      * has changed and that it needs to update the centralized model with passed version.
+     * @param model the new istance of model to set.
      */
-    void updateCentralizeModel(final Model model);
+    void updateCentralizeModel(Model model);
 
 }

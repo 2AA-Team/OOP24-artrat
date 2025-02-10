@@ -12,7 +12,7 @@ import it.unibo.artrat.utils.api.ResourceLoader;
  */
 public class ItemReaderImpl implements ItemReader {
     /**
-     * The actual reader from yaml
+     * The actual reader from yaml.
      */
     private final ResourceLoader<String,List<String>> valueOfYaml;
 
@@ -40,7 +40,7 @@ public class ItemReaderImpl implements ItemReader {
      * {@inheritDoc}
      */
     @Override
-    public String getDescription(String nameOfItem) {
+    public String getDescription(final String nameOfItem) {
         return getSpecificField(nameOfItem, 0);
     }
 
@@ -48,7 +48,7 @@ public class ItemReaderImpl implements ItemReader {
      * {@inheritDoc}
      */
     @Override
-    public double getPrice(String nameOfItem) {
+    public double getPrice(final String nameOfItem) {
         return Double.parseDouble(getSpecificField(nameOfItem, 1));
     }
 
@@ -56,7 +56,7 @@ public class ItemReaderImpl implements ItemReader {
      * {@inheritDoc}
      */
     @Override
-    public ItemType getItemType(String nameOfItem) {
+    public ItemType getItemType(final String nameOfItem) {
         switch (getSpecificField(nameOfItem, 2)) {
             case "CONSUMABLE":
                 return ItemType.CONSUMABLE;

@@ -23,6 +23,7 @@ public class CoinImpl implements Coin {
 
      /**
      * A constructor that initializes the current funds and money multiplier from a passed Coin instance.
+     * @param the Coin to copy.
      */
     public CoinImpl(final Coin coin) {
         this.amount = coin.getCurrentAmount();

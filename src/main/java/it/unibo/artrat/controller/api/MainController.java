@@ -45,7 +45,7 @@ public interface MainController {
      * A method that permit to re-set the current istance of Model with a new one, passed.
      * @param model the new Model istance to set.
      */
-    void setModel(final Model model);
+    void setModel(Model model);
 
     /**
      * get the manager of all sub controllers of the main controller.

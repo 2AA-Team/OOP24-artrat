@@ -22,7 +22,7 @@ public class MultiplierImpl implements Multiplier {
      * A constructor that initialize a new istance from a exist Multiplier.
      * @param mpd the passed Multiplier.
      */
-    public MultiplierImpl(Multiplier mpd) {
+    public MultiplierImpl(final Multiplier mpd) {
         this.multipler = mpd.getCurrentMultiplier();
     }
 

@@ -5,17 +5,42 @@ import it.unibo.artrat.model.api.inventory.Inventory;
 /**
  * Class that rappresents player.
  */
-public interface Player extends Entity {
-    
+public interface Player extends Entity {    
+    /**
+     * A method that permit to get a copy of the current inventory of player.
+     * @return a copy of the current inventory.
+     */
     Inventory getInventory();
 
-    void setInventory(final Inventory inventory);
+    /**
+     * A method that change the current inventory of player with the passed one.
+     * @param inventory the new inventory.
+     */
+    void setInventory(Inventory inventory);
 
+    /**
+     * A method that permit to get the current Coin of player.
+     * @return current coin
+     */
     Coin getCoin();
 
-    void setCoin(final Coin coins);
+    /**
+     * A method that change the current coin of player with the passed one.
+     * @param coins the new coins
+     */
+    void setCoin(Coin coins);
 
+    /**
+     * A method that increase the current coins of player with the passed amount.
+     * @param coins
+     */
     void increaseCoins(final double coins);
 
-    void increaseMultiplier(final double coins);
+    /**
+     * A method that increase the current coin multiplier, by multiplie the current multiplier.
+     * with the passed one.
+     * @param multiple
+     */
+    void increaseMultiplier(final double multiple);
+
 }

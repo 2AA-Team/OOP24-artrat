@@ -53,5 +53,5 @@ public abstract class AbstractItem implements Item {
      * {@inheritDoc}
      */
     @Override
-    public abstract Player consume(final Player player);
+    public abstract Player consume(Player player);
 }
