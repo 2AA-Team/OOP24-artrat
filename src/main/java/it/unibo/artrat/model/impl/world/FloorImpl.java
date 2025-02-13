@@ -42,26 +42,20 @@ public class FloorImpl implements Floor {
         if (maxFloorSize <= 1 || maxRoomSize <= 4) {
             throw new IllegalStateException("Floor or Room size has been modified.");
         }
-        generateFloorSet();
-        this.print(maxRoomSize * maxFloorSize);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void generateFloorSet() {
+    public void generateFloorSet() throws IOException {
         roomStructure = new HashSet<>();
         roomEnemies = new HashSet<>();
         roomValues = new HashSet<>();
         final int floorSize = RANDOM.nextInt(1, this.maxFloorSize);
         final int roomSize = RANDOM.nextInt(5, this.maxRoomSize);
         this.generateRoomsStructure(floorSize);
-        try {
-            this.generateEffectiveRooms(roomSize);
-        } catch (IOException e) {
-            throw new IllegalStateException("Configuration room file doesnt found.");
-        }
+        this.generateEffectiveRooms(roomSize);
     }
 
     /**
@@ -69,7 +63,7 @@ public class FloorImpl implements Floor {
      * 
      * @param floorSize floor size
      */
-    private void generateRoomsStructure(int floorSize) {
+    private void generateRoomsStructure(final int floorSize) {
         final int[][] directions = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
         int numberOfRooms = (int) Math.ceil((double) floorSize * floorSize / 2);
         int i = (int) Math.floor((double) floorSize / 2);
@@ -96,8 +90,8 @@ public class FloorImpl implements Floor {
      * @param roomSize size of the room
      * @throws IOException if link for the rooms json doesnt exist
      */
-    private void generateEffectiveRooms(int roomSize) throws IOException {
-        List<RoomGenerationStrategy> generations = List.of(
+    private void generateEffectiveRooms(final int roomSize) throws IOException {
+        final List<RoomGenerationStrategy> generations = List.of(
                 new RoomGenerationEmpty(),
                 new RoomGenerationFile("src/main/java/it/unibo/artrat/resources/premademaze/rooms.json"));
         RoomBuilder builder = new RoomBuilder();
@@ -105,7 +99,7 @@ public class FloorImpl implements Floor {
         for (int i = 0; i < floorMap.length; i++) {
             for (int j = 0; j < floorMap.length; j++) {
                 if (isARoom(j, i)) {
-                    if (j == Math.floor(floorMap.length / 2) && i == floorMap.length - 1) {
+                    if (j == (int) Math.floor(floorMap.length / 2) && i == floorMap.length - 1) {
                         builder = builder.insertGenerationStrategy(new RoomGenerationEmpty());
                         builder = builder.insertNumberOfEnemy(0);
                         builder = builder.insertNumberOfValues(0);
@@ -129,7 +123,7 @@ public class FloorImpl implements Floor {
      * @param y y coordinate
      * @return true if is a room
      */
-    private boolean isARoom(int x, int y) {
+    private boolean isARoom(final int x, final int y) {
         if (x < 0 || y < 0 || x >= this.floorMap.length || y >= this.floorMap.length) {
             return false;
         } else {
@@ -159,25 +153,31 @@ public class FloorImpl implements Floor {
         this.roomEnemies.addAll(tmpEnemies);
     }
 
-    private void print(double sizeTot) {
-        for (double i = 0; i < sizeTot; i++) {
-            for (double j = 0; j < sizeTot; j++) {
-                final double x = j;
-                final double y = i;
-                if (this.roomStructure.stream()
-                        .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y)) {
-                    System.out.print("#");
-                } else if (this.roomEnemies.stream()
-                        .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y)) {
-                    System.out.print("X");
-                } else if (this.roomValues.stream()
-                        .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y)) {
-                    System.out.print("Y");
-                } else {
-                    System.out.print(" ");
-                }
-            }
-            System.out.println();
-        }
-    }
+    /**
+     * public void print() {
+     * int sizeTot = this.maxFloorSize * this.maxRoomSize;
+     * for (double i = 0; i < sizeTot; i++) {
+     * for (double j = 0; j < sizeTot; j++) {
+     * final double x = j;
+     * final double y = i;
+     * if (this.roomStructure.stream()
+     * .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y))
+     * {
+     * System.out.print("#");
+     * } else if (this.roomEnemies.stream()
+     * .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y))
+     * {
+     * System.out.print("X");
+     * } else if (this.roomValues.stream()
+     * .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y))
+     * {
+     * System.out.print("Y");
+     * } else {
+     * System.out.print(" ");
+     * }
+     * }
+     * System.out.println();
+     * }
+     * }
+     */
 }

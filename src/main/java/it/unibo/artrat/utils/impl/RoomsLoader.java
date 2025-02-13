@@ -34,7 +34,7 @@ public class RoomsLoader implements ResourceLoader<Integer, char[][]> {
         if (!roomsTmp.isEmpty()) {
             return roomsTmp.get(rd.nextInt(roomsTmp.size()));
         } else {
-            return null;
+            throw new IllegalStateException();
         }
     }
 
@@ -46,10 +46,10 @@ public class RoomsLoader implements ResourceLoader<Integer, char[][]> {
     public void setConfigPath(final String configPath) throws IOException {
         final ObjectMapper objectMapper = new ObjectMapper();
         final Map<String, List<Map<String, Object>>> jsonMap = objectMapper.readValue(
-                new File(configPath), new TypeReference<Map<String, List<Map<String, Object>>>>() {
+                new File(configPath), new TypeReference<>() {
                 });
         this.roomsMap = new HashMap<>();
-        List<Map<String, Object>> rooms = jsonMap.get("rooms");
+        final List<Map<String, Object>> rooms = jsonMap.get("rooms");
         if (rooms == null) {
             throw new IllegalArgumentException("Error: rooms file doesnt contains rooms record.");
         }

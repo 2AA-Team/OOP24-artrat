@@ -40,33 +40,27 @@ public final class RoomImpl implements Room {
                 builder.size,
                 RoomSymbols.VALUE,
                 builder.numValues));
-        this.createPassage(
-                builder.upPassage,
-                builder.rightPassage,
-                builder.downPassage,
-                builder.leftPassage,
-                builder.size);
+        this.createPassage(builder);
     }
 
-    private void createPassage(boolean upPassage, boolean rightPassage, boolean downPassage,
-            boolean leftPassage, int roomSize) {
-        double averagePassage = Math.ceil(roomSize / 2);
-        boolean tmpU = upPassage;
-        boolean tmpR = rightPassage;
-        boolean tmpD = downPassage;
-        boolean tmpL = leftPassage;
-        for (int i = 0; i < roomSize - 1 && (tmpU || tmpR || tmpD || tmpL); i++) {
+    private void createPassage(final RoomBuilder builder) {
+        final double averagePassage = Math.ceil(builder.size / 2);
+        boolean tmpU = builder.upPassage;
+        boolean tmpR = builder.rightPassage;
+        boolean tmpD = builder.downPassage;
+        boolean tmpL = builder.leftPassage;
+        for (int i = 0; i < builder.size - 1 && (tmpU || tmpR || tmpD || tmpL); i++) {
             final int tmpI = i;
             if (tmpU) {
                 tmpU = this.roomStructure.removeIf((o) -> o.getPosition().equals(new Point(averagePassage, tmpI)));
             }
             if (tmpR) {
                 tmpR = this.roomStructure
-                        .removeIf((o) -> o.getPosition().equals(new Point(roomSize - tmpI - 1, averagePassage)));
+                        .removeIf((o) -> o.getPosition().equals(new Point(builder.size - tmpI - 1, averagePassage)));
             }
             if (tmpD) {
                 tmpD = this.roomStructure.removeIf((o) -> o.getPosition().equals(new Point(averagePassage,
-                        roomSize - tmpI - 1)));
+                        builder.size - tmpI - 1)));
             }
             if (tmpL) {
                 tmpL = this.roomStructure.removeIf((o) -> o.getPosition().equals(new Point(tmpI, averagePassage)));
@@ -171,7 +165,19 @@ public final class RoomImpl implements Room {
             return this;
         }
 
-        public RoomBuilder insertPassages(boolean upRoom, boolean rightRoom, boolean downRoom, boolean leftRoom) {
+        /**
+         * set the passages of the room.
+         * 
+         * @param upRoom    upwards passage
+         * @param rightRoom passage to the right
+         * @param downRoom  downward passage
+         * @param leftRoom  passage to the left
+         * @return this room builder
+         */
+        public RoomBuilder insertPassages(final boolean upRoom,
+                final boolean rightRoom,
+                final boolean downRoom,
+                final boolean leftRoom) {
             this.upPassage = upRoom;
             this.rightPassage = rightRoom;
             this.downPassage = downRoom;
