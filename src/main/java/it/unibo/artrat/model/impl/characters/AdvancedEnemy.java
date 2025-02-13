@@ -1,6 +1,7 @@
 package it.unibo.artrat.model.impl.characters;
 
 import it.unibo.artrat.model.api.characters.Enemy;
+import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;
 import it.unibo.artrat.model.api.characters.AbstractEntity;
@@ -31,12 +32,6 @@ public final class AdvancedEnemy extends AbstractEntity implements Enemy {
         super(topLeft, bottomRight);
     }
 
-    @Override
-    public void follow() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'follow'");
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -62,6 +57,12 @@ public final class AdvancedEnemy extends AbstractEntity implements Enemy {
     public void redraw() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'redraw'");
+    }
+
+    @Override
+    public void follow(Player p) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'follow'");
     }
 
 }

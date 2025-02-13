@@ -8,7 +8,7 @@ import it.unibo.artrat.utils.impl.Vector2d;
  * Essential implementetion of an entity.
  */
 public abstract class AbstractEntity extends AbstractGameObject implements Entity {
-    private final Vector2d speed = new Vector2d();
+    private Vector2d speed = new Vector2d();
 
     /**
      * Entity constructor.
@@ -57,6 +57,22 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
     @Override
     public void update(final int delta) {
         this.setPosition(this.getPosition().sum(speed.mul(delta)));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Vector2d getSpeed() {
+        return new Vector2d(this.speed.getX(), this.speed.getY());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setSpeed(final Vector2d v) {
+        this.speed = new Vector2d(v.getX(), v.getY());
     }
 
 }

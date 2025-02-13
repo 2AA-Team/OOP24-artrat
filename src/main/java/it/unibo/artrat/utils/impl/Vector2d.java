@@ -92,4 +92,13 @@ public final class Vector2d {
     public void setY(final double y) {
         this.y = y;
     }
+
+    /**
+     * Get normalized vector.
+     * 
+     * @return normalized vector
+     */
+    public Vector2d normalize() {
+        return new Vector2d(this.getX() / this.module(), this.getY() / this.module());
+    }
 }

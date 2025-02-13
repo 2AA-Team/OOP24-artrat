@@ -31,6 +31,7 @@ public abstract class AbstractGameObject implements GameObject {
      * 
      * @return current game object position
      */
+    @Override
     public Point getPosition() {
         return this.hitBox.getCenter();
     }

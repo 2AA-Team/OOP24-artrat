@@ -1,7 +1,14 @@
 package it.unibo.artrat.model.impl.characters;
 
 import it.unibo.artrat.model.api.characters.Enemy;
+import it.unibo.artrat.model.api.characters.Player;
+
+import java.util.Random;
+
 import it.unibo.artrat.model.api.characters.AbstractEntity;
+import it.unibo.artrat.utils.api.BoundingBox;
+import it.unibo.artrat.utils.api.Directions;
+import it.unibo.artrat.utils.impl.BoundingBoxImpl;
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;
 
@@ -9,6 +16,8 @@ import it.unibo.artrat.utils.impl.Vector2d;
  * Standard Enemy class.
  */
 public final class BaseEnemy extends AbstractEntity implements Enemy {
+    private final Random rd = new Random();
+    private final BoundingBox fieldOfView;
 
     /**
      * Base enemy constructor.
@@ -18,6 +27,7 @@ public final class BaseEnemy extends AbstractEntity implements Enemy {
      */
     public BaseEnemy(final Point topLeft, final Point bottomRight) {
         super(topLeft, bottomRight);
+        this.fieldOfView = new BoundingBoxImpl(topLeft, bottomRight);
     }
 
     /**
@@ -29,15 +39,17 @@ public final class BaseEnemy extends AbstractEntity implements Enemy {
      */
     public BaseEnemy(final Point topLeft, final Point bottomRight, final Vector2d v) {
         super(topLeft, bottomRight, v);
+        this.fieldOfView = new BoundingBoxImpl(topLeft, bottomRight);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void follow() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'follow'");
+    public void follow(final Player p) {
+        final var speed = this.getSpeed();
+        final var playerDirection = p.getSpeed().normalize();
+        this.setSpeed(playerDirection.mul(speed.module()));
     }
 
     /**
@@ -72,8 +84,16 @@ public final class BaseEnemy extends AbstractEntity implements Enemy {
      */
     @Override
     public void move() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'move'");
+        final var dir = rd.nextInt(Directions.values().length);
+        final var speed = this.getSpeed();
+        final Vector2d v = Directions.getDirection(Directions.values()[dir]);
+        this.setSpeed(v.mul(speed.module()));
+    }
+
+    @Override
+    public void update(int delta) {
+        super.update(delta);
+        this.fieldOfView.setCenter(this.getPosition());
     }
 
 }

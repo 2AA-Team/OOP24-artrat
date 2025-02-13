@@ -12,21 +12,20 @@ public class BoundingBoxImpl implements BoundingBox {
     private final double width;
 
     /**
-     * Get rectangle height.
-     * 
-     * @return rectangle height
+     * {@inheritDoc}
      */
+    @Override
     public double getHeight() {
         return this.height;
     }
 
     /**
-     * Get box width.
-     * 
-     * @return rectangle width
+     * {@inheritDoc}
      */
+    @Override
     public double getWidth() {
         return this.width;
+
     }
 
     /**
@@ -58,19 +57,17 @@ public class BoundingBoxImpl implements BoundingBox {
     }
 
     /**
-     * Get top left corner.
-     * 
-     * @return top left bounding box corner
+     * {@inheritDoc}
      */
+    @Override
     public Point getTopLeft() {
         return new Point(this.topLeft);
     }
 
     /**
-     * Get bottom right corner.
-     * 
-     * @return Bottom right bounding box corner
+     * {@inheritDoc}
      */
+    @Override
     public Point getBottomRight() {
         return new Point(this.bottomRight);
     }
@@ -87,20 +84,18 @@ public class BoundingBoxImpl implements BoundingBox {
     }
 
     /**
-     * Get box center.
-     * 
-     * @return Center point of the bounding box.
+     * {@inheritDoc}
      */
+    @Override
     public Point getCenter() {
 
         return new Point(this.topLeft.getX() + this.getWidth() / 2, this.topLeft.getY() + height / 2);
     }
 
     /**
-     * Set the center of the bounding box.
-     * 
-     * @param center center point
+     * {@inheritDoc}
      */
+    @Override
     public void setCenter(final Point center) {
         this.topLeft = new BoundingBoxImpl(center, this.getWidth(), this.getHeight()).getTopLeft();
         this.bottomRight = new BoundingBoxImpl(center, this.getWidth(), this.getHeight()).getBottomRight();
