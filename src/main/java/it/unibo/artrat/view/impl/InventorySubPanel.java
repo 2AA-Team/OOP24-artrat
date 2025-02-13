@@ -12,6 +12,7 @@ import it.unibo.artrat.view.api.InventoryView;
  * A base view for inventory.
  * @author Cristian Di Donato
 */
+
 public class InventorySubPanel extends AbstractSubPanel implements InventoryView {
 
     private final InventorySubController controller;
@@ -26,19 +27,6 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
     public InventorySubPanel(final InventorySubController controller) {
         this.controller = controller;
     }
-
-    @Override
-<<<<<<< HEAD
-    public void initComponents() {
-        final JPanel myJPanel = new JPanel();
-        myJPanel.setLayout(new GridLayout(0, 1, 5, 5)); // Una colonna, spazio verticale 5px
-=======
-    protected void forceRedraw() {
-        fillWithItems();
-        myJPanel.revalidate();
-        myJPanel.repaint();
-    }
->>>>>>> origin/didonato-develop
 
     private boolean confirmDialog(final String question, final String name) {
         return JOptionPane.showConfirmDialog(myJPanel, question, name, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
@@ -56,12 +44,7 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
 
         for (final var item : controller.getStoredItem()) { //observer.getStoredItem() {
             final JPanel itemPanel = new JPanel(new GridLayout(1, 2, 5, 0)); // Due colonne: itemButton e useButton
-<<<<<<< HEAD
             final JButton itemButton = new JButton(controller.getTypeName(item));
-=======
-
-            final JButton itemButton = new JButton(controller.getItemName(item));
->>>>>>> origin/didonato-develop
             final JButton useButton = new JButton("Usa");
 
             itemButton.addActionListener(new ActionListener(){
@@ -108,5 +91,11 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
         containerPanel.add(scrollPane, BorderLayout.CENTER);
         fillWithItems();
         setPanel(containerPanel);
+    }
+
+    @Override
+    protected void forceRedraw() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'forceRedraw'");
     }
 }

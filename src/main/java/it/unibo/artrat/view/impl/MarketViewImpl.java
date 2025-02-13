@@ -52,10 +52,13 @@ public class MarketViewImpl extends JFrame{
             });
 
             buyItem.addActionListener(e ->{
-                if(purchItem.getPrice() >= purchItem.getPrice()){
+                if(purchItem.getPrice() >= purchItem.getPrice()){  //da cambiare
                     if(toConfirm("Vuoi davvero acquistare?", "Compra")){
                         contr.buyItem(purchItem);   //compro l'oggetto
                     }
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Hai bisogno di più soldi!","Attenzione" ,JOptionPane.WARNING_MESSAGE);
                 }
             });
         }

@@ -6,11 +6,11 @@ import it.unibo.artrat.model.api.inventory.Item;
 public interface ItemManager {
 
     
-    List<Item> sortItemLevel();       //STESSO DISCORSO PER IL MISSION MANAGER
+    List<Item> sortItemPrice();     
 
-    List<Item> sortItemCost();
+    List<Item> reverseSortItemPrice();
 
-    List<Item> filterItemLevel();     //forse
+    List<Item> filterPowerupItems(); 
 
-    List<Item> filterItem();
+    List<Item> filterConsumableItems();
 }

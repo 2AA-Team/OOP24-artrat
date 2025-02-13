@@ -21,7 +21,6 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
         super(mainController);
     }
 
-<<<<<<< HEAD
     @Override
     public List<Item> purchasableItems() {
         // TODO Auto-generated method stub
@@ -56,6 +55,4 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     public void getDescription(Item passedItem){
         throw new UnsupportedOperationException("");
     }
-=======
->>>>>>> origin/didonato-develop
 }

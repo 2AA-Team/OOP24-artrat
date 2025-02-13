@@ -11,7 +11,6 @@ import it.unibo.artrat.model.api.inventory.ItemType;
  * A specific Item.
  */
 public class LuckyTicket extends AbstractItem {
-
     private Random rd;
 
      /**

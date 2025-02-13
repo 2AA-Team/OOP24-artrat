@@ -2,6 +2,8 @@ package it.unibo.artrat.controller.api.subcontroller;
 
 import java.util.List;
 
+import javax.swing.Icon;
+
 import it.unibo.artrat.controller.api.SubController;
 import it.unibo.artrat.model.api.inventory.Item;
 
@@ -35,6 +37,8 @@ public interface InventorySubController extends SubController {
      * @param passedItem the item that we want the typeName.
      */
     void obtainDescription(Item passedItem);
+
+    Icon getTypeName(Item item);
 
     //void quit();
 
