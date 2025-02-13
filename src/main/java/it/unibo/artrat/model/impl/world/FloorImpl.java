@@ -21,10 +21,12 @@ import it.unibo.artrat.utils.impl.ResourceLoaderImpl;
 public class FloorImpl implements Floor {
 
     private static final Random RANDOM = new Random();
-    private final Set<AbstractGameObject> roomStructure = new HashSet<>();
-    private final Set<AbstractGameObject> roomEnemies = new HashSet<>();
-    private final Set<AbstractGameObject> roomValues = new HashSet<>();
+    private Set<AbstractGameObject> roomStructure = new HashSet<>();
+    private Set<AbstractGameObject> roomEnemies = new HashSet<>();
+    private Set<AbstractGameObject> roomValues = new HashSet<>();
     private boolean[][] floorMap;
+    private final int maxFloorSize;
+    private final int maxRoomSize;
 
     /**
      * constructor that set the configuration file path.
@@ -35,25 +37,25 @@ public class FloorImpl implements Floor {
     public FloorImpl(final String configPath) throws IOException {
         final ResourceLoader<String, Integer> rl = new ResourceLoaderImpl<>();
         rl.setConfigPath(configPath);
-        final int maxFloorSize = rl.getConfig("MAXFLOORSIZE");
-        final int maxRoomSize = rl.getConfig("MAXROOMSIZE");
+        maxFloorSize = rl.getConfig("MAX_FLOOR_SIZE");
+        maxRoomSize = rl.getConfig("MAX_ROOM_SIZE");
         if (maxFloorSize <= 1 || maxRoomSize <= 4) {
             throw new IllegalStateException("Floor or Room size has been modified.");
         }
-        generateFloorSet(maxFloorSize, maxRoomSize);
+        generateFloorSet();
         this.print(maxRoomSize * maxFloorSize);
     }
 
     /**
-     * generate a pseudo-random floor as a room matrix.
-     * 
-     * @param maxFloorSize max floor size
-     * @param maxRoomSize  max room size
+     * {@inheritDoc}
      */
-    private void generateFloorSet(final int maxFloorSize, final int maxRoomSize) {
-        final int floorSize = RANDOM.nextInt(1, maxFloorSize);
-        final int roomSize = RANDOM.nextInt(8, maxRoomSize + 1);
-        System.out.println(roomSize);
+    @Override
+    public void generateFloorSet() {
+        roomStructure = new HashSet<>();
+        roomEnemies = new HashSet<>();
+        roomValues = new HashSet<>();
+        final int floorSize = RANDOM.nextInt(1, this.maxFloorSize);
+        final int roomSize = RANDOM.nextInt(5, this.maxRoomSize);
         this.generateRoomsStructure(floorSize);
         try {
             this.generateEffectiveRooms(roomSize);
@@ -62,13 +64,22 @@ public class FloorImpl implements Floor {
         }
     }
 
+    /**
+     * fullfill the boolean matrix rapresenting the structure of the floor.
+     * 
+     * @param floorSize floor size
+     */
     private void generateRoomsStructure(int floorSize) {
         final int[][] directions = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
         int numberOfRooms = (int) Math.ceil((double) floorSize * floorSize / 2);
         int i = (int) Math.floor((double) floorSize / 2);
-        int j = 0;
+        int j = floorSize - 1;
         this.floorMap = new boolean[floorSize][floorSize];
         while (numberOfRooms > 0) {
+            if (!floorMap[i][j]) {
+                floorMap[i][j] = true;
+                numberOfRooms--;
+            }
             final int[] dir = directions[RANDOM.nextInt(directions.length)];
             final int newI = i + dir[0];
             final int newJ = j + dir[1];
@@ -76,13 +87,15 @@ public class FloorImpl implements Floor {
                 i = newI;
                 j = newJ;
             }
-            if (!floorMap[i][j]) {
-                floorMap[i][j] = true;
-                numberOfRooms--;
-            }
         }
     }
 
+    /**
+     * fullfill the sets that rapresent the rooms.
+     * 
+     * @param roomSize size of the room
+     * @throws IOException if link for the rooms json doesnt exist
+     */
     private void generateEffectiveRooms(int roomSize) throws IOException {
         List<RoomGenerationStrategy> generations = List.of(
                 new RoomGenerationEmpty(),
@@ -92,9 +105,15 @@ public class FloorImpl implements Floor {
         for (int i = 0; i < floorMap.length; i++) {
             for (int j = 0; j < floorMap.length; j++) {
                 if (isARoom(j, i)) {
-                    builder = builder.insertGenerationStrategy(generations.get(RANDOM.nextInt(generations.size())));
-                    builder = builder.insertNumberOfEnemy(RANDOM.nextInt(roomSize));
-                    builder = builder.insertNumberOfValues(RANDOM.nextInt(roomSize));
+                    if (j == Math.floor(floorMap.length / 2) && i == floorMap.length - 1) {
+                        builder = builder.insertGenerationStrategy(new RoomGenerationEmpty());
+                        builder = builder.insertNumberOfEnemy(0);
+                        builder = builder.insertNumberOfValues(0);
+                    } else {
+                        builder = builder.insertGenerationStrategy(generations.get(RANDOM.nextInt(generations.size())));
+                        builder = builder.insertNumberOfEnemy(RANDOM.nextInt(roomSize));
+                        builder = builder.insertNumberOfValues(RANDOM.nextInt(roomSize));
+                    }
                     builder = builder.insertPassages(isARoom(j, i - 1), isARoom(j + 1, i), isARoom(j, i + 1),
                             isARoom(j - 1, i));
                     addNewRoom(builder.build(), j, i, roomSize);
@@ -103,6 +122,13 @@ public class FloorImpl implements Floor {
         }
     }
 
+    /**
+     * checks if a room is located in a certain location.
+     * 
+     * @param x x coordinate
+     * @param y y coordinate
+     * @return true if is a room
+     */
     private boolean isARoom(int x, int y) {
         if (x < 0 || y < 0 || x >= this.floorMap.length || y >= this.floorMap.length) {
             return false;
@@ -141,6 +167,12 @@ public class FloorImpl implements Floor {
                 if (this.roomStructure.stream()
                         .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y)) {
                     System.out.print("#");
+                } else if (this.roomEnemies.stream()
+                        .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y)) {
+                    System.out.print("X");
+                } else if (this.roomValues.stream()
+                        .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y)) {
+                    System.out.print("Y");
                 } else {
                     System.out.print(" ");
                 }
