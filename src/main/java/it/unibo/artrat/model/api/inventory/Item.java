@@ -1,5 +1,7 @@
 package it.unibo.artrat.model.api.inventory;
 
+import it.unibo.artrat.model.api.characters.Player;
+
 /**
  * Class that rappresents shop/inventory item.
  * @author Cristian Di Donato.
@@ -25,10 +27,10 @@ public interface Item {
     ItemType getType();
 
     /**
-     * 
+     * @param player the player where the item operate.
      * @return true: if the item is consume; false: if the item can't be consume for some reason.
      */
-    boolean consume();
+    Player consume(Player player);
 
 
 }

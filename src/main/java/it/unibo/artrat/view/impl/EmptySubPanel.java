@@ -16,7 +16,7 @@ public class EmptySubPanel extends AbstractSubPanel {
     /**
      * constructor to set the sub controller of the sub panel.
      * 
-     * @param menuSubController
+     * @param menuSubController sub controller
      */
     public EmptySubPanel(final MenuSubController menuSubController) {
         this.menuSubController = menuSubController;

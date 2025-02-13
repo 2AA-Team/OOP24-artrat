@@ -1,9 +1,18 @@
 package it.unibo.artrat.model.impl.inventory.items;
 
+import it.unibo.artrat.model.impl.characters.PlayerImpl;
 import it.unibo.artrat.model.impl.inventory.AbstractItem;
-import it.unibo.artrat.model.api.inventory.ItemType;;
 
-public class LuckyTicket extends AbstractItem{
+import java.util.Random;
+
+import it.unibo.artrat.model.api.characters.Player;
+import it.unibo.artrat.model.api.inventory.ItemType;
+/**
+ * A specific Item.
+ */
+public class LuckyTicket extends AbstractItem {
+
+    private Random rd;
 
      /**
      * A constructor to initialize the new item Lucky Ticket.
@@ -11,16 +20,17 @@ public class LuckyTicket extends AbstractItem{
      * @param price the price of Lucky Ticket.
      * @param type the item type of Lucky Ticket.
      */
-    public LuckyTicket(String desc, final double price, final ItemType type) {
-        super(desc,price,type);
+    public LuckyTicket(final String desc, final double price, final ItemType type) {
+        super(desc, price, type);
+        this.rd = new Random();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean consume() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'consume'");
+    public Player consume(final Player player) {
+        player.increaseCoins(rd.nextInt(1000));
+        return new PlayerImpl(player);
     }
 }

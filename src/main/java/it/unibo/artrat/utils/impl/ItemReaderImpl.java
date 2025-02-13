@@ -12,34 +12,35 @@ import it.unibo.artrat.utils.api.ResourceLoader;
  */
 public class ItemReaderImpl implements ItemReader {
     /**
-     * The actual reader from yaml
+     * The actual reader from yaml.
      */
-    private final ResourceLoader valueOfYaml;
+    private final ResourceLoader<String,List<String>> valueOfYaml;
 
 
     /**
      * A constructor that initializes an instance of Resource Loader.
      */
     public ItemReaderImpl() {
-        this.valueOfYaml = new ResourceLoaderImpl();
+        this.valueOfYaml = new ResourceLoaderImpl<>();
     }
 
     /**
      * {@inheritDoc}
      */
+    @Override
     public void readFromItemFile(final String itemPath) throws IOException {
         this.valueOfYaml.setConfigPath(itemPath);
     }
 
-    private String getSpecificField(String nameOfItem, final int field) {
-        return ((List<String>)(valueOfYaml.getConfig(nameOfItem))).get(field);
+    private String getSpecificField(final String nameOfItem, final int field) {
+        return (valueOfYaml.getConfig(nameOfItem)).get(field);
     } 
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String getDescription(String nameOfItem) {
+    public String getDescription(final String nameOfItem) {
         return getSpecificField(nameOfItem, 0);
     }
 
@@ -47,7 +48,7 @@ public class ItemReaderImpl implements ItemReader {
      * {@inheritDoc}
      */
     @Override
-    public double getPrice(String nameOfItem) {
+    public double getPrice(final String nameOfItem) {
         return Double.parseDouble(getSpecificField(nameOfItem, 1));
     }
 
@@ -55,8 +56,8 @@ public class ItemReaderImpl implements ItemReader {
      * {@inheritDoc}
      */
     @Override
-    public ItemType getItemType(String nameOfItem) {
-        switch(getSpecificField(nameOfItem, 2)) {
+    public ItemType getItemType(final String nameOfItem) {
+        switch (getSpecificField(nameOfItem, 2)) {
             case "CONSUMABLE":
                 return ItemType.CONSUMABLE;
             case "POWERUP":
@@ -65,6 +66,7 @@ public class ItemReaderImpl implements ItemReader {
                 break;
         }
         return null;
+<<<<<<< HEAD
     }
     
     /*
@@ -74,4 +76,7 @@ public class ItemReaderImpl implements ItemReader {
     devo passare una lista intera 
     publico
     */
+=======
+    }    
+>>>>>>> origin/didonato-develop
 }

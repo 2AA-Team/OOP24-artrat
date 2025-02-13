@@ -5,105 +5,108 @@ import java.awt.*;
 import java.awt.event.*;
 
 import it.unibo.artrat.controller.api.subcontroller.InventorySubController;
+import it.unibo.artrat.model.impl.Stage;
+import it.unibo.artrat.view.api.InventoryView;
 
 /** 
- * A base view for inventory
+ * A base view for inventory.
  * @author Cristian Di Donato
 */
-public class InventorySubPanel extends AbstractSubPanel {
+public class InventorySubPanel extends AbstractSubPanel implements InventoryView {
 
     private final InventorySubController controller;
+    private final JPanel myJPanel = new JPanel();
+    private final JPanel containerPanel = new JPanel(new BorderLayout());
+    /**
+     * Si può pensare a toglierlo e lasciare il resize automatico, ma così è più carino se si hanno
+     * tanti tanti oggetti.
+     */
+    private final JScrollPane scrollPane = new JScrollPane(myJPanel); 
 
     public InventorySubPanel(final InventorySubController controller) {
         this.controller = controller;
     }
 
     @Override
+<<<<<<< HEAD
     public void initComponents() {
         final JPanel myJPanel = new JPanel();
         myJPanel.setLayout(new GridLayout(0, 1, 5, 5)); // Una colonna, spazio verticale 5px
+=======
+    protected void forceRedraw() {
+        fillWithItems();
+        myJPanel.revalidate();
+        myJPanel.repaint();
+    }
+>>>>>>> origin/didonato-develop
 
-        // Aggiunta di un pannello per ogni item dell'inventario
-        for (var item : controller.getStoredItem()) { //observer.getStoredItem() {
+    private boolean confirmDialog(final String question, final String name) {
+        return JOptionPane.showConfirmDialog(myJPanel, question, name, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+    }
+
+    @Override
+    public void displayMessage(final String message, final String title) {
+        JOptionPane.showMessageDialog(myJPanel, message, title, JOptionPane.INFORMATION_MESSAGE);
+        myJPanel.revalidate();
+        myJPanel.repaint();
+    }
+
+    private void fillWithItems() {
+        myJPanel.removeAll();
+
+        for (final var item : controller.getStoredItem()) { //observer.getStoredItem() {
             final JPanel itemPanel = new JPanel(new GridLayout(1, 2, 5, 0)); // Due colonne: itemButton e useButton
+<<<<<<< HEAD
             final JButton itemButton = new JButton(controller.getTypeName(item));
+=======
+
+            final JButton itemButton = new JButton(controller.getItemName(item));
+>>>>>>> origin/didonato-develop
             final JButton useButton = new JButton("Usa");
 
             itemButton.addActionListener(new ActionListener(){
                 @Override
-                public void actionPerformed(ActionEvent e) {
-                    controller.getDescription(item);
+                public void actionPerformed(final ActionEvent e) {
+                    controller.obtainDescription(item);
                 }
             });
 
             useButton.addActionListener(new ActionListener() {
                 @Override
-                public void actionPerformed(ActionEvent e) {
-                    /*if(confirmDialog("Vuoi far si che LuPino utilizzi questo oggetto?", "Utilizza oggetto")) {
+                public void actionPerformed(final ActionEvent e) {
+                    if (confirmDialog("Vuoi far si che LuPino utilizzi questo oggetto?", "Utilizza oggetto")) {
                         if (controller.useItem(item)) { //observer.useItem()
                             myJPanel.remove(itemPanel);
+                            forceRedraw();
                         }
-                    }*/
+                    }
                 }
             });
-
-            /*this.addComponentListener(new ComponentAdapter() {
-                public void componentResized(ComponentEvent e) {
-                    Dimension newSize = getSize();
-                    int buttonWidth = newSize.width / 5;
-                    int buttonHeight = newSize.height / 10;
-
-                    itemButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
-                    useButton.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
-
-                    itemPanel.revalidate();
-                    itemPanel.repaint();
-                }
-            });*/
 
             itemPanel.add(itemButton);
             itemPanel.add(useButton);
             myJPanel.add(itemPanel);
+        }
 
-            final JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-            final JButton closeButton = new JButton("Chiudi inventario");
-            closeButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    /*if(confirmDialog("Vuoi davvero chiudere la borsa di LuPino e proseguire le tue scorribande?", "Chiudi inventario")) {
-                        controller.quit();
-                    }*/
-                }
-            });
+        JButton closeButton = new JButton("Chiudi inventario");
+        closeButton.addActionListener(e -> {
+            if (confirmDialog("Vuoi davvero chiudere la borsa di LuPino e proseguire le tue scorribande?", "Chiudi inventario")) {
+                controller.setStage(Stage.MENU); //tenere a mente che con GAME si torna nel gioco.
+            }
+        });
 
-            bottomPanel.add(closeButton);
-
-            // Creazione dello scroll panel scalabile
-            final JScrollPane scrollPane = new JScrollPane(myJPanel);
-            scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-            scrollPane.getVerticalScrollBar().setUnitIncrement(16); // Velocità di scrolling
-        };    
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        bottomPanel.add(closeButton);
+        containerPanel.add(bottomPanel, BorderLayout.SOUTH);
     }
 
     @Override
-    protected void forceRedraw() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'forceRedraw'");
+    public void initComponents() {
+        myJPanel.setLayout(new GridLayout(0, 1, 5, 5)); // Una colonna, spazio verticale 5px
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        containerPanel.add(scrollPane, BorderLayout.CENTER);
+        fillWithItems();
+        setPanel(containerPanel);
     }
-
-    /*private boolean confirmDialog(final String question, final String name) {
-        return JOptionPane.showConfirmDialog(this, question, name, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
-    }
-
-    @Override
-    public void displayMessage(String message, String title) {
-        JOptionPane.showMessageDialog(this, message, title, JOptionPane.INFORMATION_MESSAGE);
-        myJPanel.revalidate();
-        myJPanel.repaint();
-    }
-
-    @Override
-    public void closeWindow() {
-        this.dispose();
-    }*/    
 }

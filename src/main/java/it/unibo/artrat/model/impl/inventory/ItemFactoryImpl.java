@@ -6,7 +6,9 @@ import java.io.IOException;
 import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.api.inventory.ItemFactory;
 import it.unibo.artrat.model.impl.inventory.items.LuckyTicket;
+import it.unibo.artrat.model.impl.inventory.items.MagicBackpack;
 import it.unibo.artrat.model.impl.inventory.items.MultiplierBooster;
+import it.unibo.artrat.model.impl.inventory.items.MysteriousStaff;
 import it.unibo.artrat.utils.api.ItemReader;
 import it.unibo.artrat.utils.impl.ItemReaderImpl;
 
@@ -37,6 +39,7 @@ public class ItemFactoryImpl implements ItemFactory {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void initialize() throws IOException {
         this.itemReader.readFromItemFile(itemPath);
     }
@@ -53,12 +56,26 @@ public class ItemFactoryImpl implements ItemFactory {
 
     /**
      * {@inheritDoc}
-     */
+    */
     @Override
     public Item luckyTicket() {
         return new LuckyTicket(itemReader.getDescription("LUCKYTICKET"), 
             itemReader.getPrice("LUCKYTICKET"), 
             itemReader.getItemType("LUCKYTICKET"));
+        }
+
+    @Override
+    public Item magicbackpack() {
+        return new MagicBackpack(itemReader.getDescription("MAGICBACKPACK"), 
+        itemReader.getPrice("MAGICBACKPACK"), 
+        itemReader.getItemType("MAGICBACKPACK"));
     }
-    
+
+    @Override
+    public Item mysterioustaff() {
+        return new MysteriousStaff(itemReader.getDescription("MYSTERIOUSSTAFF"), 
+        itemReader.getPrice("MYSTERIOUSSTAFF"), 
+        itemReader.getItemType("MYSTERIOUSSTAFF"));
+    }
+        
 }

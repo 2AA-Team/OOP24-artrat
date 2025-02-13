@@ -22,9 +22,10 @@ public class MultiplierImpl implements Multiplier {
      * A constructor that initialize a new istance from a exist Multiplier.
      * @param mpd the passed Multiplier.
      */
-    public MultiplierImpl(Multiplier mpd) {
+    public MultiplierImpl(final Multiplier mpd) {
         this.multipler = mpd.getCurrentMultiplier();
     }
+
      /**
      * {@inheritDoc}
      */
@@ -36,18 +37,22 @@ public class MultiplierImpl implements Multiplier {
             throw new IllegalArgumentException();
         }
     }
+
      /**
      * {@inheritDoc}
      */
     @Override
     public void changeCurrentMultiplier(final double multipler) {
-        if (multipler < 0.0) {
+        if (multipler > 0.0) {
             this.multipler = multipler;
         } else { 
             throw new IllegalArgumentException();
         }
     }
 
+     /**
+     * {@inheritDoc}
+     */
     @Override
     public double getCurrentMultiplier() {
         return this.multipler;

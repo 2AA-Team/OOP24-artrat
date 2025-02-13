@@ -37,7 +37,7 @@ public final class GameEngineImpl implements GameEngine, Sender {
             + "config" + File.separator
             + "config.yaml";
     private GameStatus status;
-    private final ResourceLoader resourceLoader;
+    private final ResourceLoader<String, Double> resourceLoader;
     private final MainController mainController;
 
     /**
@@ -45,7 +45,7 @@ public final class GameEngineImpl implements GameEngine, Sender {
      */
     public GameEngineImpl() {
         this.status = GameStatus.STOPPED;
-        this.resourceLoader = new ResourceLoaderImpl();
+        this.resourceLoader = new ResourceLoaderImpl<>();
         mainController = new MainControllerImpl(this);
     }
 
@@ -55,8 +55,8 @@ public final class GameEngineImpl implements GameEngine, Sender {
             Runtime.getRuntime().exit(1);
         }
         mainController.addMainView(new MainViewImpl(
-                (int) resourceLoader.getConfig("WIDTH"),
-                (int) resourceLoader.getConfig("HEIGHT")));
+                (double) resourceLoader.getConfig("MENU_WIDTH"),
+                (double) resourceLoader.getConfig("MENU_HEIGHT")));
         mainLoop();
     }
 
@@ -65,7 +65,7 @@ public final class GameEngineImpl implements GameEngine, Sender {
      */
     private void mainLoop() {
         while (true) {
-            final double drawInterval = Converter.fpsToNanos((int) resourceLoader.getConfig("FPS"));
+            final double drawInterval = Converter.fpsToNanos(resourceLoader.getConfig("FPS").intValue());
             double delta = 0;
             double lastTime = System.nanoTime();
             long currentTime;

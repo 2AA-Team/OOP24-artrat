@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.view.api.MainView;
+import java.awt.Toolkit;
 
 /**
  * implementation of class mainView.
@@ -21,20 +22,19 @@ public class MainViewImpl implements MainView {
     /**
      * constructor set the size of the frame.
      * 
-     * @param width
-     * @param heigth
+     * @param width  width of the frame
+     * @param heigth height of the frame
      */
-    public MainViewImpl(final int width, final int heigth) {
-        frame.setSize(width, heigth);
+    public MainViewImpl(final double width, final double heigth) {
+        frame.setSize((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),
+                (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * heigth));
         this.currentStage = Stage.MENU;
         this.subPanel = new EmptySubPanel();
         this.controller = null;
     }
 
     /**
-     * Sets the controller controlled by this view (if works as input).
-     *
-     * @param observer the controller to attach
+     * {@inheritDoc}
      */
     @Override
     public void setController(final MainController observer) {
@@ -42,8 +42,7 @@ public class MainViewImpl implements MainView {
     }
 
     /**
-     * This method is called before the UI is used. It should finalize its status.
-     * (if needed).
+     * {@inheritDoc}
      */
     @Override
     public void initiate() {
@@ -52,9 +51,7 @@ public class MainViewImpl implements MainView {
     }
 
     /**
-     * This method is used to set the stage in a view.
-     * 
-     * @param currentStage
+     * {@inheritDoc}
      */
     @Override
     public void setStage(final Stage currentStage) {
@@ -71,7 +68,7 @@ public class MainViewImpl implements MainView {
     }
 
     /**
-     * force to update all his component.
+     * {@inheritDoc}
      */
     @Override
     public void forceRedraw() {
@@ -79,13 +76,13 @@ public class MainViewImpl implements MainView {
     }
 
     /**
-     * 
+     * {@inheritDoc}
      */
     @Override
     public void reconduceFromStage() {
         switch (currentStage) {
             case MENU:
-                //subPanel = new MenuSubPanel(controller.getControllerManager().getMenuSubController());
+                subPanel = new MenuSubPanel(controller.getControllerManager().getMenuSubController());
                 break;
             case GAME:
                 subPanel = new EmptySubPanel(controller.getControllerManager().getMenuSubController());

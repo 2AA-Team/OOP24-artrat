@@ -27,14 +27,27 @@ class ItemReaderTest {
             + "artrat" + File.separator
             + "utils" + File.separator
             + "testItemReader.yaml";
+    
+    final ItemReader itemReader = new ItemReaderImpl();
+
+
+       /**
+     * test loading config path.
+     */
+    @Test
+    void testLoading() {
+        try {
+            itemReader.readFromItemFile(configPath);
+        } catch (IOException e) {
+            fail();
+        }
+    }        
 
     /**
      * Test reading the description of item.
      */
     @Test
     void testReadingDesc() {
-        final ItemReader itemReader = new ItemReaderImpl();
-
         try {
             itemReader.readFromItemFile(configPath);
             assertEquals("Aumento", itemReader.getDescription("Aumenta"));
@@ -50,8 +63,6 @@ class ItemReaderTest {
      */
     @Test
     void testReadingPrice() {
-        final ItemReader itemReader = new ItemReaderImpl();
-
         try {
             itemReader.readFromItemFile(configPath);
             assertEquals(10.00, itemReader.getPrice("Aumenta"));
@@ -68,8 +79,6 @@ class ItemReaderTest {
      */
     @Test
     void testReadingItemType() {
-        final ItemReader itemReader = new ItemReaderImpl();
-
         try {
             itemReader.readFromItemFile(configPath);
             assertEquals(ItemType.POWERUP, itemReader.getItemType("Aumenta"));

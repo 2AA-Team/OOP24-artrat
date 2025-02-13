@@ -21,7 +21,11 @@ public class CoinImpl implements Coin {
         this.multiplier = new MultiplierImpl();
     }
 
-    public CoinImpl(Coin coin) {
+     /**
+     * A constructor that initializes the current funds and money multiplier from a passed Coin instance.
+     * @param the Coin to copy.
+     */
+    public CoinImpl(final Coin coin) {
         this.amount = coin.getCurrentAmount();
         this.multiplier = coin.getCurrentMultiplier();
     }
@@ -70,9 +74,9 @@ public class CoinImpl implements Coin {
      * {@inheritDoc}
      */
     @Override
-    public void changePlayerMultipler(final double multipler) {
-        if (multipler >= 0.0) {
-            this.multiplier.changeCurrentMultiplier(multipler);
+    public void changePlayerMultipler(final Multiplier multipler) {
+        if (multipler.getCurrentMultiplier() >= 0.0) {
+            this.multiplier = new MultiplierImpl(multipler);
         } else {
             throw new IllegalArgumentException();
         }

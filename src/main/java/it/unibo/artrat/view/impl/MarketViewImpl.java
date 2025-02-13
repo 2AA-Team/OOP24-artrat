@@ -43,7 +43,7 @@ public class MarketViewImpl extends JFrame{
             purchItemPanel.add(buyItem);
 
             priceButton.addActionListener(e->{
-                contr.getTypeName(purchItem);
+                contr.getTypeName(purchItem);   //prezzo devo mettere
             });
 
             itemButton.addActionListener(e->{
@@ -52,8 +52,10 @@ public class MarketViewImpl extends JFrame{
             });
 
             buyItem.addActionListener(e ->{
-                if(purchItem.getPrice() < purchItem.getPrice()){
-                    
+                if(purchItem.getPrice() >= purchItem.getPrice()){
+                    if(toConfirm("Vuoi davvero acquistare?", "Compra")){
+                        contr.buyItem(purchItem);   //compro l'oggetto
+                    }
                 }
             });
         }

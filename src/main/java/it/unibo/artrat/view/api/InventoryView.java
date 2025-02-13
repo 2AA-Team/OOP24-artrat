@@ -12,9 +12,4 @@ public interface InventoryView {
      * @param title of the messagge window.
      */
     void displayMessage(String messagge, String title); 
-
-    /**
-     * A method that, when invoked, causes the view to be closed.
-     */
-    void closeWindow();
 }

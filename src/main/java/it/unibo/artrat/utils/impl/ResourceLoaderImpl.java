@@ -11,13 +11,9 @@ import org.yaml.snakeyaml.Yaml;
 
 import it.unibo.artrat.utils.api.ResourceLoader;
 
-/***
- * Implementation of a resource loader responsible for fetching and loading
- * resources such as files, configurations, or other data types.
- */
-public final class ResourceLoaderImpl implements ResourceLoader {
+public final class ResourceLoaderImpl<I, O> implements ResourceLoader<I, O> {
 
-    private Map<String, Object> obj = new HashMap<>();
+    private Map<I, O> obj = new HashMap<>();
 
     /**
      * {@inheritDoc}
@@ -34,13 +30,12 @@ public final class ResourceLoaderImpl implements ResourceLoader {
      * {@inheritDoc}
      */
     @Override
-    public Object getConfig(final String conf) {
+    public O getConfig(final I conf) {
         final Object ob = obj.get(conf);
         if (ob != null) {
-            return obj.get(conf);
+            return (O) obj.get(conf);
         } else {
             throw new IllegalStateException();
         }
     }
-
 }

@@ -6,6 +6,8 @@ import java.util.List;
 import it.unibo.artrat.app.api.GameEngine;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.controller.api.SubControllerManager;
+import it.unibo.artrat.model.api.Model;
+import it.unibo.artrat.model.impl.ModelImpl;
 import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.view.api.MainView;
 
@@ -17,9 +19,10 @@ import it.unibo.artrat.view.api.MainView;
 public class MainControllerImpl implements MainController {
 
     private Stage currentStage;
-    private final List<MainView> views = new ArrayList<>(0);
+    private final List<MainView> views;
     private final GameEngine engine;
     private final SubControllerManager subControllerManager;
+    private Model model;
 
     /**
      * MainController constructor.
@@ -30,8 +33,10 @@ public class MainControllerImpl implements MainController {
     public MainControllerImpl(final GameEngine engine) {
         this.currentStage = Stage.MENU;
         this.engine = engine;
+        this.views = new ArrayList<>();
+        this.model = new ModelImpl();
         this.subControllerManager = new SubControllerManagerImpl(this);
-    }
+    }    
 
     /**
      * {@inheritDoc}
@@ -51,14 +56,6 @@ public class MainControllerImpl implements MainController {
     public void quit() {
         engine.forceStop();
         Runtime.getRuntime().exit(1);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void update() {
-
     }
 
     /**
@@ -96,34 +93,22 @@ public class MainControllerImpl implements MainController {
     }
 
     /**
-     * abstract class that implements subcontroller.
+     * {@inheritDoc}
      */
-    public abstract static class AbstractSubController implements SubController {
-        private final MainControllerImpl mainController;
+    @Override
+    public Model getModel() {
+        return new ModelImpl(this.model);
+    }
 
-        /**
-         * constructor to define mainController.
-         * 
-         * @param mainController
-         */
-        protected AbstractSubController(final MainControllerImpl mainController) {
-            this.mainController = mainController;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void setStage(final Stage newStage) {
-            mainController.setStage(newStage);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void quit() {
-            mainController.quit();
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setModel(final Model model) {
+        if (model != null) {
+            this.model = new ModelImpl(model);
+        } else {
+            throw new IllegalArgumentException("The new istance of model passed by the controller is null");
         }
     }
 

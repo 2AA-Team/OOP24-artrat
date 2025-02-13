@@ -34,6 +34,6 @@ public interface Coin {
      * Change the current multipler of player.
      * @param multipler the new multiplier.
      */
-    void changePlayerMultipler(double multipler);
+    void changePlayerMultipler(Multiplier multipler);
 
 }

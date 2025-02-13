@@ -1,9 +1,18 @@
 package it.unibo.artrat.model.impl.inventory.items;
 
+import it.unibo.artrat.model.impl.characters.PlayerImpl;
 import it.unibo.artrat.model.impl.inventory.AbstractItem;
-import it.unibo.artrat.model.api.inventory.ItemType;;;
 
-public class MultiplierBooster extends AbstractItem{
+import java.util.Random;
+
+import it.unibo.artrat.model.api.characters.Player;
+import it.unibo.artrat.model.api.inventory.ItemType;
+/**
+ * A specific item.
+ */
+public class MultiplierBooster extends AbstractItem {
+
+    private Random rd;
 
     /**
      * A constructor to initialize the new item Multiplier Booster.
@@ -11,17 +20,17 @@ public class MultiplierBooster extends AbstractItem{
      * @param price the price of Multiplier Booster
      * @param type the item type of Multiplier Booster
      */
-    public MultiplierBooster(String desc, final double price, final ItemType type) {
-        super(desc,price,type);
+    public MultiplierBooster(final String desc, final double price, final ItemType type) {
+        super(desc, price, type);
+        this.rd = new Random();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean consume() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'consume'");
-    }
-    
+    public Player consume(final Player player) {
+        player.increaseMultiplier(1.0 + rd.nextInt(5));
+        return new PlayerImpl(player);
+    }    
 }

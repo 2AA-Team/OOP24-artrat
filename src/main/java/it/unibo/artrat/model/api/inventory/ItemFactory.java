@@ -1,7 +1,6 @@
 package it.unibo.artrat.model.api.inventory;
 
 import java.io.IOException;
-
 /**
  * Factory to create items.
  */
@@ -23,4 +22,17 @@ public interface ItemFactory {
      * @return a new istance of lucky ticket Item.
      */
     Item luckyTicket();
+
+     /***
+     * 
+     * @return a new istance of magic backpack Item.
+     */
+    Item magicbackpack();
+    
+     /***
+     * 
+     * @return a new istance of mysterios staff Item.
+     */
+    Item mysterioustaff();
+    
 }

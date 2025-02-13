@@ -33,7 +33,7 @@ class ResourceLoaderTest {
      */
     @Test
     void testLoading() {
-        final ResourceLoader resLoad = new ResourceLoaderImpl();
+        final ResourceLoader<String, Integer> resLoad = new ResourceLoaderImpl<>();
         assertThrows(IOException.class, () -> resLoad.setConfigPath(configPath + ".exe"));
     }
 
@@ -43,7 +43,7 @@ class ResourceLoaderTest {
      */
     @Test
     void testReading() {
-        final ResourceLoader resLoad = new ResourceLoaderImpl();
+        final ResourceLoader<String, Integer> resLoad = new ResourceLoaderImpl<>();
         try {
             try (FileWriter writer = new FileWriter(configPath, StandardCharsets.UTF_8)) {
                 writer.write("");
