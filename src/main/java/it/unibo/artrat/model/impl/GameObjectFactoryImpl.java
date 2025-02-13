@@ -14,7 +14,7 @@ public class GameObjectFactoryImpl implements GameObjectFactory {
      */
     @Override
     public AbstractGameObject getWall(final int x, final int y) {
-        AbstractGameObject a = new AbstractGameObject() {
+        final AbstractGameObject a = new AbstractGameObject() {
 
             @Override
             public void redraw() {
@@ -23,7 +23,7 @@ public class GameObjectFactoryImpl implements GameObjectFactory {
             }
 
             @Override
-            public void update(int delta) {
+            public void update(final int delta) {
                 // TODO Auto-generated method stub
                 throw new UnsupportedOperationException("Unimplemented method 'update'");
             }

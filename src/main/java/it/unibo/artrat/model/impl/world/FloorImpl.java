@@ -99,7 +99,7 @@ public class FloorImpl implements Floor {
         for (int i = 0; i < floorMap.length; i++) {
             for (int j = 0; j < floorMap.length; j++) {
                 if (isARoom(j, i)) {
-                    if (j == (int) Math.floor(floorMap.length / 2) && i == floorMap.length - 1) {
+                    if (j == (int) Math.floor((double) floorMap.length / 2) && i == floorMap.length - 1) {
                         builder = builder.insertGenerationStrategy(new RoomGenerationEmpty());
                         builder = builder.insertNumberOfEnemy(0);
                         builder = builder.insertNumberOfValues(0);

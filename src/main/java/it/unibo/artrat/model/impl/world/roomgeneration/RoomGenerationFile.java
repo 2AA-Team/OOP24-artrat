@@ -35,17 +35,17 @@ public class RoomGenerationFile implements RoomGenerationStrategy {
     public Set<AbstractGameObject> generateRoomSet(final int size) {
         if (rl != null) {
             final GameObjectFactory factory = new GameObjectFactoryImpl();
-            char[][] room;
+            final char[][] room;
             try {
                 room = rl.getConfig(size);
             } catch (IllegalStateException e) {
                 return new RoomGenerationEmpty().generateRoomSet(size);
             }
-            final char[][] tmp = room;
-            return IntStream.range(0, tmp.length)
+            return IntStream.range(0, room.length)
                     .boxed()
-                    .flatMap(i -> IntStream.range(0, tmp[i].length)
-                            .filter(j -> tmp[i][j] == RoomSymbols.WALL.getSymbol())
+                    .flatMap(i -> IntStream.range(0,
+                            room[i].length)
+                            .filter(j -> room[i][j] == RoomSymbols.WALL.getSymbol())
                             .mapToObj(j -> factory.getWall(i, j)))
                     .collect(Collectors.toSet());
         } else {
