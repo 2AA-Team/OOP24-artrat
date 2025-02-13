@@ -5,7 +5,7 @@ import it.unibo.artrat.model.api.AbstractGameObject;
 import it.unibo.artrat.model.impl.world.RoomSymbols;
 
 /**
- * strategy for the insertion of a set of object in a room.
+ * strategy to describe the logic of placing some objects in a room.
  */
 public interface ObjectInsertionStrategy {
 

@@ -4,9 +4,6 @@ import it.unibo.artrat.model.api.AbstractGameObject;
 import it.unibo.artrat.model.api.GameObjectFactory;
 import it.unibo.artrat.utils.impl.Point;
 
-/**
- * factory for standard game object.
- */
 public class GameObjectFactoryImpl implements GameObjectFactory {
 
     /**

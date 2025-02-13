@@ -33,6 +33,7 @@ public class FloorImpl implements Floor {
      * config file is used to get stantard values.
      * 
      * @param configPath configuration file path
+     * @throws IOException caused by generation from file
      */
     public FloorImpl(final String configPath) throws IOException {
         final ResourceLoader<String, Integer> rl = new ResourceLoaderImpl<>();

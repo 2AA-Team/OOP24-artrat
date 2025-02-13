@@ -8,9 +8,6 @@ import it.unibo.artrat.model.api.GameObjectFactory;
 import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;
 import it.unibo.artrat.model.impl.GameObjectFactoryImpl;
 
-/**
- * room generation that generate a room with only border walls.
- */
 public class RoomGenerationEmpty implements RoomGenerationStrategy {
 
     /**
