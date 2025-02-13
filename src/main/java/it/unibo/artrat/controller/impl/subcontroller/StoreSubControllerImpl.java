@@ -31,4 +31,27 @@ public class StoreSubControllerImpl extends MainControllerImpl.AbstractSubContro
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'buyItem'");
     }
+
+    @Override
+    public boolean getPlayerCash(){
+        throw new UnsupportedOperationException("Unimplemented method");
+    }
+    /**
+     * 
+     * @param passedItem the item that we want the typeName.
+     * @return the type name of desired item.
+     */
+    @Override
+    public String getTypeName(Item passedItem){
+        throw new UnsupportedOperationException("");
+    }
+
+    /**
+     * 
+     * @param passedItem the item that we want the typeName.
+     */
+    @Override
+    public void getDescription(Item passedItem){
+        throw new UnsupportedOperationException("");
+    }
 }

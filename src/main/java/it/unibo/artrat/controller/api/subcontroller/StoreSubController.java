@@ -27,6 +27,10 @@ public interface StoreSubController extends SubController {
     int newPlayerLevel();
     */
 
+    boolean getPlayerCash();
     
+    String getTypeName(Item passedItem);
+
+    void getDescription(Item passedItem);
 
 }
