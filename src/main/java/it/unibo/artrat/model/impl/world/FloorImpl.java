@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-import it.unibo.artrat.model.api.AbstractGameObject;
+import it.unibo.artrat.model.impl.AbstractGameObject;
 import it.unibo.artrat.model.api.world.Floor;
 import it.unibo.artrat.model.api.world.Room;
 import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;

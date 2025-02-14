@@ -8,27 +8,41 @@ import it.unibo.artrat.utils.impl.Vector2d;
  * Essential implementetion of an entity.
  */
 public abstract class AbstractEntity extends AbstractGameObject implements Entity {
-    private final Vector2d speed = new Vector2d();
+    private Vector2d speed = new Vector2d();
 
     /**
      * Entity constructor.
      * 
-     * @param bottomLeft bottom left corner entity boundingbox
-     * @param topRight   top right corner entity boundingbox
+     * @param topLeft     top left corner entity boundingbox
+     * @param bottomRight bottom right corner entity boundingbox
      */
-    public AbstractEntity(final Point bottomLeft, final Point topRight) {
-        this(bottomLeft, topRight, new Vector2d());
+    public AbstractEntity(final Point topLeft, final Point bottomRight) {
+        this(topLeft, bottomRight, new Vector2d());
     }
 
     /**
      * Entity constructor passing direction (vector).
      * 
-     * @param bottomLeft bottom left corner entity boundingbox
-     * @param topRight   top right corner entity boundingbox
-     * @param v          direction
+     * @param topLeft     top left corner entity boundingbox
+     * @param bottomRight bottom right corner entity boundingbox
+     * @param v           direction
      */
-    public AbstractEntity(final Point bottomLeft, final Point topRight, final Vector2d v) {
-        super(bottomLeft, topRight);
+    public AbstractEntity(final Point topLeft, final Point bottomRight, final Vector2d v) {
+        super(topLeft, bottomRight);
+        this.speed.setX(v.getX());
+        this.speed.setY(v.getY());
+    }
+
+    /**
+     * Entity constructor passing direction (vector).
+     * 
+     * @param center center of the entity boundingbox
+     * @param width  width of the entity boundingbox
+     * @param height height of the entity boundingbox
+     * @param v      direction
+     */
+    public AbstractEntity(final Point center, final double width, final double height, final Vector2d v) {
+        super(center, width, height);
         this.speed.setX(v.getX());
         this.speed.setY(v.getY());
     }
@@ -57,6 +71,22 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
     @Override
     public void update(final int delta) {
         this.setPosition(this.getPosition().sum(speed.mul(delta)));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Vector2d getSpeed() {
+        return new Vector2d(this.speed.getX(), this.speed.getY());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setSpeed(final Vector2d v) {
+        this.speed = new Vector2d(v.getX(), v.getY());
     }
 
 }

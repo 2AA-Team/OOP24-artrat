@@ -26,7 +26,7 @@ public class ItemFactoryImpl implements ItemFactory {
             + "resources" + File.separator
             + "items" + File.separator
             + "items.yaml";
-    
+
     private final ItemReader itemReader;
 
     /**
@@ -64,6 +64,9 @@ public class ItemFactoryImpl implements ItemFactory {
             itemReader.getItemType("LUCKYTICKET"));
         }
 
+    /**
+     * {@inheritDoc}
+    */
     @Override
     public Item magicbackpack() {
         return new MagicBackpack(itemReader.getDescription("MAGICBACKPACK"), 
@@ -71,11 +74,13 @@ public class ItemFactoryImpl implements ItemFactory {
         itemReader.getItemType("MAGICBACKPACK"));
     }
 
+    /**
+     * {@inheritDoc}
+    */
     @Override
     public Item mysterioustaff() {
         return new MysteriousStaff(itemReader.getDescription("MYSTERIOUSSTAFF"), 
         itemReader.getPrice("MYSTERIOUSSTAFF"), 
         itemReader.getItemType("MYSTERIOUSSTAFF"));
     }
-        
 }

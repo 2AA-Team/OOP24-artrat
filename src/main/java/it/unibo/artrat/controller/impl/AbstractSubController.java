@@ -52,5 +52,4 @@ public abstract  class AbstractSubController implements SubController {
     public void quit() {
         mainController.quit();
     }
-    
 }

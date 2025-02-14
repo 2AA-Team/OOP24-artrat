@@ -1,11 +1,11 @@
- package it.unibo.artrat.model.api.characters;
+package it.unibo.artrat.model.api.characters;
 
 import it.unibo.artrat.model.api.inventory.Inventory;
 
 /**
  * Class that rappresents player.
  */
-public interface Player extends Entity {    
+public interface Player extends Entity {
     /**
      * A method that permit to get a copy of the current inventory of player.
      * @return a copy of the current inventory.
@@ -34,13 +34,18 @@ public interface Player extends Entity {
      * A method that increase the current coins of player with the passed amount.
      * @param coins
      */
-    void increaseCoins(final double coins);
+    void increaseCoins(double coins);
 
     /**
      * A method that increase the current coin multiplier, by multiplie the current multiplier.
      * with the passed one.
      * @param multiple
      */
-    void increaseMultiplier(final double multiple);
+    void increaseMultiplier(double multiple);
 
+    /**
+     * A method that permit to copy a passed player.
+     * @return a copy of passed Player.
+     */
+    Player copyPlayer();
 }

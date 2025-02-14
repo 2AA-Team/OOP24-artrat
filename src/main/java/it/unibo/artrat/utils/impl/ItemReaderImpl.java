@@ -14,7 +14,7 @@ public class ItemReaderImpl implements ItemReader {
     /**
      * The actual reader from yaml.
      */
-    private final ResourceLoader<String,List<String>> valueOfYaml;
+    private final ResourceLoader<String, List<String>> valueOfYaml;
 
 
     /**
@@ -33,7 +33,7 @@ public class ItemReaderImpl implements ItemReader {
     }
 
     private String getSpecificField(final String nameOfItem, final int field) {
-        return (valueOfYaml.getConfig(nameOfItem)).get(field);
+        return valueOfYaml.getConfig(nameOfItem).get(field);
     } 
 
     /**
@@ -66,5 +66,5 @@ public class ItemReaderImpl implements ItemReader {
                 break;
         }
         return null;
-    }    
+    }
 }

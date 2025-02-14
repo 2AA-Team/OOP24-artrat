@@ -31,5 +31,4 @@ public interface SubController {
      * @param model the new istance of model to set.
      */
     void updateCentralizeModel(Model model);
-
 }

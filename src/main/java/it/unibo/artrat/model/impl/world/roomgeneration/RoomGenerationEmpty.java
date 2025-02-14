@@ -3,11 +3,14 @@ package it.unibo.artrat.model.impl.world.roomgeneration;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import it.unibo.artrat.model.api.AbstractGameObject;
+import it.unibo.artrat.model.impl.AbstractGameObject;
 import it.unibo.artrat.model.api.GameObjectFactory;
 import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;
 import it.unibo.artrat.model.impl.GameObjectFactoryImpl;
 
+/**
+ * An implementation of RoomGenerationStrategy.
+ */
 public class RoomGenerationEmpty implements RoomGenerationStrategy {
 
     /**

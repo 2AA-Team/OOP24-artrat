@@ -3,6 +3,7 @@ package it.unibo.artrat.utils;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,31 +29,21 @@ class TestBoundingBox {
          */
         @Test
         void checkCreation() {
-                assertEquals(box.getBottomRight().getX() - box.getTopLeft().getX(), box.getWidth());
-                assertEquals(box.getBottomRight().getY() - box.getTopLeft().getY(), box.getHeight());
-                assertEquals(new Point(box.getTopLeft().getX() + box.getWidth() / 2,
-                                box.getTopLeft().getY() + box.getHeight() / 2), box.getCenter());
+                final double size = 3;
+                Point center = new Point(size / 2, size / 2);
+                assertEquals(size, box.getWidth());
+                assertEquals(size, box.getHeight());
+                assertEquals(center, box.getCenter());
 
-                final double width = 19;
-                final double height = 31;
-                box = new BoundingBoxImpl(new Point(Math.random() * 10, Math.random() * 10), width,
-                                height);
-                // Corners check
-                assertEquals(
-                                new Point(box.getCenter().getX() - box.getWidth() / 2,
-                                                box.getCenter().getY() - box.getHeight() / 2),
-                                box.getTopLeft());
-                assertEquals(new Point(box.getCenter().getX() + width / 2,
-                                box.getCenter().getY() + height / 2), box.getBottomRight());
-
-                box.setCenter(new Point(Math.random() * 10, Math.random() * 10));
-                assertEquals(width, box.getWidth());
-                assertEquals(height, box.getHeight());
-                // Corners check
-                assertEquals(new Point(box.getCenter().getX() - width / 2,
-                                box.getCenter().getY() - height / 2), box.getTopLeft());
-                assertEquals(new Point(box.getCenter().getX() + width / 2,
-                                box.getCenter().getY() + height / 2), box.getBottomRight());
+                // moving the bounding box
+                center = new Point(2, 2);
+                final Point topLeft = new Point(0.5, 0.5);
+                final Point bottomRight = new Point(3.5, 3.5);
+                box.setCenter(center);
+                assertEquals(size, box.getHeight());
+                assertEquals(size, box.getHeight());
+                assertEquals(topLeft, box.getTopLeft());
+                assertEquals(bottomRight, box.getBottomRight());
 
         }
 

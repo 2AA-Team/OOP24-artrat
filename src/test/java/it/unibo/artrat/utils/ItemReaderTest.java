@@ -27,8 +27,7 @@ class ItemReaderTest {
             + "artrat" + File.separator
             + "utils" + File.separator
             + "testItemReader.yaml";
-    
-    final ItemReader itemReader = new ItemReaderImpl();
+    private final ItemReader itemReader = new ItemReaderImpl();
 
 
        /**
@@ -41,8 +40,7 @@ class ItemReaderTest {
         } catch (IOException e) {
             fail();
         }
-    }        
-
+    }
     /**
      * Test reading the description of item.
      */

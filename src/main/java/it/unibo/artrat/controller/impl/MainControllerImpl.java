@@ -36,8 +36,7 @@ public class MainControllerImpl implements MainController {
         this.views = new ArrayList<>();
         this.model = new ModelImpl();
         this.subControllerManager = new SubControllerManagerImpl(this);
-    }    
-
+    }
     /**
      * {@inheritDoc}
      */

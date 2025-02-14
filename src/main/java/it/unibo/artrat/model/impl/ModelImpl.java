@@ -4,12 +4,13 @@ import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.inventory.Inventory;
 import it.unibo.artrat.model.api.inventory.ItemType;
-import it.unibo.artrat.model.impl.characters.PlayerImpl;
+import it.unibo.artrat.model.impl.characters.Lupino;
 import it.unibo.artrat.model.impl.inventory.InventoryImpl;
 import it.unibo.artrat.model.impl.inventory.items.LuckyTicket;
 import it.unibo.artrat.model.impl.inventory.items.MagicBackpack;
 import it.unibo.artrat.model.impl.inventory.items.MultiplierBooster;
 import it.unibo.artrat.model.impl.inventory.items.MysteriousStaff;
+import it.unibo.artrat.utils.impl.Point;
 
 /**
  * An implementation of model interface.
@@ -18,15 +19,21 @@ public class ModelImpl implements Model {
 
     private Player player;
 
+    /**
+     * Permit to create a new istance of Model.
+     */
     public ModelImpl() {
-        this.player = new PlayerImpl();
+        this.player = new Lupino(new Point(), new Point());
         initInventory(); // temporaneo per i test, andrà tolto in quanto all'inizio l'inventario sarà vuoto.
     }
 
+    /**
+     * Permit to create a new istance of model, starting from the passed one.
+     * @param m the passed Model.
+     */
     public ModelImpl(final Model m) {
         this.player = m.getPlayer();
     }
-
 
     private void initInventory() {
         final Inventory inv = this.player.getInventory();
@@ -42,7 +49,7 @@ public class ModelImpl implements Model {
     */
     @Override
     public Player getPlayer() {
-        return new PlayerImpl(player);
+        return this.player.copyPlayer();
     }
 
     /**
@@ -50,6 +57,6 @@ public class ModelImpl implements Model {
     */
     @Override
     public void setPlayer(final Player player) {
-        this.player = new PlayerImpl(player);
+        this.player = player.copyPlayer();
     }
 }

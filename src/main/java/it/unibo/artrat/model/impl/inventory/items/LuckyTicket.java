@@ -1,6 +1,5 @@
 package it.unibo.artrat.model.impl.inventory.items;
 
-import it.unibo.artrat.model.impl.characters.PlayerImpl;
 import it.unibo.artrat.model.impl.inventory.AbstractItem;
 
 import java.util.Random;
@@ -12,7 +11,7 @@ import it.unibo.artrat.model.api.inventory.ItemType;
  */
 public class LuckyTicket extends AbstractItem {
 
-    private Random rd;
+    private final Random rd;
 
      /**
      * A constructor to initialize the new item Lucky Ticket.
@@ -31,6 +30,6 @@ public class LuckyTicket extends AbstractItem {
     @Override
     public Player consume(final Player player) {
         player.increaseCoins(rd.nextInt(1000));
-        return new PlayerImpl(player);
+        return player.copyPlayer();
     }
 }

@@ -1,6 +1,5 @@
 package it.unibo.artrat.model.impl.inventory.items;
 
-import it.unibo.artrat.model.impl.characters.PlayerImpl;
 import it.unibo.artrat.model.impl.inventory.AbstractItem;
 
 import java.util.Random;
@@ -12,7 +11,8 @@ import it.unibo.artrat.model.api.inventory.ItemType;
  */
 public class MultiplierBooster extends AbstractItem {
 
-    private Random rd;
+    private static final int MAX_MULTIPLIER_INCREASE = 5;
+    private final Random rd;
 
     /**
      * A constructor to initialize the new item Multiplier Booster.
@@ -30,7 +30,7 @@ public class MultiplierBooster extends AbstractItem {
      */
     @Override
     public Player consume(final Player player) {
-        player.increaseMultiplier(1.0 + rd.nextInt(5));
-        return new PlayerImpl(player);
-    }    
+        player.increaseMultiplier(1.0 + rd.nextInt(MAX_MULTIPLIER_INCREASE));
+        return player.copyPlayer();
+    }
 }
