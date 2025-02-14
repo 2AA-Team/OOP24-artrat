@@ -14,8 +14,8 @@ public class CreatorAdvancedEnemy implements EnemyFactory {
      * Advanced Enemy creator method.
      */
     @Override
-    public Enemy createEnemy(final Point p, final double radius, final Vector2d v) {
-        return new AdvancedEnemy(p, radius, v); // TODO
+    public Enemy createEnemy(final Point bottomLeft, final Point topRight, final Vector2d v) {
+        return new AdvancedEnemy(bottomLeft, topRight, v); // TODO
     }
 
 }

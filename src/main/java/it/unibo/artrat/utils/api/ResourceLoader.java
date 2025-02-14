@@ -5,7 +5,8 @@ import java.io.IOException;
 /**
  * ResourceLoader is responsible for fetching and loading data.
  * 
- * @author Matteo Tonelli
+ * @param <I> input type
+ * @param <O> output type
  */
 public interface ResourceLoader<I, O> {
 

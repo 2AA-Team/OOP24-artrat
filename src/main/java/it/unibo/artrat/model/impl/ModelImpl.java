@@ -34,7 +34,6 @@ public class ModelImpl implements Model {
         inv.addItem(new MultiplierBooster("MultiplierBooster", 0, ItemType.POWERUP));
         inv.addItem(new MagicBackpack("MagicBackpack", 0, ItemType.CONSUMABLE));
         inv.addItem(new MysteriousStaff("MysteriousStaff", 0, ItemType.CONSUMABLE));
-        inv.addItem(new MysteriousStaff("MysteriousStaff", 0, ItemType.CONSUMABLE));
         this.player.setInventory(new InventoryImpl(inv));
     }
 

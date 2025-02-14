@@ -1,5 +1,8 @@
 package it.unibo.artrat.view.impl;
 
+/**
+ * sub panel class.
+ */
 public class GameSubPanel extends AbstractSubPanel {
 
     /**
@@ -15,5 +18,4 @@ public class GameSubPanel extends AbstractSubPanel {
     @Override
     protected void forceRedraw() {
     }
-
 }

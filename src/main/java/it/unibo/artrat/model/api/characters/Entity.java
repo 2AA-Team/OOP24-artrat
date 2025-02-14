@@ -1,9 +1,11 @@
 package it.unibo.artrat.model.api.characters;
 
+import it.unibo.artrat.model.api.GameObject;
+
 /**
  * Interface that rappresents every "alive" object.
  */
-public interface Entity {
+public interface Entity extends GameObject {
 
     /**
      * Movement handling.
