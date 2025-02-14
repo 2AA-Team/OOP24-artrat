@@ -59,9 +59,12 @@ public class Lupino extends AbstractEntity implements Player {
      * Player constructor.
      * 
      * @param center bounding box center
+     * @param speed  speed of player bounding box
      */
-    public Lupino(final Point center) {
-        super(center);
+    public Lupino(final Point center, final Vector2d speed) {
+        super(center, speed);
+        this.inventory = new InventoryImpl();
+        this.coins = new CoinImpl();
     }
 
     /**
@@ -128,7 +131,7 @@ public class Lupino extends AbstractEntity implements Player {
     */
     @Override
     public Player copyPlayer() {
-        final Player p = new Lupino(this.getPosition(), 0, 0, this.getSpeed()); 
+        final Player p = new Lupino(this.getPosition(), this.getSpeed()); 
         p.setInventory(this.getInventory());
         p.setCoin(this.getCoin());
         return p;
