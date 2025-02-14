@@ -14,19 +14,11 @@ public interface Market {
      * @return a list of all the purchasable items
      */
     List<Item> getPurchItems();
-
-    /**
-     * If I buy a powerup, it will be removed in the shop
-     * @param passedItem
-     * @return
-     */
-    Item removeItem(Item passedItem);
-
+ 
     /**
      * 
-     * @param passedItem
-     * @return
+     * @param passedItem the item I bougth
+     * @return true if the purchase operation is done
      */
-    boolean isOutOfStock(Item passedItem);
-    //devo fare poi il refill dei consumabili
+    boolean buyItem(Item passedItem);
 }
