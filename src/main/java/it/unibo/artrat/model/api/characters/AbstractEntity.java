@@ -34,6 +34,20 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
     }
 
     /**
+     * Entity constructor passing direction (vector).
+     * 
+     * @param center center of the entity boundingbox
+     * @param width  width of the entity boundingbox
+     * @param height height of the entity boundingbox
+     * @param v      direction
+     */
+    public AbstractEntity(final Point center, final double width, final double height, final Vector2d v) {
+        super(center, width, height);
+        this.speed.setX(v.getX());
+        this.speed.setY(v.getY());
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

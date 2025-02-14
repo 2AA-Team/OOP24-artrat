@@ -27,7 +27,18 @@ public abstract class AbstractGameObject implements GameObject {
     }
 
     /**
-     * Get current positio.
+     * Abstract GameObject constructor.
+     * 
+     * @param center center of the game object's bounding box
+     * @param width  width of the game object's bounding box
+     * @param height height of the game object's bounding box
+     */
+    public AbstractGameObject(final Point center, final double width, final double height) {
+        this.hitBox = new BoundingBoxImpl(center, width, height);
+    }
+
+    /**
+     * Get current position.
      * 
      * @return current game object position
      */
