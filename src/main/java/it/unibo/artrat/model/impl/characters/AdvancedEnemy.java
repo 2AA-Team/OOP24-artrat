@@ -60,7 +60,7 @@ public final class AdvancedEnemy extends AbstractEntity implements Enemy {
     }
 
     @Override
-    public void follow(Player p) {
+    public void follow(final Player p) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'follow'");
     }

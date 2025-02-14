@@ -6,6 +6,8 @@ package it.unibo.artrat.model.api.characters;
 public interface Enemy extends Entity {
     /**
      * If player gets too close to enemies will be followed.
+     * 
+     * @param p player
      */
     void follow(Player p);
 

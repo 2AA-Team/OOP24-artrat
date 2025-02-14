@@ -19,6 +19,11 @@ public interface GameObject {
      */
     void redraw();
 
+    /**
+     * Get current position.
+     * 
+     * @return current position
+     */
     Point getPosition();
-    
+
 }

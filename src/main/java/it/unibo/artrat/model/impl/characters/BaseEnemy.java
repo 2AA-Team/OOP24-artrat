@@ -1,11 +1,10 @@
 package it.unibo.artrat.model.impl.characters;
 
-import it.unibo.artrat.model.api.characters.Enemy;
-import it.unibo.artrat.model.api.characters.Player;
-
 import java.util.Random;
 
 import it.unibo.artrat.model.api.characters.AbstractEntity;
+import it.unibo.artrat.model.api.characters.Enemy;
+import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.utils.api.BoundingBox;
 import it.unibo.artrat.utils.api.Directions;
 import it.unibo.artrat.utils.impl.BoundingBoxImpl;
@@ -90,8 +89,11 @@ public final class BaseEnemy extends AbstractEntity implements Enemy {
         this.setSpeed(v.mul(speed.module()));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void update(int delta) {
+    public void update(final int delta) {
         super.update(delta);
         this.fieldOfView.setCenter(this.getPosition());
     }

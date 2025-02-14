@@ -21,40 +21,40 @@ public interface BoundingBox {
      * 
      * @param center center point
      */
-    public void setCenter(final Point center);
+    void setCenter(Point center);
 
     /**
      * Get bottom right corner.
      * 
      * @return Bottom right bounding box corner
      */
-    public Point getBottomRight();
+    Point getBottomRight();
 
     /**
      * Get box center.
      * 
      * @return Center point of the bounding box.
      */
-    public Point getCenter();
+    Point getCenter();
 
     /**
      * Get top left corner.
      * 
      * @return top left bounding box corner
      */
-    public Point getTopLeft();
+    Point getTopLeft();
 
     /**
      * Get box width.
      * 
      * @return rectangle width
      */
-    public double getWidth();
+    double getWidth();
 
     /**
      * Get rectangle height.
      * 
      * @return rectangle height
      */
-    public double getHeight();
+    double getHeight();
 }

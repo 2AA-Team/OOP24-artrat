@@ -2,6 +2,9 @@ package it.unibo.artrat.utils.api;
 
 import it.unibo.artrat.utils.impl.Vector2d;
 
+/**
+ * Allowed directions.
+ */
 public enum Directions {
     /**
      * Go up.
@@ -20,7 +23,13 @@ public enum Directions {
      */
     LEFT;
 
-    public static Vector2d getDirection(Directions dir) {
+    /**
+     * Get direction from enum.
+     * 
+     * @param dir direction
+     * @return new direction vector
+     */
+    public static Vector2d getDirection(final Directions dir) {
         return switch (dir) {
             case UP -> new Vector2d(0, -1);
             case DOWN -> new Vector2d(0, 1);
