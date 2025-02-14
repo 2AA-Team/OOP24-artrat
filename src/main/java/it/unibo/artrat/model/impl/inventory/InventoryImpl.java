@@ -11,7 +11,6 @@ import it.unibo.artrat.model.api.inventory.Item;
  * @author Cristian Di Donato
  */
 public class InventoryImpl implements Inventory {
-
     private List<Item> storedItem = new ArrayList<>();
 
     /**

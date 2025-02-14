@@ -11,11 +11,13 @@ import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.api.market.Market;
 import it.unibo.artrat.model.impl.ModelImpl;
 import it.unibo.artrat.model.impl.characters.PlayerImpl;
+import it.unibo.artrat.model.impl.market.MarketImpl;
 import it.unibo.artrat.view.api.MarketView;
 import it.unibo.artrat.view.impl.MarketSubPanel;
 
 /**
  * implementation of the sub controller for the store.
+ * @author Manuel Benagli
  */
 public class StoreSubControllerImpl extends AbstractSubController implements StoreSubController {
 
@@ -40,12 +42,11 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
         final Model model = this.getModel();
         final Player player = model.getPlayer();
         final Market market = this.getModel().getMarket();
-        final Inventory inv = player.getInventory();
+        final Inventory inventory = player.getInventory();
         if(market.buyItem(itemToBuy)){
-            inv.addItem(itemToBuy);
-            
-
-            final Player modPlayer = inv.addItem(itemToBuy);
+            inventory.addItem(itemToBuy);
+            player.setInventory(inventory);
+            model.setMarket(new MarketImpl());
             model.setPlayer(new PlayerImpl());
             this.updateCentralizeModel(new ModelImpl(model));
             return true;
@@ -82,12 +83,17 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
 
     @Override
     public String getTypeName(Item passedItem) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getItemName'");
+        return this.getModel().getMarket().getPurchItems().stream()
+            .filter(it -> it.equals(passedItem))
+            .map(el -> el.getType())
+            .findAny().get().toString();
     }
 
     @Override
     public double getItemPrice(Item passedItem) {
-        return passedItem.getPrice();
+        return this.getModel().getMarket().getPurchItems().stream()
+            .filter(it -> it.equals(passedItem))
+            .map(pr -> pr.getPrice())
+            .findAny().get();
     }
 }
