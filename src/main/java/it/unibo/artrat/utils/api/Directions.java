@@ -9,32 +9,38 @@ public enum Directions {
     /**
      * Go up.
      */
-    UP,
+    UP(new Vector2d(0, -1)),
     /**
      * Go down.
      */
-    DOWN,
+    DOWN(new Vector2d(0, 1)),
     /**
      * Go right.
      */
-    RIGHT,
+    RIGHT(new Vector2d(1, 0)),
     /**
      * Go left.
      */
-    LEFT;
+    LEFT(new Vector2d(-1, 0));
+
+    private final Vector2d vector;
 
     /**
-     * Get direction from enum.
+     * Directions constructor.
      * 
-     * @param dir direction
-     * @return new direction vector
+     * @param vector
      */
-    public static Vector2d getDirection(final Directions dir) {
-        return switch (dir) {
-            case UP -> new Vector2d(0, -1);
-            case DOWN -> new Vector2d(0, 1);
-            case LEFT -> new Vector2d(-1, 0);
-            case RIGHT -> new Vector2d(1, 0);
-        };
+    Directions(final Vector2d vector) {
+        this.vector = vector;
     }
+
+    /**
+     * Vector of the current direction.
+     * 
+     * @return vector's direction
+     */
+    public Vector2d vector() {
+        return vector;
+    }
+
 }

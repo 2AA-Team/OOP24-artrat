@@ -85,7 +85,7 @@ public final class BaseEnemy extends AbstractEntity implements Enemy {
     public void move() {
         final var dir = rd.nextInt(Directions.values().length);
         final var speed = this.getSpeed();
-        final Vector2d v = Directions.getDirection(Directions.values()[dir]);
+        final Vector2d v = Directions.values()[dir].vector();
         this.setSpeed(v.mul(speed.module()));
     }
 
