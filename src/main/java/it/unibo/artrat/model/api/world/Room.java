@@ -2,28 +2,31 @@ package it.unibo.artrat.model.api.world;
 
 import java.util.Set;
 
-import it.unibo.artrat.model.api.GameObject;
-import it.unibo.artrat.utils.impl.Point;
+import it.unibo.artrat.model.impl.AbstractGameObject;
 
 /**
- * Class that rappresents a room.
+ * interface that describes the room.
  */
 public interface Room {
 
     /**
-     * Add objects in the room.
+     * getter for the walls structure of the room.
      * 
-     * @param pos
-     * @param tile
-     * @throws IllegalStateException if you try to add the same type of object in
-     *                               the same spot
+     * @return set of gameobject
      */
-    void addObject(Point pos, GameObject tile);
+    Set<AbstractGameObject> getStructure();
 
     /**
-     * method to return the room objects.
+     * getter for all enemies of the room.
      * 
-     * @return all the object (without repetion)
+     * @return set of gameobject
      */
-    Set<GameObject> getObjects();
+    Set<AbstractGameObject> getEnemies();
+
+    /**
+     * getter for all valuable objects of the room.
+     * 
+     * @return set of gameobject
+     */
+    Set<AbstractGameObject> getValues();
 }

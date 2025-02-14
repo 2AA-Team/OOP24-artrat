@@ -5,9 +5,10 @@ import java.io.IOException;
 /**
  * ResourceLoader is responsible for fetching and loading data.
  * 
- * @author Matteo Tonelli
+ * @param <I> input type
+ * @param <O> output type
  */
-public interface ResourceLoader {
+public interface ResourceLoader<I, O> {
 
     /**
      * Get the configuration object.
@@ -15,14 +16,13 @@ public interface ResourceLoader {
      * @param conf config file
      * @return configuration object
      */
-    Object getConfig(String conf);
+    O getConfig(I conf);
 
     /**
      * method that load all configPath data.
      * 
-     * @param configPath
-     *                   if configPath not represent anything:
-     * @throws IOException
+     * @param configPath path of the config file
+     * @throws IOException if configPath not represent anything
      */
     void setConfigPath(String configPath) throws IOException;
 

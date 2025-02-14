@@ -17,7 +17,7 @@ public final class Converter {
     /**
      * Converts nano seconds to FPS.
      * 
-     * @param nanos nanoseconds
+     * @param nanos nano seconds to convert
      * @return int rappresenting FPS
      */
     public static int nanosToFps(final int nanos) {
@@ -28,9 +28,10 @@ public final class Converter {
      * Converts FPS to nano seconds.
      * 
      * @param fps frame per second
+     * @param fps frame per second
      * @return nano seconds
      */
-    public static int fpsToNanos(final int fps) {
-        return Math.toIntExact(BILLION / fps);
+    public static double fpsToNanos(final int fps) {
+        return BILLION / fps;
     }
 }

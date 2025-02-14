@@ -1,5 +1,6 @@
-package it.unibo.artrat.model.api;
+package it.unibo.artrat.model.impl;
 
+import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.utils.impl.BoundingBoxImpl;
 import it.unibo.artrat.utils.impl.Point;
 
@@ -69,9 +70,14 @@ public abstract class AbstractGameObject implements GameObject {
         this.hitBox.setCenter(position);
     }
 
-    @Override
-    public void update(final int delta) {
-
+    /**
+     * moved the current game object position.
+     * 
+     * @param x x position to moved
+     * @param y y position to moved
+     */
+    public void movedPosition(final int x, final int y) {
+        this.hitBox.setCenter(new Point(hitBox.getCenter().getX() + x, hitBox.getCenter().getY() + y));
     }
 
 }

@@ -3,7 +3,7 @@ package it.unibo.artrat.view.impl;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import it.unibo.artrat.controller.api.MainController;
+import it.unibo.artrat.controller.api.subcontroller.MenuSubController;
 import it.unibo.artrat.model.impl.Stage;
 
 import java.awt.GridBagConstraints;
@@ -17,15 +17,25 @@ import java.awt.Insets;
  */
 public class MenuSubPanel extends AbstractSubPanel {
 
+    private final MenuSubController menuSubController;
+
     /**
-     * construct the panel to add at the mainView.
+     * constructor to set the sub controller of the sub panel.
+     * 
+     * @param menuSubController sub controller
+     */
+    public MenuSubPanel(final MenuSubController menuSubController) {
+        this.menuSubController = menuSubController;
+    }
+
+    /**
+     * {@inheritDoc}
      */
     @Override
     public void initComponents() {
         final int verticalInsets = 10;
         final int orizzontalInsets = 20;
         final JPanel panel = new JPanel();
-        final MainController controller = getSubController();
         panel.setLayout(new GridBagLayout());
         final GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -37,26 +47,36 @@ public class MenuSubPanel extends AbstractSubPanel {
         panel.repaint();
         final JButton jbGame = new JButton("Game");
         jbGame.addActionListener((e) -> {
-            controller.setStage(Stage.GAME);
+            menuSubController.setStage(Stage.GAME);
         });
         panel.add(jbGame, gbc);
 
         gbc.gridy = 1;
         final JButton jbShop = new JButton("Shop");
         jbShop.addActionListener((e) -> {
-            controller.setStage(Stage.STORE);
+            menuSubController.setStage(Stage.STORE);
         });
         panel.add(jbShop, gbc);
 
         gbc.gridy = 2;
+        final JButton jbInvetory = new JButton("Inventory");
+        jbInvetory.addActionListener((e) -> {
+            menuSubController.setStage(Stage.INVENTORY);
+        });
+        panel.add(jbInvetory, gbc);
+
+        gbc.gridy = 3;
         final JButton jbExit = new JButton("Exit");
         jbExit.addActionListener((e) -> {
-            controller.quit();
+            menuSubController.quit();
         });
         panel.add(jbExit, gbc);
         setPanel(panel);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void forceRedraw() {
     }

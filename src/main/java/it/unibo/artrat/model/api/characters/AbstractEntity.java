@@ -1,6 +1,6 @@
 package it.unibo.artrat.model.api.characters;
 
-import it.unibo.artrat.model.api.AbstractGameObject;
+import it.unibo.artrat.model.impl.AbstractGameObject;
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;
 
@@ -49,10 +49,11 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
 
     /**
      * 
-     * @param center
+     * @param center center of the entity boundingbox
+     * @param speed direction
      */
-    public AbstractEntity(final Point center) {
-        this(center, DEFAULT_SIZE, DEFAULT_SIZE, new Vector2d());
+    public AbstractEntity(final Point center, final Vector2d speed) {
+        this(center, DEFAULT_SIZE, DEFAULT_SIZE, speed);
     }
 
     /**

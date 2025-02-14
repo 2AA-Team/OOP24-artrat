@@ -1,11 +1,17 @@
 package it.unibo.artrat.model.api.world;
 
+import java.io.IOException;
+
 /**
- * Class that rappresents house floor.
+ * interface for the floor.
  */
 public interface Floor {
+
     /**
-     * generate the rooms system.
+     * generate a pseudo-random floor as a room matrix.
+     * 
+     * @throws IOException if room generation file doesn't exist
      */
-    void generateMap();
+    void generateFloorSet() throws IOException;
+
 }
