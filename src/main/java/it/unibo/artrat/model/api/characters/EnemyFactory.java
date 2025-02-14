@@ -5,6 +5,8 @@ import it.unibo.artrat.utils.impl.Vector2d;
 
 /**
  * Factory to create enemies.
+ * 
+ * @author Samuele Trapani
  */
 public interface EnemyFactory {
 

@@ -6,6 +6,8 @@ import it.unibo.artrat.utils.impl.Vector2d;
 
 /**
  * Essential implementetion of an entity.
+ * 
+ * @author Samuele Trapani
  */
 public abstract class AbstractEntity extends AbstractGameObject implements Entity {
     private Vector2d speed = new Vector2d();
@@ -50,7 +52,7 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
     /**
      * 
      * @param center center of the entity boundingbox
-     * @param speed direction
+     * @param speed  direction
      */
     public AbstractEntity(final Point center, final Vector2d speed) {
         this(center, DEFAULT_SIZE, DEFAULT_SIZE, speed);

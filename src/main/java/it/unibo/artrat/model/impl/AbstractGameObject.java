@@ -6,6 +6,8 @@ import it.unibo.artrat.utils.impl.Point;
 
 /**
  * Abstract class that implements default instructions.
+ * 
+ * @author Samuele Trapani
  */
 public abstract class AbstractGameObject implements GameObject {
     /**

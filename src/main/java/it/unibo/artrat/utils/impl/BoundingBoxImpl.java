@@ -4,6 +4,8 @@ import it.unibo.artrat.utils.api.BoundingBox;
 
 /**
  * Class of bounding box as a rectangle.
+ * 
+ * @author Samuele Trapani
  */
 public class BoundingBoxImpl implements BoundingBox {
     private Point topLeft;

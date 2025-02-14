@@ -5,6 +5,8 @@ import it.unibo.artrat.utils.impl.Point;
 
 /**
  * Bounding box interface used to create different boxes for game object bounds.
+ * 
+ * @author Samuele Trapani
  */
 public interface BoundingBox {
 

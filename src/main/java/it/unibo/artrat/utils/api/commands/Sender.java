@@ -2,6 +2,8 @@ package it.unibo.artrat.utils.api.commands;
 
 /**
  * Command notification interface.
+ * 
+ * @author Samuele Trapani
  */
 public interface Sender {
     /**

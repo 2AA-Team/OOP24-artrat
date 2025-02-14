@@ -1,13 +1,15 @@
 package it.unibo.artrat.model.impl.characters;
 
+import it.unibo.artrat.model.api.characters.AbstractEntity;
 import it.unibo.artrat.model.api.characters.Enemy;
 import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;
-import it.unibo.artrat.model.api.characters.AbstractEntity;
 
 /**
  * New hypothetical enemies.
+ * 
+ * @author Samuele Trapani
  */
 public final class AdvancedEnemy extends AbstractEntity implements Enemy {
 
