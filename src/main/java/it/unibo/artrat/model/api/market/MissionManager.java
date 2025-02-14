@@ -1,8 +1,6 @@
 package it.unibo.artrat.model.api.market;
 
 import java.util.List;
-import java.util.Locale.Category;
-
 import it.unibo.artrat.model.api.market.Mission.MissionCategory;
 import it.unibo.artrat.model.impl.market.AdvancedMission;
 import it.unibo.artrat.model.impl.market.BaseMission;

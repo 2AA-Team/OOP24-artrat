@@ -14,22 +14,4 @@ public class MissionFactoryImpl implements MissionFactory{
     public BaseMission createBaseMission(){
         return null; //new BaseMission();
     }
-
-    //          DA IMPLEMENTARE
-    /*
-    @Override
-    public TimeChallengeMission createtimeChallengeMission() {
-        return null;//new TimeChallengeMission();
-    }
-
-    @Override
-    public GatheringMission createGatheringMission() {
-       return null;//new GatheringMission();
-    }
-
-    @Override
-    public StealthMission createStealthMission() {
-        return null; new StealthMission();
-    }
-*/
 }

@@ -65,7 +65,6 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
                     }
                 }
             });
-
             itemPanel.add(itemButton);
             itemPanel.add(useButton);
             myJPanel.add(itemPanel);

@@ -10,7 +10,6 @@ public abstract class AbstractMissionCreator implements Mission{
     private final String name;
     private final String descr;
     private final double reward;
-   // private final T category;
 
     public AbstractMissionCreator(String name, String descr, double reward){
         this.name = name;

@@ -55,7 +55,6 @@ public class MissionManagerImpl implements MissionManager{
             .collect(Collectors.toList());
     } 
 
-    // IL FILTRAGGIO SI PUO' GENERALIZZARE
     @Override
     public List<BaseMission> filterBaseMissions(){
         return this.missions.stream()
@@ -64,7 +63,6 @@ public class MissionManagerImpl implements MissionManager{
             .collect(Collectors.toList());
     }
 
-    //PER ADVANCE MISSION POI AGGIUNGERE IL FATTO CHE AD OGNI CLICK TI FILTRA CATEGORIE DIVERSE (opzionale mettere una tendina)
     @Override
     public List<AdvancedMission> filterAdvancedMissions(){
         return this.missions.stream()

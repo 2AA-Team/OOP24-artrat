@@ -3,13 +3,14 @@ package it.unibo.artrat.model.impl.market;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import it.unibo.artrat.model.api.inventory.*;
 import it.unibo.artrat.model.api.market.ItemManager;
-import it.unibo.artrat.model.api.market.Mission;
 
+/**
+ *  Item manager
+ */
 public class ItemManagerImpl implements ItemManager{
     private List<Item> items = new ArrayList<>();
 

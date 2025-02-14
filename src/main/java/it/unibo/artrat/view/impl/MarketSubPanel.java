@@ -4,17 +4,19 @@ import java.awt.*;
 import javax.swing.*;
 
 import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
+import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.model.impl.Stage;
+import it.unibo.artrat.view.api.MarketView;
 
 /** 
  *  Market View, here you can buy items (powerup and consumable), and sort them in base of price, level and type.  
  *  @author Manuel Benagli
 */
-public class MarketViewImpl extends JFrame{   
+public class MarketSubPanel extends AbstractSubPanel implements MarketView{   
     private final StoreSubController contr;
     private final JPanel marketPanel = new JPanel();
 
-    public MarketViewImpl(StoreSubController contr){    
+    public MarketSubPanel(StoreSubController contr){    
         this.contr = contr;
     }
 
@@ -22,15 +24,29 @@ public class MarketViewImpl extends JFrame{
         return JOptionPane.showConfirmDialog(marketPanel, text, name, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
     }
 
-    public void initComponents(){
-        //per il filter e il sort posso anche usare un menù a tendina, OPPURE GROUP LAYOUT
-        //SONO BOTTONI PROVVISORI
+    @Override
+    public void showMessage(final String message, final String name){
+        JOptionPane.showMessageDialog(marketPanel, message, name, JOptionPane.INFORMATION_MESSAGE);
+        marketPanel.revalidate();
+        marketPanel.repaint();
+    }
+    
+    @Override
+    public void initComponents() {
+        marketPanel.setLayout(new BorderLayout(8,8));
+        setShop();
+    }
+
+    @Override
+    protected void forceRedraw(){
+        //da fare
+    }
+
+    private void setShop(){
         final JButton filterButton = new JButton("Filter");
         final JButton sortButton = new JButton("Sort");
-        final JButton searchItemButton = new JButton();     //serve l'apposito per fare la search
+        final JButton searchItemButton = new JButton("");     //serve l'apposito per fare la search
         final JButton showMission = new JButton("M");
-
-        marketPanel.setLayout(new BorderLayout(7,7));     
 
         for(var purchItem : contr.purchasableItems()){
             final JPanel purchItemPanel = new JPanel(new GridLayout(1,2,5,1));      //da capire se usare un flowLay o grid
@@ -48,21 +64,20 @@ public class MarketViewImpl extends JFrame{
 
             itemButton.addActionListener(e->{
                 contr.getDescription(purchItem);
-                contr.getTypeName(purchItem);
+               // contr.getTypeName(purchItem);
             });
 
             buyItem.addActionListener(e ->{
-                if(purchItem.getPrice() >= purchItem.getPrice()){  //da cambiare
-                    if(toConfirm("Vuoi davvero acquistare?", "Compra")){
-                        contr.buyItem(purchItem);   //compro l'oggetto
+                if(toConfirm("Vuoi davvero acquistare?", "Compra")){
+                    if(contr.buyItem(purchItem) && purchItem.getType().equals(ItemType.POWERUP)){
+                        marketPanel.remove(purchItemPanel);     //se è un powerup, dato che è una passiva, lo rimuovo dallo shop
+                        forceRedraw();
                     }
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "Hai bisogno di più soldi!","Attenzione" ,JOptionPane.WARNING_MESSAGE);
+                    //poi per out of stock
                 }
             });
         }
-
+        
         final JPanel bottomPan = new JPanel();
         bottomPan.setLayout(new FlowLayout());
         marketPanel.add(bottomPan, BorderLayout.SOUTH);
@@ -72,7 +87,7 @@ public class MarketViewImpl extends JFrame{
         final JButton playAgain = new JButton("Play");
 
         playAgain.addActionListener(e->{
-            if(toConfirm("Do you want to play a new game?", "Esci dallo shop")){
+            if(toConfirm("Do you want to play a new game?", "Nuova partita")){
                 contr.setStage(Stage.GAME);
             }
         });
@@ -82,7 +97,5 @@ public class MarketViewImpl extends JFrame{
                 //o cambio panel o no
             }
         });
-
-        this.setVisible(true);
     }
 }

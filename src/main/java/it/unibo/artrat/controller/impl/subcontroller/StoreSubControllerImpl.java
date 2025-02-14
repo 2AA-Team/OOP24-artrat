@@ -1,17 +1,19 @@
 package it.unibo.artrat.controller.impl.subcontroller;
 
 import java.util.List;
-
 import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
 import it.unibo.artrat.model.api.inventory.Item;
+import it.unibo.artrat.view.api.MarketView;
+import it.unibo.artrat.view.impl.MarketSubPanel;
 
 /**
  * implementation of the sub controller for the store.
  */
 public class StoreSubControllerImpl extends AbstractSubController implements StoreSubController {
 
+    private final MarketView marketView;
     /**
      * constructor to initialize mainController.
      * 
@@ -19,6 +21,7 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
      */
     public StoreSubControllerImpl(final MainControllerImpl mainController) {
         super(mainController);
+        this.marketView = new MarketSubPanel(this);
     }
 
     @Override
@@ -29,22 +32,24 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
 
     @Override
     public boolean buyItem(Item itemToBuy) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buyItem'");
+        if(){
+
+        }
     }
 
     @Override
     public boolean getPlayerCash(){
-        throw new UnsupportedOperationException("Unimplemented method");
+        return this.getModel().getPlayer().getCoin() != null;       //non giusto
     }
+    
     /**
      * 
      * @param passedItem the item that we want the typeName.
      * @return the type name of desired item.
      */
     @Override
-    public String getTypeName(Item passedItem){
-        throw new UnsupportedOperationException("");
+    public String getItemName(Item passedItem){
+        return passedItem.getClass().getSimpleName();
     }
 
     /**
@@ -53,6 +58,20 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
      */
     @Override
     public void getDescription(Item passedItem){
-        throw new UnsupportedOperationException("");
+        marketView.showMessage(this.purchasableItems().stream()
+            .filter(it -> it.equals(passedItem))
+            .map(Item::getDescription)
+            .findAny().get(), "Descrizione oggetto acquistabile");
+    }
+
+    @Override
+    public String getTypeName(Item passedItem) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getItemName'");
+    }
+
+    @Override
+    public double getItemPrice(Item passedItem) {
+        return passedItem.getPrice();
     }
 }
