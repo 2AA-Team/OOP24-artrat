@@ -23,7 +23,7 @@ import it.unibo.artrat.view.impl.MainViewImpl;
 public final class GameEngineImpl implements GameEngine, Sender {
     private final List<Command> commands = new LinkedList<>();
 
-    // TODO: add Room for GameObjects' access.
+    // TODO add Room for GameObjects' access.
     private enum GameStatus {
         STOPPED, RUNNING
     }
