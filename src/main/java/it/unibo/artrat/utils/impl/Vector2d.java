@@ -22,12 +22,12 @@ public final class Vector2d {
     }
 
     /**
-     * Vector default constructor: V(x=1;y=1).
+     * Vector default constructor: V(x=0;y=-1).
      *
      */
     public Vector2d() {
-        this.x = 1;
-        this.y = 1;
+        this.x = 0;
+        this.y = -1;
     }
 
     /**

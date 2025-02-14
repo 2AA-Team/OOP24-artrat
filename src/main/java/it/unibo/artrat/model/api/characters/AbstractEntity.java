@@ -48,6 +48,14 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
     }
 
     /**
+     * 
+     * @param center
+     */
+    public AbstractEntity(final Point center) {
+        this(center, DEFAULT_SIZE, DEFAULT_SIZE, new Vector2d());
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

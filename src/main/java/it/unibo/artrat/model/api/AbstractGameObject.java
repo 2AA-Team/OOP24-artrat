@@ -7,6 +7,7 @@ import it.unibo.artrat.utils.impl.Point;
  * Abstract class that implements default instructions.
  */
 public abstract class AbstractGameObject implements GameObject {
+    public static final double DEFAULT_SIZE = 1;
     private final BoundingBoxImpl hitBox;
 
     /**
@@ -35,6 +36,15 @@ public abstract class AbstractGameObject implements GameObject {
      */
     public AbstractGameObject(final Point center, final double width, final double height) {
         this.hitBox = new BoundingBoxImpl(center, width, height);
+    }
+
+    /**
+     * Abstract GameObject constructor.
+     * 
+     * @param center center of the game object's bounding box
+     */
+    public AbstractGameObject(final Point center) {
+        this.hitBox = new BoundingBoxImpl(center, DEFAULT_SIZE, DEFAULT_SIZE);
     }
 
     /**

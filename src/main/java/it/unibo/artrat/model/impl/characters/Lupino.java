@@ -33,6 +33,15 @@ public class Lupino extends AbstractEntity implements Player {
     }
 
     /**
+     * Player constructor.
+     * 
+     * @param center bounding box center
+     */
+    public Lupino(final Point center) {
+        super(center);
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
