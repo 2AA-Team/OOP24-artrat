@@ -3,6 +3,8 @@ package it.unibo.artrat.controller.impl.subcontroller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.Icon;
+
 import it.unibo.artrat.controller.api.subcontroller.InventorySubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
@@ -67,11 +69,11 @@ public class InventorySubControllerImpl extends AbstractSubController implements
     public String getItemName(Item passedItem) {
         return passedItem.getClass().getSimpleName();
     }
-
+    /*
     private String getTypeName(Item passedItem) {
         return this.getModel().getPlayer().getInventory().getStoredItem().stream().filter(x -> x.equals(passedItem))
         .map(x -> x.getType().name()).findAny().get();
-    }
+    }*/
 
       /**
      * {@inheritDoc}
@@ -80,6 +82,12 @@ public class InventorySubControllerImpl extends AbstractSubController implements
     public void obtainDescription(Item passedItem) {
         this.inventoryView.displayMessage(this.getModel().getPlayer().getInventory().getStoredItem().stream()
         .filter(x -> x.equals(passedItem)).map(Item::getDescription).findAny().get() + "\nTYPE: " +getTypeName(passedItem), "Descrizione Oggetto");
+    }
+
+    @Override
+    public Icon getTypeName(Item item) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getTypeName'");
     }
 
 }

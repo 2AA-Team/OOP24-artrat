@@ -1,5 +1,6 @@
 package it.unibo.artrat.controller.impl.subcontroller;
 
+import java.util.ArrayList;
 import java.util.List;
 import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
@@ -34,7 +35,7 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
 
     @Override
     public List<Item> purchasableItems() {
-        return this.getModel().getMarket().getPurchItems();
+        return new ArrayList<>(this.getModel().getMarket().getPurchItems());
     }
 
     @Override
@@ -44,12 +45,15 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
         final Market market = this.getModel().getMarket();
         final Inventory inventory = player.getInventory();
         if(market.buyItem(itemToBuy)){
-            inventory.addItem(itemToBuy);
-            player.setInventory(inventory);
-            model.setMarket(new MarketImpl());
-            model.setPlayer(new PlayerImpl());
-            this.updateCentralizeModel(new ModelImpl(model));
-            return true;
+            if(player.getCoin().getCurrentAmount() >= itemToBuy.getPrice()){
+                player.getCoin().spendCoins(itemToBuy.getPrice());
+                inventory.addItem(itemToBuy);
+                player.setInventory(inventory);
+                model.setMarket(new MarketImpl());
+                model.setPlayer(new PlayerImpl());
+                this.updateCentralizeModel(new ModelImpl(model));
+                return true;
+            }
         }
         return false;
     }

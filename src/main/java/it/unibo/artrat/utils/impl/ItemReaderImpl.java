@@ -1,7 +1,10 @@
 package it.unibo.artrat.utils.impl;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.utils.api.ItemReader;
@@ -25,6 +28,14 @@ public class ItemReaderImpl implements ItemReader {
     }
 
     /**
+     * @author Manuel Benagli
+     * @return
+     */
+    public List<String> allItemList(){
+
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -41,7 +52,7 @@ public class ItemReaderImpl implements ItemReader {
      */
     @Override
     public String getDescription(final String nameOfItem) {
-        return getSpecificField(nameOfItem, 0);
+        return getSpecificField(nameOfItem, 1);
     }
 
     /**
@@ -49,7 +60,7 @@ public class ItemReaderImpl implements ItemReader {
      */
     @Override
     public double getPrice(final String nameOfItem) {
-        return Double.parseDouble(getSpecificField(nameOfItem, 1));
+        return Double.parseDouble(getSpecificField(nameOfItem, 2));
     }
 
     /**
@@ -57,7 +68,7 @@ public class ItemReaderImpl implements ItemReader {
      */
     @Override
     public ItemType getItemType(final String nameOfItem) {
-        switch (getSpecificField(nameOfItem, 2)) {
+        switch (getSpecificField(nameOfItem, 3)) {
             case "CONSUMABLE":
                 return ItemType.CONSUMABLE;
             case "POWERUP":
@@ -66,7 +77,6 @@ public class ItemReaderImpl implements ItemReader {
                 break;
         }
         return null;
-<<<<<<< HEAD
     }
     
     /*
@@ -76,7 +86,4 @@ public class ItemReaderImpl implements ItemReader {
     devo passare una lista intera 
     publico
     */
-=======
-    }    
->>>>>>> origin/didonato-develop
 }
