@@ -1,0 +1,4 @@
+MULTIPLIERBOOSTER: ["Questo consumabile ti permetterà di ottenere un boost al tuo multiplier attuale fino a 4 volte in più","1000.00","POWERUP"]
+LUCKYTICKET: ["Questo è un biglietto vincente della lotteria, che ci fa qui? Gratta per vincere fino a 1000 soldi!!", "700.00", "POWERUP"]
+MAGICBACKPACK : ["Uno zaino con una strana aura intorno, prendilo e magari cambia il tuo vecchio", "100.00", "CONSUMBALE"]
+MYSTERIOUSTAFF : ["Woah, ma questa è una bacchetta magica, prova ad agitarla", "2000.00", "CONSUMABLE"]

@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import it.unibo.artrat.model.api.AbstractGameObject;
+import it.unibo.artrat.model.impl.AbstractGameObject;
 import it.unibo.artrat.model.api.world.Room;
 import it.unibo.artrat.model.api.world.roomgeneration.ObjectInsertionStrategy;
 import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;

@@ -1,7 +1,7 @@
 package it.unibo.artrat.model.api.world.roomgeneration;
 
 import java.util.Set;
-import it.unibo.artrat.model.api.AbstractGameObject;
+import it.unibo.artrat.model.impl.AbstractGameObject;
 
 /**
  * strategy for a single room generation.

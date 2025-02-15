@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-import it.unibo.artrat.model.api.AbstractGameObject;
+import it.unibo.artrat.model.impl.AbstractGameObject;
 import it.unibo.artrat.model.api.world.Floor;
 import it.unibo.artrat.model.api.world.Room;
 import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;
@@ -34,9 +34,9 @@ public class FloorImpl implements Floor {
      * @param rl resource loader
      * @throws IOException caused by generation from file
      */
-    public FloorImpl(final ResourceLoader<String, Integer> rl) throws IOException {
-        maxFloorSize = rl.getConfig("MAX_FLOOR_SIZE");
-        maxRoomSize = rl.getConfig("MAX_ROOM_SIZE");
+    public FloorImpl(final ResourceLoader<String, Double> rl) throws IOException {
+        maxFloorSize = (int) Math.floor(rl.getConfig("MAX_FLOOR_SIZE"));
+        maxRoomSize = (int) Math.floor(rl.getConfig("MAX_ROOM_SIZE"));
         if (maxFloorSize <= 1 || maxRoomSize <= 4) {
             throw new IllegalStateException("Floor or Room size has been modified.");
         }

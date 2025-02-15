@@ -3,7 +3,7 @@ package it.unibo.artrat.model.impl.world.roomgeneration;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
-import it.unibo.artrat.model.api.AbstractGameObject;
+import it.unibo.artrat.model.impl.AbstractGameObject;
 import it.unibo.artrat.model.api.GameObjectFactory;
 import it.unibo.artrat.model.api.world.roomgeneration.ObjectInsertionStrategy;
 import it.unibo.artrat.model.impl.GameObjectFactoryImpl;

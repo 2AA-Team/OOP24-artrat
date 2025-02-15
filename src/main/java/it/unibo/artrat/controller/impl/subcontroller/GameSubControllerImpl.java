@@ -25,7 +25,7 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
      * @param rl             resource loader
      * @throws IOException if the resource loader fails
      */
-    public GameSubControllerImpl(final MainControllerImpl mainController, final ResourceLoader<String, Integer> rl)
+    public GameSubControllerImpl(final MainControllerImpl mainController, final ResourceLoader<String, Double> rl)
             throws IOException {
         super(mainController);
         floor = new FloorImpl(rl);

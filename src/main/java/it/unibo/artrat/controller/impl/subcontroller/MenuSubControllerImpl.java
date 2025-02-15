@@ -17,4 +17,5 @@ public class MenuSubControllerImpl extends AbstractSubController implements Menu
     public MenuSubControllerImpl(final MainControllerImpl mainController) {
         super(mainController);
     }
+
 }

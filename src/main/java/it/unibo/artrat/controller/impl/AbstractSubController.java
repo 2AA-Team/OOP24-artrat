@@ -1,12 +1,14 @@
 package it.unibo.artrat.controller.impl;
 
 import it.unibo.artrat.controller.api.SubController;
+import it.unibo.artrat.model.api.Model;
+import it.unibo.artrat.model.impl.ModelImpl;
 import it.unibo.artrat.model.impl.Stage;
 
 /**
  * abstract class that implements subcontroller.
  */
-public abstract class AbstractSubController implements SubController {
+public abstract  class AbstractSubController implements SubController {
     private final MainControllerImpl mainController;
 
     /**
@@ -25,6 +27,23 @@ public abstract class AbstractSubController implements SubController {
     public void setStage(final Stage newStage) {
         mainController.setStage(newStage);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Model getModel() {
+        return new ModelImpl(this.mainController.getModel());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateCentralizeModel(final Model model) {
+        mainController.setModel(new ModelImpl(model));
+    }
+
 
     /**
      * {@inheritDoc}

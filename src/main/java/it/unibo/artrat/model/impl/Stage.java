@@ -17,5 +17,9 @@ public enum Stage {
     /**
      * game store.
      */
-    STORE
+    STORE,
+    /**
+     * inventory of the player.
+     */
+    INVENTORY
 }

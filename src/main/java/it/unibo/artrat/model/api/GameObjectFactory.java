@@ -1,5 +1,7 @@
 package it.unibo.artrat.model.api;
 
+import it.unibo.artrat.model.impl.AbstractGameObject;
+
 /**
  * interface for the game object factory.
  */

@@ -2,7 +2,7 @@ package it.unibo.artrat.model.api.world;
 
 import java.util.Set;
 
-import it.unibo.artrat.model.api.AbstractGameObject;
+import it.unibo.artrat.model.impl.AbstractGameObject;
 
 /**
  * interface that describes the room.

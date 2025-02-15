@@ -90,6 +90,9 @@ public class MainViewImpl implements MainView {
             case STORE:
                 subPanel = new EmptySubPanel(controller.getControllerManager().getMenuSubController());
                 break;
+            case INVENTORY:
+                subPanel = new InventorySubPanel(controller.getControllerManager().getInventorySubController());
+                break;
             default:
                 throw new IllegalStateException();
         }

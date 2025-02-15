@@ -9,13 +9,23 @@ import it.unibo.artrat.utils.impl.Vector2d;
 public interface EnemyFactory {
 
     /**
-     * FactoryMethod for enemies creation.
+     * FactoryMethod for base enemies creation.
      * 
-     * @param bottomLeft bottom left corner of the bounding box
-     * @param topRight   top right corner the bounding box
-     * @param v          enemy vector
+     * @param topLeft     top left corner of the bounding box
+     * @param bottomRight bottom right corner the bounding box
+     * @param v           enemy vector
      * @return created enemy
      */
-    Enemy createEnemy(Point bottomLeft, Point topRight, Vector2d v);
+    Enemy createBaseEnemy(Point topLeft, Point bottomRight, Vector2d v);
+
+    /**
+     * FactoryMethod for advanced enemies creation.
+     * 
+     * @param topLeft     top left corner of the bounding box
+     * @param bottomRight bottom right corner the bounding box
+     * @param v           enemy vector
+     * @return created enemy
+     */
+    Enemy createAdvancedEnemy(Point topLeft, Point bottomRight, Vector2d v);
 
 }

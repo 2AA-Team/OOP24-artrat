@@ -7,6 +7,8 @@ import java.util.List;
 import it.unibo.artrat.app.api.GameEngine;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.controller.api.SubControllerManager;
+import it.unibo.artrat.model.api.Model;
+import it.unibo.artrat.model.impl.ModelImpl;
 import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.view.api.MainView;
 
@@ -18,9 +20,10 @@ import it.unibo.artrat.view.api.MainView;
 public class MainControllerImpl implements MainController {
 
     private Stage currentStage;
-    private final List<MainView> views = new ArrayList<>(0);
+    private final List<MainView> views;
     private final GameEngine engine;
     private final SubControllerManager subControllerManager;
+    private Model model;
 
     /**
      * MainController constructor.
@@ -32,7 +35,9 @@ public class MainControllerImpl implements MainController {
     public MainControllerImpl(final GameEngine engine) throws IOException {
         this.currentStage = Stage.MENU;
         this.engine = engine;
-        this.subControllerManager = new SubControllerManagerImpl(this, null);
+        this.views = new ArrayList<>();
+        this.model = new ModelImpl();
+        this.subControllerManager = new SubControllerManagerImpl(this, engine.getResourceLoader());
     }
 
     /**
@@ -53,14 +58,6 @@ public class MainControllerImpl implements MainController {
     public void quit() {
         engine.forceStop();
         Runtime.getRuntime().exit(1);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void update() {
-
     }
 
     /**
@@ -95,6 +92,26 @@ public class MainControllerImpl implements MainController {
     @Override
     public SubControllerManager getControllerManager() {
         return subControllerManager;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Model getModel() {
+        return new ModelImpl(this.model);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setModel(final Model model) {
+        if (model != null) {
+            this.model = new ModelImpl(model);
+        } else {
+            throw new IllegalArgumentException("The new istance of model passed by the controller is null");
+        }
     }
 
 }

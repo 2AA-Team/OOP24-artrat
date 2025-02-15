@@ -22,6 +22,7 @@ import it.unibo.artrat.view.impl.MainViewImpl;
 public final class GameEngineImpl implements GameEngine, Sender {
     private final List<Command> commands = new LinkedList<>();
 
+    // TODO add Room for GameObjects' access.
     private enum GameStatus {
         STOPPED, RUNNING
     }
@@ -83,7 +84,7 @@ public final class GameEngineImpl implements GameEngine, Sender {
                 delta += (currentTime - lastTime) / drawInterval;
                 lastTime = currentTime;
                 if (delta >= 1) {
-                    this.commands.stream().forEach(Command::execute);
+                    // this.commands.forEach(Command::execute););
                     this.commands.clear();
                     this.update();
                     this.redraw();

@@ -1,9 +1,11 @@
 package it.unibo.artrat.model.impl;
 
-import it.unibo.artrat.model.api.AbstractGameObject;
 import it.unibo.artrat.model.api.GameObjectFactory;
 import it.unibo.artrat.utils.impl.Point;
 
+/**
+ * An implementation of GameObjectFactory. 
+ */
 public class GameObjectFactoryImpl implements GameObjectFactory {
 
     /**

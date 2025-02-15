@@ -22,12 +22,12 @@ public final class Vector2d {
     }
 
     /**
-     * Vector default constructor: V(x=1;y=1).
+     * Vector default constructor: V(x=0;y=-1).
      *
      */
     public Vector2d() {
-        this.x = 1;
-        this.y = 1;
+        this.x = 0;
+        this.y = -1;
     }
 
     /**
@@ -91,5 +91,14 @@ public final class Vector2d {
      */
     public void setY(final double y) {
         this.y = y;
+    }
+
+    /**
+     * Get normalized vector.
+     * 
+     * @return normalized vector
+     */
+    public Vector2d normalize() {
+        return new Vector2d(this.getX() / this.module(), this.getY() / this.module());
     }
 }
