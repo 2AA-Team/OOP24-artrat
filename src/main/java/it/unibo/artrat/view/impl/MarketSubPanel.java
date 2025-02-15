@@ -69,21 +69,19 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView{
         marketPanel.add(upperJPanel, BorderLayout.NORTH);
 
         filterButton.addActionListener(e ->{
-            /*
-             * da fare
-             */
+            contr.filterCategory();
         });
 
         sortButton.addActionListener(e -> {
-            /*
-             * da fare 
-             */
+            if(toConfirm("Do you want to sort the item in base of their price?", "Sorting")){
+                int choice = JOptionPane.showConfirmDialog(null,"creasing?", "Ordinamento Prezzi", 
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                contr.sorting(choice);
+            }
         });
 
         searchItemButton.addActionListener(e -> {
-            /*
-             * da fare
-             */
+            contr.searchItem();
         });
 
         playAgain.addActionListener(e->{

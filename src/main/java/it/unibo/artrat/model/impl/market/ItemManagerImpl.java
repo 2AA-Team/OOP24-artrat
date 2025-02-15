@@ -7,42 +7,45 @@ import java.util.stream.Collectors;
 
 import it.unibo.artrat.model.api.inventory.*;
 import it.unibo.artrat.model.api.market.ItemManager;
+import it.unibo.artrat.model.api.market.Market;
 
 /**
  *  Item manager
  */
 public class ItemManagerImpl implements ItemManager{
-    private List<Item> items = new ArrayList<>();
+    
+    private final Market market;
 
-    public ItemManagerImpl(List<Item> items){
-        this.items = items;
+    // Costruttore per collegare il Market
+    public ItemManagerImpl(Market market) {
+        this.market = market;
     }
 
     @Override
     public List<Item> sortItemPrice(){
-        return items.stream()
+        return market.getPurchItems().stream()
             .sorted(Comparator.comparing(Item::getPrice))
             .collect(Collectors.toList());
     }
 
     @Override
     public List<Item> reverseSortItemPrice(){
-        return items.stream()
+        return market.getPurchItems().stream()
             .sorted(Comparator.comparing(Item::getPrice).reversed())
             .collect(Collectors.toList());
     }
 
     @Override
-    public List<Item> filterConsumableItems(){
-        return items.stream()
-            .filter(it -> it.getType().equals(ItemType.CONSUMABLE))
+    public List<Item> filterItems(ItemType itemType){
+        return market.getPurchItems().stream()
+            .filter(it -> it.getType().equals(itemType))
             .collect(Collectors.toList());
     }
 
     @Override
-    public List<Item> filterPowerupItems(){
-        return items.stream()
-            .filter(it -> it.getType() == ItemType.POWERUP)
+    public List<Item> searchItem(Item item){
+        return market.getPurchItems().stream()
+            .filter(it -> it.getDescription().equals(item.getDescription()))
             .collect(Collectors.toList());
     }
 }

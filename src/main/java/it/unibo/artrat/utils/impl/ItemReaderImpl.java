@@ -33,7 +33,7 @@ public class ItemReaderImpl implements ItemReader {
      */
     @Override
     public List<String> getAllItemsList(){
-        return valueOfYaml.getConfig("");   //prende tutto lo yaml
+        return valueOfYaml.getConfig("");   //prende tutto lo yaml, è sbagliato
     }
 
     /**

@@ -44,18 +44,42 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
         final Player player = model.getPlayer();
         final Market market = this.getModel().getMarket();
         final Inventory inventory = player.getInventory();
-        if(market.buyItem(itemToBuy)){
+       /*   if(market.buyItem(itemToBuy)){*/
             if(player.getCoin().getCurrentAmount() >= itemToBuy.getPrice()){
                 player.getCoin().spendCoins(itemToBuy.getPrice());
-                inventory.addItem(itemToBuy);
+                inventory.addItem(itemToBuy);       //aggiungo l'item all'inventario
                 player.setInventory(inventory);
                 model.setMarket(new MarketImpl());
                 model.setPlayer(new PlayerImpl());
                 this.updateCentralizeModel(new ModelImpl(model));
                 return true;
             }
-        }
+        /* }*/
         return false;
+    }
+
+    @Override
+    public void sorting(int choice){
+       final Model model = this.getModel();
+       final Market market = this.getModel().getMarket();
+
+       if(choice == 1){
+            
+       }
+       else{
+
+       }
+       model.setMarket(new MarketImpl());
+    }
+
+    @Override
+    public void filterCategory(){
+
+    }
+
+    @Override
+    public void searchItem(){
+
     }
 
     @Override

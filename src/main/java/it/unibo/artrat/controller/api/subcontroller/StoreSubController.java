@@ -37,4 +37,9 @@ public interface StoreSubController extends SubController{
     String getTypeName(Item passedItem);
 
     void getDescription(Item passedItem);
+
+    void sorting(int choice);
+    void filterCategory();
+    void searchItem();
+
 }
