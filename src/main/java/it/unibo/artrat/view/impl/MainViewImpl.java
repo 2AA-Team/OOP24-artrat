@@ -13,7 +13,6 @@ import java.awt.Toolkit;
  */
 public class MainViewImpl implements MainView {
 
-    private Stage currentStage;
     private MainController controller;
     private AbstractSubPanel subPanel;
 
@@ -28,7 +27,6 @@ public class MainViewImpl implements MainView {
     public MainViewImpl(final double width, final double heigth) {
         frame.setSize((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),
                 (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * heigth));
-        this.currentStage = Stage.MENU;
         this.subPanel = new EmptySubPanel();
         this.controller = null;
     }
@@ -55,16 +53,7 @@ public class MainViewImpl implements MainView {
      */
     @Override
     public void setStage(final Stage currentStage) {
-        this.currentStage = currentStage;
-        switchToCurrentPanel();
-    }
-
-    /**
-     * set up the setted stage.
-     */
-    private void switchToCurrentPanel() {
-        reconduceFromStage();
-        frame.revalidate();
+        this.controller.setStage(currentStage);
     }
 
     /**
@@ -80,7 +69,7 @@ public class MainViewImpl implements MainView {
      */
     @Override
     public void reconduceFromStage() {
-        switch (currentStage) {
+        switch (this.controller.getStage()) {
             case MENU:
                 subPanel = new MenuSubPanel(controller.getControllerManager().getMenuSubController());
                 break;
@@ -97,5 +86,6 @@ public class MainViewImpl implements MainView {
                 throw new IllegalStateException();
         }
         frame.setContentPane(subPanel.getPanel());
+        frame.revalidate();
     }
 }

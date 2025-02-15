@@ -6,8 +6,6 @@ import java.util.Set;
 import it.unibo.artrat.controller.api.subcontroller.GameSubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
-import it.unibo.artrat.model.api.world.Floor;
-import it.unibo.artrat.model.impl.world.FloorImpl;
 import it.unibo.artrat.utils.api.ResourceLoader;
 import it.unibo.artrat.utils.impl.Point;
 
@@ -15,8 +13,6 @@ import it.unibo.artrat.utils.impl.Point;
  * sub controller for the game.
  */
 public class GameSubControllerImpl extends AbstractSubController implements GameSubController {
-
-    private Floor floor;
 
     /**
      * constructor to initialize mainController.
@@ -28,7 +24,6 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
     public GameSubControllerImpl(final MainControllerImpl mainController, final ResourceLoader<String, Double> rl)
             throws IOException {
         super(mainController);
-        floor = new FloorImpl(rl);
     }
 
     /**

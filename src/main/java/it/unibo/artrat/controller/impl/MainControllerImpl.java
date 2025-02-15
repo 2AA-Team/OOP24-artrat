@@ -72,7 +72,7 @@ public class MainControllerImpl implements MainController {
             engine.forceStop();
         }
         for (final MainView mainView : views) {
-            mainView.setStage(currentStage);
+            mainView.reconduceFromStage();
         }
     }
 
@@ -112,6 +112,14 @@ public class MainControllerImpl implements MainController {
         } else {
             throw new IllegalArgumentException("The new istance of model passed by the controller is null");
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Stage getStage() {
+        return currentStage;
     }
 
 }

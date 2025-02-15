@@ -48,6 +48,7 @@ public final class GameEngineImpl implements GameEngine, Sender {
     public GameEngineImpl() throws IOException {
         this.status = GameStatus.STOPPED;
         this.resourceLoader = new ResourceLoaderImpl<>();
+        this.initiateResources();
         mainController = new MainControllerImpl(this);
     }
 
@@ -61,12 +62,9 @@ public final class GameEngineImpl implements GameEngine, Sender {
 
     @Override
     public void run() {
-        if (!initiateResources()) {
-            Runtime.getRuntime().exit(1);
-        }
         mainController.addMainView(new MainViewImpl(
-                (double) resourceLoader.getConfig("MENU_WIDTH"),
-                (double) resourceLoader.getConfig("MENU_HEIGHT")));
+                resourceLoader.getConfig("MENU_WIDTH"),
+                resourceLoader.getConfig("MENU_HEIGHT")));
         mainLoop();
     }
 

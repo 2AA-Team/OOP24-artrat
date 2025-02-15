@@ -33,7 +33,7 @@ public final class ResourceLoaderImpl<I, O> implements ResourceLoader<I, O> {
         if (ob != null) {
             return obj.get(conf);
         } else {
-            throw new IllegalStateException();
+            throw new IllegalStateException("This conf doesn't exist.");
         }
     }
 }

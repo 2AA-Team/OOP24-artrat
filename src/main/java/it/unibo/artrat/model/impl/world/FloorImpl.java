@@ -24,8 +24,8 @@ public class FloorImpl implements Floor {
     private Set<AbstractGameObject> floorEnemies = new HashSet<>();
     private Set<AbstractGameObject> floorValues = new HashSet<>();
     private boolean[][] floorMap;
-    private final int maxFloorSize;
-    private final int maxRoomSize;
+    private final double maxFloorSize;
+    private final double maxRoomSize;
 
     /**
      * constructor that set the configuration file path.
@@ -35,8 +35,8 @@ public class FloorImpl implements Floor {
      * @throws IOException caused by generation from file
      */
     public FloorImpl(final ResourceLoader<String, Double> rl) throws IOException {
-        maxFloorSize = (int) Math.floor(rl.getConfig("MAX_FLOOR_SIZE"));
-        maxRoomSize = (int) Math.floor(rl.getConfig("MAX_ROOM_SIZE"));
+        maxFloorSize = rl.getConfig("MAX_FLOOR_SIZE");
+        maxRoomSize = rl.getConfig("MAX_ROOM_SIZE");
         if (maxFloorSize <= 1 || maxRoomSize <= 4) {
             throw new IllegalStateException("Floor or Room size has been modified.");
         }
@@ -74,8 +74,8 @@ public class FloorImpl implements Floor {
         floorStructure = new HashSet<>();
         floorEnemies = new HashSet<>();
         floorValues = new HashSet<>();
-        final int floorSize = RANDOM.nextInt(1, this.maxFloorSize);
-        final int roomSize = RANDOM.nextInt(5, this.maxRoomSize);
+        final int floorSize = RANDOM.nextInt(1, (int) this.maxFloorSize);
+        final int roomSize = RANDOM.nextInt(5, (int) this.maxRoomSize);
         this.generateRoomsStructure(floorSize);
         this.generateEffectiveRooms(roomSize);
     }
