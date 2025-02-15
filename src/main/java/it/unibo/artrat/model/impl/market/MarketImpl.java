@@ -8,6 +8,7 @@ import java.util.List;
 import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.model.api.market.Market;
+import it.unibo.artrat.model.impl.inventory.ItemFactoryImpl;
 import it.unibo.artrat.utils.api.ItemReader;
 
 public class MarketImpl implements Market{    
@@ -23,9 +24,9 @@ public class MarketImpl implements Market{
 
 
     private final List<Item> itemsToBuy;
-    private final String descr;
-    private final double price;
-    private final ItemType type;
+    private String descr;
+    private double price;
+    private ItemType type;
 
     public MarketImpl(){
         this.itemsToBuy = new ArrayList<>();
@@ -34,7 +35,7 @@ public class MarketImpl implements Market{
     public MarketImpl(ItemReader itemReader) throws IOException {
         this.itemsToBuy = new ArrayList<>();
         itemReader.readFromItemFile(itemPath);
-        for (String itemName : itemReader.getList()){
+        for (String itemName : itemReader.getAllItemsList()){
             this.descr = itemReader.getDescription(itemName);
             this.price = itemReader.getPrice(itemName);
             this.type = itemReader.getItemType(itemName);

@@ -31,8 +31,9 @@ public class ItemReaderImpl implements ItemReader {
      * @author Manuel Benagli
      * @return
      */
-    public List<String> allItemList(){
-
+    @Override
+    public List<String> getAllItemsList(){
+        return valueOfYaml.getConfig("");   //prende tutto lo yaml
     }
 
     /**
