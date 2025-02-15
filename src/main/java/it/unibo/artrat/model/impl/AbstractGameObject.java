@@ -1,6 +1,7 @@
 package it.unibo.artrat.model.impl;
 
 import it.unibo.artrat.model.api.GameObject;
+import it.unibo.artrat.utils.api.BoundingBox;
 import it.unibo.artrat.utils.impl.BoundingBoxImpl;
 import it.unibo.artrat.utils.impl.Point;
 
@@ -80,6 +81,25 @@ public abstract class AbstractGameObject implements GameObject {
      */
     public void movedPosition(final int x, final int y) {
         this.hitBox.setCenter(new Point(hitBox.getCenter().getX() + x, hitBox.getCenter().getY() + y));
+    }
+
+    /**
+     * Get current bounding box.
+     * 
+     * @return bounding box
+     */
+    public BoundingBox getBoundingBox() {
+        return new BoundingBoxImpl(this.hitBox.getTopLeft(), this.hitBox.getBottomRight());
+    }
+
+    /**
+     * Collision check with other bounding box.
+     * 
+     * @param box
+     * @return true if colliding, false otherwise
+     */
+    public boolean isColliding(final BoundingBox box) {
+        return this.hitBox.isColliding(box);
     }
 
 }

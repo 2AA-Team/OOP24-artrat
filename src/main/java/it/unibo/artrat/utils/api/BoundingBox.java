@@ -1,6 +1,5 @@
 package it.unibo.artrat.utils.api;
 
-import it.unibo.artrat.utils.impl.BoundingBoxImpl;
 import it.unibo.artrat.utils.impl.Point;
 
 /**
@@ -16,7 +15,7 @@ public interface BoundingBox {
      * @param box box to check collision with
      * @return true if boundingbox is colliding false otherwise.
      */
-    boolean isColliding(BoundingBoxImpl box);
+    boolean isColliding(BoundingBox box);
 
     /**
      * Set the center of the bounding box.

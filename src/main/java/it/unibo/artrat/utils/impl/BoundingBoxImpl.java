@@ -78,7 +78,7 @@ public class BoundingBoxImpl implements BoundingBox {
      * {@inheritDoc}
      */
     @Override
-    public boolean isColliding(final BoundingBoxImpl box) {
+    public boolean isColliding(final BoundingBox box) {
         return !(this.topLeft.getX() > box.getBottomRight().getX()
                 || this.bottomRight.getX() < box.getTopLeft().getX()
                 || this.topLeft.getY() > box.getBottomRight().getY()
