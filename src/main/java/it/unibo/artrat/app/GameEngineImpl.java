@@ -41,11 +41,21 @@ public final class GameEngineImpl implements GameEngine, Sender {
 
     /**
      * Game engine constructor.
+     * 
+     * @throws IOException
      */
-    public GameEngineImpl() {
+    public GameEngineImpl() throws IOException {
         this.status = GameStatus.STOPPED;
         this.resourceLoader = new ResourceLoaderImpl<>();
         mainController = new MainControllerImpl(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ResourceLoader<String, Double> getResourceLoader() {
+        return this.resourceLoader;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package it.unibo.artrat.controller.api;
 
-import it.unibo.artrat.controller.api.subcontroller.FloorSubController;
+import it.unibo.artrat.controller.api.subcontroller.GameSubController;
 import it.unibo.artrat.controller.api.subcontroller.InventorySubController;
 import it.unibo.artrat.controller.api.subcontroller.MenuSubController;
 import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
@@ -10,11 +10,11 @@ import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
  */
 public interface SubControllerManager {
     /**
-     * return controller for the seguent model: floor.
+     * return controller for the effective game.
      * 
-     * @return subController for the floor
+     * @return subController for the game
      */
-    FloorSubController getFloorSubController();
+    GameSubController getGameSubController();
 
     /**
      * return controller for the seguent model: Menu.

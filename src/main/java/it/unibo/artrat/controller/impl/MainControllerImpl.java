@@ -1,5 +1,6 @@
 package it.unibo.artrat.controller.impl;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,11 +27,12 @@ public class MainControllerImpl implements MainController {
      * set the current Stage to the initial menu
      * 
      * @param engine game engine.
+     * @throws IOException
      */
-    public MainControllerImpl(final GameEngine engine) {
+    public MainControllerImpl(final GameEngine engine) throws IOException {
         this.currentStage = Stage.MENU;
         this.engine = engine;
-        this.subControllerManager = new SubControllerManagerImpl(this);
+        this.subControllerManager = new SubControllerManagerImpl(this, null);
     }
 
     /**

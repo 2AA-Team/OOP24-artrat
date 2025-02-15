@@ -13,7 +13,6 @@ import it.unibo.artrat.model.impl.world.RoomImpl.RoomBuilder;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationEmpty;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationFile;
 import it.unibo.artrat.utils.api.ResourceLoader;
-import it.unibo.artrat.utils.impl.ResourceLoaderImpl;
 
 /**
  * implementation of interface floor.
@@ -21,9 +20,9 @@ import it.unibo.artrat.utils.impl.ResourceLoaderImpl;
 public class FloorImpl implements Floor {
 
     private static final Random RANDOM = new Random();
-    private Set<AbstractGameObject> roomStructure = new HashSet<>();
-    private Set<AbstractGameObject> roomEnemies = new HashSet<>();
-    private Set<AbstractGameObject> roomValues = new HashSet<>();
+    private Set<AbstractGameObject> floorStructure = new HashSet<>();
+    private Set<AbstractGameObject> floorEnemies = new HashSet<>();
+    private Set<AbstractGameObject> floorValues = new HashSet<>();
     private boolean[][] floorMap;
     private final int maxFloorSize;
     private final int maxRoomSize;
@@ -32,12 +31,10 @@ public class FloorImpl implements Floor {
      * constructor that set the configuration file path.
      * config file is used to get stantard values.
      * 
-     * @param configPath configuration file path
+     * @param rl resource loader
      * @throws IOException caused by generation from file
      */
-    public FloorImpl(final String configPath) throws IOException {
-        final ResourceLoader<String, Integer> rl = new ResourceLoaderImpl<>();
-        rl.setConfigPath(configPath);
+    public FloorImpl(final ResourceLoader<String, Integer> rl) throws IOException {
         maxFloorSize = rl.getConfig("MAX_FLOOR_SIZE");
         maxRoomSize = rl.getConfig("MAX_ROOM_SIZE");
         if (maxFloorSize <= 1 || maxRoomSize <= 4) {
@@ -49,10 +46,34 @@ public class FloorImpl implements Floor {
      * {@inheritDoc}
      */
     @Override
+    public Set<AbstractGameObject> getWalls() {
+        return floorStructure;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Set<AbstractGameObject> getEnemies() {
+        return floorEnemies;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Set<AbstractGameObject> getValues() {
+        return floorValues;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void generateFloorSet() throws IOException {
-        roomStructure = new HashSet<>();
-        roomEnemies = new HashSet<>();
-        roomValues = new HashSet<>();
+        floorStructure = new HashSet<>();
+        floorEnemies = new HashSet<>();
+        floorValues = new HashSet<>();
         final int floorSize = RANDOM.nextInt(1, this.maxFloorSize);
         final int roomSize = RANDOM.nextInt(5, this.maxRoomSize);
         this.generateRoomsStructure(floorSize);
@@ -143,15 +164,15 @@ public class FloorImpl implements Floor {
     private void addNewRoom(final Room room, final int roomX, final int roomY, final int roomSize) {
         final Set<AbstractGameObject> tmpStruct = room.getStructure();
         tmpStruct.forEach((w) -> w.movedPosition(roomX * roomSize, roomY * roomSize));
-        this.roomStructure.addAll(tmpStruct);
+        this.floorStructure.addAll(tmpStruct);
 
         final Set<AbstractGameObject> tmpValues = room.getValues();
         tmpValues.forEach((w) -> w.movedPosition(roomX * roomSize, roomY * roomSize));
-        this.roomValues.addAll(tmpValues);
+        this.floorValues.addAll(tmpValues);
 
         final Set<AbstractGameObject> tmpEnemies = room.getEnemies();
         tmpEnemies.forEach((w) -> w.movedPosition(roomX * roomSize, roomY * roomSize));
-        this.roomEnemies.addAll(tmpEnemies);
+        this.floorEnemies.addAll(tmpEnemies);
     }
 
     /**
