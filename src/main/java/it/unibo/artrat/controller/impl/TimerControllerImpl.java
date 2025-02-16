@@ -15,14 +15,12 @@ public class TimerControllerImpl implements TimerController{
     }
 
     @Override
-    public void startTimerController() {
-        timer.startTimer();
+    public void startTimerController() {        //devo capire meglio se devo aggiornare il model pure col timer, in teoria no
+        timer.startTimer();                     //devo capire se nel model ho bisogno di metodi per il timer, essendo un elemento fuori da tutto
     }
 
     @Override
     public void resetTimerController() {
-        timer.resetTimer();
+        timer.resetTimer();                 //se il timer scade comunque devo aggiornare qualcosa, è la logica del game over
     }
-
-
 }

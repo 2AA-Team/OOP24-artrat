@@ -7,12 +7,12 @@ package it.unibo.artrat.model.api;
 public interface WorldTimer {
 
     /**
-     * Everytime I start a new game, a new timer starts
+     * Every time I start a new game, a new timer starts
      */
     void startTimer();
 
     /**
-     *  If Lupino gets caught or the timer stops  
+     *  If Lupino gets caught or the timer is out
      */
     void resetTimer();
 

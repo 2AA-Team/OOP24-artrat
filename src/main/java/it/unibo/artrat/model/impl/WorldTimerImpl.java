@@ -25,7 +25,8 @@ public class WorldTimerImpl implements WorldTimer{
         timer.schedule(new TimerTask() {            //classe anonima TimerTask che specifico cosa deve fare
             @Override
             public void run(){
-                
+                outOfTime = true;       //questo a true quando ho poi finito il countdown
+                //qua posso collegarmi con un messaggio di fine gioco
             }
         }, countdown);
     }
@@ -34,6 +35,8 @@ public class WorldTimerImpl implements WorldTimer{
     public void resetTimer() {
         if(timer != null){                                              //DEVO avere la roba di tonno o sam del game over
             timer.cancel(); //cancello il timer
+            timer = new Timer("WorldTimer"); 
+            outOfTime = false;
         }
     }
 
