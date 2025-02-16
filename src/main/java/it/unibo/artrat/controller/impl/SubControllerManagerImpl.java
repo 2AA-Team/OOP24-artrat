@@ -1,5 +1,7 @@
 package it.unibo.artrat.controller.impl;
 
+import java.util.Objects;
+
 import it.unibo.artrat.controller.api.SubControllerManager;
 import it.unibo.artrat.controller.api.subcontroller.FloorSubController;
 import it.unibo.artrat.controller.api.subcontroller.InventorySubController;
@@ -37,7 +39,7 @@ public class SubControllerManagerImpl implements SubControllerManager {
      */
     @Override
     public FloorSubController getFloorSubController() {
-        return this.floorSubController != null ? this.floorSubController : null;
+        return Objects.requireNonNull(this.floorSubController);
     }
 
     /**
@@ -45,7 +47,8 @@ public class SubControllerManagerImpl implements SubControllerManager {
      */
     @Override
     public MenuSubController getMenuSubController() {
-        return this.menuSubController != null ? this.menuSubController : null;
+
+        return Objects.requireNonNull(this.menuSubController);
     }
 
     /**
@@ -53,7 +56,7 @@ public class SubControllerManagerImpl implements SubControllerManager {
      */
     @Override
     public InventorySubController getInventorySubController() {
-        return this.inventorySubController != null ? this.inventorySubController : null;
+        return Objects.requireNonNull(this.inventorySubController);
     }
 
     /**
@@ -61,7 +64,7 @@ public class SubControllerManagerImpl implements SubControllerManager {
      */
     @Override
     public StoreSubController getStoreSubController() {
-        return this.storeSubController != null ? this.storeSubController : null;
+        return Objects.requireNonNull(this.storeSubController);
     }
 
 }
