@@ -4,6 +4,7 @@ import java.util.List;
 
 import it.unibo.artrat.controller.api.SubController;
 import it.unibo.artrat.model.api.inventory.Item;
+import it.unibo.artrat.model.api.inventory.ItemType;
 
 /**
  * controller for the seguent model: store (market).
@@ -23,11 +24,6 @@ public interface StoreSubController extends SubController{
      */
     boolean buyItem(Item itemToBuy);
 
-    /*      da fare poi eventualmente
-    boolean missionAccomplished();   
-    int newPlayerLevel();
-    */
-
     boolean getPlayerCash();
 
     String getItemName(Item passedItem);
@@ -39,7 +35,9 @@ public interface StoreSubController extends SubController{
     void getDescription(Item passedItem);
 
     void sorting(int choice);
-    void filterCategory();
-    void searchItem();
+
+    void filterCategory(ItemType type);
+
+    void searchItem(String nameToSearch);
 
 }

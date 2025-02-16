@@ -22,8 +22,7 @@ public class MarketImpl implements Market{
             + "items" + File.separator
             + "items.yaml";
 
-
-    private final List<Item> itemsToBuy;
+    private List<Item> itemsToBuy;
     private String descr;
     private double price;
     private ItemType type;
@@ -51,6 +50,14 @@ public class MarketImpl implements Market{
     @Override
     public List<Item> getPurchItems(){
         return new ArrayList<>(itemsToBuy);
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void setPurchItems(List<Item> items) {       //aggiorno la mia lista di elementi (filtraggio, sorting)
+        this.itemsToBuy = new ArrayList<>(items);
     }
 
     /**

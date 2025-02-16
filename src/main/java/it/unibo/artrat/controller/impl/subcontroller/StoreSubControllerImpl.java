@@ -2,6 +2,9 @@ package it.unibo.artrat.controller.impl.subcontroller;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
+
 import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
@@ -9,9 +12,12 @@ import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.inventory.Inventory;
 import it.unibo.artrat.model.api.inventory.Item;
+import it.unibo.artrat.model.api.inventory.ItemType;
+import it.unibo.artrat.model.api.market.ItemManager;
 import it.unibo.artrat.model.api.market.Market;
 import it.unibo.artrat.model.impl.ModelImpl;
 import it.unibo.artrat.model.impl.characters.PlayerImpl;
+import it.unibo.artrat.model.impl.market.ItemManagerImpl;
 import it.unibo.artrat.model.impl.market.MarketImpl;
 import it.unibo.artrat.view.api.MarketView;
 import it.unibo.artrat.view.impl.MarketSubPanel;
@@ -62,6 +68,7 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     public void sorting(int choice){
        final Model model = this.getModel();
        final Market market = this.getModel().getMarket();
+       final ItemManager itemMan = new ItemManagerImpl(market);
 
        if(choice == 1){
             
@@ -73,13 +80,23 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     }
 
     @Override
-    public void filterCategory(){
-
+    public void filterCategory(ItemType type){
+        final Model model = this.getModel();
+        final Market market = this.getModel().getMarket();
+        final ItemManager itemMan = new ItemManagerImpl(market);
+        List<Item> itemModList = itemMan.filterItems(type);
+        market.setPurchItems(itemModList);
+        model.setMarket(market);        //aggiorna il market
     }
 
     @Override
-    public void searchItem(){
-
+    public void searchItem(String nameToSearch){
+        final Model model = this.getModel();
+        final Market market = this.getModel().getMarket();
+        final ItemManager itemMan = new ItemManagerImpl(market);
+        List<Item> itemModList = itemMan.searchItem(nameToSearch);
+        market.setPurchItems(itemModList);      
+        model.setMarket(market);
     }
 
     @Override

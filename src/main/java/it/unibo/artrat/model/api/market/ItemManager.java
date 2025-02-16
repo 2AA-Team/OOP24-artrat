@@ -6,12 +6,9 @@ import it.unibo.artrat.model.api.inventory.ItemType;
 
 public interface ItemManager {
 
-    
-    List<Item> sortItemPrice();     
-
-    List<Item> reverseSortItemPrice();
+    List<Item> sortItemPrice(boolean dir);
 
     List<Item> filterItems(ItemType itemType);
     
-    List<Item> searchItem(Item item); 
+    List<Item> searchItem(String nameToSearch); 
 }

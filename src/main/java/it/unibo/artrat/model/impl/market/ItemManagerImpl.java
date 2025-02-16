@@ -1,6 +1,5 @@
 package it.unibo.artrat.model.impl.market;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,17 +21,13 @@ public class ItemManagerImpl implements ItemManager{
     }
 
     @Override
-    public List<Item> sortItemPrice(){
+    public List<Item> sortItemPrice(boolean dir){
+        Comparator<Item> sortingDir = Comparator.comparing(Item::getPrice);
+        if(dir == false){
+            sortingDir = sortingDir.reversed();
+        }
         return market.getPurchItems().stream()
-            .sorted(Comparator.comparing(Item::getPrice))
-            .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<Item> reverseSortItemPrice(){
-        return market.getPurchItems().stream()
-            .sorted(Comparator.comparing(Item::getPrice).reversed())
-            .collect(Collectors.toList());
+            .sorted(sortingDir).collect(Collectors.toList());
     }
 
     @Override
@@ -43,9 +38,9 @@ public class ItemManagerImpl implements ItemManager{
     }
 
     @Override
-    public List<Item> searchItem(Item item){
+    public List<Item> searchItem(String nameToSearch){
         return market.getPurchItems().stream()
-            .filter(it -> it.getDescription().equals(item.getDescription()))
+            .filter(it -> it.getDescription().equals(nameToSearch))
             .collect(Collectors.toList());
     }
 }
