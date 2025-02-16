@@ -17,23 +17,23 @@ public class WorldTimerImpl implements WorldTimer{
     }
 
     @Override
-    public void startTimer() {
-        timer.schedule(new TimerTask() {
+    public void startTimer() {      //qui lo starto
+        timer.schedule(new TimerTask() {            //classe anonima TimerTask che specifico cosa deve fare
             @Override
             public void run(){
-
+                
             }
-        }, DEFAULT_TIMER_SETUP);
+        }, countdown);
     }
 
-    @Override
+    @Override       //resetto il timer se finisco il game prima, e non lo riavvio
     public void ResetTimer() {
         if(timer != null){
-            timer.cancel();
+            timer.cancel(); //cancello il timer
         }
     }
 
-    @Override
+    @Override           //me lo tengo per il game over, mi sarà utile anche nei test
     public boolean isTimeOut() {
         return outOfTime;
     }

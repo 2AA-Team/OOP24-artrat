@@ -3,6 +3,7 @@ package it.unibo.artrat.view.impl;
 import java.awt.*;
 import javax.swing.*;
 
+import it.unibo.artrat.controller.api.TimerController;
 import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
 import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.model.impl.Stage;
@@ -16,13 +17,15 @@ import it.unibo.artrat.view.api.MarketView;
 */
 public class MarketSubPanel extends AbstractSubPanel implements MarketView{   
     private final StoreSubController contr;
+    //private final TimerController timerController;
     private final JPanel marketPanel = new JPanel();
     private final JPanel contPane = new JPanel(new BorderLayout());
     private final JScrollPane scrollPanel = new JScrollPane(marketPanel);
     private final ItemReader itemReader = new ItemReaderImpl();
 
-    public MarketSubPanel(StoreSubController contr){    
+    public MarketSubPanel(StoreSubController contr/* , TimerController timerController*/){    
         this.contr = contr;
+        //this.timerController = timerController;         //timer controller
     }
 
     private boolean toConfirm(final String text, final String name){
@@ -94,6 +97,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView{
         playAgain.addActionListener(e->{
             if(toConfirm("Do you want to play a new game?", "Nuova partita")){
                 contr.setStage(Stage.GAME);
+              //  timerController.startTimer();                            //avvio il timer
             }
         });
 
