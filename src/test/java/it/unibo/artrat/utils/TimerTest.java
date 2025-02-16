@@ -11,7 +11,7 @@ import it.unibo.artrat.model.impl.WorldTimerImpl;
 class TimerTest {
     static final int SECOND = 1000; 
     
-    void testTimer(){
+    void testTimer(){       //è momentaneo
        
         WorldTimerImpl timer = new WorldTimerImpl();
         timer.startTimer();

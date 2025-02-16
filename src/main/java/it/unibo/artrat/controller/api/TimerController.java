@@ -9,11 +9,11 @@ public interface TimerController {
     /**
      * Timer starts if I play a new game
      */
-    void startTimer();
+    void startTimerController();
 
     /**
      * 
      */
-    void timeOut();
+    void resetTimerController();
 
 }

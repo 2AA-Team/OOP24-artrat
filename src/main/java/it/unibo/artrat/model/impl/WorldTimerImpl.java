@@ -4,6 +4,10 @@ import it.unibo.artrat.model.api.WorldTimer;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * WorldTimerImpl class
+ * @author Manuel Benagli
+ */
 public class WorldTimerImpl implements WorldTimer{
     private static final int DEFAULT_TIMER_SETUP = 120000;
     private Timer timer;
@@ -27,8 +31,8 @@ public class WorldTimerImpl implements WorldTimer{
     }
 
     @Override       //resetto il timer se finisco il game prima, e non lo riavvio
-    public void ResetTimer() {
-        if(timer != null){
+    public void resetTimer() {
+        if(timer != null){                                              //DEVO avere la roba di tonno o sam del game over
             timer.cancel(); //cancello il timer
         }
     }

@@ -1,21 +1,27 @@
 package it.unibo.artrat.controller.impl;
 
 import it.unibo.artrat.controller.api.TimerController;
+import it.unibo.artrat.model.impl.WorldTimerImpl;
 
 /**
  * 
  */
 public class TimerControllerImpl implements TimerController{
 
-    @Override
-    public void startTimer() {
-        
-        //devo pigliare il timer model
+    private  WorldTimerImpl timer;
+
+    public TimerControllerImpl(){
+        timer = new WorldTimerImpl();       //tutto provvisorio
     }
 
     @Override
-    public void timeOut() {
-        
+    public void startTimerController() {
+        timer.startTimer();
+    }
+
+    @Override
+    public void resetTimerController() {
+        timer.resetTimer();
     }
 
 

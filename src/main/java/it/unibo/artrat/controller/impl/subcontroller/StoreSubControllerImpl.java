@@ -45,7 +45,7 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     }
 
     @Override
-    public boolean buyItem(Item itemToBuy) {
+    public boolean buyItem(Item itemToBuy) {        //moementaneo, mi serve il read per capire meglio
         final Model model = this.getModel();
         final Player player = model.getPlayer();
         final Market market = this.getModel().getMarket();

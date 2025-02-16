@@ -63,7 +63,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView{
         bottomPan.setLayout(new FlowLayout());
         final JPanel upperJPanel = new JPanel();
         upperJPanel.setLayout(new FlowLayout()); //o gridlayout
-        final JButton playAgain = new JButton("Play");
+        final JButton toMenu = new JButton("BACK");
 
         upperJPanel.add(filterButton);
         upperJPanel.add(sortButton);
@@ -94,14 +94,13 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView{
             //contr.searchItem();
         });
 
-        playAgain.addActionListener(e->{
-            if(toConfirm("Do you want to play a new game?", "Nuova partita")){
-                contr.setStage(Stage.GAME);
-              //  timerController.startTimer();                            //avvio il timer
+        toMenu.addActionListener(e->{
+            if(toConfirm("Do you want to come back to the menu?", "Back to menu")){
+                contr.setStage(Stage.MENU);
             }
         });
 
-        bottomPan.add(playAgain);
+        bottomPan.add(toMenu);
         marketPanel.add(bottomPan, BorderLayout.SOUTH);
     }
 
