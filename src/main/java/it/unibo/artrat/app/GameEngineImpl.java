@@ -60,6 +60,9 @@ public final class GameEngineImpl implements GameEngine, Sender {
         return this.resourceLoader;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void run() {
         mainController.addMainView(new MainViewImpl(
