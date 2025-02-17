@@ -17,4 +17,11 @@ public interface GameSubController extends SubController {
      */
     Set<Point> getVisibleWallPositions();
 
+    /**
+     * method to get the position of the player.
+     * 
+     * @return the position ad a point
+     */
+    Point getPlayerPos();
+
 }
