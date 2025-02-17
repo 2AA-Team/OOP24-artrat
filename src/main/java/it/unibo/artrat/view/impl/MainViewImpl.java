@@ -40,7 +40,7 @@ public class MainViewImpl implements MainView {
      */
     @Override
     public void setController(final MainController observer) {
-        controller = observer == null ? controller : observer;
+        controller = Objects.requireNonNull(observer);
     }
 
     /**
@@ -66,14 +66,16 @@ public class MainViewImpl implements MainView {
     @Override
     public void forceRedraw() {
         subPanel.forceRedraw();
-        this.frame.repaint();
-        this.frame.revalidate();
+        frame.setContentPane(subPanel.getPanel());
+        frame.revalidate();
+        frame.repaint();
     }
 
     /**
      * reload frame to get the right size.
      */
     private void reloadFrame() {
+        subPanel.initComponents();
         final double width = resourceLoader.getConfig(controller.getStage().toString() + "_WIDTH");
         final double height = resourceLoader.getConfig(controller.getStage().toString() + "_HEIGHT");
         frame.setSize((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),
@@ -101,7 +103,7 @@ public class MainViewImpl implements MainView {
                 subPanel = new InventorySubPanel(controller.getControllerManager().getInventorySubController());
                 break;
             default:
-                throw new IllegalStateException();
+                throw new IllegalStateException("Stage does not exist.");
         }
         reloadFrame();
         subPanel.setFrameDimension(this.frame.getSize());

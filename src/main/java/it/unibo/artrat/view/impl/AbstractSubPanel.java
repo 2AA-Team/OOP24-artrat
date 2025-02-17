@@ -41,7 +41,6 @@ abstract class AbstractSubPanel {
      * @return his own starter panel.
      */
     public JPanel getPanel() {
-        initComponents();
         return panel;
     }
 
@@ -51,7 +50,7 @@ abstract class AbstractSubPanel {
      * @param newPanel panel to set
      */
     protected void setPanel(final JPanel newPanel) {
-        panel = newPanel;
+        this.panel = newPanel;
     }
 
     /**

@@ -48,7 +48,7 @@ public final class RoomImpl implements Room {
     }
 
     private void createPassage(final RoomBuilder builder) {
-        final double averagePassage = Math.ceil((double) builder.size / 2);
+        final double averagePassage = Math.floor((double) builder.size / 2);
         boolean tmpU = builder.upPassage;
         boolean tmpR = builder.rightPassage;
         boolean tmpD = builder.downPassage;
