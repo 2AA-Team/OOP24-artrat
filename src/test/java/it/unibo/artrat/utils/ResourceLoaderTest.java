@@ -26,7 +26,7 @@ class ResourceLoaderTest {
             + "unibo" + File.separator
             + "artrat" + File.separator
             + "utils" + File.separator
-            + "test.yaml";
+            + "resourceLoaderTest.yaml";
 
     /**
      * test loading config path.

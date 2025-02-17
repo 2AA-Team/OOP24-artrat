@@ -39,7 +39,7 @@ public class FloorImpl implements Floor {
         maxFloorSize = rl.getConfig("MAX_FLOOR_SIZE");
         maxRoomSize = rl.getConfig("MAX_ROOM_SIZE");
         if (maxFloorSize <= 1 || maxRoomSize <= 4) {
-            throw new IllegalStateException("Floor or Room size has been modified.");
+            throw new IOException("Floor or Room size has been modified.");
         }
     }
 
