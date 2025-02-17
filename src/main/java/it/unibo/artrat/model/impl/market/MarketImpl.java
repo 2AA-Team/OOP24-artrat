@@ -39,7 +39,7 @@ public class MarketImpl implements Market{
             this.price = itemReader.getPrice(itemName);
             this.type = itemReader.getItemType(itemName);
 
-            final Item item = new Item(descr, price, type);
+           // final Item item = new Item(descr, price, type);     
             this.itemsToBuy.add(item);
         }
     }
