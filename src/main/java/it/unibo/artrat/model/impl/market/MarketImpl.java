@@ -34,7 +34,6 @@ public class MarketImpl implements Market {
         try {
             initMarket();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -78,8 +77,8 @@ public class MarketImpl implements Market {
         if(itemsToBuy.contains(passedItem)){
             if(passedItem.getType() == ItemType.POWERUP){
                 itemsToBuy.remove(passedItem);
-                return true;
             }
+            return true;
         }
         return false;
     }

@@ -6,7 +6,7 @@ import it.unibo.artrat.model.api.inventory.ItemType;
 
 public interface ItemManager {
 
-    List<Item> sortItemPrice(boolean dir);
+    List<Item> sortItemPrice(int dir);
 
     List<Item> filterItems(ItemType itemType);
     

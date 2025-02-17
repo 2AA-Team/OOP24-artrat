@@ -48,6 +48,8 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
         fillWithItems();
         myJPanel.revalidate();
         myJPanel.repaint();
+        containerPanel.revalidate();
+        containerPanel.repaint();
     }
 
     private boolean confirmDialog(final String question, final String name) {

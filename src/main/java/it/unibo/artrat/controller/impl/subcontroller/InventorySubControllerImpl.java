@@ -3,8 +3,6 @@ package it.unibo.artrat.controller.impl.subcontroller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.Icon;
-
 import it.unibo.artrat.controller.api.subcontroller.InventorySubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;

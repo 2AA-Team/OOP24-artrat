@@ -67,13 +67,7 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
        final Model model = this.getModel();
        final Market market = this.getModel().getMarket();
        final ItemManager itemMan = new ItemManagerImpl(market);
-
-       if(choice == 1){
-            
-       }
-       else{
-
-       }
+       market.setPurchItems(itemMan.sortItemPrice(choice));
        model.setMarket(new MarketImpl());
     }
 

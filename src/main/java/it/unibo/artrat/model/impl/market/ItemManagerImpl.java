@@ -21,9 +21,9 @@ public class ItemManagerImpl implements ItemManager{
     }
 
     @Override
-    public List<Item> sortItemPrice(boolean dir){
+    public List<Item> sortItemPrice(int dir){
         Comparator<Item> sortingDir = Comparator.comparing(Item::getPrice);
-        if(dir == false){
+        if(dir == 0){
             sortingDir = sortingDir.reversed();
         }
         return market.getPurchItems().stream()
