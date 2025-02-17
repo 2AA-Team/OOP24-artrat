@@ -1,6 +1,5 @@
 package it.unibo.artrat.model.impl.world;
 
-import java.awt.Point;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
@@ -15,6 +14,7 @@ import it.unibo.artrat.model.impl.world.RoomImpl.RoomBuilder;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationEmpty;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationFile;
 import it.unibo.artrat.utils.api.ResourceLoader;
+import it.unibo.artrat.utils.impl.Point;
 
 /**
  * implementation of interface floor.

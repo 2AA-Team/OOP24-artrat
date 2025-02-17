@@ -3,7 +3,6 @@ package it.unibo.artrat.controller.impl.subcontroller;
 import java.io.IOException;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import it.unibo.artrat.controller.api.subcontroller.GameSubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
@@ -38,6 +37,7 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
         this.floor = new FloorImpl(rl);
         this.floor.generateFloorSet();
         this.player = mainController.getModel().getPlayer();
+        this.player.setPosition(this.floor.getStartPosition());
     }
 
     /**
