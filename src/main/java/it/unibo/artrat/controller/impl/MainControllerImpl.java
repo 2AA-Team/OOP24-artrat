@@ -9,6 +9,7 @@ import it.unibo.artrat.controller.api.SubControllerManager;
 import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.impl.ModelImpl;
 import it.unibo.artrat.model.impl.Stage;
+import it.unibo.artrat.utils.api.commands.Command;
 import it.unibo.artrat.view.api.MainView;
 
 /**
@@ -37,6 +38,7 @@ public class MainControllerImpl implements MainController {
         this.model = new ModelImpl();
         this.subControllerManager = new SubControllerManagerImpl(this);
     }
+
     /**
      * {@inheritDoc}
      */
@@ -109,6 +111,14 @@ public class MainControllerImpl implements MainController {
         } else {
             throw new IllegalArgumentException("The new istance of model passed by the controller is null");
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void input(Command cmd) {
+        this.engine.notifyCommand(cmd);
     }
 
 }

@@ -65,10 +65,9 @@ public abstract class AbstractGameObject implements GameObject {
     }
 
     /**
-     * Set the current game object position.
-     * 
-     * @param position current position
+     * {@inheritDoc}
      */
+    @Override
     public void setPosition(final Point position) {
         this.hitBox.setCenter(position);
     }

@@ -2,6 +2,7 @@ package it.unibo.artrat.controller.api;
 
 import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.impl.Stage;
+import it.unibo.artrat.utils.api.commands.Command;
 import it.unibo.artrat.view.api.MainView;
 
 /**
@@ -37,12 +38,15 @@ public interface MainController {
 
     /**
      * A method that return a copy of the current model.
+     * 
      * @return a copy of current Model.
      */
     Model getModel();
 
     /**
-     * A method that permit to re-set the current istance of Model with a new one, passed.
+     * A method that permit to re-set the current istance of Model with a new one,
+     * passed.
+     * 
      * @param model the new Model istance to set.
      */
     void setModel(Model model);
@@ -53,5 +57,12 @@ public interface MainController {
      * @return sub controller manager
      */
     SubControllerManager getControllerManager();
+
+    /**
+     * Put in buffer commands to execute.
+     * 
+     * @param cmd command to execute
+     */
+    void input(Command cmd);
 
 }

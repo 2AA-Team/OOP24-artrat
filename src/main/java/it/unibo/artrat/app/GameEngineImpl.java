@@ -19,7 +19,7 @@ import it.unibo.artrat.view.impl.MainViewImpl;
  * Implement game engine.
  * 
  */
-public final class GameEngineImpl implements GameEngine, Sender {
+public final class GameEngineImpl implements GameEngine {
     private final List<Command> commands = new LinkedList<>();
 
     // TODO add Room for GameObjects' access.
