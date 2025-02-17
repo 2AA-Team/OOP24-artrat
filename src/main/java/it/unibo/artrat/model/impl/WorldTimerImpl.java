@@ -1,5 +1,7 @@
 package it.unibo.artrat.model.impl;
 
+import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
+import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.model.api.WorldTimer;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -13,11 +15,13 @@ public class WorldTimerImpl implements WorldTimer{
     private Timer timer;
     private boolean outOfTime;
     private final int countdown;
+    private StoreSubController contr;
 
-    public WorldTimerImpl(){
+    public WorldTimerImpl(StoreSubController contr){
         this.countdown = DEFAULT_TIMER_SETUP;
         this.timer = new Timer("WorldTimer");
         this.outOfTime = false;
+        this.contr = contr;
     }
 
     @Override
@@ -27,6 +31,8 @@ public class WorldTimerImpl implements WorldTimer{
             public void run(){
                 outOfTime = true;       //questo a true quando ho poi finito il countdown
                 //qua posso collegarmi con un messaggio di fine gioco
+                contr.setStage(Stage.MENU);
+
             }
         }, countdown);
     }

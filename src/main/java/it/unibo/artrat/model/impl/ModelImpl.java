@@ -2,15 +2,8 @@ package it.unibo.artrat.model.impl;
 
 import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.api.characters.Player;
-import it.unibo.artrat.model.api.inventory.Inventory;
-import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.model.api.market.Market;
 import it.unibo.artrat.model.impl.characters.Lupino;
-import it.unibo.artrat.model.impl.inventory.InventoryImpl;
-import it.unibo.artrat.model.impl.inventory.items.LuckyTicket;
-import it.unibo.artrat.model.impl.inventory.items.MagicBackpack;
-import it.unibo.artrat.model.impl.inventory.items.MultiplierBooster;
-import it.unibo.artrat.model.impl.inventory.items.MysteriousStaff;
 import it.unibo.artrat.model.impl.market.MarketImpl;
 import it.unibo.artrat.utils.impl.Point;
 
@@ -62,6 +55,6 @@ public class ModelImpl implements Model {
 
     @Override
     public void setMarket(Market market) {
-        this.market = new MarketImpl(market);
+        this.market = market;
     }
 }

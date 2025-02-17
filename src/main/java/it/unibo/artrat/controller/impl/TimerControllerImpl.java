@@ -1,6 +1,7 @@
 package it.unibo.artrat.controller.impl;
 
 import it.unibo.artrat.controller.api.TimerController;
+import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
 import it.unibo.artrat.model.impl.WorldTimerImpl;
 
 /**
@@ -9,9 +10,11 @@ import it.unibo.artrat.model.impl.WorldTimerImpl;
 public class TimerControllerImpl implements TimerController{
 
     private  WorldTimerImpl timer;
+        private StoreSubController contr;
+
 
     public TimerControllerImpl(){
-        timer = new WorldTimerImpl();       //tutto provvisorio
+        timer = new WorldTimerImpl(this.contr);       //tutto provvisorio
     }
 
     @Override

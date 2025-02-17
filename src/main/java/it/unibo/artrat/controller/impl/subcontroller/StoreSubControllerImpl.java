@@ -2,6 +2,7 @@ package it.unibo.artrat.controller.impl.subcontroller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
@@ -38,7 +39,7 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
 
     @Override
     public List<Item> purchasableItems() {
-        System.out.println(this.getModel().getMarket().getPurchItems());
+        System.out.println("PURCHASABLE ITEMS" + this.getModel().getMarket().getPurchItems());
         return new ArrayList<>(this.getModel().getMarket().getPurchItems());
     }
 
@@ -64,11 +65,11 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
 
     @Override
     public void sorting(int choice){
-       final Model model = this.getModel();
+       //final Model model = this.getModel();
        final Market market = this.getModel().getMarket();
        final ItemManager itemMan = new ItemManagerImpl(market);
        market.setPurchItems(itemMan.sortItemPrice(choice));
-       model.setMarket(new MarketImpl());
+      // model.setMarket(market);
     }
 
     @Override
@@ -89,11 +90,6 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
         List<Item> itemModList = itemMan.searchItem(nameToSearch);
         market.setPurchItems(itemModList);      
         model.setMarket(market);
-    }
-
-    @Override
-    public boolean getPlayerCash(){
-        return this.getModel().getPlayer().getCoin() != null;       //non giusto
     }
     
     /**

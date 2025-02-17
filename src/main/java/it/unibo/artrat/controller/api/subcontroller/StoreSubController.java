@@ -24,8 +24,6 @@ public interface StoreSubController extends SubController{
      */
     boolean buyItem(Item itemToBuy);
 
-    boolean getPlayerCash();
-
     String getItemName(Item passedItem);
     
     double getItemPrice(Item passedItem);

@@ -2,6 +2,7 @@ package it.unibo.artrat.utils;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
+import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
 import it.unibo.artrat.model.impl.WorldTimerImpl;
 
 /**
@@ -10,10 +11,11 @@ import it.unibo.artrat.model.impl.WorldTimerImpl;
  */
 class TimerTest {
     static final int SECOND = 1000; 
+    StoreSubController contr;
     
     void testTimer(){       //è momentaneo
        
-        WorldTimerImpl timer = new WorldTimerImpl();
+        WorldTimerImpl timer = new WorldTimerImpl(this.contr);
         timer.startTimer();
         while (!timer.isTimeOut()) {        //isTimeOut sta nel model, è un semplice boolean di controllo
             try {

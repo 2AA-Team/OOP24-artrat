@@ -5,18 +5,22 @@ import javax.swing.*;
 import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
 import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.model.impl.Stage;
+import it.unibo.artrat.model.impl.WorldTimerImpl;
 import it.unibo.artrat.view.api.MarketView;
 
 public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     private static final int GAP = 7;
-    private final StoreSubController contr;
+    private StoreSubController contr;
     private final JPanel marketPanel = new JPanel();
     private final JPanel contPane = new JPanel(new BorderLayout());
     private final JScrollPane scrollPanel = new JScrollPane(marketPanel);
     private final JLabel lupinoCash = new JLabel();
-
+    private WorldTimerImpl timer;
+    
     public MarketSubPanel(StoreSubController contr) {
         this.contr = contr;
+        this.timer = new WorldTimerImpl(this.contr);
+        this.timer.startTimer();
     }
 
     private boolean toConfirm(final String text, final String name) {
@@ -79,9 +83,10 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
 
         sortButton.addActionListener(e -> {
             if (toConfirm("Do you want to sort the item in base of their price?", "Sorting")) {
-                int choice = JOptionPane.showConfirmDialog(null, "creasing sorting = YES, decreasing = NO", "Ordinamento Prezzi", 
+                int choice = JOptionPane.showConfirmDialog(null, "creasing sorting = NO, decreasing = YES", "Ordinamento Prezzi", 
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 contr.sorting(choice);
+                allItemsSetup();
             }
         });
 
@@ -103,7 +108,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     private void allItemsSetup() {
         final JPanel purchItemPanel = new JPanel(new GridLayout(contr.purchasableItems().size(), 4, 4, 2));
         purchItemPanel.removeAll();  
-
+        System.out.println("VIEEEEEWWWW" + contr.purchasableItems());
         for (var purchItem : contr.purchasableItems()) {
             final JButton buyItem = new JButton("Buy");
             final JLabel itemLabel = new JLabel(contr.getItemName(purchItem));
