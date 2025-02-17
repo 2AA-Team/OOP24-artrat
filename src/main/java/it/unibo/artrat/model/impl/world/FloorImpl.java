@@ -1,5 +1,6 @@
 package it.unibo.artrat.model.impl.world;
 
+import java.awt.Point;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
@@ -27,6 +28,7 @@ public class FloorImpl implements Floor {
     private boolean[][] floorMap;
     private final double maxFloorSize;
     private final double maxRoomSize;
+    private Point startPosition;
 
     /**
      * constructor that set the configuration file path.
@@ -126,6 +128,7 @@ public class FloorImpl implements Floor {
                         builder = builder.insertGenerationStrategy(new RoomGenerationEmpty());
                         builder = builder.insertNumberOfEnemy(0);
                         builder = builder.insertNumberOfValues(0);
+                        startPosition = new Point(j * roomSize, i * roomSize);
                     } else {
                         builder = builder.insertGenerationStrategy(generations.get(RANDOM.nextInt(generations.size())));
                         builder = builder.insertNumberOfEnemy(RANDOM.nextInt(roomSize));
@@ -174,6 +177,14 @@ public class FloorImpl implements Floor {
         final Set<AbstractEntity> tmpEnemies = room.getEnemies();
         tmpEnemies.forEach((w) -> w.movedPosition(roomX * roomSize, roomY * roomSize));
         this.floorEnemies.addAll(tmpEnemies);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Point getStartPosition() {
+        return startPosition;
     }
 
     // public void print() {

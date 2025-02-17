@@ -1,5 +1,6 @@
 package it.unibo.artrat.model.api.world;
 
+import java.awt.Point;
 import java.io.IOException;
 import java.util.Set;
 
@@ -38,4 +39,11 @@ public interface Floor {
      * @return a set of AbstractGameObject
      */
     Set<AbstractEntity> getEnemies();
+
+    /**
+     * get the player startPosition.
+     * 
+     * @return a point representing the position
+     */
+    Point getStartPosition();
 }
