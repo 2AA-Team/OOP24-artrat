@@ -4,11 +4,12 @@ import it.unibo.artrat.controller.api.SubController;
 import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.impl.ModelImpl;
 import it.unibo.artrat.model.impl.Stage;
+import it.unibo.artrat.utils.api.commands.Command;
 
 /**
  * abstract class that implements subcontroller.
  */
-public abstract  class AbstractSubController implements SubController {
+public abstract class AbstractSubController implements SubController {
     private final MainControllerImpl mainController;
 
     /**
@@ -44,12 +45,16 @@ public abstract  class AbstractSubController implements SubController {
         mainController.setModel(new ModelImpl(model));
     }
 
-
     /**
      * {@inheritDoc}
      */
     @Override
     public void quit() {
         mainController.quit();
+    }
+
+    @Override
+    public void inputMainController(final Command cmd) {
+        this.mainController.input(cmd);
     }
 }

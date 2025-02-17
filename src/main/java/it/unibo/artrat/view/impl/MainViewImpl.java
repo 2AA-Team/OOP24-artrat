@@ -1,12 +1,14 @@
 package it.unibo.artrat.view.impl;
 
+import java.awt.Toolkit;
+import java.util.Objects;
+
 import javax.swing.JFrame;
+
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.utils.api.ResourceLoader;
 import it.unibo.artrat.view.api.MainView;
-import java.awt.Toolkit;
-import java.util.Objects;
 
 /**
  * implementation of class mainView.

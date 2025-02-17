@@ -65,4 +65,11 @@ public interface MainController {
      */
     Stage getStage();
 
+    /**
+     * Input event management.
+     * 
+     * @param cmd command input
+     */
+    void input(Command cmd);
+
 }

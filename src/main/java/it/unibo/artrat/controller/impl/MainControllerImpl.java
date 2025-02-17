@@ -123,4 +123,12 @@ public class MainControllerImpl implements MainController {
         return currentStage;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void input(Command cmd) {
+        this.engine.notifyCommand(cmd);
+    }
+
 }

@@ -1,6 +1,7 @@
 package it.unibo.artrat.view.impl;
 
 import javax.swing.JPanel;
+
 import it.unibo.artrat.controller.api.subcontroller.GameSubController;
 import it.unibo.artrat.utils.impl.Point;
 
@@ -9,6 +10,7 @@ import it.unibo.artrat.utils.impl.Point;
  */
 public class GameSubPanel extends AbstractSubPanel {
     private final GameSubController gameSubController;
+    private final InputListener commands;
 
     /**
      * constructor for game sub panel.
@@ -17,6 +19,7 @@ public class GameSubPanel extends AbstractSubPanel {
      */
     public GameSubPanel(final GameSubController gameSubController) {
         this.gameSubController = gameSubController;
+        commands = new InputListener(gameSubController);
     }
 
     /**
@@ -44,12 +47,16 @@ public class GameSubPanel extends AbstractSubPanel {
         final Point playerPos = this.gameSubController.getPlayerPos();
         for (final var wallsPoint : this.gameSubController.getVisibleWallPositions()) {
             panel.add(new ImageLabel("src/main/java/it/unibo/artrat/resources/image.jpg",
-                    (int) Math.floor(wallsPoint.getX() * this.getFrameDimension().getHeight() / 2 / playerPos.getX()),
-                    (int) Math.floor(wallsPoint.getY() * this.getFrameDimension().getWidth() / 2 / playerPos.getY()),
+                    (int) Math.floor(wallsPoint.getX() * this.getFrameDimension().getHeight() / 2
+                            / playerPos.getX()),
+                    (int) Math.floor(wallsPoint.getY() * this.getFrameDimension().getWidth() / 2
+                            / playerPos.getY()),
                     100,
                     100)
                     .getJLabel());
         }
         setPanel(panel);
+        System.out.println(this.gameSubController.getPlayerPos().toString());
     }
+
 }
