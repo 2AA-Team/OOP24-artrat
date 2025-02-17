@@ -27,7 +27,7 @@ class FloorImplTest {
 
     @BeforeEach
     void setUp() throws IOException {
-        ResourceLoaderImpl<String, Double> resourceLoader;
+        final ResourceLoaderImpl<String, Double> resourceLoader;
         resourceLoader = new ResourceLoaderImpl<>();
         resourceLoader.setConfigPath(baseConfigPath + "floorImplTest.yaml");
         floor = new FloorImpl(resourceLoader);
