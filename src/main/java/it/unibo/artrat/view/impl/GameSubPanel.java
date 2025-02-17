@@ -1,9 +1,7 @@
 package it.unibo.artrat.view.impl;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import it.unibo.artrat.controller.api.subcontroller.GameSubController;
-import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.utils.impl.Point;
 
 /**
@@ -28,15 +26,6 @@ public class GameSubPanel extends AbstractSubPanel {
     @Override
     public void initComponents() {
         final JPanel panel = new JPanel();
-        panel.setLayout(null);
-        panel.add(new ImageLabel("src/main/java/it/unibo/artrat/resources/image.jpg",
-                (int) Math.floor(getFrameDimension().getWidth() / 2),
-                (int) Math.floor(getFrameDimension().getHeight() / 2), 10, 10).getJLabel());
-        final JButton btn = new JButton("clacla");
-        btn.addActionListener((e) -> {
-            this.gameSubController.setStage(Stage.MENU);
-        });
-        panel.add(btn);
 
         setPanel(panel);
     }

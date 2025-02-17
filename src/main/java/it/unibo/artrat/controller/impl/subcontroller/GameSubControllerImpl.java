@@ -31,13 +31,14 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
      * @param rl             resource loader
      * @throws IOException if the resource loader fails
      */
-    public GameSubControllerImpl(final MainControllerImpl mainController, final ResourceLoader<String, Double> rl)
+    public GameSubControllerImpl(final MainControllerImpl mainController, final ResourceLoader<String, Double> rl,
+            final Player player)
             throws IOException {
         super(mainController);
-        player = null;
         FOV = rl.getConfig("FOV");
         floor = new FloorImpl(rl);
         this.floor.generateFloorSet();
+        this.player = mainController.getModel().getPlayer();
     }
 
     /**
@@ -46,12 +47,13 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
     @Override
     public Set<Point> getVisibleWallPositions() {
         BoundingBox bb = new BoundingBoxImpl(getPlayerPos(), FOV, FOV);
-        // return this.floor.getWalls().stream().filter(x ->
-        // bb.isColliding(x.getBoundingBox()))
-        // .map(AbstractGameObject::getPosition).collect(Collectors.toSet());
-        return null;
+        return this.floor.getWalls().stream().filter(x -> bb.isColliding(x.getBoundingBox()))
+                .map(AbstractGameObject::getPosition).collect(Collectors.toSet());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Point getPlayerPos() {
         return player.getPosition();

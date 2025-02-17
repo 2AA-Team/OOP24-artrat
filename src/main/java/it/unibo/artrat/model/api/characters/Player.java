@@ -58,4 +58,5 @@ public interface Player extends Entity {
      * @return a copy of passed Player.
      */
     Player copyPlayer();
+
 }

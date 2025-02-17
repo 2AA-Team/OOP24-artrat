@@ -66,6 +66,8 @@ public class MainViewImpl implements MainView {
     @Override
     public void forceRedraw() {
         subPanel.forceRedraw();
+        this.frame.repaint();
+        this.frame.revalidate();
     }
 
     /**
@@ -102,5 +104,6 @@ public class MainViewImpl implements MainView {
                 throw new IllegalStateException();
         }
         reloadFrame();
+        subPanel.setFrameDimension(this.frame.getSize());
     }
 }
