@@ -5,6 +5,8 @@ import it.unibo.artrat.utils.impl.Vector2d;
 
 /**
  * Interface that rappresents every "alive" object.
+ * 
+ * @author Samuele Trapani
  */
 public interface Entity extends GameObject {
 

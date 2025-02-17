@@ -2,6 +2,8 @@ package it.unibo.artrat.model.api.characters;
 
 /**
  * Class that rappresents enemy.
+ * 
+ * @author Samuele Trapani
  */
 public interface Enemy extends Entity {
     /**

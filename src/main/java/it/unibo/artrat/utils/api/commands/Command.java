@@ -4,6 +4,8 @@ import it.unibo.artrat.model.api.characters.Player;
 
 /**
  * Command interface for command pattern.
+ * 
+ * @author Samuele Trapani
  */
 public interface Command {
     /**

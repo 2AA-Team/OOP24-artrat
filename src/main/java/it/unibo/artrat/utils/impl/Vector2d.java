@@ -2,6 +2,8 @@ package it.unibo.artrat.utils.impl;
 
 /**
  * Vector that determines speed and direction.
+ * 
+ * @author Samuele Trapani
  */
 public final class Vector2d {
     /**

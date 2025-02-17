@@ -4,6 +4,8 @@ import it.unibo.artrat.utils.impl.Vector2d;
 
 /**
  * Allowed directions.
+ * 
+ * @author Samuele Trapani
  */
 public enum Directions {
     /**
