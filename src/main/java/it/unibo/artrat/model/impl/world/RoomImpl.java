@@ -30,24 +30,20 @@ public final class RoomImpl implements Room {
      * @param builder room builder
      */
     private RoomImpl(final RoomBuilder builder) {
-        GameObjectFactory factory = new GameObjectFactoryImpl();
+        final GameObjectFactory factory = new GameObjectFactoryImpl();
         roomStructure.addAll(builder.generationStrat.generateRoomSet(builder.size));
         roomEnemies.addAll(builder.enemyStrat.insertMultipleObject(
                 Stream.concat(roomStructure.stream(), roomValues.stream())
                         .collect(Collectors.toSet()),
                 builder.size,
                 builder.numEnemies,
-                (Integer x, Integer y) -> {
-                    return factory.getRandomEnemy(x, y);
-                }));
+                factory::getRandomEnemy));
         roomValues.addAll(builder.valuableStrat.insertMultipleObject(
                 Stream.concat(roomStructure.stream(), roomValues.stream())
                         .collect(Collectors.toSet()),
                 builder.size,
                 builder.numValues,
-                (Integer x, Integer y) -> {
-                    return factory.getValue(x, y);
-                }));
+                factory::getValue));
         this.createPassage(builder);
     }
 
@@ -98,8 +94,8 @@ public final class RoomImpl implements Room {
          */
         public RoomBuilder() {
             generationStrat = new RoomGenerationEmpty();
-            enemyStrat = new ObjectInsertionRandom<AbstractEntity>();
-            valuableStrat = new ObjectInsertionRandom<AbstractGameObject>();
+            enemyStrat = new ObjectInsertionRandom<>();
+            valuableStrat = new ObjectInsertionRandom<>();
             numEnemies = 0;
             numValues = 0;
             size = 4;
@@ -162,7 +158,7 @@ public final class RoomImpl implements Room {
         }
 
         /**
-         * set the insertion strategy for all the objects except the wall.
+         * set the insertion strategy for all the valuable objects.
          * 
          * @param insertStrat insertion strategy class
          * @return this room builder
@@ -175,6 +171,12 @@ public final class RoomImpl implements Room {
             return this;
         }
 
+        /**
+         * set the insertion strategy for all the enemies in the room.
+         * 
+         * @param insertStrat insertion strategy class
+         * @return this room builder
+         */
         public RoomBuilder insertInsertionStrategyEnemy(final ObjectInsertionStrategy<AbstractEntity> insertStrat) {
             if (insertStrat == null) {
                 throw new IllegalArgumentException("Insertion strategy cannot be null.");

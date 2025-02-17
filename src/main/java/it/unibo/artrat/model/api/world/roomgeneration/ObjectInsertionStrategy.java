@@ -7,17 +7,19 @@ import it.unibo.artrat.model.impl.AbstractGameObject;
 
 /**
  * strategy to describe the logic of placing some objects in a room.
+ * 
+ * @param <O> object type
  */
 public interface ObjectInsertionStrategy<O> {
 
     /**
-     * return a set of new objects.
+     * method to insert multiple object inside a room.
      * 
-     * @param baseRoom  the room in which to place the objects
+     * @param baseRoom  structure of the room
      * @param roomSize  size of the room
-     * @param obj       type of the object to add
-     * @param addNumber number of the objects to add
-     * @return set of the objects to add
+     * @param addNumber number of object to add
+     * @param factored  function that create the object to add
+     * @return set of object
      */
     Set<O> insertMultipleObject(Set<AbstractGameObject> baseRoom, int roomSize, int addNumber,
             BiFunction<Integer, Integer, O> factored);

@@ -15,6 +15,8 @@ import it.unibo.artrat.utils.impl.Vector2d;
  */
 public class GameObjectFactoryImpl implements GameObjectFactory {
 
+    private static final Random RANDOM = new Random();
+
     /**
      * {@inheritDoc}
      */
@@ -52,8 +54,8 @@ public class GameObjectFactoryImpl implements GameObjectFactory {
      */
     @Override
     public AbstractEntity getRandomEnemy(final int x, final int y) {
-        AbstractEntity a;
-        switch (new Random().nextInt(2)) {
+        final AbstractEntity a;
+        switch (RANDOM.nextInt(2)) {
             case 1:
                 a = new AdvancedEnemy(new Point(), new Point());
                 break;

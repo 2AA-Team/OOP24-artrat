@@ -48,7 +48,7 @@ public class FloorImpl implements Floor {
      */
     @Override
     public Set<AbstractGameObject> getWalls() {
-        return floorStructure;
+        return new HashSet<>(floorStructure);
     }
 
     /**
@@ -56,7 +56,7 @@ public class FloorImpl implements Floor {
      */
     @Override
     public Set<AbstractEntity> getEnemies() {
-        return floorEnemies;
+        return new HashSet<>(floorEnemies);
     }
 
     /**
@@ -64,7 +64,7 @@ public class FloorImpl implements Floor {
      */
     @Override
     public Set<AbstractGameObject> getValues() {
-        return floorValues;
+        return new HashSet<>(floorValues);
     }
 
     /**
@@ -176,27 +176,30 @@ public class FloorImpl implements Floor {
         this.floorEnemies.addAll(tmpEnemies);
     }
 
-    public void print() {
-        double sizeTot = this.maxFloorSize * this.maxRoomSize;
-        for (double i = 0; i < sizeTot; i++) {
-            for (double j = 0; j < sizeTot; j++) {
-                final double x = j;
-                final double y = i;
-                if (this.floorStructure.stream()
-                        .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y)) {
-                    System.out.print("#");
-                } else if (this.floorEnemies.stream()
-                        .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y)) {
-                    System.out.print("X");
-                } else if (this.floorValues.stream()
-                        .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y)) {
-                    System.out.print("Y");
-                } else {
-                    System.out.print(" ");
-                }
-            }
-            System.out.println();
-        }
-    }
+    // public void print() {
+    // double sizeTot = this.maxFloorSize * this.maxRoomSize;
+    // for (double i = 0; i < sizeTot; i++) {
+    // for (double j = 0; j < sizeTot; j++) {
+    // final double x = j;
+    // final double y = i;
+    // if (this.floorStructure.stream()
+    // .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y))
+    // {
+    // System.out.print("#");
+    // } else if (this.floorEnemies.stream()
+    // .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y))
+    // {
+    // System.out.print("X");
+    // } else if (this.floorValues.stream()
+    // .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y))
+    // {
+    // System.out.print("Y");
+    // } else {
+    // System.out.print(" ");
+    // }
+    // }
+    // System.out.println();
+    // }
+    // }
 
 }

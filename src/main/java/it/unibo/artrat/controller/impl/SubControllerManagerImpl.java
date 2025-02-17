@@ -26,8 +26,9 @@ public class SubControllerManagerImpl implements SubControllerManager {
     /**
      * constructor that define all subController.
      * 
-     * @param mainController
-     * @throws IOException
+     * @param mainController main controller
+     * @param rl             resource loader for configuration purpose
+     * @throws IOException If the resource loader has issues reading the file
      */
     public SubControllerManagerImpl(final MainControllerImpl mainController, final ResourceLoader<String, Double> rl)
             throws IOException {

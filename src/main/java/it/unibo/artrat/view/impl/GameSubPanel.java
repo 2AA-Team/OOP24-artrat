@@ -13,7 +13,7 @@ public class GameSubPanel extends AbstractSubPanel {
      * 
      * @param gameSubController sub controller for the game
      */
-    public GameSubPanel(GameSubController gameSubController) {
+    public GameSubPanel(final GameSubController gameSubController) {
         this.gameSubController = gameSubController;
     }
 

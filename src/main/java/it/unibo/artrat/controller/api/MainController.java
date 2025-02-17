@@ -57,6 +57,11 @@ public interface MainController {
      */
     SubControllerManager getControllerManager();
 
+    /**
+     * getter for current stage.
+     * 
+     * @return the current stage
+     */
     Stage getStage();
 
 }

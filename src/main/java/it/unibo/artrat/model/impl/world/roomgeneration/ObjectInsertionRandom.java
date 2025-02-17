@@ -47,7 +47,7 @@ public class ObjectInsertionRandom<O> implements ObjectInsertionStrategy<O> {
      */
     @Override
     public ObjectInsertionStrategy<O> cloneStrategy() {
-        return new ObjectInsertionRandom<O>();
+        return new ObjectInsertionRandom<>();
     }
 
 }

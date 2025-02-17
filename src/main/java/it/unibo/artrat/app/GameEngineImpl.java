@@ -57,7 +57,7 @@ public final class GameEngineImpl implements GameEngine, Sender {
      */
     @Override
     public ResourceLoader<String, Double> getResourceLoader() {
-        return this.resourceLoader;
+        return this.resourceLoader != null ? this.resourceLoader : null;
     }
 
     /**
