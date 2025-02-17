@@ -1,13 +1,14 @@
 package it.unibo.artrat.world;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Set;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import it.unibo.artrat.model.api.characters.AbstractEntity;
 import it.unibo.artrat.model.impl.AbstractGameObject;
 import it.unibo.artrat.model.api.world.Room;
@@ -38,10 +39,10 @@ class RoomImplTest {
     void testRoomCreation() {
         assertNotNull(room, "The RoomImpl object should not be null");
         assertNotNull(room.getStructure(), "Room structure should not be null");
-        Set<AbstractEntity> enemies = room.getEnemies();
+        final Set<AbstractEntity> enemies = room.getEnemies();
         assertNotNull(enemies, "Room enemies set should not be null");
         assertEquals(2, enemies.size(), "The number of enemies should be as set in the builder");
-        Set<AbstractGameObject> values = room.getValues();
+        final Set<AbstractGameObject> values = room.getValues();
         assertNotNull(values, "Room values set should not be null");
         assertEquals(3, values.size(), "The number of values should match what was set in the builder");
     }
@@ -49,12 +50,14 @@ class RoomImplTest {
     @Test
     @DisplayName("Test Room Passage Creation")
     void testRoomPassages() {
-        Set<AbstractGameObject> structure = room.getStructure();
-        long upWalls = structure.stream()
+        final Set<AbstractGameObject> structure = room.getStructure();
+        final long upWalls = structure.stream()
                 .filter(obj -> obj.getPosition().getY() == 0).count();
-        long rightWalls = structure.stream()
+        final long rightWalls = structure.stream()
                 .filter(obj -> obj.getPosition().getX() == 4).count();
-
+        final long leftWalls = structure.stream()
+                .filter(obj -> obj.getPosition().getX() == 0).count();
+        assertFalse(leftWalls < SIZE, "The left passage should be closed");
         assertTrue(upWalls < SIZE, "The top passage should be open");
         assertTrue(rightWalls < SIZE, "The right passage should be open");
     }

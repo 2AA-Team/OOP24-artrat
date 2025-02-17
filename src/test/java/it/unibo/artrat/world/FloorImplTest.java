@@ -1,6 +1,9 @@
 package it.unibo.artrat.world;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +17,6 @@ import it.unibo.artrat.utils.impl.ResourceLoaderImpl;
 class FloorImplTest {
 
     private Floor floor;
-    private ResourceLoaderImpl<String, Double> resourceLoader;
     private final String baseConfigPath = "src" + File.separator
             + "test" + File.separator
             + "java" + File.separator
@@ -25,6 +27,7 @@ class FloorImplTest {
 
     @BeforeEach
     void setUp() throws IOException {
+        ResourceLoaderImpl<String, Double> resourceLoader;
         resourceLoader = new ResourceLoaderImpl<>();
         resourceLoader.setConfigPath(baseConfigPath + "floorImplTest.yaml");
         floor = new FloorImpl(resourceLoader);
@@ -39,7 +42,7 @@ class FloorImplTest {
     @Test
     @DisplayName("Test floor structure generation")
     void testGenerateFloorSet() {
-        assertDoesNotThrow(() -> floor.generateFloorSet(), "Generating the floor should not throw exceptions");
+        assertDoesNotThrow(floor::generateFloorSet, "Generating the floor should not throw exceptions");
         assertNotNull(floor.getWalls(), "Walls should not be null");
         assertNotNull(floor.getEnemies(), "Enemies should not be null");
         assertNotNull(floor.getValues(), "Values should not be null");
@@ -49,8 +52,7 @@ class FloorImplTest {
     @Test
     @DisplayName("Test invalid configuration handling")
     void testInvalidConfig() throws IOException {
-        // Create a new resource loader with invalid values
-        ResourceLoaderImpl<String, Double> invalidLoader = new ResourceLoaderImpl<>();
+        final ResourceLoaderImpl<String, Double> invalidLoader = new ResourceLoaderImpl<>();
         invalidLoader.setConfigPath(baseConfigPath + "floorImplTestNeg.yaml");
         assertThrows(IOException.class, () -> new FloorImpl(invalidLoader),
                 "Should throw an exception if configuration values are invalid");
@@ -60,8 +62,7 @@ class FloorImplTest {
     @DisplayName("Test IOException handling during room generation")
     void testGenerateRoomsIOException() {
         assertThrows(IllegalStateException.class, () -> {
-            // Create a FloorImpl with a non-existing resource file
-            FloorImpl faultyFloor = new FloorImpl(new ResourceLoaderImpl<>());
+            final FloorImpl faultyFloor = new FloorImpl(new ResourceLoaderImpl<>());
             faultyFloor.generateFloorSet();
         }, "Should throw an IOException if the resource file is missing");
     }
