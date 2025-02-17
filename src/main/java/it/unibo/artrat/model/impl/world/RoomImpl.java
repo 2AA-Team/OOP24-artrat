@@ -5,6 +5,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import it.unibo.artrat.model.impl.AbstractGameObject;
+import it.unibo.artrat.model.impl.GameObjectFactoryImpl;
+import it.unibo.artrat.model.api.GameObjectFactory;
+import it.unibo.artrat.model.api.characters.AbstractEntity;
 import it.unibo.artrat.model.api.world.Room;
 import it.unibo.artrat.model.api.world.roomgeneration.ObjectInsertionStrategy;
 import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;
@@ -18,7 +21,7 @@ import it.unibo.artrat.utils.impl.Point;
 public final class RoomImpl implements Room {
 
     private final Set<AbstractGameObject> roomStructure = new HashSet<>();
-    private final Set<AbstractGameObject> roomEnemies = new HashSet<>();
+    private final Set<AbstractEntity> roomEnemies = new HashSet<>();
     private final Set<AbstractGameObject> roomValues = new HashSet<>();
 
     /**
@@ -27,19 +30,24 @@ public final class RoomImpl implements Room {
      * @param builder room builder
      */
     private RoomImpl(final RoomBuilder builder) {
+        GameObjectFactory factory = new GameObjectFactoryImpl();
         roomStructure.addAll(builder.generationStrat.generateRoomSet(builder.size));
-        roomEnemies.addAll(builder.insertStrat.insertMultipleObject(
+        roomEnemies.addAll(builder.enemyStrat.insertMultipleObject(
                 Stream.concat(roomStructure.stream(), roomValues.stream())
                         .collect(Collectors.toSet()),
                 builder.size,
-                RoomSymbols.ENEMY,
-                builder.numEnemies));
-        roomValues.addAll(builder.insertStrat.insertMultipleObject(
-                Stream.concat(roomStructure.stream(), roomEnemies.stream())
+                builder.numEnemies,
+                (Integer x, Integer y) -> {
+                    return factory.getRandomEnemy(x, y);
+                }));
+        roomValues.addAll(builder.valuableStrat.insertMultipleObject(
+                Stream.concat(roomStructure.stream(), roomValues.stream())
                         .collect(Collectors.toSet()),
                 builder.size,
-                RoomSymbols.VALUE,
-                builder.numValues));
+                builder.numValues,
+                (Integer x, Integer y) -> {
+                    return factory.getValue(x, y);
+                }));
         this.createPassage(builder);
     }
 
@@ -75,7 +83,8 @@ public final class RoomImpl implements Room {
     public static class RoomBuilder {
 
         private RoomGenerationStrategy generationStrat;
-        private ObjectInsertionStrategy insertStrat;
+        private ObjectInsertionStrategy<AbstractEntity> enemyStrat;
+        private ObjectInsertionStrategy<AbstractGameObject> valuableStrat;
         private int numEnemies;
         private int numValues;
         private int size;
@@ -89,7 +98,8 @@ public final class RoomImpl implements Room {
          */
         public RoomBuilder() {
             generationStrat = new RoomGenerationEmpty();
-            insertStrat = new ObjectInsertionRandom();
+            enemyStrat = new ObjectInsertionRandom<AbstractEntity>();
+            valuableStrat = new ObjectInsertionRandom<AbstractGameObject>();
             numEnemies = 0;
             numValues = 0;
             size = 4;
@@ -157,11 +167,19 @@ public final class RoomImpl implements Room {
          * @param insertStrat insertion strategy class
          * @return this room builder
          */
-        public RoomBuilder insertInsertionStrategy(final ObjectInsertionStrategy insertStrat) {
+        public RoomBuilder insertInsertionStrategyValue(final ObjectInsertionStrategy<AbstractGameObject> insertStrat) {
             if (insertStrat == null) {
                 throw new IllegalArgumentException("Insertion strategy cannot be null.");
             }
-            this.insertStrat = insertStrat.cloneStrategy();
+            this.valuableStrat = insertStrat.cloneStrategy();
+            return this;
+        }
+
+        public RoomBuilder insertInsertionStrategyEnemy(final ObjectInsertionStrategy<AbstractEntity> insertStrat) {
+            if (insertStrat == null) {
+                throw new IllegalArgumentException("Insertion strategy cannot be null.");
+            }
+            this.enemyStrat = insertStrat.cloneStrategy();
             return this;
         }
 
@@ -207,7 +225,7 @@ public final class RoomImpl implements Room {
      * {@inheritDoc}
      */
     @Override
-    public Set<AbstractGameObject> getEnemies() {
+    public Set<AbstractEntity> getEnemies() {
         return new HashSet<>(this.roomEnemies);
     }
 

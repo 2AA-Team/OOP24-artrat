@@ -3,16 +3,16 @@ package it.unibo.artrat.model.impl.world.roomgeneration;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
-import it.unibo.artrat.model.impl.AbstractGameObject;
-import it.unibo.artrat.model.api.GameObjectFactory;
+import java.util.function.BiFunction;
 import it.unibo.artrat.model.api.world.roomgeneration.ObjectInsertionStrategy;
-import it.unibo.artrat.model.impl.GameObjectFactoryImpl;
-import it.unibo.artrat.model.impl.world.RoomSymbols;
+import it.unibo.artrat.model.impl.AbstractGameObject;
 
 /**
  * random insertion method.
+ * 
+ * @param <O>
  */
-public class ObjectInsertionRandom implements ObjectInsertionStrategy {
+public class ObjectInsertionRandom<O> implements ObjectInsertionStrategy<O> {
 
     private static final Random RANDOM = new Random();
 
@@ -20,12 +20,12 @@ public class ObjectInsertionRandom implements ObjectInsertionStrategy {
      * {@inheritDoc}
      */
     @Override
-    public Set<AbstractGameObject> insertMultipleObject(
+    public Set<O> insertMultipleObject(
             final Set<AbstractGameObject> baseRoom,
             final int roomSize,
-            final RoomSymbols obj,
-            final int addNumber) {
-        final Set<AbstractGameObject> newObjects = new HashSet<>();
+            final int addNumber,
+            final BiFunction<Integer, Integer, O> factored) {
+        final Set<O> newObjects = new HashSet<>();
         boolean exit = false;
         while (newObjects.size() < addNumber && !exit) {
             final int x = RANDOM.nextInt(1, roomSize - 1);
@@ -34,17 +34,7 @@ public class ObjectInsertionRandom implements ObjectInsertionStrategy {
             if (baseRoom.stream().noneMatch((o) -> {
                 return ((int) o.getPosition().getX()) == x && ((int) o.getPosition().getY()) == y;
             })) {
-                final GameObjectFactory factory = new GameObjectFactoryImpl();
-                switch (obj) {
-                    case RoomSymbols.ENEMY:
-                        newObjects.add(factory.getEnemy(x, y));
-                        break;
-                    case RoomSymbols.VALUE:
-                        newObjects.add(factory.getValue(x, y));
-                        break;
-                    default:
-                        throw new IllegalArgumentException(obj + " insertion not implemented.");
-                }
+                newObjects.add(factored.apply(x, y));
             } else {
                 exit = true;
             }
@@ -56,8 +46,8 @@ public class ObjectInsertionRandom implements ObjectInsertionStrategy {
      * {@inheritDoc}
      */
     @Override
-    public ObjectInsertionStrategy cloneStrategy() {
-        return new ObjectInsertionRandom();
+    public ObjectInsertionStrategy<O> cloneStrategy() {
+        return new ObjectInsertionRandom<O>();
     }
 
 }

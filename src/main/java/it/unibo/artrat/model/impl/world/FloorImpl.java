@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import it.unibo.artrat.model.impl.AbstractGameObject;
+import it.unibo.artrat.model.api.characters.AbstractEntity;
 import it.unibo.artrat.model.api.world.Floor;
 import it.unibo.artrat.model.api.world.Room;
 import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;
@@ -21,7 +22,7 @@ public class FloorImpl implements Floor {
 
     private static final Random RANDOM = new Random();
     private Set<AbstractGameObject> floorStructure = new HashSet<>();
-    private Set<AbstractGameObject> floorEnemies = new HashSet<>();
+    private Set<AbstractEntity> floorEnemies = new HashSet<>();
     private Set<AbstractGameObject> floorValues = new HashSet<>();
     private boolean[][] floorMap;
     private final double maxFloorSize;
@@ -54,7 +55,7 @@ public class FloorImpl implements Floor {
      * {@inheritDoc}
      */
     @Override
-    public Set<AbstractGameObject> getEnemies() {
+    public Set<AbstractEntity> getEnemies() {
         return floorEnemies;
     }
 
@@ -170,36 +171,32 @@ public class FloorImpl implements Floor {
         tmpValues.forEach((w) -> w.movedPosition(roomX * roomSize, roomY * roomSize));
         this.floorValues.addAll(tmpValues);
 
-        final Set<AbstractGameObject> tmpEnemies = room.getEnemies();
+        final Set<AbstractEntity> tmpEnemies = room.getEnemies();
         tmpEnemies.forEach((w) -> w.movedPosition(roomX * roomSize, roomY * roomSize));
         this.floorEnemies.addAll(tmpEnemies);
     }
 
-    /**
-     * public void print() {
-     * int sizeTot = this.maxFloorSize * this.maxRoomSize;
-     * for (double i = 0; i < sizeTot; i++) {
-     * for (double j = 0; j < sizeTot; j++) {
-     * final double x = j;
-     * final double y = i;
-     * if (this.roomStructure.stream()
-     * .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y))
-     * {
-     * System.out.print("#");
-     * } else if (this.roomEnemies.stream()
-     * .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y))
-     * {
-     * System.out.print("X");
-     * } else if (this.roomValues.stream()
-     * .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y))
-     * {
-     * System.out.print("Y");
-     * } else {
-     * System.out.print(" ");
-     * }
-     * }
-     * System.out.println();
-     * }
-     * }
-     */
+    public void print() {
+        double sizeTot = this.maxFloorSize * this.maxRoomSize;
+        for (double i = 0; i < sizeTot; i++) {
+            for (double j = 0; j < sizeTot; j++) {
+                final double x = j;
+                final double y = i;
+                if (this.floorStructure.stream()
+                        .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y)) {
+                    System.out.print("#");
+                } else if (this.floorEnemies.stream()
+                        .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y)) {
+                    System.out.print("X");
+                } else if (this.floorValues.stream()
+                        .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y)) {
+                    System.out.print("Y");
+                } else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
 }

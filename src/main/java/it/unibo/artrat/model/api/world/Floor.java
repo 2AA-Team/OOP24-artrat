@@ -2,6 +2,8 @@ package it.unibo.artrat.model.api.world;
 
 import java.io.IOException;
 import java.util.Set;
+
+import it.unibo.artrat.model.api.characters.AbstractEntity;
 import it.unibo.artrat.model.impl.AbstractGameObject;
 
 /**
@@ -35,5 +37,5 @@ public interface Floor {
      * 
      * @return a set of AbstractGameObject
      */
-    Set<AbstractGameObject> getEnemies();
+    Set<AbstractEntity> getEnemies();
 }

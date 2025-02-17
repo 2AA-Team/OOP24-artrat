@@ -1,5 +1,7 @@
 package it.unibo.artrat.model.api;
 
+import it.unibo.artrat.model.api.characters.AbstractEntity;
+import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.impl.AbstractGameObject;
 
 /**
@@ -23,7 +25,7 @@ public interface GameObjectFactory {
      * @param y y position
      * @return the game object for the player
      */
-    AbstractGameObject getPlayer(int x, int y);
+    Player getPlayer(int x, int y);
 
     /**
      * create a new enemy game object.
@@ -32,7 +34,7 @@ public interface GameObjectFactory {
      * @param y y position
      * @return the game object for the enemy
      */
-    AbstractGameObject getEnemy(int x, int y);
+    AbstractEntity getRandomEnemy(int x, int y);
 
     /**
      * create a new valuable object game object.
