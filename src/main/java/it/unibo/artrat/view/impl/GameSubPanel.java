@@ -1,6 +1,11 @@
 package it.unibo.artrat.view.impl;
 
+import java.awt.BorderLayout;
+import java.io.IOException;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 import it.unibo.artrat.controller.api.subcontroller.GameSubController;
+import it.unibo.artrat.model.impl.Stage;
 
 /**
  * game sub panel class.
@@ -19,17 +24,22 @@ public class GameSubPanel extends AbstractSubPanel {
 
     /**
      * {@inheritDoc}
+     * 
      */
     @Override
     public void initComponents() {
-        forceRedraw();
+        final JPanel panel = new JPanel();
+        final JButton btn = new JButton("clacla");
+        btn.addActionListener((e) -> {
+            this.gameSubController.setStage(Stage.MENU);
+        });
+        setPanel(panel);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void forceRedraw() {
-        this.gameSubController.getVisibleWallPositions();
+    public void forceRedraw() {
     }
 }

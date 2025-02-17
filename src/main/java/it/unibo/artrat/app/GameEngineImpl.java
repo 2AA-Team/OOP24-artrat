@@ -65,9 +65,7 @@ public final class GameEngineImpl implements GameEngine, Sender {
      */
     @Override
     public void run() {
-        mainController.addMainView(new MainViewImpl(
-                resourceLoader.getConfig("MENU_WIDTH"),
-                resourceLoader.getConfig("MENU_HEIGHT")));
+        mainController.addMainView(new MainViewImpl(resourceLoader));
         mainLoop();
     }
 
