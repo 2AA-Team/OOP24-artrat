@@ -18,11 +18,11 @@ import it.unibo.artrat.view.impl.MainViewImpl;
 /**
  * Implement game engine.
  * 
- * @author Matteo Tonelli
  */
 public final class GameEngineImpl implements GameEngine, Sender {
     private final List<Command> commands = new LinkedList<>();
 
+    // TODO add Room for GameObjects' access.
     private enum GameStatus {
         STOPPED, RUNNING
     }
@@ -42,21 +42,32 @@ public final class GameEngineImpl implements GameEngine, Sender {
 
     /**
      * Game engine constructor.
+     * 
+     * @throws IOException
      */
-    public GameEngineImpl() {
+    public GameEngineImpl() throws IOException {
         this.status = GameStatus.STOPPED;
         this.resourceLoader = new ResourceLoaderImpl<>();
+        this.initiateResources();
         mainController = new MainControllerImpl(this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ResourceLoader<String, Double> getResourceLoader() {
+        return this.resourceLoader != null ? this.resourceLoader : null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void run() {
-        if (!initiateResources()) {
-            Runtime.getRuntime().exit(1);
-        }
         mainController.addMainView(new MainViewImpl(
-                (double) resourceLoader.getConfig("MENU_WIDTH"),
-                (double) resourceLoader.getConfig("MENU_HEIGHT")));
+                resourceLoader.getConfig("MENU_WIDTH"),
+                resourceLoader.getConfig("MENU_HEIGHT")));
         mainLoop();
     }
 
@@ -74,7 +85,7 @@ public final class GameEngineImpl implements GameEngine, Sender {
                 delta += (currentTime - lastTime) / drawInterval;
                 lastTime = currentTime;
                 if (delta >= 1) {
-                    this.commands.stream().forEach(Command::execute);
+                    // this.commands.forEach(Command::execute););
                     this.commands.clear();
                     this.update();
                     this.redraw();

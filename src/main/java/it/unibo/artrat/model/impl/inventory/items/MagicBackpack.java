@@ -15,14 +15,16 @@ public class MagicBackpack extends AbstractItem {
      * A constructor to initialize the new item MagicBackpack.
      * @param desc the description of Magic Backpack.
      * @param price the price of Magic Backpack.
-     * @param type the item type of Magic Backpack.
+     * @param itemType the item type of Magic Backpack.
      */
     public MagicBackpack(final String desc, final double price, final ItemType itemType) {
         super(desc, price, itemType);
     }
-    
+    /**
+     * {@inheritDoc}
+    */
     @Override
-    public Player consume(Player player) {
+    public Player consume(final Player player) {
         final Inventory inventory = player.getInventory();
         inventory.getStoredItem().stream().forEach(inventory::useItem);
         player.setInventory(new InventoryImpl(inventory));

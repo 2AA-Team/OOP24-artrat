@@ -13,7 +13,6 @@ import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.inventory.Inventory;
 import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.impl.ModelImpl;
-import it.unibo.artrat.model.impl.characters.PlayerImpl;
 import it.unibo.artrat.view.api.InventoryView;
 import it.unibo.artrat.view.impl.InventorySubPanel;
 
@@ -54,8 +53,8 @@ public class InventorySubControllerImpl extends AbstractSubController implements
         final Inventory inv = player.getInventory();
         if (inv.useItem(passedItem)) {
             player.setInventory(inv);
-            final Player modifiedPlayer = passedItem.consume(new PlayerImpl(player));
-            model.setPlayer(new PlayerImpl(modifiedPlayer));
+            final Player modifiedPlayer = passedItem.consume(player.copyPlayer());
+            model.setPlayer(modifiedPlayer.copyPlayer());
             this.updateCentralizeModel(new ModelImpl(model));
             return true;
         }
@@ -66,11 +65,16 @@ public class InventorySubControllerImpl extends AbstractSubController implements
      * {@inheritDoc}
      */
     @Override
-    public String getItemName(Item passedItem) {
+    public String getItemName(final Item passedItem) {
         return passedItem.getClass().getSimpleName();
     }
+<<<<<<< HEAD
     /*
     private String getTypeName(Item passedItem) {
+=======
+
+    private String getTypeName(final Item passedItem) {
+>>>>>>> origin/master
         return this.getModel().getPlayer().getInventory().getStoredItem().stream().filter(x -> x.equals(passedItem))
         .map(x -> x.getType().name()).findAny().get();
     }*/
@@ -79,10 +83,13 @@ public class InventorySubControllerImpl extends AbstractSubController implements
      * {@inheritDoc}
      */
     @Override
-    public void obtainDescription(Item passedItem) {
+    public void obtainDescription(final Item passedItem) {
         this.inventoryView.displayMessage(this.getModel().getPlayer().getInventory().getStoredItem().stream()
-        .filter(x -> x.equals(passedItem)).map(Item::getDescription).findAny().get() + "\nTYPE: " +getTypeName(passedItem), "Descrizione Oggetto");
+        .filter(x -> x.equals(passedItem))
+        .map(Item::getDescription).findAny().get() + "\nTYPE: " + getTypeName(passedItem),
+        "Descrizione Oggetto");
     }
+<<<<<<< HEAD
 
     @Override
     public Icon getTypeName(Item item) {
@@ -90,4 +97,6 @@ public class InventorySubControllerImpl extends AbstractSubController implements
         throw new UnsupportedOperationException("Unimplemented method 'getTypeName'");
     }
 
+=======
+>>>>>>> origin/master
 }

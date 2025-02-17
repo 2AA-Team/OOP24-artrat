@@ -15,18 +15,20 @@ public class MysteriousStaff extends AbstractItem {
      * A constructor to initialize the new item Mysterious Staff.
      * @param desc the description of Mysterious Staff.
      * @param price the price of Mysterious Staff.
-     * @param type the item type of Mysterious Staff.
+     * @param itemType the item type of Mysterious Staff.
      */
     public MysteriousStaff(final String desc, final double price, final ItemType itemType) {
         super(desc, price, itemType);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Player consume(Player player) {
+    public Player consume(final Player player) {
         final Inventory inventory = player.getInventory();
-        inventory.getStoredItem().stream().forEach(x -> inventory.addItem(x));
+        inventory.getStoredItem().stream().forEach(inventory::addItem);
         player.setInventory(new InventoryImpl(inventory));
         return player;
     }
-    
 }

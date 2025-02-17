@@ -1,7 +1,11 @@
 package it.unibo.artrat.utils.impl;
 
+import java.util.Objects;
+
 /**
  * Point is used to define the space where game objects can be.
+ * 
+ * @author Samuele Trapani
  */
 public final class Point {
     private double x;
@@ -24,6 +28,16 @@ public final class Point {
     public Point() {
         this.x = 0;
         this.y = 0;
+    }
+
+    /**
+     * Point constructor starting from a given point.
+     * 
+     * @param p point to be copied
+     */
+    public Point(final Point p) {
+        this.x = p.x;
+        this.y = p.y;
     }
 
     /**
@@ -92,6 +106,28 @@ public final class Point {
         final double distX = this.x - p.x;
         final double distY = this.y - p.y;
         return Math.sqrt(distX * distX + distY * distY);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        long temp;
+        temp = Double.doubleToLongBits(x);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(y);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (Objects.isNull(obj)) {
+            return false;
+        }
+        assert obj.getClass() == Point.class;
+        final Point p = (Point) Objects.requireNonNull(obj);
+        return Double.valueOf(this.x).equals(p.x) && Double.valueOf(this.y).equals(p.y);
     }
 
 }

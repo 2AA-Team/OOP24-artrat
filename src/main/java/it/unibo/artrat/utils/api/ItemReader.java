@@ -15,14 +15,7 @@ public interface ItemReader {
      * @param itemPath file that contains all item.
      * @throws IOException if configPath not represent anything:
      */
-    void readFromItemFile(String itemPath) throws IOException;    
-
-    /**
-     * @author Manuel Benagli
-     * @return
-     */
-    List<String> getAllItemsList();
-
+    void readFromItemFile(String itemPath) throws IOException;
     /**
      * 
      * @param nameOfItem desired item from the file.
@@ -42,5 +35,5 @@ public interface ItemReader {
      * @param nameOfItem desired item from the file.
      * @return The ItemTypes of the desired item.
      */
-    ItemType getItemType(String nameOfItem);    
+    ItemType getItemType(String nameOfItem);
 }
