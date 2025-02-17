@@ -70,7 +70,7 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
 
         for (final var item : controller.getStoredItem()) { // observer.getStoredItem() {
             final JPanel itemPanel = new JPanel(new GridLayout(1, 2, 5, 0)); // Due colonne: itemButton e useButton
-            final JButton itemButton = new JButton(controller.getTypeName(item));
+            final JButton itemButton = new JButton(controller.getItemName(item));
             final JButton useButton = new JButton("Usa");
 
             itemButton.addActionListener(new ActionListener(){

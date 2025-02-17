@@ -79,8 +79,8 @@ public class ItemFactoryImpl implements ItemFactory {
     */
     @Override
     public Item mysterioustaff() {
-        return new MysteriousStaff(itemReader.getDescription("MYSTERIOUSSTAFF"), 
-        itemReader.getPrice("MYSTERIOUSSTAFF"), 
-        itemReader.getItemType("MYSTERIOUSSTAFF"));
+        return new MysteriousStaff(itemReader.getDescription("MYSTERIOUSTAFF"), 
+        itemReader.getPrice("MYSTERIOUSTAFF"), 
+        itemReader.getItemType("MYSTERIOUSTAFF"));
     }
 }

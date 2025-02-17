@@ -1,51 +1,44 @@
 package it.unibo.artrat.utils.impl;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import org.yaml.snakeyaml.Yaml;
 
 import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.utils.api.ItemReader;
-import it.unibo.artrat.utils.api.ResourceLoader;
 
 /**
  * An implementation of ItemReader.
  */
 public class ItemReaderImpl implements ItemReader {
-    /**
-     * The actual reader from yaml.
-     */
-    private final ResourceLoader<String, List<String>> valueOfYaml;
-
-
-    /**
-     * A constructor that initializes an instance of Resource Loader.
-     */
-    public ItemReaderImpl() {
-        this.valueOfYaml = new ResourceLoaderImpl<>();
-    }
-
-    /**
-     * @author Manuel Benagli
-     * @return
-     */
-    @Override
-    public List<String> getAllItemsList(){
-        return valueOfYaml.getConfig("");   //prende tutto lo yaml, è sbagliato
-    }
+    
+    private Map<String, List<String>> obj = new HashMap<>();
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void readFromItemFile(final String itemPath) throws IOException {
-        this.valueOfYaml.setConfigPath(itemPath);
+        final Yaml yaml = new Yaml();
+        final InputStream inputStream = new FileInputStream(new File(itemPath));
+        this.obj = Map.copyOf(yaml.load(inputStream));
+        inputStream.close();
     }
 
     private String getSpecificField(final String nameOfItem, final int field) {
-        return valueOfYaml.getConfig(nameOfItem).get(field);
+        final Object ob = obj.get(nameOfItem);
+        if (ob != null) {
+            return ((List<String>)ob).get(field);
+        } else {
+            throw new IllegalStateException("This conf doesn't exist.");
+        }
     } 
 
     /**
@@ -53,7 +46,7 @@ public class ItemReaderImpl implements ItemReader {
      */
     @Override
     public String getDescription(final String nameOfItem) {
-        return getSpecificField(nameOfItem, 1);
+        return getSpecificField(nameOfItem, 0);
     }
 
     /**
@@ -61,7 +54,7 @@ public class ItemReaderImpl implements ItemReader {
      */
     @Override
     public double getPrice(final String nameOfItem) {
-        return Double.parseDouble(getSpecificField(nameOfItem, 2));
+        return Double.parseDouble(getSpecificField(nameOfItem, 1));
     }
 
     /**
@@ -69,7 +62,7 @@ public class ItemReaderImpl implements ItemReader {
      */
     @Override
     public ItemType getItemType(final String nameOfItem) {
-        switch (getSpecificField(nameOfItem, 3)) {
+        switch (getSpecificField(nameOfItem, 2)) {
             case "CONSUMABLE":
                 return ItemType.CONSUMABLE;
             case "POWERUP":
@@ -78,5 +71,9 @@ public class ItemReaderImpl implements ItemReader {
                 break;
         }
         return null;
+    }
+
+    public Set<String> getAllItemsName() {
+        return this.obj.keySet();
     }
 }

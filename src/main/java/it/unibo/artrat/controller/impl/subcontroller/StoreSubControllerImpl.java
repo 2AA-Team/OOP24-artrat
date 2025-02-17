@@ -3,8 +3,6 @@ package it.unibo.artrat.controller.impl.subcontroller;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
-
 import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
@@ -16,7 +14,6 @@ import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.model.api.market.ItemManager;
 import it.unibo.artrat.model.api.market.Market;
 import it.unibo.artrat.model.impl.ModelImpl;
-import it.unibo.artrat.model.impl.characters.PlayerImpl;
 import it.unibo.artrat.model.impl.market.ItemManagerImpl;
 import it.unibo.artrat.model.impl.market.MarketImpl;
 import it.unibo.artrat.view.api.MarketView;
@@ -41,6 +38,7 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
 
     @Override
     public List<Item> purchasableItems() {
+        System.out.println(this.getModel().getMarket().getPurchItems());
         return new ArrayList<>(this.getModel().getMarket().getPurchItems());
     }
 
@@ -50,17 +48,17 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
         final Player player = model.getPlayer();
         final Market market = this.getModel().getMarket();
         final Inventory inventory = player.getInventory();
-       /*   if(market.buyItem(itemToBuy)){*/
+       if(market.buyItem(itemToBuy)) {
             if(player.getCoin().getCurrentAmount() >= itemToBuy.getPrice()){
-                player.getCoin().spendCoins(itemToBuy.getPrice());
+                player.spendCoins(itemToBuy.getPrice());
                 inventory.addItem(itemToBuy);       //aggiungo l'item all'inventario
                 player.setInventory(inventory);
-                model.setMarket(new MarketImpl());
-                model.setPlayer(new PlayerImpl());
+                model.setMarket(market);
+                model.setPlayer(player.copyPlayer());
                 this.updateCentralizeModel(new ModelImpl(model));
                 return true;
             }
-        /* }*/
+        }
         return false;
     }
 

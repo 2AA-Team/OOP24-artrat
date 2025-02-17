@@ -10,8 +10,9 @@ import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.model.api.market.Market;
 import it.unibo.artrat.model.impl.inventory.ItemFactoryImpl;
 import it.unibo.artrat.utils.api.ItemReader;
+import it.unibo.artrat.utils.impl.ItemReaderImpl;
 
-public class MarketImpl implements Market{    
+public class MarketImpl implements Market {    
     private final String itemPath = "src" + File.separator
             + "main" + File.separator
             + "java" + File.separator
@@ -23,24 +24,33 @@ public class MarketImpl implements Market{
             + "items.yaml";
 
     private List<Item> itemsToBuy;
-    private String descr;
-    private double price;
-    private ItemType type;
+    private final ItemReader itemReader;
+    private final ItemFactoryImpl itemFactory;
 
     public MarketImpl(){
         this.itemsToBuy = new ArrayList<>();
+        this.itemReader = new ItemReaderImpl();
+        this.itemFactory = new ItemFactoryImpl();
+        try {
+            initMarket();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
-    public MarketImpl(ItemReader itemReader) throws IOException {
+    public MarketImpl(Market mark) {
         this.itemsToBuy = new ArrayList<>();
-        itemReader.readFromItemFile(itemPath);
-        for (String itemName : itemReader.getAllItemsList()){
-            this.descr = itemReader.getDescription(itemName);
-            this.price = itemReader.getPrice(itemName);
-            this.type = itemReader.getItemType(itemName);
+        this.itemsToBuy.addAll(mark.getPurchItems());
+        this.itemReader = new ItemReaderImpl();
+        this.itemFactory = new ItemFactoryImpl();
+    }
 
-           // final Item item = new Item(descr, price, type);     
-            this.itemsToBuy.add(item);
+    public void initMarket() throws IOException {
+        this.itemReader.readFromItemFile(itemPath);
+        this.itemFactory.initialize();
+        for (String it : itemReader.getAllItemsName()) {
+            this.itemsToBuy.add(createItem(it));
         }
     }
     
@@ -72,5 +82,21 @@ public class MarketImpl implements Market{
             }
         }
         return false;
+    }
+
+    private Item createItem(String nameItem) {
+        switch (nameItem) {
+            case "MULTIPLIERBOOSTER":
+                return itemFactory.multiplierBooster();
+            case "LUCKYTICKET":
+                return itemFactory.luckyTicket();
+            case "MAGICBACKPACK":
+                return itemFactory.magicbackpack();
+            case "MYSTERIOUSTAFF":
+                return itemFactory.mysterioustaff();
+            default:
+                break;
+        }
+        throw new IllegalArgumentException("The passed item name is not compatible");
     }
 }

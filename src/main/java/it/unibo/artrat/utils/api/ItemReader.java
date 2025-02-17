@@ -1,7 +1,7 @@
 package it.unibo.artrat.utils.api;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Set;
 
 import it.unibo.artrat.model.api.inventory.ItemType;
 
@@ -36,4 +36,6 @@ public interface ItemReader {
      * @return The ItemTypes of the desired item.
      */
     ItemType getItemType(String nameOfItem);
+
+    Set<String> getAllItemsName();
 }

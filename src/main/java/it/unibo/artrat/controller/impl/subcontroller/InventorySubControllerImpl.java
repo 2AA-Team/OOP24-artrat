@@ -68,16 +68,11 @@ public class InventorySubControllerImpl extends AbstractSubController implements
     public String getItemName(final Item passedItem) {
         return passedItem.getClass().getSimpleName();
     }
-<<<<<<< HEAD
-    /*
-    private String getTypeName(Item passedItem) {
-=======
 
     private String getTypeName(final Item passedItem) {
->>>>>>> origin/master
         return this.getModel().getPlayer().getInventory().getStoredItem().stream().filter(x -> x.equals(passedItem))
         .map(x -> x.getType().name()).findAny().get();
-    }*/
+    }
 
       /**
      * {@inheritDoc}
@@ -89,14 +84,4 @@ public class InventorySubControllerImpl extends AbstractSubController implements
         .map(Item::getDescription).findAny().get() + "\nTYPE: " + getTypeName(passedItem),
         "Descrizione Oggetto");
     }
-<<<<<<< HEAD
-
-    @Override
-    public Icon getTypeName(Item item) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getTypeName'");
-    }
-
-=======
->>>>>>> origin/master
 }

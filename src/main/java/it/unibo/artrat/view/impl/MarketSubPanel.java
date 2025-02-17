@@ -3,12 +3,9 @@ package it.unibo.artrat.view.impl;
 import java.awt.*;
 import javax.swing.*;
 
-import it.unibo.artrat.controller.api.TimerController;
 import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
 import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.model.impl.Stage;
-import it.unibo.artrat.utils.api.ItemReader;
-import it.unibo.artrat.utils.impl.ItemReaderImpl;
 import it.unibo.artrat.view.api.MarketView;
 
 /** 
@@ -21,7 +18,6 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView{
     private final JPanel marketPanel = new JPanel();
     private final JPanel contPane = new JPanel(new BorderLayout());
     private final JScrollPane scrollPanel = new JScrollPane(marketPanel);
-    private final ItemReader itemReader = new ItemReaderImpl();
 
     public MarketSubPanel(StoreSubController contr/* , TimerController timerController*/){    
         this.contr = contr;
@@ -108,31 +104,16 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView{
         for(var purchItem : contr.purchasableItems()){
             final JPanel purchItemPanel = new JPanel(new GridLayout(1,4,5,0));      //da capire se usare un flowLay o grid
             final JButton buyItem = new JButton("Buy");
-            
-            String description = itemReader.getDescription(purchItem.toString()); 
-            double price = itemReader.getPrice(purchItem.toString());
-            String type = itemReader.getItemType(purchItem.toString()).toString();
+        
 
-            final JButton itemButton = new JButton("item");       //DEVO USARE LA FACTORY DI DIDO(perchè lì ho le classi di oggetti) E L'ITEM READER PER LEGGERE 
-            final JButton priceButton = new JButton("$$");   
-            final JButton typeButton = new JButton(type);    
+            final JLabel itemLabel = new JLabel(contr.getItemName(purchItem));       //DEVO USARE LA FACTORY DI DIDO(perchè lì ho le classi di oggetti) E L'ITEM READER PER LEGGERE 
+            final JLabel typeLabel = new JLabel(contr.getTypeName(purchItem)); 
+            final JLabel priceButton = new JLabel("$$" + contr.getItemPrice(purchItem));    
 
-            purchItemPanel.add(itemButton);
-            purchItemPanel.add(typeButton);
+            purchItemPanel.add(itemLabel);
+            purchItemPanel.add(typeLabel);
             purchItemPanel.add(priceButton);
             purchItemPanel.add(buyItem);
-
-            priceButton.addActionListener(e->{
-                contr.getItemPrice(purchItem);
-            });
-
-            typeButton.addActionListener(e->{
-                contr.getTypeName(purchItem);
-            });
-
-            itemButton.addActionListener(e->{
-                contr.getDescription(purchItem);
-            });
 
             buyItem.addActionListener(e ->{
                 if(toConfirm("Vuoi davvero acquistare?", "Compra")){

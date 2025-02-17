@@ -38,8 +38,6 @@ public interface InventorySubController extends SubController {
      */
     void obtainDescription(Item passedItem);
 
-    Icon getTypeName(Item item);
-
     //void quit();
 
 }
