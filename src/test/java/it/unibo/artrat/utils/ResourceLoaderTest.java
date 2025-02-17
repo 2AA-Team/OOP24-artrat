@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.io.FileWriter;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.artrat.utils.api.ResourceLoader;
@@ -26,15 +27,17 @@ class ResourceLoaderTest {
             + "unibo" + File.separator
             + "artrat" + File.separator
             + "utils" + File.separator
-            + "test.yaml";
+            + "resourceLoaderTest.yaml";
 
     /**
      * test loading config path.
      */
     @Test
+    @DisplayName("Test resource loader with invalid config file.")
     void testLoading() {
         final ResourceLoader<String, Integer> resLoad = new ResourceLoaderImpl<>();
-        assertThrows(IOException.class, () -> resLoad.setConfigPath(configPath + ".exe"));
+        assertThrows(IOException.class, () -> resLoad.setConfigPath(configPath + ".exe"),
+                "config file cannot be an exe");
     }
 
     /**
@@ -42,23 +45,26 @@ class ResourceLoaderTest {
      * 
      */
     @Test
+    @DisplayName("Test resource loader with invalid configuration field.")
     void testReading() {
         final ResourceLoader<String, Integer> resLoad = new ResourceLoaderImpl<>();
         try {
             try (FileWriter writer = new FileWriter(configPath, StandardCharsets.UTF_8)) {
                 writer.write("");
             }
-            assertThrows(NullPointerException.class, () -> resLoad.setConfigPath(configPath));
+            assertThrows(NullPointerException.class, () -> resLoad.setConfigPath(configPath),
+                    "Config field cannot be empty");
             try (FileWriter writer = new FileWriter(configPath, StandardCharsets.UTF_8)) {
                 writer.write("NULL: ");
             }
-            assertThrows(NullPointerException.class, () -> resLoad.setConfigPath(configPath));
+            assertThrows(NullPointerException.class, () -> resLoad.setConfigPath(configPath),
+                    "Config field cannot be empty");
             try (FileWriter writer = new FileWriter(configPath, StandardCharsets.UTF_8)) {
                 writer.write("ONE: 1");
             }
             resLoad.setConfigPath(configPath);
-            assertEquals(1, resLoad.getConfig("ONE"));
-            assertThrows(IllegalStateException.class, () -> resLoad.getConfig("TWO"));
+            assertEquals(1, resLoad.getConfig("ONE"), "ONE field has 1 as value.");
+            assertThrows(IllegalStateException.class, () -> resLoad.getConfig("TWO"), "TWO field doesnt exist.");
         } catch (IOException e) {
             fail();
         }

@@ -1,5 +1,7 @@
 package it.unibo.artrat.view.impl;
 
+import java.awt.Dimension;
+
 import javax.swing.JPanel;
 
 /**
@@ -10,6 +12,7 @@ import javax.swing.JPanel;
  */
 abstract class AbstractSubPanel {
     private JPanel panel;
+    private Dimension frameDimension;
 
     /**
      * abstract view constructor.
@@ -17,6 +20,19 @@ abstract class AbstractSubPanel {
      */
     AbstractSubPanel() {
         panel = new JPanel();
+    }
+
+    /**
+     * method to set the master frame dimension.
+     * 
+     * @param frameDim dimension of the frame
+     */
+    public void setFrameDimension(final Dimension frameDim) {
+        this.frameDimension = frameDim;
+    }
+
+    protected Dimension getFrameDimension() {
+        return this.frameDimension;
     }
 
     /**

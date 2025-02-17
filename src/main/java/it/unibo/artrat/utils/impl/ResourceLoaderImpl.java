@@ -9,6 +9,12 @@ import java.util.Map;
 import org.yaml.snakeyaml.Yaml;
 import it.unibo.artrat.utils.api.ResourceLoader;
 
+/**
+ * resource loader for yaml file.
+ * 
+ * @param <I> input type
+ * @param <O> output type
+ */
 public final class ResourceLoaderImpl<I, O> implements ResourceLoader<I, O> {
 
     private Map<I, O> obj = new HashMap<>();
@@ -33,7 +39,7 @@ public final class ResourceLoaderImpl<I, O> implements ResourceLoader<I, O> {
         if (ob != null) {
             return obj.get(conf);
         } else {
-            throw new IllegalStateException();
+            throw new IllegalStateException("This conf doesn't exist.");
         }
     }
 }

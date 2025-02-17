@@ -6,7 +6,7 @@ package it.unibo.artrat.utils.impl;
  * @author Matteo Tonelli
  */
 public final class Converter {
-    private static final long BILLION = 1_000_000_000;
+    private static final int BILLION = 1_000_000_000;
 
     /**
      * private constructor.
@@ -28,10 +28,9 @@ public final class Converter {
      * Converts FPS to nano seconds.
      * 
      * @param fps frame per second
-     * @param fps frame per second
      * @return nano seconds
      */
     public static double fpsToNanos(final int fps) {
-        return BILLION / fps;
+        return (double) BILLION / fps;
     }
 }

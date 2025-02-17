@@ -3,8 +3,10 @@ package it.unibo.artrat.view.impl;
 import javax.swing.JFrame;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.model.impl.Stage;
+import it.unibo.artrat.utils.api.ResourceLoader;
 import it.unibo.artrat.view.api.MainView;
 import java.awt.Toolkit;
+import java.util.Objects;
 
 /**
  * implementation of class mainView.
@@ -13,22 +15,22 @@ import java.awt.Toolkit;
  */
 public class MainViewImpl implements MainView {
 
-    private Stage currentStage;
     private MainController controller;
     private AbstractSubPanel subPanel;
-
+    private final ResourceLoader<String, Double> resourceLoader;
     private final JFrame frame = new JFrame();
 
     /**
      * constructor set the size of the frame.
      * 
-     * @param width  width of the frame
-     * @param heigth height of the frame
+     * @param resourceLoader resource loader
      */
-    public MainViewImpl(final double width, final double heigth) {
+    public MainViewImpl(final ResourceLoader<String, Double> resourceLoader) {
+        this.resourceLoader = Objects.requireNonNull(resourceLoader);
+        final double width = resourceLoader.getConfig("MENU_WIDTH");
+        final double height = resourceLoader.getConfig("MENU_HEIGHT");
         frame.setSize((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),
-                (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * heigth));
-        this.currentStage = Stage.MENU;
+                (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * height));
         this.subPanel = new EmptySubPanel();
         this.controller = null;
     }
@@ -55,16 +57,7 @@ public class MainViewImpl implements MainView {
      */
     @Override
     public void setStage(final Stage currentStage) {
-        this.currentStage = currentStage;
-        switchToCurrentPanel();
-    }
-
-    /**
-     * set up the setted stage.
-     */
-    private void switchToCurrentPanel() {
-        reconduceFromStage();
-        frame.revalidate();
+        this.controller.setStage(currentStage);
     }
 
     /**
@@ -73,6 +66,20 @@ public class MainViewImpl implements MainView {
     @Override
     public void forceRedraw() {
         subPanel.forceRedraw();
+        this.frame.repaint();
+        this.frame.revalidate();
+    }
+
+    /**
+     * reload frame to get the right size.
+     */
+    private void reloadFrame() {
+        final double width = resourceLoader.getConfig(controller.getStage().toString() + "_WIDTH");
+        final double height = resourceLoader.getConfig(controller.getStage().toString() + "_HEIGHT");
+        frame.setSize((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),
+                (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * height));
+        frame.setContentPane(subPanel.getPanel());
+        frame.revalidate();
     }
 
     /**
@@ -80,12 +87,12 @@ public class MainViewImpl implements MainView {
      */
     @Override
     public void reconduceFromStage() {
-        switch (currentStage) {
+        switch (this.controller.getStage()) {
             case MENU:
                 subPanel = new MenuSubPanel(controller.getControllerManager().getMenuSubController());
                 break;
             case GAME:
-                subPanel = new EmptySubPanel(controller.getControllerManager().getMenuSubController());
+                subPanel = new GameSubPanel(controller.getControllerManager().getGameSubController());
                 break;
             case STORE:
                 subPanel = new EmptySubPanel(controller.getControllerManager().getMenuSubController());
@@ -96,6 +103,7 @@ public class MainViewImpl implements MainView {
             default:
                 throw new IllegalStateException();
         }
-        frame.setContentPane(subPanel.getPanel());
+        reloadFrame();
+        subPanel.setFrameDimension(this.frame.getSize());
     }
 }

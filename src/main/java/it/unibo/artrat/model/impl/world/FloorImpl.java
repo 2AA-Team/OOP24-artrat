@@ -1,11 +1,13 @@
 package it.unibo.artrat.model.impl.world;
 
+import java.awt.Point;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import it.unibo.artrat.model.impl.AbstractGameObject;
+import it.unibo.artrat.model.api.characters.AbstractEntity;
 import it.unibo.artrat.model.api.world.Floor;
 import it.unibo.artrat.model.api.world.Room;
 import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;
@@ -13,7 +15,6 @@ import it.unibo.artrat.model.impl.world.RoomImpl.RoomBuilder;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationEmpty;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationFile;
 import it.unibo.artrat.utils.api.ResourceLoader;
-import it.unibo.artrat.utils.impl.ResourceLoaderImpl;
 
 /**
  * implementation of interface floor.
@@ -21,27 +22,26 @@ import it.unibo.artrat.utils.impl.ResourceLoaderImpl;
 public class FloorImpl implements Floor {
 
     private static final Random RANDOM = new Random();
-    private Set<AbstractGameObject> roomStructure = new HashSet<>();
-    private Set<AbstractGameObject> roomEnemies = new HashSet<>();
-    private Set<AbstractGameObject> roomValues = new HashSet<>();
+    private Set<AbstractGameObject> floorStructure = new HashSet<>();
+    private Set<AbstractEntity> floorEnemies = new HashSet<>();
+    private Set<AbstractGameObject> floorValues = new HashSet<>();
     private boolean[][] floorMap;
-    private final int maxFloorSize;
-    private final int maxRoomSize;
+    private final double maxFloorSize;
+    private final double maxRoomSize;
+    private Point startPosition;
 
     /**
      * constructor that set the configuration file path.
      * config file is used to get stantard values.
      * 
-     * @param configPath configuration file path
+     * @param rl resource loader
      * @throws IOException caused by generation from file
      */
-    public FloorImpl(final String configPath) throws IOException {
-        final ResourceLoader<String, Integer> rl = new ResourceLoaderImpl<>();
-        rl.setConfigPath(configPath);
+    public FloorImpl(final ResourceLoader<String, Double> rl) throws IOException {
         maxFloorSize = rl.getConfig("MAX_FLOOR_SIZE");
         maxRoomSize = rl.getConfig("MAX_ROOM_SIZE");
         if (maxFloorSize <= 1 || maxRoomSize <= 4) {
-            throw new IllegalStateException("Floor or Room size has been modified.");
+            throw new IOException("Floor or Room size has been modified.");
         }
     }
 
@@ -49,12 +49,36 @@ public class FloorImpl implements Floor {
      * {@inheritDoc}
      */
     @Override
+    public Set<AbstractGameObject> getWalls() {
+        return new HashSet<>(floorStructure);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Set<AbstractEntity> getEnemies() {
+        return new HashSet<>(floorEnemies);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Set<AbstractGameObject> getValues() {
+        return new HashSet<>(floorValues);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void generateFloorSet() throws IOException {
-        roomStructure = new HashSet<>();
-        roomEnemies = new HashSet<>();
-        roomValues = new HashSet<>();
-        final int floorSize = RANDOM.nextInt(1, this.maxFloorSize);
-        final int roomSize = RANDOM.nextInt(5, this.maxRoomSize);
+        floorStructure = new HashSet<>();
+        floorEnemies = new HashSet<>();
+        floorValues = new HashSet<>();
+        final int floorSize = RANDOM.nextInt(1, (int) this.maxFloorSize);
+        final int roomSize = RANDOM.nextInt(5, (int) this.maxRoomSize);
         this.generateRoomsStructure(floorSize);
         this.generateEffectiveRooms(roomSize);
     }
@@ -104,6 +128,7 @@ public class FloorImpl implements Floor {
                         builder = builder.insertGenerationStrategy(new RoomGenerationEmpty());
                         builder = builder.insertNumberOfEnemy(0);
                         builder = builder.insertNumberOfValues(0);
+                        startPosition = new Point(j * roomSize, i * roomSize);
                     } else {
                         builder = builder.insertGenerationStrategy(generations.get(RANDOM.nextInt(generations.size())));
                         builder = builder.insertNumberOfEnemy(RANDOM.nextInt(roomSize));
@@ -143,42 +168,49 @@ public class FloorImpl implements Floor {
     private void addNewRoom(final Room room, final int roomX, final int roomY, final int roomSize) {
         final Set<AbstractGameObject> tmpStruct = room.getStructure();
         tmpStruct.forEach((w) -> w.movedPosition(roomX * roomSize, roomY * roomSize));
-        this.roomStructure.addAll(tmpStruct);
+        this.floorStructure.addAll(tmpStruct);
 
         final Set<AbstractGameObject> tmpValues = room.getValues();
         tmpValues.forEach((w) -> w.movedPosition(roomX * roomSize, roomY * roomSize));
-        this.roomValues.addAll(tmpValues);
+        this.floorValues.addAll(tmpValues);
 
-        final Set<AbstractGameObject> tmpEnemies = room.getEnemies();
+        final Set<AbstractEntity> tmpEnemies = room.getEnemies();
         tmpEnemies.forEach((w) -> w.movedPosition(roomX * roomSize, roomY * roomSize));
-        this.roomEnemies.addAll(tmpEnemies);
+        this.floorEnemies.addAll(tmpEnemies);
     }
 
     /**
-     * public void print() {
-     * int sizeTot = this.maxFloorSize * this.maxRoomSize;
-     * for (double i = 0; i < sizeTot; i++) {
-     * for (double j = 0; j < sizeTot; j++) {
-     * final double x = j;
-     * final double y = i;
-     * if (this.roomStructure.stream()
-     * .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y))
-     * {
-     * System.out.print("#");
-     * } else if (this.roomEnemies.stream()
-     * .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y))
-     * {
-     * System.out.print("X");
-     * } else if (this.roomValues.stream()
-     * .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y))
-     * {
-     * System.out.print("Y");
-     * } else {
-     * System.out.print(" ");
-     * }
-     * }
-     * System.out.println();
-     * }
-     * }
+     * {@inheritDoc}
      */
+    @Override
+    public Point getStartPosition() {
+        return startPosition;
+    }
+
+    // public void print() {
+    // double sizeTot = this.maxFloorSize * this.maxRoomSize;
+    // for (double i = 0; i < sizeTot; i++) {
+    // for (double j = 0; j < sizeTot; j++) {
+    // final double x = j;
+    // final double y = i;
+    // if (this.floorStructure.stream()
+    // .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y))
+    // {
+    // System.out.print("#");
+    // } else if (this.floorEnemies.stream()
+    // .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y))
+    // {
+    // System.out.print("X");
+    // } else if (this.floorValues.stream()
+    // .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y))
+    // {
+    // System.out.print("Y");
+    // } else {
+    // System.out.print(" ");
+    // }
+    // }
+    // System.out.println();
+    // }
+    // }
+
 }

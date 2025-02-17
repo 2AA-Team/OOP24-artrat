@@ -42,21 +42,30 @@ public final class GameEngineImpl implements GameEngine {
 
     /**
      * Game engine constructor.
+     * 
+     * @throws IOException
      */
-    public GameEngineImpl() {
+    public GameEngineImpl() throws IOException {
         this.status = GameStatus.STOPPED;
         this.resourceLoader = new ResourceLoaderImpl<>();
+        this.initiateResources();
         mainController = new MainControllerImpl(this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ResourceLoader<String, Double> getResourceLoader() {
+        return this.resourceLoader != null ? this.resourceLoader : null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void run() {
-        if (!initiateResources()) {
-            Runtime.getRuntime().exit(1);
-        }
-        mainController.addMainView(new MainViewImpl(
-                (double) resourceLoader.getConfig("MENU_WIDTH"),
-                (double) resourceLoader.getConfig("MENU_HEIGHT")));
+        mainController.addMainView(new MainViewImpl(resourceLoader));
         mainLoop();
     }
 

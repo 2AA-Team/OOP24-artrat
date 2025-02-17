@@ -59,10 +59,10 @@ public interface MainController {
     SubControllerManager getControllerManager();
 
     /**
-     * Put in buffer commands to execute.
+     * getter for current stage.
      * 
-     * @param cmd command to execute
+     * @return the current stage
      */
-    void input(Command cmd);
+    Stage getStage();
 
 }
