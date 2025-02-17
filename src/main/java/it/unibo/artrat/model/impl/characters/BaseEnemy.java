@@ -13,6 +13,8 @@ import it.unibo.artrat.utils.impl.Vector2d;
 
 /**
  * Standard Enemy class.
+ * 
+ * @author Samuele Trapani
  */
 public final class BaseEnemy extends AbstractEntity implements Enemy {
     private final Random rd = new Random();

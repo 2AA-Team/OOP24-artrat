@@ -11,11 +11,14 @@ import it.unibo.artrat.utils.impl.Vector2d;
 
 /**
  * Player implementation.
+ * 
+ * @author Samuele Trapani
  */
 public class Lupino extends AbstractEntity implements Player {
 
     private Inventory inventory;
     private Coin coins;
+
     /**
      * Player constructor with default vector.
      * 
@@ -47,7 +50,7 @@ public class Lupino extends AbstractEntity implements Player {
      * @param center center of player bounding box
      * @param width  width of player bounding box
      * @param height height of player bounding box
-     * @param speed speed of player bounding box
+     * @param speed  speed of player bounding box
      */
     public Lupino(final Point center, final double width, final double height, final Vector2d speed) {
         super(center, width, height, speed);
@@ -76,9 +79,9 @@ public class Lupino extends AbstractEntity implements Player {
         throw new UnsupportedOperationException("Unimplemented method 'redraw'");
     }
 
-     /**
+    /**
      * {@inheritDoc}
-    */
+     */
     @Override
     public Inventory getInventory() {
         return new InventoryImpl(this.inventory);
@@ -86,15 +89,15 @@ public class Lupino extends AbstractEntity implements Player {
 
     /**
      * {@inheritDoc}
-    */
+     */
     @Override
     public void setInventory(final Inventory inventory) {
         this.inventory = new InventoryImpl(inventory);
     }
 
-    /** 
+    /**
      * {@inheritDoc}
-    */
+     */
     @Override
     public Coin getCoin() {
         return new CoinImpl(this.coins);
@@ -102,7 +105,7 @@ public class Lupino extends AbstractEntity implements Player {
 
     /**
      * {@inheritDoc}
-    */
+     */
     @Override
     public void setCoin(final Coin coins) {
         this.coins = new CoinImpl(coins);
@@ -110,7 +113,7 @@ public class Lupino extends AbstractEntity implements Player {
 
     /**
      * {@inheritDoc}
-    */
+     */
     @Override
     public void increaseCoins(final double coins) {
         this.coins.addCoins(coins);
@@ -118,7 +121,7 @@ public class Lupino extends AbstractEntity implements Player {
 
     /**
      * {@inheritDoc}
-    */
+     */
     @Override
     public void increaseMultiplier(final double mutiple) {
         final Multiplier mp = new MultiplierImpl(this.coins.getCurrentMultiplier());
@@ -128,10 +131,10 @@ public class Lupino extends AbstractEntity implements Player {
 
     /**
      * {@inheritDoc}
-    */
+     */
     @Override
     public Player copyPlayer() {
-        final Player p = new Lupino(this.getPosition(), this.getSpeed()); 
+        final Player p = new Lupino(this.getPosition(), this.getSpeed());
         p.setInventory(this.getInventory());
         p.setCoin(this.getCoin());
         return p;

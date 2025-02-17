@@ -6,6 +6,8 @@ import it.unibo.artrat.utils.impl.Vector2d;
 
 /**
  * Stop command for entity movement stop.
+ * 
+ * @author Samuele Trapani
  */
 public class MoveStop implements Command {
     /**

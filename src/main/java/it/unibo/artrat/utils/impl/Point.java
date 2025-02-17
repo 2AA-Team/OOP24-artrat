@@ -4,6 +4,8 @@ import java.util.Objects;
 
 /**
  * Point is used to define the space where game objects can be.
+ * 
+ * @author Samuele Trapani
  */
 public final class Point {
     private double x;

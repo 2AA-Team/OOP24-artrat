@@ -6,6 +6,8 @@ import it.unibo.artrat.utils.impl.Vector2d;
 
 /**
  * Move left command for entity movement.
+ * 
+ * @author Samuele Trapani
  */
 public class MoveLeft implements Command {
     /**
