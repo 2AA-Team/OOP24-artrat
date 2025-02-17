@@ -32,7 +32,7 @@ public class SubControllerManagerImpl implements SubControllerManager {
      */
     public SubControllerManagerImpl(final MainControllerImpl mainController, final ResourceLoader<String, Double> rl)
             throws IOException {
-        this.gameSubController = new GameSubControllerImpl(mainController, rl, mainController.getModel().getPlayer());
+        this.gameSubController = new GameSubControllerImpl(mainController, rl);
         this.menuSubController = new MenuSubControllerImpl(mainController);
         this.inventorySubController = new InventorySubControllerImpl(mainController);
         this.storeSubController = new StoreSubControllerImpl(mainController);

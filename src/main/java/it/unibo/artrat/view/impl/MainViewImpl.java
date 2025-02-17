@@ -6,6 +6,7 @@ import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.utils.api.ResourceLoader;
 import it.unibo.artrat.view.api.MainView;
 import java.awt.Toolkit;
+import java.util.Objects;
 
 /**
  * implementation of class mainView.
@@ -22,11 +23,10 @@ public class MainViewImpl implements MainView {
     /**
      * constructor set the size of the frame.
      * 
-     * @param width  width of the frame
-     * @param heigth height of the frame
+     * @param resourceLoader resource loader
      */
-    public MainViewImpl(ResourceLoader<String, Double> resourceLoader) {
-        this.resourceLoader = resourceLoader;
+    public MainViewImpl(final ResourceLoader<String, Double> resourceLoader) {
+        this.resourceLoader = Objects.requireNonNull(resourceLoader);
         final double width = resourceLoader.getConfig("MENU_WIDTH");
         final double height = resourceLoader.getConfig("MENU_HEIGHT");
         frame.setSize((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),

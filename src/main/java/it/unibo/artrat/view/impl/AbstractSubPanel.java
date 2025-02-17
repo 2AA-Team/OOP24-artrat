@@ -27,7 +27,7 @@ abstract class AbstractSubPanel {
      * 
      * @param frameDim dimension of the frame
      */
-    public void setFrameDimension(Dimension frameDim) {
+    public void setFrameDimension(final Dimension frameDim) {
         this.frameDimension = frameDim;
     }
 

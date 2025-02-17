@@ -20,9 +20,9 @@ import it.unibo.artrat.utils.impl.Point;
  * sub controller for the game.
  */
 public class GameSubControllerImpl extends AbstractSubController implements GameSubController {
-    final Player player;
-    final Floor floor;
-    final double FOV;
+    private final Player player;
+    private final Floor floor;
+    private final double fov;
 
     /**
      * constructor to initialize mainController.
@@ -31,12 +31,11 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
      * @param rl             resource loader
      * @throws IOException if the resource loader fails
      */
-    public GameSubControllerImpl(final MainControllerImpl mainController, final ResourceLoader<String, Double> rl,
-            final Player player)
+    public GameSubControllerImpl(final MainControllerImpl mainController, final ResourceLoader<String, Double> rl)
             throws IOException {
         super(mainController);
-        FOV = rl.getConfig("FOV");
-        floor = new FloorImpl(rl);
+        this.fov = rl.getConfig("FOV");
+        this.floor = new FloorImpl(rl);
         this.floor.generateFloorSet();
         this.player = mainController.getModel().getPlayer();
     }
@@ -46,7 +45,7 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
      */
     @Override
     public Set<Point> getVisibleWallPositions() {
-        BoundingBox bb = new BoundingBoxImpl(getPlayerPos(), FOV, FOV);
+        final BoundingBox bb = new BoundingBoxImpl(getPlayerPos(), fov, fov);
         return this.floor.getWalls().stream().filter(x -> bb.isColliding(x.getBoundingBox()))
                 .map(AbstractGameObject::getPosition).collect(Collectors.toSet());
     }
