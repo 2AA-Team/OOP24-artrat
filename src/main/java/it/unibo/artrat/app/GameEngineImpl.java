@@ -8,6 +8,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import it.unibo.artrat.app.api.GameEngine;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
@@ -23,8 +26,8 @@ import it.unibo.artrat.view.impl.MainViewImpl;
  */
 public final class GameEngineImpl implements GameEngine {
     private final List<Command> commands = new LinkedList<>();
+    private static final Logger LOGGER = LoggerFactory.getLogger(GameEngineImpl.class);
 
-    // TODO add Room for GameObjects' access.
     private enum GameStatus {
         STOPPED, RUNNING
     }
@@ -69,25 +72,25 @@ public final class GameEngineImpl implements GameEngine {
      */
     private void mainLoop() {
         final long drawInterval = Converter.fpsToMillis(resourceLoader.getConfig("FPS").intValue());
-        long delta;
+        long delta = 0;
         long lastTime;
         while (status.equals(GameStatus.RUNNING)) {
             lastTime = System.currentTimeMillis();
-            this.update();
+            this.update(delta);
             this.redraw();
             delta = updateDeltaTime(lastTime, drawInterval);
         }
     }
 
     private long updateDeltaTime(final long lastFrameTime, final long drawInterval) {
-        var delta = System.currentTimeMillis() - lastFrameTime;
+        final long delta = System.currentTimeMillis() - lastFrameTime;
         if (delta < drawInterval) {
             try {
                 Thread.sleep(drawInterval - delta);
             } catch (InterruptedException e) {
+                LOGGER.info(e.getMessage());
             }
         }
-
         return System.currentTimeMillis() - lastFrameTime;
     }
 
@@ -110,7 +113,7 @@ public final class GameEngineImpl implements GameEngine {
         mainController.redraw();
     }
 
-    private void update() {
+    private void update(final long delta) {
 
     }
 

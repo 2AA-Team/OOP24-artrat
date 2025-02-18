@@ -10,6 +10,9 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import it.unibo.artrat.controller.api.subcontroller.GameSubController;
 import it.unibo.artrat.model.impl.world.RoomSymbols;
 import it.unibo.artrat.utils.impl.Point;
@@ -18,36 +21,39 @@ import it.unibo.artrat.utils.impl.Point;
  * game sub panel class.
  */
 public class GameSubPanel extends AbstractSubPanel {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(GameSubPanel.class);
     private final GameSubController gameSubController;
     private final GamePanel mapPanel = new GamePanel();
     private final int zoom;
-    private static final Map<RoomSymbols, Image> mapSymbols = Map.of(
+    private static final Map<RoomSymbols, Image> MAPSYMBOLS = Map.of(
             RoomSymbols.ENEMY, getObjectImage("enemy.png"),
             RoomSymbols.WALL, getObjectImage("wall.png"),
             RoomSymbols.VALUE, getObjectImage("picture.png"),
             RoomSymbols.EXIT, getObjectImage("exit.png"),
             RoomSymbols.PLAYER, getObjectImage("player.png"));
 
-    private static Image getObjectImage(String image) {
-
+    private static Image getObjectImage(final String image) {
         try {
             return ImageIO.read(Thread.currentThread().getContextClassLoader().getResource(
                     "gameobjects" + File.separator + image));
         } catch (IOException e) {
+            LOGGER.error("Try to get a not existing image.");
             return null;
         }
     }
 
-    private class GamePanel extends JPanel {
+    private final class GamePanel extends JPanel {
+        private static final long serialVersionUID = 1L;
 
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(final Graphics g) {
             super.paintComponent(g);
             final Point center = new Point(
                     (int) Math.floor(getFrameDimension().getWidth() / 2),
                     (int) Math.floor(getFrameDimension().getHeight() / 2));
 
-            g.drawImage(mapSymbols.get(RoomSymbols.PLAYER), (int) center.getX(), (int) center.getY(),
+            g.drawImage(MAPSYMBOLS.get(RoomSymbols.PLAYER), (int) center.getX(), (int) center.getY(),
                     zoom, zoom, null);
             final Point playerPos = gameSubController.getPlayerPos();
 
@@ -56,9 +62,10 @@ public class GameSubPanel extends AbstractSubPanel {
                 final int wallX = (int) Math.floor(center.getX() + (wallsPoint.getX() - playerPos.getX()) * zoom);
                 final int wallY = (int) Math.floor(center.getY() + (wallsPoint.getY() - playerPos.getY()) * zoom);
 
-                g.drawImage(mapSymbols.get(RoomSymbols.WALL), wallX, wallY,
+                g.drawImage(MAPSYMBOLS.get(RoomSymbols.WALL), wallX, wallY,
                         zoom, zoom, null);
             }
+            LOGGER.info("Painted game panel.");
         }
 
     }
@@ -79,7 +86,7 @@ public class GameSubPanel extends AbstractSubPanel {
      */
     @Override
     public void initComponents() {
-        JPanel tmp = new JPanel();
+        final JPanel tmp = new JPanel();
         tmp.setLayout(new BorderLayout());
         tmp.add(this.mapPanel, BorderLayout.CENTER);
         setPanel(tmp);
