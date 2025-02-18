@@ -29,7 +29,7 @@ public class GameSubPanel extends AbstractSubPanel {
     @Override
     public void initComponents() {
         setPanel(mapPanel);
-        forceRedraw();
+        // forceRedraw();
     }
 
     /**

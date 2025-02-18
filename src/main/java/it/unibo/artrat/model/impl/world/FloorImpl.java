@@ -1,6 +1,9 @@
 package it.unibo.artrat.model.impl.world;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -31,6 +34,9 @@ public class FloorImpl implements Floor {
     private final double minFloorSize;
     private final double minRoomSize;
     private Point startPosition;
+
+    private final URL roomPath = Thread.currentThread().getContextClassLoader().getResource(
+            "premademaze" + File.separator + "rooms.json");
 
     /**
      * constructor that set the configuration file path.
@@ -134,9 +140,15 @@ public class FloorImpl implements Floor {
      * @throws IOException if link for the rooms json doesnt exist
      */
     private void generateEffectiveRooms(final int roomSize) throws IOException {
-        final List<RoomGenerationStrategy> generations = List.of(
-                new RoomGenerationEmpty(),
-                new RoomGenerationFile("src/main/java/it/unibo/artrat/resources/premademaze/rooms.json"));
+        List<RoomGenerationStrategy> generations = List.of();
+        try {
+            generations = List.of(
+                    new RoomGenerationEmpty(),
+                    new RoomGenerationFile(roomPath.toURI()));
+        } catch (IOException | URISyntaxException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         RoomBuilder builder = new RoomBuilder();
         builder = builder.insertRoomSize(roomSize);
         for (int i = 0; i < floorMap.length; i++) {

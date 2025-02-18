@@ -2,6 +2,8 @@ package it.unibo.artrat.model.impl.inventory;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.api.inventory.ItemFactory;
@@ -17,15 +19,9 @@ import it.unibo.artrat.utils.impl.ItemReaderImpl;
  */
 public class ItemFactoryImpl implements ItemFactory {
 
-    private final String itemPath = "src" + File.separator
-            + "main" + File.separator
-            + "java" + File.separator
-            + "it" + File.separator
-            + "unibo" + File.separator
-            + "artrat" + File.separator
-            + "resources" + File.separator
-            + "items" + File.separator
-            + "items.yaml";
+    private final URL itemPath = Thread.currentThread().getContextClassLoader().getResource(
+            "items" + File.separator
+                    + "items.yaml");
 
     private final ItemReader itemReader;
 
@@ -41,7 +37,15 @@ public class ItemFactoryImpl implements ItemFactory {
      */
     @Override
     public void initialize() throws IOException {
-        this.itemReader.readFromItemFile(itemPath);
+        try {
+            this.itemReader.readFromItemFile(itemPath.toURI());
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -49,38 +53,38 @@ public class ItemFactoryImpl implements ItemFactory {
      */
     @Override
     public Item multiplierBooster() {
-        return new MultiplierBooster(itemReader.getDescription("MULTIPLIERBOOSTER"), 
-            itemReader.getPrice("MULTIPLIERBOOSTER"), 
-            itemReader.getItemType("MULTIPLIERBOOSTER"));
+        return new MultiplierBooster(itemReader.getDescription("MULTIPLIERBOOSTER"),
+                itemReader.getPrice("MULTIPLIERBOOSTER"),
+                itemReader.getItemType("MULTIPLIERBOOSTER"));
     }
 
     /**
      * {@inheritDoc}
-    */
+     */
     @Override
     public Item luckyTicket() {
-        return new LuckyTicket(itemReader.getDescription("LUCKYTICKET"), 
-            itemReader.getPrice("LUCKYTICKET"), 
-            itemReader.getItemType("LUCKYTICKET"));
-        }
-
-    /**
-     * {@inheritDoc}
-    */
-    @Override
-    public Item magicbackpack() {
-        return new MagicBackpack(itemReader.getDescription("MAGICBACKPACK"), 
-        itemReader.getPrice("MAGICBACKPACK"), 
-        itemReader.getItemType("MAGICBACKPACK"));
+        return new LuckyTicket(itemReader.getDescription("LUCKYTICKET"),
+                itemReader.getPrice("LUCKYTICKET"),
+                itemReader.getItemType("LUCKYTICKET"));
     }
 
     /**
      * {@inheritDoc}
-    */
+     */
+    @Override
+    public Item magicbackpack() {
+        return new MagicBackpack(itemReader.getDescription("MAGICBACKPACK"),
+                itemReader.getPrice("MAGICBACKPACK"),
+                itemReader.getItemType("MAGICBACKPACK"));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item mysterioustaff() {
-        return new MysteriousStaff(itemReader.getDescription("MYSTERIOUSSTAFF"), 
-        itemReader.getPrice("MYSTERIOUSSTAFF"), 
-        itemReader.getItemType("MYSTERIOUSSTAFF"));
+        return new MysteriousStaff(itemReader.getDescription("MYSTERIOUSSTAFF"),
+                itemReader.getPrice("MYSTERIOUSSTAFF"),
+                itemReader.getItemType("MYSTERIOUSSTAFF"));
     }
 }

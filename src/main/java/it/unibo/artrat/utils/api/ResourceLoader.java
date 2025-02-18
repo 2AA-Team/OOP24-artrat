@@ -1,6 +1,8 @@
 package it.unibo.artrat.utils.api;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
 
 /**
  * ResourceLoader is responsible for fetching and loading data.
@@ -24,6 +26,6 @@ public interface ResourceLoader<I, O> {
      * @param configPath path of the config file
      * @throws IOException if configPath not represent anything
      */
-    void setConfigPath(String configPath) throws IOException;
+    void setConfigPath(URI configPath) throws IOException;
 
 }

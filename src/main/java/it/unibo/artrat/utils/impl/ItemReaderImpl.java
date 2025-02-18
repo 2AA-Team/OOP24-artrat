@@ -1,6 +1,7 @@
 package it.unibo.artrat.utils.impl;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.List;
 
 import it.unibo.artrat.model.api.inventory.ItemType;
@@ -16,7 +17,6 @@ public class ItemReaderImpl implements ItemReader {
      */
     private final ResourceLoader<String, List<String>> valueOfYaml;
 
-
     /**
      * A constructor that initializes an instance of Resource Loader.
      */
@@ -28,13 +28,13 @@ public class ItemReaderImpl implements ItemReader {
      * {@inheritDoc}
      */
     @Override
-    public void readFromItemFile(final String itemPath) throws IOException {
+    public void readFromItemFile(final URI itemPath) throws IOException {
         this.valueOfYaml.setConfigPath(itemPath);
     }
 
     private String getSpecificField(final String nameOfItem, final int field) {
         return valueOfYaml.getConfig(nameOfItem).get(field);
-    } 
+    }
 
     /**
      * {@inheritDoc}

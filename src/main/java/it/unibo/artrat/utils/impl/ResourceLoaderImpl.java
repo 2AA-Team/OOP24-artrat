@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import org.yaml.snakeyaml.Yaml;
@@ -23,7 +25,7 @@ public final class ResourceLoaderImpl<I, O> implements ResourceLoader<I, O> {
      * {@inheritDoc}
      */
     @Override
-    public void setConfigPath(final String configPath) throws IOException {
+    public void setConfigPath(final URI configPath) throws IOException {
         final Yaml yaml = new Yaml();
         final InputStream inputStream = new FileInputStream(new File(configPath));
         this.obj = Map.copyOf(yaml.load(inputStream));

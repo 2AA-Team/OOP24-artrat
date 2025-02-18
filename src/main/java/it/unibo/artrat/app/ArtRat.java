@@ -20,8 +20,8 @@ public final class ArtRat {
      */
     public static void main(final String[] args) {
         try {
-            final Runnable gameEngine = new GameEngineImpl();
-            gameEngine.run();
+            System.out.println("Starting");
+            new GameEngineImpl().run();
         } catch (IOException e) {
             throw new IllegalStateException(e.getStackTrace().toString());
         }

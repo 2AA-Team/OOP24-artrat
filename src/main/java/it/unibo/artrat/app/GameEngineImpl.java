@@ -2,8 +2,12 @@ package it.unibo.artrat.app;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
+
 import it.unibo.artrat.app.api.GameEngine;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
@@ -25,15 +29,9 @@ public final class GameEngineImpl implements GameEngine {
         STOPPED, RUNNING
     }
 
-    private final String configPath = "src" + File.separator
-            + "main" + File.separator
-            + "java" + File.separator
-            + "it" + File.separator
-            + "unibo" + File.separator
-            + "artrat" + File.separator
-            + "resources" + File.separator
-            + "config" + File.separator
-            + "config.yaml";
+    private final URL configPath = Thread.currentThread().getContextClassLoader().getResource(
+            "config" + File.separator
+                    + "config.yaml");
     private GameStatus status;
     private final ResourceLoader<String, Double> resourceLoader;
     private final MainController mainController;
@@ -55,7 +53,7 @@ public final class GameEngineImpl implements GameEngine {
      */
     @Override
     public ResourceLoader<String, Double> getResourceLoader() {
-        return this.resourceLoader != null ? this.resourceLoader : null;
+        return Objects.requireNonNull(this.resourceLoader);
     }
 
     /**
@@ -64,10 +62,8 @@ public final class GameEngineImpl implements GameEngine {
     @Override
     public void run() {
         mainController.addMainView(new MainViewImpl(resourceLoader));
-        new Thread(() -> {
-            mainLoop();
-        }).start();
-
+        System.out.println("xD");
+        new Thread(this::mainLoop).start();
     }
 
     /**
@@ -79,6 +75,7 @@ public final class GameEngineImpl implements GameEngine {
         double lastTime;
         long currentTime;
         while (true) {
+            System.out.println("xDggggggg");
             delta = 0;
             lastTime = System.nanoTime();
             while (status.equals(GameStatus.RUNNING)) {
@@ -103,14 +100,15 @@ public final class GameEngineImpl implements GameEngine {
      */
     private boolean initiateResources() {
         try {
-            resourceLoader.setConfigPath(configPath);
+            resourceLoader.setConfigPath(configPath.toURI());
             return true;
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             return false;
         }
     }
 
     private void redraw() {
+        System.err.println("Updating view");
         mainController.redraw();
     }
 
