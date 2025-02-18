@@ -5,13 +5,10 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 
-import it.unibo.artrat.controller.api.SubController;
 import it.unibo.artrat.controller.api.subcontroller.GameSubController;
-import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.commands.MoveDown;
 import it.unibo.artrat.utils.impl.commands.MoveLeft;
 import it.unibo.artrat.utils.impl.commands.MoveRight;
-import it.unibo.artrat.utils.impl.commands.MoveStop;
 import it.unibo.artrat.utils.impl.commands.MoveUp;
 
 /**
