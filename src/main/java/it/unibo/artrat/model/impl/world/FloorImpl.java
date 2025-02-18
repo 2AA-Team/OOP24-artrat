@@ -44,6 +44,19 @@ public class FloorImpl implements Floor {
         maxRoomSize = rl.getConfig("MAX_ROOM_SIZE");
         minFloorSize = rl.getConfig("MIN_FLOOR_SIZE");
         minRoomSize = rl.getConfig("MIN_ROOM_SIZE");
+        validateFloorAndRoomSizes();
+    }
+
+    /**
+     * method to test if validate sizes.
+     * 
+     * @throws IOException if size of the room or floor are not valid
+     */
+    private void validateFloorAndRoomSizes() throws IOException {
+        final int upperBound = 100;
+        if (maxFloorSize >= upperBound) {
+            throw new IOException("Please MAX_FLOOR_SIZE must be under " + upperBound);
+        }
         if (maxFloorSize <= 1 || maxRoomSize <= 4 || minFloorSize >= maxFloorSize || minRoomSize >= maxRoomSize) {
             throw new IOException("Floor or Room size has been modified.");
         }
@@ -89,6 +102,7 @@ public class FloorImpl implements Floor {
 
     /**
      * fullfill the boolean matrix rapresenting the structure of the floor.
+     * using a random walk
      * 
      * @param floorSize floor size
      */
@@ -128,13 +142,11 @@ public class FloorImpl implements Floor {
         for (int i = 0; i < floorMap.length; i++) {
             for (int j = 0; j < floorMap.length; j++) {
                 if (isARoom(j, i)) {
-                    if (j == (int) Math.floor((double) floorMap.length / 2) && i == floorMap.length - 1) {
+                    if (isStartRoom(j, i)) {
                         builder = builder.insertGenerationStrategy(new RoomGenerationEmpty());
                         builder = builder.insertNumberOfEnemy(0);
                         builder = builder.insertNumberOfValues(0);
-                        startPosition = new Point(j * roomSize + Math.floor(roomSize / 2), i * roomSize
-                                + Math.floor(roomSize / 2));
-                        System.out.println("start" + startPosition.toString());
+                        setStartPosition(j, i, roomSize);
                     } else {
                         builder = builder.insertGenerationStrategy(generations.get(RANDOM.nextInt(generations.size())));
                         builder = builder.insertNumberOfEnemy(RANDOM.nextInt(roomSize));
@@ -161,6 +173,30 @@ public class FloorImpl implements Floor {
         } else {
             return floorMap[x][y];
         }
+    }
+
+    /**
+     * check if is a start room.
+     * 
+     * @param x x coordinate
+     * @param y y coordinate
+     * @return true if is a start room
+     */
+    private boolean isStartRoom(final int x, final int y) {
+        return x == (int) Math.floor((double) floorMap.length / 2) && y == floorMap.length - 1;
+    }
+
+    /**
+     * set the start position.
+     * 
+     * @param x        x coordinate
+     * @param y        y coordinate
+     * @param roomSize room size
+     */
+    private void setStartPosition(int x, int y, int roomSize) {
+        startPosition = new Point(
+                x * roomSize + Math.floor(roomSize / 2),
+                y * roomSize + Math.floor(roomSize / 2));
     }
 
     /**
