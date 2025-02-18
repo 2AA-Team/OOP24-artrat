@@ -111,6 +111,7 @@ public class FloorImpl implements Floor {
         final int roomSize = RANDOM.nextInt((int) this.minRoomSize, (int) this.maxRoomSize);
         this.generateRoomsStructure(floorSize);
         this.generateEffectiveRooms(roomSize);
+        // print(); // TO-REMOVE
     }
 
     /**
@@ -188,9 +189,9 @@ public class FloorImpl implements Floor {
      */
     private void setExitPosition(int x, int y, int roomSize) {
         final double tmpX = x * roomSize + Math.floor((double) roomSize / 2);
-        final double tmpY = y * roomSize + roomSize;
-        startPosition = new Point(tmpX, tmpY);
-        this.floorStructure.removeIf((o) -> o.getPosition().equals(startPosition));
+        final double tmpY = y * roomSize;
+        exitPosition = new Point(tmpX, tmpY);
+        this.floorStructure.removeIf((o) -> o.getPosition().equals(exitPosition));
     }
 
     /**

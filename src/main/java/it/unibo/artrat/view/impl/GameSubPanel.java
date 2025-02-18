@@ -52,21 +52,25 @@ public class GameSubPanel extends AbstractSubPanel {
             final Point center = new Point(
                     (int) Math.floor(getFrameDimension().getWidth() / 2),
                     (int) Math.floor(getFrameDimension().getHeight() / 2));
+            printPlayer(g, center);
+            printWalls(g, center);
+        }
 
+        private void printPlayer(Graphics g, Point center) {
             g.drawImage(MAPSYMBOLS.get(RoomSymbols.PLAYER), (int) center.getX(), (int) center.getY(),
                     zoom, zoom, null);
-            final Point playerPos = gameSubController.getPlayerPos();
+        }
 
+        private void printWalls(Graphics g, Point center) {
+            final Point playerPos = gameSubController.getPlayerPos();
             for (final var wallsPoint : gameSubController.getVisibleWallPositions()) {
 
                 final int wallX = (int) Math.floor(center.getX() + (wallsPoint.getX() - playerPos.getX()) * zoom);
                 final int wallY = (int) Math.floor(center.getY() + (wallsPoint.getY() - playerPos.getY()) * zoom);
 
-                g.drawImage(MAPSYMBOLS.get(RoomSymbols.WALL), wallX, wallY,
-                        zoom, zoom, null);
+                g.drawImage(MAPSYMBOLS.get(RoomSymbols.WALL), wallX, wallY, zoom, zoom, null);
             }
         }
-
     }
 
     /**
