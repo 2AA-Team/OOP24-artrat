@@ -40,6 +40,7 @@ public class FloorImpl implements Floor {
     private final double minFloorSize;
     private final double minRoomSize;
     private Point startPosition;
+    private Point exitPosition;
 
     private final URL roomPath = Thread.currentThread().getContextClassLoader().getResource(
             "premademaze" + File.separator + "rooms.json");
@@ -164,6 +165,7 @@ public class FloorImpl implements Floor {
                         builder = builder.insertNumberOfEnemy(0);
                         builder = builder.insertNumberOfValues(0);
                         setStartPosition(j, i, roomSize);
+                        setExitPosition(j, i, roomSize);
                     } else {
                         builder = builder.insertGenerationStrategy(generations.get(RANDOM.nextInt(generations.size())));
                         builder = builder.insertNumberOfEnemy(RANDOM.nextInt(roomSize));
@@ -175,6 +177,20 @@ public class FloorImpl implements Floor {
                 }
             }
         }
+    }
+
+    /**
+     * set the exit position.
+     * 
+     * @param x        x coordinate
+     * @param y        y coordinate
+     * @param roomSize room size
+     */
+    private void setExitPosition(int x, int y, int roomSize) {
+        final double tmpX = x * roomSize + Math.floor((double) roomSize / 2);
+        final double tmpY = y * roomSize + roomSize;
+        startPosition = new Point(tmpX, tmpY);
+        this.floorStructure.removeIf((o) -> o.getPosition().equals(startPosition));
     }
 
     /**
@@ -244,6 +260,14 @@ public class FloorImpl implements Floor {
     @Override
     public Point getStartPosition() {
         return Objects.requireNonNull(startPosition);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Point getExitPosition() {
+        return Objects.requireNonNull(exitPosition);
     }
 
     // public void print() {
