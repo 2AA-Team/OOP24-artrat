@@ -3,6 +3,9 @@ package it.unibo.artrat.model.impl.inventory;
 import java.io.File;
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.api.inventory.ItemFactory;
 import it.unibo.artrat.model.impl.inventory.items.LuckyTicket;
@@ -28,6 +31,7 @@ public class ItemFactoryImpl implements ItemFactory {
             + "items.yaml";
 
     private final ItemReader itemReader;
+    private static final java.util.logging.Logger LOGGER = LoggerFactory.getLogger(SingleThreadedGame.class);
 
     /**
      * A constructor to initialize itemReader.
@@ -49,6 +53,7 @@ public class ItemFactoryImpl implements ItemFactory {
      */
     @Override
     public Item multiplierBooster() {
+        LOGGER.info("Request for creation of multiplier booster");
         return new MultiplierBooster(itemReader.getDescription("MULTIPLIERBOOSTER"), 
             itemReader.getPrice("MULTIPLIERBOOSTER"), 
             itemReader.getItemType("MULTIPLIERBOOSTER"));
@@ -59,6 +64,7 @@ public class ItemFactoryImpl implements ItemFactory {
     */
     @Override
     public Item luckyTicket() {
+        LOGGER.info("Request for creation of lucky ticket");
         return new LuckyTicket(itemReader.getDescription("LUCKYTICKET"), 
             itemReader.getPrice("LUCKYTICKET"), 
             itemReader.getItemType("LUCKYTICKET"));
@@ -69,6 +75,7 @@ public class ItemFactoryImpl implements ItemFactory {
     */
     @Override
     public Item magicbackpack() {
+        LOGGER.info("Request for creation of magic backpack");
         return new MagicBackpack(itemReader.getDescription("MAGICBACKPACK"), 
         itemReader.getPrice("MAGICBACKPACK"), 
         itemReader.getItemType("MAGICBACKPACK"));
@@ -79,6 +86,7 @@ public class ItemFactoryImpl implements ItemFactory {
     */
     @Override
     public Item mysterioustaff() {
+        LOGGER.info("Request for creation of mysterious staff");
         return new MysteriousStaff(itemReader.getDescription("MYSTERIOUSSTAFF"), 
         itemReader.getPrice("MYSTERIOUSSTAFF"), 
         itemReader.getItemType("MYSTERIOUSSTAFF"));

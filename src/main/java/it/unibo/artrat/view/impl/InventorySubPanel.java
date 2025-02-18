@@ -58,8 +58,6 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
     @Override
     public void displayMessage(final String message, final String title) {
         JOptionPane.showMessageDialog(myJPanel, message, title, JOptionPane.INFORMATION_MESSAGE);
-        myJPanel.revalidate();
-        myJPanel.repaint();
     }
 
     private void fillWithItems() {
@@ -81,7 +79,7 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
             useButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(final ActionEvent e) {
-                    if (confirmDialog("Vuoi far si che LuPino utilizzi questo oggetto?", "Utilizza oggetto")
+                    if (confirmDialog("Do you want to make sure that LuPino uses this item?", "Use item")
                             && controller.useItem(item)) {
                         myJPanel.remove(itemPanel);
                         forceRedraw();
@@ -94,11 +92,11 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
             myJPanel.add(itemPanel);
         }
 
-        final JButton closeButton = new JButton("Chiudi inventario");
+        final JButton closeButton = new JButton("Close inventory");
         closeButton.addActionListener(e -> {
-            if (confirmDialog("Vuoi davvero chiudere la borsa di LuPino e proseguire le tue scorribande?",
-                    "Chiudi inventario")) {
-                controller.setStage(Stage.MENU); // tenere a mente che con GAME si torna nel gioco.
+            if (confirmDialog("Do you really want to close LuPino's bag and continue your adventures?",
+                    "Close inventory")) {
+                controller.setStage(Stage.MENU); 
             }
         });
 
@@ -113,7 +111,7 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
     @Override
     public void initComponents() {
         final int gap = 5;
-        myJPanel.setLayout(new GridLayout(0, 1, gap, gap)); // Una colonna, spazio verticale 5px
+        myJPanel.setLayout(new GridLayout(0, 1, gap, gap)); 
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         containerPanel.add(scrollPane, BorderLayout.CENTER);
