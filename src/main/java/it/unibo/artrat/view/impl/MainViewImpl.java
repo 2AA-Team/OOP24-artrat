@@ -1,6 +1,8 @@
 package it.unibo.artrat.view.impl;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.utils.api.ResourceLoader;
@@ -47,7 +49,6 @@ public class MainViewImpl implements MainView {
     @Override
     public void initiate() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
     }
 
     /**
@@ -73,13 +74,19 @@ public class MainViewImpl implements MainView {
      * reload frame to get the right size.
      */
     private void reloadFrame() {
-        subPanel.initComponents();
-        final double width = resourceLoader.getConfig(controller.getStage().toString() + "_WIDTH");
-        final double height = resourceLoader.getConfig(controller.getStage().toString() + "_HEIGHT");
-        frame.setSize((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),
-                (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * height));
-        frame.setContentPane(subPanel.getPanel());
-        frame.revalidate();
+        SwingUtilities.invokeLater(() -> {
+            subPanel.initComponents();
+            final double width = resourceLoader.getConfig(controller.getStage().toString() + "_WIDTH");
+            final double height = resourceLoader.getConfig(controller.getStage().toString()
+                    + "_HEIGHT");
+            frame.setSize((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),
+                    (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * height));
+            frame.setContentPane(subPanel.getPanel());
+            frame.revalidate();
+            frame.repaint();
+            frame.setVisible(true);
+        });
+
     }
 
     /**
@@ -92,7 +99,9 @@ public class MainViewImpl implements MainView {
                 subPanel = new MenuSubPanel(controller.getControllerManager().getMenuSubController());
                 break;
             case GAME:
-                subPanel = new GameSubPanel(controller.getControllerManager().getGameSubController());
+                subPanel = new EmptySubPanel(controller.getControllerManager().getMenuSubController());
+                // subPanel = new
+                // GameSubPanel(controller.getControllerManager().getGameSubController());
                 break;
             case STORE:
                 subPanel = new EmptySubPanel(controller.getControllerManager().getMenuSubController());

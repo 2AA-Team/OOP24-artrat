@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
-
 import it.unibo.artrat.app.api.GameEngine;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
@@ -65,7 +64,10 @@ public final class GameEngineImpl implements GameEngine {
     @Override
     public void run() {
         mainController.addMainView(new MainViewImpl(resourceLoader));
-        mainLoop();
+        new Thread(() -> {
+            mainLoop();
+        }).start();
+
     }
 
     /**
