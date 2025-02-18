@@ -6,12 +6,7 @@ import java.io.IOException;
  * Class that rappresents the whole application and starts the game engine.
  * 
  */
-public final class ArtRat {
-    /**
-     * private constructor.
-     */
-    private ArtRat() {
-    }
+public class ArtRat {
 
     /**
      * Main method that starts the application.
@@ -19,6 +14,7 @@ public final class ArtRat {
      * @param args ignore
      */
     public static void main(final String[] args) {
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         try {
             System.out.println("Starting");
             new GameEngineImpl().run();

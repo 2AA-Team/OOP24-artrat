@@ -32,7 +32,7 @@ public final class GameEngineImpl implements GameEngine {
     private final URL configPath = Thread.currentThread().getContextClassLoader().getResource(
             "config" + File.separator
                     + "config.yaml");
-    private GameStatus status;
+    private volatile GameStatus status;
     private final ResourceLoader<String, Double> resourceLoader;
     private final MainController mainController;
 
@@ -62,35 +62,33 @@ public final class GameEngineImpl implements GameEngine {
     @Override
     public void run() {
         mainController.addMainView(new MainViewImpl(resourceLoader));
-        System.out.println("xD");
-        new Thread(this::mainLoop).start();
     }
 
     /**
      * Game loop method.
      */
     private void mainLoop() {
-        final double drawInterval = Converter.fpsToNanos(resourceLoader.getConfig("FPS").intValue());
-        double delta;
-        double lastTime;
-        long currentTime;
-        while (true) {
-            System.out.println("xDggggggg");
-            delta = 0;
-            lastTime = System.nanoTime();
-            while (status.equals(GameStatus.RUNNING)) {
-                currentTime = System.nanoTime();
-                delta += (currentTime - lastTime) / drawInterval;
-                lastTime = currentTime;
-                if (delta >= 1) {
-                    // this.commands.forEach(Command::execute););
-                    this.update();
-                    this.redraw();
-                    delta--;
-                }
+        final long drawInterval = Converter.fpsToMillis(resourceLoader.getConfig("FPS").intValue());
+        long delta;
+        long lastTime;
+        while (status.equals(GameStatus.RUNNING)) {
+            lastTime = System.currentTimeMillis();
+            this.update();
+            this.redraw();
+            delta = updateDeltaTime(lastTime, drawInterval);
+        }
+    }
+
+    private long updateDeltaTime(final long lastFrameTime, final long drawInterval) {
+        var delta = System.currentTimeMillis() - lastFrameTime;
+        if (delta < drawInterval) {
+            try {
+                Thread.sleep(drawInterval - delta);
+            } catch (InterruptedException e) {
             }
         }
 
+        return System.currentTimeMillis() - lastFrameTime;
     }
 
     /**
@@ -108,7 +106,7 @@ public final class GameEngineImpl implements GameEngine {
     }
 
     private void redraw() {
-        System.err.println("Updating view");
+        // System.err.println("Updating view");
         mainController.redraw();
     }
 
@@ -130,6 +128,7 @@ public final class GameEngineImpl implements GameEngine {
     @Override
     public void forceStart() {
         this.status = GameStatus.RUNNING;
+        Thread.ofPlatform().daemon().start(this::mainLoop);
     }
 
     @Override

@@ -47,7 +47,6 @@ public class MainControllerImpl implements MainController {
         views.add(newView);
         newView.setController(this);
         newView.setStage(currentStage);
-        newView.initiate();
     }
 
     /**
