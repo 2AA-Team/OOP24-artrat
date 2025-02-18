@@ -3,6 +3,8 @@ package it.unibo.artrat.controller.impl.subcontroller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.SwingUtilities;
+
 import it.unibo.artrat.controller.api.subcontroller.InventorySubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
@@ -79,9 +81,11 @@ public class InventorySubControllerImpl extends AbstractSubController
      */
     @Override
     public void obtainDescription(final Item passedItem) {
-        this.inventoryView.displayMessage(this.getModel().getPlayer().getInventory().getStoredItem().stream()
-        .filter(x -> x.equals(passedItem))
-        .map(Item::getDescription).findAny().get() + "\nTYPE: " + getTypeName(passedItem),
-        "Descrizione Oggetto");
+        SwingUtilities.invokeLater( () -> { 
+            this.inventoryView.displayMessage(this.getModel().getPlayer().getInventory().getStoredItem().stream()
+            .filter(x -> x.equals(passedItem))
+            .map(Item::getDescription).findAny().get() + "\nTYPE: " + getTypeName(passedItem),
+            "Descrizione Oggetto"); 
+        });
     }
 }

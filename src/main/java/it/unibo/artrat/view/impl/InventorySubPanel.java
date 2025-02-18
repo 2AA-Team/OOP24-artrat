@@ -4,6 +4,8 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -24,11 +26,6 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
     private final InventorySubController controller;
     private final JPanel myJPanel = new JPanel();
     private final JPanel containerPanel = new JPanel(new BorderLayout());
-    /**
-     * Si può pensare a toglierlo e lasciare il resize automatico, ma così è più
-     * carino se si hanno
-     * tanti tanti oggetti.
-     */
     private final JScrollPane scrollPane = new JScrollPane(myJPanel);
 
     /**
@@ -68,11 +65,11 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
     private void fillWithItems() {
         myJPanel.removeAll();
 
-        for (final var item : controller.getStoredItem()) { // observer.getStoredItem() {
-            final JPanel itemPanel = new JPanel(new GridLayout(1, 2, 5, 0)); // Due colonne: itemButton e useButton
+        for (final var item : controller.getStoredItem()) { 
+            final JPanel itemPanel = new JPanel(new GridLayout(1, 2, 5, 0)); 
 
             final JButton itemButton = new JButton(controller.getItemName(item));
-            final JButton useButton = new JButton("Usa");
+            final JButton useButton = new JButton("Use");
 
             itemButton.addActionListener(new ActionListener() {
                 @Override
