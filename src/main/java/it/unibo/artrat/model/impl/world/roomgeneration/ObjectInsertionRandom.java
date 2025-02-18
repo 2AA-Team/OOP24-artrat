@@ -14,7 +14,7 @@ import it.unibo.artrat.utils.impl.Point;
 /**
  * random insertion method.
  * 
- * @param <O>
+ * @param <O> type of the object to add
  */
 public class ObjectInsertionRandom<O> implements ObjectInsertionStrategy<O> {
 

@@ -17,11 +17,11 @@ public enum RoomSymbols {
      */
     VALUE('V'),
     /**
-     * 
+     * exit.
      */
     EXIT('X'),
     /**
-     * 
+     * player.
      */
     PLAYER('P');
 
