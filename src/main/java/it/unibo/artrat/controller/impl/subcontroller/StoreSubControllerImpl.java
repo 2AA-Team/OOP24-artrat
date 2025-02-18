@@ -62,15 +62,17 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
         final Market market = this.getModel().getMarket();
         final Inventory inventory = player.getInventory();
 
-        if(market.buyItem(itemToBuy) && player.getCoin().getCurrentAmount() >= itemToBuy.getPrice()) {
-            player.spendCoins(itemToBuy.getPrice());
-            inventory.addItem(itemToBuy);       //aggiungo l'item all'inventario
-            player.setInventory(inventory);
-            model.setMarket(market);
-            model.setPlayer(player.copyPlayer());
-            this.updateCentralizeModel(new ModelImpl(model));
-            updateCentralizeModel(model);
-            return true;
+        if (market.buyItem(itemToBuy)) {
+            if (player.getCoin().getCurrentAmount() >= itemToBuy.getPrice()) {
+                player.spendCoins(itemToBuy.getPrice());
+                inventory.addItem(itemToBuy);       //aggiungo l'item all'inventario
+                player.setInventory(inventory);
+                model.setMarket(market);
+                model.setPlayer(player.copyPlayer());
+                this.updateCentralizeModel(new ModelImpl(model));
+                updateCentralizeModel(model);
+                return true;
+            }
         }
         return false;
     }
@@ -133,7 +135,7 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     public String getTypeName(final Item passedItem) {
         return this.getModel().getMarket().getPurchItems().stream()
             .filter(it -> it.equals(passedItem))
-            .map(el -> el.getType())
+            .map(Item::getType)
             .findAny().get().toString();
     }
 
@@ -144,7 +146,7 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     public double getItemPrice(final Item passedItem) {
         return this.getModel().getMarket().getPurchItems().stream()
             .filter(it -> it.equals(passedItem))
-            .map(pr -> pr.getPrice())
+            .map(Item::getPrice)
             .findAny().get();
     }
 }

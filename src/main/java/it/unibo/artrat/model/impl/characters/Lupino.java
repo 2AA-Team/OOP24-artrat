@@ -123,7 +123,7 @@ public class Lupino extends AbstractEntity implements Player {
      * {@inheritDoc}
      */
     @Override
-    public void spendCoins(double coins) {
+    public void spendCoins(final double coins) {
         this.coins.spendCoins(coins);
     }
 

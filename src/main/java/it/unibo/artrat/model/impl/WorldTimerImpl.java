@@ -49,7 +49,7 @@ public class WorldTimerImpl implements WorldTimer {
     @Override       //resetto il timer se finisco il game prima, e non lo riavvio
     public void resetTimer() {
         //DEVO avere la roba di tonno o sam del game over.
-        if(timer != null) {
+        if (timer != null) {
             timer.cancel(); //cancello il timer
             timer = new Timer("WorldTimer"); 
             System.out.println("TIMER RESETTATO");

@@ -10,8 +10,7 @@ public interface MissionManager {
     /**
      * @return all the mission sorted in base of their reward.
     */
-    List<Mission> sortRewardMission();            
-    //non so se usare mission, o Abstractmission o Advanced/base mission
+    List<Mission> sortRewardMission();
 
     /**
      * 

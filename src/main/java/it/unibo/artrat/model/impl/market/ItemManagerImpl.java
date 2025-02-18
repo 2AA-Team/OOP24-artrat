@@ -2,6 +2,7 @@ package it.unibo.artrat.model.impl.market;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.api.inventory.ItemType;
@@ -22,13 +23,14 @@ public class ItemManagerImpl implements ItemManager {
     }
 
     /**
+     * s.
      * {@InheritDoc}
      */
     @Override
     public List<Item> sortItemPrice(final int dir) {
         Comparator<Item> sortingDir = Comparator.comparing(Item::getPrice);
 
-        if(dir == 0) {
+        if (dir == 0) {
             sortingDir = sortingDir.reversed();
         }
         return itemList.stream()
@@ -37,12 +39,12 @@ public class ItemManagerImpl implements ItemManager {
     }
 
     /**
+     * s.
      * {@InheritDoc}
      */
     @Override
     public List<Item> filterItems(final ItemType itemType) {
-
-        if(itemType == null) {
+        if (itemType == null) {
             return itemList.stream().collect(Collectors.toList());
         }
         return itemList.stream()
@@ -51,12 +53,12 @@ public class ItemManagerImpl implements ItemManager {
     }
 
     /**
-     * {@InheritDoc}
+     * s.
      */
     @Override
     public List<Item> searchItem(final String nameToSearch) {
         return itemList.stream()
-            .filter(it -> it.getClass().getSimpleName().toLowerCase().startsWith(nameToSearch.trim().toLowerCase()))
+            .filter(it -> it.getClass().getSimpleName().toLowerCase().startsWith(nameToSearch.trim().toLowerCase(Locale.ROOT)))
             .collect(Collectors.toList());
     }
 }

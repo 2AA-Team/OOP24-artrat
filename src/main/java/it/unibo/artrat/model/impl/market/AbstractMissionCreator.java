@@ -12,7 +12,6 @@ public abstract class AbstractMissionCreator implements Mission {
     private final double reward;
 
     /**
-    *  
     * @param name n
     * @param descr d
     * @param reward r

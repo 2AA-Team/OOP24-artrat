@@ -89,16 +89,17 @@ public class MarketImpl implements Market {
      */
     @Override
     public boolean buyItem(final Item passedItem) {
-        if(itemsToBuy.contains(passedItem) && passedItem.getType() == ItemType.POWERUP) {
-            itemsToBuy.remove(passedItem);
+        if (itemsToBuy.contains(passedItem)) {
+            if (passedItem.getType() == ItemType.POWERUP) {
+                itemsToBuy.remove(passedItem);
+            }
             return true;
         }
         return false;
     }
 
     /**
-     * This private method has made to create my items and testing if I am correctly reading
-     * from my items.yaml file
+     * This private method has made to create my items and testing if I am correctly reading from my items.yaml file.
      * 
      * @param nameItem the name of the item which it has to be created
      * @return the item created using itemFactory

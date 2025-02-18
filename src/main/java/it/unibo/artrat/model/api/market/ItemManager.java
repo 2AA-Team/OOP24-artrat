@@ -5,8 +5,8 @@ import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.api.inventory.ItemType;
 
 /**
- * ItemManager interface, manages the list of game items,
- * which are read by the item reader
+ * ItemManager interface, manages the list of game items.
+ * Game items are read by the item reader.
  *
  * SortItemPrice, searchItems and filterItems are dependent one another
  */

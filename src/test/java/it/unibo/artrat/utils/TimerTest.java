@@ -14,7 +14,7 @@ class TimerTest {
     private StoreSubController contr;
 
     void testTimer() {
-        WorldTimerImpl timer = new WorldTimerImpl(this.contr);
+        final WorldTimerImpl timer = new WorldTimerImpl(this.contr);
         timer.startTimer();
         while (!timer.isTimeOut()) {        //isTimeOut sta nel model, è un semplice boolean di controllo
             try {

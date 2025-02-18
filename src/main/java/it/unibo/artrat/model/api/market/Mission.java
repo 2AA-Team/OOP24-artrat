@@ -10,11 +10,11 @@ public interface Mission {
      */
     enum MissionCategory {
         /**
-         * s
+         * s.
          */
         TIMECHALLENGE, 
         /**
-         * s
+         * s.
         */
         GATHERING
     };
@@ -38,8 +38,7 @@ public interface Mission {
     String getName();
 
     /**
-     * 
-     * @return
+     * s.
      */
     double getReward();
     //T getCategory();      mi dice a che categoria appartiene, se Stealth, base eccetera

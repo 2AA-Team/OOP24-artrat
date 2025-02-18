@@ -3,6 +3,8 @@ package it.unibo.artrat.view.impl;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.Locale;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -126,7 +128,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         marketPanel.add(upperJPanel, BorderLayout.NORTH);
 
         filterComboBox.addActionListener(e -> {
-            ItemType selectedType = (ItemType) filterComboBox.getSelectedItem();
+            final ItemType selectedType = (ItemType) filterComboBox.getSelectedItem();
             currType = selectedType;                //sto mettendo un currType
             contr.filterCategory(selectedType);
             //itemSearch(searchItemField.getText().trim().toLowerCase());
@@ -134,8 +136,8 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         });
 
         sortButton.addActionListener(e -> {
-            int choice = JOptionPane.showConfirmDialog(null, "creasing sorting = NO, decreasing = YES", "Ordinamento Prezzi", 
-            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            final int choice = JOptionPane.showConfirmDialog(null, "creasing sorting = NO, decreasing = YES", 
+            "Ordinamento Prezzi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             contr.sorting(choice);
             forceRedraw();
         });
@@ -148,19 +150,19 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
             @Override
             public void insertUpdate(final DocumentEvent doc) {
                // contr.filterCategory(currType);
-                itemSearch(searchItemField.getText().trim().toLowerCase());
+                itemSearch(searchItemField.getText().trim().toLowerCase(Locale.ROOT));
             }
 
             @Override
             public void removeUpdate(final DocumentEvent doc) {
                // contr.filterCategory(currType);
-                itemSearch(searchItemField.getText().trim().toLowerCase());
+                itemSearch(searchItemField.getText().trim().toLowerCase(Locale.ROOT));
             }
 
             @Override
             public void changedUpdate(final DocumentEvent doc) {
               //  contr.filterCategory(currType);
-                itemSearch(searchItemField.getText().trim().toLowerCase());
+                itemSearch(searchItemField.getText().trim().toLowerCase(Locale.ROOT));
             }
         });
 
@@ -193,7 +195,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     private void allItemsSetup() {
         purchItemPanel.removeAll();
 
-        for (var purchItem : contr.purchasableItems()) {
+        for (final var purchItem : contr.purchasableItems()) {
             final JButton buyItem = new JButton("Buy");
             final JLabel itemLabel = new JLabel(contr.getItemName(purchItem));
             final JLabel typeLabel = new JLabel(contr.getTypeName(purchItem));

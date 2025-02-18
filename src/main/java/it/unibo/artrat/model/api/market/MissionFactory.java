@@ -11,12 +11,13 @@ public interface MissionFactory {
      */
     enum MissionCategory {
         /**
-         * 
+         * s.
          */
         TIMECHALLENGE, 
         /**
-        * 
-        */ GATHERING
+        * s.
+        */ 
+        GATHERING
     };
 
 }
