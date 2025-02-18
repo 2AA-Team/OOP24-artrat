@@ -193,7 +193,7 @@ public class FloorImpl implements Floor {
      * @param y        y coordinate
      * @param roomSize room size
      */
-    private void setStartPosition(int x, int y, int roomSize) {
+    private void setStartPosition(final int x, final int y, final int roomSize) {
         startPosition = new Point(
                 x * roomSize + Math.floor(roomSize / 2),
                 y * roomSize + Math.floor(roomSize / 2));

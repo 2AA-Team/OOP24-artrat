@@ -1,22 +1,22 @@
 package it.unibo.artrat.utils;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
-
 import it.unibo.artrat.utils.impl.Converter;
 
-public class ConverterTest {
+class ConverterTest {
 
     @Test
-    public void testValidInput() {
-        int nanos = 500_000_000;
-        int expectedFps = 2;
-        int result = Converter.nanosToFps(nanos);
+    void testNanosToFpsValidInput() {
+        final int nanos = 500_000_000;
+        final int expectedFps = 2;
+        final int result = Converter.nanosToFps(nanos);
         assertEquals(expectedFps, result);
     }
 
     @Test
-    public void testLowerThanOne() {
+    void testLowerThanOne() {
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
             Converter.nanosToFps(0);
         });
@@ -28,14 +28,16 @@ public class ConverterTest {
     }
 
     @Test
-    public void testFpsToNanos_ValidInput() {
-        int fps = 60;
-        double expectedNanos = 1_000_000_000.0 / 60;
+    void testFpsToNanosValidInput() {
+        final double delta = 0.00_001;
+        final double billion = 1_000_000_000;
+        final int fps = 60;
+        double expectedNanos = billion / fps;
         double result = Converter.fpsToNanos(fps);
-        assertEquals(expectedNanos, result, 0.00001);
-        fps = 120;
-        expectedNanos = 1_000_000_000.0 / 120;
-        result = Converter.fpsToNanos(fps);
-        assertEquals(expectedNanos, result, 0.00001);
+        assertEquals(expectedNanos, result, delta);
+        final int fps2 = 120;
+        expectedNanos = billion / fps2;
+        result = Converter.fpsToNanos(fps2);
+        assertEquals(expectedNanos, result, delta);
     }
 }

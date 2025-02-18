@@ -56,8 +56,8 @@ public class GameSubPanel extends AbstractSubPanel {
 
         for (final var wallsPoint : this.gameSubController.getVisibleWallPositions()) {
 
-            int wallX = (int) Math.floor(center.getX() + (wallsPoint.getX() - playerPos.getX()) * zoom);
-            int wallY = (int) Math.floor(center.getY() + (wallsPoint.getY() - playerPos.getY()) * zoom);
+            final int wallX = (int) Math.floor(center.getX() + (wallsPoint.getX() - playerPos.getX()) * zoom);
+            final int wallY = (int) Math.floor(center.getY() + (wallsPoint.getY() - playerPos.getY()) * zoom);
 
             mapPanel.add(new ImageLabel("src/main/java/it/unibo/artrat/resources/wall.png",
                     wallX, wallY, zoom, zoom).getJLabel());
