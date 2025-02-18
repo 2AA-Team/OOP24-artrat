@@ -34,13 +34,11 @@ class FloorImplTest {
     }
 
     @Test
-    @DisplayName("Test FloorImpl creation with valid configuration")
     void testFloorCreation() {
         assertNotNull(floor, "The FloorImpl object should not be null");
     }
 
     @Test
-    @DisplayName("Test floor structure generation")
     void testGenerateFloorSet() {
         assertDoesNotThrow(floor::generateFloorSet, "Generating the floor should not throw exceptions");
         assertNotNull(floor.getWalls(), "Walls should not be null");
@@ -50,7 +48,6 @@ class FloorImplTest {
     }
 
     @Test
-    @DisplayName("Test invalid configuration handling")
     void testInvalidConfig() throws IOException {
         final ResourceLoaderImpl<String, Double> invalidLoader = new ResourceLoaderImpl<>();
         invalidLoader.setConfigPath(baseConfigPath + "floorImplTestNeg.yaml");
@@ -59,7 +56,6 @@ class FloorImplTest {
     }
 
     @Test
-    @DisplayName("Test IOException handling during room generation")
     void testGenerateRoomsIOException() {
         assertThrows(IllegalStateException.class, () -> {
             final FloorImpl faultyFloor = new FloorImpl(new ResourceLoaderImpl<>());

@@ -8,10 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.io.FileWriter;
-
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import it.unibo.artrat.utils.api.ResourceLoader;
 import it.unibo.artrat.utils.impl.ResourceLoaderImpl;
 
@@ -33,7 +30,6 @@ class ResourceLoaderTest {
      * test loading config path.
      */
     @Test
-    @DisplayName("Test resource loader with invalid config file.")
     void testLoading() {
         final ResourceLoader<String, Integer> resLoad = new ResourceLoaderImpl<>();
         assertThrows(IOException.class, () -> resLoad.setConfigPath(configPath + ".exe"),
@@ -45,7 +41,6 @@ class ResourceLoaderTest {
      * 
      */
     @Test
-    @DisplayName("Test resource loader with invalid configuration field.")
     void testReading() {
         final ResourceLoader<String, Integer> resLoad = new ResourceLoaderImpl<>();
         try {
