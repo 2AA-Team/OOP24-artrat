@@ -82,7 +82,7 @@ public class FloorImpl implements Floor {
         floorEnemies = new HashSet<>();
         floorValues = new HashSet<>();
         final int floorSize = RANDOM.nextInt((int) this.minFloorSize, (int) this.maxFloorSize);
-        final int roomSize = RANDOM.nextInt((int) this.minFloorSize, (int) this.maxRoomSize);
+        final int roomSize = RANDOM.nextInt((int) this.minRoomSize, (int) this.maxRoomSize);
         this.generateRoomsStructure(floorSize);
         this.generateEffectiveRooms(roomSize);
     }
