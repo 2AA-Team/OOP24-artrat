@@ -55,6 +55,6 @@ public class ModelImpl implements Model {
 
     @Override
     public void setMarket(Market market) {
-        this.market = market;
+        this.market = new MarketImpl(market);
     }
 }

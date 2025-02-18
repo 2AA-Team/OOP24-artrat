@@ -15,11 +15,13 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     private final JPanel contPane = new JPanel(new BorderLayout());
     private final JScrollPane scrollPanel = new JScrollPane(marketPanel);
     private final JLabel lupinoCash = new JLabel();
+    private JPanel purchItemPanel;
     private WorldTimerImpl timer;
     
     public MarketSubPanel(StoreSubController contr) {
         this.contr = contr;
         this.timer = new WorldTimerImpl(this.contr);
+        this.purchItemPanel = new JPanel(new GridLayout(contr.purchasableItems().size(), 4, 4, 2));
         this.timer.startTimer();
     }
 
@@ -49,8 +51,10 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
 
     @Override
     protected void forceRedraw() {
+        allItemsSetup();
         marketPanel.revalidate();
         marketPanel.repaint();
+    
     }
 
     private void updateCoinLabel() {
@@ -86,7 +90,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
                 int choice = JOptionPane.showConfirmDialog(null, "creasing sorting = NO, decreasing = YES", "Ordinamento Prezzi", 
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 contr.sorting(choice);
-                allItemsSetup();
+                forceRedraw();
             }
         });
 
@@ -106,7 +110,6 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     }
 
     private void allItemsSetup() {
-        final JPanel purchItemPanel = new JPanel(new GridLayout(contr.purchasableItems().size(), 4, 4, 2));
         purchItemPanel.removeAll();  
         System.out.println("VIEEEEEWWWW" + contr.purchasableItems());
         for (var purchItem : contr.purchasableItems()) {
@@ -136,8 +139,6 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
                 }
             });
         }
-
-        marketPanel.add(purchItemPanel, BorderLayout.CENTER);
-        forceRedraw();  
+        marketPanel.add(purchItemPanel, BorderLayout.CENTER); 
     }
 }

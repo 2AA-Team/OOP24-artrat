@@ -26,10 +26,6 @@ public class ItemManagerImpl implements ItemManager{
         if(dir == 0){
             sortingDir = sortingDir.reversed();
         }
-        System.out.println("ITEMMMMMMMMMMMM" + market.getPurchItems().stream()
-        .sorted(sortingDir)
-        .collect(Collectors.toList()));
-
         return market.getPurchItems().stream()
             .sorted(sortingDir)
             .collect(Collectors.toList());

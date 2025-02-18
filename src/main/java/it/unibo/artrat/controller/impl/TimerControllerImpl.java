@@ -10,7 +10,7 @@ import it.unibo.artrat.model.impl.WorldTimerImpl;
 public class TimerControllerImpl implements TimerController{
 
     private  WorldTimerImpl timer;
-        private StoreSubController contr;
+    private StoreSubController contr;
 
 
     public TimerControllerImpl(){
@@ -20,6 +20,11 @@ public class TimerControllerImpl implements TimerController{
     @Override
     public void startTimerController() {        //devo capire meglio se devo aggiornare il model pure col timer, in teoria no
         timer.startTimer();                     //devo capire se nel model ho bisogno di metodi per il timer, essendo un elemento fuori da tutto
+    }
+
+
+    public void stopTimer(){
+
     }
 
     @Override
