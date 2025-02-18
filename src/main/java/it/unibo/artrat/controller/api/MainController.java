@@ -2,7 +2,6 @@ package it.unibo.artrat.controller.api;
 
 import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.impl.Stage;
-import it.unibo.artrat.utils.api.commands.Command;
 import it.unibo.artrat.view.api.MainView;
 
 /**

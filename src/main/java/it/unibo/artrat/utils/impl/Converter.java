@@ -6,7 +6,7 @@ package it.unibo.artrat.utils.impl;
  * @author Matteo Tonelli
  */
 public final class Converter {
-    private static final int BILLION = 1_000_000_000;
+    private static final int MS = 1_000;
 
     /**
      * private constructor.
@@ -15,22 +15,28 @@ public final class Converter {
     }
 
     /**
-     * Converts nano seconds to FPS.
+     * Converts millis seconds to FPS.
      * 
-     * @param nanos nano seconds to convert
+     * @param millis milli seconds to convert
      * @return int rappresenting FPS
      */
-    public static int nanosToFps(final int nanos) {
-        return Math.toIntExact(BILLION / nanos);
+    public static int millisToFps(final int millis) {
+        if (millis < 1) {
+            throw new IllegalArgumentException("nano second must be > 1");
+        }
+        return Math.toIntExact(MS / millis);
     }
 
     /**
-     * Converts FPS to nano seconds.
+     * Converts FPS to millis seconds.
      * 
      * @param fps frame per second
-     * @return nano seconds
+     * @return millis seconds
      */
-    public static double fpsToNanos(final int fps) {
-        return (double) BILLION / fps;
+    public static long fpsToMillis(final int fps) {
+        if (fps < 1) {
+            throw new IllegalArgumentException("FPS must be > 1");
+        }
+        return MS / fps;
     }
 }

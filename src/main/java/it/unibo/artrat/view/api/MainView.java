@@ -19,12 +19,6 @@ public interface MainView {
     void setController(MainController observer);
 
     /**
-     * This method is called before the UI is used. It should finalize its status.
-     * (if needed).
-     */
-    void initiate();
-
-    /**
      * This method is used to set the stage in a view.
      * 
      * @param currentStage new stage to set

@@ -3,7 +3,6 @@ package it.unibo.artrat.controller.impl.subcontroller;
 import java.io.IOException;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import it.unibo.artrat.controller.api.subcontroller.GameSubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
@@ -22,7 +21,8 @@ import it.unibo.artrat.utils.impl.Point;
 public class GameSubControllerImpl extends AbstractSubController implements GameSubController {
     private final Player player;
     private final Floor floor;
-    private final double fov;
+    private final double renderDistance;
+    private final double zoom;
 
     /**
      * constructor to initialize mainController.
@@ -34,10 +34,12 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
     public GameSubControllerImpl(final MainControllerImpl mainController, final ResourceLoader<String, Double> rl)
             throws IOException {
         super(mainController);
-        this.fov = rl.getConfig("FOV");
+        this.renderDistance = rl.getConfig("RENDER_DISTANCE");
+        this.zoom = rl.getConfig("ZOOM");
         this.floor = new FloorImpl(rl);
         this.floor.generateFloorSet();
         this.player = mainController.getModel().getPlayer();
+        this.player.setPosition(this.floor.getStartPosition());
     }
 
     /**
@@ -45,7 +47,7 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
      */
     @Override
     public Set<Point> getVisibleWallPositions() {
-        final BoundingBox bb = new BoundingBoxImpl(getPlayerPos(), fov, fov);
+        final BoundingBox bb = new BoundingBoxImpl(getPlayerPos(), renderDistance, renderDistance);
         return this.floor.getWalls().stream().filter(x -> bb.isColliding(x.getBoundingBox()))
                 .map(AbstractGameObject::getPosition).collect(Collectors.toSet());
     }
@@ -56,6 +58,14 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
     @Override
     public Point getPlayerPos() {
         return this.getModel().getPlayer().getPosition();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getZoom() {
+        return (int) zoom;
     }
 
 }
