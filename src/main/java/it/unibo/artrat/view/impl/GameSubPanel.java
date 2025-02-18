@@ -1,15 +1,25 @@
 package it.unibo.artrat.view.impl;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import javax.swing.JPanel;
 
+import it.unibo.artrat.controller.api.SubController;
 import it.unibo.artrat.controller.api.subcontroller.GameSubController;
 import it.unibo.artrat.utils.impl.Point;
+import it.unibo.artrat.utils.impl.commands.MoveDown;
+import it.unibo.artrat.utils.impl.commands.MoveLeft;
+import it.unibo.artrat.utils.impl.commands.MoveRight;
+import it.unibo.artrat.utils.impl.commands.MoveStop;
+import it.unibo.artrat.utils.impl.commands.MoveUp;
 
 /**
  * game sub panel class.
  */
 public class GameSubPanel extends AbstractSubPanel {
     private final GameSubController gameSubController;
+    private final JPanel mainPanel = new JPanel();
     private final InputListener commands;
 
     /**
@@ -19,6 +29,41 @@ public class GameSubPanel extends AbstractSubPanel {
      */
     public GameSubPanel(final GameSubController gameSubController) {
         this.gameSubController = gameSubController;
+        this.mainPanel.setFocusable(true);
+        this.mainPanel.requestFocus();
+        this.mainPanel.addKeyListener(new KeyListener() {
+
+            private static final int UP = KeyEvent.VK_W;
+            private static final int DOWN = KeyEvent.VK_S;
+            private static final int LEFT = KeyEvent.VK_A;
+            private static final int RIGHT = KeyEvent.VK_D;
+
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                System.out.println(e.getKeyChar());
+                switch (e.getKeyCode()) {
+                    case UP -> gameSubController.inputMainController(new MoveUp());
+                    case DOWN -> gameSubController.inputMainController(new MoveDown());
+                    case LEFT -> gameSubController.inputMainController(new MoveLeft());
+                    case RIGHT -> gameSubController.inputMainController(new MoveRight());
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                var key = e.getKeyCode();
+                if (key == UP || key == DOWN || key == LEFT || key == RIGHT) {
+                    // gameSubController.inputMainController(new MoveStop());
+                }
+            }
+
+        });
+
         commands = new InputListener(gameSubController);
     }
 
@@ -30,7 +75,7 @@ public class GameSubPanel extends AbstractSubPanel {
     public void initComponents() {
         final JPanel panel = new JPanel();
 
-        setPanel(panel);
+        setPanel(mainPanel);
     }
 
     /**
@@ -38,25 +83,7 @@ public class GameSubPanel extends AbstractSubPanel {
      */
     @Override
     public void forceRedraw() {
-        final JPanel panel = new JPanel();
-        panel.setLayout(null);
-
-        panel.add(new ImageLabel("src/main/java/it/unibo/artrat/resources/image.jpg",
-                (int) Math.floor(getFrameDimension().getWidth() / 2),
-                (int) Math.floor(getFrameDimension().getHeight() / 2), 10, 10).getJLabel());
-        final Point playerPos = this.gameSubController.getPlayerPos();
-        for (final var wallsPoint : this.gameSubController.getVisibleWallPositions()) {
-            panel.add(new ImageLabel("src/main/java/it/unibo/artrat/resources/image.jpg",
-                    (int) Math.floor(wallsPoint.getX() * this.getFrameDimension().getHeight() / 2
-                            / playerPos.getX()),
-                    (int) Math.floor(wallsPoint.getY() * this.getFrameDimension().getWidth() / 2
-                            / playerPos.getY()),
-                    100,
-                    100)
-                    .getJLabel());
-        }
-        setPanel(panel);
-        System.out.println(this.gameSubController.getPlayerPos().toString());
+        System.out.println(this.gameSubController.getPlayerPos());
     }
 
 }

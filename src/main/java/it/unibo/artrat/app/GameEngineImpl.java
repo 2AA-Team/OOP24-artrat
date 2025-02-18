@@ -21,7 +21,6 @@ import it.unibo.artrat.view.impl.MainViewImpl;
 public final class GameEngineImpl implements GameEngine {
     private final List<Command> commands = new LinkedList<>();
 
-    // TODO add Room for GameObjects' access.
     private enum GameStatus {
         STOPPED, RUNNING
     }
@@ -81,13 +80,20 @@ public final class GameEngineImpl implements GameEngine {
                 currentTime = System.nanoTime();
                 delta += (currentTime - lastTime) / drawInterval;
                 lastTime = currentTime;
+                var model = this.mainController.getModel();
+                var player = model.getPlayer();
                 if (delta >= 1) {
-                    this.commands.forEach(x -> x.execute(this.mainController.getModel().getPlayer()));
+
+                    this.commands.forEach(x -> x.execute(player));
+
                     this.commands.clear();
                     this.update();
                     this.redraw();
                     delta--;
                 }
+                player.update((int) delta);
+                model.setPlayer(player);
+                this.mainController.setModel(model);
             }
         }
 
