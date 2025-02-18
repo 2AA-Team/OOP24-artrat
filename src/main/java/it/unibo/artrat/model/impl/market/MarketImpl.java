@@ -12,6 +12,9 @@ import it.unibo.artrat.model.impl.inventory.ItemFactoryImpl;
 import it.unibo.artrat.utils.api.ItemReader;
 import it.unibo.artrat.utils.impl.ItemReaderImpl;
 
+/**
+ * Market implementation on the Model
+ */
 public class MarketImpl implements Market {    
     private final String itemPath = "src" + File.separator
             + "main" + File.separator
@@ -45,6 +48,11 @@ public class MarketImpl implements Market {
         this.itemFactory = new ItemFactoryImpl();
     }
 
+    /**
+     * this method uses ItemReaderImpl to read my yaml file items.yaml
+     * It adds my items (created using the private method createItem) in my list
+     * @throws IOException
+     */
     public void initMarket() throws IOException {
         this.itemReader.readFromItemFile(itemPath);
         this.itemFactory.initialize();
@@ -62,10 +70,10 @@ public class MarketImpl implements Market {
     }
 
     /**
-     *
+     * Update my list of items, it's useful for ItemManager 
      */
     @Override
-    public void setPurchItems(List<Item> items) {       //aggiorno la mia lista di elementi (filtraggio, sorting)
+    public void setPurchItems(List<Item> items) {  
         this.itemsToBuy = new ArrayList<>(items);
     }
 
@@ -83,6 +91,14 @@ public class MarketImpl implements Market {
         return false;
     }
 
+    /**
+     * This private method has made to create my items and testing if I am correctly reading
+     * from my items.yaml file
+     * 
+     * @param nameItem the name of the item which it has to be created
+     * @return the item created using itemFactory
+     * @throws IllegalArgumentException if my passed item name is not compatible
+     */
     private Item createItem(String nameItem) {
         switch (nameItem) {
             case "MULTIPLIERBOOSTER":

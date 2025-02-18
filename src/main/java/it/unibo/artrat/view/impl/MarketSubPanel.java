@@ -1,14 +1,24 @@
 package it.unibo.artrat.view.impl;
 
 import java.awt.*;
+
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
 import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.model.impl.WorldTimerImpl;
 import it.unibo.artrat.view.api.MarketView;
 
+/**
+ * Here I see the collection of all the items I can purchase, and different buttons, 
+ * whose operation is dependent on each other.
+ * @author Manuel Benagli
+ */
 public class MarketSubPanel extends AbstractSubPanel implements MarketView {
+    private static final int SEARCH_TEXT_FIELD = 20;
     private static final int GAP = 7;
     private StoreSubController contr;
     private final JPanel marketPanel = new JPanel();
@@ -16,8 +26,13 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     private final JScrollPane scrollPanel = new JScrollPane(marketPanel);
     private final JLabel lupinoCash = new JLabel();
     private JPanel purchItemPanel;
+    private final JTextField searchItemField = new JTextField(SEARCH_TEXT_FIELD); 
     private WorldTimerImpl timer;
-    
+
+    /**
+     * MarketSubPanel constructor.
+     * @param contr
+     */
     public MarketSubPanel(StoreSubController contr) {
         this.contr = contr;
         this.timer = new WorldTimerImpl(this.contr);
@@ -25,6 +40,12 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         this.timer.startTimer();
     }
 
+    /**
+     * 
+     * @param text message test
+     * @param name name of test
+     * @return
+     */
     private boolean toConfirm(final String text, final String name) {
         return JOptionPane.showConfirmDialog(marketPanel, text, name, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
     }
@@ -49,6 +70,9 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         setPanel(contPane);
     }
 
+    /**
+     * 
+     */
     @Override
     protected void forceRedraw() {
         allItemsSetup();
@@ -57,31 +81,57 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     
     }
 
+    /**
+     * this private method updates the coin label every time I buy a new item
+     */
     private void updateCoinLabel() {
         lupinoCash.setText(String.valueOf(contr.getModel().getPlayer().getCoin().getCurrentAmount()));
     }
 
+    /**
+     * 
+     */
     private void setShop() {
         final JButton filterButton = new JButton("Filter");
         final JButton sortButton = new JButton("Sort");
-        final JButton searchItemButton = new JButton("Search");
-        final JPanel bottomPan = new JPanel();
+        final JPanel bottomPan = new JPanel(); // questo serve per il search
         bottomPan.setLayout(new FlowLayout());
         final JPanel upperJPanel = new JPanel();
         upperJPanel.setLayout(new FlowLayout());
         final JButton toMenu = new JButton("BACK");
 
+        final JComboBox<String> filterComboBox = new JComboBox<>();
+        filterComboBox.addItem("All");
+        for (ItemType type : ItemType.values()) {
+            filterComboBox.addItem(type.toString());
+        }
+
+        final JPanel filterPanel = new JPanel();
+        filterPanel.add(new JLabel("Filter by type:"));
+        filterPanel.add(filterComboBox);
+        filterPanel.setVisible(false); // Nascondo inizialmente
         upperJPanel.add(filterButton);
         upperJPanel.add(sortButton);
-        upperJPanel.add(searchItemButton);
-
+        upperJPanel.add(searchItemField);
         marketPanel.add(upperJPanel, BorderLayout.NORTH);
 
+        /*filterButton.addActionListener(e -> {
+            ItemType selectedType = (ItemType)filterComboBox.getSelectedItem();
+            contr.filterCategory(selectedType);
+            forceRedraw();
+        });*/
         filterButton.addActionListener(e -> {
-            if (toConfirm("Do you want to filter the item in base of their type?", "Filter")) {
-                int choice = JOptionPane.showConfirmDialog(null, "POWEUP filter?", "Filter type",  
-                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                // contr.filterCategory(ItemType);
+            marketPanel.add(filterPanel, BorderLayout.CENTER);
+            filterPanel.setVisible(true); // Mostro
+            filterButton.setEnabled(false); // Disabilito
+        });
+    
+        filterComboBox.addActionListener(e -> {
+            ItemType selectedType = (ItemType) filterComboBox.getSelectedItem();
+            if (selectedType != null) {
+                contr.filterCategory(selectedType);
+                filterPanel.setVisible(false);
+                filterButton.setEnabled(true); 
             }
         });
 
@@ -94,13 +144,33 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
             }
         });
 
-        searchItemButton.addActionListener(e -> {
-            // contr.searchItem();
+        /*
+         * I used 
+         */
+        searchItemField.getDocument().addDocumentListener(new DocumentListener() {
+
+            @Override
+            public void insertUpdate(DocumentEvent doc) {
+                itemSearch(searchItemField.getText().trim().toLowerCase());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent doc) {
+                itemSearch(searchItemField.getText().trim().toLowerCase());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent doc) {
+                itemSearch(searchItemField.getText().trim().toLowerCase());
+            }
         });
 
         toMenu.addActionListener(e -> {
             if (toConfirm("Do you want to come back to the menu?", "Back to menu")) {
+                searchItemField.setText("");
+                itemSearch("");
                 contr.setStage(Stage.MENU);
+                timer.resetTimer();
             }
         });
 
@@ -109,6 +179,18 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         marketPanel.add(bottomPan, BorderLayout.SOUTH);
     }
 
+    /**
+     * 
+     * @param searchText
+     */
+    private void itemSearch(String searchText){    
+        contr.searchItem(searchText);
+        forceRedraw();
+    }
+
+    /**
+     * 
+     */
     private void allItemsSetup() {
         purchItemPanel.removeAll();  
         System.out.println("VIEEEEEWWWW" + contr.purchasableItems());
@@ -133,6 +215,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
                             contr.getModel().getMarket().getPurchItems().remove(purchItem);
                             purchItemPanel.remove(itemPanel);  
                         }
+                        itemSearch(searchItemField.getText().trim().toLowerCase());
                         forceRedraw();
                         updateCoinLabel();
                     }

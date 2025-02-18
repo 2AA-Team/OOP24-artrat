@@ -25,6 +25,7 @@ import it.unibo.artrat.view.impl.MarketSubPanel;
 public class StoreSubControllerImpl extends AbstractSubController implements StoreSubController {
 
     private final MarketView marketView;
+    private List<Item> currenItems = new ArrayList<>();
     /**
      * constructor to initialize mainController.
      * 
@@ -33,11 +34,19 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     public StoreSubControllerImpl(final MainControllerImpl mainController) {
         super(mainController);
         this.marketView = new MarketSubPanel(this);
+        this.currenItems = new ArrayList<>(this.getModel().getMarket().getPurchItems());
     }
 
     @Override
     public List<Item> purchasableItems() {
-        return new ArrayList<>(this.getModel().getMarket().getPurchItems());
+        return new ArrayList<>(currenItems);
+    }
+
+    /**
+     * 
+     */
+    private void updateCurrentItem() {
+        this.currenItems = new ArrayList<>(this.getModel().getMarket().getPurchItems());
     }
 
     @Override
@@ -54,40 +63,33 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
                 model.setMarket(market);
                 model.setPlayer(player.copyPlayer());
                 this.updateCentralizeModel(new ModelImpl(model));
+                updateCentralizeModel(model);
                 return true;
             }
         }
         return false;
     }
 
+    /**
+     * 
+     */
     @Override
     public void sorting(int choice){
-       final Model model = this.getModel();
-       final Market market = this.getModel().getMarket();
-       final ItemManager itemMan = new ItemManagerImpl(market);
-       market.setPurchItems(itemMan.sortItemPrice(choice));
-       model.setMarket(market);
-       this.updateCentralizeModel(model);
+       final ItemManager itemMan = new ItemManagerImpl(currenItems);
+       currenItems = new ArrayList<>(itemMan.sortItemPrice(choice));
     }
 
     @Override
     public void filterCategory(ItemType type){
-        final Model model = this.getModel();
-        final Market market = this.getModel().getMarket();
-        final ItemManager itemMan = new ItemManagerImpl(market);
-        List<Item> itemModList = itemMan.filterItems(type);
-        market.setPurchItems(itemModList);
-        model.setMarket(market);        //aggiorna il market
+        final ItemManager itemMan = new ItemManagerImpl(currenItems);
+        currenItems = new ArrayList<>(itemMan.filterItems(type));
     }
 
     @Override
     public void searchItem(String nameToSearch){
-        final Model model = this.getModel();
-        final Market market = this.getModel().getMarket();
-        final ItemManager itemMan = new ItemManagerImpl(market);
-        List<Item> itemModList = itemMan.searchItem(nameToSearch);
-        market.setPurchItems(itemModList);      
-        model.setMarket(market);
+        updateCurrentItem();
+        final ItemManager itemMan = new ItemManagerImpl(currenItems);
+        currenItems = new ArrayList<>(itemMan.searchItem(nameToSearch));
     }
     
     /**

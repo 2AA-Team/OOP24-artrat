@@ -1,7 +1,6 @@
 package it.unibo.artrat.model.impl;
 
 import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
-import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.model.api.WorldTimer;
 import java.util.Timer;
 import java.util.TimerTask;
