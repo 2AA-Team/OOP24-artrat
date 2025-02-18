@@ -148,6 +148,10 @@ public class FloorImpl implements Floor {
      * @throws IOException if link for the rooms json doesnt exist
      */
     private void generateEffectiveRooms(final int roomSize) throws IOException {
+        final int maxEnemyInARoom = 3;
+        final int minEnemyInARoom = 1;
+        final int maxPaintingsInARoom = 4;
+        final int minPaintingsInARoom = 1;
         List<RoomGenerationStrategy> generations = List.of();
         try {
             generations = List.of(
@@ -169,8 +173,9 @@ public class FloorImpl implements Floor {
                         setExitPosition(j, i, roomSize);
                     } else {
                         builder = builder.insertGenerationStrategy(generations.get(RANDOM.nextInt(generations.size())));
-                        builder = builder.insertNumberOfEnemy(RANDOM.nextInt(roomSize));
-                        builder = builder.insertNumberOfValues(RANDOM.nextInt(roomSize));
+                        builder = builder.insertNumberOfEnemy(RANDOM.nextInt(minEnemyInARoom, maxEnemyInARoom));
+                        builder = builder
+                                .insertNumberOfValues(RANDOM.nextInt(minPaintingsInARoom, maxPaintingsInARoom));
                     }
                     builder = builder.insertPassages(isARoom(j, i - 1), isARoom(j + 1, i), isARoom(j, i + 1),
                             isARoom(j - 1, i));

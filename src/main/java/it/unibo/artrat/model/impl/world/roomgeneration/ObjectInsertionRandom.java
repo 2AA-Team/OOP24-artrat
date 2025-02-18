@@ -1,11 +1,15 @@
 package it.unibo.artrat.model.impl.world.roomgeneration;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.function.BiFunction;
+import java.util.stream.IntStream;
 import it.unibo.artrat.model.api.world.roomgeneration.ObjectInsertionStrategy;
 import it.unibo.artrat.model.impl.AbstractGameObject;
+import it.unibo.artrat.utils.impl.Point;
 
 /**
  * random insertion method.
@@ -27,19 +31,33 @@ public class ObjectInsertionRandom<O> implements ObjectInsertionStrategy<O> {
             final BiFunction<Integer, Integer, O> factored) {
         final Set<O> newObjects = new HashSet<>();
         boolean exit = false;
+        List<Point> freePoints = getFreePoint(baseRoom, roomSize);
         while (newObjects.size() < addNumber && !exit) {
-            final int x = RANDOM.nextInt(1, roomSize - 1);
-            final int y = RANDOM.nextInt(1, roomSize - 1);
-
-            if (baseRoom.stream().noneMatch((o) -> {
-                return ((int) o.getPosition().getX()) == x && ((int) o.getPosition().getY()) == y;
-            })) {
-                newObjects.add(factored.apply(x, y));
+            if (freePoints.size() != 0) {
+                final Point tmp = freePoints.get(RANDOM.nextInt(freePoints.size()));
+                newObjects.add(factored.apply((int) tmp.getX(), (int) tmp.getY()));
+                freePoints.remove(tmp);
             } else {
                 exit = true;
             }
         }
         return newObjects;
+    }
+
+    /**
+     * method used to search for free points in a room.
+     * 
+     * @param baseRoom base room set
+     * @param roomSize room size
+     * @return a modificable list of free Point
+     */
+    private List<Point> getFreePoint(Set<AbstractGameObject> baseRoom, final int roomSize) {
+        return new ArrayList<>(IntStream.rangeClosed(0, roomSize - 1)
+                .boxed()
+                .flatMap(x -> IntStream.rangeClosed(0, roomSize - 1)
+                        .mapToObj(y -> new Point(x, y)))
+                .filter((x) -> !baseRoom.stream().anyMatch((o) -> o.getPosition().equals(x)))
+                .toList());
     }
 
     /**
