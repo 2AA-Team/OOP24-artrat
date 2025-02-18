@@ -109,7 +109,6 @@ public final class GameEngineImpl implements GameEngine {
     }
 
     private void redraw() {
-        // System.err.println("Updating view");
         mainController.redraw();
     }
 

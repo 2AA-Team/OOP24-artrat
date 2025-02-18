@@ -65,7 +65,6 @@ public class GameSubPanel extends AbstractSubPanel {
                 g.drawImage(MAPSYMBOLS.get(RoomSymbols.WALL), wallX, wallY,
                         zoom, zoom, null);
             }
-            LOGGER.info("Painted game panel.");
         }
 
     }
