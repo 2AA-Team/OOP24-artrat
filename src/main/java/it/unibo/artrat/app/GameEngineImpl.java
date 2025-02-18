@@ -72,18 +72,19 @@ public final class GameEngineImpl implements GameEngine {
      * Game loop method.
      */
     private void mainLoop() {
+        final double drawInterval = Converter.fpsToNanos(resourceLoader.getConfig("FPS").intValue());
+        double delta;
+        double lastTime;
+        long currentTime;
         while (true) {
-            final double drawInterval = Converter.fpsToNanos(resourceLoader.getConfig("FPS").intValue());
-            double delta = 0;
-            double lastTime = System.nanoTime();
-            long currentTime;
+            delta = 0;
+            lastTime = System.nanoTime();
             while (status.equals(GameStatus.RUNNING)) {
                 currentTime = System.nanoTime();
                 delta += (currentTime - lastTime) / drawInterval;
                 lastTime = currentTime;
                 if (delta >= 1) {
                     // this.commands.forEach(Command::execute););
-                    this.commands.clear();
                     this.update();
                     this.redraw();
                     delta--;

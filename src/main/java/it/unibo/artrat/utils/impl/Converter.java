@@ -21,6 +21,9 @@ public final class Converter {
      * @return int rappresenting FPS
      */
     public static int nanosToFps(final int nanos) {
+        if (nanos < 1) {
+            throw new IllegalArgumentException("nano second must be > 1");
+        }
         return Math.toIntExact(BILLION / nanos);
     }
 
@@ -31,6 +34,9 @@ public final class Converter {
      * @return nano seconds
      */
     public static double fpsToNanos(final int fps) {
+        if (fps < 1) {
+            throw new IllegalArgumentException("FPS must be > 1");
+        }
         return (double) BILLION / fps;
     }
 }

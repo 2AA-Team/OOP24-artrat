@@ -31,8 +31,6 @@ public class MainViewImpl implements MainView {
         final double height = resourceLoader.getConfig("MENU_HEIGHT");
         frame.setSize((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),
                 (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * height));
-        this.subPanel = new EmptySubPanel();
-        this.controller = null;
     }
 
     /**
@@ -105,7 +103,7 @@ public class MainViewImpl implements MainView {
             default:
                 throw new IllegalStateException("Stage does not exist.");
         }
-        reloadFrame();
         subPanel.setFrameDimension(this.frame.getSize());
+        reloadFrame();
     }
 }

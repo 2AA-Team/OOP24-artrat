@@ -28,6 +28,8 @@ public class FloorImpl implements Floor {
     private boolean[][] floorMap;
     private final double maxFloorSize;
     private final double maxRoomSize;
+    private final double minFloorSize;
+    private final double minRoomSize;
     private Point startPosition;
 
     /**
@@ -40,7 +42,9 @@ public class FloorImpl implements Floor {
     public FloorImpl(final ResourceLoader<String, Double> rl) throws IOException {
         maxFloorSize = rl.getConfig("MAX_FLOOR_SIZE");
         maxRoomSize = rl.getConfig("MAX_ROOM_SIZE");
-        if (maxFloorSize <= 1 || maxRoomSize <= 4) {
+        minFloorSize = rl.getConfig("MIN_FLOOR_SIZE");
+        minRoomSize = rl.getConfig("MIN_ROOM_SIZE");
+        if (maxFloorSize <= 1 || maxRoomSize <= 4 || minFloorSize >= maxFloorSize || minRoomSize >= maxRoomSize) {
             throw new IOException("Floor or Room size has been modified.");
         }
     }
@@ -77,8 +81,8 @@ public class FloorImpl implements Floor {
         floorStructure = new HashSet<>();
         floorEnemies = new HashSet<>();
         floorValues = new HashSet<>();
-        final int floorSize = RANDOM.nextInt(1, (int) this.maxFloorSize);
-        final int roomSize = RANDOM.nextInt(5, (int) this.maxRoomSize);
+        final int floorSize = RANDOM.nextInt((int) this.minFloorSize, (int) this.maxFloorSize);
+        final int roomSize = RANDOM.nextInt((int) this.minFloorSize, (int) this.maxRoomSize);
         this.generateRoomsStructure(floorSize);
         this.generateEffectiveRooms(roomSize);
     }
@@ -142,7 +146,6 @@ public class FloorImpl implements Floor {
                 }
             }
         }
-        print();
     }
 
     /**
@@ -190,30 +193,33 @@ public class FloorImpl implements Floor {
         return startPosition;
     }
 
-    public void print() {
-        double sizeTot = this.maxFloorSize * this.maxRoomSize;
-        for (double i = 0; i < sizeTot; i++) {
-            for (double j = 0; j < sizeTot; j++) {
-                final double x = j;
-                final double y = i;
-                if (this.startPosition.getX() == j && this.startPosition.getY() == i) {
-                    System.out.print("_");
-                } else if (this.floorStructure.stream()
-                        .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y)) {
-                    System.out.print("#");
-                } else if (this.floorEnemies.stream()
-                        .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y)) {
-                    System.out.print("X");
-                } else if (this.floorValues.stream()
-                        .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y)) {
-                    System.out.print("Y");
-                } else {
-                    System.out.print(" ");
+    // public void print() {
+    // double sizeTot = this.maxFloorSize * this.maxRoomSize;
+    // for (double i = 0; i < sizeTot; i++) {
+    // for (double j = 0; j < sizeTot; j++) {
+    // final double x = j;
+    // final double y = i;
+    // if (this.startPosition.getX() == j && this.startPosition.getY() == i) {
+    // System.out.print("_");
+    // } else if (this.floorStructure.stream()
+    // .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y))
+    // {
+    // System.out.print("#");
+    // } else if (this.floorEnemies.stream()
+    // .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y))
+    // {
+    // System.out.print("X");
+    // } else if (this.floorValues.stream()
+    // .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y))
+    // {
+    // System.out.print("Y");
+    // } else {
+    // System.out.print(" ");
 
-                }
-            }
-            System.out.println();
-        }
-    }
+    // }
+    // }
+    // System.out.println();
+    // }
+    // }
 
 }
