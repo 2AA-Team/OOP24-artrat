@@ -18,7 +18,7 @@ import javax.swing.event.DocumentListener;
 import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
 import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.model.impl.Stage;
-import it.unibo.artrat.model.impl.WorldTimerImpl;
+//import it.unibo.artrat.model.impl.WorldTimerImpl;
 import it.unibo.artrat.view.api.MarketView;
 
 /**
@@ -38,17 +38,17 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     private final JLabel lupinoCash = new JLabel();
     private final JPanel purchItemPanel;
     private final JTextField searchItemField = new JTextField(SEARCH_TEXT_FIELD); 
-    private final WorldTimerImpl timer;
+    //private final WorldTimerImpl timer;
 
     /**
      * MarketSubPanel constructor.
      * @param contr
      */
-    public MarketSubPanel(final StoreSubController contr) {
+    public MarketSubPanel(final StoreSubController contr){
         this.contr = contr;
-        this.timer = new WorldTimerImpl(this.contr);
+        //this.timer = new WorldTimerImpl(this.contr);
         this.purchItemPanel = new JPanel(new GridLayout(contr.purchasableItems().size(), 4, 4, 2));
-        this.timer.startTimer();
+        //this.timer.startTimer();
     }
 
     /**
@@ -171,7 +171,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
                 searchItemField.setText("");
                 itemSearch("");
                 contr.setStage(Stage.MENU);
-                timer.resetTimer();
+             //   timer.resetTimer();
             }
         });
 

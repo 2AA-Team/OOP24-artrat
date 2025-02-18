@@ -1,37 +1,41 @@
 package it.unibo.artrat.controller.impl;
 
 import it.unibo.artrat.controller.api.TimerController;
-import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
 import it.unibo.artrat.model.impl.WorldTimerImpl;
 
 /**
  * 
  */
 public class TimerControllerImpl implements TimerController {
-    private final WorldTimerImpl timer;
-    private StoreSubController contr;
+    private WorldTimerImpl timer;
+
+    //CHIEDERE SE, AVENDO IL TIMER DEL MODEL (OVVIAMENTE), SE LO DEVO AGGIUNGERE CON UN 
+    //METODO GETTIMER() NELLA CLASSE MODEL E MODELIMPL
 
     /**
      * 
      */
     public TimerControllerImpl() {
-        timer = new WorldTimerImpl(this.contr);       //tutto provvisorio
+        timer = new WorldTimerImpl();
     }
 
     /**
      * 
      */
     @Override
-    public void startTimerController() {        //devo capire meglio se devo aggiornare il model pure col timer, in teoria no
+    public void startTimerController() {
         timer.startTimer();
-        //devo capire se nel model ho bisogno di metodi per il timer, essendo un elemento fuori da tutto
     }
 
     /**
      * 
      */
     public void stopTimer() {
+        timer.stopTimer();
+    }
 
+    public void getCurrentTimeController() {
+        this.timer.getCurrentTime();
     }
 
     /**
@@ -40,5 +44,21 @@ public class TimerControllerImpl implements TimerController {
     @Override
     public void resetTimerController() {
         timer.resetTimer();                 //se il timer scade comunque devo aggiornare qualcosa, è la logica del game over
+    }
+
+    @Override
+    public void stopTimerController() {
+        this.timer.stopTimer();
+    }
+
+    @Override
+    public void restartTimerController() {
+        this.timer.restartTimer();
+    }
+
+    @Override
+    public void setCountdownController() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setCountdownController'");
     }
 }

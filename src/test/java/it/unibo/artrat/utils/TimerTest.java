@@ -1,8 +1,9 @@
 package it.unibo.artrat.utils;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
 import it.unibo.artrat.model.impl.WorldTimerImpl;
 
 /**
@@ -10,24 +11,67 @@ import it.unibo.artrat.model.impl.WorldTimerImpl;
  * @author Manuel Benagli
  */
 class TimerTest {
-    static final int SECOND = 1000; 
-    private StoreSubController contr;
+    static final int ONE_SECOND = 1000;
+    private WorldTimerImpl timer;
+
+    void testTimerSetup(){
+        timer = new WorldTimerImpl();
+    }
 
     void testTimer() {
-        final WorldTimerImpl timer = new WorldTimerImpl(this.contr);
         timer.startTimer();
         while (!timer.isTimeOut()) {        //isTimeOut sta nel model, è un semplice boolean di controllo
             try {
-                Thread.sleep(SECOND);       //Uso il thread per aspettare 1 secondo
+                Thread.sleep(ONE_SECOND);       //Uso il thread per aspettare 1 secondo
             } catch (InterruptedException e) {
-                fail();                     //rivedi
+                fail();                     
             }
         }
     }
 
     /**
-     * resetting timer test.
-    */
-    void testResettingTimer() {
+    * resetting timer test.
+    * @throws InterruptedException 
+    */     
+    void testResettingTimer() throws InterruptedException {
+        timer.startTimer();
+        Thread.sleep(ONE_SECOND);
+        timer.resetTimer();
+        assertFalse(timer.isTimeOut());
+
+        //IL RESET TIMER DEVE AVERE COME TEST PURE IL GAME OVER PER CATTURA
     }
+
+    /**
+     * 
+     * @throws InterruptedException
+     */
+    void testStopAndGoTimer() throws InterruptedException {
+        timer.startTimer();
+        Thread.sleep(ONE_SECOND);
+        timer.stopTimer();
+        assertTrue(false);      //verifica se si sia stoppato
+        Thread.sleep(ONE_SECOND);
+        timer.resetTimer();
+        assertTrue(null);   //verifica che sia ripartito
+    }
+
+
+    /**
+     * I can add or cut time only in my inventory during the game.
+     * The timer is always stopped when I am in the inventory.
+     * @throws InterruptedException
+     */
+    void testAddAndCutTime() throws InterruptedException {
+        timer.startTimer();
+        Thread.sleep(ONE_SECOND);
+        timer.stopTimer();
+        //magari da aggiungere un thread sleep per sicurezza
+        timer.setCountdown();
+        assertTrue(null);   //verifica che sia ripartito
+        timer.setCountdown();
+        assertTrue(null);   //verifica che sia ripartito
+        timer.restartTimer();
+    }
+
 }
