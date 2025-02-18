@@ -192,9 +192,9 @@ public class FloorImpl implements Floor {
      * @param y        y coordinate
      * @param roomSize room size
      */
-    private void setExitPosition(int x, int y, int roomSize) {
+    private void setExitPosition(final int x, final int y, final int roomSize) {
         final double tmpX = x * roomSize + Math.floor((double) roomSize / 2);
-        double tmpY = y * roomSize + roomSize - 1;
+        final double tmpY = y * roomSize + roomSize - 1;
         exitPosition = new Point(tmpX, tmpY);
         this.floorStructure.removeIf((o) -> o.getPosition().equals(exitPosition));
     }

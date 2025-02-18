@@ -31,9 +31,9 @@ public class ObjectInsertionRandom<O> implements ObjectInsertionStrategy<O> {
             final BiFunction<Integer, Integer, O> factored) {
         final Set<O> newObjects = new HashSet<>();
         boolean exit = false;
-        List<Point> freePoints = getFreePoint(baseRoom, roomSize);
+        final List<Point> freePoints = getFreePoint(baseRoom, roomSize);
         while (newObjects.size() < addNumber && !exit) {
-            if (freePoints.size() != 0) {
+            if (!freePoints.isEmpty()) {
                 final Point tmp = freePoints.get(RANDOM.nextInt(freePoints.size()));
                 newObjects.add(factored.apply((int) tmp.getX(), (int) tmp.getY()));
                 freePoints.remove(tmp);
@@ -51,7 +51,7 @@ public class ObjectInsertionRandom<O> implements ObjectInsertionStrategy<O> {
      * @param roomSize room size
      * @return a modificable list of free Point
      */
-    private List<Point> getFreePoint(Set<AbstractGameObject> baseRoom, final int roomSize) {
+    private List<Point> getFreePoint(final Set<AbstractGameObject> baseRoom, final int roomSize) {
         return new ArrayList<>(IntStream.rangeClosed(0, roomSize - 1)
                 .boxed()
                 .flatMap(x -> IntStream.rangeClosed(0, roomSize - 1)
