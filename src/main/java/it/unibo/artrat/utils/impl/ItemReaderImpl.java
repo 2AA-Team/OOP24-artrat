@@ -18,7 +18,6 @@ import it.unibo.artrat.utils.api.ItemReader;
  * An implementation of ItemReader.
  */
 public class ItemReaderImpl implements ItemReader {
-    
     private Map<String, List<String>> obj = new HashMap<>();
 
     /**
@@ -32,6 +31,12 @@ public class ItemReaderImpl implements ItemReader {
         inputStream.close();
     }
 
+    /**
+     * 
+     * @param nameOfItem n
+     * @param field f
+     * @return s
+     */
     private String getSpecificField(final String nameOfItem, final int field) {
         final Object ob = obj.get(nameOfItem);
         if (ob != null) {
@@ -73,6 +78,10 @@ public class ItemReaderImpl implements ItemReader {
         return null;
     }
 
+    /**
+     * s.
+     */
+    @Override
     public Set<String> getAllItemsName() {
         return this.obj.keySet();
     }

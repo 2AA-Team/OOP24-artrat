@@ -2,6 +2,7 @@ package it.unibo.artrat.model.api;
 
 import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.market.Market;
+
 /**
  * An interface to rapresent the model.
  */
@@ -19,14 +20,14 @@ public interface Model {
     void setPlayer(Player player);
 
     /**
-     * Method which obtains a copy of the current state of the market
+     * Method which obtains a copy of the current state of the market.
      * @return a copy of the current market
      * @autor Manuel Benagli
      */
     Market getMarket();
 
     /**
-     * Method which updaets the current market instance with the new passed
+     * Method which updaets the current market instance with the new passed.
      * @param market
      * @autor Manuel Benagli
      */

@@ -139,5 +139,4 @@ public final class GameEngineImpl implements GameEngine, Sender {
         commands.add(cmd);
     }
 
-    
 }

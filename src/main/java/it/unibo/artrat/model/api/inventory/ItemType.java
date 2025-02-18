@@ -5,6 +5,7 @@ package it.unibo.artrat.model.api.inventory;
  * @author Cristian Di Donato
  */
 public enum ItemType {
+
     /**
      * Represents the Consumable category for various items.
      */

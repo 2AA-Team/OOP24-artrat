@@ -37,5 +37,9 @@ public interface ItemReader {
      */
     ItemType getItemType(String nameOfItem);
 
+    /**
+     * 
+     * @return all items name.
+     */
     Set<String> getAllItemsName();
 }

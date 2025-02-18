@@ -75,7 +75,7 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
             final JButton itemButton = new JButton(controller.getItemName(item));
             final JButton useButton = new JButton("Usa");
 
-            itemButton.addActionListener(new ActionListener(){
+            itemButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(final ActionEvent e) {
                     controller.obtainDescription(item);

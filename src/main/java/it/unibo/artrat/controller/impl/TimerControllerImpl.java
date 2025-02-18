@@ -7,26 +7,36 @@ import it.unibo.artrat.model.impl.WorldTimerImpl;
 /**
  * 
  */
-public class TimerControllerImpl implements TimerController{
-
-    private  WorldTimerImpl timer;
+public class TimerControllerImpl implements TimerController {
+    private final WorldTimerImpl timer;
     private StoreSubController contr;
 
-
-    public TimerControllerImpl(){
+    /**
+     * 
+     */
+    public TimerControllerImpl() {
         timer = new WorldTimerImpl(this.contr);       //tutto provvisorio
     }
 
+    /**
+     * 
+     */
     @Override
     public void startTimerController() {        //devo capire meglio se devo aggiornare il model pure col timer, in teoria no
-        timer.startTimer();                     //devo capire se nel model ho bisogno di metodi per il timer, essendo un elemento fuori da tutto
+        timer.startTimer();
+        //devo capire se nel model ho bisogno di metodi per il timer, essendo un elemento fuori da tutto
     }
 
-
-    public void stopTimer(){
+    /**
+     * 
+     */
+    public void stopTimer() {
 
     }
 
+    /**
+     * 
+     */
     @Override
     public void resetTimerController() {
         timer.resetTimer();                 //se il timer scade comunque devo aggiornare qualcosa, è la logica del game over

@@ -2,12 +2,12 @@ package it.unibo.artrat.controller.api;
 
 /**
  * @author Manuel Benagli
- * TimerController interface
+ * TimerController interface.
  */
 public interface TimerController {
 
     /**
-     * Timer starts if I play a new game
+     * Timer starts if I play a new game.
      */
     void startTimerController();
 

@@ -24,7 +24,7 @@ public interface ItemManager {
      * @return A List of POWERUP or CONSUMABLE items 
      */
     List<Item> filterItems(ItemType itemType);
-    
+
     /**
      * the search is based character by character starting from the beginning.
      * There are no spaces and uppercase and lowercase letters don't matter

@@ -21,5 +21,4 @@ public interface WorldTimer {
      * @return true if the time is out
      */
     boolean isTimeOut();
-    
 }

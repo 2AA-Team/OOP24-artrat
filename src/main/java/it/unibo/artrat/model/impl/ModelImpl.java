@@ -11,7 +11,6 @@ import it.unibo.artrat.utils.impl.Point;
  * An implementation of model interface.
  */
 public class ModelImpl implements Model {
-
     private Player player;
     private Market market;
 
@@ -48,13 +47,19 @@ public class ModelImpl implements Model {
         this.player = player.copyPlayer();
     }
 
+    /**
+     * s.
+     */
     @Override
     public Market getMarket() {
         return new MarketImpl(this.market);
     }
 
+    /**
+     * s.
+     */
     @Override
-    public void setMarket(Market market) {
+    public void setMarket(final Market market) {
         this.market = new MarketImpl(market);
     }
 }

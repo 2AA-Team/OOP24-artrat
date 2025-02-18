@@ -1,9 +1,6 @@
 package it.unibo.artrat.controller.api.subcontroller;
 
 import java.util.List;
-
-import javax.swing.Icon;
-
 import it.unibo.artrat.controller.api.SubController;
 import it.unibo.artrat.model.api.inventory.Item;
 
