@@ -21,6 +21,7 @@ import it.unibo.artrat.model.impl.AbstractGameObject;
 import it.unibo.artrat.model.impl.world.RoomImpl.RoomBuilder;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationEmpty;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationFile;
+import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationMatrix;
 import it.unibo.artrat.utils.api.ResourceLoader;
 import it.unibo.artrat.utils.impl.Point;
 
@@ -156,7 +157,8 @@ public class FloorImpl implements Floor {
         try {
             generations = List.of(
                     new RoomGenerationEmpty(),
-                    new RoomGenerationFile(roomPath.toURI()));
+                    new RoomGenerationFile(roomPath.toURI()),
+                    new RoomGenerationMatrix());
         } catch (IOException | URISyntaxException e) {
             LOGGER.warn("Room generations method failed to build.");
         }

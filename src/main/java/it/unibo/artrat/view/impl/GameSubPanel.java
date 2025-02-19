@@ -59,11 +59,11 @@ public class GameSubPanel extends AbstractSubPanel {
                     (int) Math.floor(getFrameDimension().getHeight() / 2));
 
             final Point playerPos = gameSubController.getPlayerPos();
-            printPlayer(g, center);
             printObject(g, center, playerPos, RoomSymbols.WALL, gameSubController.getVisibleWallPositions());
             printObject(g, center, playerPos, RoomSymbols.EXIT, Set.of(gameSubController.getExitPos()));
             printObject(g, center, playerPos, RoomSymbols.ENEMY, gameSubController.getVisibleEnemyPositions());
             printObject(g, center, playerPos, RoomSymbols.VALUE, gameSubController.getVisiblePaintings());
+            printPlayer(g, center);
         }
 
         private void printObject(final Graphics g, final Point center, final Point playerPos,
