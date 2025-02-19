@@ -33,6 +33,7 @@ public class MainViewImpl implements MainView {
         final double height = resourceLoader.getConfig("MENU_HEIGHT");
         frame.setSize((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),
                 (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * height));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     /**
@@ -41,14 +42,6 @@ public class MainViewImpl implements MainView {
     @Override
     public void setController(final MainController observer) {
         controller = Objects.requireNonNull(observer);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void initiate() {
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     /**

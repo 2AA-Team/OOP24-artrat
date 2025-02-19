@@ -21,7 +21,7 @@ import it.unibo.artrat.utils.impl.Point;
 public class ModelImpl implements Model {
 
     private Player player;
-    private static final java.util.logging.Logger LOGGER = LoggerFactory.getLogger(SingleThreadedGame.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ModelImpl.class);
 
     /**
      * Permit to create a new istance of Model.

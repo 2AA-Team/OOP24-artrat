@@ -1,15 +1,23 @@
 package it.unibo.artrat.model.impl.world;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
-import it.unibo.artrat.model.impl.AbstractGameObject;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import it.unibo.artrat.model.api.characters.AbstractEntity;
 import it.unibo.artrat.model.api.world.Floor;
 import it.unibo.artrat.model.api.world.Room;
 import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;
+import it.unibo.artrat.model.impl.AbstractGameObject;
 import it.unibo.artrat.model.impl.world.RoomImpl.RoomBuilder;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationEmpty;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationFile;
@@ -21,6 +29,7 @@ import it.unibo.artrat.utils.impl.Point;
  */
 public class FloorImpl implements Floor {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(FloorImpl.class);
     private static final Random RANDOM = new Random();
     private Set<AbstractGameObject> floorStructure = new HashSet<>();
     private Set<AbstractEntity> floorEnemies = new HashSet<>();
@@ -31,6 +40,9 @@ public class FloorImpl implements Floor {
     private final double minFloorSize;
     private final double minRoomSize;
     private Point startPosition;
+
+    private final URL roomPath = Thread.currentThread().getContextClassLoader().getResource(
+            "premademaze" + File.separator + "rooms.json");
 
     /**
      * constructor that set the configuration file path.
@@ -134,9 +146,14 @@ public class FloorImpl implements Floor {
      * @throws IOException if link for the rooms json doesnt exist
      */
     private void generateEffectiveRooms(final int roomSize) throws IOException {
-        final List<RoomGenerationStrategy> generations = List.of(
-                new RoomGenerationEmpty(),
-                new RoomGenerationFile("src/main/java/it/unibo/artrat/resources/premademaze/rooms.json"));
+        List<RoomGenerationStrategy> generations = List.of();
+        try {
+            generations = List.of(
+                    new RoomGenerationEmpty(),
+                    new RoomGenerationFile(roomPath.toURI()));
+        } catch (IOException | URISyntaxException e) {
+            LOGGER.warn("Room generations method failed to build.");
+        }
         RoomBuilder builder = new RoomBuilder();
         builder = builder.insertRoomSize(roomSize);
         for (int i = 0; i < floorMap.length; i++) {
@@ -193,10 +210,10 @@ public class FloorImpl implements Floor {
      * @param y        y coordinate
      * @param roomSize room size
      */
-    private void setStartPosition(int x, int y, int roomSize) {
+    private void setStartPosition(final int x, final int y, final int roomSize) {
         startPosition = new Point(
-                x * roomSize + Math.floor(roomSize / 2),
-                y * roomSize + Math.floor(roomSize / 2));
+                x * roomSize + Math.floor((double) roomSize / 2),
+                y * roomSize + Math.floor((double) roomSize / 2));
     }
 
     /**
@@ -226,7 +243,7 @@ public class FloorImpl implements Floor {
      */
     @Override
     public Point getStartPosition() {
-        return startPosition;
+        return Objects.requireNonNull(startPosition);
     }
 
     // public void print() {

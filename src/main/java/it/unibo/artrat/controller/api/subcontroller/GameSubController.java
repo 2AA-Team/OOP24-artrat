@@ -24,6 +24,11 @@ public interface GameSubController extends SubController {
      */
     Point getPlayerPos();
 
+    /**
+     * get the zoom of the view.
+     * 
+     * @return the int for the zoom
+     */
     int getZoom();
 
 }

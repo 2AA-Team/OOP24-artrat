@@ -15,7 +15,7 @@ public class CoinImpl implements Coin {
     private static final double RESET_AMOUNT = 0.0;
     private double amount;
     private Multiplier multiplier;
-    private static final java.util.logging.Logger LOGGER = LoggerFactory.getLogger(SingleThreadedGame.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CoinImpl.class);
 
     /**
      * A constructor that initializes the current funds to zero and instantiates a new money multiplier.

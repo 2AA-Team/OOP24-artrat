@@ -13,7 +13,7 @@ public class MultiplierImpl implements Multiplier {
 
     private static final double DEFAULT_MULTIPLIER = 1.0;
     private double multipler;
-    private static final Logger LOGGER = LoggerFactory.getLogger(SingleThreadedGame.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MultiplierImpl.class);
 
     /**
      * A constructor that initialize a new istance of multiplier with the default value.

@@ -3,9 +3,6 @@ package it.unibo.artrat.controller.impl;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.SwingUtilities;
-
 import it.unibo.artrat.app.api.GameEngine;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.controller.api.SubControllerManager;
@@ -50,7 +47,6 @@ public class MainControllerImpl implements MainController {
         views.add(newView);
         newView.setController(this);
         newView.setStage(currentStage);
-        newView.initiate();
     }
 
     /**
@@ -83,11 +79,9 @@ public class MainControllerImpl implements MainController {
      */
     @Override
     public void redraw() {
-        SwingUtilities.invokeLater(() -> {
-            for (final MainView mainView : views) {
-                mainView.forceRedraw();
-            }
-        });
+        for (final MainView mainView : views) {
+            mainView.forceRedraw();
+        }
     }
 
     /**

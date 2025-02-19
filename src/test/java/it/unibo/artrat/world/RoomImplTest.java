@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import it.unibo.artrat.model.api.characters.AbstractEntity;
 import it.unibo.artrat.model.impl.AbstractGameObject;
@@ -35,7 +34,6 @@ class RoomImplTest {
     }
 
     @Test
-    @DisplayName("Test Room Creation with Valid Builder")
     void testRoomCreation() {
         assertNotNull(room, "The RoomImpl object should not be null");
         assertNotNull(room.getStructure(), "Room structure should not be null");
@@ -48,7 +46,6 @@ class RoomImplTest {
     }
 
     @Test
-    @DisplayName("Test Room Passage Creation")
     void testRoomPassages() {
         final Set<AbstractGameObject> structure = room.getStructure();
         final long upWalls = structure.stream()
@@ -63,7 +60,6 @@ class RoomImplTest {
     }
 
     @Test
-    @DisplayName("Test Invalid values")
     void testInvalidValue() {
         assertThrows(IllegalArgumentException.class, () -> {
             new RoomImpl.RoomBuilder().insertRoomSize(2).build();
@@ -77,7 +73,6 @@ class RoomImplTest {
     }
 
     @Test
-    @DisplayName("Test Null Generation Strategy Throws Exception")
     void testNullGenerationStrategy() {
         assertThrows(IllegalArgumentException.class, () -> {
             new RoomImpl.RoomBuilder().insertGenerationStrategy(null).build();

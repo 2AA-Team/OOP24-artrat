@@ -21,7 +21,7 @@ public class Lupino extends AbstractEntity implements Player {
 
     private Inventory inventory;
     private Coin coins;
-    private static final Logger LOGGER = LoggerFactory.getLogger(SingleThreadedGame.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Lupino.class);
 
     /**
      * Player constructor with default vector.

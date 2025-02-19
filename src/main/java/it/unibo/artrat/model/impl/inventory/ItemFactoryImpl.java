@@ -2,6 +2,8 @@ package it.unibo.artrat.model.impl.inventory;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,18 +22,12 @@ import it.unibo.artrat.utils.impl.ItemReaderImpl;
  */
 public class ItemFactoryImpl implements ItemFactory {
 
-    private final String itemPath = "src" + File.separator
-            + "main" + File.separator
-            + "java" + File.separator
-            + "it" + File.separator
-            + "unibo" + File.separator
-            + "artrat" + File.separator
-            + "resources" + File.separator
-            + "items" + File.separator
-            + "items.yaml";
+    private final URL itemPath = Thread.currentThread().getContextClassLoader().getResource(
+            "items" + File.separator
+                    + "items.yaml");
 
     private final ItemReader itemReader;
-    private static final java.util.logging.Logger LOGGER = LoggerFactory.getLogger(SingleThreadedGame.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ItemFactoryImpl.class);
 
     /**
      * A constructor to initialize itemReader.
@@ -45,7 +41,15 @@ public class ItemFactoryImpl implements ItemFactory {
      */
     @Override
     public void initialize() throws IOException {
-        this.itemReader.readFromItemFile(itemPath);
+        try {
+            this.itemReader.readFromItemFile(itemPath.toURI());
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -53,42 +57,38 @@ public class ItemFactoryImpl implements ItemFactory {
      */
     @Override
     public Item multiplierBooster() {
-        LOGGER.info("Request for creation of multiplier booster");
-        return new MultiplierBooster(itemReader.getDescription("MULTIPLIERBOOSTER"), 
-            itemReader.getPrice("MULTIPLIERBOOSTER"), 
-            itemReader.getItemType("MULTIPLIERBOOSTER"));
+        return new MultiplierBooster(itemReader.getDescription("MULTIPLIERBOOSTER"),
+                itemReader.getPrice("MULTIPLIERBOOSTER"),
+                itemReader.getItemType("MULTIPLIERBOOSTER"));
     }
 
     /**
      * {@inheritDoc}
-    */
+     */
     @Override
     public Item luckyTicket() {
-        LOGGER.info("Request for creation of lucky ticket");
-        return new LuckyTicket(itemReader.getDescription("LUCKYTICKET"), 
-            itemReader.getPrice("LUCKYTICKET"), 
-            itemReader.getItemType("LUCKYTICKET"));
-        }
-
-    /**
-     * {@inheritDoc}
-    */
-    @Override
-    public Item magicbackpack() {
-        LOGGER.info("Request for creation of magic backpack");
-        return new MagicBackpack(itemReader.getDescription("MAGICBACKPACK"), 
-        itemReader.getPrice("MAGICBACKPACK"), 
-        itemReader.getItemType("MAGICBACKPACK"));
+        return new LuckyTicket(itemReader.getDescription("LUCKYTICKET"),
+                itemReader.getPrice("LUCKYTICKET"),
+                itemReader.getItemType("LUCKYTICKET"));
     }
 
     /**
      * {@inheritDoc}
-    */
+     */
+    @Override
+    public Item magicbackpack() {
+        return new MagicBackpack(itemReader.getDescription("MAGICBACKPACK"),
+                itemReader.getPrice("MAGICBACKPACK"),
+                itemReader.getItemType("MAGICBACKPACK"));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Item mysterioustaff() {
-        LOGGER.info("Request for creation of mysterious staff");
-        return new MysteriousStaff(itemReader.getDescription("MYSTERIOUSSTAFF"), 
-        itemReader.getPrice("MYSTERIOUSSTAFF"), 
-        itemReader.getItemType("MYSTERIOUSSTAFF"));
+        return new MysteriousStaff(itemReader.getDescription("MYSTERIOUSSTAFF"),
+                itemReader.getPrice("MYSTERIOUSSTAFF"),
+                itemReader.getItemType("MYSTERIOUSSTAFF"));
     }
 }

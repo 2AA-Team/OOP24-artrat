@@ -16,7 +16,7 @@ import it.unibo.artrat.model.api.inventory.Item;
 public class InventoryImpl implements Inventory {
 
     private final List<Item> storedItem;
-    private static final java.util.logging.Logger LOGGER = LoggerFactory.getLogger(SingleThreadedGame.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(InventoryImpl.class);
 
     /**
      * A constructor that initializes an instance of an empty list of items.
