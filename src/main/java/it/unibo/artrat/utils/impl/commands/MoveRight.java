@@ -16,7 +16,9 @@ public class MoveRight implements Command {
     @Override
     public void execute(final Player p) {
         final var speed = p.getSpeed();
-        p.setSpeed(new Vector2d(1, 0));
+        p.setSpeed(speed.summVector2d(new Vector2d(1, 0)));
+        p.setSpeed(p.getSpeed().normalize());
+
     }
 
 }

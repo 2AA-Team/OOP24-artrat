@@ -81,6 +81,7 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
      */
     @Override
     public void update(final long delta) {
+        System.out.println(speed);
         this.setPosition(this.getPosition().sum(speed.mul(delta * 0.1)));
     }
 

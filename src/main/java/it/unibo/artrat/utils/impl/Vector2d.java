@@ -29,7 +29,7 @@ public final class Vector2d {
      */
     public Vector2d() {
         this.x = 0;
-        this.y = -1;
+        this.y = 0;
     }
 
     /**
@@ -48,7 +48,7 @@ public final class Vector2d {
      * @return vector module value.
      */
     public double module() {
-        return Math.sqrt(Math.pow(this.x, this.x) + Math.pow(this.y, this.y));
+        return Math.sqrt(this.x * this.x + this.y * this.y);
     }
 
     /**
@@ -58,7 +58,7 @@ public final class Vector2d {
      * @return sum result
      */
     public Vector2d summVector2d(final Vector2d vector2d) {
-        return new Vector2d(this.x + vector2d.x, this.y * vector2d.y);
+        return new Vector2d(this.x + vector2d.x, this.y + vector2d.y);
     }
 
     /**
@@ -101,6 +101,14 @@ public final class Vector2d {
      * @return normalized vector
      */
     public Vector2d normalize() {
+        if (this.module() == 0.0) {
+            return this;
+        }
         return new Vector2d(this.getX() / this.module(), this.getY() / this.module());
+    }
+
+    @Override
+    public String toString() {
+        return "X: " + this.x + "\tY: " + this.y;
     }
 }

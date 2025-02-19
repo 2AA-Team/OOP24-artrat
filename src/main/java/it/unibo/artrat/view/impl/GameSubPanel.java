@@ -7,7 +7,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -17,6 +19,7 @@ import org.slf4j.LoggerFactory;
 
 import it.unibo.artrat.controller.api.subcontroller.GameSubController;
 import it.unibo.artrat.model.impl.world.RoomSymbols;
+import it.unibo.artrat.utils.api.commands.Command;
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.commands.MoveDown;
 import it.unibo.artrat.utils.impl.commands.MoveLeft;
@@ -37,6 +40,7 @@ public class GameSubPanel extends AbstractSubPanel {
     private static final int DOWN = KeyEvent.VK_S;
     private static final int LEFT = KeyEvent.VK_A;
     private static final int RIGHT = KeyEvent.VK_D;
+    private final Set<Command> pressed = new HashSet<>();
     private static final Map<RoomSymbols, Image> MAPSYMBOLS = Map.of(
             RoomSymbols.ENEMY, getObjectImage("enemy.png"),
             RoomSymbols.WALL, getObjectImage("wall.png"),
@@ -154,8 +158,9 @@ public class GameSubPanel extends AbstractSubPanel {
                 switch (e.getKeyCode()) {
                     case UP -> gameSubController.inputMainController(new MoveUp());
                     case DOWN -> gameSubController.inputMainController(new MoveDown());
-                    case LEFT -> gameSubController.inputMainController(new MoveLeft());
                     case RIGHT -> gameSubController.inputMainController(new MoveRight());
+                    case LEFT -> gameSubController.inputMainController(new MoveLeft());
+
                 }
             }
 
