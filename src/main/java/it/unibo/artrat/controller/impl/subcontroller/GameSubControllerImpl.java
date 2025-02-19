@@ -23,7 +23,6 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
     private final Player player;
     private final Floor floor;
     private final double renderDistance;
-    private final double zoom;
 
     /**
      * constructor to initialize mainController.
@@ -36,7 +35,6 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
             throws IOException {
         super(mainController);
         this.renderDistance = rl.getConfig("RENDER_DISTANCE");
-        this.zoom = rl.getConfig("ZOOM");
         this.floor = new FloorImpl(rl);
         this.floor.generateFloorSet();
         this.player = mainController.getModel().getPlayer();
@@ -69,14 +67,6 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
     @Override
     public Point getPlayerPos() {
         return player.getPosition();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getZoom() {
-        return (int) zoom;
     }
 
     /**

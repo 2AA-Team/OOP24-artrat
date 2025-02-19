@@ -28,7 +28,6 @@ public class GameSubPanel extends AbstractSubPanel {
     private final GamePanel mapPanel = new GamePanel();
     private int resizedX;
     private int resizedY;
-    private final int zoom;
     private static final Map<RoomSymbols, Image> MAPSYMBOLS = Map.of(
             RoomSymbols.ENEMY, getObjectImage("enemy.png"),
             RoomSymbols.WALL, getObjectImage("wall.png"),
@@ -70,17 +69,17 @@ public class GameSubPanel extends AbstractSubPanel {
                 final RoomSymbols object, final Set<Point> setObject) {
             for (final var it : setObject) {
                 final int wallX = (int) Math
-                        .floor(center.getX() + (it.getX() - playerPos.getX()) * resizedX * zoom);
+                        .floor(center.getX() + (it.getX() - playerPos.getX()) * resizedX);
                 final int wallY = (int) Math
-                        .floor(center.getY() + (it.getY() - playerPos.getY()) * resizedY * zoom);
+                        .floor(center.getY() + (it.getY() - playerPos.getY()) * resizedY);
 
-                g.drawImage(MAPSYMBOLS.get(object), wallX, wallY, resizedX * zoom, resizedY * zoom, null);
+                g.drawImage(MAPSYMBOLS.get(object), wallX, wallY, resizedX, resizedY, null);
             }
         }
 
         private void printPlayer(final Graphics g, final Point center) {
             g.drawImage(MAPSYMBOLS.get(RoomSymbols.PLAYER), (int) center.getX(), (int) center.getY(),
-                    resizedX * zoom, resizedY * zoom, null);
+                    resizedX, resizedY, null);
         }
     }
 
@@ -91,7 +90,6 @@ public class GameSubPanel extends AbstractSubPanel {
      */
     public GameSubPanel(final GameSubController gameSubController) {
         this.gameSubController = gameSubController;
-        zoom = gameSubController.getZoom();
     }
 
     /**
