@@ -17,7 +17,7 @@ public interface Mission {
          * s.
         */
         GATHERING
-    };
+    }
 
     /**
      * 

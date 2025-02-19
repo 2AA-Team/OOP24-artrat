@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.yaml.snakeyaml.Yaml;
@@ -18,40 +20,33 @@ import it.unibo.artrat.utils.api.ItemReader;
  * An implementation of ItemReader.
  */
 public class ItemReaderImpl implements ItemReader {
-    private Map<String, List<String>> obj = new HashMap<>();
+        private Map<String, List<String>> obj = new HashMap<>();
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void readFromItemFile(final String itemPath) throws IOException {
+    public void setItemPath(final URI configPath) throws IOException {
         final Yaml yaml = new Yaml();
-        final InputStream inputStream = new FileInputStream(new File(itemPath));
+        final InputStream inputStream = new FileInputStream(new File(configPath));
         this.obj = Map.copyOf(yaml.load(inputStream));
         inputStream.close();
     }
 
-    /**
-     * 
-     * @param nameOfItem n
-     * @param field f
-     * @return s
-     */
-    private String getSpecificField(final String nameOfItem, final int field) {
-        final Object ob = obj.get(nameOfItem);
-        if (ob != null) {
-            return ((List<String>)ob).get(field);
-        } else {
-            throw new IllegalStateException("This conf doesn't exist.");
+    private String getConfig(final String conf, final int field) {
+        final Object ob = obj.get(conf);
+        if (Objects.nonNull(ob)) {
+            return ((List<String>) ob).get(field);
         }
-    } 
+        throw new IllegalArgumentException("The searched " + conf + " item doesn't exist");
+    }
 
     /**
      * {@inheritDoc}
      */
     @Override
     public String getDescription(final String nameOfItem) {
-        return getSpecificField(nameOfItem, 0);
+        return getConfig(nameOfItem, 0);
     }
 
     /**
@@ -59,7 +54,7 @@ public class ItemReaderImpl implements ItemReader {
      */
     @Override
     public double getPrice(final String nameOfItem) {
-        return Double.parseDouble(getSpecificField(nameOfItem, 1));
+        return Double.parseDouble(getConfig(nameOfItem, 1));
     }
 
     /**
@@ -67,7 +62,7 @@ public class ItemReaderImpl implements ItemReader {
      */
     @Override
     public ItemType getItemType(final String nameOfItem) {
-        switch (getSpecificField(nameOfItem, 2)) {
+        switch (getConfig(nameOfItem, 2)) {
             case "CONSUMABLE":
                 return ItemType.CONSUMABLE;
             case "POWERUP":
@@ -75,7 +70,8 @@ public class ItemReaderImpl implements ItemReader {
             default:
                 break;
         }
-        return null;
+        throw new IllegalStateException("The second field in the YAML file related to "
+         + nameOfItem + " is either not an ItemType or has a typo.");
     }
 
     /**

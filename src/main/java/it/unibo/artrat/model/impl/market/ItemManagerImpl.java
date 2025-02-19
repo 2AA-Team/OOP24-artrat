@@ -14,15 +14,15 @@ import it.unibo.artrat.model.api.market.ItemManager;
  */
 public class ItemManagerImpl implements ItemManager {
     private List<Item> itemList;
-    private ItemType currenType = null;
+    private ItemType currenType;
     private String currentSearch = "";
 
     /**
      * Item Manager constructor.
-     * @param market a list of items read
+     * @param passedItemList a list of items read
      */
-    public ItemManagerImpl(final List<Item> market) {
-        this.itemList = market;
+    public ItemManagerImpl(final List<Item> passedItemList) {
+        this.itemList = new ArrayList<>(passedItemList);
     }
 
     /**
@@ -69,16 +69,17 @@ public class ItemManagerImpl implements ItemManager {
 
     private List<Item> filter(final List<Item> passedList) {
         if (currenType == null) {
-            return passedList.stream().collect(Collectors.toList());
+            return new ArrayList<>(passedList.stream().collect(Collectors.toList()));
         }
-        return passedList.stream()
+        return new ArrayList<>(passedList.stream()
             .filter(it -> it.getType().equals(currenType))
-            .collect(Collectors.toList());
+            .collect(Collectors.toList()));
     }
 
     private List<Item> search(final List<Item> passedList) {
-        return passedList.stream()
-            .filter(it -> it.getClass().getSimpleName().toLowerCase().startsWith(currentSearch.trim().toLowerCase(Locale.ROOT)))
-            .collect(Collectors.toList());
+        return new ArrayList<>(passedList.stream()
+            .filter(it -> it.getClass().getSimpleName().toLowerCase(Locale.getDefault())
+            .startsWith(currentSearch.trim().toLowerCase(Locale.getDefault())))
+            .collect(Collectors.toList()));
     }
 }

@@ -2,8 +2,13 @@ package it.unibo.artrat.model.impl.market;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.api.inventory.ItemType;
@@ -16,19 +21,14 @@ import it.unibo.artrat.utils.impl.ItemReaderImpl;
  * Market implementation on the Model.
  */
 public class MarketImpl implements Market {
-    private final String itemPath = "src" + File.separator
-            + "main" + File.separator
-            + "java" + File.separator
-            + "it" + File.separator
-            + "unibo" + File.separator
-            + "artrat" + File.separator
-            + "resources" + File.separator
-            + "items" + File.separator
-            + "items.yaml";
+    private final URL itemPath = Thread.currentThread().getContextClassLoader().getResource(
+            "items" + File.separator
+                    + "items.yaml");
 
     private List<Item> itemsToBuy;
     private final ItemReader itemReader;
     private final ItemFactoryImpl itemFactory;
+        private static final Logger LOGGER = LoggerFactory.getLogger(MarketImpl.class);
 
     /**
      * 
@@ -37,11 +37,6 @@ public class MarketImpl implements Market {
         this.itemsToBuy = new ArrayList<>();
         this.itemReader = new ItemReaderImpl();
         this.itemFactory = new ItemFactoryImpl();
-        try {
-            initMarket();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -56,13 +51,16 @@ public class MarketImpl implements Market {
     }
 
     /**
-     * this method uses ItemReaderImpl to read my yaml file items.yaml.
-     * It adds my items (created using the private method createItem) in my list.
-     * @throws IOException
+     * {@inheritDoc}
      */
-    public void initMarket() throws IOException {
-        this.itemReader.readFromItemFile(itemPath);
-        this.itemFactory.initialize();
+    @Override
+    public void initMarket() {
+        try {
+            this.itemReader.setItemPath(itemPath.toURI());
+            this.itemFactory.initialize();
+        } catch (IOException | URISyntaxException e) {
+            LOGGER.error("MarketImpl class thrown an error : ", e);
+        }
         for (final String it : itemReader.getAllItemsName()) {
             this.itemsToBuy.add(createItem(it));
         }

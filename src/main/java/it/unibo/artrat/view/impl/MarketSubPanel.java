@@ -35,7 +35,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     private final JPanel contPane = new JPanel(new BorderLayout());
     private final JScrollPane scrollPanel = new JScrollPane(marketPanel);
     private final JLabel lupinoCash = new JLabel();
-    private final JPanel purchItemPanel;
+    private JPanel purchItemPanel = new JPanel();
     private final JTextField searchItemField = new JTextField(SEARCH_TEXT_FIELD); 
     //private final WorldTimerImpl timer;
 
@@ -45,7 +45,6 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
      */
     public MarketSubPanel(final StoreSubController contr) {
         this.contr = contr;
-        this.purchItemPanel = new JPanel(new GridLayout(contr.purchasableItems().size(), 4, 4, 2));
     }
 
     /**
@@ -78,6 +77,8 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         contPane.add(scrollPanel, BorderLayout.CENTER);
         scrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        contr.initItemList();
+        this.purchItemPanel = new JPanel(new GridLayout(contr.purchasableItems().size(), 4, 4, 2));
         setShop();
         allItemsSetup();
         updateCoinLabel();
@@ -201,16 +202,14 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
             purchItemPanel.add(itemPanel);
 
             buyItem.addActionListener(e -> {
-                if (toConfirm("Vuoi davvero acquistare?", "Compra")) {
-                    if (contr.buyItem(purchItem)) {
-                        if (purchItem.getType().equals(ItemType.POWERUP)) {
-                            contr.getModel().getMarket().getPurchItems().remove(purchItem);
-                            purchItemPanel.remove(itemPanel);
-                        }
-                        itemSearch(searchItemField.getText().trim().toLowerCase(Locale.ROOT));
-                        forceRedraw();
-                        updateCoinLabel();
+                if (toConfirm("Vuoi davvero acquistare?", "Compra") && contr.buyItem(purchItem)) {
+                    if (purchItem.getType().equals(ItemType.POWERUP)) {
+                        contr.getModel().getMarket().getPurchItems().remove(purchItem);
+                        purchItemPanel.remove(itemPanel);
                     }
+                    itemSearch(searchItemField.getText().trim().toLowerCase(Locale.ROOT));
+                    forceRedraw();
+                    updateCoinLabel();
                 }
             });
         }

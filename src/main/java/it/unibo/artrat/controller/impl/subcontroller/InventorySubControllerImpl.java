@@ -78,6 +78,6 @@ public class InventorySubControllerImpl extends AbstractSubController implements
         this.inventoryView.displayMessage(this.getModel().getPlayer().getInventory().getStoredItem().stream()
         .filter(x -> x.equals(passedItem))
         .map(Item::getDescription).findAny().get() + "\nTYPE: " + getTypeName(passedItem),
-        "Descrizione Oggetto");
+        "Item Description");
     }
 }

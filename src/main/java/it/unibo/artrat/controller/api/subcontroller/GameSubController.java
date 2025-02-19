@@ -17,4 +17,39 @@ public interface GameSubController extends SubController {
      */
     Set<Point> getVisibleWallPositions();
 
+    /**
+     * getter for all the visible enemy position.
+     * 
+     * @return a set of points
+     */
+    Set<Point> getVisibleEnemyPositions();
+
+    /**
+     * method to get the position of the player.
+     * 
+     * @return the position as a point
+     */
+    Point getPlayerPos();
+
+    /**
+     * get the zoom of the view.
+     * 
+     * @return the int for the zoom
+     */
+    int getZoom();
+
+    /**
+     * method to get the position of the exit.
+     * 
+     * @return the position as a point
+     */
+    Point getExitPos();
+
+    /**
+     * getter for all the visible paintings position.
+     * 
+     * @return a set of points
+     */
+    Set<Point> getVisiblePaintings();
+
 }

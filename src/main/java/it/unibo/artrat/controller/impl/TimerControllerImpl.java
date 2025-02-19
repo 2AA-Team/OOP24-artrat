@@ -38,7 +38,7 @@ public class TimerControllerImpl implements TimerController {
      * s.
      */
     @Override
-    public void getCurrentTimeController() {
+    public void obtainCurrentTimeController() {
         this.timer.getCurrentTime();
     }
 

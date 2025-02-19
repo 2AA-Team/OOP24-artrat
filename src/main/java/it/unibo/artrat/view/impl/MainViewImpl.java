@@ -1,10 +1,13 @@
 package it.unibo.artrat.view.impl;
 
 import javax.swing.JFrame;
+
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.model.impl.Stage;
+import it.unibo.artrat.utils.api.ResourceLoader;
 import it.unibo.artrat.view.api.MainView;
 import java.awt.Toolkit;
+import java.util.Objects;
 
 /**
  * implementation of class mainView.
@@ -15,20 +18,21 @@ public class MainViewImpl implements MainView {
 
     private MainController controller;
     private AbstractSubPanel subPanel;
-
+    private final ResourceLoader<String, Double> resourceLoader;
     private final JFrame frame = new JFrame();
 
     /**
      * constructor set the size of the frame.
      * 
-     * @param width  width of the frame
-     * @param heigth height of the frame
+     * @param resourceLoader resource loader
      */
-    public MainViewImpl(final double width, final double heigth) {
+    public MainViewImpl(final ResourceLoader<String, Double> resourceLoader) {
+        this.resourceLoader = Objects.requireNonNull(resourceLoader);
+        final double width = resourceLoader.getConfig("MENU_WIDTH");
+        final double height = resourceLoader.getConfig("MENU_HEIGHT");
         frame.setSize((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),
-                (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * heigth));
-        this.subPanel = new EmptySubPanel();
-        this.controller = null;
+                (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * height));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     /**
@@ -36,16 +40,7 @@ public class MainViewImpl implements MainView {
      */
     @Override
     public void setController(final MainController observer) {
-        controller = observer == null ? controller : observer;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void initiate() {
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        controller = Objects.requireNonNull(observer);
     }
 
     /**
@@ -62,6 +57,25 @@ public class MainViewImpl implements MainView {
     @Override
     public void forceRedraw() {
         subPanel.forceRedraw();
+        frame.setContentPane(subPanel.getPanel());
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    /**
+     * reload frame to get the right size.
+     */
+    private void reloadFrame() {
+        subPanel.initComponents();
+        final double width = resourceLoader.getConfig(controller.getStage().toString() + "_WIDTH");
+        final double height = resourceLoader.getConfig(controller.getStage().toString()
+                + "_HEIGHT");
+        frame.setSize((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),
+                (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * height));
+        frame.setContentPane(subPanel.getPanel());
+        frame.revalidate();
+        frame.repaint();
+        frame.setVisible(true);
     }
 
     /**
@@ -74,7 +88,7 @@ public class MainViewImpl implements MainView {
                 subPanel = new MenuSubPanel(controller.getControllerManager().getMenuSubController());
                 break;
             case GAME:
-                subPanel = new EmptySubPanel(controller.getControllerManager().getMenuSubController());
+                subPanel = new GameSubPanel(controller.getControllerManager().getGameSubController());
                 break;
             case STORE:
                 subPanel = new MarketSubPanel(controller.getControllerManager().getStoreSubController());
@@ -83,9 +97,9 @@ public class MainViewImpl implements MainView {
                 subPanel = new InventorySubPanel(controller.getControllerManager().getInventorySubController());
                 break;
             default:
-                throw new IllegalStateException();
+                throw new IllegalStateException("Stage does not exist.");
         }
-        frame.setContentPane(subPanel.getPanel());
-        frame.revalidate();
+        subPanel.setFrameDimension(this.frame.getSize());
+        reloadFrame();
     }
 }

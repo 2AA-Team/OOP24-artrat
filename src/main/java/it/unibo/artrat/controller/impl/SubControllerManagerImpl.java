@@ -2,6 +2,8 @@ package it.unibo.artrat.controller.impl;
 
 import java.io.IOException;
 
+import java.util.Objects;
+
 import it.unibo.artrat.controller.api.SubControllerManager;
 import it.unibo.artrat.controller.api.subcontroller.GameSubController;
 import it.unibo.artrat.controller.api.subcontroller.InventorySubController;
@@ -43,7 +45,7 @@ public class SubControllerManagerImpl implements SubControllerManager {
      */
     @Override
     public GameSubController getGameSubController() {
-        return this.gameSubController != null ? this.gameSubController : null;
+        return Objects.requireNonNull(this.gameSubController);
     }
 
     /**
@@ -51,7 +53,8 @@ public class SubControllerManagerImpl implements SubControllerManager {
      */
     @Override
     public MenuSubController getMenuSubController() {
-        return this.menuSubController != null ? this.menuSubController : null;
+
+        return Objects.requireNonNull(this.menuSubController);
     }
 
     /**
@@ -59,7 +62,7 @@ public class SubControllerManagerImpl implements SubControllerManager {
      */
     @Override
     public InventorySubController getInventorySubController() {
-        return this.inventorySubController != null ? this.inventorySubController : null;
+        return Objects.requireNonNull(this.inventorySubController);
     }
 
     /**
@@ -67,7 +70,7 @@ public class SubControllerManagerImpl implements SubControllerManager {
      */
     @Override
     public StoreSubController getStoreSubController() {
-        return this.storeSubController != null ? this.storeSubController : null;
+        return Objects.requireNonNull(this.storeSubController);
     }
 
 }

@@ -52,7 +52,7 @@ public interface StoreSubController extends SubController {
      * 
      * @param passedItem the item which 
      */
-    void getDescription(Item passedItem);
+    void showDescription(Item passedItem);
 
     /**
      * 
@@ -71,5 +71,10 @@ public interface StoreSubController extends SubController {
      * @param nameToSearch a String (using trim and toLowerBound) to search in the list of items.
      */
     void searchItem(String nameToSearch);
+
+    /**
+     * Method to initialize the itemList in the "market".
+     */
+    void initItemList();
 
 }

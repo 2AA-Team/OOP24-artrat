@@ -35,27 +35,32 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     public StoreSubControllerImpl(final MainControllerImpl mainController) {
         super(mainController);
         this.marketView = new MarketSubPanel(this);
-        this.currenItems = new ArrayList<>(this.getModel().getMarket().getPurchItems());
         this.itemMan = new ItemManagerImpl(currenItems);
     }
 
-    /**
-    * s.
-    */
+     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initItemList() {
+        this.currenItems = new ArrayList<>(this.getModel().getMarket().getPurchItems());
+    }
+
+     /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Item> purchasableItems() {
         return new ArrayList<>(currenItems);
     }
 
-    /**
-     * s.
-     */
+
     private void updateCurrentItem() {
         this.currenItems = new ArrayList<>(this.getModel().getMarket().getPurchItems());
     }
 
-    /**
-     * s.
+     /**
+     * {@inheritDoc}
      */
     @Override
     public boolean buyItem(final Item itemToBuy) {        //moementaneo, mi serve il read per capire meglio
@@ -77,8 +82,8 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
         return false;
     }
 
-    /**
-     * s.
+     /**
+     * {@inheritDoc}
      */
     @Override
     public void sorting(final int choice) {
@@ -86,7 +91,7 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     }
 
     /**
-     * s.
+     * {@inheritDoc}
      */
     @Override
     public void filterCategory(final ItemType type) {
@@ -97,7 +102,7 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     }
 
     /**
-     * s.
+     * {@inheritDoc}
      */
     @Override
     public void searchItem(final String nameToSearch) {
@@ -108,21 +113,18 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     }
 
     /**
-     * 
-     * @param passedItem the item that we want the typeName.
-     * @return the type name of desired item.
+     * {@inheritDoc}
      */
     @Override
     public String getItemName(final Item passedItem) {
         return passedItem.getClass().getSimpleName();
     }
 
-    /**
-     * 
-     * @param passedItem the item that we want the typeName.
+     /**
+     * {@inheritDoc}
      */
     @Override
-    public void getDescription(final Item passedItem) {
+    public void showDescription(final Item passedItem) {
         marketView.showMessage(this.purchasableItems().stream()
             .filter(it -> it.equals(passedItem))
             .map(Item::getDescription)
@@ -130,7 +132,7 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     }
 
     /**
-     * s.
+     * {@inheritDoc}
      */
     @Override
     public String getTypeName(final Item passedItem) {
@@ -141,7 +143,7 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     }
 
     /**
-     * s.
+     * {@inheritDoc}
      */
     @Override
     public double getItemPrice(final Item passedItem) {

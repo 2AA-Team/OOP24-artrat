@@ -24,7 +24,7 @@ public interface TimerController {
     /**
      * method which get the current time. 
      */
-    void getCurrentTimeController();        //DEVO CHIAMARLA O AGGIORNARLA OGNI SECONDO (1000 MS)
+    void obtainCurrentTimeController();        //DEVO CHIAMARLA O AGGIORNARLA OGNI SECONDO (1000 MS)
 
     /**
      * With this method you can modify your countdown (adding or cutting it).

@@ -26,4 +26,11 @@ public interface GameObject {
      */
     Point getPosition();
 
+    /**
+     * Set Object Position.
+     * 
+     * @param p new position
+     */
+    void setPosition(Point p);
+
 }

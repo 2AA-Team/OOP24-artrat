@@ -41,7 +41,6 @@ public class EmptySubPanel extends AbstractSubPanel {
         });
         panel.add(btn);
         setPanel(panel);
-
     }
 
     /**

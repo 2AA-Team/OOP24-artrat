@@ -3,7 +3,6 @@ package it.unibo.artrat.controller.impl;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import it.unibo.artrat.app.api.GameEngine;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.controller.api.SubControllerManager;
@@ -30,7 +29,7 @@ public class MainControllerImpl implements MainController {
      * set the current Stage to the initial menu
      * 
      * @param engine game engine.
-     * @throws IOException
+     * @throws IOException if resource loader fail to load resource
      */
     public MainControllerImpl(final GameEngine engine) throws IOException {
         this.currentStage = Stage.MENU;
@@ -48,7 +47,6 @@ public class MainControllerImpl implements MainController {
         views.add(newView);
         newView.setController(this);
         newView.setStage(currentStage);
-        newView.initiate();
     }
 
     /**
