@@ -7,9 +7,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
+import java.util.function.Function;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -19,7 +18,6 @@ import org.slf4j.LoggerFactory;
 
 import it.unibo.artrat.controller.api.subcontroller.GameSubController;
 import it.unibo.artrat.model.impl.world.RoomSymbols;
-import it.unibo.artrat.utils.api.commands.Command;
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.commands.MoveDown;
 import it.unibo.artrat.utils.impl.commands.MoveLeft;
@@ -40,7 +38,7 @@ public class GameSubPanel extends AbstractSubPanel {
     private static final int DOWN = KeyEvent.VK_S;
     private static final int LEFT = KeyEvent.VK_A;
     private static final int RIGHT = KeyEvent.VK_D;
-    private final Set<Command> pressed = new HashSet<>();
+
     private static final Map<RoomSymbols, Image> MAPSYMBOLS = Map.of(
             RoomSymbols.ENEMY, getObjectImage("enemy.png"),
             RoomSymbols.WALL, getObjectImage("wall.png"),
@@ -130,8 +128,8 @@ public class GameSubPanel extends AbstractSubPanel {
 
     }
 
-    private boolean isMovementCommand(KeyEvent e) {
-        var key = e.getKeyCode();
+    private boolean isMovementCommand(final KeyEvent e) {
+        final var key = e.getKeyCode();
         return key == UP || key == DOWN || key == LEFT || key == RIGHT;
     }
 
@@ -148,24 +146,24 @@ public class GameSubPanel extends AbstractSubPanel {
 
         tmp.addKeyListener(new KeyListener() {
             @Override
-            public void keyTyped(KeyEvent e) {
+            public void keyTyped(final KeyEvent e) {
                 System.out.println("typed: " + e.getKeyChar());
             }
 
             @Override
-            public void keyPressed(KeyEvent e) {
+            public void keyPressed(final KeyEvent e) {
 
                 switch (e.getKeyCode()) {
                     case UP -> gameSubController.inputMainController(new MoveUp());
                     case DOWN -> gameSubController.inputMainController(new MoveDown());
                     case RIGHT -> gameSubController.inputMainController(new MoveRight());
                     case LEFT -> gameSubController.inputMainController(new MoveLeft());
-
+                    default -> Function.identity();
                 }
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {
+            public void keyReleased(final KeyEvent e) {
                 if (isMovementCommand(e)) {
                     gameSubController.inputMainController(new MoveStop());
                 }

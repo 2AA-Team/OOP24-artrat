@@ -61,4 +61,5 @@ public class ModelImpl implements Model {
     public void setPlayer(final Player player) {
         this.player = player.copyPlayer();
     }
+
 }

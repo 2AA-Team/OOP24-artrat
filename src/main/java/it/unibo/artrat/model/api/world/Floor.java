@@ -51,5 +51,5 @@ public interface Floor {
      * 
      * @return a point representing the position
      */
-    public Point getExitPosition();
+    Point getExitPosition();
 }

@@ -1,5 +1,8 @@
 package it.unibo.artrat.model.api.characters;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import it.unibo.artrat.model.impl.AbstractGameObject;
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;
@@ -10,7 +13,8 @@ import it.unibo.artrat.utils.impl.Vector2d;
  * @author Samuele Trapani
  */
 public abstract class AbstractEntity extends AbstractGameObject implements Entity {
-    private Vector2d speed = new Vector2d();
+
+    private final Set<Vector2d> speed = new HashSet<>();
 
     /**
      * Entity constructor.
@@ -31,8 +35,9 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
      */
     public AbstractEntity(final Point topLeft, final Point bottomRight, final Vector2d v) {
         super(topLeft, bottomRight);
-        this.speed.setX(v.getX());
-        this.speed.setY(v.getY());
+        final Vector2d vel = new Vector2d(v.getX(), v.getY());
+        speed.add(vel);
+
     }
 
     /**
@@ -45,8 +50,8 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
      */
     public AbstractEntity(final Point center, final double width, final double height, final Vector2d v) {
         super(center, width, height);
-        this.speed.setX(v.getX());
-        this.speed.setY(v.getY());
+        final Vector2d vel = new Vector2d(v.getX(), v.getY());
+        speed.add(vel);
     }
 
     /**
@@ -81,8 +86,9 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
      */
     @Override
     public void update(final long delta) {
-        System.out.println(speed);
-        this.setPosition(this.getPosition().sum(speed.mul(delta * 0.1)));
+        System.out.println(this.getSpeed());
+        System.out.println("SIZE: " + this.speed);
+        this.setPosition(this.getPosition().sum(getSpeed().mul(delta * 0.1)));
     }
 
     /**
@@ -90,7 +96,7 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
      */
     @Override
     public Vector2d getSpeed() {
-        return new Vector2d(this.speed.getX(), this.speed.getY());
+        return speed.stream().reduce(new Vector2d(), Vector2d::summVector2d);
     }
 
     /**
@@ -98,7 +104,16 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
      */
     @Override
     public void setSpeed(final Vector2d v) {
-        this.speed = new Vector2d(v.getX(), v.getY());
+        this.speed.clear();
+        this.speed.add(v);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addDirection(final Vector2d v) {
+        this.speed.add(v);
     }
 
 }

@@ -15,9 +15,7 @@ public class MoveLeft implements Command {
      */
     @Override
     public void execute(final Player p) {
-        final var speed = p.getSpeed();
-        p.setSpeed(speed.summVector2d(new Vector2d(-1, 0)));
-        p.setSpeed(p.getSpeed().normalize());
+        p.addDirection(new Vector2d(-1, 0));
 
     }
 

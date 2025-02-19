@@ -4,12 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
-import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -116,9 +113,9 @@ public final class GameEngineImpl implements GameEngine {
     }
 
     private void update(final long delta) {
-        var cmd = this.commands.poll();
-        var model = this.mainController.getModel();
-        var player = model.getPlayer();
+        final var cmd = this.commands.poll();
+        final var model = this.mainController.getModel();
+        final var player = model.getPlayer();
         if (!Objects.isNull(cmd)) {
             cmd.execute(player);
             System.out.println(player.getPosition());
