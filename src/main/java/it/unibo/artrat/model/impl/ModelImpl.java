@@ -1,8 +1,5 @@
 package it.unibo.artrat.model.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.market.Market;
@@ -16,7 +13,6 @@ import it.unibo.artrat.utils.impl.Point;
 public class ModelImpl implements Model {
     private Player player;
     private Market market;
-    private static final Logger LOGGER = LoggerFactory.getLogger(ModelImpl.class);
 
     /**
      * Permit to create a new istance of Model.
@@ -42,7 +38,6 @@ public class ModelImpl implements Model {
      */
     @Override
     public Player getPlayer() {
-        LOGGER.info("Request for a copy of the player.");
         return this.player.copyPlayer();
     }
 
@@ -51,7 +46,6 @@ public class ModelImpl implements Model {
      */
     @Override
     public void setPlayer(final Player player) {
-        LOGGER.info("Setting up the new player.");
         this.player = player.copyPlayer();
     }
 

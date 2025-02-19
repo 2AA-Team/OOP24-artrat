@@ -112,23 +112,4 @@ public class MainViewImpl implements MainView {
         subPanel.setFrameDimension(this.frame.getSize());
         reloadFrame();
     }
-
-    /**
-     * reload frame to get the right size.
-     */
-    private void reloadFrame() {
-        SwingUtilities.invokeLater(() -> {
-            subPanel.initComponents();
-            final double width = resourceLoader.getConfig(controller.getStage().toString() + "_WIDTH");
-            final double height = resourceLoader.getConfig(controller.getStage().toString()
-                    + "_HEIGHT");
-            frame.setSize((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),
-                    (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * height));
-            frame.setContentPane(subPanel.getPanel());
-            frame.revalidate();
-            frame.repaint();
-            frame.setVisible(true);
-        });
-
-    }
 }
