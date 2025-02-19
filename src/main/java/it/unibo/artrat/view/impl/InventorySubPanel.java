@@ -4,6 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -24,11 +25,6 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
     private final InventorySubController controller;
     private final JPanel myJPanel = new JPanel();
     private final JPanel containerPanel = new JPanel(new BorderLayout());
-    /**
-     * Si può pensare a toglierlo e lasciare il resize automatico, ma così è più
-     * carino se si hanno
-     * tanti tanti oggetti.
-     */
     private final JScrollPane scrollPane = new JScrollPane(myJPanel);
 
     /**
@@ -48,6 +44,8 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
         fillWithItems();
         myJPanel.revalidate();
         myJPanel.repaint();
+        containerPanel.revalidate();
+        containerPanel.repaint();
     }
 
     private boolean confirmDialog(final String question, final String name) {
@@ -61,18 +59,16 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
     @Override
     public void displayMessage(final String message, final String title) {
         JOptionPane.showMessageDialog(myJPanel, message, title, JOptionPane.INFORMATION_MESSAGE);
-        myJPanel.revalidate();
-        myJPanel.repaint();
     }
 
     private void fillWithItems() {
         myJPanel.removeAll();
 
-        for (final var item : controller.getStoredItem()) { // observer.getStoredItem() {
-            final JPanel itemPanel = new JPanel(new GridLayout(1, 2, 5, 0)); // Due colonne: itemButton e useButton
+        for (final var item : controller.getStoredItem()) { 
+            final JPanel itemPanel = new JPanel(new GridLayout(1, 2, 5, 0)); 
 
             final JButton itemButton = new JButton(controller.getItemName(item));
-            final JButton useButton = new JButton("Usa");
+            final JButton useButton = new JButton("Use");
 
             itemButton.addActionListener(new ActionListener() {
                 @Override
@@ -84,24 +80,23 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
             useButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(final ActionEvent e) {
-                    if (confirmDialog("Vuoi far si che LuPino utilizzi questo oggetto?", "Utilizza oggetto")
+                    if (confirmDialog("Do you want to make sure that LuPino uses this item?", "Use item")
                             && controller.useItem(item)) {
                         myJPanel.remove(itemPanel);
                         forceRedraw();
                     }
                 }
             });
-
             itemPanel.add(itemButton);
             itemPanel.add(useButton);
             myJPanel.add(itemPanel);
         }
 
-        final JButton closeButton = new JButton("Chiudi inventario");
+        final JButton closeButton = new JButton("Close inventory");
         closeButton.addActionListener(e -> {
-            if (confirmDialog("Vuoi davvero chiudere la borsa di LuPino e proseguire le tue scorribande?",
-                    "Chiudi inventario")) {
-                controller.setStage(Stage.MENU); // tenere a mente che con GAME si torna nel gioco.
+            if (confirmDialog("Do you really want to close LuPino's bag and continue your adventures?",
+                    "Close inventory")) {
+                controller.setStage(Stage.MENU); 
             }
         });
 
@@ -116,7 +111,7 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
     @Override
     public void initComponents() {
         final int gap = 5;
-        myJPanel.setLayout(new GridLayout(0, 1, gap, gap)); // Una colonna, spazio verticale 5px
+        myJPanel.setLayout(new GridLayout(0, 1, gap, gap)); 
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         containerPanel.add(scrollPane, BorderLayout.CENTER);

@@ -17,12 +17,8 @@ import it.unibo.artrat.view.impl.InventorySubPanel;
 /**
  * implementation of the sub controller for the inventory.
  */
-public class InventorySubControllerImpl extends AbstractSubController
-        implements InventorySubController {
-
-        private final InventoryView inventoryView;
-
-
+public class InventorySubControllerImpl extends AbstractSubController implements InventorySubController {
+    private final InventoryView inventoryView;
     /**
      * constructor to initialize mainController.
      * 
@@ -82,6 +78,6 @@ public class InventorySubControllerImpl extends AbstractSubController
         this.inventoryView.displayMessage(this.getModel().getPlayer().getInventory().getStoredItem().stream()
         .filter(x -> x.equals(passedItem))
         .map(Item::getDescription).findAny().get() + "\nTYPE: " + getTypeName(passedItem),
-        "Descrizione Oggetto");
+        "Item Description");
     }
 }

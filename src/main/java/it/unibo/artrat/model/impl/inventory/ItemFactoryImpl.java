@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.api.inventory.ItemFactory;
 import it.unibo.artrat.model.impl.inventory.items.LuckyTicket;
@@ -24,6 +27,7 @@ public class ItemFactoryImpl implements ItemFactory {
                     + "items.yaml");
 
     private final ItemReader itemReader;
+    private static final Logger LOGGER = LoggerFactory.getLogger(ItemFactoryImpl.class);
 
     /**
      * A constructor to initialize itemReader.
@@ -36,16 +40,12 @@ public class ItemFactoryImpl implements ItemFactory {
      * {@inheritDoc}
      */
     @Override
-    public void initialize() throws IOException {
-        try {
-            this.itemReader.readFromItemFile(itemPath.toURI());
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (URISyntaxException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+    public void initialize() {
+            try {
+                this.itemReader.setItemPath(itemPath.toURI());
+            } catch (IOException | URISyntaxException e) {
+                LOGGER.error("Item reader thown an error : ", e);
+            }
     }
 
     /**
@@ -83,8 +83,8 @@ public class ItemFactoryImpl implements ItemFactory {
      */
     @Override
     public Item mysterioustaff() {
-        return new MysteriousStaff(itemReader.getDescription("MYSTERIOUSSTAFF"),
-                itemReader.getPrice("MYSTERIOUSSTAFF"),
-                itemReader.getItemType("MYSTERIOUSSTAFF"));
+        return new MysteriousStaff(itemReader.getDescription("MYSTERIOUSTAFF"), 
+        itemReader.getPrice("MYSTERIOUSTAFF"), 
+        itemReader.getItemType("MYSTERIOUSTAFF"));
     }
 }

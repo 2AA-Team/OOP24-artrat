@@ -1,5 +1,8 @@
 package it.unibo.artrat.model.impl.characters;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import it.unibo.artrat.model.api.characters.AbstractEntity;
 import it.unibo.artrat.model.api.characters.Coin;
 import it.unibo.artrat.model.api.characters.Multiplier;
@@ -18,6 +21,7 @@ public class Lupino extends AbstractEntity implements Player {
 
     private Inventory inventory;
     private Coin coins;
+    private static final Logger LOGGER = LoggerFactory.getLogger(Lupino.class);
 
     /**
      * Player constructor with default vector.
@@ -84,6 +88,7 @@ public class Lupino extends AbstractEntity implements Player {
      */
     @Override
     public Inventory getInventory() {
+        LOGGER.info("Richiesta dell'attuale inventario");
         return new InventoryImpl(this.inventory);
     }
 
@@ -92,6 +97,7 @@ public class Lupino extends AbstractEntity implements Player {
      */
     @Override
     public void setInventory(final Inventory inventory) {
+        LOGGER.info("Richiesta di set di un nuovo inventario");
         this.inventory = new InventoryImpl(inventory);
     }
 
@@ -100,6 +106,7 @@ public class Lupino extends AbstractEntity implements Player {
      */
     @Override
     public Coin getCoin() {
+        LOGGER.info("Richiesta dei Coin attuali");
         return new CoinImpl(this.coins);
     }
 
@@ -108,6 +115,7 @@ public class Lupino extends AbstractEntity implements Player {
      */
     @Override
     public void setCoin(final Coin coins) {
+        LOGGER.info("Richiesta di set di un nuovo coin");
         this.coins = new CoinImpl(coins);
     }
 
@@ -117,6 +125,14 @@ public class Lupino extends AbstractEntity implements Player {
     @Override
     public void increaseCoins(final double coins) {
         this.coins.addCoins(coins);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void spendCoins(final double coins) {
+        this.coins.spendCoins(coins);
     }
 
     /**
