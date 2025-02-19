@@ -45,4 +45,11 @@ public interface Floor {
      * @return a point representing the position
      */
     Point getStartPosition();
+
+    /**
+     * get the floor exit position.
+     * 
+     * @return a point representing the position
+     */
+    Point getExitPosition();
 }

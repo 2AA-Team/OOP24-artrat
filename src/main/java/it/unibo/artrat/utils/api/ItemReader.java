@@ -2,6 +2,7 @@ package it.unibo.artrat.utils.api;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.Set;
 
 import it.unibo.artrat.model.api.inventory.ItemType;
 
@@ -17,7 +18,7 @@ public interface ItemReader {
      * @param itemPath file that contains all item.
      * @throws IOException if configPath not represent anything:
      */
-    void readFromItemFile(URI itemPath) throws IOException;
+    void setItemPath(URI itemPath) throws IOException;
 
     /**
      * 
@@ -39,4 +40,10 @@ public interface ItemReader {
      * @return The ItemTypes of the desired item.
      */
     ItemType getItemType(String nameOfItem);
+
+    /**
+     * 
+     * @return all items name.
+     */
+    Set<String> getAllItemsName();
 }

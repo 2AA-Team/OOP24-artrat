@@ -3,9 +3,6 @@ package it.unibo.artrat.controller.impl.subcontroller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.SwingUtilities;
-
-
 import it.unibo.artrat.controller.api.subcontroller.InventorySubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
@@ -20,12 +17,8 @@ import it.unibo.artrat.view.impl.InventorySubPanel;
 /**
  * implementation of the sub controller for the inventory.
  */
-public class InventorySubControllerImpl extends AbstractSubController
-        implements InventorySubController {
-
-        private final InventoryView inventoryView;
-
-
+public class InventorySubControllerImpl extends AbstractSubController implements InventorySubController {
+    private final InventoryView inventoryView;
     /**
      * constructor to initialize mainController.
      * 

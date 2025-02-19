@@ -131,6 +131,14 @@ public class Lupino extends AbstractEntity implements Player {
      * {@inheritDoc}
      */
     @Override
+    public void spendCoins(final double coins) {
+        this.coins.spendCoins(coins);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void increaseMultiplier(final double mutiple) {
         final Multiplier mp = new MultiplierImpl(this.coins.getCurrentMultiplier());
         mp.changeCurrentMultiplier(mp.getCurrentMultiplier() * mutiple);

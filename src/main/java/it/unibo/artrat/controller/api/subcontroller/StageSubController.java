@@ -9,7 +9,7 @@ public interface StageSubController {
     /**
      * method to set the frame stage.
      * 
-     * @param newStage
+     * @param newStage new stage
      */
     void setStage(Stage newStage);
 

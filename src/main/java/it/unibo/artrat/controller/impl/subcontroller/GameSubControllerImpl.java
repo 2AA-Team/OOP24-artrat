@@ -56,6 +56,16 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
      * {@inheritDoc}
      */
     @Override
+    public Set<Point> getVisibleEnemyPositions() {
+        final BoundingBox bb = new BoundingBoxImpl(getPlayerPos(), renderDistance, renderDistance);
+        return this.floor.getEnemies().stream().filter(x -> bb.isColliding(x.getBoundingBox()))
+                .map(AbstractGameObject::getPosition).collect(Collectors.toSet());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Point getPlayerPos() {
         return player.getPosition();
     }
@@ -66,6 +76,24 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
     @Override
     public int getZoom() {
         return (int) zoom;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Point getExitPos() {
+        return this.floor.getExitPosition();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Set<Point> getVisiblePaintings() {
+        final BoundingBox bb = new BoundingBoxImpl(getPlayerPos(), renderDistance, renderDistance);
+        return this.floor.getValues().stream().filter(x -> bb.isColliding(x.getBoundingBox()))
+                .map(AbstractGameObject::getPosition).collect(Collectors.toSet());
     }
 
 }

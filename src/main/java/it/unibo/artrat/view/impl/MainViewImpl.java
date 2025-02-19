@@ -1,7 +1,6 @@
 package it.unibo.artrat.view.impl;
 
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.model.impl.Stage;
@@ -92,7 +91,7 @@ public class MainViewImpl implements MainView {
                 subPanel = new GameSubPanel(controller.getControllerManager().getGameSubController());
                 break;
             case STORE:
-                subPanel = new EmptySubPanel(controller.getControllerManager().getMenuSubController());
+                subPanel = new MarketSubPanel(controller.getControllerManager().getStoreSubController());
                 break;
             case INVENTORY:
                 subPanel = new InventorySubPanel(controller.getControllerManager().getInventorySubController());

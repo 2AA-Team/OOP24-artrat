@@ -4,7 +4,6 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.SwingUtilities;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -45,6 +44,8 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
         fillWithItems();
         myJPanel.revalidate();
         myJPanel.repaint();
+        containerPanel.revalidate();
+        containerPanel.repaint();
     }
 
     private boolean confirmDialog(final String question, final String name) {
@@ -86,7 +87,6 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
                     }
                 }
             });
-
             itemPanel.add(itemButton);
             itemPanel.add(useButton);
             myJPanel.add(itemPanel);
