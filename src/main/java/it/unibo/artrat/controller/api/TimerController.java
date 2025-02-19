@@ -27,15 +27,11 @@ public interface TimerController {
     void getCurrentTimeController();        //DEVO CHIAMARLA O AGGIORNARLA OGNI SECONDO (1000 MS)
 
     /**
-     * Timer restarts if I exit from my inventory.
-     */
-    void restartTimerController();
-
-    /**
      * With this method you can modify your countdown (adding or cutting it).
      * This method can only be used in the inventory,                   SDVSEDSEWEOIGAERIBUHERGOIHEARGIUHAER
      */
     void setCountdownController();       //aggiunge o toglie tempo
+    
     //IMPORTANTE NON PUOI USARE UN ITEM SE TI FA SCADERE IL TEMPO (GESTISCE DIDO)
     //DA CAPIRE SE PUOI AGGIUNGERE O TOGLIERE TEMPO ANCHE A INIZIO GAME
 }

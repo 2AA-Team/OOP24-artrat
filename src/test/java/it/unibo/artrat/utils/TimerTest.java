@@ -50,10 +50,10 @@ class TimerTest {
         timer.startTimer();
         Thread.sleep(ONE_SECOND);
         timer.stopTimer();
-        assertTrue(false);      //verifica se si sia stoppato
+        assertTrue(timer.isPaused());      //verifica se si sia stoppato
         Thread.sleep(ONE_SECOND);
-        timer.resetTimer();
-        assertTrue(null);   //verifica che sia ripartito
+        timer.startTimer();
+        assertFalse(timer.isPaused());   //verifica che sia ripartito
     }
 
 
@@ -67,11 +67,11 @@ class TimerTest {
         Thread.sleep(ONE_SECOND);
         timer.stopTimer();
         //magari da aggiungere un thread sleep per sicurezza
-        timer.setCountdown();
+        //timer.setCountdown();
         assertTrue(null);   //verifica che sia ripartito
-        timer.setCountdown();
+        //timer.setCountdown();
         assertTrue(null);   //verifica che sia ripartito
-        timer.restartTimer();
+        timer.startTimer();
     }
 
 }

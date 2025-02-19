@@ -1,5 +1,7 @@
 package it.unibo.artrat.model.api;
 
+import it.unibo.artrat.model.api.inventory.Item;
+
 /**
  * Timer interface.
  * @author Manuel Benagli
@@ -19,17 +21,12 @@ public interface WorldTimer {
     /**
      *  If I use an item I can add or cut time, in base of item's effect.
      */
-    void setCountdown();
+    void setCountdown(Item itemPassed);
 
     /**
      * If we enter in the inventory while playing, the timer stops.
      */
     void stopTimer();
-
-    /**
-     * The timer restarts when I'll exit from the inventory and I'll continue the game.
-     */
-    void restartTimer();
 
     /**
      * 
@@ -42,4 +39,10 @@ public interface WorldTimer {
      * @return true if the time is out.
      */
     boolean isTimeOut();
+
+    /**
+     * 
+     * @return true if the timer is stopped
+     */
+    boolean isPaused();
 }

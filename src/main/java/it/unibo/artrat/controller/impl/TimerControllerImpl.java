@@ -34,6 +34,9 @@ public class TimerControllerImpl implements TimerController {
         timer.stopTimer();
     }
 
+    /**
+     * 
+     */
     public void getCurrentTimeController() {
         this.timer.getCurrentTime();
     }
@@ -46,16 +49,17 @@ public class TimerControllerImpl implements TimerController {
         timer.resetTimer();                 //se il timer scade comunque devo aggiornare qualcosa, è la logica del game over
     }
 
+    /**
+     * 
+     */
     @Override
     public void stopTimerController() {
         this.timer.stopTimer();
     }
 
-    @Override
-    public void restartTimerController() {
-        this.timer.restartTimer();
-    }
-
+    /**
+     * 
+     */
     @Override
     public void setCountdownController() {
         // TODO Auto-generated method stub
