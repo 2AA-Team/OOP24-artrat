@@ -37,7 +37,8 @@ public class MainViewImpl implements MainView {
         frame.setSize((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),
                 (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * height));
         frame.addComponentListener(new ComponentAdapter() {
-            public void componentResized(ComponentEvent comp) {
+            @Override
+            public void componentResized(final ComponentEvent comp) {
                 subPanel.setFrameDimension(frame.getSize());
             }
         });

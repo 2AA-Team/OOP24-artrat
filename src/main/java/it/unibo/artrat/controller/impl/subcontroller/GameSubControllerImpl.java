@@ -97,6 +97,9 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
                 .map(AbstractGameObject::getPosition).collect(Collectors.toSet());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getRenderDistance() {
         return (int) renderDistance;
