@@ -56,18 +56,22 @@ public final class RoomImpl implements Room {
         for (int i = 0; i < builder.size - 1 && (tmpU || tmpR || tmpD || tmpL); i++) {
             final int tmpI = i;
             if (tmpU) {
-                tmpU = this.roomStructure.removeIf((o) -> o.getPosition().equals(new Point(averagePassage, tmpI)));
+                tmpU = this.roomStructure.removeIf((o) -> o.getPosition().equals(new Point(averagePassage, tmpI)) ||
+                        o.getPosition().equals(new Point(averagePassage - 1, tmpI)));
             }
             if (tmpR) {
                 tmpR = this.roomStructure
-                        .removeIf((o) -> o.getPosition().equals(new Point(builder.size - tmpI - 1, averagePassage)));
+                        .removeIf((o) -> o.getPosition().equals(new Point(builder.size - tmpI - 1, averagePassage)) ||
+                                o.getPosition().equals(new Point(builder.size - tmpI - 1, averagePassage - 1)));
             }
             if (tmpD) {
                 tmpD = this.roomStructure.removeIf((o) -> o.getPosition().equals(new Point(averagePassage,
-                        builder.size - tmpI - 1)));
+                        builder.size - tmpI - 1)) ||
+                        o.getPosition().equals(new Point(averagePassage - 1, builder.size - tmpI - 1)));
             }
             if (tmpL) {
-                tmpL = this.roomStructure.removeIf((o) -> o.getPosition().equals(new Point(tmpI, averagePassage)));
+                tmpL = this.roomStructure.removeIf((o) -> o.getPosition().equals(new Point(tmpI, averagePassage)) ||
+                        o.getPosition().equals(new Point(tmpI, averagePassage - 1)));
             }
         }
 
