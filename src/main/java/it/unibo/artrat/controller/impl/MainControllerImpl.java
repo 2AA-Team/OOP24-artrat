@@ -31,7 +31,7 @@ public class MainControllerImpl implements MainController {
      * set the current Stage to the initial menu
      * 
      * @param engine game engine.
-     * @throws IOException
+     * @throws IOException if resource loader fail to load resource
      */
     public MainControllerImpl(final GameEngine engine) throws IOException {
         this.currentStage = Stage.MENU;
@@ -126,7 +126,7 @@ public class MainControllerImpl implements MainController {
      * {@inheritDoc}
      */
     @Override
-    public void input(Command cmd) {
+    public void input(final Command cmd) {
         this.engine.notifyCommand(cmd);
     }
 

@@ -5,7 +5,7 @@ import it.unibo.artrat.utils.api.commands.Command;
 import it.unibo.artrat.utils.impl.Vector2d;
 
 /**
- * Stop command for entity movement stop.
+ * Stop movement command for entity movement.
  * 
  * @author Samuele Trapani
  */
@@ -15,8 +15,9 @@ public class MoveStop implements Command {
      */
     @Override
     public void execute(final Player p) {
-        final var speed = p.getSpeed();
-        p.setSpeed(new Vector2d(0, 0).mul(speed.module()));
+
+        p.setSpeed(new Vector2d());
+
     }
 
 }

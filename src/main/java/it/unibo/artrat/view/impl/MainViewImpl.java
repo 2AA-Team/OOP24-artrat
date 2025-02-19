@@ -59,7 +59,6 @@ public class MainViewImpl implements MainView {
     @Override
     public void forceRedraw() {
         subPanel.forceRedraw();
-        frame.setContentPane(subPanel.getPanel());
         frame.revalidate();
         frame.repaint();
     }
@@ -69,6 +68,7 @@ public class MainViewImpl implements MainView {
      */
     private void reloadFrame() {
         SwingUtilities.invokeLater(() -> {
+
             subPanel.initComponents();
             final double width = resourceLoader.getConfig(controller.getStage().toString() + "_WIDTH");
             final double height = resourceLoader.getConfig(controller.getStage().toString()
@@ -79,6 +79,7 @@ public class MainViewImpl implements MainView {
             frame.revalidate();
             frame.repaint();
             frame.setVisible(true);
+            subPanel.getPanel().requestFocus();
         });
 
     }

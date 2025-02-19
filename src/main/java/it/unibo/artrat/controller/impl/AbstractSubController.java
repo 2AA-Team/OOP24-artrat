@@ -53,8 +53,13 @@ public abstract class AbstractSubController implements SubController {
         mainController.quit();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void inputMainController(final Command cmd) {
         this.mainController.input(cmd);
+
     }
+
 }

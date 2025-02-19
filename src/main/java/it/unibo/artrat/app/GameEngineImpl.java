@@ -4,9 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,7 @@ import it.unibo.artrat.view.impl.MainViewImpl;
  * 
  */
 public final class GameEngineImpl implements GameEngine {
-    private final List<Command> commands = new LinkedList<>();
+    private final BlockingQueue<Command> commands = new LinkedBlockingDeque<>();
     private static final Logger LOGGER = LoggerFactory.getLogger(GameEngineImpl.class);
 
     private enum GameStatus {
@@ -113,7 +113,16 @@ public final class GameEngineImpl implements GameEngine {
     }
 
     private void update(final long delta) {
-
+        final var cmd = this.commands.poll();
+        final var model = this.mainController.getModel();
+        final var player = model.getPlayer();
+        if (!Objects.isNull(cmd)) {
+            cmd.execute(player);
+            System.out.println(player.getPosition());
+            player.update(delta);
+            model.setPlayer(player);
+            this.mainController.setModel(model);
+        }
     }
 
     /**

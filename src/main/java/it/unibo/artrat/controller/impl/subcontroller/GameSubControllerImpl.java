@@ -3,9 +3,11 @@ package it.unibo.artrat.controller.impl.subcontroller;
 import java.io.IOException;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 import it.unibo.artrat.controller.api.subcontroller.GameSubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
+import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.world.Floor;
 import it.unibo.artrat.model.impl.AbstractGameObject;
@@ -23,6 +25,7 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
     private final Floor floor;
     private final double renderDistance;
     private final double zoom;
+    private final Model model = this.getModel();
 
     /**
      * constructor to initialize mainController.
@@ -38,8 +41,11 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
         this.zoom = rl.getConfig("ZOOM");
         this.floor = new FloorImpl(rl);
         this.floor.generateFloorSet();
-        this.player = mainController.getModel().getPlayer();
-        this.player.setPosition(this.floor.getStartPosition());
+        this.player = model.getPlayer();
+        player.setPosition(this.floor.getStartPosition());
+        model.setPlayer(player);
+        this.updateCentralizeModel(model);
+
     }
 
     /**
@@ -49,6 +55,16 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
     public Set<Point> getVisibleWallPositions() {
         final BoundingBox bb = new BoundingBoxImpl(getPlayerPos(), renderDistance, renderDistance);
         return this.floor.getWalls().stream().filter(x -> bb.isColliding(x.getBoundingBox()))
+                .map(AbstractGameObject::getPosition).collect(Collectors.toSet());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Set<Point> getVisibleEnemyPositions() {
+        final BoundingBox bb = new BoundingBoxImpl(getPlayerPos(), renderDistance, renderDistance);
+        return this.floor.getEnemies().stream().filter(x -> bb.isColliding(x.getBoundingBox()))
                 .map(AbstractGameObject::getPosition).collect(Collectors.toSet());
     }
 
@@ -66,6 +82,24 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
     @Override
     public int getZoom() {
         return (int) zoom;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Point getExitPos() {
+        return this.floor.getExitPosition();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Set<Point> getVisiblePaintings() {
+        final BoundingBox bb = new BoundingBoxImpl(getPlayerPos(), renderDistance, renderDistance);
+        return this.floor.getValues().stream().filter(x -> bb.isColliding(x.getBoundingBox()))
+                .map(AbstractGameObject::getPosition).collect(Collectors.toSet());
     }
 
 }

@@ -95,7 +95,7 @@ public final class BaseEnemy extends AbstractEntity implements Enemy {
      * {@inheritDoc}
      */
     @Override
-    public void update(final int delta) {
+    public void update(final long delta) {
         super.update(delta);
         this.fieldOfView.setCenter(this.getPosition());
     }

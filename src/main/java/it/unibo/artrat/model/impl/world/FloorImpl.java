@@ -40,6 +40,7 @@ public class FloorImpl implements Floor {
     private final double minFloorSize;
     private final double minRoomSize;
     private Point startPosition;
+    private Point exitPosition;
 
     private final URL roomPath = Thread.currentThread().getContextClassLoader().getResource(
             "premademaze" + File.separator + "rooms.json");
@@ -110,6 +111,7 @@ public class FloorImpl implements Floor {
         final int roomSize = RANDOM.nextInt((int) this.minRoomSize, (int) this.maxRoomSize);
         this.generateRoomsStructure(floorSize);
         this.generateEffectiveRooms(roomSize);
+        // print(); // TO-REMOVE
     }
 
     /**
@@ -146,6 +148,10 @@ public class FloorImpl implements Floor {
      * @throws IOException if link for the rooms json doesnt exist
      */
     private void generateEffectiveRooms(final int roomSize) throws IOException {
+        final int maxEnemyInARoom = 3;
+        final int minEnemyInARoom = 1;
+        final int maxPaintingsInARoom = 4;
+        final int minPaintingsInARoom = 1;
         List<RoomGenerationStrategy> generations = List.of();
         try {
             generations = List.of(
@@ -164,10 +170,12 @@ public class FloorImpl implements Floor {
                         builder = builder.insertNumberOfEnemy(0);
                         builder = builder.insertNumberOfValues(0);
                         setStartPosition(j, i, roomSize);
+                        setExitPosition(j, i, roomSize);
                     } else {
                         builder = builder.insertGenerationStrategy(generations.get(RANDOM.nextInt(generations.size())));
-                        builder = builder.insertNumberOfEnemy(RANDOM.nextInt(roomSize));
-                        builder = builder.insertNumberOfValues(RANDOM.nextInt(roomSize));
+                        builder = builder.insertNumberOfEnemy(RANDOM.nextInt(minEnemyInARoom, maxEnemyInARoom));
+                        builder = builder
+                                .insertNumberOfValues(RANDOM.nextInt(minPaintingsInARoom, maxPaintingsInARoom));
                     }
                     builder = builder.insertPassages(isARoom(j, i - 1), isARoom(j + 1, i), isARoom(j, i + 1),
                             isARoom(j - 1, i));
@@ -175,6 +183,20 @@ public class FloorImpl implements Floor {
                 }
             }
         }
+    }
+
+    /**
+     * set the exit position.
+     * 
+     * @param x        x coordinate
+     * @param y        y coordinate
+     * @param roomSize room size
+     */
+    private void setExitPosition(final int x, final int y, final int roomSize) {
+        final double tmpX = x * roomSize + Math.floor((double) roomSize / 2);
+        final double tmpY = y * roomSize + roomSize - 1;
+        exitPosition = new Point(tmpX, tmpY);
+        this.floorStructure.removeIf((o) -> o.getPosition().equals(exitPosition));
     }
 
     /**
@@ -244,6 +266,14 @@ public class FloorImpl implements Floor {
     @Override
     public Point getStartPosition() {
         return Objects.requireNonNull(startPosition);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Point getExitPosition() {
+        return Objects.requireNonNull(exitPosition);
     }
 
     // public void print() {

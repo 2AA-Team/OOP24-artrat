@@ -38,7 +38,7 @@ public interface SubController {
 
     /**
      * Sends to main controller the input.
-     * 
+     *
      * @param cmd command to execute
      */
     void inputMainController(Command cmd);

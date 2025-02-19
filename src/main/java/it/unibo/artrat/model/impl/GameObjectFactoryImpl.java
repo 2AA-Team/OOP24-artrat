@@ -31,7 +31,7 @@ public class GameObjectFactoryImpl implements GameObjectFactory {
             }
 
             @Override
-            public void update(final int delta) {
+            public void update(final long delta) {
                 // TODO Auto-generated method stub
                 throw new UnsupportedOperationException("Unimplemented method 'update'");
             }
