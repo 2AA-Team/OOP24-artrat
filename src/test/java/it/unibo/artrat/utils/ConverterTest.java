@@ -31,7 +31,7 @@ class ConverterTest {
 
     @Test
     void testFpsToNanosValidInput() {
-        final double delta = 0.00_001;
+        final double delta = 0.000_01;
         final long thousand = 1_000;
         final int fps = 60;
         long expectedNanos = thousand / fps;

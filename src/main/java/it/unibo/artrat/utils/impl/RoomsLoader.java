@@ -13,9 +13,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.unibo.artrat.utils.api.ResourceLoader;
 
-/**
- * class for reading premade rooms from a json file.
- */
 public class RoomsLoader implements ResourceLoader<Integer, char[][]> {
 
     private Map<Integer, List<char[][]>> roomsMap = new HashMap<>();

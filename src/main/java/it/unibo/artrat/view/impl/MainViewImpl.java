@@ -1,6 +1,8 @@
 package it.unibo.artrat.view.impl;
 
 import java.awt.Toolkit;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.Objects;
 
 import javax.swing.JFrame;
@@ -33,6 +35,12 @@ public class MainViewImpl implements MainView {
         final double height = resourceLoader.getConfig("MENU_HEIGHT");
         frame.setSize((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),
                 (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * height));
+        frame.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(final ComponentEvent comp) {
+                subPanel.setFrameDimension(frame.getSize());
+            }
+        });
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -103,5 +111,24 @@ public class MainViewImpl implements MainView {
         }
         subPanel.setFrameDimension(this.frame.getSize());
         reloadFrame();
+    }
+
+    /**
+     * reload frame to get the right size.
+     */
+    private void reloadFrame() {
+        SwingUtilities.invokeLater(() -> {
+            subPanel.initComponents();
+            final double width = resourceLoader.getConfig(controller.getStage().toString() + "_WIDTH");
+            final double height = resourceLoader.getConfig(controller.getStage().toString()
+                    + "_HEIGHT");
+            frame.setSize((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),
+                    (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * height));
+            frame.setContentPane(subPanel.getPanel());
+            frame.revalidate();
+            frame.repaint();
+            frame.setVisible(true);
+        });
+
     }
 }

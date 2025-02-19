@@ -33,7 +33,8 @@ public class GameSubPanel extends AbstractSubPanel {
     private static final Logger LOGGER = LoggerFactory.getLogger(GameSubPanel.class);
     private final GameSubController gameSubController;
     private final GamePanel mapPanel = new GamePanel();
-    private final int zoom;
+    private int resizedX;
+    private int resizedY;
     private static final int UP = KeyEvent.VK_W;
     private static final int DOWN = KeyEvent.VK_S;
     private static final int LEFT = KeyEvent.VK_A;
@@ -62,58 +63,35 @@ public class GameSubPanel extends AbstractSubPanel {
         @Override
         protected void paintComponent(final Graphics g) {
             super.paintComponent(g);
+            resizedX = (int) Math.floor(getFrameDimension().getWidth() / gameSubController.getRenderDistance());
+            resizedY = (int) Math.floor(getFrameDimension().getHeight() / gameSubController.getRenderDistance());
             final Point center = new Point(
                     (int) Math.floor(getFrameDimension().getWidth() / 2),
                     (int) Math.floor(getFrameDimension().getHeight() / 2));
 
             final Point playerPos = gameSubController.getPlayerPos();
-
+            printObject(g, center, playerPos, RoomSymbols.WALL, gameSubController.getVisibleWallPositions());
+            printObject(g, center, playerPos, RoomSymbols.EXIT, Set.of(gameSubController.getExitPos()));
+            printObject(g, center, playerPos, RoomSymbols.ENEMY, gameSubController.getVisibleEnemyPositions());
+            printObject(g, center, playerPos, RoomSymbols.VALUE, gameSubController.getVisiblePaintings());
             printPlayer(g, center);
-            printWalls(g, center, playerPos);
-            printExit(g, center, playerPos);
-            printEnemy(g, center, playerPos);
-            printPaintings(g, center, playerPos);
         }
 
-        private void printEnemy(final Graphics g, final Point center, final Point playerPos) {
-            for (final var enemyPoints : gameSubController.getVisibleEnemyPositions()) {
-                final int wallX = (int) Math.floor(center.getX() + (enemyPoints.getX() - playerPos.getX()) * zoom);
-                final int wallY = (int) Math.floor(center.getY() + (enemyPoints.getY() - playerPos.getY()) * zoom);
+        private void printObject(final Graphics g, final Point center, final Point playerPos,
+                final RoomSymbols object, final Set<Point> setObject) {
+            for (final var it : setObject) {
+                final int wallX = (int) Math
+                        .floor(center.getX() + (it.getX() - playerPos.getX()) * resizedX);
+                final int wallY = (int) Math
+                        .floor(center.getY() + (it.getY() - playerPos.getY()) * resizedY);
 
-                g.drawImage(MAPSYMBOLS.get(RoomSymbols.ENEMY), wallX, wallY, zoom, zoom, null);
+                g.drawImage(MAPSYMBOLS.get(object), wallX, wallY, resizedX, resizedY, null);
             }
-        }
-
-        private void printPaintings(final Graphics g, final Point center, final Point playerPos) {
-            for (final var paintPoints : gameSubController.getVisiblePaintings()) {
-                final int wallX = (int) Math.floor(center.getX() + (paintPoints.getX() - playerPos.getX()) * zoom);
-                final int wallY = (int) Math.floor(center.getY() + (paintPoints.getY() - playerPos.getY()) * zoom);
-
-                g.drawImage(MAPSYMBOLS.get(RoomSymbols.VALUE), wallX, wallY, zoom, zoom, null);
-            }
-        }
-
-        private void printExit(final Graphics g, final Point center, final Point playerPos) {
-            final Point exitPos = gameSubController.getExitPos();
-            final int wallX = (int) Math.floor(center.getX() + (exitPos.getX() - playerPos.getX()) * zoom);
-            final int wallY = (int) Math.floor(center.getY() + (exitPos.getY() - playerPos.getY()) * zoom);
-
-            g.drawImage(MAPSYMBOLS.get(RoomSymbols.EXIT), wallX, wallY, zoom, zoom, null);
         }
 
         private void printPlayer(final Graphics g, final Point center) {
             g.drawImage(MAPSYMBOLS.get(RoomSymbols.PLAYER), (int) center.getX(), (int) center.getY(),
-                    zoom, zoom, null);
-        }
-
-        private void printWalls(final Graphics g, final Point center, final Point playerPos) {
-            for (final var wallsPoint : gameSubController.getVisibleWallPositions()) {
-
-                final int wallX = (int) Math.floor(center.getX() + (wallsPoint.getX() - playerPos.getX()) * zoom);
-                final int wallY = (int) Math.floor(center.getY() + (wallsPoint.getY() - playerPos.getY()) * zoom);
-
-                g.drawImage(MAPSYMBOLS.get(RoomSymbols.WALL), wallX, wallY, zoom, zoom, null);
-            }
+                    resizedX, resizedY, null);
         }
     }
 
@@ -124,7 +102,6 @@ public class GameSubPanel extends AbstractSubPanel {
      */
     public GameSubPanel(final GameSubController gameSubController) {
         this.gameSubController = gameSubController;
-        zoom = gameSubController.getZoom();
 
     }
 

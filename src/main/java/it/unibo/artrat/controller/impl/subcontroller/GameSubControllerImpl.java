@@ -24,7 +24,6 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
     private final Player player;
     private final Floor floor;
     private final double renderDistance;
-    private final double zoom;
     private final Model model = this.getModel();
 
     /**
@@ -38,7 +37,6 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
             throws IOException {
         super(mainController);
         this.renderDistance = rl.getConfig("RENDER_DISTANCE");
-        this.zoom = rl.getConfig("ZOOM");
         this.floor = new FloorImpl(rl);
         this.floor.generateFloorSet();
         this.player = model.getPlayer();
@@ -73,15 +71,7 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
      */
     @Override
     public Point getPlayerPos() {
-        return this.getModel().getPlayer().getPosition();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getZoom() {
-        return (int) zoom;
+        return player.getPosition();
     }
 
     /**
@@ -100,6 +90,14 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
         final BoundingBox bb = new BoundingBoxImpl(getPlayerPos(), renderDistance, renderDistance);
         return this.floor.getValues().stream().filter(x -> bb.isColliding(x.getBoundingBox()))
                 .map(AbstractGameObject::getPosition).collect(Collectors.toSet());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getRenderDistance() {
+        return (int) renderDistance;
     }
 
 }
