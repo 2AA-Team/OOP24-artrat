@@ -21,7 +21,7 @@ class TimerTest {
      * 
      */
     @BeforeEach
-    void testTimerSetup(){
+    void testTimerSetup() {
         timer = new WorldTimerImpl();
     }
 
@@ -35,7 +35,7 @@ class TimerTest {
             try {
                 Thread.sleep(ONE_SECOND);       //Uso il thread per aspettare 1 secondo
             } catch (InterruptedException e) {
-                fail();                     
+                fail();
             }
         }
     }
@@ -43,7 +43,7 @@ class TimerTest {
     /**
     * resetting timer test.
     * @throws InterruptedException 
-    */     
+    */
     @Test
     void testResettingTimer() throws InterruptedException {
         timer.startTimer();

@@ -31,7 +31,7 @@ public interface TimerController {
      * This method can only be used in the inventory,                   SDVSEDSEWEOIGAERIBUHERGOIHEARGIUHAER
      */
     void setCountdownController();       //aggiunge o toglie tempo
-    
+
     //IMPORTANTE NON PUOI USARE UN ITEM SE TI FA SCADERE IL TEMPO (GESTISCE DIDO)
     //DA CAPIRE SE PUOI AGGIUNGERE O TOGLIERE TEMPO ANCHE A INIZIO GAME
 }

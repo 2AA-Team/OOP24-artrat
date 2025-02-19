@@ -44,7 +44,6 @@ public class WorldTimerImpl implements WorldTimer {
      */
     @Override
     public void startTimer() {      // qui lo starto
-        System.out.println("TIMER STARTATO");
         if(!isInPause){
             currenTask = new TimerTask() { // usa il nome giusto della variabile
                 @Override

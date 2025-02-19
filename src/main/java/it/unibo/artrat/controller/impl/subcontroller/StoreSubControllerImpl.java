@@ -24,6 +24,7 @@ import it.unibo.artrat.view.impl.MarketSubPanel;
  */
 public class StoreSubControllerImpl extends AbstractSubController implements StoreSubController {
     private final MarketView marketView;
+    private final ItemManager itemMan;
     private List<Item> currenItems = new ArrayList<>();
 
     /**
@@ -35,6 +36,7 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
         super(mainController);
         this.marketView = new MarketSubPanel(this);
         this.currenItems = new ArrayList<>(this.getModel().getMarket().getPurchItems());
+        this.itemMan = new ItemManagerImpl(currenItems);
     }
 
     /**
@@ -82,7 +84,6 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
      */
     @Override
     public void sorting(final int choice) {
-       final ItemManager itemMan = new ItemManagerImpl(currenItems);
        currenItems = new ArrayList<>(itemMan.sortItemPrice(choice));
     }
 
@@ -92,8 +93,9 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     @Override
     public void filterCategory(final ItemType type) {
         updateCurrentItem();
-        final ItemManager itemMan = new ItemManagerImpl(currenItems);
+        this.itemMan.updateItemList(currenItems);
         currenItems = new ArrayList<>(itemMan.filterItems(type));
+        this.itemMan.updateItemList(currenItems);
     }
 
     /**
@@ -102,8 +104,9 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     @Override
     public void searchItem(final String nameToSearch) {
         updateCurrentItem();
-        final ItemManager itemMan = new ItemManagerImpl(currenItems);
+        this.itemMan.updateItemList(currenItems);
         currenItems = new ArrayList<>(itemMan.searchItem(nameToSearch));
+        this.itemMan.updateItemList(currenItems);
     }
 
     /**

@@ -30,7 +30,6 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     private static final ItemType ITEMTYPE_ALL = null;
     private static final int SEARCH_TEXT_FIELD = 20;
     private static final int GAP = 7;
-    private ItemType currType;
     private final StoreSubController contr;
     private final JPanel marketPanel = new JPanel();
     private final JPanel contPane = new JPanel(new BorderLayout());
@@ -46,9 +45,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
      */
     public MarketSubPanel(final StoreSubController contr){
         this.contr = contr;
-        //this.timer = new WorldTimerImpl(this.contr);
         this.purchItemPanel = new JPanel(new GridLayout(contr.purchasableItems().size(), 4, 4, 2));
-        //this.timer.startTimer();
     }
 
     /**
@@ -129,9 +126,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
 
         filterComboBox.addActionListener(e -> {
             final ItemType selectedType = (ItemType) filterComboBox.getSelectedItem();
-            currType = selectedType;                //sto mettendo un currType
             contr.filterCategory(selectedType);
-            //itemSearch(searchItemField.getText().trim().toLowerCase());
             forceRedraw();
         });
 
@@ -149,19 +144,16 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
 
             @Override
             public void insertUpdate(final DocumentEvent doc) {
-               // contr.filterCategory(currType);
                 itemSearch(searchItemField.getText().trim().toLowerCase(Locale.ROOT));
             }
 
             @Override
             public void removeUpdate(final DocumentEvent doc) {
-               // contr.filterCategory(currType);
                 itemSearch(searchItemField.getText().trim().toLowerCase(Locale.ROOT));
             }
 
             @Override
             public void changedUpdate(final DocumentEvent doc) {
-              //  contr.filterCategory(currType);
                 itemSearch(searchItemField.getText().trim().toLowerCase(Locale.ROOT));
             }
         });
@@ -169,9 +161,9 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         toMenu.addActionListener(e -> {
             if (toConfirm("Do you want to come back to the menu?", "Back to menu")) {
                 searchItemField.setText("");
-                itemSearch("");
+                contr.filterCategory(ITEMTYPE_ALL);
+                itemSearch(""); 
                 contr.setStage(Stage.MENU);
-             //   timer.resetTimer();
             }
         });
 

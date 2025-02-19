@@ -32,4 +32,9 @@ public interface ItemManager {
      * @return A List of items with characters corresponding to those typed
      */
     List<Item> searchItem(String nameToSearch); 
+
+    /**
+     * s.
+     */
+    void updateItemList(List<Item> passedList);
 }
