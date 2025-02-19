@@ -76,6 +76,7 @@ public final class GameEngineImpl implements GameEngine {
         long lastTime;
         while (status.equals(GameStatus.RUNNING)) {
             lastTime = System.currentTimeMillis();
+
             this.update(delta);
             this.redraw();
             delta = updateDeltaTime(lastTime, drawInterval);
@@ -118,7 +119,6 @@ public final class GameEngineImpl implements GameEngine {
         final var player = model.getPlayer();
         if (!Objects.isNull(cmd)) {
             cmd.execute(player);
-            System.out.println(player.getPosition());
             player.update(delta);
             model.setPlayer(player);
             this.mainController.setModel(model);

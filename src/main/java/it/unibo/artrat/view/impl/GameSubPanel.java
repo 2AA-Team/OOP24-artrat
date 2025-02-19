@@ -125,7 +125,7 @@ public class GameSubPanel extends AbstractSubPanel {
         tmp.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(final KeyEvent e) {
-                System.out.println("typed: " + e.getKeyChar());
+
             }
 
             @Override

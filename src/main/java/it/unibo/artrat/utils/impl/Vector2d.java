@@ -1,35 +1,22 @@
 package it.unibo.artrat.utils.impl;
 
 /**
+ * 
  * Vector that determines speed and direction.
+ * 
+ * @param x
+ * @param y
  * 
  * @author Samuele Trapani
  */
-public final class Vector2d {
-    /**
-     * Default vector position is up.
-     */
-    private double x;
-    private double y;
-
-    /**
-     * Vector constructor.
-     * 
-     * @param x x axis
-     * @param y y axis
-     */
-    public Vector2d(final double x, final double y) {
-        this.x = x;
-        this.y = y;
-    }
+public record Vector2d(double x, double y) {
 
     /**
      * Vector default constructor: V(x=0;y=0).
      *
      */
     public Vector2d() {
-        this.x = 0;
-        this.y = 0;
+        this(0, 0);
     }
 
     /**
@@ -62,40 +49,6 @@ public final class Vector2d {
     }
 
     /**
-     * 
-     * @return x axis
-     */
-    public double getX() {
-        return x;
-    }
-
-    /**
-     * Set x axis.
-     * 
-     * @param x
-     */
-    public void setX(final double x) {
-        this.x = x;
-    }
-
-    /**
-     * 
-     * @return y axis.
-     */
-    public double getY() {
-        return y;
-    }
-
-    /**
-     * Set y axis.
-     * 
-     * @param y
-     */
-    public void setY(final double y) {
-        this.y = y;
-    }
-
-    /**
      * Get normalized vector.
      * 
      * @return normalized vector
@@ -104,49 +57,12 @@ public final class Vector2d {
         if (this.module() == 0.0) {
             return this;
         }
-        return new Vector2d(this.getX() / this.module(), this.getY() / this.module());
+        return new Vector2d(this.x / this.module(), this.y / this.module());
     }
 
     @Override
     public String toString() {
         return "X: " + this.x + "\tY: " + this.y;
-    }
-
-    @Override
-    public int hashCode() {
-        // auto generated hascode method.
-        final int prime = 31;
-        int result = 1;
-        long temp;
-        temp = Double.doubleToLongBits(x);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(y);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
-        return result;
-    }
-
-    @Override
-    public boolean equals(final Object obj) {
-        // auto generated equals method.
-        if (this == obj) {
-            return true;
-        }
-
-        if (obj == null) {
-            return false;
-        }
-
-        if (getClass() != obj.getClass()) {
-            return false;
-        } else {
-            final Vector2d other = (Vector2d) obj;
-            if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x)) {
-                return false;
-            } else {
-                return (Double.doubleToLongBits(y) == Double.doubleToLongBits(other.y));
-            }
-        }
-
     }
 
 }

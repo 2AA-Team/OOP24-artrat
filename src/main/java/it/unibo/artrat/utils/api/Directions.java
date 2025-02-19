@@ -42,7 +42,7 @@ public enum Directions {
      * @return vector's direction
      */
     public Vector2d vector() {
-        return new Vector2d(this.vector.getX(), this.vector.getY());
+        return new Vector2d(this.vector.x(), this.vector.y());
     }
 
 }

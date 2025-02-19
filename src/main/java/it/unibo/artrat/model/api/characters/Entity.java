@@ -1,5 +1,7 @@
 package it.unibo.artrat.model.api.characters;
 
+import java.util.Set;
+
 import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.utils.impl.Vector2d;
 
@@ -25,7 +27,7 @@ public interface Entity extends GameObject {
      * 
      * @return current speed
      */
-    Vector2d getSpeed();
+    Set<Vector2d> getSpeed();
 
     /**
      * Set method for speed vector.
@@ -40,4 +42,11 @@ public interface Entity extends GameObject {
      * @param v
      */
     void addDirection(Vector2d v);
+
+    /**
+     * Directions sum.
+     * 
+     * @return current speed
+     */
+    Vector2d calculateSpeed();
 }
