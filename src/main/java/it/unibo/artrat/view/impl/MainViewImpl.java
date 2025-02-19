@@ -66,7 +66,6 @@ public class MainViewImpl implements MainView {
     @Override
     public void forceRedraw() {
         subPanel.forceRedraw();
-        frame.setContentPane(subPanel.getPanel());
         frame.revalidate();
         frame.repaint();
     }
