@@ -63,5 +63,4 @@ public interface MainController {
      * @return the current stage
      */
     Stage getStage();
-
 }

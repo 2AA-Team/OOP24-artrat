@@ -39,6 +39,13 @@ public interface GameSubController extends SubController {
     int getZoom();
 
     /**
+     * get the zoom of the view.
+     * 
+     * @return the int for the zoom
+     */
+    int getRenderDistance();
+
+    /**
      * method to get the position of the exit.
      * 
      * @return the position as a point

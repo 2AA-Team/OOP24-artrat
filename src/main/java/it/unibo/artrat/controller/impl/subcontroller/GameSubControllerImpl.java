@@ -3,6 +3,7 @@ package it.unibo.artrat.controller.impl.subcontroller;
 import java.io.IOException;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 import it.unibo.artrat.controller.api.subcontroller.GameSubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
@@ -94,6 +95,11 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
         final BoundingBox bb = new BoundingBoxImpl(getPlayerPos(), renderDistance, renderDistance);
         return this.floor.getValues().stream().filter(x -> bb.isColliding(x.getBoundingBox()))
                 .map(AbstractGameObject::getPosition).collect(Collectors.toSet());
+    }
+
+    @Override
+    public int getRenderDistance() {
+        return (int) renderDistance;
     }
 
 }
