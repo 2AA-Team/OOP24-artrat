@@ -48,28 +48,25 @@ public class RoomGenerationMaze implements RoomGenerationStrategy {
         if (visited.isEmpty()) {
             return;
         }
-
         if (currentPoint == null) {
             currentPoint = visited.remove(RANDOM.nextInt(visited.size()));
         }
-
-        while (!visited.isEmpty()) {
-            final Point tmp = currentPoint;
-            final List<Point> neighbours = visited.stream()
+        List<Point> stack = new java.util.ArrayList<>();
+        stack.add(currentPoint);
+        while (!stack.isEmpty()) {
+            Point tmp = stack.get(stack.size() - 1);
+            List<Point> neighbours = visited.stream()
                     .filter(p -> p.getDistance(tmp) == 2)
-                    .toList();
+                    .collect(Collectors.toList());
             if (neighbours.isEmpty()) {
-                visited.remove(tmp);
-                createMaze(visited, null);
+                stack.remove(stack.size() - 1);
             } else {
                 Point next = neighbours.get(RANDOM.nextInt(neighbours.size()));
                 visited.remove(next);
-                int midX = (int) (next.getX() + currentPoint.getX()) / 2;
-                int midY = (int) (next.getY() + currentPoint.getY()) / 2;
+                int midX = (int) (next.getX() + tmp.getX()) / 2;
+                int midY = (int) (next.getY() + tmp.getY()) / 2;
                 maze.removeIf(x -> x.getPosition().equals(new Point(midX, midY)));
-
-                currentPoint = next;
-
+                stack.add(next);
             }
         }
     }
