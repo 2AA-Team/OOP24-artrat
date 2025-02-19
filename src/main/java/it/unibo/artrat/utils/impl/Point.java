@@ -47,7 +47,7 @@ public final class Point {
      * @return return new position.
      */
     public Point sum(final Vector2d v) {
-        return new Point(this.x + v.getX(), this.y + v.getY());
+        return new Point(this.x + v.x(), this.y + v.y());
     }
 
     /**

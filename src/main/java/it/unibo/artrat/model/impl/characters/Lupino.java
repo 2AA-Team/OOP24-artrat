@@ -1,5 +1,8 @@
 package it.unibo.artrat.model.impl.characters;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import it.unibo.artrat.model.api.characters.AbstractEntity;
 import it.unibo.artrat.model.api.characters.Coin;
 import it.unibo.artrat.model.api.characters.Multiplier;
@@ -26,7 +29,7 @@ public class Lupino extends AbstractEntity implements Player {
      * @param bottomRight boundingbox corner
      */
     public Lupino(final Point topLeft, final Point bottomRight) {
-        this(topLeft, bottomRight, new Vector2d());
+        this(topLeft, bottomRight, new HashSet<>());
         this.inventory = new InventoryImpl();
         this.coins = new CoinImpl();
     }
@@ -38,7 +41,7 @@ public class Lupino extends AbstractEntity implements Player {
      * @param bottomRight boundingbox corner
      * @param v           direction
      */
-    public Lupino(final Point topLeft, final Point bottomRight, final Vector2d v) {
+    public Lupino(final Point topLeft, final Point bottomRight, final Set<Vector2d> v) {
         super(topLeft, bottomRight, v);
         this.inventory = new InventoryImpl();
         this.coins = new CoinImpl();
@@ -52,7 +55,7 @@ public class Lupino extends AbstractEntity implements Player {
      * @param height height of player bounding box
      * @param speed  speed of player bounding box
      */
-    public Lupino(final Point center, final double width, final double height, final Vector2d speed) {
+    public Lupino(final Point center, final double width, final double height, final Set<Vector2d> speed) {
         super(center, width, height, speed);
         this.inventory = new InventoryImpl();
         this.coins = new CoinImpl();
@@ -64,7 +67,7 @@ public class Lupino extends AbstractEntity implements Player {
      * @param center bounding box center
      * @param speed  speed of player bounding box
      */
-    public Lupino(final Point center, final Vector2d speed) {
+    public Lupino(final Point center, final Set<Vector2d> speed) {
         super(center, speed);
         this.inventory = new InventoryImpl();
         this.coins = new CoinImpl();
