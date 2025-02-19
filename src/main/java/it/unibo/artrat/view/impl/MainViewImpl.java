@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.model.impl.Stage;
+import it.unibo.artrat.model.impl.WorldTimerImpl;
 import it.unibo.artrat.utils.api.ResourceLoader;
 import it.unibo.artrat.view.api.MainView;
 import java.awt.Toolkit;
@@ -20,6 +21,8 @@ public class MainViewImpl implements MainView {
     private AbstractSubPanel subPanel;
     private final ResourceLoader<String, Double> resourceLoader;
     private final JFrame frame = new JFrame();
+
+    private WorldTimerImpl timer = new WorldTimerImpl();
 
     /**
      * constructor set the size of the frame.

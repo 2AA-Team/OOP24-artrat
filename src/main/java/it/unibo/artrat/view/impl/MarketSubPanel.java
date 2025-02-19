@@ -18,6 +18,7 @@ import javax.swing.event.DocumentListener;
 import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
 import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.model.impl.Stage;
+import it.unibo.artrat.model.impl.WorldTimerImpl;
 //import it.unibo.artrat.model.impl.WorldTimerImpl;
 import it.unibo.artrat.view.api.MarketView;
 
@@ -37,8 +38,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     private final JLabel lupinoCash = new JLabel();
     private JPanel purchItemPanel = new JPanel();
     private final JTextField searchItemField = new JTextField(SEARCH_TEXT_FIELD); 
-    //private final WorldTimerImpl timer;
-
+    private final WorldTimerImpl timer = new WorldTimerImpl(); 
     /**
      * MarketSubPanel constructor.
      * @param contr
@@ -113,6 +113,11 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         upperJPanel.setLayout(new FlowLayout());
         final JButton toMenu = new JButton("BACK");
 
+
+        final JButton timerButton = new JButton("TIMER");
+        final JButton stoptimerButton = new JButton("STOP");
+        
+
         final JComboBox<ItemType> filterComboBox = new JComboBox<>();
         filterComboBox.addItem(ITEMTYPE_ALL);
 
@@ -159,6 +164,14 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
             }
         });
 
+        stoptimerButton.addActionListener(e->{
+            timer.stopTimer();
+        });
+
+        timerButton.addActionListener(e->{
+            timer.startTimer();
+        });
+
         toMenu.addActionListener(e -> {
             if (toConfirm("Do you want to come back to the menu?", "Back to menu")) {
                 searchItemField.setText("");
@@ -167,6 +180,11 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
                 contr.setStage(Stage.MENU);
             }
         });
+
+
+        upperJPanel.add(stoptimerButton);
+        upperJPanel.add(timerButton);
+
 
         bottomPan.add(toMenu);
         bottomPan.add(lupinoCash);
