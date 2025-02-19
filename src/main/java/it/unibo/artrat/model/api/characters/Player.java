@@ -43,6 +43,13 @@ public interface Player extends Entity {
      */
     void increaseCoins(double coins);
 
+        /**
+     * A method that decrease the current coins of player with the passed amount.
+     * 
+     * @param coins
+     */
+    void spendCoins(double coins);
+
     /**
      * A method that increase the current coin multiplier, by multiplie the current
      * multiplier.

@@ -17,12 +17,8 @@ import it.unibo.artrat.view.impl.InventorySubPanel;
 /**
  * implementation of the sub controller for the inventory.
  */
-public class InventorySubControllerImpl extends AbstractSubController
-        implements InventorySubController {
-
-        private final InventoryView inventoryView;
-
-
+public class InventorySubControllerImpl extends AbstractSubController implements InventorySubController {
+    private final InventoryView inventoryView;
     /**
      * constructor to initialize mainController.
      * 

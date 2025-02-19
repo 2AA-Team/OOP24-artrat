@@ -1,12 +1,17 @@
 package it.unibo.artrat.utils.impl;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.yaml.snakeyaml.Yaml;
 
 import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.utils.api.ItemReader;
-import it.unibo.artrat.utils.api.ResourceLoader;
 
 /**
  * An implementation of ItemReader.
@@ -32,6 +37,12 @@ public class ItemReaderImpl implements ItemReader {
         this.valueOfYaml.setConfigPath(itemPath);
     }
 
+    /**
+     * 
+     * @param nameOfItem n
+     * @param field f
+     * @return s
+     */
     private String getSpecificField(final String nameOfItem, final int field) {
         return valueOfYaml.getConfig(nameOfItem).get(field);
     }
@@ -66,5 +77,13 @@ public class ItemReaderImpl implements ItemReader {
                 break;
         }
         return null;
+    }
+
+    /**
+     * s.
+     */
+    @Override
+    public Set<String> getAllItemsName() {
+        return this.obj.keySet();
     }
 }

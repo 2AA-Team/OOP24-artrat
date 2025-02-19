@@ -1,7 +1,11 @@
 package it.unibo.artrat.utils.api;
 
 import java.io.IOException;
+<<<<<<< HEAD
 import java.net.URI;
+=======
+import java.util.Set;
+>>>>>>> benagli-develop
 
 import it.unibo.artrat.model.api.inventory.ItemType;
 
@@ -39,4 +43,10 @@ public interface ItemReader {
      * @return The ItemTypes of the desired item.
      */
     ItemType getItemType(String nameOfItem);
+
+    /**
+     * 
+     * @return all items name.
+     */
+    Set<String> getAllItemsName();
 }

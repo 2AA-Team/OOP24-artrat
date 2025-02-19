@@ -48,6 +48,8 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
         fillWithItems();
         myJPanel.revalidate();
         myJPanel.repaint();
+        containerPanel.revalidate();
+        containerPanel.repaint();
     }
 
     private boolean confirmDialog(final String question, final String name) {
@@ -70,7 +72,6 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
 
         for (final var item : controller.getStoredItem()) { // observer.getStoredItem() {
             final JPanel itemPanel = new JPanel(new GridLayout(1, 2, 5, 0)); // Due colonne: itemButton e useButton
-
             final JButton itemButton = new JButton(controller.getItemName(item));
             final JButton useButton = new JButton("Usa");
 
@@ -91,7 +92,6 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
                     }
                 }
             });
-
             itemPanel.add(itemButton);
             itemPanel.add(useButton);
             myJPanel.add(itemPanel);
