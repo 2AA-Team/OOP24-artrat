@@ -45,13 +45,15 @@ public class WorldTimerImpl implements WorldTimer {
     @Override
     public void startTimer() {      // qui lo starto
         System.out.println("TIMER STARTATO");
-        currenTask = new TimerTask() { // usa il nome giusto della variabile
-            @Override
-            public void run() {
-                outOfTime = true;
-                //IMPORTANTE LE LOGICHE GAME OVER
-            }
-        };
+        if(!isInPause){
+            currenTask = new TimerTask() { // usa il nome giusto della variabile
+                @Override
+                public void run() {
+                    outOfTime = true;
+                    //IMPORTANTE LE LOGICHE GAME OVER
+                }
+            };
+        }
         //qui ci ficco il currentTask di prima e il countdown che si aggiorna sempre
         timer.schedule(currenTask, countdown);  
     
@@ -60,7 +62,7 @@ public class WorldTimerImpl implements WorldTimer {
     /**
      * 
      */
-    @Override       //resetto il timer se finisco il game prima, e non lo riavvio
+    @Override       //resetto il timer se finisco il game prima, oppure è game over
     public void resetTimer() {
         //DEVO avere la roba di tonno o sam del game over.
         if (timer != null) {
@@ -96,7 +98,7 @@ public class WorldTimerImpl implements WorldTimer {
     public void stopTimer() {
         if(isInPause == false && timer != null){
             isInPause = true;
-
+            timer.cancel();
             System.out.println("TIMER STOPPATO");
         }
     }
