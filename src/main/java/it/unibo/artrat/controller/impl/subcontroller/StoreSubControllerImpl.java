@@ -64,8 +64,7 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
         final Market market = this.getModel().getMarket();
         final Inventory inventory = player.getInventory();
 
-        if (market.buyItem(itemToBuy)) {
-            if (player.getCoin().getCurrentAmount() >= itemToBuy.getPrice()) {
+        if (market.buyItem(itemToBuy) && player.getCoin().getCurrentAmount() >= itemToBuy.getPrice()) {
                 player.spendCoins(itemToBuy.getPrice());
                 inventory.addItem(itemToBuy);       //aggiungo l'item all'inventario
                 player.setInventory(inventory);
@@ -75,7 +74,6 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
                 updateCentralizeModel(model);
                 return true;
             }
-        }
         return false;
     }
 

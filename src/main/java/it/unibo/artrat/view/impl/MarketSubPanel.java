@@ -43,7 +43,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
      * MarketSubPanel constructor.
      * @param contr
      */
-    public MarketSubPanel(final StoreSubController contr){
+    public MarketSubPanel(final StoreSubController contr) {
         this.contr = contr;
         this.purchItemPanel = new JPanel(new GridLayout(contr.purchasableItems().size(), 4, 4, 2));
     }
@@ -207,7 +207,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
                             contr.getModel().getMarket().getPurchItems().remove(purchItem);
                             purchItemPanel.remove(itemPanel);
                         }
-                        itemSearch(searchItemField.getText().trim().toLowerCase());
+                        itemSearch(searchItemField.getText().trim().toLowerCase(Locale.ROOT));
                         forceRedraw();
                         updateCoinLabel();
                     }

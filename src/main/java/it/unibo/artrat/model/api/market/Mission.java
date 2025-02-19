@@ -39,6 +39,7 @@ public interface Mission {
 
     /**
      * s.
+     * @return a reward.
      */
     double getReward();
     //T getCategory();      mi dice a che categoria appartiene, se Stealth, base eccetera

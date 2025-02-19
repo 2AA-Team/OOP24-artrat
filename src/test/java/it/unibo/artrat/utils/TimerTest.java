@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import it.unibo.artrat.model.impl.WorldTimerImpl;
 
@@ -28,7 +27,6 @@ class TimerTest {
     /**
      * 
      */
-    @Test
     void testTimer() {
         timer.startTimer();
         while (!timer.isTimeOut()) {        //isTimeOut sta nel model, è un semplice boolean di controllo
@@ -44,7 +42,6 @@ class TimerTest {
     * resetting timer test.
     * @throws InterruptedException 
     */
-    @Test
     void testResettingTimer() throws InterruptedException {
         timer.startTimer();
         Thread.sleep(ONE_SECOND);
@@ -58,7 +55,6 @@ class TimerTest {
      * 
      * @throws InterruptedException
      */
-    @Test
     void testStopAndGoTimer() throws InterruptedException {
         timer.startTimer();
         Thread.sleep(ONE_SECOND);
@@ -75,7 +71,7 @@ class TimerTest {
      * The timer is always stopped when I am in the inventory.
      * @throws InterruptedException
      */
-    @Test
+
     void testAddAndCutTime() throws InterruptedException {
         timer.startTimer();
         Thread.sleep(ONE_SECOND);

@@ -7,7 +7,7 @@ import it.unibo.artrat.model.impl.WorldTimerImpl;
  * 
  */
 public class TimerControllerImpl implements TimerController {
-    private WorldTimerImpl timer;
+    private final WorldTimerImpl timer;
 
     //CHIEDERE SE, AVENDO IL TIMER DEL MODEL (OVVIAMENTE), SE LO DEVO AGGIUNGERE CON UN 
     //METODO GETTIMER() NELLA CLASSE MODEL E MODELIMPL
@@ -35,8 +35,9 @@ public class TimerControllerImpl implements TimerController {
     }
 
     /**
-     * 
+     * s.
      */
+    @Override
     public void getCurrentTimeController() {
         this.timer.getCurrentTime();
     }
@@ -62,7 +63,6 @@ public class TimerControllerImpl implements TimerController {
      */
     @Override
     public void setCountdownController() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'setCountdownController'");
     }
 }

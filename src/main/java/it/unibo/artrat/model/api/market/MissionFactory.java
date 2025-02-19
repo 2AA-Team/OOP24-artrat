@@ -5,19 +5,4 @@ package it.unibo.artrat.model.api.market;
  *  Every mission has its own difficulty, an higher one gives more points.
  */
 public interface MissionFactory {
-
-    /**
-     * s.
-     */
-    enum MissionCategory {
-        /**
-         * s.
-         */
-        TIMECHALLENGE, 
-        /**
-        * s.
-        */ 
-        GATHERING
-    };
-
 }

@@ -20,6 +20,7 @@ public interface WorldTimer {
 
     /**
      *  If I use an item I can add or cut time, in base of item's effect.
+     * @param itemPassed which will have a time parameter.
      */
     void setCountdown(Item itemPassed);
 

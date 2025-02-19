@@ -59,12 +59,15 @@ public class ItemManagerImpl implements ItemManager {
         return search(filter(itemList));
     }
 
+    /**
+     * @param passedList list which updated itemList.
+     */
     @Override
-    public void updateItemList(List<Item> passedList) {
+    public void updateItemList(final List<Item> passedList) {
         this.itemList = new ArrayList<>(passedList);
     }
 
-    private List<Item> filter(List<Item> passedList) {
+    private List<Item> filter(final List<Item> passedList) {
         if (currenType == null) {
             return passedList.stream().collect(Collectors.toList());
         }
@@ -73,7 +76,7 @@ public class ItemManagerImpl implements ItemManager {
             .collect(Collectors.toList());
     }
 
-    private List<Item> search(List<Item> passedList) {
+    private List<Item> search(final List<Item> passedList) {
         return passedList.stream()
             .filter(it -> it.getClass().getSimpleName().toLowerCase().startsWith(currentSearch.trim().toLowerCase(Locale.ROOT)))
             .collect(Collectors.toList());

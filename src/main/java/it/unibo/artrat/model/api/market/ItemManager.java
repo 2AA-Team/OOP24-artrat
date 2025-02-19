@@ -34,7 +34,7 @@ public interface ItemManager {
     List<Item> searchItem(String nameToSearch); 
 
     /**
-     * s.
+     * @param passedList list which will be updated.
      */
     void updateItemList(List<Item> passedList);
 }

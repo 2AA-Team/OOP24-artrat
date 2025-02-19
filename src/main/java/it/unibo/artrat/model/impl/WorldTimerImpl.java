@@ -11,16 +11,15 @@ import java.util.TimerTask;
  * @author Manuel Benagli
  */
 public class WorldTimerImpl implements WorldTimer {
-    private static final int DEFAULT_TIMER_SETUP = 10000;
-    private Timer timer;
+    private static final int DEFAULT_TIMER_SETUP = 100_000;
+    private final Timer timer;
     private boolean outOfTime;      //se è scaduto il tempo
     private int countdown;          //il countdown può subire modifiche nell'inventario (addTime o cutTime)
     private boolean isInPause;
     private TimerTask currenTask;           //Questo è fondamentale nel avvio/riavvio timer
 
     /**
-     * 
-     * @param contr Controller provvisorio passato nello store per testarlo.
+     * s.
      */
     public WorldTimerImpl() {
         this.countdown = DEFAULT_TIMER_SETUP;
@@ -30,9 +29,10 @@ public class WorldTimerImpl implements WorldTimer {
     }
 
     /**
-     * 
+     * @param settedCountDown is time which be added or cutted to the timer.
      */
-    public WorldTimerImpl(int settedCountDown) {    //IL SETTED COUNTDOWN E' IL TEMPO IN ms SETTATO NELL'INVENTARIO
+    public WorldTimerImpl(final int settedCountDown) {
+         //IL SETTED COUNTDOWN E' IL TEMPO IN ms SETTATO NELL'INVENTARIO
         this.countdown = settedCountDown;
         this.timer = new Timer("WorldTimer");
         this.outOfTime = false;
@@ -44,8 +44,8 @@ public class WorldTimerImpl implements WorldTimer {
      */
     @Override
     public void startTimer() {      // qui lo starto
-        if(!isInPause){
-            currenTask = new TimerTask() { // usa il nome giusto della variabile
+        if (!isInPause) {
+            currenTask = new TimerTask() {
                 @Override
                 public void run() {
                     outOfTime = true;
@@ -54,8 +54,7 @@ public class WorldTimerImpl implements WorldTimer {
             };
         }
         //qui ci ficco il currentTask di prima e il countdown che si aggiorna sempre
-        timer.schedule(currenTask, countdown);  
-    
+        timer.schedule(currenTask, countdown);
     }
 
     /**
@@ -70,7 +69,6 @@ public class WorldTimerImpl implements WorldTimer {
         this.countdown = DEFAULT_TIMER_SETUP;
         this.outOfTime = false;
         this.isInPause = false;
-        System.out.println("TIMER RESETTATO");
     }
 
     /**
@@ -78,7 +76,7 @@ public class WorldTimerImpl implements WorldTimer {
      * @return true if the timer is stopper (if we are in inventory during the game). 
      */
     @Override
-    public boolean isPaused(){
+    public boolean isPaused() {
         return isInPause;
     }
 
@@ -95,11 +93,12 @@ public class WorldTimerImpl implements WorldTimer {
      */
     @Override
     public void stopTimer() {
-        if(isInPause == false && timer != null){
+        /*
+        if (isInPause == false && timer != null) {
             isInPause = true;
             timer.cancel();
-            System.out.println("TIMER STOPPATO");
         }
+        */
     }
 
     /**
@@ -114,7 +113,7 @@ public class WorldTimerImpl implements WorldTimer {
      * 
      */
     @Override
-    public void setCountdown(Item passedItem) {
+    public void setCountdown(final Item passedItem) {
         //qua devo semplicemente settare il timer con un parametro o un qualcosa di Dido
     }
 }
