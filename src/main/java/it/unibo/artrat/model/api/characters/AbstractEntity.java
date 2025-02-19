@@ -80,8 +80,8 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
      * {@inheritDoc}
      */
     @Override
-    public void update(final int delta) {
-        this.setPosition(this.getPosition().sum(speed.mul(delta)));
+    public void update(final long delta) {
+        this.setPosition(this.getPosition().sum(speed.mul(delta * 0.1)));
     }
 
     /**

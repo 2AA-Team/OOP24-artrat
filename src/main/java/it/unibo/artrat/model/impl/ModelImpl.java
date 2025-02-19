@@ -23,12 +23,14 @@ public class ModelImpl implements Model {
      * Permit to create a new istance of Model.
      */
     public ModelImpl() {
-        this.player = new Lupino(new Point(), new Point());
-        initInventory(); // temporaneo per i test, andrà tolto in quanto all'inizio l'inventario sarà vuoto.
+        this.player = new Lupino(new Point(), new Point(3, 3));
+        initInventory(); // temporaneo per i test, andrà tolto in quanto all'inizio l'inventario sarà
+                         // vuoto.
     }
 
     /**
      * Permit to create a new istance of model, starting from the passed one.
+     * 
      * @param m the passed Model.
      */
     public ModelImpl(final Model m) {
@@ -46,7 +48,7 @@ public class ModelImpl implements Model {
 
     /**
      * {@inheritDoc}
-    */
+     */
     @Override
     public Player getPlayer() {
         return this.player.copyPlayer();
@@ -54,7 +56,7 @@ public class ModelImpl implements Model {
 
     /**
      * {@inheritDoc}
-    */
+     */
     @Override
     public void setPlayer(final Player player) {
         this.player = player.copyPlayer();

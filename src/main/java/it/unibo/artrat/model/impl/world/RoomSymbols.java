@@ -15,7 +15,15 @@ public enum RoomSymbols {
     /**
      * base valuable object.
      */
-    VALUE('V');
+    VALUE('V'),
+    /**
+     * exit.
+     */
+    EXIT('X'),
+    /**
+     * player.
+     */
+    PLAYER('P');
 
     private final char symbol;
 
