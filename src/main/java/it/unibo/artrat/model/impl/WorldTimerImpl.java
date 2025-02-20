@@ -63,7 +63,7 @@ public class WorldTimerImpl implements WorldTimer {
             }
         };
         // Riavvia il timer dal tempo rimanente
-        timer.scheduleAtFixedRate(currentTask, 0, ONE_SECOND);
+        timer.scheduleAtFixedRate(currentTask, ONE_SECOND, ONE_SECOND);
         //con 1 second di settaggio prevengo problemi con eventi
         System.out.println("TIMER STARTATO");
     }

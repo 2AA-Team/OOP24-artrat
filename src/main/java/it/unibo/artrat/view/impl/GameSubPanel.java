@@ -43,6 +43,10 @@ public class GameSubPanel extends AbstractSubPanel {
     private static final int LEFT = KeyEvent.VK_A;
     private static final int RIGHT = KeyEvent.VK_D;
 
+
+    
+    private final JLabel timerCountdown = new JLabel();
+
     private static final Map<RoomSymbols, Image> MAPSYMBOLS = Map.of(
             RoomSymbols.ENEMY, getObjectImage("enemy.png"),
             RoomSymbols.WALL, getObjectImage("wall.png"),
@@ -79,7 +83,8 @@ public class GameSubPanel extends AbstractSubPanel {
             printObject(g, center, playerPos, RoomSymbols.VALUE, gameSubController.getVisiblePaintings());
             printPlayer(g, center);
 
-       //     gameSubController.getCurrentTimeController();               //gamesubcontroller e prendo il time 
+           gameSubController.getCurrentTimeController();               //gamesubcontroller e prendo il time 
+           timerCountdown.setText(Integer.toString(gameSubController.getCurrentTimeController()));      //aggiorno il timer
             
         }
 
@@ -109,7 +114,7 @@ public class GameSubPanel extends AbstractSubPanel {
     public GameSubPanel(final GameSubController gameSubController) {
         this.gameSubController = gameSubController;
         
-        this.gameSubController.startTimerSubController();
+        this.gameSubController.startTimerSubController();           //starto il timer
     }
 
     private boolean isMovementCommand(final KeyEvent e) {
@@ -131,6 +136,7 @@ public class GameSubPanel extends AbstractSubPanel {
 
         final JLabel timerJLabel = new JLabel("TIMER");
         southJPanel.add(timerJLabel);
+        southJPanel.add(timerCountdown);
         tmp.add(southJPanel, BorderLayout.SOUTH);
 
         tmp.addKeyListener(new KeyListener() {

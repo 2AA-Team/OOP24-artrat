@@ -47,5 +47,5 @@ public interface SubController {
     void startTimerSubController();
     void resetTimerSubController();
     void stopTimerSubController();
-    void getCurrentTimeController();
+    int getCurrentTimeController();
 }

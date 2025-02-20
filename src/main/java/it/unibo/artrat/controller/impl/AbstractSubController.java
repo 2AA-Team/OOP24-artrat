@@ -79,15 +79,7 @@ public abstract class AbstractSubController implements SubController {
     }
 
     @Override
-    public void getCurrentTimeController(){
-        
-        SwingUtilities.invokeLater(new Runnable(){  
-            
-            @Override
-            public void run(){
-              //  model.getTimer().getCurrentTime();
-            }
-        });
+    public int getCurrentTimeController(){
+        return this.mainController.getCurrentTimeMainController();
     }
-
 }

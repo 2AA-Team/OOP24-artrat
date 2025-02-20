@@ -149,4 +149,8 @@ public class MainControllerImpl implements MainController {
         timer.stopTimer();
     }
 
+    @Override
+    public int getCurrentTimeMainController(){
+        return timer.getCurrentTime();
+    }
 }

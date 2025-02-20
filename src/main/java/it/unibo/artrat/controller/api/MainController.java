@@ -78,4 +78,5 @@ public interface MainController {
     void startTimerMainController();
     void resetTimerMainController();
     void stopTimerMainController();
+    int getCurrentTimeMainController();
 }
