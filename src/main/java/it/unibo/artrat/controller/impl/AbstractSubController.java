@@ -59,7 +59,6 @@ public abstract class AbstractSubController implements SubController {
     @Override
     public void inputMainController(final Command cmd) {
         this.mainController.input(cmd);
-
     }
 
 }
