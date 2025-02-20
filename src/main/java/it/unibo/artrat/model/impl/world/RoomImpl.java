@@ -40,7 +40,7 @@ public final class RoomImpl implements Room {
                 builder.numEnemies,
                 factory::getRandomEnemy));
         roomValues.addAll(builder.valuableStrat.insertMultipleObject(
-                Stream.concat(roomStructure.stream(), roomValues.stream())
+                Stream.concat(roomStructure.stream(), roomEnemies.stream())
                         .collect(Collectors.toSet()),
                 builder.size,
                 builder.numValues,
