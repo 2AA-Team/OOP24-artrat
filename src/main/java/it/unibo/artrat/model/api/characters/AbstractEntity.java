@@ -1,9 +1,11 @@
 package it.unibo.artrat.model.api.characters;
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 import it.unibo.artrat.model.impl.AbstractGameObject;
+import it.unibo.artrat.utils.api.Directions;
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;
 
@@ -67,8 +69,10 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
      */
     @Override
     public void move() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'move'");
+        // final Random rd = new Random();
+        // final var dir = rd.nextInt(Directions.values().length);
+        // final Vector2d v = Directions.values()[dir].vector();
+        // this.setSpeed(v);
     }
 
     /**
