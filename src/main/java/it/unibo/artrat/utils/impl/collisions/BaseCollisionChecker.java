@@ -13,6 +13,7 @@ import it.unibo.artrat.utils.api.commands.Command;
 import it.unibo.artrat.utils.impl.BoundingBoxImpl;
 
 public class BaseCollisionChecker extends AbstractCollisionChecker {
+    private final static long deltaLimit = 30;
 
     public BaseCollisionChecker(double renderDistance) {
         super(renderDistance);
@@ -20,48 +21,53 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
 
     @Override
     public void updateAndCheckPlayer(Command cmd, long delta) {
-        final var model = this.mainController.getModel();
-        final var player = model.getPlayer();
-        final var rollBack = new Lupino(player.getPosition(), new HashSet<>());
+        if (delta < deltaLimit) {
+            final var model = this.mainController.getModel();
+            final var player = model.getPlayer();
+            final var rollBack = new Lupino(player.getPosition(), new HashSet<>());
 
-        if (!Objects.isNull(cmd)) {
-            cmd.execute(player);
-        }
-        player.update(delta);
-        System.out.println(player.getSpeed());
+            if (!Objects.isNull(cmd)) {
+                cmd.execute(player);
+            }
+            player.update(delta);
+            System.out.println(player.getSpeed());
 
-        if (!checkWallCollision(player)) {
-            model.setPlayer(player);
-        } else {
-            model.setPlayer(rollBack);
+            if (!checkWallCollision(player)) {
+                model.setPlayer(player);
+            } else {
+                model.setPlayer(rollBack);
+            }
+            this.mainController.setModel(model);
         }
-        this.mainController.setModel(model);
     }
 
     @Override
     public void updateAndCheckVisibleEnemy(long delta) {
-        final var model = this.mainController.getModel();
-        final var player = model.getPlayer();
-        final Floor floor = model.getFloor();
-        final var enemies = floor.getEnemies();
-        final Set<Enemy> updated = new HashSet<>();
-        final BoundingBox bb = new BoundingBoxImpl(player.getPosition(), renderDistance, renderDistance);
-        for (Enemy e : enemies) {
-            if (bb.isColliding(e.getBoundingBox())) {
-                final Enemy tmp = e;
-                tmp.move();
-                tmp.update(delta);
-                if (!checkWallCollision(tmp)) {
-                    updated.add(tmp);
+        if (delta < deltaLimit) {
+            final var model = this.mainController.getModel();
+            final var player = model.getPlayer();
+            final Floor floor = model.getFloor();
+            final var enemies = floor.getEnemies();
+            final Set<Enemy> updated = new HashSet<>();
+            final BoundingBox bb = new BoundingBoxImpl(player.getPosition(),
+                    renderDistance, renderDistance);
+            for (Enemy e : enemies) {
+                if (bb.isColliding(e.getBoundingBox())) {
+                    final Enemy tmp = e;
+                    tmp.move();
+                    tmp.update(delta);
+                    if (!checkWallCollision(tmp)) {
+                        updated.add(tmp);
+                    } else {
+                        updated.add(e);
+                    }
                 } else {
                     updated.add(e);
                 }
-            } else {
-                updated.add(e);
             }
+            floor.setEnemies(updated);
+            model.setFloor(floor);
         }
-        floor.setEnemies(updated);
-        model.setFloor(floor);
     }
 
     private boolean checkWallCollision(final Entity e) {

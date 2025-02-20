@@ -117,7 +117,6 @@ public final class GameEngineImpl implements GameEngine {
     }
 
     private void update(final long delta) {
-        LOGGER.info("Delta:" + delta);
         collisionChecker.updateAndCheck(mainController, commands.poll(), delta);
     }
 
