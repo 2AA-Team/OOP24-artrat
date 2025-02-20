@@ -16,11 +16,6 @@ public interface WorldTimer {
      * If the player get caught, if he completes the level, or the countdown is over.
      */
     void resetTimer();
-    
-    /**
-     * If we enter in the inventory while playing, the timer stops.
-     */
-    void stopTimer();
 
     /**
      * A boolean which states if the time is out.
@@ -34,9 +29,4 @@ public interface WorldTimer {
      */
     int getCurrentTime();
 
-    /**
-     * 
-     * @return true if the timer is stopped
-     */
-    boolean isPaused();
 }

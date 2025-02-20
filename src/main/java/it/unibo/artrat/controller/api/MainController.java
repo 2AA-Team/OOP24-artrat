@@ -87,13 +87,6 @@ public interface MainController {
     void resetTimerMainController();
 
     /**
-     * This method calls stopTimer in WorldTimerImpl (Model).
-     * 
-     * @author Manuel Benagli
-     */
-    void stopTimerMainController();
-
-    /**
      * This method calls getCurrentTime in WorldTimerImpl (Model).
      * 
      * @return the countdown every second.
