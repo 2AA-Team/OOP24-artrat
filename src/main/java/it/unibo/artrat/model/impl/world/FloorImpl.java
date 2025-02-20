@@ -48,6 +48,17 @@ public class FloorImpl implements Floor {
             "premademaze" + File.separator + "rooms.json");
 
     /**
+     * constructor that set the configuration to base state.
+     */
+    public FloorImpl() {
+        this.maxFloorSize = 2;
+        this.minRoomSize = 1;
+        this.maxRoomSize = 2;
+        this.minFloorSize = 1;
+        this.startPosition = new Point();
+        this.exitPosition = new Point();
+    }
+    /**
      * constructor that set the configuration file path.
      * config file is used to get stantard values.
      * 
@@ -61,6 +72,19 @@ public class FloorImpl implements Floor {
         minRoomSize = rl.getConfig("MIN_ROOM_SIZE");
         validateFloorAndRoomSizes();
     }
+
+    private FloorImpl(final Floor passedFloor) {
+        this.floorValues = passedFloor.getValues();
+        this.floorEnemies = passedFloor.getEnemies();
+        this.floorStructure = passedFloor.getWalls();
+        this.startPosition = passedFloor.getStartPosition();
+        this.exitPosition = passedFloor.getExitPosition();
+        this.maxFloorSize = passedFloor.getMaxFloorSize();
+        this.minFloorSize = passedFloor.getMinFloorSize();
+        this.maxRoomSize =  passedFloor.getMaxRoomSize();
+        this.minRoomSize =  passedFloor.getMinRoomSize();
+    }
+
 
     /**
      * method to test if validate sizes.
@@ -278,6 +302,46 @@ public class FloorImpl implements Floor {
     @Override
     public Point getExitPosition() {
         return Objects.requireNonNull(exitPosition);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Floor copyFloor() {
+        return new FloorImpl(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getMaxFloorSize() {
+        return this.maxFloorSize;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getMinFloorSize() {
+        return this.minFloorSize;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getMaxRoomSize() {
+        return this.maxRoomSize;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getMinRoomSize() {
+        return this.minRoomSize;
     }
 
     // public void print() {

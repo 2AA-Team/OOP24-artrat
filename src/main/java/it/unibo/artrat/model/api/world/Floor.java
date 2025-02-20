@@ -53,4 +53,38 @@ public interface Floor {
      * @return a point representing the position
      */
     Point getExitPosition();
+
+    /**
+     * get the max floor size.
+     * 
+     * @return a double representing the max floor size.
+     */
+    double getMaxFloorSize();
+
+    /**
+     * get the minj floor size.
+     * 
+     * @return a double representing the min floor size.
+     */
+    double getMinFloorSize();
+
+    /**
+     * get the max room size.
+     * 
+     * @return a double representing the max room size.
+     */
+    double getMaxRoomSize();
+
+    /**
+     * get the min room size.
+     * 
+     * @return a double representing the min room size.
+     */
+    double getMinRoomSize();
+
+    /**
+     * Return a copy of the called floor
+     * @return a copy of the called floor.
+     */
+    Floor copyFloor();
 }

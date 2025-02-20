@@ -49,7 +49,7 @@ public class MainViewImpl implements MainView {
      */
     @Override
     public void setController(final MainController observer) {
-        controller = Objects.requireNonNull(observer);
+        this.controller = Objects.requireNonNull(observer);
     }
 
     /**
