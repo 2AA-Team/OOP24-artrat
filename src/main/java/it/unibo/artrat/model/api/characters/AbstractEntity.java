@@ -16,6 +16,7 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
 
     private Set<Vector2d> speed = new HashSet<>();
     private static final double SCALE = 0.01;
+    private double boost = 1.0;
 
     /**
      * Entity constructor.
@@ -85,7 +86,7 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
      */
     @Override
     public void update(final long delta) {
-        this.setPosition(this.getPosition().sum(calculateSpeed().mul(delta * SCALE)));
+        this.setPosition(this.getPosition().sum(calculateSpeed().mul(delta * SCALE * boost)));
     }
 
     /**
@@ -127,6 +128,22 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
     @Override
     public Set<Vector2d> getSpeed() {
         return new HashSet<>(this.speed);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getBoost() {
+        return this.boost;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setBoost(final double passedBoost) {
+        this.boost = passedBoost;
     }
 
 }

@@ -12,6 +12,7 @@ import it.unibo.artrat.model.api.inventory.ItemType;
 public class LuckyTicket extends AbstractItem {
 
     private final Random rd;
+    private static final int MAX_WIN = 1000;
 
      /**
      * A constructor to initialize the new item Lucky Ticket.
@@ -29,7 +30,7 @@ public class LuckyTicket extends AbstractItem {
      */
     @Override
     public Player consume(final Player player) {
-        player.increaseCoins(rd.nextInt(1000));
+        player.increaseCoins(rd.nextInt(MAX_WIN));
         return player.copyPlayer();
     }
 }

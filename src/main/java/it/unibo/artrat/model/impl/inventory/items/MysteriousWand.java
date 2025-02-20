@@ -9,7 +9,9 @@ import it.unibo.artrat.model.impl.inventory.InventoryImpl;
 /**
  * A specific item.
  */
-public class MysteriousStaff extends AbstractItem {
+public class MysteriousWand extends AbstractItem {
+
+    private final String nameOfItem;
 
      /**
      * A constructor to initialize the new item Mysterious Staff.
@@ -17,8 +19,9 @@ public class MysteriousStaff extends AbstractItem {
      * @param price the price of Mysterious Staff.
      * @param itemType the item type of Mysterious Staff.
      */
-    public MysteriousStaff(final String desc, final double price, final ItemType itemType) {
+    public MysteriousWand(final String desc, final double price, final ItemType itemType) {
         super(desc, price, itemType);
+        nameOfItem = this.getClass().getSimpleName();
     }
 
     /**
@@ -27,7 +30,8 @@ public class MysteriousStaff extends AbstractItem {
     @Override
     public Player consume(final Player player) {
         final Inventory inventory = player.getInventory();
-        inventory.getStoredItem().stream().forEach(inventory::addItem);
+        inventory.getStoredItem().stream().filter(x -> !x.getClass().getSimpleName().equals(nameOfItem))
+                                            .forEach(inventory::addItem);
         player.setInventory(new InventoryImpl(inventory));
         return player;
     }

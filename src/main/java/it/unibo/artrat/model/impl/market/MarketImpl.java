@@ -111,8 +111,10 @@ public class MarketImpl implements Market {
                 return itemFactory.luckyTicket();
             case "MAGICBACKPACK":
                 return itemFactory.magicbackpack();
-            case "MYSTERIOUSTAFF":
-                return itemFactory.mysterioustaff();
+            case "MYSTERIOUSWAND":
+                return itemFactory.mysteriouswand();
+            case "WINGEDBOOTS":
+                return itemFactory.wingedboots();
             default:
                 break;
         }

@@ -13,7 +13,8 @@ import it.unibo.artrat.model.api.inventory.ItemFactory;
 import it.unibo.artrat.model.impl.inventory.items.LuckyTicket;
 import it.unibo.artrat.model.impl.inventory.items.MagicBackpack;
 import it.unibo.artrat.model.impl.inventory.items.MultiplierBooster;
-import it.unibo.artrat.model.impl.inventory.items.MysteriousStaff;
+import it.unibo.artrat.model.impl.inventory.items.MysteriousWand;
+import it.unibo.artrat.model.impl.inventory.items.WingedBoots;
 import it.unibo.artrat.utils.api.ItemReader;
 import it.unibo.artrat.utils.impl.ItemReaderImpl;
 
@@ -82,9 +83,19 @@ public class ItemFactoryImpl implements ItemFactory {
      * {@inheritDoc}
      */
     @Override
-    public Item mysterioustaff() {
-        return new MysteriousStaff(itemReader.getDescription("MYSTERIOUSTAFF"), 
-        itemReader.getPrice("MYSTERIOUSTAFF"), 
-        itemReader.getItemType("MYSTERIOUSTAFF"));
+    public Item mysteriouswand() {
+        return new MysteriousWand(itemReader.getDescription("MYSTERIOUSWAND"), 
+        itemReader.getPrice("MYSTERIOUSWAND"), 
+        itemReader.getItemType("MYSTERIOUSWAND"));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Item wingedboots() {
+        return new WingedBoots(itemReader.getDescription("WINGEDBOOTS"), 
+        itemReader.getPrice("WINGEDBOOTS"), 
+        itemReader.getItemType("WINGEDBOOTS"));
     }
 }

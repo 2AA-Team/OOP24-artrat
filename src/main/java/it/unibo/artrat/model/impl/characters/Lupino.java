@@ -137,6 +137,7 @@ public class Lupino extends AbstractEntity implements Player {
     @Override
     public Player copyPlayer() {
         final Player p = new Lupino(this.getPosition(), this.getSpeed());
+        p.setBoost(this.getBoost());
         p.setInventory(this.getInventory());
         p.setCoin(this.getCoin());
         return p;

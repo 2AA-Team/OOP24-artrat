@@ -56,4 +56,17 @@ public interface Entity extends GameObject {
      * @return current speed
      */
     Vector2d calculateSpeed();
+
+    /**
+     * Boost getter.
+     * 
+     * @return current boost speed.
+     */
+    double getBoost();
+
+    /**
+     * Change the current boost with the passed one.
+     * @param passedBoost set this boost.
+     */
+    void setBoost(double passedBoost);
 }

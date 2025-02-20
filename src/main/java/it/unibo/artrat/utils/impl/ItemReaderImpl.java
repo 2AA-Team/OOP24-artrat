@@ -1,5 +1,8 @@
 package it.unibo.artrat.utils.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -21,6 +24,7 @@ import it.unibo.artrat.utils.api.ItemReader;
  */
 public class ItemReaderImpl implements ItemReader {
     private Map<String, List<String>> obj = new HashMap<>();
+    private static final Logger LOGGER = LoggerFactory.getLogger(ItemReaderImpl.class);
 
     /**
      * {@inheritDoc}
@@ -37,13 +41,12 @@ public class ItemReaderImpl implements ItemReader {
         final Object ob = obj.get(conf);
         if (ob instanceof List<?> list) {
             try {
-                List<String> safeList = list.stream()
+                final List<String> safeList = list.stream()
                         .map(e -> Objects.toString(e, null))
                         .toList();
                 return safeList.get(field);
             } catch (IndexOutOfBoundsException e) {
-                throw new IllegalArgumentException("Index out of bounds for element: " +
-                        conf);
+                LOGGER.error("ItemReaderImpl throw an error: ", e);
             }
         }
         throw new IllegalArgumentException(conf + " is not valid list.");
