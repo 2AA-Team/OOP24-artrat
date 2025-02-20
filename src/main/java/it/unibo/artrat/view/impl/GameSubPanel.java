@@ -34,7 +34,7 @@ import it.unibo.artrat.utils.impl.commands.StopMovingUp;
  * game sub panel class.
  */
 public class GameSubPanel extends AbstractSubPanel {
-
+    private static final int ONE_SECOND = 1000;
     private static final Logger LOGGER = LoggerFactory.getLogger(GameSubPanel.class);
     private final GameSubController gameSubController;
     private final GamePanel mapPanel = new GamePanel();
@@ -83,7 +83,7 @@ public class GameSubPanel extends AbstractSubPanel {
             printObject(g, center, playerPos, RoomSymbols.VALUE, gameSubController.getVisiblePaintings());
             printPlayer(g, center);
 
-           timerCountdown.setText(Integer.toString(gameSubController.getCurrentTimeController()));      //aggiorno il timer            
+           timerCountdown.setText(Integer.toString(gameSubController.getCurrentTimeController()/ONE_SECOND));      //aggiorno il timer            
             forceRedraw();
         }
 

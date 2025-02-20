@@ -1,7 +1,6 @@
 package it.unibo.artrat.model.impl;
 
 import it.unibo.artrat.model.api.Model;
-import it.unibo.artrat.model.api.WorldTimer;
 import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.market.Market;
 import it.unibo.artrat.model.api.world.Floor;

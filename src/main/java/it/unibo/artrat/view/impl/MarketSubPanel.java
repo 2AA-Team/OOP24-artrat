@@ -114,10 +114,6 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         upperJPanel.setLayout(new FlowLayout());
         final JButton toMenu = new JButton("BACK");
 
-        final JButton timerButton = new JButton("TIMER");
-        final JButton stoptimerButton = new JButton("STOP");
-        final JButton addTimeButton = new JButton("ADD TIME");
-
         final JComboBox<ItemType> filterComboBox = new JComboBox<>();
         filterComboBox.addItem(ITEMTYPE_ALL);
 
@@ -181,10 +177,6 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
                 contr.setStage(Stage.MENU);
             }
         });
-
-        upperJPanel.add(stoptimerButton);
-        upperJPanel.add(timerButton);
-        upperJPanel.add(addTimeButton);
         
         bottomPan.add(toMenu);
         bottomPan.add(lupinoCash);

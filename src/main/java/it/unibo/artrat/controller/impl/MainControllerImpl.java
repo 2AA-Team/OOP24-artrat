@@ -150,14 +150,6 @@ public class MainControllerImpl implements MainController {
         timer.resetTimer();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void stopTimerMainController() {
-        timer.stopTimer();
-    }
-
     @Override
     public boolean isTimeOutMainController(){
         return timer.isTimeOut();

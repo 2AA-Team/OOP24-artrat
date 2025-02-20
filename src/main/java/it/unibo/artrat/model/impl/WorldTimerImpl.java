@@ -12,7 +12,6 @@ public class WorldTimerImpl implements WorldTimer {
     private static final int DEFAULT_TIMER_SETUP = 10000; // Tempo iniziale
     private static final int ONE_SECOND = 1000;
     private final Timer timer;
-    private boolean isInPause;
     private int countdown;
     private boolean outOfTime;
     private int remainingTime;  // Tempo rimanente che si aggiorna ogni secondo
@@ -25,7 +24,6 @@ public class WorldTimerImpl implements WorldTimer {
     public WorldTimerImpl() {
         this.countdown = DEFAULT_TIMER_SETUP;
         this.timer = new Timer("WorldTimer");
-        this.isInPause = false;
         this.remainingTime = countdown; // Il tempo rimanente è uguale al tempo iniziale
     }
 
@@ -35,7 +33,6 @@ public class WorldTimerImpl implements WorldTimer {
     public WorldTimerImpl(int settedCountdown) {
         this.countdown = settedCountdown;
         this.timer = new Timer("WorldTimer");
-        this.isInPause = false;
         this.remainingTime = countdown;
     }
 
@@ -44,7 +41,6 @@ public class WorldTimerImpl implements WorldTimer {
      */
     @Override
     public void startTimer() {
-        isInPause = false; 
         outOfTime = false;
         currentTask = new TimerTask() {
             
@@ -72,29 +68,7 @@ public class WorldTimerImpl implements WorldTimer {
      */
     @Override
     public int getCurrentTime(){
-        return remainingTime/ONE_SECOND;
-    }
-
-    /**
-     * 
-     */
-    @Override
-    public void stopTimer() {
-        if (!isInPause) {
-            isInPause = true;
-            //remainingTime = countdown;  // Salva il tempo rimanente
-            currentTask.cancel();  // Annulla il task corrente
-            System.out.println("TIMER IN PAUSA");
-        }
-    }
-
-    /**
-     * This method is useful on JUnit TimerTest.
-     * @return true if during the game we switch to InventorySubPanel, false otherwise.
-     */
-    @Override
-    public boolean isPaused() {
-        return isInPause;
+        return remainingTime;
     }
 
     /**
@@ -107,7 +81,6 @@ public class WorldTimerImpl implements WorldTimer {
         }
         countdown = DEFAULT_TIMER_SETUP;  // Ripristina il countdown iniziale
         remainingTime = countdown;  // Ripristina il tempo rimanente
-        isInPause = false;  // Torna alla modalità di gioco normale
         System.out.println("TIMER RESETTATO");
     }
 

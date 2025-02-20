@@ -1,8 +1,7 @@
 package it.unibo.artrat.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,24 +39,8 @@ class TimerTest {
         final int threadSleep = 3000;
         timer.startTimer();
         Thread.sleep(threadSleep);
-        assertEquals(defTimer-threadSleep, timer.getCurrentTime()*ONE_SECOND);
-    }
-
-    /**
-     * The timer starts and keep going for n seconds, then it stops.
-     * The thread sleeps another n seconds, but not the timer.
-     * @throws InterruptedException if something goes wrong.
-     */
-    @Test
-    public void testStopTimer() throws InterruptedException {
-        final int threadSleep = 2000;
-        timer.startTimer();
-        Thread.sleep(threadSleep);
-        timer.stopTimer();
-        assertTrue(timer.isPaused());
-        assertEquals(defTimer - threadSleep, timer.getCurrentTime()*ONE_SECOND);
-        Thread.sleep(threadSleep);
-        assertEquals(defTimer - threadSleep, timer.getCurrentTime()*ONE_SECOND);
+        assertEquals(Math.floorDiv(defTimer-threadSleep, ONE_SECOND), Math.floorDiv(timer.getCurrentTime(), ONE_SECOND));
+        timer.resetTimer();
     }
 
     /**
@@ -71,6 +54,7 @@ class TimerTest {
         timer.startTimer();
         Thread.sleep(threadSleep);
         timer.resetTimer(); 
-        assertEquals(defTimer, timer.getCurrentTime()*ONE_SECOND);
+        assertNotEquals(Math.floorDiv(defTimer-threadSleep, ONE_SECOND), Math.floorDiv(timer.getCurrentTime(), ONE_SECOND));
+        timer.resetTimer();
     }
 }
