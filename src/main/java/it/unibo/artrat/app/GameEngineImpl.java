@@ -78,7 +78,6 @@ public final class GameEngineImpl implements GameEngine {
         long lastTime;
         while (status.equals(GameStatus.RUNNING)) {
             lastTime = System.currentTimeMillis();
-
             this.update(delta);
             this.redraw();
             delta = updateDeltaTime(lastTime, drawInterval);
@@ -116,15 +115,20 @@ public final class GameEngineImpl implements GameEngine {
     }
 
     private void update(final long delta) {
-        final var cmd = this.commands.poll();
+        final Command cmd = this.commands.poll();
         final var model = this.mainController.getModel();
         final var player = model.getPlayer();
         if (!Objects.isNull(cmd)) {
             cmd.execute(player);
-            player.update(delta);
-            model.setPlayer(player);
-            this.mainController.setModel(model);
         }
+        player.update(delta);
+        System.out.println(player.getSpeed());
+        final boolean tuma = this.mainController.getModel().getFloor().getWalls().stream()
+                .anyMatch(x -> x.getBoundingBox().isColliding(player.getBoundingBox()));
+        if (!tuma) {
+            model.setPlayer(player);
+        }
+        this.mainController.setModel(model);
     }
 
     /**
@@ -141,7 +145,7 @@ public final class GameEngineImpl implements GameEngine {
     @Override
     public void forceStart() {
         this.status = GameStatus.RUNNING;
-        Thread.ofPlatform().daemon().start(this::mainLoop);
+        new Thread(this::mainLoop, "GameLoopThread").start();
     }
 
     @Override

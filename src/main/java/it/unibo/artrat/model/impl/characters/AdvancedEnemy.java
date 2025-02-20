@@ -54,15 +54,6 @@ public final class AdvancedEnemy extends AbstractEntity implements Enemy {
         throw new UnsupportedOperationException("Unimplemented method 'interact'");
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void redraw() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'redraw'");
-    }
-
     @Override
     public void follow(final Player p) {
         // TODO Auto-generated method stub

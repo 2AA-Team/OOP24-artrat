@@ -26,5 +26,4 @@ public interface ResourceLoader<I, O> {
      * @throws IOException if configPath not represent anything
      */
     void setConfigPath(URI configPath) throws IOException;
-
 }

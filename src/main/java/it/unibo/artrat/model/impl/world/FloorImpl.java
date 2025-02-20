@@ -42,10 +42,22 @@ public class FloorImpl implements Floor {
     private final double minFloorSize;
     private final double minRoomSize;
     private Point startPosition;
-    private Point exitPosition;
+    private AbstractGameObject exit;
 
     private final URL roomPath = Thread.currentThread().getContextClassLoader().getResource(
             "premademaze" + File.separator + "rooms.json");
+
+    /**
+     * constructor that set the configuration to base state.
+     */
+    public FloorImpl() {
+        this.maxFloorSize = 2;
+        this.minRoomSize = 1;
+        this.maxRoomSize = 2;
+        this.minFloorSize = 1;
+        this.startPosition = new Point();
+        this.exit = new Exit(0, 0);
+    }
 
     /**
      * constructor that set the configuration file path.
@@ -62,18 +74,42 @@ public class FloorImpl implements Floor {
         validateFloorAndRoomSizes();
     }
 
+    private FloorImpl(final Floor passedFloor) {
+        this.floorValues = passedFloor.getValues();
+        this.floorEnemies = passedFloor.getEnemies();
+        this.floorStructure = passedFloor.getWalls();
+        this.startPosition = passedFloor.getStartPosition();
+        this.exit = passedFloor.getExit();
+        this.maxFloorSize = passedFloor.getMaxFloorSize();
+        this.minFloorSize = passedFloor.getMinFloorSize();
+        this.maxRoomSize = passedFloor.getMaxRoomSize();
+        this.minRoomSize = passedFloor.getMinRoomSize();
+    }
+
     /**
      * method to test if validate sizes.
      * 
      * @throws IOException if size of the room or floor are not valid
      */
     private void validateFloorAndRoomSizes() throws IOException {
-        final int upperBound = 100;
-        if (maxFloorSize >= upperBound) {
-            throw new IOException("Please MAX_FLOOR_SIZE must be under " + upperBound);
+        final int upperBoundFloor = 100;
+        if (maxFloorSize >= upperBoundFloor) {
+            throw new IOException("Please MAX_FLOOR_SIZE must be less of " + upperBoundFloor);
         }
-        if (maxFloorSize <= 1 || maxRoomSize <= 4 || minFloorSize >= maxFloorSize || minRoomSize >= maxRoomSize) {
-            throw new IOException("Floor or Room size has been modified.");
+        final int upperBoundRoom = 14;
+        if (maxRoomSize >= upperBoundRoom) {
+            throw new IOException("Please MAX_ROOM_SIZE must be less of " + upperBoundRoom);
+        }
+        final int lowerBoundFloor = 1;
+        if (minFloorSize <= lowerBoundFloor) {
+            throw new IOException("Please MIN_FLOOR_SIZE must be greater of " + lowerBoundFloor);
+        }
+        final int lowerBoundRoom = 6;
+        if (minRoomSize <= lowerBoundRoom) {
+            throw new IOException("Please MIN_FLOOR_SIZE must be greater of " + lowerBoundRoom);
+        }
+        if (minFloorSize >= maxFloorSize || minRoomSize >= maxRoomSize) {
+            throw new IOException("Invalid range for apartment generation.");
         }
     }
 
@@ -106,6 +142,7 @@ public class FloorImpl implements Floor {
      */
     @Override
     public void generateFloorSet() throws IOException {
+        this.validateFloorAndRoomSizes();
         floorStructure = new HashSet<>();
         floorEnemies = new HashSet<>();
         floorValues = new HashSet<>();
@@ -199,8 +236,8 @@ public class FloorImpl implements Floor {
     private void setExitPosition(final int x, final int y, final int roomSize) {
         final double tmpX = x * roomSize + Math.floor((double) roomSize / 2);
         final double tmpY = y * roomSize + roomSize - 1;
-        exitPosition = new Point(tmpX, tmpY);
-        this.floorStructure.removeIf((o) -> o.getPosition().equals(exitPosition));
+        exit = new Exit(tmpX, tmpY);
+        this.floorStructure.removeIf((o) -> o.getPosition().equals(exit.getPosition()));
     }
 
     /**
@@ -276,8 +313,45 @@ public class FloorImpl implements Floor {
      * {@inheritDoc}
      */
     @Override
-    public Point getExitPosition() {
-        return Objects.requireNonNull(exitPosition);
+    public Floor copyFloor() {
+        return new FloorImpl(this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getMaxFloorSize() {
+        return this.maxFloorSize;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getMinFloorSize() {
+        return this.minFloorSize;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getMaxRoomSize() {
+        return this.maxRoomSize;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getMinRoomSize() {
+        return this.minRoomSize;
+    }
+
+    @Override
+    public AbstractGameObject getExit() {
+        return this.exit;
     }
 
     // public void print() {

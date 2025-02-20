@@ -9,6 +9,9 @@ import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.impl.characters.AdvancedEnemy;
 import it.unibo.artrat.model.impl.characters.BaseEnemy;
 import it.unibo.artrat.model.impl.characters.Lupino;
+import it.unibo.artrat.model.impl.world.Exit;
+import it.unibo.artrat.model.impl.world.Picture;
+import it.unibo.artrat.model.impl.world.Wall;
 import it.unibo.artrat.utils.impl.Point;
 
 /**
@@ -23,23 +26,7 @@ public class GameObjectFactoryImpl implements GameObjectFactory {
      */
     @Override
     public AbstractGameObject getWall(final int x, final int y) {
-        final AbstractGameObject a = new AbstractGameObject() {
-
-            @Override
-            public void redraw() {
-                // TODO Auto-generated method stub
-                throw new UnsupportedOperationException("Unimplemented method 'redraw'");
-            }
-
-            @Override
-            public void update(final long delta) {
-                // TODO Auto-generated method stub
-                throw new UnsupportedOperationException("Unimplemented method 'update'");
-            }
-
-        };
-        a.setPosition(new Point(x, y));
-        return a;
+        return new Wall(x, y);
     }
 
     /**
@@ -72,8 +59,16 @@ public class GameObjectFactoryImpl implements GameObjectFactory {
      * {@inheritDoc}
      */
     @Override
-    public AbstractGameObject getValue(final int x, final int y) {
-        return getWall(x, y);
+    public AbstractGameObject getPicture(final int x, final int y) {
+        return new Picture(x, y);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public AbstractGameObject getExit(final int x, final int y) {
+        return new Exit(x, y);
     }
 
 }

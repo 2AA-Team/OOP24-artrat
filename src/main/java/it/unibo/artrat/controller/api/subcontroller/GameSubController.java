@@ -51,4 +51,11 @@ public interface GameSubController extends SubController {
      * @return a set of points
      */
     Set<Point> getVisiblePaintings();
+
+
+    /**
+     * Initialize the game resources.
+     */
+    void init();
+
 }

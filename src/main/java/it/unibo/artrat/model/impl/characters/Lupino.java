@@ -77,15 +77,6 @@ public class Lupino extends AbstractEntity implements Player {
      * {@inheritDoc}
      */
     @Override
-    public void redraw() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'redraw'");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public Inventory getInventory() {
         return new InventoryImpl(this.inventory);
     }

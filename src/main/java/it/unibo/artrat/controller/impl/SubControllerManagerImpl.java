@@ -45,7 +45,10 @@ public class SubControllerManagerImpl implements SubControllerManager {
      */
     @Override
     public GameSubController getGameSubController() {
-        return Objects.requireNonNull(this.gameSubController);
+        final var help = Objects.requireNonNull(this.gameSubController);
+        help.init();
+        return help;
+
     }
 
     /**

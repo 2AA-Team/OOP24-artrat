@@ -43,5 +43,14 @@ public interface GameObjectFactory {
      * @param y y position
      * @return the game object for the valuable object
      */
-    AbstractGameObject getValue(int x, int y);
+    AbstractGameObject getPicture(int x, int y);
+
+    /**
+     * create a new exit.
+     * 
+     * @param x x position
+     * @param y y position
+     * @return the game object for the exit
+     */
+    AbstractGameObject getExit(int x, int y);
 }

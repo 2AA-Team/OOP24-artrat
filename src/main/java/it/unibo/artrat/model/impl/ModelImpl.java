@@ -4,8 +4,10 @@ import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.api.WorldTimer;
 import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.market.Market;
+import it.unibo.artrat.model.api.world.Floor;
 import it.unibo.artrat.model.impl.characters.Lupino;
 import it.unibo.artrat.model.impl.market.MarketImpl;
+import it.unibo.artrat.model.impl.world.FloorImpl;
 import it.unibo.artrat.utils.impl.Point;
 
 /**
@@ -14,6 +16,7 @@ import it.unibo.artrat.utils.impl.Point;
 public class ModelImpl implements Model {
     private Player player;
     private Market market;
+    private Floor floor;
 
     /**
      * Permit to create a new istance of Model.
@@ -21,6 +24,7 @@ public class ModelImpl implements Model {
     public ModelImpl() {
         this.player = new Lupino(new Point(), new Point());
         this.market = new MarketImpl();
+        this.floor = new FloorImpl();
         this.market.initMarket();
 
     }
@@ -33,6 +37,7 @@ public class ModelImpl implements Model {
     public ModelImpl(final Model m) {
         this.player = m.getPlayer();
         this.market = m.getMarket();
+        this.floor = m.getFloor();
     }
 
     /**
@@ -66,4 +71,21 @@ public class ModelImpl implements Model {
     public void setMarket(final Market market) {
         this.market = new MarketImpl(market);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Floor getFloor() {
+        return this.floor.copyFloor();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setFloor(final Floor passedFloor) {
+        this.floor = passedFloor.copyFloor();
+    }
+
 }

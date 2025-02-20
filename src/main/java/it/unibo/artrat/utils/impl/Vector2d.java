@@ -19,6 +19,11 @@ public record Vector2d(double x, double y) {
         this(0, 0);
     }
 
+    public Vector2d(final Point p1, final Point p2) {
+        this(p2.getX() - p1.getX(), p2.getY() - p1.getY());
+
+    }
+
     /**
      * Multiplication of a vector2d.
      * 
