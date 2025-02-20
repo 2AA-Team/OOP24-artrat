@@ -187,7 +187,7 @@ public class FloorImpl implements Floor {
      * @throws IOException if link for the rooms json doesnt exist
      */
     private void generateEffectiveRooms(final int roomSize) throws IOException {
-        final int maxEnemyInARoom = 3;
+        final int maxEnemyInARoom = 2;
         final int minEnemyInARoom = 1;
         final int maxPaintingsInARoom = 4;
         final int minPaintingsInARoom = 1;
@@ -358,6 +358,11 @@ public class FloorImpl implements Floor {
     @Override
     public GameObject getExit() {
         return this.exit.clone();
+    }
+
+    @Override
+    public void setEnemies(Set<Enemy> enemies) {
+        this.floorEnemies = new HashSet<>(enemies);
     }
 
     // public void print() {

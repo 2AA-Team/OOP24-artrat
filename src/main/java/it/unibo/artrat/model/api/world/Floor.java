@@ -88,4 +88,10 @@ public interface Floor {
      * @return a copy of the called floor.
      */
     Floor copyFloor();
+
+    /**
+     * setter for all enemies.
+     * 
+     */
+    void setEnemies(Set<Enemy> enemies);
 }
