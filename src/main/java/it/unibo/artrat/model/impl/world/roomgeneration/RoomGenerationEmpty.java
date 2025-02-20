@@ -4,9 +4,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.GameObjectFactory;
 import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;
-import it.unibo.artrat.model.impl.AbstractGameObject;
 import it.unibo.artrat.model.impl.GameObjectFactoryImpl;
 
 /**
@@ -18,7 +18,7 @@ public class RoomGenerationEmpty implements RoomGenerationStrategy {
      * {@inheritDoc}
      */
     @Override
-    public Set<AbstractGameObject> generateRoomSet(final int size) {
+    public Set<GameObject> generateRoomSet(final int size) {
         final GameObjectFactory factory = new GameObjectFactoryImpl();
         return IntStream.range(0, size)
                 .boxed()

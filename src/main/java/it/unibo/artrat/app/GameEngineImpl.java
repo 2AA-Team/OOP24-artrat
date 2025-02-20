@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -14,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import it.unibo.artrat.app.api.GameEngine;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
+import it.unibo.artrat.model.impl.characters.Lupino;
 import it.unibo.artrat.utils.api.ResourceLoader;
 import it.unibo.artrat.utils.api.commands.Command;
 import it.unibo.artrat.utils.impl.Converter;
@@ -116,6 +118,7 @@ public final class GameEngineImpl implements GameEngine {
         final Command cmd = this.commands.poll();
         final var model = this.mainController.getModel();
         final var player = model.getPlayer();
+        final var rollBack = new Lupino(player.getPosition(), new HashSet<>());
         if (!Objects.isNull(cmd)) {
             cmd.execute(player);
         }
@@ -125,6 +128,8 @@ public final class GameEngineImpl implements GameEngine {
                 .anyMatch(x -> x.getBoundingBox().isColliding(player.getBoundingBox()));
         if (!tuma) {
             model.setPlayer(player);
+        } else {
+            model.setPlayer(rollBack);
         }
         this.mainController.setModel(model);
     }

@@ -1,5 +1,6 @@
 package it.unibo.artrat.model.impl.characters;
 
+import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
@@ -20,6 +21,11 @@ import it.unibo.artrat.utils.impl.Vector2d;
 public final class BaseEnemy extends AbstractEntity implements Enemy {
     private final Random rd = new Random();
     private final BoundingBox fieldOfView;
+
+    public BaseEnemy(final Point center, final double width, final double height) {
+        super(center, width, height, new HashSet<>());
+        fieldOfView = new BoundingBoxImpl(center, width, height);
+    }
 
     /**
      * Base enemy constructor.

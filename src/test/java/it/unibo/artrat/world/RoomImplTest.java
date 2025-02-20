@@ -5,15 +5,18 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.Set;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import it.unibo.artrat.model.api.characters.AbstractEntity;
-import it.unibo.artrat.model.impl.AbstractGameObject;
+
+import it.unibo.artrat.model.api.GameObject;
+import it.unibo.artrat.model.api.characters.Enemy;
 import it.unibo.artrat.model.api.world.Room;
-import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationEmpty;
 import it.unibo.artrat.model.impl.world.RoomImpl;
 import it.unibo.artrat.model.impl.world.roomgeneration.ObjectInsertionRandom;
+import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationEmpty;
 
 class RoomImplTest {
 
@@ -37,17 +40,17 @@ class RoomImplTest {
     void testRoomCreation() {
         assertNotNull(room, "The RoomImpl object should not be null");
         assertNotNull(room.getStructure(), "Room structure should not be null");
-        final Set<AbstractEntity> enemies = room.getEnemies();
+        final Set<Enemy> enemies = room.getEnemies();
         assertNotNull(enemies, "Room enemies set should not be null");
         assertEquals(2, enemies.size(), "The number of enemies should be as set in the builder");
-        final Set<AbstractGameObject> values = room.getValues();
+        final Set<GameObject> values = room.getValues();
         assertNotNull(values, "Room values set should not be null");
         assertEquals(3, values.size(), "The number of values should match what was set in the builder");
     }
 
     @Test
     void testRoomPassages() {
-        final Set<AbstractGameObject> structure = room.getStructure();
+        final Set<GameObject> structure = room.getStructure();
         final long upWalls = structure.stream()
                 .filter(obj -> obj.getPosition().getY() == 0).count();
         final long rightWalls = structure.stream()

@@ -7,10 +7,10 @@ import java.util.stream.Collectors;
 import it.unibo.artrat.controller.api.subcontroller.GameSubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
+import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.world.Floor;
-import it.unibo.artrat.model.impl.AbstractGameObject;
 import it.unibo.artrat.model.impl.world.FloorImpl;
 import it.unibo.artrat.utils.api.BoundingBox;
 import it.unibo.artrat.utils.api.ResourceLoader;
@@ -47,7 +47,7 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
     public Set<Point> getVisibleWallPositions() {
         final BoundingBox bb = new BoundingBoxImpl(getPlayerPos(), renderDistance, renderDistance);
         return this.getModel().getFloor().getWalls().stream().filter(x -> bb.isColliding(x.getBoundingBox()))
-                .map(AbstractGameObject::getPosition).collect(Collectors.toSet());
+                .map(GameObject::getPosition).collect(Collectors.toSet());
     }
 
     /**
@@ -57,7 +57,7 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
     public Set<Point> getVisibleEnemyPositions() {
         final BoundingBox bb = new BoundingBoxImpl(getPlayerPos(), renderDistance, renderDistance);
         return this.getModel().getFloor().getEnemies().stream().filter(x -> bb.isColliding(x.getBoundingBox()))
-                .map(AbstractGameObject::getPosition).collect(Collectors.toSet());
+                .map(GameObject::getPosition).collect(Collectors.toSet());
     }
 
     /**
@@ -83,7 +83,7 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
     public Set<Point> getVisiblePaintings() {
         final BoundingBox bb = new BoundingBoxImpl(getPlayerPos(), renderDistance, renderDistance);
         return this.getModel().getFloor().getValues().stream().filter(x -> bb.isColliding(x.getBoundingBox()))
-                .map(AbstractGameObject::getPosition).collect(Collectors.toSet());
+                .map(GameObject::getPosition).collect(Collectors.toSet());
     }
 
     /**
