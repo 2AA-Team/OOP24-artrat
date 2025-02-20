@@ -134,23 +134,35 @@ public class MainControllerImpl implements MainController {
         this.engine.notifyCommand(cmd);
     }
 
+    /**
+     *  {@inheritDoc}
+     */
     @Override
     public void startTimerMainController(){
         timer.startTimer();
     }
 
+    /**
+     *  {@inheritDoc}
+     */
     @Override
-    public void resetTimerMainController(){
+    public void resetTimerMainController() {
         timer.resetTimer();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void stopTimerMainController(){
+    public void stopTimerMainController() {
         timer.stopTimer();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public int getCurrentTimeMainController(){
+    public int getCurrentTimeMainController() {
         return timer.getCurrentTime();
     }
 }

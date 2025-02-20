@@ -72,11 +72,32 @@ public interface MainController {
      */
     void input(Command cmd);
 
-
-
-
+    /**
+     * This method calls startTimer in WorldTimerImpl (Model).
+     * 
+     * @author Manuel Benagli
+     */
     void startTimerMainController();
+
+    /**
+     * This method calls resetTimer in WorldTimerImpl (Model).
+     * 
+     * @author Manuel Benagli
+     */
     void resetTimerMainController();
+
+    /**
+     * This method calls stopTimer in WorldTimerImpl (Model).
+     * 
+     * @author Manuel Benagli
+     */
     void stopTimerMainController();
+
+    /**
+     * This method calls getCurrentTime in WorldTimerImpl (Model).
+     * 
+     * @return the countdown every second.
+     * @author Manuel Benagli
+     */
     int getCurrentTimeMainController();
 }

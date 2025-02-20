@@ -67,7 +67,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     }
 
     /**
-     * 
+     * initComponents method.
      */
     @Override
     public void initComponents() {
@@ -104,7 +104,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     }
 
     /**
-     * 
+     * setShop method.
      */
     private void setShop() {
         final JButton sortButton = new JButton("Sort");
@@ -114,11 +114,9 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         upperJPanel.setLayout(new FlowLayout());
         final JButton toMenu = new JButton("BACK");
 
-
         final JButton timerButton = new JButton("TIMER");
         final JButton stoptimerButton = new JButton("STOP");
         final JButton addTimeButton = new JButton("ADD TIME");
-        
 
         final JComboBox<ItemType> filterComboBox = new JComboBox<>();
         filterComboBox.addItem(ITEMTYPE_ALL);
@@ -150,32 +148,29 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
          */
         searchItemField.getDocument().addDocumentListener(new DocumentListener() {
 
+            /* 
+             * I call itemSearch method at every character inserted into the search field.
+            */
             @Override
             public void insertUpdate(final DocumentEvent doc) {
                 itemSearch(searchItemField.getText().trim().toLowerCase(Locale.ROOT));
             }
 
+            /* 
+             * I call itemSearch method at every character removed into the search field.
+            */
             @Override
             public void removeUpdate(final DocumentEvent doc) {
                 itemSearch(searchItemField.getText().trim().toLowerCase(Locale.ROOT));
             }
 
+            /* 
+             * I call itemSearch method at every changed update.
+            */
             @Override
             public void changedUpdate(final DocumentEvent doc) {
                 itemSearch(searchItemField.getText().trim().toLowerCase(Locale.ROOT));
             }
-        });
-
-        addTimeButton.addActionListener(e->{
-            //oseivsoivjsoivjsovijsd
-        });
-
-        stoptimerButton.addActionListener(e->{
-            //      sodivnsdovinsdvoisn
-        });
-
-        timerButton.addActionListener(e->{
-            //      sodivsdovisdvoi
         });
 
         toMenu.addActionListener(e -> {
@@ -187,12 +182,10 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
             }
         });
 
-
         upperJPanel.add(stoptimerButton);
         upperJPanel.add(timerButton);
         upperJPanel.add(addTimeButton);
-
-
+        
         bottomPan.add(toMenu);
         bottomPan.add(lupinoCash);
         marketPanel.add(bottomPan, BorderLayout.SOUTH);
@@ -208,7 +201,10 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
 
     /**
      * This method reads from my StoreSubControllerImpl a list of purchasableItems.
-     * For every item I read, I create a nel panel, with 
+     * For every item I read, I create a nel panel, with three labels (item name, item type,
+     * item price) and a button to buy it
+     * The purchasableItems are read using ItemReaderImpl.
+     * When I buy an item, if the item is a powerup, the item is cancelled in the market.
      */
     private void allItemsSetup() {
         purchItemPanel.removeAll();
@@ -232,6 +228,9 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
                         contr.getModel().getMarket().getPurchItems().remove(purchItem);
                         purchItemPanel.remove(itemPanel);
                     }
+                    /*itemSearch is also called here to fix bugs (specially if I buy a powerup and the item 
+                     * is removed from the shop).
+                    */
                     itemSearch(searchItemField.getText().trim().toLowerCase(Locale.ROOT));
                     forceRedraw();
                     updateCoinLabel();

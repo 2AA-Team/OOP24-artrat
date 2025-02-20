@@ -29,7 +29,7 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
 
     /**
      * constructor to initialize mainController.
-     * 
+     * itemMan will be used to connect this controller into ItemManagerImpl.
      * @param mainController main controller
      */
     public StoreSubControllerImpl(final MainControllerImpl mainController) {
@@ -55,6 +55,13 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     }
 
 
+    /*
+     * This private method is essential to the currect update of my item list int the MarketSubPanel.
+     * This method is called every time I call filterCategory and searchItem.
+     * Considering that searchItem is called with with every character inserted or removed,
+     * BUT ALSO WITH EVERY GENERAL MODIFICATION (changedUpdate method),
+     *  the update performs at its maximum
+    */
     private void updateCurrentItem() {
         this.currenItems = new ArrayList<>(this.getModel().getMarket().getPurchItems());
     }

@@ -47,6 +47,8 @@ public class WorldTimerImpl implements WorldTimer {
     @Override
     public void startTimer() {
         isInPause = false;
+        
+        
         currentTask = new TimerTask() {
             
             @Override
