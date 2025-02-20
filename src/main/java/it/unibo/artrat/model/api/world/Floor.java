@@ -83,7 +83,8 @@ public interface Floor {
     double getMinRoomSize();
 
     /**
-     * Return a copy of the called floor
+     * Return a copy of the called floor.
+     * 
      * @return a copy of the called floor.
      */
     Floor copyFloor();

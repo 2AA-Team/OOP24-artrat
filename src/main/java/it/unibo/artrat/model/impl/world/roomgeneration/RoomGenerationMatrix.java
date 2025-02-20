@@ -31,7 +31,7 @@ public class RoomGenerationMatrix implements RoomGenerationStrategy {
                 true, true, true, true, false);
         final Set<Integer> column = new HashSet<>();
         final Set<Integer> rows = new HashSet<>();
-        while (column.size() == 0 && rows.size() == 0) {
+        while (column.isEmpty() || rows.isEmpty()) {
             for (int i = 1; i < size - 1; i++) {
                 if (probabilities.get(RANDOM.nextInt(probabilities.size()))) {
                     column.add(i);

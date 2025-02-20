@@ -152,7 +152,6 @@ public class GameSubPanel extends AbstractSubPanel {
                         case LEFT -> gameSubController.inputMainController(new StopMovingLeft());
                         default -> LOGGER.info("Tasto premuto non gestito: " + e.getKeyCode());
                     }
-                } else {
                 }
             }
         });

@@ -9,6 +9,7 @@ import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.impl.characters.AdvancedEnemy;
 import it.unibo.artrat.model.impl.characters.BaseEnemy;
 import it.unibo.artrat.model.impl.characters.Lupino;
+import it.unibo.artrat.model.impl.world.Exit;
 import it.unibo.artrat.model.impl.world.Picture;
 import it.unibo.artrat.model.impl.world.Wall;
 import it.unibo.artrat.utils.impl.Point;
@@ -60,6 +61,14 @@ public class GameObjectFactoryImpl implements GameObjectFactory {
     @Override
     public AbstractGameObject getPicture(final int x, final int y) {
         return new Picture(x, y);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public AbstractGameObject getExit(final int x, final int y) {
+        return new Exit(x, y);
     }
 
 }

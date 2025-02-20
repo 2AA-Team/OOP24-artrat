@@ -93,18 +93,18 @@ public class FloorImpl implements Floor {
      */
     private void validateFloorAndRoomSizes() throws IOException {
         final int upperBoundFloor = 100;
-        final int upperBoundRoom = 14;
-        final int lowerBoundFloor = 1;
-        final int lowerBoundRoom = 6;
         if (maxFloorSize >= upperBoundFloor) {
             throw new IOException("Please MAX_FLOOR_SIZE must be less of " + upperBoundFloor);
         }
+        final int upperBoundRoom = 14;
         if (maxRoomSize >= upperBoundRoom) {
             throw new IOException("Please MAX_ROOM_SIZE must be less of " + upperBoundRoom);
         }
+        final int lowerBoundFloor = 1;
         if (minFloorSize <= lowerBoundFloor) {
             throw new IOException("Please MIN_FLOOR_SIZE must be greater of " + lowerBoundFloor);
         }
+        final int lowerBoundRoom = 6;
         if (minRoomSize <= lowerBoundRoom) {
             throw new IOException("Please MIN_FLOOR_SIZE must be greater of " + lowerBoundRoom);
         }

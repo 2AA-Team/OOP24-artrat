@@ -70,7 +70,7 @@ public class ModelImpl implements Model {
         this.market = new MarketImpl(market);
     }
 
-      /**
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -84,5 +84,6 @@ public class ModelImpl implements Model {
     @Override
     public void setFloor(final Floor passedFloor) {
         this.floor = passedFloor.copyFloor();
-    }    
+    }
+
 }

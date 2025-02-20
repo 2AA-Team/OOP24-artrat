@@ -39,11 +39,16 @@ public interface Entity extends GameObject {
     /**
      * Add direction to current movements.
      * 
-     * @param v
+     * @param v vector to add
      */
     void addDirection(Vector2d v);
 
-    void removeDirection(final Vector2d v);
+    /**
+     * Remove direction to current movements.
+     * 
+     * @param v vector to remove
+     */
+    void removeDirection(Vector2d v);
 
     /**
      * Directions sum.

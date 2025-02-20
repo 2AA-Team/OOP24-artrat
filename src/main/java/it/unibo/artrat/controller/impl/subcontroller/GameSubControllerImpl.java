@@ -99,10 +99,10 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
      */
     @Override
     public void init() {
-        Model model = this.getModel();
+        final Model model = this.getModel();
         model.setFloor(this.floor);
         final Player player = model.getPlayer();
-        player.setPosition(this.floor.getStartPosition()); 
+        player.setPosition(this.floor.getStartPosition());
         model.setPlayer(player);
         this.updateCentralizeModel(model);
     }

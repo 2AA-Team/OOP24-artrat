@@ -4,9 +4,9 @@ import it.unibo.artrat.model.impl.AbstractGameObject;
 import it.unibo.artrat.utils.impl.Point;
 
 /**
- * class that represents wall gameobject.
+ * class to represent exit door.
  */
-public class Wall extends AbstractGameObject {
+public class Exit extends AbstractGameObject {
 
     /**
      * constructor that specify center and puts hitbox at 1.
@@ -14,7 +14,7 @@ public class Wall extends AbstractGameObject {
      * @param x x coordinate
      * @param y y coordinate
      */
-    public Wall(final double x, final double y) {
+    public Exit(final double x, final double y) {
         super(new Point(x, y), 1, 1);
     }
 
