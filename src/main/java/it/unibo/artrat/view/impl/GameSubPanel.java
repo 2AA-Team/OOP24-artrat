@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.slf4j.Logger;
@@ -120,8 +122,12 @@ public class GameSubPanel extends AbstractSubPanel {
     @Override
     public void initComponents() {
         final JPanel tmp = new JPanel();
+        final JPanel southJPanel = new JPanel();
         tmp.setLayout(new BorderLayout());
         tmp.add(this.mapPanel, BorderLayout.CENTER);
+        final JLabel timerJLabel = new JLabel("TIMER");
+        southJPanel.add(timerJLabel);
+        tmp.add(southJPanel, BorderLayout.SOUTH);
         setPanel(tmp);
     }
 

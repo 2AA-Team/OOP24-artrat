@@ -9,7 +9,7 @@ import java.util.TimerTask;
  * @author Manuel Benagli
  */
 public class WorldTimerImpl implements WorldTimer {
-    private static final int DEFAULT_TIMER_SETUP = 5000; // Tempo iniziale
+    private static final int DEFAULT_TIMER_SETUP = 120000; // Tempo iniziale
     private static final int ONE_SECOND = 1000;
     private final Timer timer;
     private boolean isInPause;
@@ -46,12 +46,13 @@ public class WorldTimerImpl implements WorldTimer {
     public void startTimer() {
         isInPause = false;
         currentTask = new TimerTask() {
+            
             @Override
             public void run() {
                 // La logica del game over quando il timer finisce
                 if (remainingTime > ONE_SECOND) {
-                    System.out.println("IN CORSO");
                     remainingTime -= ONE_SECOND;
+                    System.out.println("IN CORSO  " + remainingTime/1000);
                     //da mettere poi la logica
                 } else {
                     outOfTime = true;
@@ -61,6 +62,7 @@ public class WorldTimerImpl implements WorldTimer {
         };
         // Riavvia il timer dal tempo rimanente
         timer.scheduleAtFixedRate(currentTask, 0, ONE_SECOND);
+        //con 1 second di settaggio prevengo problemi con eventi
         System.out.println("TIMER STARTATO");
     }
 
@@ -84,14 +86,6 @@ public class WorldTimerImpl implements WorldTimer {
     @Override
     public boolean isPaused() {
         return isInPause;
-    }
-
-    /**
-     * 
-     */
-    @Override
-    public int getCurrentTime() {
-        return remainingTime;  // Restituisce il tempo rimanente
     }
 
     /**

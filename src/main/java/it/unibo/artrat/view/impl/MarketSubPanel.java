@@ -15,16 +15,15 @@ import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+
 import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
 import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.model.impl.Stage;
-import it.unibo.artrat.model.impl.WorldTimerImpl;
-//import it.unibo.artrat.model.impl.WorldTimerImpl;
 import it.unibo.artrat.view.api.MarketView;
 
 /**
- * Here I see the collection of all the items I can purchase, and different buttons, 
- * whose operation is dependent on each other.
+ * Here I see the collection of all the items I can purchase, and different buttons. 
+ * The operations of the buttons are dependent on each other.
  * @author Manuel Benagli
  */
 public class MarketSubPanel extends AbstractSubPanel implements MarketView {
@@ -38,7 +37,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     private final JLabel lupinoCash = new JLabel();
     private JPanel purchItemPanel = new JPanel();
     private final JTextField searchItemField = new JTextField(SEARCH_TEXT_FIELD); 
-    private final WorldTimerImpl timer = new WorldTimerImpl(); 
+    
     /**
      * MarketSubPanel constructor.
      * @param contr
@@ -51,14 +50,14 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
      * 
      * @param text message test
      * @param name name of test
-     * @return s.
+     * @return a confirm message when it's needed
      */
     private boolean toConfirm(final String text, final String name) {
         return JOptionPane.showConfirmDialog(marketPanel, text, name, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
     }
 
     /**
-     * 
+     * this method is called by toConfirm, it shows my message and update the view.
      */
     @Override
     public void showMessage(final String message, final String name) {
@@ -86,7 +85,9 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     }
 
     /**
-     * 
+     * This method forces a view update.
+     * I call the method allItemsSetup to read from my item List, which can be
+     * modified temporally (with filter, sort and search), and permanently (if I buy a powerup).
      */
     @Override
     protected void forceRedraw() {
@@ -116,6 +117,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
 
         final JButton timerButton = new JButton("TIMER");
         final JButton stoptimerButton = new JButton("STOP");
+        final JButton addTimeButton = new JButton("ADD TIME");
         
 
         final JComboBox<ItemType> filterComboBox = new JComboBox<>();
@@ -164,12 +166,16 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
             }
         });
 
+        addTimeButton.addActionListener(e->{
+            //oseivsoivjsoivjsovijsd
+        });
+
         stoptimerButton.addActionListener(e->{
-            timer.stopTimer();
+            //      sodivnsdovinsdvoisn
         });
 
         timerButton.addActionListener(e->{
-            timer.startTimer();
+            //      sodivsdovisdvoi
         });
 
         toMenu.addActionListener(e -> {
@@ -184,6 +190,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
 
         upperJPanel.add(stoptimerButton);
         upperJPanel.add(timerButton);
+        upperJPanel.add(addTimeButton);
 
 
         bottomPan.add(toMenu);
@@ -191,9 +198,8 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         marketPanel.add(bottomPan, BorderLayout.SOUTH);
     }
 
-    /**
-     * 
-     * @param searchText s.
+    /*
+     * private method itemSearch.
      */
     private void itemSearch(final String searchText) {
         contr.searchItem(searchText);
@@ -201,7 +207,8 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     }
 
     /**
-     * 
+     * This method reads from my StoreSubControllerImpl a list of purchasableItems.
+     * For every item I read, I create a nel panel, with 
      */
     private void allItemsSetup() {
         purchItemPanel.removeAll();

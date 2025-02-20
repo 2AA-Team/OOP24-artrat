@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import it.unibo.artrat.model.api.Model;
+import it.unibo.artrat.model.api.WorldTimer;
 import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.market.Market;
 import it.unibo.artrat.model.impl.characters.Lupino;
@@ -16,6 +17,7 @@ import it.unibo.artrat.utils.impl.Point;
 public class ModelImpl implements Model {
     private Player player;
     private Market market;
+    private WorldTimer timer;
     private static final Logger LOGGER = LoggerFactory.getLogger(ModelImpl.class);
 
     /**
@@ -24,7 +26,9 @@ public class ModelImpl implements Model {
     public ModelImpl() {
         this.player = new Lupino(new Point(), new Point());
         this.market = new MarketImpl();
+        this.timer = new WorldTimerImpl();
         this.market.initMarket();
+
     }
 
     /**
@@ -59,6 +63,7 @@ public class ModelImpl implements Model {
      */
     @Override
     public Market getMarket() {
+        LOGGER.info("Request for a copy of the market");
         return new MarketImpl(market);
     }
 
@@ -67,6 +72,16 @@ public class ModelImpl implements Model {
      */
     @Override
     public void setMarket(final Market market) {
+        LOGGER.info("Set the new market");
         this.market = new MarketImpl(market);
+    }
+
+    /**
+     * s.
+     */
+    @Override
+    public WorldTimer getTimer() {
+        LOGGER.info("Request for a copy of the timer");
+        return new WorldTimerImpl();
     }
 }

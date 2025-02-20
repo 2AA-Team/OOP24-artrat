@@ -31,12 +31,6 @@ public interface WorldTimer {
 
     /**
      * 
-     * @return the current time (updates every second).
-     */
-    int getCurrentTime();
-
-    /**
-     * 
      * @return true if the time is out.
      */
     boolean isTimeOut();

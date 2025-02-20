@@ -33,4 +33,10 @@ public interface Model {
      */
     void setMarket(Market market);
 
+    /**
+     * 
+     * @return a copy of the current timer
+     */
+    WorldTimer getTimer();
+
 }
