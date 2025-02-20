@@ -42,7 +42,7 @@ public class FloorImpl implements Floor {
     private final double minFloorSize;
     private final double minRoomSize;
     private Point startPosition;
-    private GameObject exit;
+    private Set<GameObject> exit;
 
     private final URL roomPath = Thread.currentThread().getContextClassLoader().getResource(
             "premademaze" + File.separator + "rooms.json");
@@ -56,7 +56,7 @@ public class FloorImpl implements Floor {
         this.maxRoomSize = 2;
         this.minFloorSize = 1;
         this.startPosition = new Point();
-        this.exit = new Exit(0, 0);
+        this.exit = new HashSet<>();
     }
 
     /**
@@ -212,14 +212,16 @@ public class FloorImpl implements Floor {
                         builder = builder.insertNumberOfValues(0);
                         setStartPosition(j, i, roomSize);
                         setExitPosition(j, i, roomSize);
+                        builder = builder.insertPassages(isARoom(j, i - 1), isARoom(j + 1, i), true,
+                                isARoom(j - 1, i));
                     } else {
                         builder = builder.insertGenerationStrategy(generations.get(RANDOM.nextInt(generations.size())));
                         builder = builder.insertNumberOfEnemy(RANDOM.nextInt(minEnemyInARoom, maxEnemyInARoom));
                         builder = builder
                                 .insertNumberOfValues(RANDOM.nextInt(minPaintingsInARoom, maxPaintingsInARoom));
+                        builder = builder.insertPassages(isARoom(j, i - 1), isARoom(j + 1, i), isARoom(j, i + 1),
+                                isARoom(j - 1, i));
                     }
-                    builder = builder.insertPassages(isARoom(j, i - 1), isARoom(j + 1, i), isARoom(j, i + 1),
-                            isARoom(j - 1, i));
                     addNewRoom(builder.build(), j, i, roomSize);
                 }
             }
@@ -236,8 +238,9 @@ public class FloorImpl implements Floor {
     private void setExitPosition(final int x, final int y, final int roomSize) {
         final double tmpX = x * roomSize + Math.floor((double) roomSize / 2);
         final double tmpY = y * roomSize + roomSize - 1;
-        exit = new Exit(tmpX, tmpY);
-        this.floorStructure.removeIf((o) -> o.getBoundingBox().isColliding(exit.getBoundingBox()));
+        exit = new HashSet<>();
+        exit.add(new Exit(tmpX, tmpY));
+        exit.add(new Exit(tmpX - 1, tmpY));
     }
 
     /**
@@ -356,8 +359,8 @@ public class FloorImpl implements Floor {
      * {@inheritDoc}
      */
     @Override
-    public GameObject getExit() {
-        return this.exit.clone();
+    public Set<GameObject> getExit() {
+        return new HashSet<>(this.exit);
     }
 
     // public void print() {
