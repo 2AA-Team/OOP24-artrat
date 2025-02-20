@@ -12,7 +12,6 @@ import java.util.Set;
 import java.util.function.Function;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -20,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import it.unibo.artrat.controller.api.subcontroller.GameSubController;
+import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.model.impl.world.RoomSymbols;
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.commands.MoveDown;
@@ -43,8 +43,6 @@ public class GameSubPanel extends AbstractSubPanel {
     private static final int LEFT = KeyEvent.VK_A;
     private static final int RIGHT = KeyEvent.VK_D;
 
-
-    
     private final JLabel timerCountdown = new JLabel();
 
     private static final Map<RoomSymbols, Image> MAPSYMBOLS = Map.of(
@@ -83,9 +81,8 @@ public class GameSubPanel extends AbstractSubPanel {
             printObject(g, center, playerPos, RoomSymbols.VALUE, gameSubController.getVisiblePaintings());
             printPlayer(g, center);
 
-           gameSubController.getCurrentTimeController();               //gamesubcontroller e prendo il time 
-           timerCountdown.setText(Integer.toString(gameSubController.getCurrentTimeController()));      //aggiorno il timer
-            
+           timerCountdown.setText(Integer.toString(gameSubController.getCurrentTimeController()));      //aggiorno il timer            
+            forceRedraw();
         }
 
         private void printObject(final Graphics g, final Point center, final Point playerPos,
@@ -175,5 +172,8 @@ public class GameSubPanel extends AbstractSubPanel {
      */
     @Override
     public void forceRedraw() {
+        if(gameSubController.isTimeOutSubController()){
+            gameSubController.setStage(Stage.MENU);
+        }
     }
 }

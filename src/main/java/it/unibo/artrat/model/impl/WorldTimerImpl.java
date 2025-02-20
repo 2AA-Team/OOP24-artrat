@@ -1,8 +1,6 @@
 package it.unibo.artrat.model.impl;
 
 import it.unibo.artrat.model.api.WorldTimer;
-
-import java.awt.SystemColor;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -32,23 +30,22 @@ public class WorldTimerImpl implements WorldTimer {
     }
 
     /**
-     * WorldTimerImpl constructor
+     * WorldTimerImpl constructor.
      */
     public WorldTimerImpl(int settedCountdown) {
         this.countdown = settedCountdown;
         this.timer = new Timer("WorldTimer");
         this.isInPause = false;
-        this.remainingTime = countdown; // Il tempo rimanente è uguale al tempo iniziale
+        this.remainingTime = countdown;
     }
 
     /**
-     * 
+     *
      */
     @Override
     public void startTimer() {
-        isInPause = false;
-        
-        
+        isInPause = false; 
+        outOfTime = false;
         currentTask = new TimerTask() {
             
             @Override
@@ -56,7 +53,7 @@ public class WorldTimerImpl implements WorldTimer {
                 // La logica del game over quando il timer finisce
                 if (remainingTime > ONE_SECOND) {
                     remainingTime -= ONE_SECOND;
-                    System.out.println("IN CORSO  " + remainingTime/1000);
+                    System.out.println("IN CORSO  " + remainingTime/ONE_SECOND);
                     getCurrentTime();
                 } else {
                     outOfTime = true;
@@ -75,7 +72,7 @@ public class WorldTimerImpl implements WorldTimer {
      */
     @Override
     public int getCurrentTime(){
-        return remainingTime;
+        return remainingTime/ONE_SECOND;
     }
 
     /**
@@ -101,15 +98,13 @@ public class WorldTimerImpl implements WorldTimer {
     }
 
     /**
-     * The timer will be resetted, and coming back to menu.
-     * If the player get caught, if he completes the level, or the countdown is over.
+     * {@inheritDoc}
      */
     @Override
     public void resetTimer() {
         if (currentTask != null) {
             currentTask.cancel();  // Annulla il task corrente
         }
-        timer.cancel();  // Ferma il timer
         countdown = DEFAULT_TIMER_SETUP;  // Ripristina il countdown iniziale
         remainingTime = countdown;  // Ripristina il tempo rimanente
         isInPause = false;  // Torna alla modalità di gioco normale
@@ -117,17 +112,7 @@ public class WorldTimerImpl implements WorldTimer {
     }
 
     /**
-     * 
-     */
-    @Override
-    public void setCountdown(int settedItemTime) {
-        countdown += settedItemTime;
-        remainingTime += settedItemTime; 
-    }
-
-    /**
-     * a boolean which states if the time is out.
-     * @return true if the time is over.
+     * {@inheritDoc}
      */
     @Override
     public boolean isTimeOut() {

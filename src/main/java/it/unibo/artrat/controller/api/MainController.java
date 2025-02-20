@@ -100,4 +100,7 @@ public interface MainController {
      * @author Manuel Benagli
      */
     int getCurrentTimeMainController();
+
+    
+    boolean isTimeOutMainController();
 }

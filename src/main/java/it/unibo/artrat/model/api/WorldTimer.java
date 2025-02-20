@@ -1,7 +1,5 @@
 package it.unibo.artrat.model.api;
 
-import it.unibo.artrat.model.api.inventory.Item;
-
 /**
  * Timer interface.
  * @author Manuel Benagli
@@ -14,24 +12,19 @@ public interface WorldTimer {
     void startTimer();
 
     /**
-     *  If Lupino gets caught or the timer is out.
+     * The timer will be resetted, and coming back to menu.
+     * If the player get caught, if he completes the level, or the countdown is over.
      */
     void resetTimer();
-
-    /**
-     *  If I use an item I can add or cut time, in base of item's effect.
-     * @param itemPassed which will have a time parameter.
-     */
-    void setCountdown(int settedItemTime);
-
+    
     /**
      * If we enter in the inventory while playing, the timer stops.
      */
     void stopTimer();
 
     /**
-     * 
-     * @return true if the time is out.
+     * A boolean which states if the time is out.
+     * @return true if the time is over.
      */
     boolean isTimeOut();
 
