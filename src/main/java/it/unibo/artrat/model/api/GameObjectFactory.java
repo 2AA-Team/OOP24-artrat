@@ -43,5 +43,5 @@ public interface GameObjectFactory {
      * @param y y position
      * @return the game object for the valuable object
      */
-    AbstractGameObject getValue(int x, int y);
+    AbstractGameObject getPicture(int x, int y);
 }

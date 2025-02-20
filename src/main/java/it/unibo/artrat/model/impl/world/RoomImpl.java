@@ -44,7 +44,7 @@ public final class RoomImpl implements Room {
                         .collect(Collectors.toSet()),
                 builder.size,
                 builder.numValues,
-                factory::getValue));
+                factory::getPicture));
         this.createPassage(builder);
     }
 

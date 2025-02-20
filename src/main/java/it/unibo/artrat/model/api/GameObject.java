@@ -15,11 +15,6 @@ public interface GameObject {
     void update(long delta);
 
     /**
-     * reloads the object view.
-     */
-    void redraw();
-
-    /**
      * Get current position.
      * 
      * @return current position
