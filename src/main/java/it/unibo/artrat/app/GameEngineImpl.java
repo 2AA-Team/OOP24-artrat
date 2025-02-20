@@ -113,14 +113,19 @@ public final class GameEngineImpl implements GameEngine {
     }
 
     private void update(final long delta) {
-        final var cmd = this.commands.poll();
+        final Command cmd = this.commands.poll();
         final var model = this.mainController.getModel();
         final var player = model.getPlayer();
         if (!Objects.isNull(cmd)) {
             cmd.execute(player);
         }
         player.update(delta);
-        model.setPlayer(player);
+        System.out.println(player.getSpeed());
+        final boolean tuma = this.mainController.getModel().getFloor().getWalls().stream()
+                .anyMatch(x -> x.getBoundingBox().isColliding(player.getBoundingBox()));
+        if (!tuma) {
+            model.setPlayer(player);
+        }
         this.mainController.setModel(model);
     }
 
