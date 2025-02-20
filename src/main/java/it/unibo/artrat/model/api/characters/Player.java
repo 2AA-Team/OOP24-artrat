@@ -43,7 +43,7 @@ public interface Player extends Entity {
      */
     void increaseCoins(double coins);
 
-        /**
+    /**
      * A method that decrease the current coins of player with the passed amount.
      * 
      * @param coins
@@ -65,5 +65,4 @@ public interface Player extends Entity {
      * @return a copy of passed Player.
      */
     Player copyPlayer();
-
 }

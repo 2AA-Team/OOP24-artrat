@@ -15,7 +15,7 @@ import it.unibo.artrat.utils.impl.Vector2d;
 public abstract class AbstractEntity extends AbstractGameObject implements Entity {
 
     private Set<Vector2d> speed = new HashSet<>();
-    private static final double SCALE = 0.03;
+    private static final double SCALE = 0.01;
 
     /**
      * Entity constructor.
@@ -103,6 +103,14 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
     @Override
     public void addDirection(final Vector2d v) {
         this.speed.add(v);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void removeDirection(final Vector2d v) {
+        this.speed.remove(v);
     }
 
     /**
