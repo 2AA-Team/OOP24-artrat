@@ -3,12 +3,16 @@ package it.unibo.artrat.controller.impl;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import it.unibo.artrat.app.api.GameEngine;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.controller.api.SubControllerManager;
 import it.unibo.artrat.model.api.Model;
+import it.unibo.artrat.model.api.WorldTimer;
 import it.unibo.artrat.model.impl.ModelImpl;
 import it.unibo.artrat.model.impl.Stage;
+import it.unibo.artrat.model.impl.WorldTimerImpl;
+import it.unibo.artrat.utils.api.commands.Command;
 import it.unibo.artrat.view.api.MainView;
 
 /**
@@ -23,6 +27,7 @@ public class MainControllerImpl implements MainController {
     private final GameEngine engine;
     private final SubControllerManager subControllerManager;
     private Model model;
+    private final WorldTimer timer;
 
     /**
      * MainController constructor.
@@ -37,6 +42,7 @@ public class MainControllerImpl implements MainController {
         this.views = new ArrayList<>();
         this.model = new ModelImpl();
         this.subControllerManager = new SubControllerManagerImpl(this, engine.getResourceLoader());
+        this.timer = new WorldTimerImpl();
     }
 
     /**
@@ -118,6 +124,29 @@ public class MainControllerImpl implements MainController {
     @Override
     public Stage getStage() {
         return currentStage;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void input(final Command cmd) {
+        this.engine.notifyCommand(cmd);
+    }
+
+    @Override
+    public void startTimerMainController(){
+        timer.startTimer();
+    }
+
+    @Override
+    public void resetTimerMainController(){
+        timer.resetTimer();
+    }
+
+    @Override
+    public void stopTimerMainController(){
+        timer.stopTimer();
     }
 
 }

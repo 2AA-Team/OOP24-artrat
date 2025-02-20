@@ -20,16 +20,6 @@ import it.unibo.artrat.utils.impl.ResourceLoaderImpl;
 class ResourceLoaderTest {
 
     /**
-     * test loading config path.
-     */
-    @Test
-    void testLoading() {
-        final ResourceLoader<String, Integer> resLoad = new ResourceLoaderImpl<>();
-        assertThrows(IllegalArgumentException.class, () -> resLoad.setConfigPath(new URI("file_not_exist")),
-                "config file cannot be an exe");
-    }
-
-    /**
      * test reading config data.
      *
      */

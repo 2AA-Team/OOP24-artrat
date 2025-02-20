@@ -15,8 +15,8 @@ public class MoveUp implements Command {
      */
     @Override
     public void execute(final Player p) {
-        final var speed = p.getSpeed();
-        p.setSpeed(new Vector2d(0, -1).mul(speed.module()));
+        p.addDirection(new Vector2d(0, -1));
+
     }
 
 }

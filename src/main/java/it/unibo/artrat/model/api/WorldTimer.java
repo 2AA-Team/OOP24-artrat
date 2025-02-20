@@ -37,6 +37,12 @@ public interface WorldTimer {
 
     /**
      * 
+     * @return the remaining time.
+     */
+    int getCurrentTime();
+
+    /**
+     * 
      * @return true if the timer is stopped
      */
     boolean isPaused();

@@ -1,14 +1,17 @@
 package it.unibo.artrat.controller.impl;
 
+import javax.swing.SwingUtilities;
+
 import it.unibo.artrat.controller.api.SubController;
 import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.impl.ModelImpl;
 import it.unibo.artrat.model.impl.Stage;
+import it.unibo.artrat.utils.api.commands.Command;
 
 /**
  * abstract class that implements subcontroller.
  */
-public abstract  class AbstractSubController implements SubController {
+public abstract class AbstractSubController implements SubController {
     private final MainControllerImpl mainController;
 
     /**
@@ -44,7 +47,6 @@ public abstract  class AbstractSubController implements SubController {
         mainController.setModel(new ModelImpl(model));
     }
 
-
     /**
      * {@inheritDoc}
      */
@@ -52,4 +54,40 @@ public abstract  class AbstractSubController implements SubController {
     public void quit() {
         mainController.quit();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void inputMainController(final Command cmd) {
+        this.mainController.input(cmd);
+    }
+
+    @Override
+    public void startTimerSubController(){
+        this.mainController.startTimerMainController();
+    }
+
+    @Override
+    public void resetTimerSubController(){
+        this.mainController.startTimerMainController();
+    }
+
+    @Override
+    public void stopTimerSubController(){
+        this.mainController.startTimerMainController();
+    }
+
+    @Override
+    public void getCurrentTimeController(){
+        
+        SwingUtilities.invokeLater(new Runnable(){  
+            
+            @Override
+            public void run(){
+              //  model.getTimer().getCurrentTime();
+            }
+        });
+    }
+
 }

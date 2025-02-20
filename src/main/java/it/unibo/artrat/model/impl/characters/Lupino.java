@@ -1,7 +1,7 @@
 package it.unibo.artrat.model.impl.characters;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.HashSet;
+import java.util.Set;
 
 import it.unibo.artrat.model.api.characters.AbstractEntity;
 import it.unibo.artrat.model.api.characters.Coin;
@@ -21,7 +21,6 @@ public class Lupino extends AbstractEntity implements Player {
 
     private Inventory inventory;
     private Coin coins;
-    private static final Logger LOGGER = LoggerFactory.getLogger(Lupino.class);
 
     /**
      * Player constructor with default vector.
@@ -30,7 +29,7 @@ public class Lupino extends AbstractEntity implements Player {
      * @param bottomRight boundingbox corner
      */
     public Lupino(final Point topLeft, final Point bottomRight) {
-        this(topLeft, bottomRight, new Vector2d());
+        this(topLeft, bottomRight, new HashSet<>());
         this.inventory = new InventoryImpl();
         this.coins = new CoinImpl();
     }
@@ -42,7 +41,7 @@ public class Lupino extends AbstractEntity implements Player {
      * @param bottomRight boundingbox corner
      * @param v           direction
      */
-    public Lupino(final Point topLeft, final Point bottomRight, final Vector2d v) {
+    public Lupino(final Point topLeft, final Point bottomRight, final Set<Vector2d> v) {
         super(topLeft, bottomRight, v);
         this.inventory = new InventoryImpl();
         this.coins = new CoinImpl();
@@ -56,7 +55,7 @@ public class Lupino extends AbstractEntity implements Player {
      * @param height height of player bounding box
      * @param speed  speed of player bounding box
      */
-    public Lupino(final Point center, final double width, final double height, final Vector2d speed) {
+    public Lupino(final Point center, final double width, final double height, final Set<Vector2d> speed) {
         super(center, width, height, speed);
         this.inventory = new InventoryImpl();
         this.coins = new CoinImpl();
@@ -68,7 +67,7 @@ public class Lupino extends AbstractEntity implements Player {
      * @param center bounding box center
      * @param speed  speed of player bounding box
      */
-    public Lupino(final Point center, final Vector2d speed) {
+    public Lupino(final Point center, final Set<Vector2d> speed) {
         super(center, speed);
         this.inventory = new InventoryImpl();
         this.coins = new CoinImpl();
@@ -88,7 +87,6 @@ public class Lupino extends AbstractEntity implements Player {
      */
     @Override
     public Inventory getInventory() {
-        LOGGER.info("Richiesta dell'attuale inventario");
         return new InventoryImpl(this.inventory);
     }
 
@@ -97,7 +95,6 @@ public class Lupino extends AbstractEntity implements Player {
      */
     @Override
     public void setInventory(final Inventory inventory) {
-        LOGGER.info("Richiesta di set di un nuovo inventario");
         this.inventory = new InventoryImpl(inventory);
     }
 
@@ -106,7 +103,6 @@ public class Lupino extends AbstractEntity implements Player {
      */
     @Override
     public Coin getCoin() {
-        LOGGER.info("Richiesta dei Coin attuali");
         return new CoinImpl(this.coins);
     }
 
@@ -115,7 +111,6 @@ public class Lupino extends AbstractEntity implements Player {
      */
     @Override
     public void setCoin(final Coin coins) {
-        LOGGER.info("Richiesta di set di un nuovo coin");
         this.coins = new CoinImpl(coins);
     }
 

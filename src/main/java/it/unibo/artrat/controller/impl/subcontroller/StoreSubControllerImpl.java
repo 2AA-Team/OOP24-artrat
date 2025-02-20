@@ -87,7 +87,8 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
      */
     @Override
     public void sorting(final int choice) {
-       currenItems = new ArrayList<>(itemMan.sortItemPrice(choice));
+        this.itemMan.updateItemList(currenItems);
+        currenItems = new ArrayList<>(itemMan.sortItemPrice(choice));
     }
 
     /**

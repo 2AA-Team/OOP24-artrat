@@ -1,6 +1,8 @@
 package it.unibo.artrat.model.impl;
 
 import it.unibo.artrat.model.api.WorldTimer;
+
+import java.awt.SystemColor;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -9,7 +11,7 @@ import java.util.TimerTask;
  * @author Manuel Benagli
  */
 public class WorldTimerImpl implements WorldTimer {
-    private static final int DEFAULT_TIMER_SETUP = 120000; // Tempo iniziale
+    private static final int DEFAULT_TIMER_SETUP = 10000; // Tempo iniziale
     private static final int ONE_SECOND = 1000;
     private final Timer timer;
     private boolean isInPause;
@@ -53,7 +55,7 @@ public class WorldTimerImpl implements WorldTimer {
                 if (remainingTime > ONE_SECOND) {
                     remainingTime -= ONE_SECOND;
                     System.out.println("IN CORSO  " + remainingTime/1000);
-                    //da mettere poi la logica
+                    getCurrentTime();
                 } else {
                     outOfTime = true;
                     resetTimer();
@@ -64,6 +66,14 @@ public class WorldTimerImpl implements WorldTimer {
         timer.scheduleAtFixedRate(currentTask, 0, ONE_SECOND);
         //con 1 second di settaggio prevengo problemi con eventi
         System.out.println("TIMER STARTATO");
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public int getCurrentTime(){
+        return remainingTime;
     }
 
     /**

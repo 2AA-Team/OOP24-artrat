@@ -1,5 +1,7 @@
 package it.unibo.artrat.model.impl.characters;
 
+import java.util.Set;
+
 import it.unibo.artrat.model.api.characters.AbstractEntity;
 import it.unibo.artrat.model.api.characters.Enemy;
 import it.unibo.artrat.model.api.characters.Player;
@@ -20,7 +22,7 @@ public final class AdvancedEnemy extends AbstractEntity implements Enemy {
      * @param bottomRight bottom right corner
      * @param v           vector
      */
-    public AdvancedEnemy(final Point topLeft, final Point bottomRight, final Vector2d v) {
+    public AdvancedEnemy(final Point topLeft, final Point bottomRight, final Set<Vector2d> v) {
         super(topLeft, bottomRight, v);
     }
 

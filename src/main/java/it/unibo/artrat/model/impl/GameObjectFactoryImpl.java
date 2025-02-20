@@ -1,6 +1,8 @@
 package it.unibo.artrat.model.impl;
 
+import java.util.HashSet;
 import java.util.Random;
+
 import it.unibo.artrat.model.api.GameObjectFactory;
 import it.unibo.artrat.model.api.characters.AbstractEntity;
 import it.unibo.artrat.model.api.characters.Player;
@@ -8,7 +10,6 @@ import it.unibo.artrat.model.impl.characters.AdvancedEnemy;
 import it.unibo.artrat.model.impl.characters.BaseEnemy;
 import it.unibo.artrat.model.impl.characters.Lupino;
 import it.unibo.artrat.utils.impl.Point;
-import it.unibo.artrat.utils.impl.Vector2d;
 
 /**
  * An implementation of GameObjectFactory.
@@ -31,7 +32,7 @@ public class GameObjectFactoryImpl implements GameObjectFactory {
             }
 
             @Override
-            public void update(final int delta) {
+            public void update(final long delta) {
                 // TODO Auto-generated method stub
                 throw new UnsupportedOperationException("Unimplemented method 'update'");
             }
@@ -46,7 +47,7 @@ public class GameObjectFactoryImpl implements GameObjectFactory {
      */
     @Override
     public Player getPlayer(final int x, final int y) {
-        return new Lupino(new Point(x, y), new Vector2d());
+        return new Lupino(new Point(x, y), new HashSet<>());
     }
 
     /**

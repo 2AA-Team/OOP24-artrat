@@ -4,13 +4,14 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import it.unibo.artrat.model.impl.AbstractGameObject;
-import it.unibo.artrat.model.impl.GameObjectFactoryImpl;
+
 import it.unibo.artrat.model.api.GameObjectFactory;
 import it.unibo.artrat.model.api.characters.AbstractEntity;
 import it.unibo.artrat.model.api.world.Room;
 import it.unibo.artrat.model.api.world.roomgeneration.ObjectInsertionStrategy;
 import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;
+import it.unibo.artrat.model.impl.AbstractGameObject;
+import it.unibo.artrat.model.impl.GameObjectFactoryImpl;
 import it.unibo.artrat.model.impl.world.roomgeneration.ObjectInsertionRandom;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationEmpty;
 import it.unibo.artrat.utils.impl.Point;
@@ -56,18 +57,22 @@ public final class RoomImpl implements Room {
         for (int i = 0; i < builder.size - 1 && (tmpU || tmpR || tmpD || tmpL); i++) {
             final int tmpI = i;
             if (tmpU) {
-                tmpU = this.roomStructure.removeIf((o) -> o.getPosition().equals(new Point(averagePassage, tmpI)));
+                tmpU = this.roomStructure.removeIf((o) -> o.getPosition().equals(new Point(averagePassage, tmpI))
+                        || o.getPosition().equals(new Point(averagePassage - 1, tmpI)));
             }
             if (tmpR) {
                 tmpR = this.roomStructure
-                        .removeIf((o) -> o.getPosition().equals(new Point(builder.size - tmpI - 1, averagePassage)));
+                        .removeIf((o) -> o.getPosition().equals(new Point(builder.size - tmpI - 1, averagePassage))
+                                || o.getPosition().equals(new Point(builder.size - tmpI - 1, averagePassage - 1)));
             }
             if (tmpD) {
                 tmpD = this.roomStructure.removeIf((o) -> o.getPosition().equals(new Point(averagePassage,
-                        builder.size - tmpI - 1)));
+                        builder.size - tmpI - 1))
+                        || o.getPosition().equals(new Point(averagePassage - 1, builder.size - tmpI - 1)));
             }
             if (tmpL) {
-                tmpL = this.roomStructure.removeIf((o) -> o.getPosition().equals(new Point(tmpI, averagePassage)));
+                tmpL = this.roomStructure.removeIf((o) -> o.getPosition().equals(new Point(tmpI, averagePassage))
+                        || o.getPosition().equals(new Point(tmpI, averagePassage - 1)));
             }
         }
 

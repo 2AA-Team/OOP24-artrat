@@ -1,6 +1,7 @@
 package it.unibo.artrat.model.impl.characters;
 
 import java.util.Random;
+import java.util.Set;
 
 import it.unibo.artrat.model.api.characters.AbstractEntity;
 import it.unibo.artrat.model.api.characters.Enemy;
@@ -38,7 +39,7 @@ public final class BaseEnemy extends AbstractEntity implements Enemy {
      * @param bottomRight bottom right corner
      * @param v           vector
      */
-    public BaseEnemy(final Point topLeft, final Point bottomRight, final Vector2d v) {
+    public BaseEnemy(final Point topLeft, final Point bottomRight, final Set<Vector2d> v) {
         super(topLeft, bottomRight, v);
         this.fieldOfView = new BoundingBoxImpl(topLeft, bottomRight);
     }
@@ -48,8 +49,8 @@ public final class BaseEnemy extends AbstractEntity implements Enemy {
      */
     @Override
     public void follow(final Player p) {
-        final var speed = this.getSpeed();
-        final var playerDirection = p.getSpeed().normalize();
+        final var speed = this.calculateSpeed();
+        final var playerDirection = p.calculateSpeed().normalize();
         this.setSpeed(playerDirection.mul(speed.module()));
     }
 
@@ -86,7 +87,7 @@ public final class BaseEnemy extends AbstractEntity implements Enemy {
     @Override
     public void move() {
         final var dir = rd.nextInt(Directions.values().length);
-        final var speed = this.getSpeed();
+        final var speed = this.calculateSpeed();
         final Vector2d v = Directions.values()[dir].vector();
         this.setSpeed(v.mul(speed.module()));
     }
@@ -95,7 +96,7 @@ public final class BaseEnemy extends AbstractEntity implements Enemy {
      * {@inheritDoc}
      */
     @Override
-    public void update(final int delta) {
+    public void update(final long delta) {
         super.update(delta);
         this.fieldOfView.setCenter(this.getPosition());
     }

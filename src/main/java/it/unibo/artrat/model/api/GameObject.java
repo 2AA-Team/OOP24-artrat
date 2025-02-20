@@ -12,7 +12,7 @@ public interface GameObject {
      * 
      * @param delta delta time
      */
-    void update(int delta);
+    void update(long delta);
 
     /**
      * reloads the object view.
