@@ -50,9 +50,9 @@ public interface Floor {
     /**
      * get the floor exit position.
      * 
-     * @return a point representing the position
+     * @return an abstract game object representing the position
      */
-    Point getExitPosition();
+    AbstractGameObject getExit();
 
     /**
      * get the max floor size.

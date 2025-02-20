@@ -73,7 +73,7 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
      */
     @Override
     public Point getExitPos() {
-        return this.getModel().getFloor().getExitPosition();
+        return this.getModel().getFloor().getExit().getPosition();
     }
 
     /**

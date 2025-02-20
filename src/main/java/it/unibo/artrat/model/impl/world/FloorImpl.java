@@ -42,7 +42,7 @@ public class FloorImpl implements Floor {
     private final double minFloorSize;
     private final double minRoomSize;
     private Point startPosition;
-    private Point exitPosition;
+    private AbstractGameObject exit;
 
     private final URL roomPath = Thread.currentThread().getContextClassLoader().getResource(
             "premademaze" + File.separator + "rooms.json");
@@ -56,7 +56,7 @@ public class FloorImpl implements Floor {
         this.maxRoomSize = 2;
         this.minFloorSize = 1;
         this.startPosition = new Point();
-        this.exitPosition = new Point();
+        this.exit = new Exit(0, 0);
     }
 
     /**
@@ -79,7 +79,7 @@ public class FloorImpl implements Floor {
         this.floorEnemies = passedFloor.getEnemies();
         this.floorStructure = passedFloor.getWalls();
         this.startPosition = passedFloor.getStartPosition();
-        this.exitPosition = passedFloor.getExitPosition();
+        this.exit = passedFloor.getExit();
         this.maxFloorSize = passedFloor.getMaxFloorSize();
         this.minFloorSize = passedFloor.getMinFloorSize();
         this.maxRoomSize = passedFloor.getMaxRoomSize();
@@ -236,8 +236,8 @@ public class FloorImpl implements Floor {
     private void setExitPosition(final int x, final int y, final int roomSize) {
         final double tmpX = x * roomSize + Math.floor((double) roomSize / 2);
         final double tmpY = y * roomSize + roomSize - 1;
-        exitPosition = new Point(tmpX, tmpY);
-        this.floorStructure.removeIf((o) -> o.getPosition().equals(exitPosition));
+        exit = new Exit(tmpX, tmpY);
+        this.floorStructure.removeIf((o) -> o.getPosition().equals(exit.getPosition()));
     }
 
     /**
@@ -313,14 +313,6 @@ public class FloorImpl implements Floor {
      * {@inheritDoc}
      */
     @Override
-    public Point getExitPosition() {
-        return Objects.requireNonNull(exitPosition);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public Floor copyFloor() {
         return new FloorImpl(this);
     }
@@ -355,6 +347,11 @@ public class FloorImpl implements Floor {
     @Override
     public double getMinRoomSize() {
         return this.minRoomSize;
+    }
+
+    @Override
+    public AbstractGameObject getExit() {
+        return this.exit;
     }
 
     // public void print() {
