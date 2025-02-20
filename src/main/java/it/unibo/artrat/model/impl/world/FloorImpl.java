@@ -58,6 +58,7 @@ public class FloorImpl implements Floor {
         this.startPosition = new Point();
         this.exitPosition = new Point();
     }
+
     /**
      * constructor that set the configuration file path.
      * config file is used to get stantard values.
@@ -81,10 +82,9 @@ public class FloorImpl implements Floor {
         this.exitPosition = passedFloor.getExitPosition();
         this.maxFloorSize = passedFloor.getMaxFloorSize();
         this.minFloorSize = passedFloor.getMinFloorSize();
-        this.maxRoomSize =  passedFloor.getMaxRoomSize();
-        this.minRoomSize =  passedFloor.getMinRoomSize();
+        this.maxRoomSize = passedFloor.getMaxRoomSize();
+        this.minRoomSize = passedFloor.getMinRoomSize();
     }
-
 
     /**
      * method to test if validate sizes.
@@ -92,12 +92,24 @@ public class FloorImpl implements Floor {
      * @throws IOException if size of the room or floor are not valid
      */
     private void validateFloorAndRoomSizes() throws IOException {
-        final int upperBound = 100;
-        if (maxFloorSize >= upperBound) {
-            throw new IOException("Please MAX_FLOOR_SIZE must be under " + upperBound);
+        final int upperBoundFloor = 100;
+        final int upperBoundRoom = 14;
+        final int lowerBoundFloor = 1;
+        final int lowerBoundRoom = 6;
+        if (maxFloorSize >= upperBoundFloor) {
+            throw new IOException("Please MAX_FLOOR_SIZE must be less of " + upperBoundFloor);
         }
-        if (maxFloorSize <= 1 || maxRoomSize <= 4 || minFloorSize >= maxFloorSize || minRoomSize >= maxRoomSize) {
-            throw new IOException("Floor or Room size has been modified.");
+        if (maxRoomSize >= upperBoundRoom) {
+            throw new IOException("Please MAX_ROOM_SIZE must be less of " + upperBoundRoom);
+        }
+        if (minFloorSize <= lowerBoundFloor) {
+            throw new IOException("Please MIN_FLOOR_SIZE must be greater of " + lowerBoundFloor);
+        }
+        if (minRoomSize <= lowerBoundRoom) {
+            throw new IOException("Please MIN_FLOOR_SIZE must be greater of " + lowerBoundRoom);
+        }
+        if (minFloorSize >= maxFloorSize || minRoomSize >= maxRoomSize) {
+            throw new IOException("Invalid range for apartment generation.");
         }
     }
 
@@ -130,6 +142,7 @@ public class FloorImpl implements Floor {
      */
     @Override
     public void generateFloorSet() throws IOException {
+        this.validateFloorAndRoomSizes();
         floorStructure = new HashSet<>();
         floorEnemies = new HashSet<>();
         floorValues = new HashSet<>();
