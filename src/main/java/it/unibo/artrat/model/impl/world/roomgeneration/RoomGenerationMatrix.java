@@ -31,12 +31,14 @@ public class RoomGenerationMatrix implements RoomGenerationStrategy {
                 true, true, true, true, false);
         final Set<Integer> column = new HashSet<>();
         final Set<Integer> rows = new HashSet<>();
-        for (int i = 1; i < size - 1; i++) {
-            if (probabilities.get(RANDOM.nextInt(probabilities.size()))) {
-                column.add(i);
-            }
-            if (probabilities.get(RANDOM.nextInt(probabilities.size()))) {
-                rows.add(i);
+        while (column.size() == 0 && rows.size() == 0) {
+            for (int i = 1; i < size - 1; i++) {
+                if (probabilities.get(RANDOM.nextInt(probabilities.size()))) {
+                    column.add(i);
+                }
+                if (probabilities.get(RANDOM.nextInt(probabilities.size()))) {
+                    rows.add(i);
+                }
             }
         }
         final Stream<AbstractGameObject> border = new RoomGenerationEmpty().generateRoomSet(size).stream();

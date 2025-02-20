@@ -43,6 +43,8 @@ public interface Entity extends GameObject {
      */
     void addDirection(Vector2d v);
 
+    void removeDirection(final Vector2d v);
+
     /**
      * Directions sum.
      * 

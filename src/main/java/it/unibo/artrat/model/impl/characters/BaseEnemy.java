@@ -76,15 +76,6 @@ public final class BaseEnemy extends AbstractEntity implements Enemy {
      * {@inheritDoc}
      */
     @Override
-    public void redraw() {
-        // TODO
-        throw new UnsupportedOperationException("Unimplemented method 'redraw'");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void move() {
         final var dir = rd.nextInt(Directions.values().length);
         final var speed = this.calculateSpeed();

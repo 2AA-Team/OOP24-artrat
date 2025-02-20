@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -23,8 +22,11 @@ import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.commands.MoveDown;
 import it.unibo.artrat.utils.impl.commands.MoveLeft;
 import it.unibo.artrat.utils.impl.commands.MoveRight;
-import it.unibo.artrat.utils.impl.commands.MoveStop;
 import it.unibo.artrat.utils.impl.commands.MoveUp;
+import it.unibo.artrat.utils.impl.commands.StopMovingDown;
+import it.unibo.artrat.utils.impl.commands.StopMovingLeft;
+import it.unibo.artrat.utils.impl.commands.StopMovingRight;
+import it.unibo.artrat.utils.impl.commands.StopMovingUp;
 
 /**
  * game sub panel class.
@@ -125,32 +127,38 @@ public class GameSubPanel extends AbstractSubPanel {
         tmp.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(final KeyEvent e) {
-
             }
 
             @Override
             public void keyPressed(final KeyEvent e) {
-
-                switch (e.getKeyCode()) {
-                    case UP -> gameSubController.inputMainController(new MoveUp());
-                    case DOWN -> gameSubController.inputMainController(new MoveDown());
-                    case RIGHT -> gameSubController.inputMainController(new MoveRight());
-                    case LEFT -> gameSubController.inputMainController(new MoveLeft());
-                    default -> Function.identity();
+                if (isMovementCommand(e)) {
+                    switch (e.getKeyCode()) {
+                        case UP -> gameSubController.inputMainController(new MoveUp());
+                        case DOWN -> gameSubController.inputMainController(new MoveDown());
+                        case RIGHT -> gameSubController.inputMainController(new MoveRight());
+                        case LEFT -> gameSubController.inputMainController(new MoveLeft());
+                        default -> LOGGER.info("Tasto premuto non gestito: " + e.getKeyCode());
+                    }
                 }
             }
 
             @Override
             public void keyReleased(final KeyEvent e) {
                 if (isMovementCommand(e)) {
-                    gameSubController.inputMainController(new MoveStop());
+                    switch (e.getKeyCode()) {
+                        case UP -> gameSubController.inputMainController(new StopMovingUp());
+                        case DOWN -> gameSubController.inputMainController(new StopMovingDown());
+                        case RIGHT -> gameSubController.inputMainController(new StopMovingRight());
+                        case LEFT -> gameSubController.inputMainController(new StopMovingLeft());
+                        default -> LOGGER.info("Tasto premuto non gestito: " + e.getKeyCode());
+                    }
+                } else {
                 }
             }
         });
-
         setPanel(tmp);
         tmp.setFocusable(true);
-
+        tmp.requestFocusInWindow();
     }
 
     /**
