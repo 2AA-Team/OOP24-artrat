@@ -35,24 +35,18 @@ public class ItemReaderImpl implements ItemReader {
 
     private String getConfig(final String conf, final int field) {
         final Object ob = obj.get(conf);
-        if (Objects.nonNull(ob)) {
-            return ((List<String>) ob).get(field);
+        if (ob instanceof List<?> list) {
+            try {
+                List<String> safeList = list.stream()
+                        .map(e -> Objects.toString(e, null))
+                        .toList();
+                return safeList.get(field);
+            } catch (IndexOutOfBoundsException e) {
+                throw new IllegalArgumentException("Index out of bounds for element: " +
+                        conf);
+            }
         }
-        throw new IllegalArgumentException("The searched " + conf + " item doesn't exist");
-        // final Object ob = obj.get(conf);
-        // if (ob instanceof List<?> list) {
-        // try {
-        // List<String> safeList = list.stream()
-        // .map(e -> Objects.toString(e, null))
-        // .toList();
-
-        // return safeList.get(field);
-        // } catch (IndexOutOfBoundsException e) {
-        // throw new IllegalArgumentException("Index out of bounds for element: " +
-        // conf);
-        // }
-        // }
-        // throw new IllegalArgumentException(conf + " is not valid list.");
+        throw new IllegalArgumentException(conf + " is not valid list.");
     }
 
     /**
