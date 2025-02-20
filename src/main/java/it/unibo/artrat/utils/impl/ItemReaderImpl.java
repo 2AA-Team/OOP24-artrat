@@ -37,13 +37,12 @@ public class ItemReaderImpl implements ItemReader {
         final Object ob = obj.get(conf);
         if (ob instanceof List<?> list) {
             try {
-                List<String> safeList = list.stream()
+                final List<String> safeList = list.stream()
                         .map(e -> Objects.toString(e, null))
                         .toList();
                 return safeList.get(field);
             } catch (IndexOutOfBoundsException e) {
-                throw new IllegalArgumentException("Index out of bounds for element: " +
-                        conf);
+                throw new IllegalArgumentException("Index out of bounds for element: " + conf);
             }
         }
         throw new IllegalArgumentException(conf + " is not valid list.");

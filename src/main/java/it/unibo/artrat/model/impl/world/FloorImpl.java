@@ -349,6 +349,9 @@ public class FloorImpl implements Floor {
         return this.minRoomSize;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public AbstractGameObject getExit() {
         return this.exit;
