@@ -20,7 +20,7 @@ import it.unibo.artrat.utils.api.ItemReader;
  * An implementation of ItemReader.
  */
 public class ItemReaderImpl implements ItemReader {
-        private Map<String, List<String>> obj = new HashMap<>();
+    private Map<String, List<String>> obj = new HashMap<>();
 
     /**
      * {@inheritDoc}
@@ -39,6 +39,20 @@ public class ItemReaderImpl implements ItemReader {
             return ((List<String>) ob).get(field);
         }
         throw new IllegalArgumentException("The searched " + conf + " item doesn't exist");
+        // final Object ob = obj.get(conf);
+        // if (ob instanceof List<?> list) {
+        // try {
+        // List<String> safeList = list.stream()
+        // .map(e -> Objects.toString(e, null))
+        // .toList();
+
+        // return safeList.get(field);
+        // } catch (IndexOutOfBoundsException e) {
+        // throw new IllegalArgumentException("Index out of bounds for element: " +
+        // conf);
+        // }
+        // }
+        // throw new IllegalArgumentException(conf + " is not valid list.");
     }
 
     /**
@@ -71,7 +85,7 @@ public class ItemReaderImpl implements ItemReader {
                 break;
         }
         throw new IllegalStateException("The second field in the YAML file related to "
-         + nameOfItem + " is either not an ItemType or has a typo.");
+                + nameOfItem + " is either not an ItemType or has a typo.");
     }
 
     /**
