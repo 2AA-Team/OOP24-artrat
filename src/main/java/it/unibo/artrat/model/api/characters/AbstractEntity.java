@@ -14,8 +14,16 @@ import it.unibo.artrat.utils.impl.Vector2d;
 public abstract class AbstractEntity extends AbstractGameObject implements Entity {
 
     private Set<Vector2d> speed = new HashSet<>();
-    private static final double SCALE = 0.01;
-    private double boost = 1.0;
+    private double velocity = 0.01;
+
+    public AbstractEntity(Point center, double width, double height) {
+        super(center, width, height);
+
+    }
+
+    public AbstractEntity(Point center) {
+        super(center);
+    }
 
     /**
      * Entity constructor.
@@ -87,7 +95,7 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
      */
     @Override
     public void update(final long delta) {
-        this.setPosition(this.getPosition().sum(calculateSpeed().mul(delta * SCALE * boost)));
+        this.setPosition(this.getPosition().sum(calculateSpeed().mul(delta * getVelocity())));
     }
 
     /**
@@ -131,20 +139,13 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
         return new HashSet<>(this.speed);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public double getBoost() {
-        return this.boost;
+    public double getVelocity() {
+        return this.velocity;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public void setBoost(final double passedBoost) {
-        this.boost = passedBoost;
+    public void setVelocity(final double vel) {
+        this.velocity = vel;
     }
-
 }

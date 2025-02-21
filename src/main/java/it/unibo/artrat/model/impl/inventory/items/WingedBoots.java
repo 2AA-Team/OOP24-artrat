@@ -9,8 +9,8 @@ import it.unibo.artrat.model.impl.inventory.AbstractItem;
  */
 public class WingedBoots extends AbstractItem {
 
-    private static final double MAX_BOOST = 3.0;
-    private static final double ADD_BOOST_UNIT = 0.2;
+    private static final double MAX_BOOST = 0.025;
+    private static final double ADD_BOOST_UNIT = 0.005;
 
     /**
      * A constructor to initialize the new item Winged Boots.
@@ -28,8 +28,8 @@ public class WingedBoots extends AbstractItem {
      */
     @Override
     public Player consume(final Player player) {
-        if (player.getBoost() + ADD_BOOST_UNIT <= MAX_BOOST) {
-            player.setBoost(player.getBoost() + ADD_BOOST_UNIT);
+        if (player.getVelocity() + ADD_BOOST_UNIT <= MAX_BOOST) {
+            player.setVelocity((player.getVelocity() + ADD_BOOST_UNIT));
         }
         return player.copyPlayer();
     }

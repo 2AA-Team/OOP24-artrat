@@ -13,6 +13,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import it.unibo.artrat.model.api.Collectable;
 import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.characters.Enemy;
 import it.unibo.artrat.model.api.world.Floor;
@@ -38,7 +39,7 @@ public class FloorImpl implements Floor {
     private static final Random RANDOM = new Random();
     private Set<GameObject> floorStructure = new HashSet<>();
     private Set<Enemy> floorEnemies = new HashSet<>();
-    private Set<GameObject> floorValues = new HashSet<>();
+    private Set<Collectable> floorValues = new HashSet<>();
     private List<List<Boolean>> floorMap;
     private final double maxFloorSize;
     private final double maxRoomSize;
@@ -136,7 +137,7 @@ public class FloorImpl implements Floor {
      * {@inheritDoc}
      */
     @Override
-    public Set<GameObject> getValues() {
+    public Set<Collectable> getValues() {
         return new HashSet<>(floorValues);
     }
 
@@ -285,7 +286,7 @@ public class FloorImpl implements Floor {
                 w.getPosition().getY() + roomY * roomSize)));
         this.floorStructure.addAll(tmpStruct);
 
-        final Set<GameObject> tmpValues = room.getValues();
+        final Set<Collectable> tmpValues = room.getValues();
         tmpValues.forEach((w) -> w.setPosition(new Point(w.getPosition().getX() + roomX * roomSize,
                 w.getPosition().getY() + roomY * roomSize)));
         this.floorValues.addAll(tmpValues);
@@ -355,5 +356,10 @@ public class FloorImpl implements Floor {
     @Override
     public void setEnemies(final Set<Enemy> enemies) {
         this.floorEnemies = new HashSet<>(enemies);
+    }
+
+    @Override
+    public void setValues(Set<Collectable> passedValues) {
+        this.floorValues = new HashSet<>(passedValues);
     }
 }

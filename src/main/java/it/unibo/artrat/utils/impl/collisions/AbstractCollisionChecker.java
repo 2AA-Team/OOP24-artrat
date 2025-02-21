@@ -1,5 +1,7 @@
 package it.unibo.artrat.utils.impl.collisions;
 
+import java.util.Objects;
+
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.utils.api.commands.Command;
 
@@ -12,12 +14,18 @@ public abstract class AbstractCollisionChecker {
     }
 
     public void updateAndCheck(MainController mainController, Command cmd, long delta) {
-        this.mainController = mainController;
+        this.mainController = Objects.requireNonNull(mainController);
         updateAndCheckPlayer(cmd, delta);
-        updateAndCheckVisibleEnemy(delta);
+        updateEnemiesState(delta);
+        updateAndCheckPaintings();
+        updateAndCheckExit();
     }
 
     public abstract void updateAndCheckPlayer(Command cmd, long delta);
 
-    public abstract void updateAndCheckVisibleEnemy(long delta);
+    public abstract void updateAndCheckPaintings();
+    
+    public abstract void updateAndCheckExit();
+
+    public abstract void updateEnemiesState(long delta);
 }

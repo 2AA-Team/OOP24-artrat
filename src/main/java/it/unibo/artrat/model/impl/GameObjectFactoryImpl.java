@@ -3,6 +3,7 @@ package it.unibo.artrat.model.impl;
 import java.util.HashSet;
 import java.util.Random;
 
+import it.unibo.artrat.model.api.Collectable;
 import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.GameObjectFactory;
 import it.unibo.artrat.model.api.characters.Enemy;
@@ -56,7 +57,7 @@ public class GameObjectFactoryImpl implements GameObjectFactory {
      * {@inheritDoc}
      */
     @Override
-    public GameObject getPicture(final int x, final int y) {
+    public Collectable getPicture(final int x, final int y) {
         final double priceMax = 10;
         return new Picture(x, y, RANDOM.nextDouble(priceMax));
     }

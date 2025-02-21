@@ -3,8 +3,7 @@ package it.unibo.artrat.model.impl.characters;
 import java.util.HashSet;
 import java.util.Set;
 
-import it.unibo.artrat.model.api.characters.AbstractEntity;
-import it.unibo.artrat.model.api.characters.Enemy;
+import it.unibo.artrat.model.api.characters.AbstractEnemy;
 import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;
@@ -14,7 +13,7 @@ import it.unibo.artrat.utils.impl.Vector2d;
  * 
  * @author Samuele Trapani
  */
-public final class AdvancedEnemy extends AbstractEntity implements Enemy {
+public final class AdvancedEnemy extends AbstractEnemy {
 
     public AdvancedEnemy(final Point center, final double width, final double height) {
         super(center, width, height, new HashSet<>());
@@ -60,9 +59,9 @@ public final class AdvancedEnemy extends AbstractEntity implements Enemy {
     }
 
     @Override
-    public void follow(final Player p) {
+    public void follow(Player p) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'follow'");
+
     }
 
 }

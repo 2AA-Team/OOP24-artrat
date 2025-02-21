@@ -9,7 +9,7 @@ import it.unibo.artrat.model.api.characters.Coin;
  */
 public class CoinImpl implements Coin {
 
-    private static final double RESET_AMOUNT = 9999.0;
+    private static final double RESET_AMOUNT = 0.0;
     private double amount;
 
     /**

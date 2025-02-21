@@ -3,9 +3,9 @@ package it.unibo.artrat.model.impl.characters;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-import it.unibo.artrat.model.api.characters.AbstractEntity;
-import it.unibo.artrat.model.api.characters.Enemy;
+import it.unibo.artrat.model.api.characters.AbstractEnemy;
 import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.utils.api.BoundingBox;
 import it.unibo.artrat.utils.api.Directions;
@@ -18,7 +18,7 @@ import it.unibo.artrat.utils.impl.Vector2d;
  * 
  * @author Samuele Trapani
  */
-public final class BaseEnemy extends AbstractEntity implements Enemy {
+public final class BaseEnemy extends AbstractEnemy {
     private final Random rd = new Random();
     private final BoundingBox fieldOfView;
     private static final int DEFAULT_STEPS = 10;
@@ -57,9 +57,21 @@ public final class BaseEnemy extends AbstractEntity implements Enemy {
      */
     @Override
     public void follow(final Player p) {
-        final var speed = this.calculateSpeed();
-        final var playerDirection = p.calculateSpeed().normalize();
-        this.setSpeed(playerDirection.mul(speed.module()));
+        System.out.println(this.getPosition() + " FOLLOWING");
+        final Set<Vector2d> dir = Set.of(Directions.values()).stream()
+                .map(x -> x.vector())
+                .collect(Collectors.toSet());
+        Vector2d tmp = new Vector2d();
+        double min = Integer.MAX_VALUE;
+        for (Vector2d v : dir) {
+            final Point current = this.getPosition().sum(v);
+            double distance = p.getPosition().getEuclideanDistance(current);
+            if (distance <= min) {
+                tmp = v;
+                min = distance;
+            }
+        }
+        this.setSpeed(tmp);
     }
 
     /**
@@ -92,15 +104,6 @@ public final class BaseEnemy extends AbstractEntity implements Enemy {
         } else {
             this.steps--;
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void update(final long delta) {
-        super.update(delta);
-        this.fieldOfView.setCenter(this.getPosition());
     }
 
 }

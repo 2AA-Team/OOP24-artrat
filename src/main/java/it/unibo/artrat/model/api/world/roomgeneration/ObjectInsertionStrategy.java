@@ -21,7 +21,7 @@ public interface ObjectInsertionStrategy<O> {
      * @param factored  function that create the object to add
      * @return set of object
      */
-    Set<O> insertMultipleObject(Set<GameObject> baseRoom, int roomSize, int addNumber,
+    Set<O> insertMultipleObject(Set<? extends GameObject> baseRoom, int roomSize, int addNumber,
             BiFunction<Integer, Integer, O> factored);
 
     /**

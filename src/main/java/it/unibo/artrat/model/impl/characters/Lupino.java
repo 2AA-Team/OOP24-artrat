@@ -1,9 +1,12 @@
 package it.unibo.artrat.model.impl.characters;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 
 import it.unibo.artrat.model.api.Collectable;
 import it.unibo.artrat.model.api.characters.AbstractEntity;
@@ -192,11 +195,20 @@ public class Lupino extends AbstractEntity implements Player {
     @Override
     public Player copyPlayer() {
         final Player p = new Lupino(this.getPosition(), this.getSpeed());
-        p.setBoost(this.getBoost());
+        p.setVelocity(this.getVelocity());
         p.setInventory(this.getInventory());
         p.setCoin(this.getCoin());
         p.setMultipler(this.getMultiplier());
         p.setColletableList(this.getColletableList());
         return p;
+    }
+
+    @Override
+    public void obtainCollectable() {
+        double coinsToAdd = BigDecimal.valueOf(collectabels.stream().mapToDouble(Collectable::getPrice).sum())
+                                        .setScale(2, RoundingMode.HALF_UP)
+                                        .doubleValue();
+        this.coins.addCoins(coinsToAdd);
+        this.collectabels.clear();
     }
 }

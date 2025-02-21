@@ -11,6 +11,7 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.unibo.artrat.model.api.Collectable;
 import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.characters.Enemy;
 import it.unibo.artrat.model.api.world.Room;
@@ -43,7 +44,7 @@ class RoomImplTest {
         final Set<Enemy> enemies = room.getEnemies();
         assertNotNull(enemies, "Room enemies set should not be null");
         assertEquals(2, enemies.size(), "The number of enemies should be as set in the builder");
-        final Set<GameObject> values = room.getValues();
+        final Set<Collectable> values = room.getValues();
         assertNotNull(values, "Room values set should not be null");
         assertEquals(3, values.size(), "The number of values should match what was set in the builder");
     }

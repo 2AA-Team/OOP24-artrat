@@ -94,6 +94,9 @@ public interface MainController {
      */
     int getCurrentTimeMainController();
 
-    
     boolean isTimeOutMainController();
+
+    void winGame();
+
+    void loseGame();
 }

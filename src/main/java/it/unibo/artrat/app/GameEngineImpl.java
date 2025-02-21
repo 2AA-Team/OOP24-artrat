@@ -68,7 +68,8 @@ public final class GameEngineImpl implements GameEngine {
      */
     @Override
     public void run() {
-        mainController.addMainView(new MainViewImpl(resourceLoader));
+        MainViewImpl mv = new MainViewImpl(resourceLoader);
+        mainController.addMainView(mv);
     }
 
     /**
@@ -126,6 +127,7 @@ public final class GameEngineImpl implements GameEngine {
     @Override
     public void forceStop() {
         this.status = GameStatus.STOPPED;
+        commands.clear();
     }
 
     /**
@@ -133,6 +135,7 @@ public final class GameEngineImpl implements GameEngine {
      */
     @Override
     public void forceStart() {
+        commands.clear();
         this.status = GameStatus.RUNNING;
         new Thread(this::mainLoop, "GameLoopThread").start();
     }

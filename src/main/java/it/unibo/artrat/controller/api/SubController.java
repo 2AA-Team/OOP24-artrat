@@ -44,25 +44,25 @@ public interface SubController {
     void inputMainController(Command cmd);
 
     /**
-     * @author Manuel Benagli
+     * start the timer in controller.
      */
     void startTimerSubController();
 
     /**
-     * @author Manuel Benagli
+     * reset the timer in controller.
      */
     void resetTimerSubController();
 
     /**
-     * @author Manuel Benagli
+     * check if time is out.
+     * 
      */
-    boolean isTimeOutSubController();
+    void isTimeOutSubController();
 
     /**
+     * getter for current time.
      * 
-     * @return
-     * 
-     * @author Manuel Benagli
+     * @return current time as a int
      */
     int getCurrentTimeController();
 }

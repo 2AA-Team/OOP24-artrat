@@ -83,7 +83,7 @@ public class GameSubPanel extends AbstractSubPanel {
             printObject(g, center, playerPos, RoomSymbols.ENEMY, gameSubController.getVisibleEnemyPositions());
             printPlayer(g, center);
 
-           timerCountdown.setText(Integer.toString(gameSubController.getCurrentTimeController() / ONE_SECOND));      //aggiorno il timer            
+            timerCountdown.setText(Integer.toString(gameSubController.getCurrentTimeController() / ONE_SECOND));
             forceRedraw();
         }
 
@@ -112,8 +112,8 @@ public class GameSubPanel extends AbstractSubPanel {
      */
     public GameSubPanel(final GameSubController gameSubController) {
         this.gameSubController = gameSubController;
-        
-        this.gameSubController.startTimerSubController();           //starto il timer
+
+        this.gameSubController.startTimerSubController(); // starto il timer
     }
 
     private boolean isMovementCommand(final KeyEvent e) {
@@ -179,8 +179,7 @@ public class GameSubPanel extends AbstractSubPanel {
      */
     @Override
     public void forceRedraw() {
-        if(gameSubController.isTimeOutSubController()) {
-            gameSubController.setStage(Stage.MENU);
-        }
+        gameSubController.isTimeOutSubController();
+        
     }
 }

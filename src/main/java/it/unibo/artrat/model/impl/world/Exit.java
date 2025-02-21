@@ -25,8 +25,4 @@ public class Exit extends AbstractGameObject {
     public void update(final long delta) {
     }
 
-    @Override
-    public AbstractGameObject clone() {
-        return new Exit(this.getPosition().getX(), this.getPosition().getY());
-    }
 }
