@@ -1,7 +1,6 @@
 package it.unibo.artrat.controller.api.subcontroller;
 
 import java.util.Set;
-
 import it.unibo.artrat.controller.api.SubController;
 import it.unibo.artrat.utils.impl.Point;
 
@@ -56,5 +55,12 @@ public interface GameSubController extends SubController {
      * Initialize the game resources.
      */
     void init();
+
+    /**
+     * return the direction to show at the player the exit.
+     * 
+     * @return the direction as an angle
+     */
+    double getAngleCompass();
 
 }

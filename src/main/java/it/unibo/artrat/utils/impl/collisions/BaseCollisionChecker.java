@@ -3,7 +3,6 @@ package it.unibo.artrat.utils.impl.collisions;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.api.characters.Enemy;

@@ -7,9 +7,7 @@ import java.util.stream.Collectors;
 
 import it.unibo.artrat.model.api.characters.AbstractEnemy;
 import it.unibo.artrat.model.api.characters.Player;
-import it.unibo.artrat.utils.api.BoundingBox;
 import it.unibo.artrat.utils.api.Directions;
-import it.unibo.artrat.utils.impl.BoundingBoxImpl;
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;
 
@@ -20,13 +18,11 @@ import it.unibo.artrat.utils.impl.Vector2d;
  */
 public final class BaseEnemy extends AbstractEnemy {
     private final Random rd = new Random();
-    private final BoundingBox fieldOfView;
     private static final int DEFAULT_STEPS = 10;
     private int steps = 0;
 
     public BaseEnemy(final Point center, final double width, final double height) {
         super(center, width, height, new HashSet<>());
-        fieldOfView = new BoundingBoxImpl(center, width, height);
     }
 
     /**
@@ -37,7 +33,6 @@ public final class BaseEnemy extends AbstractEnemy {
      */
     public BaseEnemy(final Point topLeft, final Point bottomRight) {
         super(topLeft, bottomRight);
-        this.fieldOfView = new BoundingBoxImpl(topLeft, bottomRight);
     }
 
     /**
@@ -49,7 +44,6 @@ public final class BaseEnemy extends AbstractEnemy {
      */
     public BaseEnemy(final Point topLeft, final Point bottomRight, final Set<Vector2d> v) {
         super(topLeft, bottomRight, v);
-        this.fieldOfView = new BoundingBoxImpl(topLeft, bottomRight);
     }
 
     /**
