@@ -14,6 +14,7 @@ import it.unibo.artrat.utils.impl.BoundingBoxImpl;
 import it.unibo.artrat.utils.impl.Vector2d;
 
 public class BaseCollisionChecker extends AbstractCollisionChecker {
+    private final static long deltaLimit = 30;
 
     public BaseCollisionChecker(double renderDistance) {
         super(renderDistance);
@@ -21,22 +22,24 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
 
     @Override
     public void updateAndCheckPlayer(Command cmd, long delta) {
-        final var model = this.mainController.getModel();
-        final var player = model.getPlayer();
-        final var rollBack = new Lupino(player.getPosition(), new HashSet<>());
+        if (delta < deltaLimit) {
+            final var model = this.mainController.getModel();
+            final var player = model.getPlayer();
+            final var rollBack = new Lupino(player.getPosition(), new HashSet<>());
 
-        if (!Objects.isNull(cmd)) {
-            cmd.execute(player);
-        }
-        player.update(delta);
-        System.out.println(player.getSpeed());
+            if (!Objects.isNull(cmd)) {
+                cmd.execute(player);
+            }
+            player.update(delta);
+            System.out.println(player.getSpeed());
 
-        if (!checkWallCollision(player)) {
-            model.setPlayer(player);
-        } else {
-            model.setPlayer(rollBack);
+            if (!checkWallCollision(player)) {
+                model.setPlayer(player);
+            } else {
+                model.setPlayer(rollBack);
+            }
+            this.mainController.setModel(model);
         }
-        this.mainController.setModel(model);
     }
 
     @Override

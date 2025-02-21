@@ -8,6 +8,7 @@ import it.unibo.artrat.utils.api.BoundingBox;
  * @author Samuele Trapani
  */
 public class BoundingBoxImpl implements BoundingBox {
+    private static final double EPSILON = 1e-6;
     private Point topLeft;
     private Point bottomRight;
     private final double height;
@@ -39,8 +40,8 @@ public class BoundingBoxImpl implements BoundingBox {
     public BoundingBoxImpl(final Point topLeft, final Point bottomRight) {
         this.bottomRight = new Point(bottomRight);
         this.topLeft = new Point(topLeft);
-        this.width = Math.abs(this.bottomRight.getY() - this.topLeft.getY());
-        this.height = Math.abs(this.topLeft.getX() - this.bottomRight.getX());
+        this.width = Math.abs(this.bottomRight.getX() - this.topLeft.getX());
+        this.height = Math.abs(this.topLeft.getY() - this.bottomRight.getY());
     }
 
     /**
@@ -79,10 +80,10 @@ public class BoundingBoxImpl implements BoundingBox {
      */
     @Override
     public boolean isColliding(final BoundingBox box) {
-        return !(this.topLeft.getX() >= box.getBottomRight().getX()
-                || this.bottomRight.getX() <= box.getTopLeft().getX()
-                || this.topLeft.getY() >= box.getBottomRight().getY()
-                || this.bottomRight.getY() <= box.getTopLeft().getY());
+        return !(this.topLeft.getX() >= box.getBottomRight().getX() + EPSILON
+                || this.bottomRight.getX() <= box.getTopLeft().getX() - EPSILON
+                || this.topLeft.getY() >= box.getBottomRight().getY() + EPSILON
+                || this.bottomRight.getY() <= box.getTopLeft().getY() - EPSILON);
     }
 
     /**
@@ -90,7 +91,6 @@ public class BoundingBoxImpl implements BoundingBox {
      */
     @Override
     public Point getCenter() {
-
         return new Point(this.topLeft.getX() + this.getWidth() / 2, this.topLeft.getY() + height / 2);
     }
 
@@ -99,8 +99,8 @@ public class BoundingBoxImpl implements BoundingBox {
      */
     @Override
     public void setCenter(final Point center) {
-        this.topLeft = new BoundingBoxImpl(center, this.getWidth(), this.getHeight()).getTopLeft();
-        this.bottomRight = new BoundingBoxImpl(center, this.getWidth(), this.getHeight()).getBottomRight();
+        this.topLeft = new Point(center.getX() - this.width / 2, center.getY() - this.height / 2);
+        this.bottomRight = new Point(center.getX() + this.width / 2, center.getY() + this.height / 2);
     }
 
 }
