@@ -5,6 +5,7 @@ import java.net.URI;
 import java.util.Set;
 
 import it.unibo.artrat.model.api.inventory.ItemType;
+import it.unibo.artrat.model.api.market.MissionType;
 
 /**
  * An interface that represents a reader for all types of Items present in
@@ -40,6 +41,13 @@ public interface ItemReader {
      * @return The ItemTypes of the desired item.
      */
     ItemType getItemType(String nameOfItem);
+
+    /**
+     * 
+     * @param nameOfMission desired mission from the file.
+     * @return the MissionTypes of the desired item.
+     */
+    MissionType getMissionType(final String nameOfMission);
 
     /**
      * 

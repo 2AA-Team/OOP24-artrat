@@ -100,6 +100,12 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
     @Override
     public void init() {
         final Model model = this.getModel();
+        try {
+            this.floor.generateFloorSet();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         model.setFloor(this.floor);
         final Player player = model.getPlayer();
         player.setPosition(this.floor.getStartPosition());

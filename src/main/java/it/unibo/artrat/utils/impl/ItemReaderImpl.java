@@ -14,6 +14,7 @@ import java.util.Set;
 import org.yaml.snakeyaml.Yaml;
 
 import it.unibo.artrat.model.api.inventory.ItemType;
+import it.unibo.artrat.model.api.market.MissionType;
 import it.unibo.artrat.utils.api.ItemReader;
 
 /**
@@ -79,6 +80,20 @@ public class ItemReaderImpl implements ItemReader {
         }
         throw new IllegalStateException("The second field in the YAML file related to "
                 + nameOfItem + " is either not an ItemType or has a typo.");
+    }
+
+    @Override
+    public MissionType getMissionType(final String nameOfMission) {
+        switch (getConfig(nameOfMission, 2)) {
+            case "CONSUMABLE":
+                return MissionType.SCORE;
+            case "POWERUP":
+                return MissionType.CHALLENGE;
+            default:
+                break;
+        }
+        throw new IllegalStateException("The second field in the YAML file related to "
+                + nameOfMission + " is either not an MissionType or has a typo.");
     }
 
     /**
