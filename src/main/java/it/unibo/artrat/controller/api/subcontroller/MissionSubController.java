@@ -1,14 +1,11 @@
 package it.unibo.artrat.controller.api.subcontroller;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import it.unibo.artrat.controller.api.SubController;
-import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.api.market.Mission;
 
 /**
- * 
+ * MissionSubController interface.
  */
 public interface MissionSubController extends SubController {
 
@@ -19,13 +16,13 @@ public interface MissionSubController extends SubController {
  
     /**
      * 
-     * @return
+     * @return all the missions to redeem.
      */
-    List<Item> redeemableMissions();
+    List<Mission> redeemableMissions();
     
     /**
      * 
-     * @param missionToRedeem
+     * @param missionToRedeem mission to redeem.
      * @return
      */
     boolean redeemMission(final Mission missionToRedeem);

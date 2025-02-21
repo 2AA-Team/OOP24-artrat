@@ -166,9 +166,10 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         });
 
         toMissions.addActionListener(e-> {
-            if (toConfirm("Do you want to come back to the menu?", "Back to menu")) {
+            if (toConfirm("Do you want to see the missions?", "Go to missions")) {
                 exitSettings();
                 contr.setStage(Stage.MISSIONS);
+                forceRedraw();                      //qevqwqwqwcqwcqwqwqwcqwqqqqqqqqqqqqqqqqqqqqqqqqqqqq
             }
         });
 

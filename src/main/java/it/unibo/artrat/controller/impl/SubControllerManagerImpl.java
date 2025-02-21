@@ -8,10 +8,12 @@ import it.unibo.artrat.controller.api.SubControllerManager;
 import it.unibo.artrat.controller.api.subcontroller.GameSubController;
 import it.unibo.artrat.controller.api.subcontroller.InventorySubController;
 import it.unibo.artrat.controller.api.subcontroller.MenuSubController;
+import it.unibo.artrat.controller.api.subcontroller.MissionSubController;
 import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
 import it.unibo.artrat.controller.impl.subcontroller.GameSubControllerImpl;
 import it.unibo.artrat.controller.impl.subcontroller.InventorySubControllerImpl;
 import it.unibo.artrat.controller.impl.subcontroller.MenuSubControllerImpl;
+import it.unibo.artrat.controller.impl.subcontroller.MissionSubControllerImpl;
 import it.unibo.artrat.controller.impl.subcontroller.StoreSubControllerImpl;
 import it.unibo.artrat.utils.api.ResourceLoader;
 
@@ -24,6 +26,7 @@ public class SubControllerManagerImpl implements SubControllerManager {
     private final GameSubController gameSubController;
     private final InventorySubController inventorySubController;
     private final StoreSubController storeSubController;
+    private final MissionSubController missionSubController;
 
     /**
      * constructor that define all subController.
@@ -38,6 +41,7 @@ public class SubControllerManagerImpl implements SubControllerManager {
         this.menuSubController = new MenuSubControllerImpl(mainController);
         this.inventorySubController = new InventorySubControllerImpl(mainController);
         this.storeSubController = new StoreSubControllerImpl(mainController);
+        this.missionSubController = new MissionSubControllerImpl(mainController);
     }
 
     /**
@@ -74,6 +78,11 @@ public class SubControllerManagerImpl implements SubControllerManager {
     @Override
     public StoreSubController getStoreSubController() {
         return Objects.requireNonNull(this.storeSubController);
+    }
+
+    @Override
+    public MissionSubController getMissionsSubController() {
+        return Objects.requireNonNull(this.missionSubController);
     }
 
 }

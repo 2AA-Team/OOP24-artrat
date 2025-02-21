@@ -3,6 +3,7 @@ package it.unibo.artrat.controller.api;
 import it.unibo.artrat.controller.api.subcontroller.GameSubController;
 import it.unibo.artrat.controller.api.subcontroller.InventorySubController;
 import it.unibo.artrat.controller.api.subcontroller.MenuSubController;
+import it.unibo.artrat.controller.api.subcontroller.MissionSubController;
 import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
 
 /**
@@ -36,4 +37,10 @@ public interface SubControllerManager {
      * @return subController for the Store
      */
     StoreSubController getStoreSubController();
+
+    /**
+     * return controller fot the seguent model: Missions.
+     * @return subController for the Missions panel.
+     */
+    MissionSubController getMissionsSubController();
 }

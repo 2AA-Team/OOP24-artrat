@@ -109,6 +109,9 @@ public class MainViewImpl implements MainView {
             case INVENTORY:
                 subPanel = new InventorySubPanel(controller.getControllerManager().getInventorySubController());
                 break;
+            case MISSIONS:
+                subPanel = new MissionSubPanel(controller.getControllerManager().getMissionsSubController());
+                break;
             default:
                 throw new IllegalStateException("Stage does not exist.");
         }

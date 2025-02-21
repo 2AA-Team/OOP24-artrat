@@ -14,7 +14,6 @@ import it.unibo.artrat.utils.impl.ItemReaderImpl;
  * 
  */
 public class MissionFactoryImpl implements MissionFactory {
-
     private final URL itemPath = Thread.currentThread().getContextClassLoader().getResource(
             "missions" + File.separator + "missions.yaml");
  

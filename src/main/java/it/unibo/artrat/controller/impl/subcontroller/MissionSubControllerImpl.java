@@ -6,7 +6,6 @@ import java.util.List;
 import it.unibo.artrat.controller.api.subcontroller.MissionSubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
-import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.api.market.Mission;
 
 /**
@@ -28,16 +27,15 @@ public class MissionSubControllerImpl extends AbstractSubController implements M
      */
     @Override
     public void initMissionList() {
-      // this.currentMissionsList = new ArrayList<>(this.getModel().getMarket().getPurchItems());
+      this.currentMissionsList = new ArrayList<>(this.getModel().getMarket().getMissionList());
     }
 
     /**
      * 
      */
     @Override
-    public List<Item> redeemableMissions() {
-        //return new ArrayList<>(currentMissionsList);
-        return null;
+    public List<Mission> redeemableMissions() {
+        return new ArrayList<>(currentMissionsList);
     }
 
     /**

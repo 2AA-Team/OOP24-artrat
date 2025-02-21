@@ -1,11 +1,10 @@
 package it.unibo.artrat.view.impl;
 
 import java.awt.*;
-import java.util.Locale;
-
 import javax.swing.*;
 
 import it.unibo.artrat.controller.api.subcontroller.MissionSubController;
+import it.unibo.artrat.model.impl.Stage;
 
 /**
  * MissionSubPanel, we enter here from the market.
@@ -13,42 +12,58 @@ import it.unibo.artrat.controller.api.subcontroller.MissionSubController;
 public class MissionSubPanel extends AbstractSubPanel {
     private final MissionSubController missionControl;
     private JPanel missionPanel = new JPanel();
-        private final JPanel contPane = new JPanel(new BorderLayout());
-        private final JScrollPane scrollPanel = new JScrollPane(missionPanel);
-        //private final JTextField searchMissionField = new JTextField(SEARCH_TEXT_FIELD);
+    private final JPanel contMissionPane = new JPanel(new BorderLayout());
+    private final JScrollPane scrollPanel = new JScrollPane(missionPanel);
+
+    /**
+     * Constructor.
+     * @param missionControl Controller for mission management
+     */
+    public MissionSubPanel(final MissionSubController missionControl) {
+        this.missionControl = missionControl;
+    }
     
-        public MissionSubPanel(final MissionSubController missionControl) {
-            this.missionControl = missionControl;
-        }
+    /**
+     * Initializes the components of the view.
+     */
+    @Override
+    public void initComponents() {
+        // Set the layout of the main panel to BorderLayout to support flexible resizing
+        missionPanel.setLayout(new BorderLayout(3, 3));
+        scrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+        contMissionPane.add(scrollPanel, BorderLayout.CENTER);
+        missionControl.initMissionList();
     
-        @Override
-        public void initComponents() {
-           // missionPanel.setLayout(new BorderLayout(GAP, GAP));
-            scrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-            contPane.add(scrollPanel, BorderLayout.CENTER);
-            missionControl.initMissionList();
-    
-            this.missionPanel = new JPanel(new GridLayout(0, 1, 2, 2));
+        this.missionPanel = new JPanel(new GridLayout(0, 1, 2, 2));
         setMissions();
         allMissionsSetup();
-        setPanel(contPane);
+        setPanel(contMissionPane);
     }
 
+    /**
+     * Method to confirm an action with a message dialog.
+     * @param text The message text
+     * @param name The title of the dialog
+     * @return true if confirmed, false otherwise
+     */
+    private boolean toConfirm(final String text, final String name) {
+        return JOptionPane.showConfirmDialog(missionPanel, text, name, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+    }
+
+    /* 
+    * Layout, similar to MarketSubPanel, but for missions, which has a completely different concept.
+    */
     private void setMissions() {
-        // Layout, similar to the MarketSubPanel, but for missions
         final JPanel bottomPan = new JPanel(new FlowLayout(FlowLayout.LEFT));
         final JButton toMarket = new JButton("BACK");
-        
-        // Add components to the layout
         missionPanel.add(bottomPan, BorderLayout.SOUTH);
 
-        /* 
         toMarket.addActionListener(e -> {
-            if (toConfirm("Do you want to come back to the menu?", "Back to menu")) {
-                exitSettings();
-                missionControl.setStage(Stage.MARKET);
+            if (toConfirm("Do you want to come back to the market?", "Back to market")) {
+                missionControl.setStage(Stage.STORE);
             }
-        });*/
+        });
 
         bottomPan.add(toMarket);
     }
@@ -59,25 +74,29 @@ public class MissionSubPanel extends AbstractSubPanel {
         for (final var mission : missionControl.redeemableMissions()) {
             final JButton missionButton = new JButton("Mission");
             final JButton acceptMission = new JButton("Accept");
-            final JPanel missionPanel = new JPanel(new GridLayout(1, 3, 2, 2));  // Similar to items grid
-            missionPanel.add(missionButton);
-            missionPanel.add(acceptMission);
+            final JPanel missionItemPanel = new JPanel(new GridLayout(1, 3, 2, 2));
+            missionItemPanel.add(missionButton);
+            missionItemPanel.add(acceptMission);
 
-            this.missionPanel.add(missionPanel);
+            this.missionPanel.add(missionItemPanel);
 
             acceptMission.addActionListener(e -> {
-                if (toConfirm("Do you want to accept this mission?", "Accept Mission") && contr.acceptMission(mission)) {
+                if (toConfirm("Do you want to accept this mission?", "Accept Mission") && missionControl.redeemMission(mission)) {
                     forceRedraw();
                 }
             });
         }
+        // Update the view after any changes
         missionPanel.revalidate();
         missionPanel.repaint();
     }
 
+    /**
+     * Forces the redraw of the panel to reflect any changes
+     */
     @Override
     protected void forceRedraw() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'forceRedraw'");
+        missionPanel.revalidate();
+        missionPanel.repaint();
     }
 }

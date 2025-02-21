@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.model.api.market.Market;
+import it.unibo.artrat.model.api.market.Mission;
 import it.unibo.artrat.model.impl.inventory.ItemFactoryImpl;
 import it.unibo.artrat.utils.api.ItemReader;
 import it.unibo.artrat.utils.impl.ItemReaderImpl;
@@ -28,7 +29,8 @@ public class MarketImpl implements Market {
     private List<Item> itemsToBuy;
     private final ItemReader itemReader;
     private final ItemFactoryImpl itemFactory;
-        private static final Logger LOGGER = LoggerFactory.getLogger(MarketImpl.class);
+    private List<Mission> missionsToRedeem;
+    private static final Logger LOGGER = LoggerFactory.getLogger(MarketImpl.class);
 
     /**
      * 
@@ -37,6 +39,7 @@ public class MarketImpl implements Market {
         this.itemsToBuy = new ArrayList<>();
         this.itemReader = new ItemReaderImpl();
         this.itemFactory = new ItemFactoryImpl();
+        this.missionsToRedeem = new ArrayList<>();
     }
 
     /**
@@ -46,6 +49,8 @@ public class MarketImpl implements Market {
     public MarketImpl(final Market mark) {
         this.itemsToBuy = new ArrayList<>();
         this.itemsToBuy.addAll(mark.getPurchItems());
+        this.missionsToRedeem = new ArrayList<>();
+        this.missionsToRedeem.addAll(mark.getMissionList());
         this.itemReader = new ItemReaderImpl();
         this.itemFactory = new ItemFactoryImpl();
     }
@@ -80,6 +85,22 @@ public class MarketImpl implements Market {
     @Override
     public void setPurchItems(final List<Item> items) {
         this.itemsToBuy = new ArrayList<>(items);
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public List<Mission> getMissionList() {
+        return new ArrayList<>(missionsToRedeem);
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public void setMissionList(List<Mission> missions) {
+        this.missionsToRedeem = new ArrayList<>(missions);
     }
 
     /**
