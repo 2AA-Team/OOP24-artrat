@@ -32,7 +32,6 @@ public interface GameObject {
     /**
      * Collision check with other bounding box.
      * 
-     * @param box
      * @return true if colliding, false otherwise
      */
     BoundingBox getBoundingBox();

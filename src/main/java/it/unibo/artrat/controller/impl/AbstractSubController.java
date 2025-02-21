@@ -77,11 +77,17 @@ public abstract class AbstractSubController implements SubController {
         this.mainController.startTimerMainController();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isTimeOutSubController() {
         return this.mainController.isTimeOutMainController();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getCurrentTimeController() {
         return this.mainController.getCurrentTimeMainController();

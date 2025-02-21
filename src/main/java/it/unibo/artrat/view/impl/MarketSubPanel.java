@@ -12,8 +12,10 @@ import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.view.api.MarketView;
 
 /**
- * Here I see the collection of all the items I can purchase, and different buttons. 
+ * Here I see the collection of all the items I can purchase, and different
+ * buttons.
  * The operations of the buttons are dependent on each other.
+ * 
  * @author Manuel Benagli
  */
 public class MarketSubPanel extends AbstractSubPanel implements MarketView {
@@ -30,6 +32,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
 
     /**
      * MarketSubPanel constructor.
+     * 
      * @param contr
      */
     public MarketSubPanel(final StoreSubController contr) {
@@ -42,7 +45,8 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
      * @return a confirm message when it's needed
      */
     private boolean toConfirm(final String text, final String name) {
-        return JOptionPane.showConfirmDialog(marketPanel, text, name, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+        return JOptionPane.showConfirmDialog(marketPanel, text, name,
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
     }
 
     /**
@@ -75,10 +79,11 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         setPanel(contPane);
     }
 
-     /**
+    /**
      * This method forces a view update.
      * I call the method allItemsSetup to read from my item List, which can be
-     * modified temporally (with filter, sort and search), and permanently (if I buy a powerup).
+     * modified temporally (with filter, sort and search), and permanently (if I buy
+     * a powerup).
      */
     @Override
     protected void forceRedraw() {
@@ -86,8 +91,8 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         marketPanel.revalidate();
         marketPanel.repaint();
     }
-    
-    //this private method updates the coin label every time I buy a new item.
+
+    // this private method updates the coin label every time I buy a new item.
     private void updateCoinLabel() {
         lupinoCash.setText(String.valueOf(contr.getModel().getPlayer().getCoin().getCurrentAmount()));
     }
@@ -95,7 +100,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     private void setShop() {
         final JButton sortButton = new JButton("Sort");
         final JPanel bottomPan = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        final JPanel upperJPanel = new JPanel(new GridBagLayout());  // Usato GridBagLayout per una gestione flessibile
+        final JPanel upperJPanel = new JPanel(new GridBagLayout()); // Usato GridBagLayout per una gestione flessibile
         final JButton toMenu = new JButton("BACK");
 
         final JComboBox<ItemType> filterComboBox = new JComboBox<>();
@@ -105,7 +110,8 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
             filterComboBox.addItem(type);
         }
 
-        // Impostato il layout di GridBagLayout per fare in modo che i componenti siano ridimensionabili
+        // Impostato il layout di GridBagLayout per fare in modo che i componenti siano
+        // ridimensionabili
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -129,26 +135,26 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         });
 
         sortButton.addActionListener(e -> {
-            final int choice = JOptionPane.showConfirmDialog(null, "creasing sorting = NO, decreasing = YES", 
-            "Ordinamento Prezzi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            final int choice = JOptionPane.showConfirmDialog(null, "creasing sorting = NO, decreasing = YES",
+                    "Ordinamento Prezzi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             contr.sorting(choice);
             forceRedraw();
         });
 
         searchItemField.getDocument().addDocumentListener(new DocumentListener() {
-           
+
             // I call itemSearch method at every character inserted into the search field.
             @Override
             public void insertUpdate(final DocumentEvent doc) {
                 itemSearch(searchItemField.getText().trim().toLowerCase(Locale.ROOT));
             }
 
-             // I call itemSearch method at every character removed into the search field.
+            // I call itemSearch method at every character removed into the search field.
             @Override
             public void removeUpdate(final DocumentEvent doc) {
                 itemSearch(searchItemField.getText().trim().toLowerCase(Locale.ROOT));
             }
-            
+
             // I call itemSearch method at every changed update.
             @Override
             public void changedUpdate(final DocumentEvent doc) {
@@ -161,7 +167,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
             if (toConfirm("Do you want to come back to the menu?", "Back to menu")) {
                 searchItemField.setText("");
                 contr.filterCategory(ITEMTYPE_ALL);
-                itemSearch(""); 
+                itemSearch("");
                 contr.setStage(Stage.MENU);
             }
         });
@@ -178,10 +184,12 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
 
     /**
      * This method reads from my StoreSubControllerImpl a list of purchasableItems.
-     * For every item I read, I create a nel panel, with three labels (item name, item type,
+     * For every item I read, I create a nel panel, with three labels (item name,
+     * item type,
      * item price) and a button to buy it
      * The purchasableItems are read using ItemReaderImpl.
-     * When I buy an item, if the item is a powerup, the item is cancelled in the market.
+     * When I buy an item, if the item is a powerup, the item is cancelled in the
+     * market.
      */
     private void allItemsSetup() {
         purchItemPanel.removeAll();
@@ -193,8 +201,8 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
             final JLabel priceButton = new JLabel(contr.getItemPrice(purchItem) + "$");
 
             // Layout per ogni singolo item: 3 label e un bottone su ogni riga
-            final JPanel itemPanel = new JPanel(new GridLayout(1, 4, GAP, GAP));  // 1 riga, 4 colonne
-            itemPanel.add(itemLabel); 
+            final JPanel itemPanel = new JPanel(new GridLayout(1, 4, GAP, GAP)); // 1 riga, 4 colonne
+            itemPanel.add(itemLabel);
             itemPanel.add(typeLabel);
             itemPanel.add(priceButton);
             itemPanel.add(buyItem);
@@ -213,6 +221,6 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
                 }
             });
         }
-        marketPanel.add(purchItemPanel, BorderLayout.CENTER); 
+        marketPanel.add(purchItemPanel, BorderLayout.CENTER);
     }
 }
