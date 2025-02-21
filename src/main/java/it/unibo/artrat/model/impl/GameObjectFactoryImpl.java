@@ -48,7 +48,7 @@ public class GameObjectFactoryImpl implements GameObjectFactory {
         return switch (RANDOM.nextInt(2)) {
             case 0 -> new AdvancedEnemy(new Point(x, y), size, size);
             case 1 -> new BaseEnemy(new Point(x, y), size, size);
-            default -> Function.identity();
+            default -> throw new IllegalStateException();
 
         };
     }
