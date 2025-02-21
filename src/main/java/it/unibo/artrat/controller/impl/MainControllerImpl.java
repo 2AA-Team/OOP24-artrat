@@ -1,9 +1,6 @@
 package it.unibo.artrat.controller.impl;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import it.unibo.artrat.app.api.GameEngine;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.controller.api.SubControllerManager;
@@ -23,7 +20,7 @@ import it.unibo.artrat.view.api.MainView;
 public class MainControllerImpl implements MainController {
 
     private Stage currentStage;
-    private final List<MainView> views;
+    private MainView view;
     private final GameEngine engine;
     private final SubControllerManager subControllerManager;
     private Model model;
@@ -39,7 +36,7 @@ public class MainControllerImpl implements MainController {
     public MainControllerImpl(final GameEngine engine) throws IOException {
         this.currentStage = Stage.MENU;
         this.engine = engine;
-        this.views = new ArrayList<>();
+        this.view = null;
         this.model = new ModelImpl();
         this.subControllerManager = new SubControllerManagerImpl(this, engine.getResourceLoader());
         this.timer = new WorldTimerImpl();
@@ -50,7 +47,7 @@ public class MainControllerImpl implements MainController {
      */
     @Override
     public void addMainView(final MainView newView) {
-        views.add(newView);
+        this.view = newView;
         newView.setController(this);
         newView.setStage(currentStage);
     }
@@ -70,9 +67,7 @@ public class MainControllerImpl implements MainController {
     @Override
     public void setStage(final Stage newStage) {
         currentStage = newStage;
-        for (final MainView mainView : views) {
-            mainView.reconduceFromStage();
-        }
+        view.reconduceFromStage();
         if (newStage.equals(Stage.GAME)) {
             engine.forceStart();
         } else {
@@ -87,9 +82,7 @@ public class MainControllerImpl implements MainController {
      */
     @Override
     public void redraw() {
-        for (final MainView mainView : views) {
-            mainView.forceRedraw();
-        }
+        view.forceRedraw();
     }
 
     /**
