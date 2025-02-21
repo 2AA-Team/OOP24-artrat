@@ -78,4 +78,16 @@ public abstract class AbstractEnemy extends AbstractEntity implements Enemy {
         this.fieldOfView.setCenter(this.getPosition().sum(this.calculateSpeed().mul(delta * this.getVelocity())));
     }
 
+    @Override
+    public void follow(Player p) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void capture() {
+        // TODO Auto-generated method stub
+
+    }
+
 }
