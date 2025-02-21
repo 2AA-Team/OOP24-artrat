@@ -15,6 +15,13 @@ import it.unibo.artrat.utils.impl.Vector2d;
  */
 public final class AdvancedEnemy extends AbstractEnemy {
 
+    /**
+     * constructor for advanced enemy.
+     * 
+     * @param center center of the hitbox
+     * @param width  width of the hitbox
+     * @param height height of the hitbox
+     */
     public AdvancedEnemy(final Point center, final double width, final double height) {
         super(center, width, height, new HashSet<>());
     }

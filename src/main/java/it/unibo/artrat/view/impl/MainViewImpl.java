@@ -109,12 +109,6 @@ public class MainViewImpl implements MainView {
                 throw new IllegalStateException("Stage does not exist.");
         }
         subPanel.setFrameDimension(this.frame.getSize());
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
         reloadFrame();
     }
 }

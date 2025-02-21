@@ -14,8 +14,9 @@ public class Picture extends AbstractGameObject implements Collectable {
     /**
      * constructor that specify center and puts hitbox at 1.
      * 
-     * @param x x coordinate
-     * @param y y coordinate
+     * @param x     x coordinate
+     * @param y     y coordinate
+     * @param price value of the picture
      */
     public Picture(final double x, final double y, final double price) {
         super(new Point(x, y), 1, 1);

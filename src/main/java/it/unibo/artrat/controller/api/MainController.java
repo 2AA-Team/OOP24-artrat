@@ -94,6 +94,10 @@ public interface MainController {
      */
     int getCurrentTimeMainController();
 
-    
+    /**
+     * check if time is out.
+     * 
+     * @return true if is time out
+     */
     boolean isTimeOutMainController();
 }

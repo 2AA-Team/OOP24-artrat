@@ -1,6 +1,7 @@
 package it.unibo.artrat.controller.impl;
 
 import java.io.IOException;
+
 import it.unibo.artrat.app.api.GameEngine;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.controller.api.SubControllerManager;
@@ -145,6 +146,9 @@ public class MainControllerImpl implements MainController {
         timer.resetTimer();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isTimeOutMainController() {
         return timer.isTimeOut();

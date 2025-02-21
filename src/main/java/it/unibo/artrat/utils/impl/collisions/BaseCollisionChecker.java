@@ -20,7 +20,7 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
     }
 
     @Override
-    public void updateAndCheckPlayer(Command cmd, long delta) {
+    public void updateAndCheckPlayer(final Command cmd, final long delta) {
         final var model = this.mainController.getModel();
         final var player = model.getPlayer();
         if (!Objects.isNull(cmd)) {
@@ -30,7 +30,6 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
         if (checkWallCollision(player)) {
             player.update(-delta);
         }
-        // System.out.println(player.getSpeed());
         model.setPlayer(player);
         this.mainController.setModel(model);
     }
@@ -43,10 +42,10 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
         final var enemies = floor.getEnemies();
         final Set<Enemy> updated = new HashSet<>();
 
-        for (Enemy e : enemies) {
+        for (final Enemy e : enemies) {
             if (e.getBoundingBox().isColliding(bb)) {
-                var speed = e.getSpeed();
-                var pos = e.getPosition();
+                final var speed = e.getSpeed();
+                final var pos = e.getPosition();
                 e.update(delta);
                 if (checkWallCollision(e)) {
                     e.setSpeed(new Vector2d());
@@ -88,7 +87,6 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
 
         enemies.forEach(x -> {
             if (x.getBoundingBox().isColliding(bb)) {
-                System.out.println(checkFieldOfView(x));
                 if (checkFieldOfView(x)) {
                     x.follow(this.mainController.getModel().getPlayer());
                 } else {

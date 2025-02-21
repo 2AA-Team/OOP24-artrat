@@ -2,6 +2,7 @@ package it.unibo.artrat.model.impl;
 
 import java.util.HashSet;
 import java.util.Random;
+import java.util.function.Function;
 
 import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.GameObjectFactory;
@@ -47,7 +48,7 @@ public class GameObjectFactoryImpl implements GameObjectFactory {
         return switch (RANDOM.nextInt(2)) {
             case 0 -> new AdvancedEnemy(new Point(x, y), size, size);
             case 1 -> new BaseEnemy(new Point(x, y), size, size);
-            default -> new BaseEnemy(new Point(x, y), size, size);
+            default -> Function.identity();
 
         };
     }

@@ -352,6 +352,9 @@ public class FloorImpl implements Floor {
         return new HashSet<>(this.exit);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setEnemies(final Set<Enemy> enemies) {
         this.floorEnemies = new HashSet<>(enemies);
