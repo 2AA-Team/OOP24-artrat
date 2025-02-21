@@ -57,7 +57,7 @@ public class RoomGenerationMaze implements RoomGenerationStrategy {
         while (!stack.isEmpty()) {
             final Point tmp = stack.get(stack.size() - 1);
             final List<Point> neighbours = visited.stream()
-                    .filter(p -> p.getDistance(tmp) == 2)
+                    .filter(p -> p.getEuclideanDistance(tmp) == 2)
                     .collect(Collectors.toList());
             if (neighbours.isEmpty()) {
                 stack.remove(stack.size() - 1);

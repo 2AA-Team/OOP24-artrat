@@ -4,8 +4,7 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-import it.unibo.artrat.model.api.characters.AbstractEntity;
-import it.unibo.artrat.model.api.characters.Enemy;
+import it.unibo.artrat.model.api.characters.AbstractEnemy;
 import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.utils.api.BoundingBox;
 import it.unibo.artrat.utils.api.Directions;
@@ -18,7 +17,7 @@ import it.unibo.artrat.utils.impl.Vector2d;
  * 
  * @author Samuele Trapani
  */
-public final class BaseEnemy extends AbstractEntity implements Enemy {
+public final class BaseEnemy extends AbstractEnemy {
     private final Random rd = new Random();
     private final BoundingBox fieldOfView;
     private static final int DEFAULT_STEPS = 10;
