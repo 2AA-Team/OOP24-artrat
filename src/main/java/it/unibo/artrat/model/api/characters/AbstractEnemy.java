@@ -9,9 +9,10 @@ import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;
 
 public abstract class AbstractEnemy extends AbstractEntity implements Enemy {
-    private static final int FOV_SCALE = 2;
+    private static final int FOV_SCALE = 10;
     private boolean follow = false;
     private BoundingBox fieldOfView;
+    private static final double VEL = 0.005;
 
     /**
      * {@inheritDoc}
@@ -19,6 +20,7 @@ public abstract class AbstractEnemy extends AbstractEntity implements Enemy {
     public AbstractEnemy(Point center, double width, double height, Set<Vector2d> v) {
         super(center, width, height, v);
         this.fieldOfView = new BoundingBoxImpl(center, width * FOV_SCALE, height * FOV_SCALE);
+        setVelocity(VEL);
     }
 
     /**
@@ -29,6 +31,7 @@ public abstract class AbstractEnemy extends AbstractEntity implements Enemy {
         final BoundingBox tmp = this.getBoundingBox();
         this.fieldOfView = new BoundingBoxImpl(tmp.getCenter(), tmp.getWidth() * FOV_SCALE,
                 tmp.getHeight() * FOV_SCALE);
+        setVelocity(VEL);
     }
 
     /**
@@ -39,6 +42,7 @@ public abstract class AbstractEnemy extends AbstractEntity implements Enemy {
         final BoundingBox tmp = this.getBoundingBox();
         this.fieldOfView = new BoundingBoxImpl(tmp.getCenter(), tmp.getWidth() * FOV_SCALE,
                 tmp.getHeight() * FOV_SCALE);
+        setVelocity(VEL);
     }
 
     /**
@@ -66,6 +70,12 @@ public abstract class AbstractEnemy extends AbstractEntity implements Enemy {
     public void setFieldOfView(BoundingBox fov) {
         this.fieldOfView = new BoundingBoxImpl(fov.getTopLeft(), fov.getBottomRight());
 
+    }
+
+    @Override
+    public void update(long delta) {
+        super.update(delta);
+        this.fieldOfView.setCenter(this.getPosition().sum(this.calculateSpeed().mul(delta * this.getVelocity())));
     }
 
 }

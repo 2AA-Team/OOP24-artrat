@@ -14,13 +14,14 @@ public abstract class AbstractCollisionChecker {
     public void updateAndCheck(MainController mainController, Command cmd, long delta) {
         this.mainController = mainController;
         updateAndCheckPlayer(cmd, delta);
-        updateAndCheckVisibleEnemy(delta);
+        updateEnemiesState(delta);
         updateAndCheckPaintings();
+
     }
 
     public abstract void updateAndCheckPlayer(Command cmd, long delta);
 
-    public abstract void updateAndCheckVisibleEnemy(long delta);
-
     public abstract void updateAndCheckPaintings();
+
+    public abstract void updateEnemiesState(long delta);
 }

@@ -3,6 +3,7 @@ package it.unibo.artrat.model.impl.characters;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import it.unibo.artrat.model.api.characters.AbstractEnemy;
 import it.unibo.artrat.model.api.characters.Player;
@@ -56,9 +57,21 @@ public final class BaseEnemy extends AbstractEnemy {
      */
     @Override
     public void follow(final Player p) {
-        final var speed = this.calculateSpeed();
-        final var playerDirection = p.calculateSpeed().normalize();
-        this.setSpeed(playerDirection.mul(speed.module()));
+        System.out.println(this.getPosition() + " FOLLOWING");
+        final Set<Vector2d> dir = Set.of(Directions.values()).stream()
+                .map(x -> x.vector())
+                .collect(Collectors.toSet());
+        Vector2d tmp = new Vector2d();
+        double min = Integer.MAX_VALUE;
+        for (Vector2d v : dir) {
+            final Point current = this.getPosition().sum(v);
+            double distance = p.getPosition().getEuclideanDistance(current);
+            if (distance <= min) {
+                tmp = v;
+                min = distance;
+            }
+        }
+        this.setSpeed(tmp);
     }
 
     /**
@@ -91,15 +104,6 @@ public final class BaseEnemy extends AbstractEnemy {
         } else {
             this.steps--;
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void update(final long delta) {
-        super.update(delta);
-        this.fieldOfView.setCenter(this.getPosition());
     }
 
 }

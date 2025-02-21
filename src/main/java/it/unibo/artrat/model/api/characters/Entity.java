@@ -56,4 +56,19 @@ public interface Entity extends GameObject {
      * @return current speed
      */
     Vector2d calculateSpeed();
+
+    /**
+     * Get entity velocity.
+     * DEFAULT=0.01
+     * 
+     * @return velocity coefficent
+     */
+    double getVelocity();
+
+    /**
+     * Set entity velocity.
+     * 
+     * @param vel new velocity.
+     */
+    void setVelocity(double vel);
 }
