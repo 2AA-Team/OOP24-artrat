@@ -43,10 +43,11 @@ public class GameObjectFactoryImpl implements GameObjectFactory {
      */
     @Override
     public Enemy getRandomEnemy(final int x, final int y) {
+        final double size = 0.8;
         return switch (RANDOM.nextInt(2)) {
-            case 0 -> new AdvancedEnemy(new Point(x, y), 1, 1);
-            case 1 -> new BaseEnemy(new Point(x, y), 1, 1);
-            default -> new BaseEnemy(new Point(x, y), 1, 1);
+            case 0 -> new AdvancedEnemy(new Point(x, y), size, size);
+            case 1 -> new BaseEnemy(new Point(x, y), size, size);
+            default -> new BaseEnemy(new Point(x, y), size, size);
 
         };
     }

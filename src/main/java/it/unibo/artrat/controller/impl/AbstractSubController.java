@@ -1,7 +1,5 @@
 package it.unibo.artrat.controller.impl;
 
-import javax.swing.SwingUtilities;
-
 import it.unibo.artrat.controller.api.SubController;
 import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.impl.ModelImpl;
@@ -64,27 +62,27 @@ public abstract class AbstractSubController implements SubController {
     }
 
     @Override
-    public void startTimerSubController(){
+    public void startTimerSubController() {
         this.mainController.startTimerMainController();
     }
 
     @Override
-    public void resetTimerSubController(){
+    public void resetTimerSubController() {
         this.mainController.startTimerMainController();
     }
 
     @Override
-    public void stopTimerSubController(){
+    public void stopTimerSubController() {
         this.mainController.startTimerMainController();
     }
 
     @Override
-    public boolean isTimeOutSubController(){
+    public boolean isTimeOutSubController() {
         return this.mainController.isTimeOutMainController();
     }
 
     @Override
-    public int getCurrentTimeController(){
+    public int getCurrentTimeController() {
         return this.mainController.getCurrentTimeMainController();
     }
 }
