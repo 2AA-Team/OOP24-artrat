@@ -1,5 +1,6 @@
 package it.unibo.artrat.model.impl.characters;
 
+import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
@@ -20,6 +21,12 @@ import it.unibo.artrat.utils.impl.Vector2d;
 public final class BaseEnemy extends AbstractEntity implements Enemy {
     private final Random rd = new Random();
     private final BoundingBox fieldOfView;
+    private final int steps = 10;
+
+    public BaseEnemy(final Point center, final double width, final double height) {
+        super(center, width, height, new HashSet<>());
+        fieldOfView = new BoundingBoxImpl(center, width, height);
+    }
 
     /**
      * Base enemy constructor.
@@ -77,10 +84,12 @@ public final class BaseEnemy extends AbstractEntity implements Enemy {
      */
     @Override
     public void move() {
+        if (steps > 0) {
+
+        }
         final var dir = rd.nextInt(Directions.values().length);
-        final var speed = this.calculateSpeed();
         final Vector2d v = Directions.values()[dir].vector();
-        this.setSpeed(v.mul(speed.module()));
+        this.setSpeed(v);
     }
 
     /**

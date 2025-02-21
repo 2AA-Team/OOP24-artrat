@@ -1,5 +1,6 @@
 package it.unibo.artrat.model.api;
 
+import it.unibo.artrat.utils.api.BoundingBox;
 import it.unibo.artrat.utils.impl.Point;
 
 /**
@@ -27,5 +28,20 @@ public interface GameObject {
      * @param p new position
      */
     void setPosition(Point p);
+
+    /**
+     * Collision check with other bounding box.
+     * 
+     * @param box
+     * @return true if colliding, false otherwise
+     */
+    BoundingBox getBoundingBox();
+
+    /**
+     * clone method.
+     * 
+     * @return a clone
+     */
+    GameObject clone();
 
 }

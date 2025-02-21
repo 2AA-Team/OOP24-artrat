@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
@@ -14,8 +16,14 @@ import org.slf4j.LoggerFactory;
 import it.unibo.artrat.app.api.GameEngine;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
+import it.unibo.artrat.model.api.characters.Enemy;
+import it.unibo.artrat.model.api.characters.Entity;
+import it.unibo.artrat.model.api.world.Floor;
+import it.unibo.artrat.model.impl.characters.Lupino;
+import it.unibo.artrat.utils.api.BoundingBox;
 import it.unibo.artrat.utils.api.ResourceLoader;
 import it.unibo.artrat.utils.api.commands.Command;
+import it.unibo.artrat.utils.impl.BoundingBoxImpl;
 import it.unibo.artrat.utils.impl.Converter;
 import it.unibo.artrat.utils.impl.ResourceLoaderImpl;
 import it.unibo.artrat.view.impl.MainViewImpl;
@@ -113,15 +121,50 @@ public final class GameEngineImpl implements GameEngine {
     }
 
     private void update(final long delta) {
-        final var cmd = this.commands.poll();
+        System.out.println(delta);
+        final Command cmd = this.commands.poll();
         final var model = this.mainController.getModel();
         final var player = model.getPlayer();
+        final Floor floor = model.getFloor();
+        final var rollBack = new Lupino(player.getPosition(), new HashSet<>());
+        final var enemies = floor.getEnemies();
+        final Set<Enemy> updated = new HashSet<>();
+        final double size = this.resourceLoader.getConfig("RENDER_DISTANCE");
+        final BoundingBox bb = new BoundingBoxImpl(player.getPosition(), size, size);
+        for (Enemy e : enemies) {
+            if (bb.isColliding(e.getBoundingBox())) {
+                final Enemy tmp = e;
+                tmp.move();
+                tmp.update(delta);
+                if (!checkWallCollision(tmp)) {
+                    updated.add(tmp);
+                } else {
+                    updated.add(e);
+                }
+            } else {
+                updated.add(e);
+            }
+
+        }
+        floor.setEnemies(updated);
+        model.setFloor(floor);
         if (!Objects.isNull(cmd)) {
             cmd.execute(player);
         }
         player.update(delta);
-        model.setPlayer(player);
+        System.out.println(player.getSpeed());
+
+        if (!checkWallCollision(player)) {
+            model.setPlayer(player);
+        } else {
+            model.setPlayer(rollBack);
+        }
         this.mainController.setModel(model);
+    }
+
+    private boolean checkWallCollision(final Entity e) {
+        return this.mainController.getModel().getFloor().getWalls().stream()
+                .anyMatch(x -> x.getBoundingBox().isColliding(e.getBoundingBox()));
     }
 
     /**

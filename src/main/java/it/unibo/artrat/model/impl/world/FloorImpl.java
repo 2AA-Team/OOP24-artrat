@@ -13,11 +13,11 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import it.unibo.artrat.model.api.characters.AbstractEntity;
+import it.unibo.artrat.model.api.GameObject;
+import it.unibo.artrat.model.api.characters.Enemy;
 import it.unibo.artrat.model.api.world.Floor;
 import it.unibo.artrat.model.api.world.Room;
 import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;
-import it.unibo.artrat.model.impl.AbstractGameObject;
 import it.unibo.artrat.model.impl.world.RoomImpl.RoomBuilder;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationEmpty;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationFile;
@@ -33,16 +33,16 @@ public class FloorImpl implements Floor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FloorImpl.class);
     private static final Random RANDOM = new Random();
-    private Set<AbstractGameObject> floorStructure = new HashSet<>();
-    private Set<AbstractEntity> floorEnemies = new HashSet<>();
-    private Set<AbstractGameObject> floorValues = new HashSet<>();
+    private Set<GameObject> floorStructure = new HashSet<>();
+    private Set<Enemy> floorEnemies = new HashSet<>();
+    private Set<GameObject> floorValues = new HashSet<>();
     private boolean[][] floorMap;
     private final double maxFloorSize;
     private final double maxRoomSize;
     private final double minFloorSize;
     private final double minRoomSize;
     private Point startPosition;
-    private AbstractGameObject exit;
+    private GameObject exit;
 
     private final URL roomPath = Thread.currentThread().getContextClassLoader().getResource(
             "premademaze" + File.separator + "rooms.json");
@@ -117,7 +117,7 @@ public class FloorImpl implements Floor {
      * {@inheritDoc}
      */
     @Override
-    public Set<AbstractGameObject> getWalls() {
+    public Set<GameObject> getWalls() {
         return new HashSet<>(floorStructure);
     }
 
@@ -125,7 +125,7 @@ public class FloorImpl implements Floor {
      * {@inheritDoc}
      */
     @Override
-    public Set<AbstractEntity> getEnemies() {
+    public Set<Enemy> getEnemies() {
         return new HashSet<>(floorEnemies);
     }
 
@@ -133,7 +133,7 @@ public class FloorImpl implements Floor {
      * {@inheritDoc}
      */
     @Override
-    public Set<AbstractGameObject> getValues() {
+    public Set<GameObject> getValues() {
         return new HashSet<>(floorValues);
     }
 
@@ -187,7 +187,7 @@ public class FloorImpl implements Floor {
      * @throws IOException if link for the rooms json doesnt exist
      */
     private void generateEffectiveRooms(final int roomSize) throws IOException {
-        final int maxEnemyInARoom = 3;
+        final int maxEnemyInARoom = 2;
         final int minEnemyInARoom = 1;
         final int maxPaintingsInARoom = 4;
         final int minPaintingsInARoom = 1;
@@ -237,7 +237,7 @@ public class FloorImpl implements Floor {
         final double tmpX = x * roomSize + Math.floor((double) roomSize / 2);
         final double tmpY = y * roomSize + roomSize - 1;
         exit = new Exit(tmpX, tmpY);
-        this.floorStructure.removeIf((o) -> o.getPosition().equals(exit.getPosition()));
+        this.floorStructure.removeIf((o) -> o.getBoundingBox().isColliding(exit.getBoundingBox()));
     }
 
     /**
@@ -288,16 +288,19 @@ public class FloorImpl implements Floor {
      * @param roomSize the size of the room
      */
     private void addNewRoom(final Room room, final int roomX, final int roomY, final int roomSize) {
-        final Set<AbstractGameObject> tmpStruct = room.getStructure();
-        tmpStruct.forEach((w) -> w.movedPosition(roomX * roomSize, roomY * roomSize));
+        final Set<GameObject> tmpStruct = room.getStructure();
+        tmpStruct.forEach((w) -> w.setPosition(new Point(w.getPosition().getX() + roomX * roomSize,
+                w.getPosition().getY() + roomY * roomSize)));
         this.floorStructure.addAll(tmpStruct);
 
-        final Set<AbstractGameObject> tmpValues = room.getValues();
-        tmpValues.forEach((w) -> w.movedPosition(roomX * roomSize, roomY * roomSize));
+        final Set<GameObject> tmpValues = room.getValues();
+        tmpValues.forEach((w) -> w.setPosition(new Point(w.getPosition().getX() + roomX * roomSize,
+                w.getPosition().getY() + roomY * roomSize)));
         this.floorValues.addAll(tmpValues);
 
-        final Set<AbstractEntity> tmpEnemies = room.getEnemies();
-        tmpEnemies.forEach((w) -> w.movedPosition(roomX * roomSize, roomY * roomSize));
+        final Set<Enemy> tmpEnemies = room.getEnemies();
+        tmpEnemies.forEach((w) -> w.setPosition(new Point(w.getPosition().getX() + roomX * roomSize,
+                w.getPosition().getY() + roomY * roomSize)));
         this.floorEnemies.addAll(tmpEnemies);
     }
 
@@ -353,8 +356,13 @@ public class FloorImpl implements Floor {
      * {@inheritDoc}
      */
     @Override
-    public AbstractGameObject getExit() {
-        return this.exit;
+    public GameObject getExit() {
+        return this.exit.clone();
+    }
+
+    @Override
+    public void setEnemies(Set<Enemy> enemies) {
+        this.floorEnemies = new HashSet<>(enemies);
     }
 
     // public void print() {

@@ -79,10 +79,10 @@ public class BoundingBoxImpl implements BoundingBox {
      */
     @Override
     public boolean isColliding(final BoundingBox box) {
-        return !(this.topLeft.getX() > box.getBottomRight().getX()
-                || this.bottomRight.getX() < box.getTopLeft().getX()
-                || this.topLeft.getY() > box.getBottomRight().getY()
-                || this.bottomRight.getY() < box.getTopLeft().getY());
+        return !(this.topLeft.getX() >= box.getBottomRight().getX()
+                || this.bottomRight.getX() <= box.getTopLeft().getX()
+                || this.topLeft.getY() >= box.getBottomRight().getY()
+                || this.bottomRight.getY() <= box.getTopLeft().getY());
     }
 
     /**

@@ -14,7 +14,7 @@ public abstract class AbstractGameObject implements GameObject {
     /**
      * Default bounding box size.
      */
-    public static final double DEFAULT_SIZE = 1;
+    public static final double DEFAULT_SIZE = 0.5;
     private final BoundingBoxImpl hitBox;
 
     /**
@@ -87,18 +87,13 @@ public abstract class AbstractGameObject implements GameObject {
      * 
      * @return bounding box
      */
+    @Override
     public BoundingBox getBoundingBox() {
         return new BoundingBoxImpl(this.hitBox.getTopLeft(), this.hitBox.getBottomRight());
     }
 
-    /**
-     * Collision check with other bounding box.
-     * 
-     * @param box
-     * @return true if colliding, false otherwise
-     */
-    public boolean isColliding(final BoundingBox box) {
-        return this.hitBox.isColliding(box);
+    public AbstractGameObject clone() {
+        return null;
     }
 
 }

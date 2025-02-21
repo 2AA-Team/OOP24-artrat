@@ -3,8 +3,8 @@ package it.unibo.artrat.model.api.world;
 import java.io.IOException;
 import java.util.Set;
 
-import it.unibo.artrat.model.api.characters.AbstractEntity;
-import it.unibo.artrat.model.impl.AbstractGameObject;
+import it.unibo.artrat.model.api.GameObject;
+import it.unibo.artrat.model.api.characters.Enemy;
 import it.unibo.artrat.utils.impl.Point;
 
 /**
@@ -24,21 +24,21 @@ public interface Floor {
      * 
      * @return a set of AbstractGameObject
      */
-    Set<AbstractGameObject> getValues();
+    Set<GameObject> getValues();
 
     /**
      * getter for all walls.
      * 
      * @return a set of AbstractGameObject
      */
-    Set<AbstractGameObject> getWalls();
+    Set<GameObject> getWalls();
 
     /**
      * getter for all enemies.
      * 
      * @return a set of AbstractGameObject
      */
-    Set<AbstractEntity> getEnemies();
+    Set<Enemy> getEnemies();
 
     /**
      * get the player startPosition.
@@ -52,7 +52,7 @@ public interface Floor {
      * 
      * @return an abstract game object representing the position
      */
-    AbstractGameObject getExit();
+    GameObject getExit();
 
     /**
      * get the max floor size.
@@ -88,4 +88,10 @@ public interface Floor {
      * @return a copy of the called floor.
      */
     Floor copyFloor();
+
+    /**
+     * setter for all enemies.
+     * 
+     */
+    void setEnemies(Set<Enemy> enemies);
 }

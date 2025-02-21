@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.GameObjectFactory;
 import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;
-import it.unibo.artrat.model.impl.AbstractGameObject;
 import it.unibo.artrat.model.impl.GameObjectFactoryImpl;
 
 /**
@@ -25,7 +25,7 @@ public class RoomGenerationMatrix implements RoomGenerationStrategy {
      * {@inheritDoc}
      */
     @Override
-    public Set<AbstractGameObject> generateRoomSet(final int size) {
+    public Set<GameObject> generateRoomSet(final int size) {
         final GameObjectFactory factory = new GameObjectFactoryImpl();
         final List<Boolean> probabilities = List.of(
                 true, true, true, true, false);
@@ -41,8 +41,8 @@ public class RoomGenerationMatrix implements RoomGenerationStrategy {
                 }
             }
         }
-        final Stream<AbstractGameObject> border = new RoomGenerationEmpty().generateRoomSet(size).stream();
-        final Stream<AbstractGameObject> matrix = IntStream.range(0, size - 2).filter(rows::contains)
+        final Stream<GameObject> border = new RoomGenerationEmpty().generateRoomSet(size).stream();
+        final Stream<GameObject> matrix = IntStream.range(0, size - 2).filter(rows::contains)
                 .boxed()
                 .flatMap(i -> IntStream.range(0, size - 2).mapToObj(j -> factory.getWall(i, j))
                         .filter(y -> column.contains((int) y.getPosition().getY())));

@@ -42,6 +42,7 @@ public class ItemReaderImpl implements ItemReader {
         if (ob instanceof List<?> list) {
             try {
                 final List<String> safeList = list.stream()
+                final List<String> safeList = list.stream()
                         .map(e -> Objects.toString(e, null))
                         .toList();
                 return safeList.get(field);

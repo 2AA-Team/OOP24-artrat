@@ -2,8 +2,8 @@ package it.unibo.artrat.model.api.world;
 
 import java.util.Set;
 
-import it.unibo.artrat.model.api.characters.AbstractEntity;
-import it.unibo.artrat.model.impl.AbstractGameObject;
+import it.unibo.artrat.model.api.GameObject;
+import it.unibo.artrat.model.api.characters.Enemy;
 
 /**
  * interface that describes the room.
@@ -15,19 +15,20 @@ public interface Room {
      * 
      * @return set of gameobject
      */
-    Set<AbstractGameObject> getStructure();
+    Set<GameObject> getStructure();
 
     /**
      * getter for all enemies of the room.
      * 
      * @return set of gameobject
      */
-    Set<AbstractEntity> getEnemies();
+    Set<Enemy> getEnemies();
 
     /**
      * getter for all valuable objects of the room.
      * 
      * @return set of gameobject
      */
-    Set<AbstractGameObject> getValues();
+    Set<GameObject> getValues();
+
 }
