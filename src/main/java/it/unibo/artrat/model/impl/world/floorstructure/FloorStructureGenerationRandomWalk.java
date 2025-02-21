@@ -53,7 +53,6 @@ public class FloorStructureGenerationRandomWalk implements FloorStructureGenerat
             y += direction.getY();
             main.get(x).set(y, true);
         }
-
         return main;
     }
 }
