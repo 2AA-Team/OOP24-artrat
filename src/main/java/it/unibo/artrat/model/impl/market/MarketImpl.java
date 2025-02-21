@@ -26,7 +26,6 @@ public class MarketImpl implements Market {
                     + "items.yaml");
 
     private List<Item> itemsToBuy;
-    private final ItemReader itemReader;
     private final ItemFactoryImpl itemFactory;
         private static final Logger LOGGER = LoggerFactory.getLogger(MarketImpl.class);
 
@@ -35,7 +34,6 @@ public class MarketImpl implements Market {
      */
     public MarketImpl() {
         this.itemsToBuy = new ArrayList<>();
-        this.itemReader = new ItemReaderImpl();
         this.itemFactory = new ItemFactoryImpl();
     }
 
@@ -46,7 +44,6 @@ public class MarketImpl implements Market {
     public MarketImpl(final Market mark) {
         this.itemsToBuy = new ArrayList<>();
         this.itemsToBuy.addAll(mark.getPurchItems());
-        this.itemReader = new ItemReaderImpl();
         this.itemFactory = new ItemFactoryImpl();
     }
 
@@ -55,8 +52,9 @@ public class MarketImpl implements Market {
      */
     @Override
     public void initMarket() {
+        final ItemReader itemReader = new ItemReaderImpl();
         try {
-            this.itemReader.setItemPath(itemPath.toURI());
+            itemReader.setItemPath(itemPath.toURI());
             this.itemFactory.initialize();
         } catch (IOException | URISyntaxException e) {
             LOGGER.error("MarketImpl class thrown an error : ", e);
