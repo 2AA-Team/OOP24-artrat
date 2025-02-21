@@ -11,6 +11,7 @@ import it.unibo.artrat.model.impl.characters.Lupino;
 import it.unibo.artrat.utils.api.BoundingBox;
 import it.unibo.artrat.utils.api.commands.Command;
 import it.unibo.artrat.utils.impl.BoundingBoxImpl;
+import it.unibo.artrat.utils.impl.Vector2d;
 
 public class BaseCollisionChecker extends AbstractCollisionChecker {
 
@@ -43,22 +44,21 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
         final var model = this.mainController.getModel();
         final var player = model.getPlayer();
         final Floor floor = model.getFloor();
-        final var enemies = floor.getEnemies();
-        final Set<Enemy> updated = new HashSet<>();
         final BoundingBox bb = new BoundingBoxImpl(player.getPosition(), renderDistance, renderDistance);
+        final var enemies = floor.getEnemies().stream().filter(x -> bb.isColliding(x.getBoundingBox())).toList();
+        final Set<Enemy> updated = new HashSet<>();
+
         for (Enemy e : enemies) {
-            if (bb.isColliding(e.getBoundingBox())) {
-                final Enemy tmp = e;
-                tmp.move();
-                tmp.update(delta);
-                if (!checkWallCollision(tmp)) {
-                    updated.add(tmp);
-                } else {
-                    updated.add(e);
-                }
-            } else {
-                updated.add(e);
+            var speed = e.getSpeed();
+            var pos = e.getPosition();
+            e.move();
+            e.update(delta);
+            if (checkWallCollision(e)) {
+                e.setSpeed(new Vector2d());
+                speed.forEach(x -> e.addDirection(x));
+                e.setPosition(pos);
             }
+            updated.add(e);
         }
         floor.setEnemies(updated);
         model.setFloor(floor);
