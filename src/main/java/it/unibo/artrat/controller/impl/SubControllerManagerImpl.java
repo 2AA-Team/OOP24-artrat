@@ -48,7 +48,6 @@ public class SubControllerManagerImpl implements SubControllerManager {
         final var help = Objects.requireNonNull(this.gameSubController);
         help.init();
         return help;
-
     }
 
     /**

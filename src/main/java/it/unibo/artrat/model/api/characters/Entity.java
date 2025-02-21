@@ -34,7 +34,7 @@ public interface Entity extends GameObject {
      * 
      * @param v speed vector.
      */
-    void setSpeed(Vector2d v);
+    void setSpeed(Set<Vector2d> v);
 
     /**
      * Add direction to current movements.

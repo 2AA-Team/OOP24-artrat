@@ -1,6 +1,7 @@
 package it.unibo.artrat.controller.impl.subcontroller;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -19,7 +20,6 @@ import it.unibo.artrat.utils.api.BoundingBox;
 import it.unibo.artrat.utils.api.ResourceLoader;
 import it.unibo.artrat.utils.impl.BoundingBoxImpl;
 import it.unibo.artrat.utils.impl.Point;
-import it.unibo.artrat.utils.impl.Vector2d;
 
 /**
  * sub controller for the game.
@@ -112,7 +112,7 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
         model.setFloor(this.floor);
         final Player player = model.getPlayer();
         player.setPosition(this.floor.getStartPosition());
-        player.setSpeed(new Vector2d());
+        player.setSpeed(new HashSet<>());
         model.setPlayer(player);
         this.updateCentralizeModel(model);
     }

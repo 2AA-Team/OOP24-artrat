@@ -31,6 +31,7 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
             if (checkWallCollision(player)) {
                 player.update(-delta);
             }
+            // System.out.println(player.getSpeed());
             model.setPlayer(player);
             this.mainController.setModel(model);
         }
@@ -52,7 +53,7 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
             e.move();
             e.update(delta);
             if (checkWallCollision(e)) {
-                e.setSpeed(new Vector2d());
+                e.setSpeed(new HashSet<>());
                 speed.forEach(x -> e.addDirection(x));
                 e.setPosition(pos);
             }

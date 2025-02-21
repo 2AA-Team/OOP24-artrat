@@ -93,9 +93,9 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
      * {@inheritDoc}
      */
     @Override
-    public void setSpeed(final Vector2d v) {
+    public void setSpeed(final Set<Vector2d> v) {
         this.speed.clear();
-        this.speed.add(v);
+        this.speed.addAll(v);
     }
 
     /**

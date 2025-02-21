@@ -59,7 +59,7 @@ public final class BaseEnemy extends AbstractEntity implements Enemy {
     public void follow(final Player p) {
         final var speed = this.calculateSpeed();
         final var playerDirection = p.calculateSpeed().normalize();
-        this.setSpeed(playerDirection.mul(speed.module()));
+        this.setSpeed(Set.of(playerDirection.mul(speed.module())));
     }
 
     /**
@@ -88,7 +88,7 @@ public final class BaseEnemy extends AbstractEntity implements Enemy {
         if (steps <= 0) {
             this.steps = DEFAULT_STEPS;
             final int dir = rd.nextInt(Directions.values().length);
-            this.setSpeed(Directions.values()[dir].vector());
+            this.setSpeed(Set.of(Directions.values()[dir].vector()));
         } else {
             this.steps--;
         }

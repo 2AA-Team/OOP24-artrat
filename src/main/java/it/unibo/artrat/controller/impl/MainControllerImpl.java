@@ -70,14 +70,16 @@ public class MainControllerImpl implements MainController {
     @Override
     public void setStage(final Stage newStage) {
         currentStage = newStage;
+        for (final MainView mainView : views) {
+            mainView.reconduceFromStage();
+        }
         if (newStage.equals(Stage.GAME)) {
             engine.forceStart();
         } else {
             engine.forceStop();
+
         }
-        for (final MainView mainView : views) {
-            mainView.reconduceFromStage();
-        }
+
     }
 
     /**
@@ -135,15 +137,15 @@ public class MainControllerImpl implements MainController {
     }
 
     /**
-     *  {@inheritDoc}
+     * {@inheritDoc}
      */
     @Override
-    public void startTimerMainController(){
+    public void startTimerMainController() {
         timer.startTimer();
     }
 
     /**
-     *  {@inheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public void resetTimerMainController() {
@@ -151,7 +153,7 @@ public class MainControllerImpl implements MainController {
     }
 
     @Override
-    public boolean isTimeOutMainController(){
+    public boolean isTimeOutMainController() {
         return timer.isTimeOut();
     }
 
