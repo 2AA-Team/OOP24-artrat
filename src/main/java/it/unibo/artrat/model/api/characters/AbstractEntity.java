@@ -1,11 +1,8 @@
 package it.unibo.artrat.model.api.characters;
 
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
-
 import it.unibo.artrat.model.impl.AbstractGameObject;
-import it.unibo.artrat.utils.api.Directions;
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;
 

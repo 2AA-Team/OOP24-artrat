@@ -42,4 +42,27 @@ public interface SubController {
      * @param cmd command to execute
      */
     void inputMainController(Command cmd);
+
+    /**
+     * @author Manuel Benagli
+     */
+    void startTimerSubController();
+
+    /**
+     * @author Manuel Benagli
+     */
+    void resetTimerSubController();
+
+    /**
+     * @author Manuel Benagli
+     */
+    boolean isTimeOutSubController();
+
+    /**
+     * 
+     * @return
+     * 
+     * @author Manuel Benagli
+     */
+    int getCurrentTimeController();
 }

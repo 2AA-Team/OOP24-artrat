@@ -11,12 +11,14 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.imageio.ImageIO;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import it.unibo.artrat.controller.api.subcontroller.GameSubController;
+import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.model.impl.world.RoomSymbols;
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.commands.MoveDown;
@@ -32,7 +34,7 @@ import it.unibo.artrat.utils.impl.commands.StopMovingUp;
  * game sub panel class.
  */
 public class GameSubPanel extends AbstractSubPanel {
-
+    private static final int ONE_SECOND = 1000;
     private static final Logger LOGGER = LoggerFactory.getLogger(GameSubPanel.class);
     private final GameSubController gameSubController;
     private final GamePanel mapPanel = new GamePanel();
@@ -42,6 +44,8 @@ public class GameSubPanel extends AbstractSubPanel {
     private static final int DOWN = KeyEvent.VK_S;
     private static final int LEFT = KeyEvent.VK_A;
     private static final int RIGHT = KeyEvent.VK_D;
+
+    private final JLabel timerCountdown = new JLabel();
 
     private static final Map<RoomSymbols, Image> MAPSYMBOLS = Map.of(
             RoomSymbols.ENEMY, getObjectImage("enemy.png"),
@@ -73,11 +77,14 @@ public class GameSubPanel extends AbstractSubPanel {
                     (int) Math.floor(getFrameDimension().getHeight() / 2));
 
             final Point playerPos = gameSubController.getPlayerPos();
-            printObject(g, center, playerPos, RoomSymbols.EXIT, Set.of(gameSubController.getExitPos()));
             printObject(g, center, playerPos, RoomSymbols.WALL, gameSubController.getVisibleWallPositions());
+            printObject(g, center, playerPos, RoomSymbols.EXIT, gameSubController.getExitPos());
             printObject(g, center, playerPos, RoomSymbols.VALUE, gameSubController.getVisiblePaintings());
             printObject(g, center, playerPos, RoomSymbols.ENEMY, gameSubController.getVisibleEnemyPositions());
             printPlayer(g, center);
+
+           timerCountdown.setText(Integer.toString(gameSubController.getCurrentTimeController()/ONE_SECOND));      //aggiorno il timer            
+            forceRedraw();
         }
 
         private void printObject(final Graphics g, final Point center, final Point playerPos,
@@ -105,7 +112,8 @@ public class GameSubPanel extends AbstractSubPanel {
      */
     public GameSubPanel(final GameSubController gameSubController) {
         this.gameSubController = gameSubController;
-
+        
+        this.gameSubController.startTimerSubController();           //starto il timer
     }
 
     private boolean isMovementCommand(final KeyEvent e) {
@@ -120,9 +128,15 @@ public class GameSubPanel extends AbstractSubPanel {
     @Override
     public void initComponents() {
         final JPanel tmp = new JPanel();
+        final JPanel southJPanel = new JPanel();
 
         tmp.setLayout(new BorderLayout());
         tmp.add(this.mapPanel, BorderLayout.CENTER);
+
+        final JLabel timerJLabel = new JLabel("TIMER");
+        southJPanel.add(timerJLabel);
+        southJPanel.add(timerCountdown);
+        tmp.add(southJPanel, BorderLayout.SOUTH);
 
         tmp.addKeyListener(new KeyListener() {
             @Override
@@ -165,5 +179,8 @@ public class GameSubPanel extends AbstractSubPanel {
      */
     @Override
     public void forceRedraw() {
+        if(gameSubController.isTimeOutSubController()){
+            gameSubController.setStage(Stage.MENU);
+        }
     }
 }

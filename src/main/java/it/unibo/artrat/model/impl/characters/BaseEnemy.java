@@ -21,7 +21,8 @@ import it.unibo.artrat.utils.impl.Vector2d;
 public final class BaseEnemy extends AbstractEntity implements Enemy {
     private final Random rd = new Random();
     private final BoundingBox fieldOfView;
-    private final int steps = 10;
+    private static final int DEFAULT_STEPS = 10;
+    private int steps = 0;
 
     public BaseEnemy(final Point center, final double width, final double height) {
         super(center, width, height, new HashSet<>());
@@ -84,12 +85,13 @@ public final class BaseEnemy extends AbstractEntity implements Enemy {
      */
     @Override
     public void move() {
-        if (steps > 0) {
-
+        if (steps <= 0) {
+            this.steps = DEFAULT_STEPS;
+            final int dir = rd.nextInt(Directions.values().length);
+            this.setSpeed(Directions.values()[dir].vector());
+        } else {
+            this.steps--;
         }
-        final var dir = rd.nextInt(Directions.values().length);
-        final Vector2d v = Directions.values()[dir].vector();
-        this.setSpeed(v);
     }
 
     /**

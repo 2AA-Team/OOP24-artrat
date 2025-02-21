@@ -52,7 +52,7 @@ public interface Floor {
      * 
      * @return an abstract game object representing the position
      */
-    GameObject getExit();
+    Set<GameObject> getExit();
 
     /**
      * get the max floor size.
@@ -92,6 +92,7 @@ public interface Floor {
     /**
      * setter for all enemies.
      * 
+     * @param enemies set of enemies
      */
     void setEnemies(Set<Enemy> enemies);
 }

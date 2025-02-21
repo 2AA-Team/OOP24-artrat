@@ -25,6 +25,7 @@ public class ModelImpl implements Model {
         this.market = new MarketImpl();
         this.floor = new FloorImpl();
         this.market.initMarket();
+
     }
 
     /**

@@ -17,8 +17,11 @@ import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.characters.Enemy;
 import it.unibo.artrat.model.api.world.Floor;
 import it.unibo.artrat.model.api.world.Room;
+import it.unibo.artrat.model.api.world.floorstructure.FloorStructureGenerationStrategy;
 import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;
 import it.unibo.artrat.model.impl.world.RoomImpl.RoomBuilder;
+import it.unibo.artrat.model.impl.world.floorstructure.FloorStructureGenerationFullfill;
+import it.unibo.artrat.model.impl.world.floorstructure.FloorStructureGenerationRandomWalk;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationEmpty;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationFile;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationMatrix;
@@ -36,13 +39,13 @@ public class FloorImpl implements Floor {
     private Set<GameObject> floorStructure = new HashSet<>();
     private Set<Enemy> floorEnemies = new HashSet<>();
     private Set<GameObject> floorValues = new HashSet<>();
-    private boolean[][] floorMap;
+    private List<List<Boolean>> floorMap;
     private final double maxFloorSize;
     private final double maxRoomSize;
     private final double minFloorSize;
     private final double minRoomSize;
     private Point startPosition;
-    private GameObject exit;
+    private Set<GameObject> exit;
 
     private final URL roomPath = Thread.currentThread().getContextClassLoader().getResource(
             "premademaze" + File.separator + "rooms.json");
@@ -56,7 +59,7 @@ public class FloorImpl implements Floor {
         this.maxRoomSize = 2;
         this.minFloorSize = 1;
         this.startPosition = new Point();
-        this.exit = new Exit(0, 0);
+        this.exit = new HashSet<>();
     }
 
     /**
@@ -148,9 +151,8 @@ public class FloorImpl implements Floor {
         floorValues = new HashSet<>();
         final int floorSize = RANDOM.nextInt((int) this.minFloorSize, (int) this.maxFloorSize);
         final int roomSize = RANDOM.nextInt((int) this.minRoomSize, (int) this.maxRoomSize);
-        this.generateRoomsStructure(floorSize);
+        this.generateFloorStructure(floorSize);
         this.generateEffectiveRooms(roomSize);
-        // print(); // TO-REMOVE
     }
 
     /**
@@ -159,25 +161,12 @@ public class FloorImpl implements Floor {
      * 
      * @param floorSize floor size
      */
-    private void generateRoomsStructure(final int floorSize) {
-        final int[][] directions = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
-        int numberOfRooms = (int) Math.ceil((double) floorSize * floorSize / 2);
-        int i = (int) Math.floor((double) floorSize / 2);
-        int j = floorSize - 1;
-        this.floorMap = new boolean[floorSize][floorSize];
-        while (numberOfRooms > 0) {
-            if (!floorMap[i][j]) {
-                floorMap[i][j] = true;
-                numberOfRooms--;
-            }
-            final int[] dir = directions[RANDOM.nextInt(directions.length)];
-            final int newI = i + dir[0];
-            final int newJ = j + dir[1];
-            if (newI >= 0 && newI < floorSize && newJ >= 0 && newJ < floorSize) {
-                i = newI;
-                j = newJ;
-            }
-        }
+    private void generateFloorStructure(final int floorSize) {
+        final List<FloorStructureGenerationStrategy> generations = List.of(
+                new FloorStructureGenerationRandomWalk(
+                        (int) Math.floor((double) floorSize / 2), floorSize - 1),
+                new FloorStructureGenerationFullfill());
+        this.floorMap = generations.get(RANDOM.nextInt(generations.size())).generate(floorSize);
     }
 
     /**
@@ -203,8 +192,8 @@ public class FloorImpl implements Floor {
         }
         RoomBuilder builder = new RoomBuilder();
         builder = builder.insertRoomSize(roomSize);
-        for (int i = 0; i < floorMap.length; i++) {
-            for (int j = 0; j < floorMap.length; j++) {
+        for (int i = 0; i < floorMap.size(); i++) {
+            for (int j = 0; j < floorMap.size(); j++) {
                 if (isARoom(j, i)) {
                     if (isStartRoom(j, i)) {
                         builder = builder.insertGenerationStrategy(new RoomGenerationEmpty());
@@ -212,14 +201,16 @@ public class FloorImpl implements Floor {
                         builder = builder.insertNumberOfValues(0);
                         setStartPosition(j, i, roomSize);
                         setExitPosition(j, i, roomSize);
+                        builder = builder.insertPassages(isARoom(j, i - 1), isARoom(j + 1, i), true,
+                                isARoom(j - 1, i));
                     } else {
                         builder = builder.insertGenerationStrategy(generations.get(RANDOM.nextInt(generations.size())));
                         builder = builder.insertNumberOfEnemy(RANDOM.nextInt(minEnemyInARoom, maxEnemyInARoom));
                         builder = builder
                                 .insertNumberOfValues(RANDOM.nextInt(minPaintingsInARoom, maxPaintingsInARoom));
+                        builder = builder.insertPassages(isARoom(j, i - 1), isARoom(j + 1, i), isARoom(j, i + 1),
+                                isARoom(j - 1, i));
                     }
-                    builder = builder.insertPassages(isARoom(j, i - 1), isARoom(j + 1, i), isARoom(j, i + 1),
-                            isARoom(j - 1, i));
                     addNewRoom(builder.build(), j, i, roomSize);
                 }
             }
@@ -236,8 +227,9 @@ public class FloorImpl implements Floor {
     private void setExitPosition(final int x, final int y, final int roomSize) {
         final double tmpX = x * roomSize + Math.floor((double) roomSize / 2);
         final double tmpY = y * roomSize + roomSize - 1;
-        exit = new Exit(tmpX, tmpY);
-        this.floorStructure.removeIf((o) -> o.getBoundingBox().isColliding(exit.getBoundingBox()));
+        exit = new HashSet<>();
+        exit.add(new Exit(tmpX, tmpY));
+        exit.add(new Exit(tmpX - 1, tmpY));
     }
 
     /**
@@ -248,10 +240,10 @@ public class FloorImpl implements Floor {
      * @return true if is a room
      */
     private boolean isARoom(final int x, final int y) {
-        if (x < 0 || y < 0 || x >= this.floorMap.length || y >= this.floorMap.length) {
+        if (x < 0 || y < 0 || x >= this.floorMap.size() || y >= this.floorMap.size()) {
             return false;
         } else {
-            return floorMap[x][y];
+            return floorMap.get(x).get(y);
         }
     }
 
@@ -263,7 +255,7 @@ public class FloorImpl implements Floor {
      * @return true if is a start room
      */
     private boolean isStartRoom(final int x, final int y) {
-        return x == (int) Math.floor((double) floorMap.length / 2) && y == floorMap.length - 1;
+        return x == (int) Math.floor((double) floorMap.size() / 2) && y == floorMap.size() - 1;
     }
 
     /**
@@ -356,42 +348,12 @@ public class FloorImpl implements Floor {
      * {@inheritDoc}
      */
     @Override
-    public GameObject getExit() {
-        return this.exit.clone();
+    public Set<GameObject> getExit() {
+        return new HashSet<>(this.exit);
     }
 
     @Override
-    public void setEnemies(Set<Enemy> enemies) {
+    public void setEnemies(final Set<Enemy> enemies) {
         this.floorEnemies = new HashSet<>(enemies);
     }
-
-    // public void print() {
-    // double sizeTot = this.maxFloorSize * this.maxRoomSize;
-    // for (double i = 0; i < sizeTot; i++) {
-    // for (double j = 0; j < sizeTot; j++) {
-    // final double x = j;
-    // final double y = i;
-    // if (this.startPosition.getX() == j && this.startPosition.getY() == i) {
-    // System.out.print("_");
-    // } else if (this.floorStructure.stream()
-    // .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y))
-    // {
-    // System.out.print("#");
-    // } else if (this.floorEnemies.stream()
-    // .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y))
-    // {
-    // System.out.print("X");
-    // } else if (this.floorValues.stream()
-    // .anyMatch((o) -> o.getPosition().getX() == x && o.getPosition().getY() == y))
-    // {
-    // System.out.print("Y");
-    // } else {
-    // System.out.print(" ");
-
-    // }
-    // }
-    // System.out.println();
-    // }
-    // }
-
 }

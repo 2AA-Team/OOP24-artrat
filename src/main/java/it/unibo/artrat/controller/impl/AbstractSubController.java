@@ -61,4 +61,23 @@ public abstract class AbstractSubController implements SubController {
         this.mainController.input(cmd);
     }
 
+    @Override
+    public void startTimerSubController() {
+        this.mainController.startTimerMainController();
+    }
+
+    @Override
+    public void resetTimerSubController() {
+        this.mainController.startTimerMainController();
+    }
+
+    @Override
+    public boolean isTimeOutSubController() {
+        return this.mainController.isTimeOutMainController();
+    }
+
+    @Override
+    public int getCurrentTimeController() {
+        return this.mainController.getCurrentTimeMainController();
+    }
 }
