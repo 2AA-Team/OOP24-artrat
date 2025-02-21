@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.GameObjectFactory;
 import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;
-import it.unibo.artrat.model.impl.AbstractGameObject;
 import it.unibo.artrat.model.impl.GameObjectFactoryImpl;
 import it.unibo.artrat.utils.impl.Point;
 
@@ -21,21 +21,21 @@ public class RoomGenerationMaze implements RoomGenerationStrategy {
 
     private final GameObjectFactory factory = new GameObjectFactoryImpl();
     private static final Random RANDOM = new Random();
-    private Set<AbstractGameObject> maze = new HashSet<>();
+    private Set<GameObject> maze = new HashSet<>();
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Set<AbstractGameObject> generateRoomSet(final int size) {
-        final Set<AbstractGameObject> border = new RoomGenerationEmpty().generateRoomSet(size);
-        final Set<AbstractGameObject> allFilledSet = fullFilled(size).collect(Collectors.toSet());
+    public Set<GameObject> generateRoomSet(final int size) {
+        final Set<GameObject> border = new RoomGenerationEmpty().generateRoomSet(size);
+        final Set<GameObject> allFilledSet = fullFilled(size).collect(Collectors.toSet());
         maze = allFilledSet.stream()
                 .filter(x -> x.getPosition().getX() % 2 == 0 || x.getPosition().getY() % 2 == 0)
                 .collect(Collectors.toSet());
         final List<Point> visited = allFilledSet.stream()
                 .filter(x -> !maze.contains(x))
-                .map(AbstractGameObject::getPosition)
+                .map(GameObject::getPosition)
                 .collect(Collectors.toList());
         if (!visited.isEmpty()) {
             final Point currentPoint = visited.get(RANDOM.nextInt(visited.size()));
@@ -72,7 +72,7 @@ public class RoomGenerationMaze implements RoomGenerationStrategy {
         }
     }
 
-    private Stream<AbstractGameObject> fullFilled(final int size) {
+    private Stream<GameObject> fullFilled(final int size) {
         return IntStream.range(1, size - 1)
                 .boxed()
                 .flatMap(i -> IntStream.range(1, size - 1)

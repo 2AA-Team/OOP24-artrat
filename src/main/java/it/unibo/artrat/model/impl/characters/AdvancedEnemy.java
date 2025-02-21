@@ -1,5 +1,6 @@
 package it.unibo.artrat.model.impl.characters;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import it.unibo.artrat.model.api.characters.AbstractEntity;
@@ -14,6 +15,10 @@ import it.unibo.artrat.utils.impl.Vector2d;
  * @author Samuele Trapani
  */
 public final class AdvancedEnemy extends AbstractEntity implements Enemy {
+
+    public AdvancedEnemy(final Point center, final double width, final double height) {
+        super(center, width, height, new HashSet<>());
+    }
 
     /**
      * Advanced enemy constructor.

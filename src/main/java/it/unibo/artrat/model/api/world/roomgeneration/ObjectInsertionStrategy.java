@@ -3,7 +3,7 @@ package it.unibo.artrat.model.api.world.roomgeneration;
 import java.util.Set;
 import java.util.function.BiFunction;
 
-import it.unibo.artrat.model.impl.AbstractGameObject;
+import it.unibo.artrat.model.api.GameObject;
 
 /**
  * strategy to describe the logic of placing some objects in a room.
@@ -21,7 +21,7 @@ public interface ObjectInsertionStrategy<O> {
      * @param factored  function that create the object to add
      * @return set of object
      */
-    Set<O> insertMultipleObject(Set<AbstractGameObject> baseRoom, int roomSize, int addNumber,
+    Set<O> insertMultipleObject(Set<GameObject> baseRoom, int roomSize, int addNumber,
             BiFunction<Integer, Integer, O> factored);
 
     /**

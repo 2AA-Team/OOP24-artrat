@@ -92,4 +92,8 @@ public abstract class AbstractGameObject implements GameObject {
         return new BoundingBoxImpl(this.hitBox.getTopLeft(), this.hitBox.getBottomRight());
     }
 
+    public AbstractGameObject clone() {
+        return null;
+    }
+
 }

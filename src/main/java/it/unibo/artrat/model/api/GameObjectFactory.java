@@ -1,8 +1,7 @@
 package it.unibo.artrat.model.api;
 
-import it.unibo.artrat.model.api.characters.AbstractEntity;
+import it.unibo.artrat.model.api.characters.Enemy;
 import it.unibo.artrat.model.api.characters.Player;
-import it.unibo.artrat.model.impl.AbstractGameObject;
 
 /**
  * interface for the game object factory.
@@ -16,7 +15,7 @@ public interface GameObjectFactory {
      * @param y y position
      * @return the game object for the wall
      */
-    AbstractGameObject getWall(int x, int y);
+    GameObject getWall(int x, int y);
 
     /**
      * create a new player game object.
@@ -34,7 +33,7 @@ public interface GameObjectFactory {
      * @param y y position
      * @return the game object for the enemy
      */
-    AbstractEntity getRandomEnemy(int x, int y);
+    Enemy getRandomEnemy(int x, int y);
 
     /**
      * create a new valuable object game object.
@@ -43,7 +42,7 @@ public interface GameObjectFactory {
      * @param y y position
      * @return the game object for the valuable object
      */
-    AbstractGameObject getPicture(int x, int y);
+    GameObject getPicture(int x, int y);
 
     /**
      * create a new exit.
@@ -52,5 +51,5 @@ public interface GameObjectFactory {
      * @param y y position
      * @return the game object for the exit
      */
-    AbstractGameObject getExit(int x, int y);
+    GameObject getExit(int x, int y);
 }

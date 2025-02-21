@@ -20,6 +20,8 @@ import it.unibo.artrat.utils.api.ResourceLoader;
 import it.unibo.artrat.utils.api.commands.Command;
 import it.unibo.artrat.utils.impl.Converter;
 import it.unibo.artrat.utils.impl.ResourceLoaderImpl;
+import it.unibo.artrat.utils.impl.collisions.AbstractCollisionChecker;
+import it.unibo.artrat.utils.impl.collisions.BaseCollisionChecker;
 import it.unibo.artrat.view.impl.MainViewImpl;
 
 /**
@@ -29,6 +31,7 @@ import it.unibo.artrat.view.impl.MainViewImpl;
 public final class GameEngineImpl implements GameEngine {
     private final BlockingQueue<Command> commands = new LinkedBlockingDeque<>();
     private static final Logger LOGGER = LoggerFactory.getLogger(GameEngineImpl.class);
+    private final AbstractCollisionChecker collisionChecker;
 
     private enum GameStatus {
         STOPPED, RUNNING
@@ -50,6 +53,7 @@ public final class GameEngineImpl implements GameEngine {
         this.status = GameStatus.STOPPED;
         this.resourceLoader = new ResourceLoaderImpl<>();
         this.initiateResources();
+        collisionChecker = new BaseCollisionChecker(resourceLoader.getConfig("RENDER_DISTANCE"));
         mainController = new MainControllerImpl(this);
     }
 
@@ -115,20 +119,8 @@ public final class GameEngineImpl implements GameEngine {
     }
 
     private void update(final long delta) {
-        final Command cmd = this.commands.poll();
-        final var model = this.mainController.getModel();
-        final var player = model.getPlayer();
-        if (!Objects.isNull(cmd)) {
-            cmd.execute(player);
-        }
-        player.update(delta);
-        System.out.println(player.getSpeed());
-        final boolean tuma = this.mainController.getModel().getFloor().getWalls().stream()
-                .anyMatch(x -> x.getBoundingBox().isColliding(player.getBoundingBox()));
-        if (!tuma) {
-            model.setPlayer(player);
-        }
-        this.mainController.setModel(model);
+        LOGGER.info("Delta:" + delta);
+        collisionChecker.updateAndCheck(mainController, commands.poll(), delta);
     }
 
     /**

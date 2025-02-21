@@ -7,8 +7,9 @@ import java.util.Random;
 import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.stream.IntStream;
+
+import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.world.roomgeneration.ObjectInsertionStrategy;
-import it.unibo.artrat.model.impl.AbstractGameObject;
 import it.unibo.artrat.utils.impl.Point;
 
 /**
@@ -25,7 +26,7 @@ public class ObjectInsertionRandom<O> implements ObjectInsertionStrategy<O> {
      */
     @Override
     public Set<O> insertMultipleObject(
-            final Set<AbstractGameObject> baseRoom,
+            final Set<GameObject> baseRoom,
             final int roomSize,
             final int addNumber,
             final BiFunction<Integer, Integer, O> factored) {
@@ -51,7 +52,7 @@ public class ObjectInsertionRandom<O> implements ObjectInsertionStrategy<O> {
      * @param roomSize room size
      * @return a modificable list of free Point
      */
-    private List<Point> getFreePoint(final Set<AbstractGameObject> baseRoom, final int roomSize) {
+    private List<Point> getFreePoint(final Set<GameObject> baseRoom, final int roomSize) {
         return new ArrayList<>(IntStream.rangeClosed(0, roomSize - 1)
                 .boxed()
                 .flatMap(x -> IntStream.rangeClosed(0, roomSize - 1)
