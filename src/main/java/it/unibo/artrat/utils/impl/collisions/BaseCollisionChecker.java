@@ -66,9 +66,4 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
         return this.mainController.getModel().getFloor().getWalls().stream()
                 .anyMatch(x -> x.getBoundingBox().isColliding(e.getBoundingBox()));
     }
-
-    @Override
-    public void updateAndCheckPaintings() {
-    }
-
 }

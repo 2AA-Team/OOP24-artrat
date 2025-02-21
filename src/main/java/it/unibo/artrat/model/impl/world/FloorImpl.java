@@ -178,7 +178,7 @@ public class FloorImpl implements Floor {
     private void generateEffectiveRooms(final int roomSize) throws IOException {
         final int maxEnemyInARoom = 2;
         final int minEnemyInARoom = 1;
-        final int maxPaintingsInARoom = 4;
+        final int maxPaintingsInARoom = 3;
         final int minPaintingsInARoom = 1;
         List<RoomGenerationStrategy> generations = List.of();
         try {

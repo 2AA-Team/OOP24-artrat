@@ -31,8 +31,9 @@ public class WorldTimerImpl implements WorldTimer {
 
     /**
      * WorldTimerImpl constructor.
+     * @param settedCountdown the new countdown is initialize with settedCountdown
      */
-    public WorldTimerImpl(int settedCountdown) {
+    public WorldTimerImpl(final int settedCountdown) {
         this.countdown = settedCountdown;
         this.timer = new Timer("WorldTimer");
         this.remainingTime = countdown;
@@ -60,8 +61,6 @@ public class WorldTimerImpl implements WorldTimer {
         };
         // Riavvia il timer dal tempo rimanente
         timer.scheduleAtFixedRate(currentTask, ONE_SECOND, ONE_SECOND);
-        // con 1 second di settaggio prevengo problemi con eventi
-        System.out.println("TIMER STARTATO");
     }
 
     /**
@@ -82,7 +81,6 @@ public class WorldTimerImpl implements WorldTimer {
         }
         countdown = DEFAULT_TIMER_SETUP; // Ripristina il countdown iniziale
         remainingTime = countdown; // Ripristina il tempo rimanente
-        System.out.println("TIMER RESETTATO");
     }
 
     /**

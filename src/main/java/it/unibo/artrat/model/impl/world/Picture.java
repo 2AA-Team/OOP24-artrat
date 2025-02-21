@@ -16,6 +16,7 @@ public class Picture extends AbstractGameObject implements Collectable {
      * 
      * @param x x coordinate
      * @param y y coordinate
+     * @param price the price of picture.
      */
     public Picture(final double x, final double y, final double price) {
         super(new Point(x, y), 1, 1);

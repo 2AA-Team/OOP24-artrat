@@ -15,12 +15,9 @@ public abstract class AbstractCollisionChecker {
         this.mainController = mainController;
         updateAndCheckPlayer(cmd, delta);
         updateAndCheckVisibleEnemy(delta);
-        updateAndCheckPaintings();
     }
 
     public abstract void updateAndCheckPlayer(Command cmd, long delta);
 
     public abstract void updateAndCheckVisibleEnemy(long delta);
-
-    public abstract void updateAndCheckPaintings();
 }

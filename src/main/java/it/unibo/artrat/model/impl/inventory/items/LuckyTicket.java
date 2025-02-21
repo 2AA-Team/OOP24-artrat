@@ -16,12 +16,13 @@ public class LuckyTicket extends AbstractItem {
 
      /**
      * A constructor to initialize the new item Lucky Ticket.
+     * @param name the name of Lucky Ticket.
      * @param desc the description of Lucky Ticket.
      * @param price the price of Lucky Ticket.
      * @param type the item type of Lucky Ticket.
      */
-    public LuckyTicket(final String desc, final double price, final ItemType type) {
-        super(desc, price, type);
+    public LuckyTicket(final String name, final String desc, final double price, final ItemType type) {
+        super(name, desc, price, type);
         this.rd = new Random();
     }
 

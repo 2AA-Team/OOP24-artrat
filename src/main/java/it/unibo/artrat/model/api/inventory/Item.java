@@ -10,6 +10,12 @@ public interface Item {
 
     /**
      * 
+     * @return String that rappresent the name of object: Effect, Story, Curiosity.
+     */
+    String getName();
+
+    /**
+     * 
      * @return String that rappresent the description of object: Effect, Story, Curiosity.
      */
     String getDescription();

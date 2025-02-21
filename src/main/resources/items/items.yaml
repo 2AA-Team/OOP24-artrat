@@ -1,5 +1,25 @@
-MULTIPLIERBOOSTER: ["This consumable will allow you to gain a boost to your current multiplier.","1000.00","POWERUP"]
-LUCKYTICKET: ["This is a winning lottery ticket, what is it doing here? Scratch to win up to many coins!!", "700.00", "POWERUP"]
-WINGEDBOOTS : ["These shoes, just like a famous energy drink, give you wings. Wear them and become a bull. \nThis item has a usage limit, after which it will have no effect.", "1.00", "POWERUP"]
-MAGICBACKPACK : ["A backpack with a strange aura around it, take it and maybe replace your old one.", "9999.00", "CONSUMABLE"]
-MYSTERIOUSWAND : ["Woah, this is a magic wand! Try waving it.", "2000.00", "CONSUMABLE"]
+MULTIPLIERBOOSTER:
+  name: "Multiplier Booster"
+  description: "This consumable will allow you to gain a boost to your current multiplier."
+  price: 1000.00
+  itemType: POWERUP
+LUCKYTICKET: 
+  name: "Lucky Ticket"
+  description: "This is a winning lottery ticket, what is it doing here? Scratch to win up to many coins!!"
+  price: 700.00
+  itemType: POWERUP
+WINGEDBOOTS : 
+  name: "Winged Boots"
+  description: "These shoes, just like a famous energy drink, give you wings. Wear them and become a bull. \nThis item has a usage limit, after which it will have no effect."
+  price: 1.00
+  itemType: POWERUP
+MAGICBACKPACK : 
+  name: Magic Backpack
+  description: "A backpack with a strange aura around it, take it and maybe replace your old one."
+  price: 9999.00
+  itemType: CONSUMABLE
+MYSTERIOUSWAND : 
+  name: "Mysterious Wand"
+  description: "Woah, this is a magic wand! Try waving it."
+  price: 2000.00
+  itemType: CONSUMABLE

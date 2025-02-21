@@ -54,7 +54,7 @@ public class MarketImpl implements Market {
     public void initMarket() {
         final ItemReader itemReader = new ItemReaderImpl();
         try {
-            itemReader.setItemPath(itemPath.toURI());
+            itemReader.setPath(itemPath.toURI());
             this.itemFactory.initialize();
         } catch (IOException | URISyntaxException e) {
             LOGGER.error("MarketImpl class thrown an error : ", e);

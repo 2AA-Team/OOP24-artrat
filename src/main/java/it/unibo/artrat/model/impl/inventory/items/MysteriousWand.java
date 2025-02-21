@@ -15,12 +15,13 @@ public class MysteriousWand extends AbstractItem {
 
      /**
      * A constructor to initialize the new item Mysterious Staff.
+     * @param name the name of Mysterious Staff.
      * @param desc the description of Mysterious Staff.
      * @param price the price of Mysterious Staff.
      * @param itemType the item type of Mysterious Staff.
      */
-    public MysteriousWand(final String desc, final double price, final ItemType itemType) {
-        super(desc, price, itemType);
+    public MysteriousWand(final String name, final String desc, final double price, final ItemType itemType) {
+        super(name, desc, price, itemType);
         nameOfItem = this.getClass().getSimpleName();
     }
 

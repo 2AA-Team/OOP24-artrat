@@ -166,7 +166,7 @@ public class Lupino extends AbstractEntity implements Player {
      * {@inheritDoc}
      */
     @Override
-    public void setColletableList(List<Collectable> passedCollecatble) {
+    public void setColletableList(final List<Collectable> passedCollecatble) {
         this.collectabels = new ArrayList<>(passedCollecatble);
     }
 
@@ -174,7 +174,7 @@ public class Lupino extends AbstractEntity implements Player {
      * {@inheritDoc}
      */
     @Override
-    public void addCollectable(Collectable passedCollectable) {
+    public void addCollectable(final Collectable passedCollectable) {
         this.collectabels.add(passedCollectable);
     }
 

@@ -14,12 +14,13 @@ public class WingedBoots extends AbstractItem {
 
     /**
      * A constructor to initialize the new item Winged Boots.
+     * @param name the name of Winged Boots
      * @param desc the description of Winged Boots
      * @param price the price of Winged Boots
      * @param itemType the item type of Winged Boots
      */
-    public WingedBoots(final String desc, final double price, final ItemType itemType) {
-        super(desc, price, itemType);
+    public WingedBoots(final String name, final String desc, final double price, final ItemType itemType) {
+        super(name, desc, price, itemType);
     }
 
     /**
