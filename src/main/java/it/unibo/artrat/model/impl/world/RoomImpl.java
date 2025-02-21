@@ -22,7 +22,7 @@ import it.unibo.artrat.utils.impl.Point;
 public final class RoomImpl implements Room {
 
     private final Set<GameObject> roomStructure = new HashSet<>();
-    private Set<Enemy> roomEnemies = new HashSet<>();
+    private final Set<Enemy> roomEnemies = new HashSet<>();
     private final Set<GameObject> roomValues = new HashSet<>();
 
     /**

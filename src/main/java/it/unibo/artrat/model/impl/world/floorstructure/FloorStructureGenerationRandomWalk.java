@@ -42,7 +42,7 @@ public class FloorStructureGenerationRandomWalk implements FloorStructureGenerat
         int x = startX;
         int y = startY;
         main.get(x).set(y, true);
-        int steps = size * size / 2;
+        final int steps = size * size / 2;
         for (int i = 0; i < steps; i++) {
             Point direction;
             do {

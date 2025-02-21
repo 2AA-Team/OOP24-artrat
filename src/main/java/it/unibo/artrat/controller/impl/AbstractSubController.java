@@ -61,11 +61,17 @@ public abstract class AbstractSubController implements SubController {
         this.mainController.input(cmd);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void startTimerSubController() {
         this.mainController.startTimerMainController();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void resetTimerSubController() {
         this.mainController.startTimerMainController();

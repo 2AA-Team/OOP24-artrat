@@ -13,7 +13,7 @@ public class FloorStructureGenerationFullfill implements FloorStructureGeneratio
      */
     @Override
     public List<List<Boolean>> generate(final int size) {
-        List<List<Boolean>> main = new ArrayList<>(size);
+        final List<List<Boolean>> main = new ArrayList<>(size);
         for (int i = 0; i < size; i++) {
             main.add(new ArrayList<>(Collections.nCopies(size, true)));
         }

@@ -37,11 +37,4 @@ public interface GameObject {
      */
     BoundingBox getBoundingBox();
 
-    /**
-     * clone method.
-     * 
-     * @return a clone
-     */
-    GameObject clone();
-
 }
