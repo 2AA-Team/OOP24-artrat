@@ -56,12 +56,6 @@ public interface SubController {
     /**
      * @author Manuel Benagli
      */
-    void stopTimerSubController();
-
-    
-    /**
-     * @author Manuel Benagli
-     */
     boolean isTimeOutSubController();
 
     /**

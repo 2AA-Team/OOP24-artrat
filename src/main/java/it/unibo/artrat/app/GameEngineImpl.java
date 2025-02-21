@@ -14,8 +14,6 @@ import org.slf4j.LoggerFactory;
 import it.unibo.artrat.app.api.GameEngine;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
-import it.unibo.artrat.model.api.WorldTimer;
-import it.unibo.artrat.model.impl.WorldTimerImpl;
 import it.unibo.artrat.utils.api.ResourceLoader;
 import it.unibo.artrat.utils.api.commands.Command;
 import it.unibo.artrat.utils.impl.Converter;

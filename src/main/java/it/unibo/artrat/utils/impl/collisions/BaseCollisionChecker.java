@@ -7,7 +7,6 @@ import java.util.Set;
 import it.unibo.artrat.model.api.characters.Enemy;
 import it.unibo.artrat.model.api.characters.Entity;
 import it.unibo.artrat.model.api.world.Floor;
-import it.unibo.artrat.model.impl.characters.Lupino;
 import it.unibo.artrat.utils.api.BoundingBox;
 import it.unibo.artrat.utils.api.commands.Command;
 import it.unibo.artrat.utils.impl.BoundingBoxImpl;
@@ -25,21 +24,17 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
         if (delta < deltaLimit) {
             final var model = this.mainController.getModel();
             final var player = model.getPlayer();
-            final var rollBack = new Lupino(player.getPosition(), new HashSet<>());
-
             if (!Objects.isNull(cmd)) {
                 cmd.execute(player);
             }
             player.update(delta);
-            System.out.println(player.getSpeed());
-
-            if (!checkWallCollision(player)) {
-                model.setPlayer(player);
-            } else {
-                model.setPlayer(rollBack);
+            if (checkWallCollision(player)) {
+                player.update(-delta);
             }
+            model.setPlayer(player);
             this.mainController.setModel(model);
         }
+
     }
 
     @Override
