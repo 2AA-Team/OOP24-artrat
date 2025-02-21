@@ -1,8 +1,9 @@
 package it.unibo.artrat.model.impl;
 
-import it.unibo.artrat.model.api.WorldTimer;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import it.unibo.artrat.model.api.WorldTimer;
 
 /**
  * WorldTimerImpl class.
@@ -10,7 +11,7 @@ import java.util.TimerTask;
  * @author Manuel Benagli
  */
 public class WorldTimerImpl implements WorldTimer {
-    private static final int DEFAULT_TIMER_SETUP = 120000; // Tempo iniziale
+    private static final int DEFAULT_TIMER_SETUP = 5000; // Tempo iniziale
     private static final int ONE_SECOND = 1000;
     private final Timer timer;
     private int countdown;
@@ -50,7 +51,6 @@ public class WorldTimerImpl implements WorldTimer {
                 // La logica del game over quando il timer finisce
                 if (remainingTime > ONE_SECOND) {
                     remainingTime -= ONE_SECOND;
-                    System.out.println("IN CORSO  " + remainingTime / ONE_SECOND);
                     getCurrentTime();
                 } else {
                     outOfTime = true;

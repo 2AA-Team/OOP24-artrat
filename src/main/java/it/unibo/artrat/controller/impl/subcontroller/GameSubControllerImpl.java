@@ -16,6 +16,7 @@ import it.unibo.artrat.utils.api.BoundingBox;
 import it.unibo.artrat.utils.api.ResourceLoader;
 import it.unibo.artrat.utils.impl.BoundingBoxImpl;
 import it.unibo.artrat.utils.impl.Point;
+import it.unibo.artrat.utils.impl.Vector2d;
 
 /**
  * sub controller for the game.
@@ -36,7 +37,6 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
         super(mainController);
         this.renderDistance = rl.getConfig("RENDER_DISTANCE");
         this.floor = new FloorImpl(rl);
-        this.floor.generateFloorSet();
 
     }
 
@@ -100,9 +100,15 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
     @Override
     public void init() {
         final Model model = this.getModel();
+        try {
+            this.floor.generateFloorSet();
+        } catch (IOException e) {
+
+        }
         model.setFloor(this.floor);
         final Player player = model.getPlayer();
         player.setPosition(this.floor.getStartPosition());
+        player.setSpeed(new Vector2d());
         model.setPlayer(player);
         this.updateCentralizeModel(model);
     }
