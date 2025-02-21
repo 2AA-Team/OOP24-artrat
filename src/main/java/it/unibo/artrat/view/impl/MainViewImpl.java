@@ -9,7 +9,6 @@ import javax.swing.JFrame;
 
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.model.impl.Stage;
-import it.unibo.artrat.model.impl.WorldTimerImpl;
 import it.unibo.artrat.utils.api.ResourceLoader;
 import it.unibo.artrat.view.api.MainView;
 
@@ -24,8 +23,6 @@ public class MainViewImpl implements MainView {
     private AbstractSubPanel subPanel;
     private final ResourceLoader<String, Double> resourceLoader;
     private final JFrame frame = new JFrame();
-
-    private WorldTimerImpl timer = new WorldTimerImpl();
 
     /**
      * constructor set the size of the frame.
@@ -77,7 +74,6 @@ public class MainViewImpl implements MainView {
      * reload frame to get the right size.
      */
     private void reloadFrame() {
-
         subPanel.initComponents();
         final double width = resourceLoader.getConfig(controller.getStage().toString() + "_WIDTH");
         final double height = resourceLoader.getConfig(controller.getStage().toString()
@@ -113,6 +109,12 @@ public class MainViewImpl implements MainView {
                 throw new IllegalStateException("Stage does not exist.");
         }
         subPanel.setFrameDimension(this.frame.getSize());
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         reloadFrame();
     }
 }

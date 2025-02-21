@@ -57,7 +57,8 @@ public class GameObjectFactoryImpl implements GameObjectFactory {
      */
     @Override
     public GameObject getPicture(final int x, final int y) {
-        return new Picture(x, y);
+        final double priceMax = 10;
+        return new Picture(x, y, RANDOM.nextDouble(priceMax));
     }
 
     /**
