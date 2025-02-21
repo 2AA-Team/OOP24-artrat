@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface FloorStructureGenerationStrategy {
 
-    public List<List<Boolean>> generate(int size);
+    List<List<Boolean>> generate(final int size);
 }

@@ -6,12 +6,13 @@ import java.util.List;
 import java.util.Random;
 
 import it.unibo.artrat.model.api.world.floorstructure.FloorStructureGenerationStrategy;
+import it.unibo.artrat.utils.impl.Point;
 
 public class FloorStructureGenerationRandomWalk implements FloorStructureGenerationStrategy {
 
     private final int startX;
     private final int startY;
-    private final Random RANDOM = new Random();
+    private final static Random RANDOM = new Random();
 
     /**
      * Constructor to define the start room.
@@ -19,7 +20,7 @@ public class FloorStructureGenerationRandomWalk implements FloorStructureGenerat
      * @param x start room x coordinate
      * @param y start room y coordinate
      */
-    public FloorStructureGenerationRandomWalk(int x, int y) {
+    public FloorStructureGenerationRandomWalk(final int x, final int y) {
         this.startX = x;
         this.startY = y;
     }
@@ -28,8 +29,13 @@ public class FloorStructureGenerationRandomWalk implements FloorStructureGenerat
      * {@inheritDoc}
      */
     @Override
-    public List<List<Boolean>> generate(int size) {
-        List<List<Boolean>> main = new ArrayList<>(size);
+    public List<List<Boolean>> generate(final int size) {
+        final List<Point> directions = List.of(
+                new Point(1, 0),
+                new Point(-1, 0),
+                new Point(0, 1),
+                new Point(0, -1));
+        final List<List<Boolean>> main = new ArrayList<>(size);
         for (int i = 0; i < size; i++) {
             main.add(new ArrayList<>(Collections.nCopies(size, false)));
         }
@@ -37,28 +43,14 @@ public class FloorStructureGenerationRandomWalk implements FloorStructureGenerat
         int y = startY;
         main.get(x).set(y, true);
         int steps = size * size / 2;
-        ;
         for (int i = 0; i < steps; i++) {
-            int direction = RANDOM.nextInt(4); // 0 = up, 1 = down, 2 = left, 3 = right
-
-            switch (direction) {
-                case 0:
-                    if (y > 0)
-                        y--;
-                    break;
-                case 1:
-                    if (y < size - 1)
-                        y++;
-                    break;
-                case 2:
-                    if (x > 0)
-                        x--;
-                    break;
-                case 3:
-                    if (x < size - 1)
-                        x++;
-                    break;
-            }
+            Point direction;
+            do {
+                direction = directions.get(RANDOM.nextInt(directions.size()));
+            } while (x + direction.getX() < 0 || y + direction.getY() < 0 || x + direction.getX() >= size
+                    || y + +direction.getY() >= size);
+            x += direction.getX();
+            y += direction.getY();
             main.get(x).set(y, true);
         }
 

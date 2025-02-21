@@ -92,6 +92,7 @@ public interface Floor {
     /**
      * setter for all enemies.
      * 
+     * @param enemies set of enemies
      */
     void setEnemies(Set<Enemy> enemies);
 }

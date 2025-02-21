@@ -162,7 +162,7 @@ public class FloorImpl implements Floor {
      * @param floorSize floor size
      */
     private void generateFloorStructure(final int floorSize) {
-        List<FloorStructureGenerationStrategy> generations = List.of(
+        final List<FloorStructureGenerationStrategy> generations = List.of(
                 new FloorStructureGenerationRandomWalk(
                         (int) Math.floor((double) floorSize / 2), floorSize - 1),
                 new FloorStructureGenerationFullfill());
@@ -353,7 +353,7 @@ public class FloorImpl implements Floor {
     }
 
     @Override
-    public void setEnemies(Set<Enemy> enemies) {
+    public void setEnemies(final Set<Enemy> enemies) {
         this.floorEnemies = new HashSet<>(enemies);
     }
 }
