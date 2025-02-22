@@ -1,20 +1,22 @@
 package it.unibo.artrat.model.impl;
 
-import it.unibo.artrat.model.api.WorldTimer;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import it.unibo.artrat.model.api.WorldTimer;
+
 /**
  * WorldTimerImpl class.
+ * 
  * @author Manuel Benagli
  */
 public class WorldTimerImpl implements WorldTimer {
-    private static final int DEFAULT_TIMER_SETUP = 10000; // Tempo iniziale
+    private static final int DEFAULT_TIMER_SETUP = 120000; // Tempo iniziale
     private static final int ONE_SECOND = 1000;
     private final Timer timer;
-    private int countdown;
     private boolean outOfTime;
-    private int remainingTime;  // Tempo rimanente che si aggiorna ogni secondo
+    private int countdown;
+    private int remainingTime; // Tempo rimanente che si aggiorna ogni secondo
     private TimerTask currentTask;
 
     /**
@@ -29,8 +31,9 @@ public class WorldTimerImpl implements WorldTimer {
 
     /**
      * WorldTimerImpl constructor.
+     * @param settedCountdown the new countdown is initialize with settedCountdown
      */
-    public WorldTimerImpl(int settedCountdown) {
+    public WorldTimerImpl(final int settedCountdown) {
         this.countdown = settedCountdown;
         this.timer = new Timer("WorldTimer");
         this.remainingTime = countdown;
@@ -43,13 +46,12 @@ public class WorldTimerImpl implements WorldTimer {
     public void startTimer() {
         outOfTime = false;
         currentTask = new TimerTask() {
-            
+
             @Override
             public void run() {
                 // La logica del game over quando il timer finisce
                 if (remainingTime > ONE_SECOND) {
                     remainingTime -= ONE_SECOND;
-                    System.out.println("IN CORSO  " + remainingTime/ONE_SECOND);
                     getCurrentTime();
                 } else {
                     outOfTime = true;
@@ -57,17 +59,14 @@ public class WorldTimerImpl implements WorldTimer {
                 }
             }
         };
-        // Riavvia il timer dal tempo rimanente
         timer.scheduleAtFixedRate(currentTask, ONE_SECOND, ONE_SECOND);
-        //con 1 second di settaggio prevengo problemi con eventi
-        System.out.println("TIMER STARTATO");
     }
 
     /**
      * 
      */
     @Override
-    public int getCurrentTime(){
+    public int getCurrentTime() {
         return remainingTime;
     }
 
@@ -77,11 +76,10 @@ public class WorldTimerImpl implements WorldTimer {
     @Override
     public void resetTimer() {
         if (currentTask != null) {
-            currentTask.cancel();  // Annulla il task corrente
+            currentTask.cancel(); // Annulla il task corrente
         }
-        countdown = DEFAULT_TIMER_SETUP;  // Ripristina il countdown iniziale
-        remainingTime = countdown;  // Ripristina il tempo rimanente
-        System.out.println("TIMER RESETTATO");
+        countdown = DEFAULT_TIMER_SETUP; // Ripristina il countdown iniziale
+        remainingTime = countdown; // Ripristina il tempo rimanente
     }
 
     /**

@@ -4,12 +4,8 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-import it.unibo.artrat.model.api.characters.AbstractEntity;
-import it.unibo.artrat.model.api.characters.Enemy;
-import it.unibo.artrat.model.api.characters.Player;
-import it.unibo.artrat.utils.api.BoundingBox;
+import it.unibo.artrat.model.api.characters.AbstractEnemy;
 import it.unibo.artrat.utils.api.Directions;
-import it.unibo.artrat.utils.impl.BoundingBoxImpl;
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;
 
@@ -18,15 +14,13 @@ import it.unibo.artrat.utils.impl.Vector2d;
  * 
  * @author Samuele Trapani
  */
-public final class BaseEnemy extends AbstractEntity implements Enemy {
+public final class BaseEnemy extends AbstractEnemy {
     private final Random rd = new Random();
-    private final BoundingBox fieldOfView;
     private static final int DEFAULT_STEPS = 10;
     private int steps = 0;
 
     public BaseEnemy(final Point center, final double width, final double height) {
         super(center, width, height, new HashSet<>());
-        fieldOfView = new BoundingBoxImpl(center, width, height);
     }
 
     /**
@@ -37,7 +31,6 @@ public final class BaseEnemy extends AbstractEntity implements Enemy {
      */
     public BaseEnemy(final Point topLeft, final Point bottomRight) {
         super(topLeft, bottomRight);
-        this.fieldOfView = new BoundingBoxImpl(topLeft, bottomRight);
     }
 
     /**
@@ -49,35 +42,6 @@ public final class BaseEnemy extends AbstractEntity implements Enemy {
      */
     public BaseEnemy(final Point topLeft, final Point bottomRight, final Set<Vector2d> v) {
         super(topLeft, bottomRight, v);
-        this.fieldOfView = new BoundingBoxImpl(topLeft, bottomRight);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void follow(final Player p) {
-        final var speed = this.calculateSpeed();
-        final var playerDirection = p.calculateSpeed().normalize();
-        this.setSpeed(playerDirection.mul(speed.module()));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void capture() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'capture'");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void interact() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'interact'");
     }
 
     /**
@@ -92,15 +56,6 @@ public final class BaseEnemy extends AbstractEntity implements Enemy {
         } else {
             this.steps--;
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void update(final long delta) {
-        super.update(delta);
-        this.fieldOfView.setCenter(this.getPosition());
     }
 
 }

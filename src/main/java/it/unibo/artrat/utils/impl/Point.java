@@ -97,15 +97,25 @@ public final class Point {
     }
 
     /**
-     * Get distance from other point.
+     * Get euclidean distance from other point.
      * 
      * @param p point used to compute the distance
      * @return distance
      */
-    public double getDistance(final Point p) {
+    public double getEuclideanDistance(final Point p) {
         final double distX = this.x - p.x;
         final double distY = this.y - p.y;
         return Math.sqrt(distX * distX + distY * distY);
+    }
+
+    /**
+     * Get manhattan distance from other point.
+     * 
+     * @param p point used to compute the distance
+     * @return distance
+     */
+    public double getManhattanDistance(final Point p) {
+        return Math.abs(this.x - p.x) + Math.abs(this.y - p.y);
     }
 
     @Override

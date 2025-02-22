@@ -2,6 +2,7 @@ package it.unibo.artrat.view.impl;
 
 import java.awt.BorderLayout;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -53,6 +54,7 @@ public class GameSubPanel extends AbstractSubPanel {
             RoomSymbols.VALUE, getObjectImage("picture.png"),
             RoomSymbols.EXIT, getObjectImage("exit.png"),
             RoomSymbols.PLAYER, getObjectImage("player.png"));
+    private static final Image COMPASS = getObjectImage("compass.png");
 
     private static Image getObjectImage(final String image) {
         try {
@@ -83,8 +85,15 @@ public class GameSubPanel extends AbstractSubPanel {
             printObject(g, center, playerPos, RoomSymbols.ENEMY, gameSubController.getVisibleEnemyPositions());
             printPlayer(g, center);
 
-           timerCountdown.setText(Integer.toString(gameSubController.getCurrentTimeController()/ONE_SECOND));      //aggiorno il timer            
+            timerCountdown.setText(Integer.toString(gameSubController.getCurrentTimeController() / ONE_SECOND));
             forceRedraw();
+            printCompass(g, gameSubController.getAngleCompass());
+        }
+
+        private void printCompass(final Graphics g, final double angle) {
+            final Graphics2D g2 = (Graphics2D) g;
+            g2.rotate(angle, resizedX, resizedY);
+            g2.drawImage(COMPASS, 0, 0, resizedX * 2, resizedY * 2, null);
         }
 
         private void printObject(final Graphics g, final Point center, final Point playerPos,
@@ -112,8 +121,8 @@ public class GameSubPanel extends AbstractSubPanel {
      */
     public GameSubPanel(final GameSubController gameSubController) {
         this.gameSubController = gameSubController;
-        
-        this.gameSubController.startTimerSubController();           //starto il timer
+
+        this.gameSubController.startTimerSubController(); // starto il timer
     }
 
     private boolean isMovementCommand(final KeyEvent e) {
@@ -179,8 +188,7 @@ public class GameSubPanel extends AbstractSubPanel {
      */
     @Override
     public void forceRedraw() {
-        if(gameSubController.isTimeOutSubController()){
-            gameSubController.setStage(Stage.MENU);
-        }
+        gameSubController.isTimeOutSubController();
+        
     }
 }

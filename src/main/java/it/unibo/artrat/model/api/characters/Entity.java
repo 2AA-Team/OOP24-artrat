@@ -18,11 +18,6 @@ public interface Entity extends GameObject {
     void move();
 
     /**
-     * Usefull method for objects interaction.
-     */
-    void interact();
-
-    /**
      * Get method for speed vector.
      * 
      * @return current speed
@@ -56,4 +51,19 @@ public interface Entity extends GameObject {
      * @return current speed
      */
     Vector2d calculateSpeed();
+
+    /**
+     * Get entity velocity.
+     * DEFAULT=0.01
+     * 
+     * @return velocity coefficent
+     */
+    double getVelocity();
+
+    /**
+     * Set entity velocity.
+     * 
+     * @param vel new velocity.
+     */
+    void setVelocity(double vel);
 }

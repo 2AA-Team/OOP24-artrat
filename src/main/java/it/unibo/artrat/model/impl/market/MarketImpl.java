@@ -27,7 +27,6 @@ public class MarketImpl implements Market {
                     + "items.yaml");
 
     private List<Item> itemsToBuy;
-    private final ItemReader itemReader;
     private final ItemFactoryImpl itemFactory;
     private List<Mission> missionsToRedeem;
     private static final Logger LOGGER = LoggerFactory.getLogger(MarketImpl.class);
@@ -37,7 +36,6 @@ public class MarketImpl implements Market {
      */
     public MarketImpl() {
         this.itemsToBuy = new ArrayList<>();
-        this.itemReader = new ItemReaderImpl();
         this.itemFactory = new ItemFactoryImpl();
         this.missionsToRedeem = new ArrayList<>();
     }
@@ -49,9 +47,6 @@ public class MarketImpl implements Market {
     public MarketImpl(final Market mark) {
         this.itemsToBuy = new ArrayList<>();
         this.itemsToBuy.addAll(mark.getPurchItems());
-        this.missionsToRedeem = new ArrayList<>();
-        this.missionsToRedeem.addAll(mark.getMissionList());
-        this.itemReader = new ItemReaderImpl();
         this.itemFactory = new ItemFactoryImpl();
     }
 
@@ -60,8 +55,9 @@ public class MarketImpl implements Market {
      */
     @Override
     public void initMarket() {
+        final ItemReader itemReader = new ItemReaderImpl();
         try {
-            this.itemReader.setItemPath(itemPath.toURI());
+            itemReader.setPath(itemPath.toURI());
             this.itemFactory.initialize();
         } catch (IOException | URISyntaxException e) {
             LOGGER.error("MarketImpl class thrown an error : ", e);
@@ -132,8 +128,10 @@ public class MarketImpl implements Market {
                 return itemFactory.luckyTicket();
             case "MAGICBACKPACK":
                 return itemFactory.magicbackpack();
-            case "MYSTERIOUSTAFF":
-                return itemFactory.mysterioustaff();
+            case "MYSTERIOUSWAND":
+                return itemFactory.mysteriouswand();
+            case "WINGEDBOOTS":
+                return itemFactory.wingedboots();
             default:
                 break;
         }

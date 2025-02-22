@@ -3,9 +3,9 @@ package it.unibo.artrat.model.impl.characters;
 import java.util.HashSet;
 import java.util.Set;
 
-import it.unibo.artrat.model.api.characters.AbstractEntity;
-import it.unibo.artrat.model.api.characters.Enemy;
+import it.unibo.artrat.model.api.characters.AbstractEnemy;
 import it.unibo.artrat.model.api.characters.Player;
+import it.unibo.artrat.utils.api.Directions;
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;
 
@@ -14,8 +14,15 @@ import it.unibo.artrat.utils.impl.Vector2d;
  * 
  * @author Samuele Trapani
  */
-public final class AdvancedEnemy extends AbstractEntity implements Enemy {
+public final class AdvancedEnemy extends AbstractEnemy {
 
+    /**
+     * constructor for advanced enemy.
+     * 
+     * @param center center of the hitbox
+     * @param width  width of the hitbox
+     * @param height height of the hitbox
+     */
     public AdvancedEnemy(final Point center, final double width, final double height) {
         super(center, width, height, new HashSet<>());
     }
@@ -41,28 +48,24 @@ public final class AdvancedEnemy extends AbstractEntity implements Enemy {
         super(topLeft, bottomRight);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public void capture() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'capture'");
-    }
+    public void follow(Player p) {
+        final Vector2d dir = Set.of(Directions.values()).stream()
+                .map(x -> x.vector())
+                .min((a, b) -> {
+                    final Point playerPos = p.getPosition();
+                    return Double.compare(
+                            playerPos.getEuclideanDistance(this.getPosition().sum(a)),
+                            playerPos.getEuclideanDistance(this.getPosition().sum(b)));
+                })
+                .orElse(new Vector2d());
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void interact() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'interact'");
+        this.setSpeed(dir);
     }
 
     @Override
-    public void follow(final Player p) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'follow'");
+    public void move() {
+        this.setSpeed(new Vector2d());
     }
 
 }

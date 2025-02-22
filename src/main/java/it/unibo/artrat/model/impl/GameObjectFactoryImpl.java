@@ -3,12 +3,13 @@ package it.unibo.artrat.model.impl;
 import java.util.HashSet;
 import java.util.Random;
 
+import it.unibo.artrat.model.api.Collectable;
 import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.GameObjectFactory;
 import it.unibo.artrat.model.api.characters.Enemy;
+import it.unibo.artrat.model.api.characters.EnemyFactory;
 import it.unibo.artrat.model.api.characters.Player;
-import it.unibo.artrat.model.impl.characters.AdvancedEnemy;
-import it.unibo.artrat.model.impl.characters.BaseEnemy;
+import it.unibo.artrat.model.impl.characters.EnemyFactoryImpl;
 import it.unibo.artrat.model.impl.characters.Lupino;
 import it.unibo.artrat.model.impl.world.Exit;
 import it.unibo.artrat.model.impl.world.Picture;
@@ -21,6 +22,7 @@ import it.unibo.artrat.utils.impl.Point;
 public class GameObjectFactoryImpl implements GameObjectFactory {
 
     private static final Random RANDOM = new Random();
+    private final EnemyFactory enemies = new EnemyFactoryImpl();
 
     /**
      * {@inheritDoc}
@@ -43,10 +45,12 @@ public class GameObjectFactoryImpl implements GameObjectFactory {
      */
     @Override
     public Enemy getRandomEnemy(final int x, final int y) {
+        final double size = 0.8;
+        final Point pos = new Point(x, y);
         return switch (RANDOM.nextInt(2)) {
-            case 0 -> new AdvancedEnemy(new Point(x, y), 1, 1);
-            case 1 -> new BaseEnemy(new Point(x, y), 1, 1);
-            default -> new BaseEnemy(new Point(x, y), 1, 1);
+            case 0 -> enemies.createAdvancedEnemy(pos, size, size);
+            case 1 -> enemies.createBaseEnemy(pos, size, size);
+            default -> throw new IllegalStateException("");
 
         };
     }
@@ -55,8 +59,9 @@ public class GameObjectFactoryImpl implements GameObjectFactory {
      * {@inheritDoc}
      */
     @Override
-    public GameObject getPicture(final int x, final int y) {
-        return new Picture(x, y);
+    public Collectable getPicture(final int x, final int y) {
+        final double priceMax = 10;
+        return new Picture(x, y, RANDOM.nextDouble(priceMax));
     }
 
     /**

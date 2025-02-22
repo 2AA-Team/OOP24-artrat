@@ -72,7 +72,6 @@ public class MissionSubPanel extends AbstractSubPanel {
     private void allMissionsSetup() {
         missionPanel.removeAll();
 
-        /* 
         for (final var mission : missionControl.redeemableMissions()) {
             final JButton missionButton = new JButton("Mission");
             final JButton acceptMission = new JButton("Accept");
@@ -88,7 +87,7 @@ public class MissionSubPanel extends AbstractSubPanel {
                 }
             });
         }
-        */
+        
         // Update the view after any changes
         missionPanel.revalidate();
         missionPanel.repaint();

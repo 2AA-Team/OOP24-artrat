@@ -32,16 +32,8 @@ public interface GameObject {
     /**
      * Collision check with other bounding box.
      * 
-     * @param box
      * @return true if colliding, false otherwise
      */
     BoundingBox getBoundingBox();
-
-    /**
-     * clone method.
-     * 
-     * @return a clone
-     */
-    GameObject clone();
 
 }

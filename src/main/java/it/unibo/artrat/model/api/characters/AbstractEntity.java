@@ -2,6 +2,7 @@ package it.unibo.artrat.model.api.characters;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import it.unibo.artrat.model.impl.AbstractGameObject;
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;
@@ -14,7 +15,16 @@ import it.unibo.artrat.utils.impl.Vector2d;
 public abstract class AbstractEntity extends AbstractGameObject implements Entity {
 
     private Set<Vector2d> speed = new HashSet<>();
-    private static final double SCALE = 0.01;
+    private double velocity = 0.01;
+
+    public AbstractEntity(Point center, double width, double height) {
+        super(center, width, height);
+
+    }
+
+    public AbstractEntity(Point center) {
+        super(center);
+    }
 
     /**
      * Entity constructor.
@@ -76,17 +86,8 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
      * {@inheritDoc}
      */
     @Override
-    public void interact() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'interact'");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void update(final long delta) {
-        this.setPosition(this.getPosition().sum(calculateSpeed().mul(delta * SCALE)));
+        this.setPosition(this.getPosition().sum(calculateSpeed().mul(delta * getVelocity())));
     }
 
     /**
@@ -130,4 +131,13 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
         return new HashSet<>(this.speed);
     }
 
+    @Override
+    public double getVelocity() {
+        return this.velocity;
+    }
+
+    @Override
+    public void setVelocity(final double vel) {
+        this.velocity = vel;
+    }
 }

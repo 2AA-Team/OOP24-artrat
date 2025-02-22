@@ -13,7 +13,8 @@ import it.unibo.artrat.model.api.inventory.ItemFactory;
 import it.unibo.artrat.model.impl.inventory.items.LuckyTicket;
 import it.unibo.artrat.model.impl.inventory.items.MagicBackpack;
 import it.unibo.artrat.model.impl.inventory.items.MultiplierBooster;
-import it.unibo.artrat.model.impl.inventory.items.MysteriousStaff;
+import it.unibo.artrat.model.impl.inventory.items.MysteriousWand;
+import it.unibo.artrat.model.impl.inventory.items.WingedBoots;
 import it.unibo.artrat.utils.api.ItemReader;
 import it.unibo.artrat.utils.impl.ItemReaderImpl;
 
@@ -22,6 +23,11 @@ import it.unibo.artrat.utils.impl.ItemReaderImpl;
  */
 public class ItemFactoryImpl implements ItemFactory {
 
+    private static final String MULTIPLIER_BOOSTER = "MULTIPLIERBOOSTER";
+    private static final String LUCKY_TICKET = "LUCKYTICKET";
+    private static final String MAGIC_BACKPACK = "MAGICBACKPACK";
+    private static final String MYSTERIOUS_WAND = "MYSTERIOUSWAND";
+    private static final String WINGED_BOOTS = "WINGEDBOOTS";
     private final URL itemPath = Thread.currentThread().getContextClassLoader().getResource(
             "items" + File.separator
                     + "items.yaml");
@@ -42,7 +48,7 @@ public class ItemFactoryImpl implements ItemFactory {
     @Override
     public void initialize() {
             try {
-                this.itemReader.setItemPath(itemPath.toURI());
+                this.itemReader.setPath(itemPath.toURI());
             } catch (IOException | URISyntaxException e) {
                 LOGGER.error("Item reader thown an error : ", e);
             }
@@ -53,9 +59,10 @@ public class ItemFactoryImpl implements ItemFactory {
      */
     @Override
     public Item multiplierBooster() {
-        return new MultiplierBooster(itemReader.getDescription("MULTIPLIERBOOSTER"),
-                itemReader.getPrice("MULTIPLIERBOOSTER"),
-                itemReader.getItemType("MULTIPLIERBOOSTER"));
+        return new MultiplierBooster(itemReader.getName(MULTIPLIER_BOOSTER),
+                itemReader.getDescription(MULTIPLIER_BOOSTER),
+                itemReader.getPrice(MULTIPLIER_BOOSTER),
+                itemReader.getItemType(MULTIPLIER_BOOSTER));
     }
 
     /**
@@ -63,9 +70,10 @@ public class ItemFactoryImpl implements ItemFactory {
      */
     @Override
     public Item luckyTicket() {
-        return new LuckyTicket(itemReader.getDescription("LUCKYTICKET"),
-                itemReader.getPrice("LUCKYTICKET"),
-                itemReader.getItemType("LUCKYTICKET"));
+        return new LuckyTicket(itemReader.getName(LUCKY_TICKET),
+            itemReader.getDescription(LUCKY_TICKET),
+            itemReader.getPrice(LUCKY_TICKET),
+            itemReader.getItemType(LUCKY_TICKET));
     }
 
     /**
@@ -73,18 +81,31 @@ public class ItemFactoryImpl implements ItemFactory {
      */
     @Override
     public Item magicbackpack() {
-        return new MagicBackpack(itemReader.getDescription("MAGICBACKPACK"),
-                itemReader.getPrice("MAGICBACKPACK"),
-                itemReader.getItemType("MAGICBACKPACK"));
+        return new MagicBackpack(itemReader.getName(MAGIC_BACKPACK),
+            itemReader.getDescription(MAGIC_BACKPACK),
+            itemReader.getPrice(MAGIC_BACKPACK),
+            itemReader.getItemType(MAGIC_BACKPACK));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Item mysterioustaff() {
-        return new MysteriousStaff(itemReader.getDescription("MYSTERIOUSTAFF"), 
-        itemReader.getPrice("MYSTERIOUSTAFF"), 
-        itemReader.getItemType("MYSTERIOUSTAFF"));
+    public Item mysteriouswand() {
+        return new MysteriousWand(itemReader.getName(MYSTERIOUS_WAND), 
+            itemReader.getDescription(MYSTERIOUS_WAND), 
+            itemReader.getPrice(MYSTERIOUS_WAND), 
+            itemReader.getItemType(MYSTERIOUS_WAND));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Item wingedboots() {
+        return new WingedBoots(itemReader.getName(WINGED_BOOTS), 
+            itemReader.getDescription(WINGED_BOOTS), 
+            itemReader.getPrice(WINGED_BOOTS), 
+            itemReader.getItemType(WINGED_BOOTS));
     }
 }

@@ -1,8 +1,14 @@
 package it.unibo.artrat.model.impl.characters;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 
+import it.unibo.artrat.model.api.Collectable;
 import it.unibo.artrat.model.api.characters.AbstractEntity;
 import it.unibo.artrat.model.api.characters.Coin;
 import it.unibo.artrat.model.api.characters.Multiplier;
@@ -20,7 +26,9 @@ import it.unibo.artrat.utils.impl.Vector2d;
 public class Lupino extends AbstractEntity implements Player {
 
     private Inventory inventory;
+    private List<Collectable> collectabels;
     private Coin coins;
+    private Multiplier multiplier;
 
     /**
      * Player constructor with default vector.
@@ -31,7 +39,9 @@ public class Lupino extends AbstractEntity implements Player {
     public Lupino(final Point topLeft, final Point bottomRight) {
         this(topLeft, bottomRight, new HashSet<>());
         this.inventory = new InventoryImpl();
+        this.multiplier = new MultiplierImpl();
         this.coins = new CoinImpl();
+        this.collectabels = new ArrayList<>();
     }
 
     /**
@@ -45,6 +55,8 @@ public class Lupino extends AbstractEntity implements Player {
         super(topLeft, bottomRight, v);
         this.inventory = new InventoryImpl();
         this.coins = new CoinImpl();
+        this.multiplier = new MultiplierImpl();
+        this.collectabels = new ArrayList<>();
     }
 
     /**
@@ -59,6 +71,8 @@ public class Lupino extends AbstractEntity implements Player {
         super(center, width, height, speed);
         this.inventory = new InventoryImpl();
         this.coins = new CoinImpl();
+        this.multiplier = new MultiplierImpl();
+        this.collectabels = new ArrayList<>();
     }
 
     /**
@@ -71,6 +85,8 @@ public class Lupino extends AbstractEntity implements Player {
         super(center, speed);
         this.inventory = new InventoryImpl();
         this.coins = new CoinImpl();
+        this.multiplier = new MultiplierImpl();
+        this.collectabels = new ArrayList<>();
     }
 
     /**
@@ -125,10 +141,52 @@ public class Lupino extends AbstractEntity implements Player {
      * {@inheritDoc}
      */
     @Override
+    public Multiplier getMultiplier() {
+        return new MultiplierImpl(this.multiplier);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setMultipler(final Multiplier multipler) {
+        if (multipler.getCurrentMultiplier() >= 0.0) {
+            this.multiplier = new MultiplierImpl(multipler);
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Collectable> getColletableList() {
+        return new ArrayList<>(this.collectabels);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setColletableList(final List<Collectable> passedCollecatble) {
+        this.collectabels = new ArrayList<>(passedCollecatble);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addCollectable(final Collectable passedCollectable) {
+        this.collectabels.add(passedCollectable);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void increaseMultiplier(final double mutiple) {
-        final Multiplier mp = new MultiplierImpl(this.coins.getCurrentMultiplier());
-        mp.changeCurrentMultiplier(mp.getCurrentMultiplier() * mutiple);
-        coins.changePlayerMultipler(new MultiplierImpl(mp));
+        this.multiplier.changeCurrentMultiplier(this.multiplier.getCurrentMultiplier() * mutiple);
     }
 
     /**
@@ -137,8 +195,21 @@ public class Lupino extends AbstractEntity implements Player {
     @Override
     public Player copyPlayer() {
         final Player p = new Lupino(this.getPosition(), this.getSpeed());
+        p.setVelocity(this.getVelocity());
         p.setInventory(this.getInventory());
         p.setCoin(this.getCoin());
+        p.setMultipler(this.getMultiplier());
+        p.setColletableList(this.getColletableList());
         return p;
+    }
+
+    @Override
+    public double obtainCollectable() {
+        double coinsToAdd = BigDecimal.valueOf(collectabels.stream().mapToDouble(Collectable::getPrice).sum())
+                                        .setScale(2, RoundingMode.HALF_UP)
+                                        .doubleValue();
+        this.coins.addCoins(coinsToAdd);
+        this.collectabels.clear();
+        return coinsToAdd;
     }
 }

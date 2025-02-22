@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import it.unibo.artrat.controller.api.subcontroller.GameSubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
@@ -16,11 +19,13 @@ import it.unibo.artrat.utils.api.BoundingBox;
 import it.unibo.artrat.utils.api.ResourceLoader;
 import it.unibo.artrat.utils.impl.BoundingBoxImpl;
 import it.unibo.artrat.utils.impl.Point;
+import it.unibo.artrat.utils.impl.Vector2d;
 
 /**
  * sub controller for the game.
  */
 public class GameSubControllerImpl extends AbstractSubController implements GameSubController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(GameSubControllerImpl.class);
     private final Floor floor;
     private final double renderDistance;
 
@@ -36,7 +41,6 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
         super(mainController);
         this.renderDistance = rl.getConfig("RENDER_DISTANCE");
         this.floor = new FloorImpl(rl);
-        this.floor.generateFloorSet();
 
     }
 
@@ -73,7 +77,7 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
      */
     @Override
     public Set<Point> getExitPos() {
-        return this.getModel().getFloor().getExit().stream().map(x -> x.getPosition()).collect(Collectors.toSet());
+        return this.getModel().getFloor().getExit().stream().map(GameObject::getPosition).collect(Collectors.toSet());
     }
 
     /**
@@ -103,14 +107,28 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
         try {
             this.floor.generateFloorSet();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOGGER.warn("floor generation failed.");
         }
         model.setFloor(this.floor);
         final Player player = model.getPlayer();
         player.setPosition(this.floor.getStartPosition());
+        player.setSpeed(new Vector2d());
         model.setPlayer(player);
         this.updateCentralizeModel(model);
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getAngleCompass() {
+        final Model model = getModel();
+        final Point player = model.getPlayer().getPosition();
+        final Point exit = model.getFloor().getExit().stream().map(GameObject::getPosition).min((a, b) -> {
+            return Double.compare(a.getEuclideanDistance(player), b.getEuclideanDistance(player));
+        }).orElseGet(() -> new Point());
+        return Math.atan2(exit.getY() - player.getY(), exit.getX() - player.getX());
     }
 
 }

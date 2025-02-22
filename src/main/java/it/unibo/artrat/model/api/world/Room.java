@@ -2,6 +2,7 @@ package it.unibo.artrat.model.api.world;
 
 import java.util.Set;
 
+import it.unibo.artrat.model.api.Collectable;
 import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.characters.Enemy;
 
@@ -29,6 +30,6 @@ public interface Room {
      * 
      * @return set of gameobject
      */
-    Set<GameObject> getValues();
+    Set<Collectable> getValues();
 
 }

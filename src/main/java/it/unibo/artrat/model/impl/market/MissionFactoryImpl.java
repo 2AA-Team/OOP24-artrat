@@ -31,11 +31,7 @@ public class MissionFactoryImpl implements MissionFactory {
      */
     @Override
     public void initialize() {
-            try {
-                this.itemReader.setItemPath(itemPath.toURI());
-            } catch (IOException | URISyntaxException e) {
-                
-            }
+            
     }
 
     /**
@@ -43,9 +39,12 @@ public class MissionFactoryImpl implements MissionFactory {
      */
     @Override
     public Mission houdini(){
+        return null;
+        /*
         return new Houdini(itemReader.getDescription("HOUDINI"),
                 itemReader.getPrice("HOUDINI"),
                 itemReader.getMissionType("HOUDINI"));
+                */
     }
 
     /**
@@ -53,8 +52,11 @@ public class MissionFactoryImpl implements MissionFactory {
      */
     @Override
     public Mission culturalBaggage() {
+        return null;
+        /*
         return new Houdini(itemReader.getDescription("CULTURALBAGGAGE"),
                 itemReader.getPrice("CULTURALBAGGAGE"),
                 itemReader.getMissionType("CULTURALBAGGAGE"));
+                */
     }
 }

@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import it.unibo.artrat.model.api.Collectable;
 import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.GameObjectFactory;
 import it.unibo.artrat.model.api.characters.Enemy;
@@ -22,8 +23,8 @@ import it.unibo.artrat.utils.impl.Point;
 public final class RoomImpl implements Room {
 
     private final Set<GameObject> roomStructure = new HashSet<>();
-    private Set<Enemy> roomEnemies = new HashSet<>();
-    private final Set<GameObject> roomValues = new HashSet<>();
+    private final Set<Enemy> roomEnemies = new HashSet<>();
+    private final Set<Collectable> roomValues = new HashSet<>();
 
     /**
      * constructor using the builder.
@@ -85,7 +86,7 @@ public final class RoomImpl implements Room {
 
         private RoomGenerationStrategy generationStrat;
         private ObjectInsertionStrategy<Enemy> enemyStrat;
-        private ObjectInsertionStrategy<GameObject> valuableStrat;
+        private ObjectInsertionStrategy<Collectable> valuableStrat;
         private int numEnemies;
         private int numValues;
         private int size;
@@ -168,7 +169,7 @@ public final class RoomImpl implements Room {
          * @param insertStrat insertion strategy class
          * @return this room builder
          */
-        public RoomBuilder insertInsertionStrategyValue(final ObjectInsertionStrategy<GameObject> insertStrat) {
+        public RoomBuilder insertInsertionStrategyValue(final ObjectInsertionStrategy<Collectable> insertStrat) {
             if (insertStrat == null) {
                 throw new IllegalArgumentException("Insertion strategy cannot be null.");
             }
@@ -240,7 +241,7 @@ public final class RoomImpl implements Room {
      * {@inheritDoc}
      */
     @Override
-    public Set<GameObject> getValues() {
+    public Set<Collectable> getValues() {
         return new HashSet<>(this.roomValues);
     }
 

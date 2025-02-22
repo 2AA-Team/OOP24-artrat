@@ -42,7 +42,7 @@ public interface GameObjectFactory {
      * @param y y position
      * @return the game object for the valuable object
      */
-    GameObject getPicture(int x, int y);
+    Collectable getPicture(int x, int y);
 
     /**
      * create a new exit.

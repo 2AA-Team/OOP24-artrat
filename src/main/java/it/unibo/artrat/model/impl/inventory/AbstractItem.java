@@ -9,6 +9,7 @@ import it.unibo.artrat.model.api.inventory.Item;
  */
 public abstract class AbstractItem implements Item {
 
+    private final String name;
     private final String description;
     private final double price;
     private final ItemType itemType;
@@ -19,10 +20,19 @@ public abstract class AbstractItem implements Item {
      * @param price the price of new item.
      * @param itemType the itemtype of new item.
      */
-    protected AbstractItem(final String desc, final double price, final ItemType itemType) {
+    protected AbstractItem(final String name, final String desc, final double price, final ItemType itemType) {
+        this.name = name;
         this.description = desc;
         this.price = price;
         this.itemType = itemType;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getName() {
+        return this.name;
     }
 
     /**
