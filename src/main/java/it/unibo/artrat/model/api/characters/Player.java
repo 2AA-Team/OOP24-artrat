@@ -100,5 +100,5 @@ public interface Player extends Entity {
      */
     Player copyPlayer();
 
-    void obtainCollectable();
+    double obtainCollectable();
 }

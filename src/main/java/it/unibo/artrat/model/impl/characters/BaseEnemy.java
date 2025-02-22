@@ -57,7 +57,6 @@ public final class BaseEnemy extends AbstractEnemy {
      */
     @Override
     public void follow(final Player p) {
-        System.out.println(this.getPosition() + " FOLLOWING");
         final Set<Vector2d> dir = Set.of(Directions.values()).stream()
                 .map(x -> x.vector())
                 .collect(Collectors.toSet());

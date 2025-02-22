@@ -5,7 +5,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import it.unibo.artrat.model.api.Collectable;
-import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.api.characters.Enemy;
 import it.unibo.artrat.model.api.characters.Entity;
@@ -17,7 +16,6 @@ import it.unibo.artrat.utils.impl.BoundingBoxImpl;
 import it.unibo.artrat.utils.impl.Vector2d;
 
 public class BaseCollisionChecker extends AbstractCollisionChecker {
-    private final static long deltaLimit = 30;
 
     public BaseCollisionChecker(double renderDistance) {
         super(renderDistance);
@@ -25,21 +23,19 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
 
     @Override
     public void updateAndCheckPlayer(Command cmd, long delta) {
-        if (delta < deltaLimit) {
-            final var model = this.mainController.getModel();
-            final var player = model.getPlayer();
-            if (!Objects.isNull(cmd)) {
-                cmd.execute(player);
-            }
-            player.update(delta);
-            if (checkWallCollision(player)) {
-                player.update(-delta);
-            }
-            // System.out.println(player.getSpeed());
-            model.setPlayer(player);
-            this.mainController.setModel(model);
+        System.out.println(mainController.getModel().getPlayer().getSpeed());
+        final var model = this.mainController.getModel();
+        final var player = model.getPlayer();
+        if (!Objects.isNull(cmd)) {
+            cmd.execute(player);
         }
-
+        player.update(delta);
+        if (checkWallCollision(player)) {
+            player.update(-delta);
+        }
+        // System.out.println(player.getSpeed());
+        model.setPlayer(player);
+        this.mainController.setModel(model);
     }
 
     private void enemiesCollisionAvoidance(long delta) {
@@ -91,7 +87,6 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
 
         enemies.forEach(x -> {
             if (x.getBoundingBox().isColliding(bb)) {
-                System.out.println(checkFieldOfView(x));
                 if (checkFieldOfView(x)) {
                     x.follow(this.mainController.getModel().getPlayer());
                 } else {

@@ -35,4 +35,6 @@ public interface MainView {
      */
     void reconduceFromStage();
 
+    void showGameVictory(double point, String state);
+
 }
