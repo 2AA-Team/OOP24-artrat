@@ -1,5 +1,9 @@
 package it.unibo.artrat.model.impl.characters;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+import it.unibo.artrat.model.api.Collectable;
 import it.unibo.artrat.model.api.characters.Coin;
 
 /**
@@ -56,7 +60,9 @@ public class CoinImpl implements Coin {
     @Override
     public void spendCoins(final double coins) {
         if (coins >= 0.0 && coins <= amount) {
-            amount -= coins;
+            amount = BigDecimal.valueOf((amount - coins))
+                                .setScale(2, RoundingMode.HALF_UP)
+                                .doubleValue();
         } else {
             throw new IllegalArgumentException();
         }
