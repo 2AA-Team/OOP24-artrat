@@ -31,11 +31,12 @@ public class MissionSubPanel extends AbstractSubPanel {
         // Set the layout of the main panel to BorderLayout to support flexible resizing
         missionPanel.setLayout(new BorderLayout(3, 3));
         scrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-
         contMissionPane.add(scrollPanel, BorderLayout.CENTER);
+        scrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         missionControl.initMissionList();
     
-        this.missionPanel = new JPanel(new GridLayout(0, 1, 2, 2));
+        this.missionPanel = new JPanel(new GridLayout(0, 1, 1, 1));
         setMissions();
         allMissionsSetup();
         setPanel(contMissionPane);
@@ -71,6 +72,7 @@ public class MissionSubPanel extends AbstractSubPanel {
     private void allMissionsSetup() {
         missionPanel.removeAll();
 
+        /* 
         for (final var mission : missionControl.redeemableMissions()) {
             final JButton missionButton = new JButton("Mission");
             final JButton acceptMission = new JButton("Accept");
@@ -86,6 +88,7 @@ public class MissionSubPanel extends AbstractSubPanel {
                 }
             });
         }
+        */
         // Update the view after any changes
         missionPanel.revalidate();
         missionPanel.repaint();

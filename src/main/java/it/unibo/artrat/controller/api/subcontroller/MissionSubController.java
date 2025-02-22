@@ -27,3 +27,4 @@ public interface MissionSubController extends SubController {
      */
     boolean redeemMission(final Mission missionToRedeem);
 }
+

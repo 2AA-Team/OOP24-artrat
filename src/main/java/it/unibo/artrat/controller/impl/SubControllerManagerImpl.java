@@ -21,7 +21,6 @@ import it.unibo.artrat.utils.api.ResourceLoader;
  * implementation of SubControllerManager.
  */
 public class SubControllerManagerImpl implements SubControllerManager {
-
     private final MenuSubController menuSubController;
     private final GameSubController gameSubController;
     private final InventorySubController inventorySubController;
@@ -84,5 +83,4 @@ public class SubControllerManagerImpl implements SubControllerManager {
     public MissionSubController getMissionsSubController() {
         return Objects.requireNonNull(this.missionSubController);
     }
-
 }

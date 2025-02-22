@@ -97,8 +97,6 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         final JPanel bottomPan = new JPanel(new FlowLayout(FlowLayout.LEFT));
         final JPanel upperJPanel = new JPanel(new GridBagLayout());  // Usato GridBagLayout per una gestione flessibile
         final JButton toMenu = new JButton("BACK");
-        final JButton toMissions = new JButton("MISSIONS");
-
 
         final JComboBox<ItemType> filterComboBox = new JComboBox<>();
         filterComboBox.addItem(ITEMTYPE_ALL);
@@ -165,16 +163,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
             }
         });
 
-        toMissions.addActionListener(e-> {
-            if (toConfirm("Do you want to see the missions?", "Go to missions")) {
-                exitSettings();
-                contr.setStage(Stage.MISSIONS);
-                forceRedraw();                      //qevqwqwqwcqwcqwqwqwcqwqqqqqqqqqqqqqqqqqqqqqqqqqqqq
-            }
-        });
-
         bottomPan.add(toMenu);
-        bottomPan.add(toMissions);
         bottomPan.add(lupinoCash);
         marketPanel.add(bottomPan, BorderLayout.SOUTH);
     }

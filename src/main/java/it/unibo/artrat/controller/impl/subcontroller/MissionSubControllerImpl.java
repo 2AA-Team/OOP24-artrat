@@ -43,6 +43,6 @@ public class MissionSubControllerImpl extends AbstractSubController implements M
      */
     @Override
     public boolean redeemMission(final Mission missionToRedeem) { 
-        return true;
+        return false;
     }
 }
