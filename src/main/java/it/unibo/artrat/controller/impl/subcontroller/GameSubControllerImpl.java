@@ -1,13 +1,10 @@
 package it.unibo.artrat.controller.impl.subcontroller;
 
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import it.unibo.artrat.controller.api.subcontroller.GameSubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
@@ -116,6 +113,16 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
         player.setSpeed(new Vector2d());
         model.setPlayer(player);
         this.updateCentralizeModel(model);
+    }
+
+    @Override
+    public double getAngleCompass() {
+        final Model model = getModel();
+        final Point player = model.getPlayer().getPosition();
+        final Point exit = model.getFloor().getExit().stream().map(GameObject::getPosition).min((a, b) -> {
+            return Double.compare(a.getEuclideanDistance(player), b.getEuclideanDistance(player));
+        }).orElseGet(() -> new Point());
+        return Math.atan2(exit.getY() - player.getY(), exit.getX() - player.getX());
     }
 
 }

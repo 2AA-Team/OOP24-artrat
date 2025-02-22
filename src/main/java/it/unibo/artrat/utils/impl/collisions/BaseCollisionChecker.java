@@ -23,7 +23,6 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
 
     @Override
     public void updateAndCheckPlayer(Command cmd, long delta) {
-        System.out.println(mainController.getModel().getPlayer().getSpeed());
         final var model = this.mainController.getModel();
         final var player = model.getPlayer();
         if (!Objects.isNull(cmd)) {
