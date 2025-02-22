@@ -20,7 +20,8 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
     }
 
     @Override
-    public void updateAndCheckPlayer(final Command cmd, final long delta) {
+    public void updateAndCheckPlayer(Command cmd, long delta) {
+
         final var model = this.mainController.getModel();
         final var player = model.getPlayer();
         if (!Objects.isNull(cmd)) {
@@ -30,8 +31,10 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
         if (checkWallCollision(player)) {
             player.update(-delta);
         }
+        // System.out.println(player.getSpeed());
         model.setPlayer(player);
         this.mainController.setModel(model);
+
     }
 
     private void enemiesCollisionAvoidance(long delta) {
