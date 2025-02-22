@@ -58,20 +58,17 @@ public final class BaseEnemy extends AbstractEnemy {
     @Override
     public void follow(final Player p) {
         System.out.println(this.getPosition() + " FOLLOWING");
-        final Set<Vector2d> dir = Set.of(Directions.values()).stream()
+        final Vector2d dir = Set.of(Directions.values()).stream()
                 .map(x -> x.vector())
-                .collect(Collectors.toSet());
-        Vector2d tmp = new Vector2d();
-        double min = Integer.MAX_VALUE;
-        for (Vector2d v : dir) {
-            final Point current = this.getPosition().sum(v);
-            double distance = p.getPosition().getEuclideanDistance(current);
-            if (distance <= min) {
-                tmp = v;
-                min = distance;
-            }
-        }
-        this.setSpeed(tmp);
+                .min((a, b) -> {
+                    final Point playerPos = p.getPosition();
+                    return Double.compare(
+                            playerPos.getEuclideanDistance(this.getPosition().sum(a)),
+                            playerPos.getEuclideanDistance(this.getPosition().sum(b)));
+                })
+                .orElse(new Vector2d());
+
+        this.setSpeed(dir);
     }
 
     /**
