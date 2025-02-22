@@ -75,9 +75,9 @@ public class MainControllerImpl implements MainController {
             engine.forceStart();
         } else {
             engine.forceStop();
-
         }
 
+        System.out.println(this.model.getPlayer().getCoin().getCurrentAmount());
     }
 
     /**
@@ -175,7 +175,7 @@ public class MainControllerImpl implements MainController {
      */
     @Override
     public void winGame() {
-        Player player = model.getPlayer();
+        Player player = getModel().getPlayer();
         view.showGameVictory(player.obtainCollectable(), "VICTORY");
         gameExit(player);
     }
