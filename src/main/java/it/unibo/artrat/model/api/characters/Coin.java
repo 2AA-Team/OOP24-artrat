@@ -22,18 +22,4 @@ public interface Coin {
      * @param coins the coins to remove (spend).
      */
     void spendCoins(double coins);
-
-    /**
-     * 
-     * @return the current multiplier that player have.
-     */
-    Multiplier getCurrentMultiplier();
-
-    /**
-     * 
-     * Change the current multipler of player.
-     * @param multipler the new multiplier.
-     */
-    void changePlayerMultipler(Multiplier multipler);
-
 }

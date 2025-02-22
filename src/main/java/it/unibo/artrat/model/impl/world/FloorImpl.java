@@ -13,6 +13,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import it.unibo.artrat.model.api.Collectable;
 import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.characters.Enemy;
 import it.unibo.artrat.model.api.world.Floor;
@@ -20,7 +21,6 @@ import it.unibo.artrat.model.api.world.Room;
 import it.unibo.artrat.model.api.world.floorstructure.FloorStructureGenerationStrategy;
 import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;
 import it.unibo.artrat.model.impl.world.RoomImpl.RoomBuilder;
-import it.unibo.artrat.model.impl.world.floorstructure.FloorStructureGenerationFullfill;
 import it.unibo.artrat.model.impl.world.floorstructure.FloorStructureGenerationRandomWalk;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationEmpty;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationFile;
@@ -38,7 +38,7 @@ public class FloorImpl implements Floor {
     private static final Random RANDOM = new Random();
     private Set<GameObject> floorStructure = new HashSet<>();
     private Set<Enemy> floorEnemies = new HashSet<>();
-    private Set<GameObject> floorValues = new HashSet<>();
+    private Set<Collectable> floorValues = new HashSet<>();
     private List<List<Boolean>> floorMap;
     private final double maxFloorSize;
     private final double maxRoomSize;
@@ -136,7 +136,7 @@ public class FloorImpl implements Floor {
      * {@inheritDoc}
      */
     @Override
-    public Set<GameObject> getValues() {
+    public Set<Collectable> getValues() {
         return new HashSet<>(floorValues);
     }
 
@@ -164,8 +164,9 @@ public class FloorImpl implements Floor {
     private void generateFloorStructure(final int floorSize) {
         final List<FloorStructureGenerationStrategy> generations = List.of(
                 new FloorStructureGenerationRandomWalk(
-                        (int) Math.floor((double) floorSize / 2), floorSize - 1),
-                new FloorStructureGenerationFullfill());
+                        (int) Math.floor((double) floorSize / 2), floorSize - 1)
+        // new FloorStructureGenerationFullfill()
+        );
         this.floorMap = generations.get(RANDOM.nextInt(generations.size())).generate(floorSize);
     }
 
@@ -178,7 +179,7 @@ public class FloorImpl implements Floor {
     private void generateEffectiveRooms(final int roomSize) throws IOException {
         final int maxEnemyInARoom = 2;
         final int minEnemyInARoom = 1;
-        final int maxPaintingsInARoom = 4;
+        final int maxPaintingsInARoom = 3;
         final int minPaintingsInARoom = 1;
         List<RoomGenerationStrategy> generations = List.of();
         try {
@@ -285,7 +286,7 @@ public class FloorImpl implements Floor {
                 w.getPosition().getY() + roomY * roomSize)));
         this.floorStructure.addAll(tmpStruct);
 
-        final Set<GameObject> tmpValues = room.getValues();
+        final Set<Collectable> tmpValues = room.getValues();
         tmpValues.forEach((w) -> w.setPosition(new Point(w.getPosition().getX() + roomX * roomSize,
                 w.getPosition().getY() + roomY * roomSize)));
         this.floorValues.addAll(tmpValues);
@@ -358,5 +359,10 @@ public class FloorImpl implements Floor {
     @Override
     public void setEnemies(final Set<Enemy> enemies) {
         this.floorEnemies = new HashSet<>(enemies);
+    }
+
+    @Override
+    public void setValues(Set<Collectable> passedValues) {
+        this.floorValues = new HashSet<>(passedValues);
     }
 }

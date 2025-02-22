@@ -13,12 +13,13 @@ public class MagicBackpack extends AbstractItem {
 
      /**
      * A constructor to initialize the new item MagicBackpack.
+     * @param name the name of Magic Backpack.
      * @param desc the description of Magic Backpack.
      * @param price the price of Magic Backpack.
      * @param itemType the item type of Magic Backpack.
      */
-    public MagicBackpack(final String desc, final double price, final ItemType itemType) {
-        super(desc, price, itemType);
+    public MagicBackpack(final String name, final String desc, final double price, final ItemType itemType) {
+        super(name, desc, price, itemType);
     }
     /**
      * {@inheritDoc}

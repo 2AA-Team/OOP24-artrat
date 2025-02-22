@@ -100,4 +100,8 @@ public interface MainController {
      * @return true if is time out
      */
     boolean isTimeOutMainController();
+
+    void winGame();
+
+    void loseGame();
 }

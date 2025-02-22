@@ -81,8 +81,10 @@ public abstract class AbstractSubController implements SubController {
      * {@inheritDoc}
      */
     @Override
-    public boolean isTimeOutSubController() {
-        return this.mainController.isTimeOutMainController();
+    public void isTimeOutSubController() {
+        if(this.mainController.isTimeOutMainController()) {
+            this.mainController.loseGame();
+        }
     }
 
     /**

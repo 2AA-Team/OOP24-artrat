@@ -1,5 +1,8 @@
 package it.unibo.artrat.model.api.characters;
 
+import java.util.List;
+
+import it.unibo.artrat.model.api.Collectable;
 import it.unibo.artrat.model.api.inventory.Inventory;
 
 /**
@@ -51,6 +54,37 @@ public interface Player extends Entity {
     void spendCoins(double coins);
 
     /**
+     * 
+     * @return the current multiplier that player have.
+     */
+    Multiplier getMultiplier();
+
+    /**
+     * 
+     * Change the current multipler of player with the passed one.
+     * @param multipler the new multiplier.
+     */
+    void setMultipler(Multiplier multipler);
+
+    /**
+     * 
+     * @return the current Collectable list.
+     */
+    List<Collectable> getColletableList();
+
+    /**
+     * A method that change the current collectable list with the passed one.
+     * @param passedCollecatble
+     */
+    void setColletableList(List<Collectable> passedCollecatble);
+
+    /**
+     * A method that add a new collectable .
+     * @param passedCollectable the collectable to add
+     */
+    void addCollectable(Collectable passedCollectable);
+
+    /**
      * A method that increase the current coin multiplier, by multiplie the current
      * multiplier.
      * with the passed one.
@@ -65,4 +99,6 @@ public interface Player extends Entity {
      * @return a copy of passed Player.
      */
     Player copyPlayer();
+
+    double obtainCollectable();
 }

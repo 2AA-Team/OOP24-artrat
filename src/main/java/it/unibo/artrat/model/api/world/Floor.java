@@ -3,6 +3,7 @@ package it.unibo.artrat.model.api.world;
 import java.io.IOException;
 import java.util.Set;
 
+import it.unibo.artrat.model.api.Collectable;
 import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.characters.Enemy;
 import it.unibo.artrat.utils.impl.Point;
@@ -24,7 +25,7 @@ public interface Floor {
      * 
      * @return a set of AbstractGameObject
      */
-    Set<GameObject> getValues();
+    Set<Collectable> getValues();
 
     /**
      * getter for all walls.
@@ -95,4 +96,6 @@ public interface Floor {
      * @param enemies set of enemies
      */
     void setEnemies(Set<Enemy> enemies);
+    
+    void setValues(Set<Collectable> passedValues);
 }

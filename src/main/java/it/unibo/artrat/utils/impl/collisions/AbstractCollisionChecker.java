@@ -18,12 +18,14 @@ public abstract class AbstractCollisionChecker {
         updateAndCheckPlayer(cmd, delta);
         updateEnemiesState(delta);
         updateAndCheckPaintings();
-
+        updateAndCheckExit();
     }
 
     public abstract void updateAndCheckPlayer(Command cmd, long delta);
 
     public abstract void updateAndCheckPaintings();
+    
+    public abstract void updateAndCheckExit();
 
     public abstract void updateEnemiesState(long delta);
 }

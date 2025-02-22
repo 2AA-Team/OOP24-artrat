@@ -6,6 +6,7 @@ import java.awt.event.ComponentEvent;
 import java.util.Objects;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.model.impl.Stage;
@@ -110,5 +111,10 @@ public class MainViewImpl implements MainView {
         }
         subPanel.setFrameDimension(this.frame.getSize());
         reloadFrame();
+    }
+
+    @Override
+    public void showGameVictory(double point, String state) {
+        JOptionPane.showMessageDialog(frame, state + "\n You obtain : " + point, state, JOptionPane.PLAIN_MESSAGE);
     }
 }

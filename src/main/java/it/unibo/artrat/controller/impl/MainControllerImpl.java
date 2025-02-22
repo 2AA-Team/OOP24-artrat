@@ -1,12 +1,14 @@
 package it.unibo.artrat.controller.impl;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import it.unibo.artrat.app.api.GameEngine;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.controller.api.SubControllerManager;
 import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.api.WorldTimer;
+import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.impl.ModelImpl;
 import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.model.impl.WorldTimerImpl;
@@ -160,5 +162,29 @@ public class MainControllerImpl implements MainController {
     @Override
     public int getCurrentTimeMainController() {
         return timer.getCurrentTime();
+    }
+
+    private void gameExit(Player passedPlayer) {
+        model.setPlayer(passedPlayer.copyPlayer());
+        resetTimerMainController();
+        setStage(Stage.MENU);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void winGame() {
+        Player player = model.getPlayer();
+        view.showGameVictory(player.obtainCollectable(), "VICTORY");
+        gameExit(player);
+    }
+
+    @Override
+    public void loseGame() {
+        Player player = model.getPlayer();
+        player.setColletableList(new ArrayList<>());
+        view.showGameVictory(0.0, "LOOSE");
+        gameExit(player);
     }
 }

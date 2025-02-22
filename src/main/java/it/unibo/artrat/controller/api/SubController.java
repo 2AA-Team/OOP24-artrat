@@ -56,9 +56,8 @@ public interface SubController {
     /**
      * check if time is out.
      * 
-     * @return true if is out
      */
-    boolean isTimeOutSubController();
+    void isTimeOutSubController();
 
     /**
      * getter for current time.

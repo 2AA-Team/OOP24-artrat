@@ -1,3 +1,15 @@
-Aumenta: ["Aumento","10.00","POWERUP"]
-Biglietto: ["Lotteria", "100.00", "CONSUMABLE"]
-Zaino: ["Cartella", "1000.00", "POTION"]
+Aumenta: 
+  name: "Aumenta"
+  description: "Aumento"
+  price: 10.00
+  itemType: POWERUP
+Biglietto: 
+  name: "Bi_glietto"
+  description: "Lotteria"
+  price: 100.00
+  itemType: CONSUMABLE
+Zaino: 
+  name: "Zaino"
+  description: "Cartella"
+  price: 1000.00
+  itemType: POTION

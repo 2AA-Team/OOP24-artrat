@@ -16,12 +16,13 @@ public class MultiplierBooster extends AbstractItem {
 
     /**
      * A constructor to initialize the new item Multiplier Booster.
+     * @param name the name of Multiplier Booster.
      * @param desc the description of Multiplier Booster
      * @param price the price of Multiplier Booster
      * @param type the item type of Multiplier Booster
      */
-    public MultiplierBooster(final String desc, final double price, final ItemType type) {
-        super(desc, price, type);
+    public MultiplierBooster(final String name, final String desc, final double price, final ItemType type) {
+        super(name, desc, price, type);
         this.rd = new Random();
     }
 

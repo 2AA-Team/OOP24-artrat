@@ -4,9 +4,11 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import it.unibo.artrat.model.api.Collectable;
 import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.api.characters.Enemy;
 import it.unibo.artrat.model.api.characters.Entity;
+import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.world.Floor;
 import it.unibo.artrat.utils.api.BoundingBox;
 import it.unibo.artrat.utils.api.commands.Command;
@@ -21,7 +23,6 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
 
     @Override
     public void updateAndCheckPlayer(Command cmd, long delta) {
-
         final var model = this.mainController.getModel();
         final var player = model.getPlayer();
         if (!Objects.isNull(cmd)) {
@@ -34,7 +35,6 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
 
         model.setPlayer(player);
         this.mainController.setModel(model);
-
     }
 
     private void enemiesCollisionAvoidance(long delta) {
@@ -78,10 +78,6 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
     }
 
     @Override
-    public void updateAndCheckPaintings() {
-    }
-
-    @Override
     public void updateEnemiesState(final long delta) {
         final Model model = this.mainController.getModel();
         final Floor floor = model.getFloor();
@@ -103,6 +99,35 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
         this.mainController.setModel(model);
         enemiesCollisionAvoidance(delta);
 
+    }
+
+    @Override
+    public void updateAndCheckPaintings() {
+        final Model model = this.mainController.getModel();
+        final Player player = model.getPlayer(); 
+        final Floor floor = model.getFloor();
+        BoundingBox bbPlayer = model.getPlayer().getBoundingBox();
+        Set<Collectable> updated = new HashSet<>();
+        for (var value : floor.getValues()) {
+            if (!value.getBoundingBox().isColliding(bbPlayer)) {
+                updated.add(value);
+            } else {
+                player.addCollectable(value);
+            }
+        }
+        floor.setValues(updated);
+        model.setPlayer(player.copyPlayer());
+        model.setFloor(floor);
+        this.mainController.setModel(model);
+    }
+
+    @Override
+    public void updateAndCheckExit() {
+        Model model = this.mainController.getModel();
+        if (model.getFloor().getExit().stream()
+                .anyMatch(x -> x.getBoundingBox().isColliding(model.getPlayer().getBoundingBox()))) {
+            mainController.winGame();
+        }
     }
 
 }

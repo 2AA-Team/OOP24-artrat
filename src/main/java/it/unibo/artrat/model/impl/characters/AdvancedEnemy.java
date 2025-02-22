@@ -63,4 +63,9 @@ public final class AdvancedEnemy extends AbstractEnemy {
         this.setSpeed(dir);
     }
 
+    @Override
+    public void move() {
+        this.setSpeed(new Vector2d());
+    }
+
 }

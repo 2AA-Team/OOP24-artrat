@@ -2,6 +2,7 @@ package it.unibo.artrat.model.impl.inventory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import it.unibo.artrat.model.api.inventory.Inventory;
 import it.unibo.artrat.model.api.inventory.Item;
@@ -31,12 +32,18 @@ public class InventoryImpl implements Inventory {
         this.storedItem = inv.getStoredItem();
     }
 
+    private List<Item> sortItems() {
+        return new ArrayList<>(storedItem.stream()
+                        .sorted((x, y) -> x.getClass().getSimpleName().compareTo(y.getClass().getSimpleName()))
+                        .collect(Collectors.toList()));
+    }
+
     /**
      * {@inheritDoc}
      */
     @Override
     public List<Item> getStoredItem() {
-        return new ArrayList<>(storedItem);
+        return new ArrayList<>(sortItems());
     }
 
     /**

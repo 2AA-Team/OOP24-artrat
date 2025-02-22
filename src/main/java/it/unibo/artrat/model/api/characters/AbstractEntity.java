@@ -147,7 +147,5 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
     @Override
     public void setVelocity(final double vel) {
         this.velocity = vel;
-
     }
-
 }

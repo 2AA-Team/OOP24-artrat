@@ -188,8 +188,7 @@ public class GameSubPanel extends AbstractSubPanel {
      */
     @Override
     public void forceRedraw() {
-        if (gameSubController.isTimeOutSubController()) {
-            gameSubController.setStage(Stage.MENU);
-        }
+        gameSubController.isTimeOutSubController();
+        
     }
 }
