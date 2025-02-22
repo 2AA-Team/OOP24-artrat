@@ -3,10 +3,8 @@ package it.unibo.artrat.model.impl.characters;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import it.unibo.artrat.model.api.characters.AbstractEnemy;
-import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.utils.api.Directions;
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;
@@ -44,42 +42,6 @@ public final class BaseEnemy extends AbstractEnemy {
      */
     public BaseEnemy(final Point topLeft, final Point bottomRight, final Set<Vector2d> v) {
         super(topLeft, bottomRight, v);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void follow(final Player p) {
-        final Vector2d dir = Set.of(Directions.values()).stream()
-                .map(x -> x.vector())
-                .min((a, b) -> {
-                    final Point playerPos = p.getPosition();
-                    return Double.compare(
-                            playerPos.getEuclideanDistance(this.getPosition().sum(a)),
-                            playerPos.getEuclideanDistance(this.getPosition().sum(b)));
-                })
-                .orElse(new Vector2d());
-
-        this.setSpeed(dir);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void capture() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'capture'");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void interact() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'interact'");
     }
 
     /**

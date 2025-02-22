@@ -3,8 +3,10 @@ package it.unibo.artrat.controller.impl.subcontroller;
 import java.io.IOException;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import it.unibo.artrat.controller.api.subcontroller.GameSubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
@@ -113,8 +115,12 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
         player.setSpeed(new Vector2d());
         model.setPlayer(player);
         this.updateCentralizeModel(model);
+
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public double getAngleCompass() {
         final Model model = getModel();

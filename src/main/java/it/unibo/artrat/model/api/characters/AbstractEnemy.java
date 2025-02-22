@@ -9,7 +9,7 @@ import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;
 
 public abstract class AbstractEnemy extends AbstractEntity implements Enemy {
-    private static final int FOV_SCALE = 10;
+    private static final int FOV_SCALE = 8;
     private boolean follow = false;
     private BoundingBox fieldOfView;
     private static final double VEL = 0.005;
@@ -80,12 +80,6 @@ public abstract class AbstractEnemy extends AbstractEntity implements Enemy {
 
     @Override
     public void follow(Player p) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void capture() {
         // TODO Auto-generated method stub
 
     }

@@ -16,35 +16,30 @@ public interface Enemy extends Entity {
     void follow(Player p);
 
     /**
-     * Capture the player when very closer.
-     */
-    void capture();
-
-    /**
      * Get the current FOV.
      * 
      * @return FOV bounding box
      */
-    public BoundingBox getFieldOfView();
+    BoundingBox getFieldOfView();
 
     /**
      * Check if the enemy is following the player.
      * 
      * @return true if enemy is following, false otherwise.
      */
-    public boolean isFollowing();
+    boolean isFollowing();
 
     /**
      * Trigger the enemy.
      * 
      * @param follow trigger
      */
-    public void trigger(boolean follow);
+    void trigger(boolean follow);
 
     /**
      * Set a new FOV.
      * 
      * @param fov field of view
      */
-    public void setFieldOfView(BoundingBox fov);
+    void setFieldOfView(BoundingBox fov);
 }

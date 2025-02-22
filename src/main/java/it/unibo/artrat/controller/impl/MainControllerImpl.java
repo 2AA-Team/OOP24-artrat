@@ -75,9 +75,7 @@ public class MainControllerImpl implements MainController {
             engine.forceStart();
         } else {
             engine.forceStop();
-
         }
-
     }
 
     /**
@@ -148,6 +146,9 @@ public class MainControllerImpl implements MainController {
         timer.resetTimer();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isTimeOutMainController() {
         return timer.isTimeOut();
@@ -172,7 +173,7 @@ public class MainControllerImpl implements MainController {
      */
     @Override
     public void winGame() {
-        Player player = model.getPlayer();
+        Player player = getModel().getPlayer();
         view.showGameVictory(player.obtainCollectable(), "VICTORY");
         gameExit(player);
     }

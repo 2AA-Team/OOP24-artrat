@@ -18,11 +18,6 @@ public interface Entity extends GameObject {
     void move();
 
     /**
-     * Usefull method for objects interaction.
-     */
-    void interact();
-
-    /**
      * Get method for speed vector.
      * 
      * @return current speed

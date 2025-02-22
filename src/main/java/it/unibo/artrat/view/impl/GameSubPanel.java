@@ -22,7 +22,6 @@ import it.unibo.artrat.controller.api.subcontroller.GameSubController;
 import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.model.impl.world.RoomSymbols;
 import it.unibo.artrat.utils.impl.Point;
-import it.unibo.artrat.utils.impl.Vector2d;
 import it.unibo.artrat.utils.impl.commands.MoveDown;
 import it.unibo.artrat.utils.impl.commands.MoveLeft;
 import it.unibo.artrat.utils.impl.commands.MoveRight;
@@ -91,8 +90,8 @@ public class GameSubPanel extends AbstractSubPanel {
             printCompass(g, gameSubController.getAngleCompass());
         }
 
-        private void printCompass(Graphics g, double angle) {
-            Graphics2D g2 = (Graphics2D) g;
+        private void printCompass(final Graphics g, final double angle) {
+            final Graphics2D g2 = (Graphics2D) g;
             g2.rotate(angle, resizedX, resizedY);
             g2.drawImage(COMPASS, 0, 0, resizedX * 2, resizedY * 2, null);
         }

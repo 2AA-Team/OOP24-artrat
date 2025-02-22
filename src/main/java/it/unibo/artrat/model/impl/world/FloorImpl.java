@@ -21,7 +21,6 @@ import it.unibo.artrat.model.api.world.Room;
 import it.unibo.artrat.model.api.world.floorstructure.FloorStructureGenerationStrategy;
 import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;
 import it.unibo.artrat.model.impl.world.RoomImpl.RoomBuilder;
-import it.unibo.artrat.model.impl.world.floorstructure.FloorStructureGenerationFullfill;
 import it.unibo.artrat.model.impl.world.floorstructure.FloorStructureGenerationRandomWalk;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationEmpty;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationFile;
@@ -165,8 +164,9 @@ public class FloorImpl implements Floor {
     private void generateFloorStructure(final int floorSize) {
         final List<FloorStructureGenerationStrategy> generations = List.of(
                 new FloorStructureGenerationRandomWalk(
-                        (int) Math.floor((double) floorSize / 2), floorSize - 1),
-                new FloorStructureGenerationFullfill());
+                        (int) Math.floor((double) floorSize / 2), floorSize - 1)
+        // new FloorStructureGenerationFullfill()
+        );
         this.floorMap = generations.get(RANDOM.nextInt(generations.size())).generate(floorSize);
     }
 
@@ -353,6 +353,9 @@ public class FloorImpl implements Floor {
         return new HashSet<>(this.exit);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setEnemies(final Set<Enemy> enemies) {
         this.floorEnemies = new HashSet<>(enemies);

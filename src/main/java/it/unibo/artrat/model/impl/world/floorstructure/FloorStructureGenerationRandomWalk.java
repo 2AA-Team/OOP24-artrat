@@ -8,6 +8,9 @@ import java.util.Random;
 import it.unibo.artrat.model.api.world.floorstructure.FloorStructureGenerationStrategy;
 import it.unibo.artrat.utils.impl.Point;
 
+/**
+ * floor structure generation based on a random walk.
+ */
 public class FloorStructureGenerationRandomWalk implements FloorStructureGenerationStrategy {
 
     private final int startX;

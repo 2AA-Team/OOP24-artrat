@@ -20,6 +20,7 @@ import it.unibo.artrat.view.impl.MarketSubPanel;
 
 /**
  * implementation of the sub controller for the store.
+ * 
  * @author Manuel Benagli
  */
 public class StoreSubControllerImpl extends AbstractSubController implements StoreSubController {
@@ -30,6 +31,7 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     /**
      * constructor to initialize mainController.
      * itemMan will be used to connect this controller into ItemManagerImpl.
+     * 
      * @param mainController main controller
      */
     public StoreSubControllerImpl(final MainControllerImpl mainController) {
@@ -38,7 +40,7 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
         this.itemMan = new ItemManagerImpl(currenItems);
     }
 
-     /**
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -46,7 +48,7 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
         this.currenItems = new ArrayList<>(this.getModel().getMarket().getPurchItems());
     }
 
-     /**
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -54,42 +56,42 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
         return new ArrayList<>(currenItems);
     }
 
-
     /*
-     * This private method is essential to the currect update of my item list int the MarketSubPanel.
+     * This private method is essential to the currect update of my item list int
+     * the MarketSubPanel.
      * This method is called every time I call filterCategory and searchItem.
-     * Considering that searchItem is called with with every character inserted or removed,
+     * Considering that searchItem is called with with every character inserted or
+     * removed,
      * BUT ALSO WITH EVERY GENERAL MODIFICATION (changedUpdate method),
-     *  the update performs at its maximum
-    */
+     * the update performs at its maximum
+     */
     private void updateCurrentItem() {
         this.currenItems = new ArrayList<>(this.getModel().getMarket().getPurchItems());
     }
 
-     /**
+    /**
      * {@inheritDoc}
      */
     @Override
-    public boolean buyItem(final Item itemToBuy) {        //moementaneo, mi serve il read per capire meglio
+    public boolean buyItem(final Item itemToBuy) { // moementaneo, mi serve il read per capire meglio
         final Model model = this.getModel();
         final Player player = model.getPlayer();
-        final Market market = this.getModel().getMarket();
+        final Market market = model.getMarket();
         final Inventory inventory = player.getInventory();
 
         if (market.buyItem(itemToBuy) && player.getCoin().getCurrentAmount() >= itemToBuy.getPrice()) {
-                player.spendCoins(itemToBuy.getPrice());
-                inventory.addItem(itemToBuy);       //aggiungo l'item all'inventario
-                player.setInventory(inventory);
-                model.setMarket(market);
-                model.setPlayer(player.copyPlayer());
-                this.updateCentralizeModel(new ModelImpl(model));
-                updateCentralizeModel(model);
-                return true;
-            }
+            player.spendCoins(itemToBuy.getPrice());
+            inventory.addItem(itemToBuy); // aggiungo l'item all'inventario
+            player.setInventory(inventory);
+            model.setMarket(market);
+            model.setPlayer(player.copyPlayer());
+            this.updateCentralizeModel(new ModelImpl(model));
+            return true;
+        }
         return false;
     }
 
-     /**
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -128,15 +130,15 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
         return passedItem.getClass().getSimpleName();
     }
 
-     /**
+    /**
      * {@inheritDoc}
      */
     @Override
     public void showDescription(final Item passedItem) {
         marketView.showMessage(this.purchasableItems().stream()
-            .filter(it -> it.equals(passedItem))
-            .map(Item::getDescription)
-            .findAny().get(), "Descrizione oggetto acquistabile");
+                .filter(it -> it.equals(passedItem))
+                .map(Item::getDescription)
+                .findAny().get(), "Descrizione oggetto acquistabile");
     }
 
     /**
@@ -145,9 +147,9 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     @Override
     public String getTypeName(final Item passedItem) {
         return this.getModel().getMarket().getPurchItems().stream()
-            .filter(it -> it.equals(passedItem))
-            .map(Item::getType)
-            .findAny().get().toString();
+                .filter(it -> it.equals(passedItem))
+                .map(Item::getType)
+                .findAny().get().toString();
     }
 
     /**
@@ -156,8 +158,8 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     @Override
     public double getItemPrice(final Item passedItem) {
         return this.getModel().getMarket().getPurchItems().stream()
-            .filter(it -> it.equals(passedItem))
-            .map(Item::getPrice)
-            .findAny().get();
+                .filter(it -> it.equals(passedItem))
+                .map(Item::getPrice)
+                .findAny().get();
     }
 }

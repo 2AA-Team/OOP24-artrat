@@ -204,10 +204,13 @@ public class Lupino extends AbstractEntity implements Player {
 
     @Override
     public double obtainCollectable() {
+        System.out.println(multiplier.getCurrentMultiplier());
         double coinsToAdd = collectabels.stream().mapToDouble(Collectable::getPrice).sum();
+        System.out.println(coinsToAdd);
         coinsToAdd = BigDecimal.valueOf(multiplier.multipleTheCoins(coinsToAdd))
                                 .setScale(2, RoundingMode.HALF_UP)
                                 .doubleValue();
+        System.out.println(coinsToAdd);
         this.coins.addCoins(coinsToAdd);
         this.collectabels.clear();
         return coinsToAdd;
