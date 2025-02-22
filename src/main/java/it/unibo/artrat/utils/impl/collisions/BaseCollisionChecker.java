@@ -43,6 +43,9 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
                     speed.forEach(x -> e.addDirection(x));
                     e.setPosition(pos);
                 }
+                if (e.getBoundingBox().isColliding(this.player.getBoundingBox())) {
+                    this.mainController.loseGame();
+                }
             }
             updated.add(e);
 
