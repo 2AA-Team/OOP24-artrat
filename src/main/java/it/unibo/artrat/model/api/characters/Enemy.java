@@ -16,11 +16,6 @@ public interface Enemy extends Entity {
     void follow(Player p);
 
     /**
-     * Capture the player when very closer.
-     */
-    void capture();
-
-    /**
      * Get the current FOV.
      * 
      * @return FOV bounding box

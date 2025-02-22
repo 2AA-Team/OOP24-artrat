@@ -32,7 +32,7 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
         if (checkWallCollision(player)) {
             player.update(-delta);
         }
-        // System.out.println(player.getSpeed());
+
         model.setPlayer(player);
         this.mainController.setModel(model);
     }
