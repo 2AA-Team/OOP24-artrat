@@ -84,10 +84,4 @@ public abstract class AbstractEnemy extends AbstractEntity implements Enemy {
 
     }
 
-    @Override
-    public void capture() {
-        // TODO Auto-generated method stub
-
-    }
-
 }

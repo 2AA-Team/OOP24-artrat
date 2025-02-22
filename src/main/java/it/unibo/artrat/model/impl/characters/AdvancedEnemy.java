@@ -5,6 +5,7 @@ import java.util.Set;
 
 import it.unibo.artrat.model.api.characters.AbstractEnemy;
 import it.unibo.artrat.model.api.characters.Player;
+import it.unibo.artrat.utils.api.Directions;
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;
 
@@ -47,28 +48,19 @@ public final class AdvancedEnemy extends AbstractEnemy {
         super(topLeft, bottomRight);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void capture() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'capture'");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void interact() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'interact'");
-    }
-
     @Override
     public void follow(Player p) {
-        // TODO Auto-generated method stub
+        final Vector2d dir = Set.of(Directions.values()).stream()
+                .map(x -> x.vector())
+                .min((a, b) -> {
+                    final Point playerPos = p.getPosition();
+                    return Double.compare(
+                            playerPos.getEuclideanDistance(this.getPosition().sum(a)),
+                            playerPos.getEuclideanDistance(this.getPosition().sum(b)));
+                })
+                .orElse(new Vector2d());
 
+        this.setSpeed(dir);
     }
 
 }
