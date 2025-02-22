@@ -36,10 +36,11 @@ public abstract class AbstractCollisionChecker {
                 .filter(x -> x.isColliding(renderTmp)).toList();
 
         updateAndCheckPlayer(cmd, delta);
-        updateEnemiesState(delta);
         updateAndCheckPaintings();
+
         model.setFloor(floor);
         upPlayer();
+        updateEnemiesState(delta);
         updateAndCheckExit();
     }
 
