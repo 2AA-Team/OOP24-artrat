@@ -31,7 +31,7 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
         if (checkWallCollision(player)) {
             player.update(-delta);
         }
-        // System.out.println(player.getSpeed());
+
         model.setPlayer(player);
         this.mainController.setModel(model);
 
@@ -90,7 +90,6 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
 
         enemies.forEach(x -> {
             if (x.getBoundingBox().isColliding(bb)) {
-                System.out.println(checkFieldOfView(x));
                 if (checkFieldOfView(x)) {
                     x.follow(this.mainController.getModel().getPlayer());
                 } else {
