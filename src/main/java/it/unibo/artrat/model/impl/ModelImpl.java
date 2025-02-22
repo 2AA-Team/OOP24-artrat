@@ -3,9 +3,11 @@ package it.unibo.artrat.model.impl;
 import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.market.Market;
+import it.unibo.artrat.model.api.missioncenter.MissionCenter;
 import it.unibo.artrat.model.api.world.Floor;
 import it.unibo.artrat.model.impl.characters.Lupino;
 import it.unibo.artrat.model.impl.market.MarketImpl;
+import it.unibo.artrat.model.impl.missioncenter.MissionCenterImpl;
 import it.unibo.artrat.model.impl.world.FloorImpl;
 import it.unibo.artrat.utils.impl.Point;
 
@@ -15,6 +17,7 @@ import it.unibo.artrat.utils.impl.Point;
 public class ModelImpl implements Model {
     private Player player;
     private Market market;
+    private MissionCenter missionCenter;
     private Floor floor;
 
     /**
@@ -23,6 +26,7 @@ public class ModelImpl implements Model {
     public ModelImpl() {
         this.player = new Lupino(new Point(), new Point());
         this.market = new MarketImpl();
+        this.missionCenter = new MissionCenterImpl();
         this.floor = new FloorImpl();
         this.market.initMarket();
 
@@ -36,6 +40,7 @@ public class ModelImpl implements Model {
     public ModelImpl(final Model m) {
         this.player = m.getPlayer();
         this.market = m.getMarket();
+        this.missionCenter = m.getMissionCenter();
         this.floor = m.getFloor();
     }
 
@@ -69,6 +74,24 @@ public class ModelImpl implements Model {
     @Override
     public void setMarket(final Market market) {
         this.market = new MarketImpl(market);
+    }
+    
+    /**
+     * 
+     * @return
+     */
+    @Override
+    public MissionCenter getMissionCenter() {
+        return new MissionCenterImpl(missionCenter);
+    }
+
+    /**
+     * 
+     * @return
+     */
+    @Override
+    public void setMissionCenter(final MissionCenter missionCenter) {
+        this.missionCenter = new MissionCenterImpl(missionCenter);
     }
 
     /**

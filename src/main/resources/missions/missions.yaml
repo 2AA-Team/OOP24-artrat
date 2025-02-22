@@ -1,2 +1,10 @@
-HOUDINI: ["What an art rat! You survived this theft and you escaped!", "200.00","TIMECHALLENGE"]
-CULTURALBAGGAGE : ["What a businessman! You reached 9999$", "9999.00","SCORE"]
+HOUDINI:
+  name: "Houdini"
+  desc: "What an art rat! You survived this theft and you escaped!"
+  reward: "200.00"
+  type: "TIMECHALLENGE"
+CULTURALBAGGAGE: 
+  name: "Cultural Baggage"
+  desc: "What a businessman! You reached 9999$"
+  reward: "9999.00"
+  type: "SCORE"

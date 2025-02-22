@@ -11,12 +11,12 @@ import it.unibo.artrat.model.api.WorldTimer;
  * @author Manuel Benagli
  */
 public class WorldTimerImpl implements WorldTimer {
-    private static final int DEFAULT_TIMER_SETUP = 120000; // Tempo iniziale
+    private static final int DEFAULT_TIMER_SETUP = 120000;
     private static final int ONE_SECOND = 1000;
     private final Timer timer;
     private boolean outOfTime;
     private int countdown;
-    private int remainingTime; // Tempo rimanente che si aggiorna ogni secondo
+    private int remainingTime; // il Tempo rimanente e che poi uso per gettarlo ogni volta
     private TimerTask currentTask;
 
     /**
@@ -26,7 +26,7 @@ public class WorldTimerImpl implements WorldTimer {
     public WorldTimerImpl() {
         this.countdown = DEFAULT_TIMER_SETUP;
         this.timer = new Timer("WorldTimer");
-        this.remainingTime = countdown; // Il tempo rimanente è uguale al tempo iniziale
+        this.remainingTime = countdown;
     }
 
     /**
@@ -47,9 +47,11 @@ public class WorldTimerImpl implements WorldTimer {
         outOfTime = false;
         currentTask = new TimerTask() {
 
+            /*
+             * la logica di timer e game over quando il timer finisce
+             */
             @Override
             public void run() {
-                // La logica del game over quando il timer finisce
                 if (remainingTime > ONE_SECOND) {
                     remainingTime -= ONE_SECOND;
                     getCurrentTime();
@@ -76,10 +78,13 @@ public class WorldTimerImpl implements WorldTimer {
     @Override
     public void resetTimer() {
         if (currentTask != null) {
-            currentTask.cancel(); // Annulla il task corrente
+            currentTask.cancel();       
+            /*mi cancello il task , (quella cosa che ho rimosso il timer cancel perchè poi ho 
+            l'ho inizializzato nel maincontroller che per mio ragionamento è ultra performante sium)
+            */
         }
-        countdown = DEFAULT_TIMER_SETUP; // Ripristina il countdown iniziale
-        remainingTime = countdown; // Ripristina il tempo rimanente
+        countdown = DEFAULT_TIMER_SETUP;
+        remainingTime = countdown; 
     }
 
     /**

@@ -1,4 +1,4 @@
-package it.unibo.artrat.model.api.market;
+package it.unibo.artrat.model.api.missioncenter;
 
 /**
  * 

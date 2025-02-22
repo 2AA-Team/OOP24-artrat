@@ -1,6 +1,6 @@
-package it.unibo.artrat.model.impl.market;
+package it.unibo.artrat.model.impl.missioncenter;
 
-import it.unibo.artrat.model.api.market.MissionType;
+import it.unibo.artrat.model.api.missioncenter.MissionType;
 
 
 /**
@@ -9,13 +9,13 @@ import it.unibo.artrat.model.api.market.MissionType;
 public class Houdini extends AbstractMission {
 
     /**
-     * 
+     * @param name
      * @param descr
      * @param reward
      * @param missionType
      */
-    public Houdini(final String descr, final double reward, MissionType missionType) {
-        super(descr, reward, missionType);
+    public Houdini(final String name, final String descr, final double reward, MissionType missionType) {
+        super(name, descr, reward, missionType);
     }
 
     /**

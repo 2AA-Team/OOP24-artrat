@@ -1,9 +1,7 @@
 package it.unibo.artrat.utils.api;
 
 import java.util.Set;
-
 import it.unibo.artrat.model.api.inventory.ItemType;
-import it.unibo.artrat.model.api.market.MissionType;
 
 /**
  * An interface that represents a reader for all types of Items present in

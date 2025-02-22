@@ -2,6 +2,7 @@ package it.unibo.artrat.model.api;
 
 import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.market.Market;
+import it.unibo.artrat.model.api.missioncenter.MissionCenter;
 import it.unibo.artrat.model.api.world.Floor;
 
 /**
@@ -27,7 +28,6 @@ public interface Model {
      * Method which obtains a copy of the current state of the market.
      * 
      * @return a copy of the current market
-     * @autor Manuel Benagli
      */
     Market getMarket();
 
@@ -35,9 +35,20 @@ public interface Model {
      * Method which updaets the current market instance with the new passed.
      * 
      * @param market
-     * @autor Manuel Benagli
      */
     void setMarket(Market market);
+
+    /**
+     * 
+     * @return
+     */
+    MissionCenter getMissionCenter();
+
+    /**
+     * 
+     * @param missionCenter
+     */
+    void setMissionCenter(MissionCenter missionCenter);
 
     /**
      * A method that permit to obtain a copy of the current floor.
