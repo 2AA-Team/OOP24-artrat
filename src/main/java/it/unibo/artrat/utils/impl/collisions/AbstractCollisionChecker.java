@@ -38,10 +38,9 @@ public abstract class AbstractCollisionChecker {
         updateAndCheckPlayer(cmd, delta);
         updateEnemiesState(delta);
         updateAndCheckPaintings();
-        updateAndCheckExit();
-
         model.setFloor(floor);
         upPlayer();
+        updateAndCheckExit();
     }
 
     protected void upPlayer() {

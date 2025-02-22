@@ -76,8 +76,6 @@ public class MainControllerImpl implements MainController {
         } else {
             engine.forceStop();
         }
-
-        System.out.println(this.model.getPlayer().getCoin().getCurrentAmount());
     }
 
     /**
