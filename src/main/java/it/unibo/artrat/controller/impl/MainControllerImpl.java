@@ -3,6 +3,8 @@ package it.unibo.artrat.controller.impl;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.text.View;
+
 import it.unibo.artrat.app.api.GameEngine;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.controller.api.SubControllerManager;
@@ -61,7 +63,7 @@ public class MainControllerImpl implements MainController {
     @Override
     public void quit() {
         engine.forceStop();
-        Runtime.getRuntime().exit(1);
+        System.exit(1);
     }
 
     /**

@@ -63,4 +63,6 @@ public interface GameSubController extends SubController {
      */
     double getAngleCompass();
 
+    int getStolenCollectable();
+
 }
