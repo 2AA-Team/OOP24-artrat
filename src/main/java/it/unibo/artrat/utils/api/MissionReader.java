@@ -23,13 +23,6 @@ public interface MissionReader extends Reader {
 
     /**
      * 
-     * @param nameOfMission the mission from the file.
-     * @return The reward of the mission.
-     */
-    double getReward(String nameOfMission);
-
-    /**
-     * 
      * @return the names of all missions.
      */
     Set<String> getAllMissionName();    

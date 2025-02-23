@@ -53,8 +53,7 @@ public class MissionFactoryImpl implements MissionFactory {
     @Override
     public Mission houdini(){
         return new Houdini(missionReader.getName(HOUDINI),
-                missionReader.getDescription(HOUDINI),
-                missionReader.getReward(HOUDINI));
+                missionReader.getDescription(HOUDINI));
     }
 
     /**
@@ -63,7 +62,6 @@ public class MissionFactoryImpl implements MissionFactory {
     @Override
     public Mission culturalBaggage() {
         return new CulturalBaggage(missionReader.getName(CULTURAL_BAGGAGE),
-                missionReader.getDescription(CULTURAL_BAGGAGE),
-                missionReader.getReward(CULTURAL_BAGGAGE));  
+                missionReader.getDescription(CULTURAL_BAGGAGE)); 
     }
 }

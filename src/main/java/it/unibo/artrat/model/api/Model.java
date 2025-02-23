@@ -44,11 +44,6 @@ public interface Model {
      */
     MissionCenter getMissionCenter();
 
-    /**
-     * 
-     * @param missionCenter
-     */
-    void setMissionCenter(MissionCenter missionCenter);
 
     /**
      * A method that permit to obtain a copy of the current floor.

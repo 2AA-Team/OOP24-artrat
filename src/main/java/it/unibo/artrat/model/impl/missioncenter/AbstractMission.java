@@ -1,5 +1,6 @@
 package it.unibo.artrat.model.impl.missioncenter;
 
+import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.missioncenter.Mission;
 
 /**
@@ -7,18 +8,15 @@ import it.unibo.artrat.model.api.missioncenter.Mission;
  */
 public abstract class AbstractMission implements Mission {
     private final String missionText;
-    private final double reward;
     private final String name;
     
     /**
      * Costruttore che inizializza una nuova istanza di Mission con variabili passate.
+     * @param name il nome
      * @param desc La descrizione della missione
-     * @param reward Il premio della missione
-     * @param missionType Il tipo della missione
      */
-    protected AbstractMission(final String name, final String missionText, final double reward) {
+    protected AbstractMission(final String name, final String missionText) {
         this.name = name;
-        this.reward = reward;
         this.missionText = missionText;
     }
 
@@ -41,19 +39,8 @@ public abstract class AbstractMission implements Mission {
     }
 
     /**
-     * 
-     * @return
-     */
-    @Override
-    public double getReward(){
-        return this.reward;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
-    public boolean isMissionDone(){
-        return true;
-    }
+    public abstract boolean isMissionDone(Player passedPlayer);
 }

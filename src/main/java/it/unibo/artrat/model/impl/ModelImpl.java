@@ -87,15 +87,6 @@ public class ModelImpl implements Model {
     }
 
     /**
-     * 
-     * @return
-     */
-    @Override
-    public void setMissionCenter(final MissionCenter missionCenter) {
-        this.missionCenter = new MissionCenterImpl(missionCenter);
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override

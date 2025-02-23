@@ -43,7 +43,7 @@ public class MissionSubControllerImpl extends AbstractSubController implements M
      */
     @Override
     public boolean redeemMission(final Mission missionToRedeem) { 
-        return missionToRedeem.isMissionDone();
+        return missionToRedeem.isMissionDone(this.getModel().getPlayer());
     }
 
         /**
@@ -66,16 +66,5 @@ public class MissionSubControllerImpl extends AbstractSubController implements M
                 .filter(m -> m.equals(passedMission))
                 .map(Mission::getText)
                 .findAny().get().toString();
-    }
-    
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public double getMissionReward(final Mission passedMission) {
-        return this.getModel().getMissionCenter().getMissionList().stream()
-                .filter(m -> m.equals(passedMission))
-                .map(Mission::getReward)
-                .findAny().get();
     }
 }

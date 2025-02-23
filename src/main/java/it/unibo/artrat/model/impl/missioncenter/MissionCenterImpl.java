@@ -57,22 +57,6 @@ public class MissionCenterImpl implements MissionCenter {
      * {@inheritDoc}
      */
     @Override
-    public void setMissionList(List<Mission> missions) {
-        this.missionsToRedeem = new ArrayList<>(missions);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean redeemMission(Mission passedMission) {
-        throw new UnsupportedOperationException("Unimplemented method 'redeemMission'");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void initMissionCenter() {
         final MissionReader missionReader = new MissionReaderImpl();
 

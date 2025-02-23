@@ -1,8 +1,7 @@
 HOUDINI:
   name: "Houdini"
-  desc: "To be an art ratter, you need to survive this theft!"
-  reward: "200.00"
+  desc: "Stay unnoticed and collect 10$"
 CULTURALBAGGAGE: 
   name: "Cultural Baggage"
-  desc: "You need to become the most well known art ratter! Reach 1000$"
-  reward: "9999.00"
+  desc: "Become the most well known art ratter! Collect at least 4 items in your inventory"
+

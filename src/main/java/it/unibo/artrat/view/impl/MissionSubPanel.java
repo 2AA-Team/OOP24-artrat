@@ -57,8 +57,10 @@ public class MissionSubPanel extends AbstractSubPanel {
     * Layout, similar to MarketSubPanel, but for missions, which has a completely different concept.
     */
     private void setMissionCenter() {
-        final JPanel bottomPan = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        final JPanel uppJPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        final JPanel bottomPan = new JPanel(new FlowLayout(FlowLayout.CENTER));
         final JButton toMenu = new JButton("BACK");
+        final JLabel missJLabel = new JLabel("MISSION CENTER, BECOME AN ART RATTER!");
 
         toMenu.addActionListener(e -> {
             if (toConfirm("Do you want to come back to menu?", "Back to menu")) {
@@ -66,31 +68,25 @@ public class MissionSubPanel extends AbstractSubPanel {
             }
         });
 
+        uppJPanel.add(missJLabel);
         bottomPan.add(toMenu);
         missionCenterPanel.add(bottomPan, BorderLayout.SOUTH);
+        missionCenterPanel.add(uppJPanel, BorderLayout.NORTH);
     }
 
     private void allMissionsSetup() {
-      //  missionToClaimPanel.removeAll();
 
         for (final var mission : missionControl.redeemableMissions()) {
             final JButton claimButton = new JButton(missionControl.getMissionName(mission) + ": " + missionControl.showDescr(mission));
             final JPanel missPanel = new JPanel(new GridLayout(1, 2, GAP, GAP));
-            
-            /*
-            if (missionControl.redeemMission(mission)) {
-                claimButton.setBackground(Color.GREEN);
-            }*/
 
             missPanel.add(claimButton);
             missionToClaimPanel.add(missPanel);
 
-            claimButton.addActionListener(e->{
-                if(missionControl.redeemMission(mission)) {
-                    missionControl.getMissionReward(mission);
-                }
-                forceRedraw();
-            });
+            if(missionControl.redeemMission(mission)) {
+                claimButton.setBackground(new Color(0,128,0));
+            }
+            forceRedraw();
         }   
 
         this.missionCenterPanel.add(missionToClaimPanel, BorderLayout.CENTER);
@@ -102,7 +98,6 @@ public class MissionSubPanel extends AbstractSubPanel {
      */
     @Override
     protected void forceRedraw() {
-      //  allMissionsSetup();
         missionCenterPanel.revalidate();
         missionCenterPanel.repaint();
     }

@@ -1,5 +1,7 @@
 package it.unibo.artrat.model.api.missioncenter;
 
+import it.unibo.artrat.model.api.characters.Player;
+
 /**
  * Mission base interface.
  * @author Manuel Benagli
@@ -18,14 +20,9 @@ public interface Mission {
      */
     String getText();
 
-    /**
-     * 
-     * @return
-     */
-    double getReward();
 
     /**
      * 
      */
-    boolean isMissionDone();
+    boolean isMissionDone(Player passedPlayer);
 }

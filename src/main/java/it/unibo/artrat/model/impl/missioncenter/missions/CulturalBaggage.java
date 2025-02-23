@@ -9,26 +9,21 @@ import it.unibo.artrat.model.api.characters.Player;
  * @author Manuel Benagli
  */
 public class CulturalBaggage extends AbstractMission {
-    private static final double COINS = 9999;
-    private Player player;
 
     /**
      * @param name
      * @param desc
-     * @param price
-     * @param missionType
      */
-    public CulturalBaggage(final String name, final String descr, final double reward) {
-        super(name, descr, reward);
+    public CulturalBaggage(final String name, final String descr) {
+        super(name, descr);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean isMissionDone() {
-        if(player.getCoin().getCurrentAmount() == COINS ) {
-            player.increaseCoins(COINS);
+    public boolean isMissionDone(Player passedPlayer) {
+        if (passedPlayer.getInventory().getStoredItem().size() >= 4) {
             return true;
         }
         return false;

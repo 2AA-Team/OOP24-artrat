@@ -28,14 +28,6 @@ public class MissionReaderImpl extends AbstractReader implements MissionReader {
      * {@inheritDoc}
      */
     @Override
-    public double getReward(String nameOfMission) {
-        return Double.parseDouble(super.getSpecificFiled(nameOfMission, "reward"));    
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public Set<String> getAllMissionName() {
         return super.getKeySetMap();
     }    

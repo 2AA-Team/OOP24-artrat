@@ -1,12 +1,12 @@
 MULTIPLIERBOOSTER:
   name: "Multiplier Booster"
   description: "This consumable will allow you to gain a boost to your current multiplier."
-  price: 10.50
+  price: 10.57
   itemType: POWERUP
 LUCKYTICKET: 
   name: "Lucky Ticket"
   description: "This is a winning lottery ticket, what is it doing here? Scratch to win up to many coins!!"
-  price: 700.50
+  price: 5.57
   itemType: POWERUP
 WINGEDBOOTS : 
   name: "Winged Boots"
@@ -16,10 +16,10 @@ WINGEDBOOTS :
 MAGICBACKPACK : 
   name: Magic Backpack
   description: "A backpack with a strange aura around it, take it and maybe replace your old one."
-  price: 9000.99
+  price: 1.88
   itemType: CONSUMABLE
 MYSTERIOUSWAND : 
   name: "Mysterious Wand"
   description: "Woah, this is a magic wand! Try waving it."
-  price: 15.99
+  price: 3.99
   itemType: CONSUMABLE

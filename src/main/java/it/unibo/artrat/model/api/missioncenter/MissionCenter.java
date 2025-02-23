@@ -13,17 +13,5 @@ public interface MissionCenter {
     /**
      * 
      */
-    void setMissionList(List<Mission> missions);
-
-    /**
-     * 
-     * @param passedMission
-     * @return
-     */
-    boolean redeemMission(Mission passedMission);
-
-    /**
-     * 
-     */
     void initMissionCenter();
 }
