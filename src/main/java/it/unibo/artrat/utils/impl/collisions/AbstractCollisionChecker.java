@@ -40,6 +40,7 @@ public abstract class AbstractCollisionChecker {
 
         model.setFloor(floor);
         upPlayer();
+        
         updateEnemiesState(delta);
         updateAndCheckExit();
     }

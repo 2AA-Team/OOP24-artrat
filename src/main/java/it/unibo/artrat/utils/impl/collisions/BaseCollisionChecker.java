@@ -88,6 +88,7 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
     public void updateAndCheckPaintings() {
         BoundingBox bbPlayer = player.getBoundingBox();
         Set<Collectable> updated = new HashSet<>();
+
         for (Collectable value : floor.getValues()) {
             if (!value.getBoundingBox().isColliding(bbPlayer)) {
                 updated.add(value);
