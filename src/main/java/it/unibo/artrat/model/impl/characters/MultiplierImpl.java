@@ -1,5 +1,8 @@
 package it.unibo.artrat.model.impl.characters;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import it.unibo.artrat.model.api.characters.Multiplier;
 
 /**
@@ -35,7 +38,9 @@ public class MultiplierImpl implements Multiplier {
     @Override
     public double multipleTheCoins(final double coins) {
         if (coins >= 0.0) {
-            return coins * multipler;
+            return BigDecimal.valueOf(coins * multipler)
+                            .setScale(2, RoundingMode.UP)
+                            .doubleValue();
         } else {
             throw new IllegalArgumentException();
         }
