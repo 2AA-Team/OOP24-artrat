@@ -1,12 +1,14 @@
-package it.unibo.artrat.model.impl.missioncenter;
+package it.unibo.artrat.model.impl.missioncenter.missions;
 
-import it.unibo.artrat.model.api.missioncenter.MissionType;
+import it.unibo.artrat.model.impl.missioncenter.AbstractMission;
+import it.unibo.artrat.view.api.MainView;
 
 
 /**
  * @author Manuel Benagli
  */
 public class Houdini extends AbstractMission {
+    private MainView view;
 
     /**
      * @param name
@@ -14,8 +16,8 @@ public class Houdini extends AbstractMission {
      * @param reward
      * @param missionType
      */
-    public Houdini(final String name, final String descr, final double reward, MissionType missionType) {
-        super(name, descr, reward, missionType);
+    public Houdini(final String name, final String descr, final double reward) {
+        super(name, descr, reward);
     }
 
     /**
@@ -23,7 +25,6 @@ public class Houdini extends AbstractMission {
      */
     @Override
     public boolean isMissionDone() {
-        
         
         return true;
     }

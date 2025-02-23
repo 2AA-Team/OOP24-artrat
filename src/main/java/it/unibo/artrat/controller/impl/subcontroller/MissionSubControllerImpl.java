@@ -45,4 +45,37 @@ public class MissionSubControllerImpl extends AbstractSubController implements M
     public boolean redeemMission(final Mission missionToRedeem) { 
         return false;
     }
+
+        /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getMissionName(final Mission passedMission) {
+        return this.currentMissionsList.stream()
+            .filter(m -> m.equals(passedMission))
+            .map(Mission::getName)
+            .findAny().get().toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String showDescr(final Mission passedMission) {
+        return this.currentMissionsList.stream()
+                .filter(m -> m.equals(passedMission))
+                .map(Mission::getText)
+                .findAny().get().toString();
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getMissionReward(final Mission passedMission) {
+        return this.getModel().getMissionCenter().getMissionList().stream()
+                .filter(m -> m.equals(passedMission))
+                .map(Mission::getReward)
+                .findAny().get();
+    }
 }

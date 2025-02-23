@@ -29,6 +29,7 @@ public class ModelImpl implements Model {
         this.missionCenter = new MissionCenterImpl();
         this.floor = new FloorImpl();
         this.market.initMarket();
+        this.missionCenter.initMissionCenter();
 
     }
 

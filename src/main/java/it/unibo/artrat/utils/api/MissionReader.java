@@ -2,8 +2,6 @@ package it.unibo.artrat.utils.api;
 
 import java.util.Set;
 
-import it.unibo.artrat.model.api.missioncenter.MissionType;
-
 /**
  * 
  */
@@ -29,13 +27,6 @@ public interface MissionReader extends Reader {
      * @return The reward of the mission.
      */
     double getReward(String nameOfMission);
-
-    /**
-     * 
-     * @param nameOfMission the mission.
-     * @return The ItemTypes of the desired item.
-     */
-    MissionType getMissionType(String nameOfMission);
 
     /**
      * 

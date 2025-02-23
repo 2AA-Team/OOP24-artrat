@@ -121,13 +121,14 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
             filterComboBox.addItem(type);
         }
 
-        // Impostato il layout di GridBagLayout per fare in modo che i componenti siano
-        // ridimensionabili
+        /*Impostato il layout di GridBagLayout per fare in modo che i componenti sono
+        ridimensionabili
+        */
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.weightx = 1.0; // Questo rende il componente espandibile orizzontalmente
+        gbc.weightx = 1.0;
         upperJPanel.add(filterComboBox, gbc);
 
         gbc.gridx = 1;

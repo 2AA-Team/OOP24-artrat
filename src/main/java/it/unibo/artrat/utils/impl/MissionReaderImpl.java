@@ -1,8 +1,6 @@
 package it.unibo.artrat.utils.impl;
 
 import java.util.Set;
-
-import it.unibo.artrat.model.api.missioncenter.MissionType;
 import it.unibo.artrat.utils.api.MissionReader;
 
 /**
@@ -32,14 +30,6 @@ public class MissionReaderImpl extends AbstractReader implements MissionReader {
     @Override
     public double getReward(String nameOfMission) {
         return Double.parseDouble(super.getSpecificFiled(nameOfMission, "reward"));    
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public MissionType getMissionType(String nameOfMission) {
-        return MissionType.valueOf(super.getSpecificFiled(nameOfMission, "type"));
     }
 
     /**

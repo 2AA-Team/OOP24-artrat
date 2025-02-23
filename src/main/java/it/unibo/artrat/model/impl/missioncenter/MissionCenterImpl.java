@@ -21,8 +21,7 @@ import it.unibo.artrat.utils.impl.MissionReaderImpl;
  */
 public class MissionCenterImpl implements MissionCenter {
     private final URL missionPath = Thread.currentThread().getContextClassLoader().getResource(
-            "missions" + File.separator
-                    + "missions.yaml");
+            "missions" + File.separator + "missions.yaml");
 
     private MissionFactory missionFactory;
     private List<Mission> missionsToRedeem;
@@ -33,13 +32,14 @@ public class MissionCenterImpl implements MissionCenter {
      */
     public MissionCenterImpl() {
         this.missionsToRedeem = new ArrayList<>();
+        this.missionFactory = new MissionFactoryImpl();
     }
     
     /**
      * 
      * @param missionCenter
      */
-    public MissionCenterImpl(MissionCenter missionCenter) {
+    public MissionCenterImpl(final MissionCenter missionCenter) {
         this.missionsToRedeem = new ArrayList<>();
         this.missionsToRedeem.addAll(missionCenter.getMissionList());
         this.missionFactory = new MissionFactoryImpl();

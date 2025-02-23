@@ -26,5 +26,16 @@ public interface MissionSubController extends SubController {
      * @return
      */
     boolean redeemMission(final Mission missionToRedeem);
+
+    /**
+     * 
+     * @param passedMission
+     * @return
+     */
+    double getMissionReward(final Mission passedMission);
+
+    String getMissionName(final Mission passedMission);
+    
+    String showDescr(final Mission passedMission);
 }
 

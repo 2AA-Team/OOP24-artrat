@@ -23,12 +23,6 @@ public interface Mission {
      * @return
      */
     double getReward();
-    
-    /**
-     * 
-     * @return the type of a mission.
-     */
-    MissionType getMissionType();
 
     /**
      * 

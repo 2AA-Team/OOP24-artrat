@@ -1,10 +1,8 @@
 HOUDINI:
   name: "Houdini"
-  desc: "What an art rat! You survived this theft and you escaped!"
+  desc: "To be an art ratter, you need to survive this theft!"
   reward: "200.00"
-  type: "TIMECHALLENGE"
 CULTURALBAGGAGE: 
   name: "Cultural Baggage"
-  desc: "What a businessman! You reached 9999$"
+  desc: "You need to become the most well known art ratter! Reach 1000$"
   reward: "9999.00"
-  type: "SCORE"

@@ -7,13 +7,15 @@ import it.unibo.artrat.controller.api.subcontroller.MissionSubController;
 import it.unibo.artrat.model.impl.Stage;
 
 /**
- * MissionSubPanel, we enter here from the market.
+ * MissionSubPanel, the MissionCenter to read and claim rewards.
  */
 public class MissionSubPanel extends AbstractSubPanel {
+    private static final int GAP = 5;
     private final MissionSubController missionControl;
-    private JPanel missionPanel = new JPanel();
+    private JPanel missionCenterPanel = new JPanel();
+    private JPanel missionToClaimPanel = new JPanel();
     private final JPanel contMissionPane = new JPanel(new BorderLayout());
-    private final JScrollPane scrollPanel = new JScrollPane(missionPanel);
+    private final JScrollPane scrollPanel = new JScrollPane(missionCenterPanel);
 
     /**
      * Constructor.
@@ -28,16 +30,15 @@ public class MissionSubPanel extends AbstractSubPanel {
      */
     @Override
     public void initComponents() {
-        // Set the layout of the main panel to BorderLayout to support flexible resizing
-        missionPanel.setLayout(new BorderLayout(3, 3));
+        missionCenterPanel.setLayout(new BorderLayout(GAP, GAP));
         scrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         contMissionPane.add(scrollPanel, BorderLayout.CENTER);
         scrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         missionControl.initMissionList();
     
-        this.missionPanel = new JPanel(new GridLayout(0, 1, 1, 1));
-        setMissions();
+        this.missionToClaimPanel = new JPanel(new GridLayout(0, 1, GAP, GAP));
+        setMissionCenter();
         allMissionsSetup();
         setPanel(contMissionPane);
     }
@@ -49,48 +50,42 @@ public class MissionSubPanel extends AbstractSubPanel {
      * @return true if confirmed, false otherwise
      */
     private boolean toConfirm(final String text, final String name) {
-        return JOptionPane.showConfirmDialog(missionPanel, text, name, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+        return JOptionPane.showConfirmDialog(missionCenterPanel, text, name, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
     }
 
     /* 
     * Layout, similar to MarketSubPanel, but for missions, which has a completely different concept.
     */
-    private void setMissions() {
+    private void setMissionCenter() {
         final JPanel bottomPan = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        final JButton toMarket = new JButton("BACK");
-        missionPanel.add(bottomPan, BorderLayout.SOUTH);
+        final JButton toMenu = new JButton("BACK");
 
-        toMarket.addActionListener(e -> {
-            if (toConfirm("Do you want to come back to the market?", "Back to market")) {
-                missionControl.setStage(Stage.STORE);
+        toMenu.addActionListener(e -> {
+            if (toConfirm("Do you want to come back to menu?", "Back to menu")) {
+                missionControl.setStage(Stage.MENU);
             }
         });
 
-        bottomPan.add(toMarket);
+        bottomPan.add(toMenu);
+        missionCenterPanel.add(bottomPan, BorderLayout.SOUTH);
     }
 
     private void allMissionsSetup() {
-        missionPanel.removeAll();
+      //  missionToClaimPanel.removeAll();
 
         for (final var mission : missionControl.redeemableMissions()) {
-            final JButton missionButton = new JButton("Mission");
-            final JButton acceptMission = new JButton("Accept");
-            final JPanel missionItemPanel = new JPanel(new GridLayout(1, 3, 2, 2));
-            missionItemPanel.add(missionButton);
-            missionItemPanel.add(acceptMission);
+            final JButton claimButton = new JButton(missionControl.getMissionName(mission) + ": " + missionControl.showDescr(mission));
+            final JPanel missPanel = new JPanel(new GridLayout(1, 2, GAP, GAP));
+            missPanel.add(claimButton);
+            missionToClaimPanel.add(missPanel);
 
-            this.missionPanel.add(missionItemPanel);
+            claimButton.addActionListener(e->{
 
-            acceptMission.addActionListener(e -> {
-                if (toConfirm("Do you want to accept this mission?", "Accept Mission") && missionControl.redeemMission(mission)) {
-                    forceRedraw();
-                }
             });
-        }
-        
-        // Update the view after any changes
-        missionPanel.revalidate();
-        missionPanel.repaint();
+        }   
+
+        this.missionCenterPanel.add(missionToClaimPanel, BorderLayout.CENTER);
+       // forceRedraw();
     }
 
     /**
@@ -98,7 +93,8 @@ public class MissionSubPanel extends AbstractSubPanel {
      */
     @Override
     protected void forceRedraw() {
-        missionPanel.revalidate();
-        missionPanel.repaint();
+      //  allMissionsSetup();
+        missionCenterPanel.revalidate();
+        missionCenterPanel.repaint();
     }
 }
