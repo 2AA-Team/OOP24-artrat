@@ -76,11 +76,20 @@ public class MissionSubPanel extends AbstractSubPanel {
         for (final var mission : missionControl.redeemableMissions()) {
             final JButton claimButton = new JButton(missionControl.getMissionName(mission) + ": " + missionControl.showDescr(mission));
             final JPanel missPanel = new JPanel(new GridLayout(1, 2, GAP, GAP));
+            
+            /*
+            if (missionControl.redeemMission(mission)) {
+                claimButton.setBackground(Color.GREEN);
+            }*/
+
             missPanel.add(claimButton);
             missionToClaimPanel.add(missPanel);
 
             claimButton.addActionListener(e->{
-
+                if(missionControl.redeemMission(mission)) {
+                    missionControl.getMissionReward(mission);
+                }
+                forceRedraw();
             });
         }   
 

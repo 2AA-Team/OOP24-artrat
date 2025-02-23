@@ -1,14 +1,12 @@
 package it.unibo.artrat.model.impl.missioncenter.missions;
 
 import it.unibo.artrat.model.impl.missioncenter.AbstractMission;
-import it.unibo.artrat.view.api.MainView;
 
 
 /**
  * @author Manuel Benagli
  */
 public class Houdini extends AbstractMission {
-    private MainView view;
 
     /**
      * @param name
@@ -25,7 +23,6 @@ public class Houdini extends AbstractMission {
      */
     @Override
     public boolean isMissionDone() {
-        
         return true;
     }
 }
