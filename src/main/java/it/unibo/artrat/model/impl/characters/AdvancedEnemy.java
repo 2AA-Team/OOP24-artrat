@@ -49,9 +49,9 @@ public final class AdvancedEnemy extends AbstractEnemy {
     }
 
     @Override
-    public void follow(Player p) {
+    public void follow(final Player p) {
         final Vector2d dir = Set.of(Directions.values()).stream()
-                .map(x -> x.vector())
+                .map(Directions::vector)
                 .min((a, b) -> {
                     final Point playerPos = p.getPosition();
                     return Double.compare(
