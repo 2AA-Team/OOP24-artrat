@@ -4,11 +4,11 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.util.Objects;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.utils.api.ResourceLoader;
@@ -21,7 +21,7 @@ import it.unibo.artrat.view.api.MainView;
  */
 public class MainViewImpl implements MainView {
 
-    private MainController controller;
+    private final MainController controller;
     private AbstractSubPanel subPanel;
     private final ResourceLoader<String, Double> resourceLoader;
     private final JFrame frame = new JFrame();
@@ -30,9 +30,13 @@ public class MainViewImpl implements MainView {
      * constructor set the size of the frame.
      * 
      * @param resourceLoader resource loader
+     * @param observer       main controller
      */
-    public MainViewImpl(final ResourceLoader<String, Double> resourceLoader) {
-        this.resourceLoader = Objects.requireNonNull(resourceLoader);
+    @SuppressFBWarnings("EI2")
+    public MainViewImpl(final ResourceLoader<String, Double> resourceLoader, final MainController observer) {
+        this.resourceLoader = resourceLoader.getClone();
+        this.subPanel = new MenuSubPanel(null);
+        this.controller = observer;
         final double width = resourceLoader.getConfig("MENU_WIDTH");
         final double height = resourceLoader.getConfig("MENU_HEIGHT");
         frame.setSize((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),
@@ -44,14 +48,6 @@ public class MainViewImpl implements MainView {
             }
         });
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setController(final MainController observer) {
-        this.controller = Objects.requireNonNull(observer);
     }
 
     /**

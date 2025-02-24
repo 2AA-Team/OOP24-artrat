@@ -7,7 +7,9 @@ import java.io.InputStream;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.yaml.snakeyaml.Yaml;
+
 import it.unibo.artrat.utils.api.ResourceLoader;
 
 /**
@@ -19,6 +21,17 @@ import it.unibo.artrat.utils.api.ResourceLoader;
 public final class ResourceLoaderImpl<I, O> implements ResourceLoader<I, O> {
 
     private Map<I, O> obj = new HashMap<>();
+
+    private ResourceLoaderImpl(final ResourceLoaderImpl<I, O> rl) {
+        this.obj = new HashMap<>(rl.obj);
+    }
+
+    /**
+     * empty constructor.
+     */
+    public ResourceLoaderImpl() {
+        this.obj = new HashMap<>();
+    }
 
     /**
      * {@inheritDoc}
@@ -42,5 +55,10 @@ public final class ResourceLoaderImpl<I, O> implements ResourceLoader<I, O> {
         } else {
             throw new IllegalStateException("This conf doesn't exist.");
         }
+    }
+
+    @Override
+    public ResourceLoader<I, O> getClone() {
+        return new ResourceLoaderImpl<>(this);
     }
 }

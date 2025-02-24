@@ -22,6 +22,17 @@ public class RoomsLoader implements ResourceLoader<Integer, char[][]> {
     private Map<Integer, List<char[][]>> roomsMap = new HashMap<>();
     private final Random rd = new Random();
 
+    private RoomsLoader(final RoomsLoader roomsLoader) {
+        this.roomsMap = new HashMap<>(roomsLoader.roomsMap);
+    }
+
+    /**
+     * empty constructor.
+     */
+    public RoomsLoader() {
+        this.roomsMap = new HashMap<>();
+    }
+
     /**
      * get a random room with a determinated size.
      * 
@@ -78,7 +89,14 @@ public class RoomsLoader implements ResourceLoader<Integer, char[][]> {
             }
             roomsMap.put(size, roomsList);
         }
+    }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ResourceLoader<Integer, char[][]> getClone() {
+        return new RoomsLoader(this);
     }
 
 }

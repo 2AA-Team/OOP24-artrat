@@ -111,10 +111,4 @@ public interface MainController {
      */
     void loseGame();
 
-    /**
-     * clone method.
-     * 
-     * @return a copy of this main contreller.
-     */
-    MainController clone();
 }
