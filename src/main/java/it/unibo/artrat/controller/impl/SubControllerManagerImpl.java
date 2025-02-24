@@ -78,6 +78,9 @@ public class SubControllerManagerImpl implements SubControllerManager {
         return Objects.requireNonNull(this.storeSubController);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public MissionSubController getMissionsSubController() {
         return Objects.requireNonNull(this.missionSubController);

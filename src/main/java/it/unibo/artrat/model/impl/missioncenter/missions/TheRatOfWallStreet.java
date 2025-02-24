@@ -25,9 +25,9 @@ public class TheRatOfWallStreet extends AbstractMission {
      */
     @Override
     public boolean isMissionDone(final Player passedPlayer) {
-        if (!this.getStatus() && passedPlayer.getCoin().getCurrentAmount() >= COINS) {
+        if (!this.isStatusDone() && passedPlayer.getCoin().getCurrentAmount() >= COINS) {
             this.setStatus(true);
         }
-        return getStatus();
+        return isStatusDone();
     }
 }

@@ -11,7 +11,7 @@ import it.unibo.artrat.model.api.WorldTimer;
  * @author Manuel Benagli
  */
 public class WorldTimerImpl implements WorldTimer {
-    private static final int DEFAULT_TIMER_SETUP = 120_000;
+    private static final int DEFAULT_TIMER_SETUP = 120_000; // Tempo iniziale
     private static final int ONE_SECOND = 1000;
     private final Timer timer;
     private boolean outOfTime;
@@ -26,7 +26,7 @@ public class WorldTimerImpl implements WorldTimer {
     public WorldTimerImpl() {
         this.countdown = DEFAULT_TIMER_SETUP;
         this.timer = new Timer("WorldTimer");
-        this.remainingTime = countdown;
+        this.remainingTime = this.countdown; // Il tempo rimanente è uguale al tempo iniziale
     }
 
     /**
@@ -66,7 +66,7 @@ public class WorldTimerImpl implements WorldTimer {
         if (currentTask != null) {
             currentTask.cancel();
         }
-        countdown = DEFAULT_TIMER_SETUP;
+        this.countdown = DEFAULT_TIMER_SETUP;
         remainingTime = countdown; 
     }
 
@@ -75,6 +75,8 @@ public class WorldTimerImpl implements WorldTimer {
      */
     @Override
     public boolean isTimeOut() {
-        return outOfTime;
+        final boolean tmp = outOfTime;
+        outOfTime = false;
+        return tmp;
     }
 }

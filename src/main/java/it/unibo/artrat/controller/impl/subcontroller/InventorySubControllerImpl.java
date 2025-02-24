@@ -19,6 +19,7 @@ import it.unibo.artrat.view.impl.InventorySubPanel;
  */
 public class InventorySubControllerImpl extends AbstractSubController implements InventorySubController {
     private final InventoryView inventoryView;
+
     /**
      * constructor to initialize mainController.
      * 
@@ -42,8 +43,8 @@ public class InventorySubControllerImpl extends AbstractSubController implements
      */
     @Override
     public boolean useItem(final Item passedItem) {
-        //The idea is to obtain the current model, modify the desired parameter
-        //and then update the centralized model in the main controller.
+        // The idea is to obtain the current model, modify the desired parameter
+        // and then update the centralized model in the main controller.
         final Model model = this.getModel();
         final Player player = model.getPlayer();
         final Inventory inv = player.getInventory();
@@ -52,8 +53,13 @@ public class InventorySubControllerImpl extends AbstractSubController implements
             final Player modifiedPlayer = passedItem.consume(player.copyPlayer());
             model.setPlayer(modifiedPlayer.copyPlayer());
             this.updateCentralizeModel(new ModelImpl(model));
+            inventoryView.displayMessage("The " + passedItem.getName() + " item has been used correctly.",
+                    "Item usage check");
             return true;
         }
+        inventoryView.displayMessage(
+                "There " + passedItem.getName() + " was a problem, and it was not possible to use the item.",
+                "Item usage check");
         return false;
     }
 
@@ -62,22 +68,22 @@ public class InventorySubControllerImpl extends AbstractSubController implements
      */
     @Override
     public String getItemName(final Item passedItem) {
-        return passedItem.getClass().getSimpleName();
+        return passedItem.getName();
     }
 
     private String getTypeName(final Item passedItem) {
         return this.getModel().getPlayer().getInventory().getStoredItem().stream().filter(x -> x.equals(passedItem))
-        .map(x -> x.getType().name()).findAny().get();
+                .map(x -> x.getType().name()).findAny().get();
     }
 
-      /**
+    /**
      * {@inheritDoc}
      */
     @Override
     public void obtainDescription(final Item passedItem) {
         this.inventoryView.displayMessage(this.getModel().getPlayer().getInventory().getStoredItem().stream()
-        .filter(x -> x.equals(passedItem))
-        .map(Item::getDescription).findAny().get() + "\nTYPE: " + getTypeName(passedItem),
-        "Item Description");
+                .filter(x -> x.equals(passedItem))
+                .map(Item::getDescription).findAny().get() + "\nTYPE: " + getTypeName(passedItem),
+                "Item Description");
     }
 }

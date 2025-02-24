@@ -26,4 +26,11 @@ public interface ResourceLoader<I, O> {
      * @throws IOException if configPath not represent anything
      */
     void setConfigPath(URI configPath) throws IOException;
+
+    /**
+     * get the clone of resource loader.
+     * 
+     * @return the clone of the resource loader
+     */
+    ResourceLoader<I, O> getClone();
 }

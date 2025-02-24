@@ -1,6 +1,7 @@
 package it.unibo.artrat.controller.api.subcontroller;
 
 import java.util.Set;
+
 import it.unibo.artrat.controller.api.SubController;
 import it.unibo.artrat.utils.impl.Point;
 
@@ -62,5 +63,11 @@ public interface GameSubController extends SubController {
      * @return the direction as an angle
      */
     double getAngleCompass();
+
+    /**
+     * Retrieve the number of collectibles stolen by the player at that moment.
+     * @return the number of collectibles stolen by the player at that moment.
+     */
+    int getStolenCollectable();
 
 }

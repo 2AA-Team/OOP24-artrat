@@ -45,7 +45,7 @@ public class MissionSubControllerImpl extends AbstractSubController implements M
     @Override
     public boolean isMissionDone(final Mission missionToRedeem) {
         final boolean check = missionToRedeem.isMissionDone(this.getModel().getPlayer());
-        Model model = this.getModel();
+        final Model model = this.getModel();
         model.setMissions(new ArrayList<>(currentMissionsList));
         this.updateCentralizeModel(model);
         return check;

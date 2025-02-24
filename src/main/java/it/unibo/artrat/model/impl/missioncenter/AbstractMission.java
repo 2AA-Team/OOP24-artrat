@@ -38,7 +38,7 @@ public abstract class AbstractMission implements Mission {
      * {@inheritDoc}
      */
     @Override
-    public boolean getStatus() {
+    public boolean isStatusDone() {
         return this.status;
     }
 

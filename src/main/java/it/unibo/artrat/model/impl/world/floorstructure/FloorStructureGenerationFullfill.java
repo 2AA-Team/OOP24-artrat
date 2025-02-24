@@ -6,6 +6,9 @@ import java.util.List;
 
 import it.unibo.artrat.model.api.world.floorstructure.FloorStructureGenerationStrategy;
 
+/**
+ * strategy that fullfill the floor matrix.
+ */
 public class FloorStructureGenerationFullfill implements FloorStructureGenerationStrategy {
 
     /**

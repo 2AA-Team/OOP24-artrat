@@ -3,6 +3,7 @@ package it.unibo.artrat.controller.impl;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.artrat.app.api.GameEngine;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.controller.api.SubControllerManager;
@@ -48,10 +49,10 @@ public class MainControllerImpl implements MainController {
     /**
      * {@inheritDoc}
      */
+    @SuppressFBWarnings("EI2")
     @Override
     public void addMainView(final MainView newView) {
         this.view = newView;
-        newView.setController(this);
         newView.setStage(currentStage);
     }
 
@@ -61,7 +62,7 @@ public class MainControllerImpl implements MainController {
     @Override
     public void quit() {
         engine.forceStop();
-        Runtime.getRuntime().exit(1);
+        Runtime.getRuntime().exit(0);
     }
 
     /**
@@ -162,7 +163,7 @@ public class MainControllerImpl implements MainController {
         return timer.getCurrentTime();
     }
 
-    private void gameExit(Player passedPlayer) {
+    private void gameExit(final Player passedPlayer) {
         model.setPlayer(passedPlayer.copyPlayer());
         resetTimerMainController();
         setStage(Stage.MENU);
@@ -173,16 +174,21 @@ public class MainControllerImpl implements MainController {
      */
     @Override
     public void winGame() {
-        Player player = getModel().getPlayer();
-        view.showGameVictory(player.obtainCollectable(), "VICTORY");
+        final Player player = getModel().getPlayer();
+        final double obtainedCoins = player.obtainCollectable();
         gameExit(player);
+        view.showGameResult(obtainedCoins, "VICTORY");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void loseGame() {
-        Player player = model.getPlayer();
+        final Player player = model.getPlayer();
         player.setColletableList(new ArrayList<>());
-        view.showGameVictory(0.0, "LOOSE");
         gameExit(player);
+        view.showGameResult(0.0, "LOOSE");
     }
+
 }

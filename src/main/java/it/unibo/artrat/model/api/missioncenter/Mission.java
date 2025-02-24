@@ -23,7 +23,7 @@ public interface Mission {
      * 
      * @return true if the mission is done, false otherwise.
      */
-    boolean getStatus();
+    boolean isStatusDone();
 
     /**
      * 

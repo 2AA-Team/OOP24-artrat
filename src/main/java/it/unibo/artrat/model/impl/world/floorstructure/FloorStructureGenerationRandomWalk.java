@@ -15,7 +15,7 @@ public class FloorStructureGenerationRandomWalk implements FloorStructureGenerat
 
     private final int startX;
     private final int startY;
-    private final static Random RANDOM = new Random();
+    private static final Random RANDOM = new Random();
 
     /**
      * Constructor to define the start room.

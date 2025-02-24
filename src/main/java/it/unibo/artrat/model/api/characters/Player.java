@@ -100,5 +100,9 @@ public interface Player extends Entity {
      */
     Player copyPlayer();
 
+    /**
+     * Adding to the player the value obtained from all stolen collectibles.
+     * @return the total loot value.
+     */
     double obtainCollectable();
 }

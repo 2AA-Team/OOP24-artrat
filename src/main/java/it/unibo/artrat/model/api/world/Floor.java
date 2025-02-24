@@ -96,6 +96,11 @@ public interface Floor {
      * @param enemies set of enemies
      */
     void setEnemies(Set<Enemy> enemies);
-    
+
+    /**
+     * setter for all values.
+     * 
+     * @param passedValues set of values
+     */
     void setValues(Set<Collectable> passedValues);
 }

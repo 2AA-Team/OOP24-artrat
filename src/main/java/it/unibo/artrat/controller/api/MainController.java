@@ -101,7 +101,14 @@ public interface MainController {
      */
     boolean isTimeOutMainController();
 
+    /**
+     * Method to handle all the logic related to victory.
+     */
     void winGame();
 
+    /**
+     * Method to handle all the logic related to defeat.
+     */
     void loseGame();
+
 }

@@ -18,10 +18,18 @@ import it.unibo.artrat.utils.impl.Vector2d;
 public final class BaseEnemy extends AbstractEnemy {
     private final Random rd = new Random();
     private static final int DEFAULT_STEPS = 10;
-    private int steps = 0;
+    private int steps;
 
+    /**
+     * Base enemy constructor.
+     * 
+     * @param center of the enemy bounding box
+     * @param width  of the enemy bounding box
+     * @param height of the enemy bounding box
+     */
     public BaseEnemy(final Point center, final double width, final double height) {
         super(center, width, height, new HashSet<>());
+        this.steps = 0;
     }
 
     /**
@@ -32,6 +40,7 @@ public final class BaseEnemy extends AbstractEnemy {
      */
     public BaseEnemy(final Point topLeft, final Point bottomRight) {
         super(topLeft, bottomRight);
+        this.steps = 0;
     }
 
     /**
@@ -43,6 +52,7 @@ public final class BaseEnemy extends AbstractEnemy {
      */
     public BaseEnemy(final Point topLeft, final Point bottomRight, final Set<Vector2d> v) {
         super(topLeft, bottomRight, v);
+        this.steps = 0;
     }
 
     /**
@@ -63,7 +73,7 @@ public final class BaseEnemy extends AbstractEnemy {
      * {@inheritDoc}
      */
     @Override
-    public void follow(Player p) {
+    public void follow(final Player p) {
         move();
     }
 
