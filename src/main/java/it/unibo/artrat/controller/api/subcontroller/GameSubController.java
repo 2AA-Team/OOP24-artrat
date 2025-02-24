@@ -1,6 +1,7 @@
 package it.unibo.artrat.controller.api.subcontroller;
 
 import java.util.Set;
+
 import it.unibo.artrat.controller.api.SubController;
 import it.unibo.artrat.utils.impl.Point;
 

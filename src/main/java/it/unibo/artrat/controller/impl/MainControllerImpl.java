@@ -189,6 +189,9 @@ public class MainControllerImpl implements MainController {
         gameExit(player);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public MainController clone() {
         return this;
