@@ -61,7 +61,7 @@ public class MainControllerImpl implements MainController {
     @Override
     public void quit() {
         engine.forceStop();
-        Runtime.getRuntime().exit(1);
+        Runtime.getRuntime().exit(0);
     }
 
     /**
