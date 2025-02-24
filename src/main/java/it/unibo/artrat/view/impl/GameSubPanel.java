@@ -89,6 +89,7 @@ public class GameSubPanel extends AbstractSubPanel {
             timerCountdown.setText(Integer.toString(gameSubController.getCurrentTimeController() / ONE_SECOND));
             counterColletable.setText(Integer.toString(gameSubController.getStolenCollectable()));
             forceRedraw();
+
             printCompass(g, gameSubController.getAngleCompass());
         }
 

@@ -51,8 +51,14 @@ public final class GameEngineImpl implements GameEngine {
         this.status = GameStatus.STOPPED;
         this.resourceLoader = new ResourceLoaderImpl<>();
         this.initiateResources();
-        collisionChecker = new BaseCollisionChecker(resourceLoader.getConfig("RENDER_DISTANCE"));
-        mainController = new MainControllerImpl(this);
+        double renderDistance = resourceLoader.getConfig("RENDER_DISTANCE");
+        if (renderDistance > 20) {
+            collisionChecker = new BaseCollisionChecker(renderDistance);
+            mainController = new MainControllerImpl(this);
+        } else {
+            LOGGER.warn("RENDER DISTANCE must be > 20.");
+            throw new IOException("RENDER DISTANCE TOO LOW");
+        }
     }
 
     /**
