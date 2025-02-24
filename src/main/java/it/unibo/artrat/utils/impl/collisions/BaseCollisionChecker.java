@@ -29,7 +29,7 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
         upPlayer();
     }
 
-    private void enemiesCollisionAvoidance(long delta) {
+    private void enemiesCollisionAvoidance(final long delta) {
         final var enemies = floor.getEnemies();
         final Set<Enemy> updated = new HashSet<>();
 

@@ -60,8 +60,8 @@ public class CoinImpl implements Coin {
      */
     @Override
     public void spendCoins(final double coins) {
-        if (coins >= 0.0 && coins <= amount) {
-            amount = BigDecimal.valueOf((amount - coins))
+        if (coins > 0.0 && coins <= amount) {
+            amount = BigDecimal.valueOf(amount - coins)
                                 .setScale(2, RoundingMode.HALF_UP)
                                 .doubleValue();
         } else {

@@ -87,6 +87,8 @@ public class WorldTimerImpl implements WorldTimer {
      */
     @Override
     public boolean isTimeOut() {
-        return outOfTime;
+        final boolean tmp = outOfTime;
+        outOfTime = false;
+        return tmp;
     }
 }

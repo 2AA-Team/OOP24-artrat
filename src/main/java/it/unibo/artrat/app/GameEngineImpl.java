@@ -75,7 +75,7 @@ public final class GameEngineImpl implements GameEngine {
      */
     @Override
     public void run() {
-        MainViewImpl mv = new MainViewImpl(resourceLoader);
+        final MainViewImpl mv = new MainViewImpl(resourceLoader);
         mainController.addMainView(mv);
     }
 
@@ -85,13 +85,13 @@ public final class GameEngineImpl implements GameEngine {
      * @throws IOException if fps are under 20
      */
     private void mainLoop() throws IOException {
-        final int FPS = resourceLoader.getConfig("FPS").intValue();
+        final int fps = resourceLoader.getConfig("FPS").intValue();
         final int minimumFPS = 20;
-        if (FPS < minimumFPS) {
+        if (fps < minimumFPS) {
             LOGGER.warn("minimum FPS are 20");
             throw new IOException("Invalid FPS.");
         } else {
-            final long drawInterval = Converter.fpsToMillis(FPS);
+            final long drawInterval = Converter.fpsToMillis(fps);
             long delta = 0;
             long lastTime;
             while (status.equals(GameStatus.RUNNING)) {
@@ -159,7 +159,7 @@ public final class GameEngineImpl implements GameEngine {
                 mainLoop();
             } catch (IOException e) {
                 LOGGER.error("FPS too low", e);
-                System.exit(1);
+                Runtime.getRuntime().exit(0);
             }
         }, "GameLoopThread").start();
     }

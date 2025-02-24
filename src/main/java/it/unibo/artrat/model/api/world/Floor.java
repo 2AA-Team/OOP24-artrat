@@ -100,7 +100,7 @@ public interface Floor {
     /**
      * setter for all values.
      * 
-     * @param enemies set of values
+     * @param passedValues set of values
      */
     void setValues(Set<Collectable> passedValues);
 }

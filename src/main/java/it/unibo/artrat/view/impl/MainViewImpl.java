@@ -83,8 +83,6 @@ public class MainViewImpl implements MainView {
         frame.setMinimumSize(new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),
                 (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * height)));
         frame.setContentPane(subPanel.getPanel());
-        frame.revalidate();
-        frame.repaint();
         frame.setVisible(true);
         subPanel.getPanel().requestFocus();
     }
@@ -118,7 +116,7 @@ public class MainViewImpl implements MainView {
      * {@inheritDoc}
      */
     @Override
-    public void showGameVictory(final double point, final String state) {
+    public void showGameResult(final double point, final String state) {
         JOptionPane.showMessageDialog(frame, state + "\n You obtain : " + point, state, JOptionPane.PLAIN_MESSAGE);
     }
 }

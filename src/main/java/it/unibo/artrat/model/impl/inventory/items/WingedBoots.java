@@ -29,7 +29,7 @@ public class WingedBoots extends AbstractItem {
     @Override
     public Player consume(final Player player) {
         if (player.getVelocity() + ADD_BOOST_UNIT <= MAX_BOOST) {
-            player.setVelocity((player.getVelocity() + ADD_BOOST_UNIT));
+            player.setVelocity(player.getVelocity() + ADD_BOOST_UNIT);
         }
         return player.copyPlayer();
     }

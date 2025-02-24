@@ -37,14 +37,17 @@ public abstract class AbstractReader implements Reader {
 
     private Object getConfig(final String conf, final String field) {
         final Object ob = obj.get(conf);
-        if (ob instanceof Map<?, ?> list) {
-            try {
-                return list.get(field);
-            } catch (IndexOutOfBoundsException e) {
-                LOGGER.error("ItemReaderImpl throw an error: ", e);
-            }
+        if (ob == null) {
+            throw new IllegalArgumentException(conf + " is null and not a valid map.");
         }
-        throw new IllegalArgumentException(conf + " is not valid list.");
+
+        Map<?, ?> list = (Map<?, ?>) ob;
+        try {
+            return list.get(field);
+        } catch (IndexOutOfBoundsException e) {
+            LOGGER.error("ItemReaderImpl threw an error: ", e);
+        }
+        throw new IllegalArgumentException("Error retrieving field: " + field);
     }
 
     /**
