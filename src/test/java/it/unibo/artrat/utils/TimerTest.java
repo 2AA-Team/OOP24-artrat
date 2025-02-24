@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import it.unibo.artrat.model.impl.WorldTimerImpl;
 
 /**
@@ -14,7 +15,7 @@ import it.unibo.artrat.model.impl.WorldTimerImpl;
  * @author Manuel Benagli
  */
 class TimerTest {
-    static final int SETTED_COUNTDOWN = 10000;
+    static final int SETTED_COUNTDOWN = 10_000;
     static final int ONE_SECOND = 1000;
     private WorldTimerImpl timer;
     private int defTimer;
@@ -54,7 +55,7 @@ class TimerTest {
      * @throws InterruptedException
      */
     @Test
-    public void testResetTimer() throws InterruptedException {
+    void testResetTimer() throws InterruptedException {
         final int threadSleep = 2000;
         timer.startTimer();
         Thread.sleep(threadSleep);

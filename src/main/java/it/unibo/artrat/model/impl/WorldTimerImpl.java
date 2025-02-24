@@ -53,7 +53,6 @@ public class WorldTimerImpl implements WorldTimer {
                 // La logica del game over quando il timer finisce
                 if (remainingTime > ONE_SECOND) {
                     remainingTime -= ONE_SECOND;
-                    getCurrentTime();
                 } else {
                     outOfTime = true;
                     resetTimer();

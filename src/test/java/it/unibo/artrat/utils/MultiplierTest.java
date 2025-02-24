@@ -12,7 +12,7 @@ import it.unibo.artrat.model.impl.characters.MultiplierImpl;
 /**
  * Test the function of the Multiplier.
  */
-public class MultiplierTest {
+class MultiplierTest {
     @Test
     void testChangeCurrentMultiplier() {
         final Multiplier multiplierTest = new MultiplierImpl();

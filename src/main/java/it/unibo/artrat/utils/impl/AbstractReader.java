@@ -16,7 +16,7 @@ import org.yaml.snakeyaml.Yaml;
 import it.unibo.artrat.utils.api.Reader;
 
 /**
- * An abstract reader of the reader interface that handles the logic of 
+ * An abstract reader of the reader interface that handles the logic of
  * loading from the file and leaves the casting policies to the extensions.
  */
 public abstract class AbstractReader implements Reader {
@@ -41,7 +41,7 @@ public abstract class AbstractReader implements Reader {
             throw new IllegalArgumentException(conf + " is null and not a valid map.");
         }
 
-        Map<?, ?> list = (Map<?, ?>) ob;
+        final Map<?, ?> list = (Map<?, ?>) ob;
         try {
             return list.get(field);
         } catch (IndexOutOfBoundsException e) {
@@ -51,7 +51,7 @@ public abstract class AbstractReader implements Reader {
     }
 
     /**
-     * @param conf the desidered conf in yaml.
+     * @param conf  the desidered conf in yaml.
      * @param field the desidered field for the passed conf
      * @return the desidered field.
      */
@@ -61,6 +61,7 @@ public abstract class AbstractReader implements Reader {
 
     /**
      * Method that permit to obtain all name of conf in yaml.
+     * 
      * @return the Set with all name of confs in yaml.
      */
     protected Set<String> getKeySetMap() {

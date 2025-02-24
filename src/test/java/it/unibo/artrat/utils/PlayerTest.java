@@ -15,8 +15,8 @@ import it.unibo.artrat.utils.impl.Point;
 /**
  * Test the fuction of the Player.
  */
-public class PlayerTest {
- 
+class PlayerTest {
+
     @Test
     void testObtainCollectable() {
         final Player playerTest = new Lupino(new Point(), new HashSet<>());
