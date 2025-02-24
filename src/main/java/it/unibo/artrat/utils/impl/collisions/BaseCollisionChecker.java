@@ -38,7 +38,8 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
                 final var speed = e.getSpeed();
                 final var pos = e.getPosition();
                 e.update(delta);
-                if (checkWallCollision(e)) {
+                if (checkWallCollision(e)
+                        || floor.getExit().stream().anyMatch(x -> x.getBoundingBox().isColliding(e.getBoundingBox()))) {
                     e.setSpeed(new Vector2d());
                     speed.forEach(e::addDirection);
                     e.setPosition(pos);

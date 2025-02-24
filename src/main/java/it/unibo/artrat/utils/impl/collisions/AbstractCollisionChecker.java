@@ -6,6 +6,7 @@ import java.util.Objects;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.Model;
+import it.unibo.artrat.model.api.characters.Entity;
 import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.world.Floor;
 import it.unibo.artrat.utils.api.BoundingBox;
