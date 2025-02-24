@@ -123,7 +123,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
 
         // Impostato il layout di GridBagLayout per fare in modo che i componenti siano
         // ridimensionabili
-        GridBagConstraints gbc = new GridBagConstraints();
+        final GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;

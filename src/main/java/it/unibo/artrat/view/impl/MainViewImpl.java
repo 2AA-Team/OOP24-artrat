@@ -115,7 +115,7 @@ public class MainViewImpl implements MainView {
     }
 
     @Override
-    public void showGameVictory(double point, String state) {
+    public void showGameVictory(final double point, final String state) {
         JOptionPane.showMessageDialog(frame, state + "\n You obtain : " + point, state, JOptionPane.PLAIN_MESSAGE);
     }
 }

@@ -361,8 +361,11 @@ public class FloorImpl implements Floor {
         this.floorEnemies = new HashSet<>(enemies);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void setValues(Set<Collectable> passedValues) {
+    public void setValues(final Set<Collectable> passedValues) {
         this.floorValues = new HashSet<>(passedValues);
     }
 }

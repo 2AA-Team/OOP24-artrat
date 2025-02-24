@@ -30,4 +30,24 @@ public interface EnemyFactory {
      */
     Enemy createAdvancedEnemy(Point topLeft, Point bottomRight, Vector2d v);
 
+    /**
+     * FactoryMethod for advanced enemies creation.
+     * 
+     * @param center center of the bounding box
+     * @param width  width of the bounding box
+     * @param height height of the bounding box
+     * @return created enemy
+     */
+    Enemy createAdvancedEnemy(Point center, double width, double height);
+
+    /**
+     * FactoryMethod for base enemies creation.
+     * 
+     * @param center center of the bounding box
+     * @param width  width of the bounding box
+     * @param height height of the bounding box
+     * @return created enemy
+     */
+    Enemy createBaseEnemy(Point center, double width, double height);
+
 }

@@ -9,7 +9,7 @@ import it.unibo.artrat.model.impl.inventory.AbstractItem;
  */
 public class WingedBoots extends AbstractItem {
 
-    private static final double MAX_BOOST = 0.025;
+    private static final double MAX_BOOST = 0.020;
     private static final double ADD_BOOST_UNIT = 0.005;
 
     /**

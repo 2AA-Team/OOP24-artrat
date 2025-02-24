@@ -13,19 +13,19 @@ import it.unibo.artrat.utils.api.commands.Command;
 import it.unibo.artrat.utils.impl.BoundingBoxImpl;
 
 public abstract class AbstractCollisionChecker {
-    protected MainController mainController = null;
-    protected double renderDistance = 0;
+    MainController mainController = null;
+    double renderDistance = 0;
     private Model model;
-    protected Floor floor;
-    protected Player player;
-    protected BoundingBox renderBB;
-    protected List<BoundingBox> wallRendered;
+    Floor floor;
+    Player player;
+    BoundingBox renderBB;
+    List<BoundingBox> wallRendered;
 
-    public AbstractCollisionChecker(double renderDistance) {
+    public AbstractCollisionChecker(final double renderDistance) {
         this.renderDistance = renderDistance;
     }
 
-    public void updateAndCheck(MainController mainController, Command cmd, long delta) {
+    public void updateAndCheck(final MainController mainController, final Command cmd, final long delta) {
         this.mainController = Objects.requireNonNull(mainController);
         this.model = this.mainController.getModel();
         this.floor = model.getFloor();
@@ -36,10 +36,12 @@ public abstract class AbstractCollisionChecker {
                 .filter(x -> x.isColliding(renderTmp)).toList();
 
         updateAndCheckPlayer(cmd, delta);
-        updateEnemiesState(delta);
         updateAndCheckPaintings();
+
         model.setFloor(floor);
         upPlayer();
+
+        updateEnemiesState(delta);
         updateAndCheckExit();
     }
 

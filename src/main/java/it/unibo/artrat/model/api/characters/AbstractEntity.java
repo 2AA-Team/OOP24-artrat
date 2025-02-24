@@ -2,6 +2,7 @@ package it.unibo.artrat.model.api.characters;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import it.unibo.artrat.model.impl.AbstractGameObject;
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;
@@ -79,15 +80,6 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
         // final var dir = rd.nextInt(Directions.values().length);
         // final Vector2d v = Directions.values()[dir].vector();
         // this.setSpeed(v);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void interact() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'interact'");
     }
 
     /**

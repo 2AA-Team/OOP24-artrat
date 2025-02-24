@@ -178,11 +178,19 @@ public class MainControllerImpl implements MainController {
         gameExit(player);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void loseGame() {
         final Player player = model.getPlayer();
         player.setColletableList(new ArrayList<>());
         view.showGameVictory(0.0, "LOOSE");
         gameExit(player);
+    }
+
+    @Override
+    public MainController clone() {
+        return this;
     }
 }

@@ -52,8 +52,10 @@ public class InventorySubControllerImpl extends AbstractSubController implements
             final Player modifiedPlayer = passedItem.consume(player.copyPlayer());
             model.setPlayer(modifiedPlayer.copyPlayer());
             this.updateCentralizeModel(new ModelImpl(model));
+            inventoryView.displayMessage("The " + passedItem.getName() + " item has been used correctly.", "Item usage check");
             return true;
         }
+        inventoryView.displayMessage("There " + passedItem.getName() + " was a problem, and it was not possible to use the item.", "Item usage check");
         return false;
     }
 
@@ -62,7 +64,7 @@ public class InventorySubControllerImpl extends AbstractSubController implements
      */
     @Override
     public String getItemName(final Item passedItem) {
-        return passedItem.getClass().getSimpleName();
+        return passedItem.getName();
     }
 
     private String getTypeName(final Item passedItem) {

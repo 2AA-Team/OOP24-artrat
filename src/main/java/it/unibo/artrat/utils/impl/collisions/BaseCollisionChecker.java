@@ -13,12 +13,12 @@ import it.unibo.artrat.utils.impl.Vector2d;
 
 public class BaseCollisionChecker extends AbstractCollisionChecker {
 
-    public BaseCollisionChecker(double renderDistance) {
+    public BaseCollisionChecker(final double renderDistance) {
         super(renderDistance);
     }
 
     @Override
-    public void updateAndCheckPlayer(Command cmd, long delta) {
+    public void updateAndCheckPlayer(final Command cmd, final long delta) {
         if (!Objects.isNull(cmd)) {
             cmd.execute(player);
         }
@@ -40,8 +40,11 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
                 e.update(delta);
                 if (checkWallCollision(e)) {
                     e.setSpeed(new Vector2d());
-                    speed.forEach(x -> e.addDirection(x));
+                    speed.forEach(e::addDirection);
                     e.setPosition(pos);
+                }
+                if (e.getBoundingBox().isColliding(this.player.getBoundingBox())) {
+                    this.mainController.loseGame();
                 }
             }
             updated.add(e);
@@ -83,9 +86,10 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
 
     @Override
     public void updateAndCheckPaintings() {
-        BoundingBox bbPlayer = player.getBoundingBox();
-        Set<Collectable> updated = new HashSet<>();
-        for (Collectable value : floor.getValues()) {
+        final BoundingBox bbPlayer = player.getBoundingBox();
+        final Set<Collectable> updated = new HashSet<>();
+
+        for (final Collectable value : floor.getValues()) {
             if (!value.getBoundingBox().isColliding(bbPlayer)) {
                 updated.add(value);
             } else {

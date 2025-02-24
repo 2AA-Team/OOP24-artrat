@@ -131,4 +131,9 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
         return Math.atan2(exit.getY() - player.getY(), exit.getX() - player.getX());
     }
 
+    @Override
+    public int getStolenCollectable() {
+        return getModel().getPlayer().getColletableList().size();
+    }
+
 }

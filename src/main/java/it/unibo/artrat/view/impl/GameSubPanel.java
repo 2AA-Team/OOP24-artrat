@@ -1,6 +1,7 @@
 package it.unibo.artrat.view.impl;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -46,6 +47,7 @@ public class GameSubPanel extends AbstractSubPanel {
     private static final int RIGHT = KeyEvent.VK_D;
 
     private final JLabel timerCountdown = new JLabel();
+    private final JLabel counterColletable = new JLabel();
 
     private static final Map<RoomSymbols, Image> MAPSYMBOLS = Map.of(
             RoomSymbols.ENEMY, getObjectImage("enemy.png"),
@@ -85,6 +87,7 @@ public class GameSubPanel extends AbstractSubPanel {
             printPlayer(g, center);
 
             timerCountdown.setText(Integer.toString(gameSubController.getCurrentTimeController() / ONE_SECOND));
+            counterColletable.setText(Integer.toString(gameSubController.getStolenCollectable()));
             forceRedraw();
             printCompass(g, gameSubController.getAngleCompass());
         }
@@ -142,8 +145,19 @@ public class GameSubPanel extends AbstractSubPanel {
         tmp.add(this.mapPanel, BorderLayout.CENTER);
 
         final JLabel timerJLabel = new JLabel("TIMER");
-        southJPanel.add(timerJLabel);
-        southJPanel.add(timerCountdown);
+        final JLabel pictureCounterLabel = new JLabel("Collectable: ");
+        southJPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 5)); // 50px tra i due gruppi
+
+        final JPanel timerPanel = new JPanel();
+        timerPanel.add(timerJLabel);
+        timerPanel.add(timerCountdown);
+
+        final JPanel picturePanel = new JPanel();
+        picturePanel.add(pictureCounterLabel);
+        picturePanel.add(counterColletable);
+
+        southJPanel.add(timerPanel);
+        southJPanel.add(picturePanel);
         tmp.add(southJPanel, BorderLayout.SOUTH);
 
         tmp.addKeyListener(new KeyListener() {
