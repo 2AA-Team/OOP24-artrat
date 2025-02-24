@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Objects;
 
 import it.unibo.artrat.controller.api.MainController;
-
 import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.api.characters.Player;
@@ -34,6 +33,7 @@ public abstract class AbstractCollisionChecker {
      * Collision manager contructor.
      * 
      * @param renderDistance of the map
+     * @param mainController main controller
      */
     public AbstractCollisionChecker(final double renderDistance, final MainController mainController) {
         this.renderDistance = renderDistance;

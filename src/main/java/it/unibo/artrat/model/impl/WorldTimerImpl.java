@@ -11,7 +11,7 @@ import it.unibo.artrat.model.api.WorldTimer;
  * @author Manuel Benagli
  */
 public class WorldTimerImpl implements WorldTimer {
-    private static final int DEFAULT_TIMER_SETUP = 120000; // Tempo iniziale
+    private static final int DEFAULT_TIMER_SETUP = 120_000; // Tempo iniziale
     private static final int ONE_SECOND = 1000;
     private final Timer timer;
     private boolean outOfTime;
@@ -31,6 +31,7 @@ public class WorldTimerImpl implements WorldTimer {
 
     /**
      * WorldTimerImpl constructor.
+     * 
      * @param settedCountdown the new countdown is initialize with settedCountdown
      */
     public WorldTimerImpl(final int settedCountdown) {
