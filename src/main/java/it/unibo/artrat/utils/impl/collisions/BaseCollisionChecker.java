@@ -11,12 +11,20 @@ import it.unibo.artrat.utils.api.BoundingBox;
 import it.unibo.artrat.utils.api.commands.Command;
 import it.unibo.artrat.utils.impl.Vector2d;
 
+/**
+ * Base collision manager.
+ */
 public class BaseCollisionChecker extends AbstractCollisionChecker {
-
+    /**
+     * {@inheritDoc}
+     */
     public BaseCollisionChecker(final double renderDistance) {
         super(renderDistance);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateAndCheckPlayer(final Command cmd, final long delta) {
         if (!Objects.isNull(cmd)) {
@@ -66,6 +74,9 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
                 .isColliding(e.getFieldOfView());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateEnemiesState(final long delta) {
 
@@ -85,6 +96,9 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateAndCheckPaintings() {
         final BoundingBox bbPlayer = player.getBoundingBox();
@@ -100,6 +114,9 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
         floor.setValues(updated);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void updateAndCheckExit() {
         if (floor.getExit().stream()

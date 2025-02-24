@@ -204,6 +204,6 @@ public class GameSubPanel extends AbstractSubPanel {
      */
     @Override
     public void forceRedraw() {
-        SwingUtilities.invokeLater(() -> gameSubController.isTimeOutSubController());
+        SwingUtilities.invokeLater(gameSubController::isTimeOutSubController);
     }
 }

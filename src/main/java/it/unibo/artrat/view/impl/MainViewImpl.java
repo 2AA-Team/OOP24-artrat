@@ -83,6 +83,8 @@ public class MainViewImpl implements MainView {
         frame.setMinimumSize(new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),
                 (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * height)));
         frame.setContentPane(subPanel.getPanel());
+        frame.revalidate();
+        frame.repaint();
         frame.setVisible(true);
         subPanel.getPanel().requestFocus();
     }
