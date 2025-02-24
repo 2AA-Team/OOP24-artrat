@@ -8,21 +8,34 @@ import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;
 
 /**
- * Essential implementetion of an entity.
+ * Entity essential implementation.
  * 
  * @author Samuele Trapani
  */
 public abstract class AbstractEntity extends AbstractGameObject implements Entity {
 
     private Set<Vector2d> speed = new HashSet<>();
-    private double velocity = 0.01;
+    private static final double DEFAULT_VELOCITY = 0.01;
+    private double velocity = DEFAULT_VELOCITY;
 
-    public AbstractEntity(Point center, double width, double height) {
+    /**
+     * Entity constructor.
+     * 
+     * @param center of the entity bounding box
+     * @param width  of the entity bounding box
+     * @param height of the entity bounding box
+     */
+    public AbstractEntity(final Point center, final double width, final double height) {
         super(center, width, height);
 
     }
 
-    public AbstractEntity(Point center) {
+    /**
+     * Entity constructor.
+     * 
+     * @param center of the entity bounding box
+     */
+    public AbstractEntity(final Point center) {
         super(center);
     }
 
@@ -76,10 +89,6 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
      */
     @Override
     public void move() {
-        // final Random rd = new Random();
-        // final var dir = rd.nextInt(Directions.values().length);
-        // final Vector2d v = Directions.values()[dir].vector();
-        // this.setSpeed(v);
     }
 
     /**
@@ -131,11 +140,17 @@ public abstract class AbstractEntity extends AbstractGameObject implements Entit
         return new HashSet<>(this.speed);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public double getVelocity() {
         return this.velocity;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setVelocity(final double vel) {
         this.velocity = vel;

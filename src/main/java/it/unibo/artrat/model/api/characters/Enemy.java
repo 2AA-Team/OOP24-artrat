@@ -23,20 +23,6 @@ public interface Enemy extends Entity {
     BoundingBox getFieldOfView();
 
     /**
-     * Check if the enemy is following the player.
-     * 
-     * @return true if enemy is following, false otherwise.
-     */
-    boolean isFollowing();
-
-    /**
-     * Trigger the enemy.
-     * 
-     * @param follow trigger
-     */
-    void trigger(boolean follow);
-
-    /**
      * Set a new FOV.
      * 
      * @param fov field of view

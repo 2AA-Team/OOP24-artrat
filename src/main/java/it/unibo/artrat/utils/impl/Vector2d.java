@@ -19,6 +19,12 @@ public record Vector2d(double x, double y) {
         this(0, 0);
     }
 
+    /**
+     * Vector constructor starting from two points.
+     * 
+     * @param p1 start point
+     * @param p2 end point
+     */
     public Vector2d(final Point p1, final Point p2) {
         this(p2.getX() - p1.getX(), p2.getY() - p1.getY());
 

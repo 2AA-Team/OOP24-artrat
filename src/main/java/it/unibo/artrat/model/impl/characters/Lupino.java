@@ -200,6 +200,9 @@ public class Lupino extends AbstractEntity implements Player {
         return p;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public double obtainCollectable() {
         double coinsToAdd = collectabels.stream().mapToDouble(Collectable::getPrice).sum();

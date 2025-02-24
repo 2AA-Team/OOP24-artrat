@@ -8,41 +8,57 @@ import it.unibo.artrat.utils.impl.BoundingBoxImpl;
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;
 
+/**
+ * Enemy essential implementation.
+ * 
+ * @author Samuele Trapani
+ */
 public abstract class AbstractEnemy extends AbstractEntity implements Enemy {
     private static final int FOV_SCALE = 8;
-    private boolean follow = false;
     private BoundingBox fieldOfView;
     private static final double VEL = 0.005;
 
     /**
-     * {@inheritDoc}
+     * Enemy constructor.
+     * 
+     * @param center of the enemy bounding box
+     * @param width  of the enemy bounding box
+     * @param height of the enemy bounding box
+     * @param v      current direction
      */
-    public AbstractEnemy(Point center, double width, double height, Set<Vector2d> v) {
+    public AbstractEnemy(final Point center, final double width, final double height, final Set<Vector2d> v) {
         super(center, width, height, v);
         this.fieldOfView = new BoundingBoxImpl(center, width * FOV_SCALE, height * FOV_SCALE);
-        setVelocity(VEL);
+        super.setVelocity(VEL);
     }
 
     /**
-     * {@inheritDoc}
+     * Enemy constructor.
+     * 
+     * @param topLeft     corner of the enemy bounding box
+     * @param bottomRight corner of the enemy bounding box
      */
     public AbstractEnemy(final Point topLeft, final Point bottomRight) {
         super(topLeft, bottomRight, new HashSet<>());
-        final BoundingBox tmp = this.getBoundingBox();
+        final BoundingBox tmp = new BoundingBoxImpl(topLeft, bottomRight);
         this.fieldOfView = new BoundingBoxImpl(tmp.getCenter(), tmp.getWidth() * FOV_SCALE,
                 tmp.getHeight() * FOV_SCALE);
-        setVelocity(VEL);
+        super.setVelocity(VEL);
     }
 
     /**
-     * {@inheritDoc}
+     * Enemy constructor.
+     * 
+     * @param topLeft     corner of the enemy bounding box
+     * @param bottomRight corner of the enemy bounding box
+     * @param v           current direction
      */
     public AbstractEnemy(final Point topLeft, final Point bottomRight, final Set<Vector2d> v) {
         super(topLeft, bottomRight, v);
-        final BoundingBox tmp = this.getBoundingBox();
+        final BoundingBox tmp = new BoundingBoxImpl(topLeft, bottomRight);
         this.fieldOfView = new BoundingBoxImpl(tmp.getCenter(), tmp.getWidth() * FOV_SCALE,
                 tmp.getHeight() * FOV_SCALE);
-        setVelocity(VEL);
+        super.setVelocity(VEL);
     }
 
     /**
@@ -57,30 +73,26 @@ public abstract class AbstractEnemy extends AbstractEntity implements Enemy {
      * {@inheritDoc}
      */
     @Override
-    public boolean isFollowing() {
-        return follow;
-    }
-
-    @Override
-    public void trigger(boolean follow) {
-        this.follow = follow;
-    }
-
-    @Override
-    public void setFieldOfView(BoundingBox fov) {
+    public void setFieldOfView(final BoundingBox fov) {
         this.fieldOfView = new BoundingBoxImpl(fov.getTopLeft(), fov.getBottomRight());
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void update(long delta) {
+    public void update(final long delta) {
         super.update(delta);
         this.fieldOfView.setCenter(this.getPosition().sum(this.calculateSpeed().mul(delta * this.getVelocity())));
     }
 
+    /**
+     * {@inheritDoc}
+     * 
+     */
     @Override
-    public void follow(Player p) {
-        // TODO Auto-generated method stub
+    public void follow(final Player p) {
 
     }
 
