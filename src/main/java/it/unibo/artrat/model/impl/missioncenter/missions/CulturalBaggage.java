@@ -26,10 +26,8 @@ public class CulturalBaggage extends AbstractMission {
      */
     @Override
     public boolean isMissionDone(final Player passedPlayer) {
-        if (!this.getStatus()) {
-            if (passedPlayer.getInventory().getStoredItem().size() >= 4) {
-                setStatus(true);
-            }
+        if (!this.getStatus() && passedPlayer.getInventory().getStoredItem().size() >= 4) {
+            setStatus(true);
         }
         return getStatus();
     }

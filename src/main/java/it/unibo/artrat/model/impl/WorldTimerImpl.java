@@ -41,7 +41,6 @@ public class WorldTimerImpl implements WorldTimer {
             public void run() {
                 if (remainingTime > ONE_SECOND) {
                     remainingTime -= ONE_SECOND;
-                    getCurrentTime();
                 } else {
                     outOfTime = true;
                     resetTimer();
@@ -66,9 +65,6 @@ public class WorldTimerImpl implements WorldTimer {
     public void resetTimer() {
         if (currentTask != null) {
             currentTask.cancel();
-            /*mi cancello il task , (quella cosa che ho rimosso il timer cancel perchè poi ho 
-            l'ho inizializzato nel maincontroller che per mio ragionamento è ultra performante sium)
-            */
         }
         countdown = DEFAULT_TIMER_SETUP;
         remainingTime = countdown; 
