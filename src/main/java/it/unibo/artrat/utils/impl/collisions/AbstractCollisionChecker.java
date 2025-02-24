@@ -1,6 +1,7 @@
 package it.unibo.artrat.utils.impl.collisions;
 
 import java.util.List;
+import java.util.Objects;
 
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.model.api.GameObject;
@@ -25,7 +26,7 @@ public abstract class AbstractCollisionChecker {
     }
 
     public void updateAndCheck(final MainController mainController, final Command cmd, final long delta) {
-        this.mainController = mainController.clone();
+        this.mainController = Objects.requireNonNull(mainController);
         this.model = this.mainController.getModel();
         this.floor = model.getFloor();
         this.player = model.getPlayer();
