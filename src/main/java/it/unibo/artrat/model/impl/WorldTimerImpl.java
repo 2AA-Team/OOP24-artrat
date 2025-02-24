@@ -31,6 +31,7 @@ public class WorldTimerImpl implements WorldTimer {
 
     /**
      * WorldTimerImpl constructor.
+     * 
      * @param settedCountdown the new countdown is initialize with settedCountdown
      */
     public WorldTimerImpl(final int settedCountdown) {
