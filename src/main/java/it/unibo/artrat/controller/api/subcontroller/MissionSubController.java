@@ -19,7 +19,7 @@ public interface MissionSubController extends SubController {
      * 
      * @return a list of all the missions to achieve.
      */
-    List<Mission> MissionList();
+    List<Mission> missionList();
 
     /**
      * 

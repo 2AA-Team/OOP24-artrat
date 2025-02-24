@@ -30,16 +30,6 @@ public class WorldTimerImpl implements WorldTimer {
     }
 
     /**
-     * WorldTimerImpl constructor.
-     * @param settedCountdown the new countdown is initialized with settedCountdown
-     */
-    public WorldTimerImpl(final int settedCountdown) {
-        this.countdown = settedCountdown;
-        this.timer = new Timer("WorldTimer");
-        this.remainingTime = countdown;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override

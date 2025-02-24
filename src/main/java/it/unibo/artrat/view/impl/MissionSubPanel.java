@@ -1,7 +1,5 @@
 package it.unibo.artrat.view.impl;
 
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -43,7 +41,6 @@ public class MissionSubPanel extends AbstractSubPanel {
         missionCenterPanel.setLayout(new BorderLayout(GAP, GAP));
         scrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         contMissionPane.add(scrollPanel, BorderLayout.CENTER);
-
         missionControl.initMissionList();
 
         this.missionToClaimPanel = new JPanel(new GridLayout(0, 1, GAP, GAP));
@@ -54,7 +51,7 @@ public class MissionSubPanel extends AbstractSubPanel {
     }
 
     private void allMissionsSetup() {
-        for (final var mission : missionControl.MissionList()) {
+        for (final var mission : missionControl.missionList()) {
             final JLabel missionLabel = new JLabel(missionControl.getMissionName(mission) + ": " 
                     + missionControl.showDescr(mission));
 

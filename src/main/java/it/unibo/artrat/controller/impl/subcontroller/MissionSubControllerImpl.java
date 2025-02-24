@@ -35,7 +35,7 @@ public class MissionSubControllerImpl extends AbstractSubController implements M
      * {@inheritDoc}
      */
     @Override
-    public List<Mission> MissionList() {
+    public List<Mission> missionList() {
         return new ArrayList<>(currentMissionsList);
     }
 
@@ -44,7 +44,7 @@ public class MissionSubControllerImpl extends AbstractSubController implements M
      */
     @Override
     public boolean isMissionDone(final Mission missionToRedeem) {
-        boolean check = missionToRedeem.isMissionDone(this.getModel().getPlayer());
+        final boolean check = missionToRedeem.isMissionDone(this.getModel().getPlayer());
         Model model = this.getModel();
         model.setMissions(new ArrayList<>(currentMissionsList));
         this.updateCentralizeModel(model);

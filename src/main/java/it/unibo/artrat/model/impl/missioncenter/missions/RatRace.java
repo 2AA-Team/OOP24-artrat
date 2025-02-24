@@ -8,14 +8,14 @@ import it.unibo.artrat.model.impl.missioncenter.AbstractMission;
  */
 public class RatRace extends AbstractMission {
     private static final double MAX_SPEED = 0.02;
-    
+
     /**
      * @param name mission's name.
      * @param desc mission's description.
      * @param status mission's status.
      */
     public RatRace(final String name, final String desc, final boolean status) {
-        super(name,desc,status);
+        super(name, desc, status);
     }
 
     /**

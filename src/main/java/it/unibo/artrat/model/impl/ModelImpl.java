@@ -110,7 +110,7 @@ public class ModelImpl implements Model {
      * {@inheritDoc}
      */
     @Override
-    public void setMissions(List<Mission> passedMissions) {
+    public void setMissions(final List<Mission> passedMissions) {
         this.missions = new ArrayList<>(passedMissions);
     }
 }

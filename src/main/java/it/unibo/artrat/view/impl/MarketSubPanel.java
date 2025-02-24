@@ -218,13 +218,13 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
 
             buyItem.addActionListener(e -> {
                 if (toConfirm("Do you really want to buy?", "Buy")) {
-                    if(contr.getModel().getPlayer().getCoin().getCurrentAmount() >= contr.getItemPrice(purchItem) && contr.buyItem(purchItem)) {
+                    if (contr.getModel().getPlayer().getCoin().getCurrentAmount() >= contr.getItemPrice(purchItem) 
+                            && contr.buyItem(purchItem)) {
                         if (purchItem.getType().equals(ItemType.POWERUP)) {
                             contr.getModel().getMarket().getPurchItems().remove(purchItem);
                             purchItemPanel.remove(itemPanel);
                         }
-                    }
-                    else {
+                    } else {
                         showMessage("Not enough money", "Purchase denied");
                     }
                     itemSearch(searchItemField.getText().trim().toLowerCase(Locale.ROOT));

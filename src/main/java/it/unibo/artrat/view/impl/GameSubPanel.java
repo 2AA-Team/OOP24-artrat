@@ -19,7 +19,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import it.unibo.artrat.controller.api.subcontroller.GameSubController;
-import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.model.impl.world.RoomSymbols;
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.commands.MoveDown;
