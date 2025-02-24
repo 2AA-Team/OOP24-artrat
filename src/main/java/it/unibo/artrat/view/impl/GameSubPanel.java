@@ -148,11 +148,11 @@ public class GameSubPanel extends AbstractSubPanel {
         final JLabel pictureCounterLabel = new JLabel("Collectable: ");
         southJPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 5)); // 50px tra i due gruppi
 
-        JPanel timerPanel = new JPanel();
+        final JPanel timerPanel = new JPanel();
         timerPanel.add(timerJLabel);
         timerPanel.add(timerCountdown);
 
-        JPanel picturePanel = new JPanel();
+        final JPanel picturePanel = new JPanel();
         picturePanel.add(pictureCounterLabel);
         picturePanel.add(counterColletable);
 
@@ -202,6 +202,6 @@ public class GameSubPanel extends AbstractSubPanel {
     @Override
     public void forceRedraw() {
         gameSubController.isTimeOutSubController();
-        
+
     }
 }
