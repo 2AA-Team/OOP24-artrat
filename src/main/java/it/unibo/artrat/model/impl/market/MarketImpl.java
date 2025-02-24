@@ -18,7 +18,7 @@ import it.unibo.artrat.utils.api.ItemReader;
 import it.unibo.artrat.utils.impl.ItemReaderImpl;
 
 /**
- * Market implementation on the Model.
+ * Market implementation model class.
  */
 public class MarketImpl implements Market {
     private final URL itemPath = Thread.currentThread().getContextClassLoader().getResource(
@@ -30,7 +30,7 @@ public class MarketImpl implements Market {
     private static final Logger LOGGER = LoggerFactory.getLogger(MarketImpl.class);
 
     /**
-     * 
+     * Market default constructor.
      */
     public MarketImpl() {
         this.itemsToBuy = new ArrayList<>();
@@ -38,7 +38,7 @@ public class MarketImpl implements Market {
     }
 
     /**
-     * MarketImpl constructor.
+     * Market constructor.
      * @param mark a market object
      */
     public MarketImpl(final Market mark) {
@@ -73,7 +73,7 @@ public class MarketImpl implements Market {
     }
 
     /**
-     * Update my list of items, it's useful for ItemManager.
+     * {@inheritDoc}
      */
     @Override
     public void setPurchItems(final List<Item> items) {

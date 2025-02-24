@@ -10,14 +10,14 @@ import it.unibo.artrat.model.api.world.Floor;
  */
 public interface Model {
     /**
-     * A method that permit to obtain a copy of the current player.
+     * A method that permits to obtain a copy of the current player.
      * 
      * @return a copy of current player.
      */
     Player getPlayer();
 
     /**
-     * A method that permit to change the current player istance with the new
+     * A method that permits to change the current player istance with the new
      * passed.
      * 
      * @param player the passed player.
@@ -34,16 +34,16 @@ public interface Model {
     /**
      * Method which updaets the current market instance with the new passed.
      * 
-     * @param market
+     * @param market the passed market.
      */
     void setMarket(Market market);
 
     /**
+     * A method that obtains a copy of the current state of mision center.
      * 
-     * @return
+     * @return a copy of the current mission center.
      */
     MissionCenter getMissionCenter();
-
 
     /**
      * A method that permit to obtain a copy of the current floor.
@@ -53,11 +53,9 @@ public interface Model {
     Floor getFloor();
 
     /**
-     * A method that permit to change the current floor istance with the new
-     * passed.
+     * A method that permits to change the current floor istance with the new passed.
      * 
      * @param floor the passed floor.
      */
     void setFloor(Floor floor);
-
 }

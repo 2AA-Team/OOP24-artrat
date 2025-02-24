@@ -24,7 +24,7 @@ public enum Stage {
     INVENTORY,
 
     /**
-     * missions panel, accessible only from the shop
+     * mission center.
      */
     MISSIONS
 }

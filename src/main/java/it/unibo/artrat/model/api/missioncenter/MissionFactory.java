@@ -1,24 +1,22 @@
 package it.unibo.artrat.model.api.missioncenter;
 
 /**
- * 
+ * MissionFactory interface.
  */
 public interface MissionFactory {
-    
+
     /**
-     * 
+     * This method initializes
      */
     void initialize();
 
     /**
-     * 
-     * @return
+     * @return a new mission instance, houdini.
      */
     Mission houdini();
 
     /**
-     * 
-     * @return
+     * @return a new mission instance, culturalBaggage.
      */
     Mission culturalBaggage();
 }

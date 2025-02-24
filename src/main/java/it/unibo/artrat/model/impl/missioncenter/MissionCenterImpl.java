@@ -17,18 +17,18 @@ import it.unibo.artrat.utils.api.MissionReader;
 import it.unibo.artrat.utils.impl.MissionReaderImpl;
 
 /**
- * 
+ * MissionCenter implementation class.
  */
 public class MissionCenterImpl implements MissionCenter {
     private final URL missionPath = Thread.currentThread().getContextClassLoader().getResource(
             "missions" + File.separator + "missions.yaml");
 
-    private MissionFactory missionFactory;
+    private final MissionFactory missionFactory;
     private List<Mission> missionsToRedeem;
     private static final Logger LOGGER = LoggerFactory.getLogger(MissionCenterImpl.class);
-    
+
     /**
-     * 
+     * MissionCenter defualt constructor.
      */
     public MissionCenterImpl() {
         this.missionsToRedeem = new ArrayList<>();
@@ -36,8 +36,8 @@ public class MissionCenterImpl implements MissionCenter {
     }
     
     /**
-     * 
-     * @param missionCenter
+     * MissionCenter constructor.
+     * @param missionCenter MissionCenter interface.
      */
     public MissionCenterImpl(final MissionCenter missionCenter) {
         this.missionsToRedeem = new ArrayList<>();
@@ -59,7 +59,6 @@ public class MissionCenterImpl implements MissionCenter {
     @Override
     public void initMissionCenter() {
         final MissionReader missionReader = new MissionReaderImpl();
-
         try {
             missionReader.setPath(missionPath.toURI());
             this.missionFactory.initialize();
@@ -71,7 +70,13 @@ public class MissionCenterImpl implements MissionCenter {
         }
     }
 
-    private Mission createMission(final String missionName){
+   /**
+    * 
+    * @param missionName mission's name.
+    * @return a mission using MissionFactory.
+    * @throws an IllegalArgumentException if the passed missionName is not compatible.
+    */
+    private Mission createMission(final String missionName) {
         switch (missionName) {
             case "HOUDINI":
                 return missionFactory.houdini();

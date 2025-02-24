@@ -5,15 +5,18 @@ import it.unibo.artrat.model.api.missioncenter.Mission;
 
 /**
  * Abstract mission class.
+ * 
+ * @author Manuel Benagli
  */
 public abstract class AbstractMission implements Mission {
     private final String missionText;
     private final String name;
-    
+
     /**
-     * Costruttore che inizializza una nuova istanza di Mission con variabili passate.
-     * @param name il nome
-     * @param desc La descrizione della missione
+     * AbstractMission constructor.
+     * 
+     * @param name mission's name.
+     * @param missionText mission's task to accomplish.
      */
     protected AbstractMission(final String name, final String missionText) {
         this.name = name;
@@ -21,17 +24,15 @@ public abstract class AbstractMission implements Mission {
     }
 
     /**
-     * 
-     * @return
+     * {@inheritDoc}
      */
     @Override
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
     /**
-     * 
-     * @return
+     * {@inheritDoc}
      */
     @Override
     public String getText(){

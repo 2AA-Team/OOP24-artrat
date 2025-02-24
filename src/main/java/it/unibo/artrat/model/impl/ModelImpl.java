@@ -62,7 +62,7 @@ public class ModelImpl implements Model {
     }
 
     /**
-     * s.
+     * {@inheritDoc}
      */
     @Override
     public Market getMarket() {
@@ -70,16 +70,15 @@ public class ModelImpl implements Model {
     }
 
     /**
-     * s.
+     * {@inheritDoc}
      */
     @Override
     public void setMarket(final Market market) {
         this.market = new MarketImpl(market);
     }
-    
+
     /**
-     * 
-     * @return
+     * {@inheritDoc}
      */
     @Override
     public MissionCenter getMissionCenter() {

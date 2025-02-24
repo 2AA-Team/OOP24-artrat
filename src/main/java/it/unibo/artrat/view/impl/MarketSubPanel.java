@@ -24,8 +24,8 @@ import it.unibo.artrat.view.api.MarketView;
 
 /**
  * Here I see the collection of all the items I can purchase, and different
- * buttons.
- * The operations of the buttons are dependent on each other.
+ * buttons (sort, filter and a search wield).
+ * Sort, filter and search are dependent on each other.
  * 
  * @author Manuel Benagli
  */
@@ -44,16 +44,16 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     /**
      * MarketSubPanel constructor.
      * 
-     * @param contr
+     * @param contr StoreSubController.
      */
     public MarketSubPanel(final StoreSubController contr) {
         this.contr = contr;
     }
 
     /**
-     * @param text message test
-     * @param name name of test
-     * @return a confirm message when it's needed
+     * @param text message text.
+     * @param name name of text.
+     * @return a confirm message when it's needed.
      */
     private boolean toConfirm(final String text, final String name) {
         return JOptionPane.showConfirmDialog(marketPanel, text, name,
@@ -71,7 +71,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     }
 
     /**
-     * initComponents method.
+     * {@inheritDoc}
      */
     @Override
     public void initComponents() {
@@ -81,9 +81,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         scrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         contr.initItemList();
-
-        // Cambiato il layout di purchItemPanel per farlo essere flessibile
-        this.purchItemPanel = new JPanel(new GridLayout(0, 1, GAP, GAP)); // Righe dinamiche, una per ogni item
+        this.purchItemPanel = new JPanel(new GridLayout(0, 1, GAP, GAP));
         setShop();
         allItemsSetup();
         updateCoinLabel();
@@ -91,7 +89,6 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     }
 
     /**
-     * This method forces a view update.
      * I call the method allItemsSetup to read from my item List, which can be
      * modified temporally (with filter, sort and search), and permanently (if I buy
      * a powerup).
@@ -111,7 +108,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     private void setShop() {
         final JButton sortButton = new JButton("Sort");
         final JPanel bottomPan = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        final JPanel upperJPanel = new JPanel(new GridBagLayout()); // Usato GridBagLayout per una gestione flessibile
+        final JPanel upperJPanel = new JPanel(new GridBagLayout());
         final JButton toMenu = new JButton("BACK");
 
         final JComboBox<ItemType> filterComboBox = new JComboBox<>();
@@ -121,10 +118,8 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
             filterComboBox.addItem(type);
         }
 
-        /*Impostato il layout di GridBagLayout per fare in modo che i componenti sono
-        ridimensionabili
-        */
-        GridBagConstraints gbc = new GridBagConstraints();
+        //GridBagConstraints used for a good resize.
+        final GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -133,7 +128,6 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
 
         gbc.gridx = 1;
         upperJPanel.add(sortButton, gbc);
-
         gbc.gridx = 2;
         upperJPanel.add(searchItemField, gbc);
 
@@ -148,43 +142,40 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         sortButton.addActionListener(e -> {
             final int choice = JOptionPane.showConfirmDialog(null, 
                 "creasing sorting = NO, decreasing = YES",
-                    "Ordinamento Prezzi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    "Price sorting", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             contr.sorting(choice);
             forceRedraw();
         });
 
+        /*
+         * I call itemSearch method at every character inserted or removed into the search field.
+         * itemSearch is also called with changedUpdate method, at every changed update in the view.
+        */
         searchItemField.getDocument().addDocumentListener(new DocumentListener() {
 
-            // I call itemSearch method at every character inserted into the search field.
             @Override
             public void insertUpdate(final DocumentEvent doc) {
                 itemSearch(searchItemField.getText().trim().toLowerCase(Locale.ROOT));
             }
 
-            // I call itemSearch method at every character removed into the search field.
             @Override
             public void removeUpdate(final DocumentEvent doc) {
                 itemSearch(searchItemField.getText().trim().toLowerCase(Locale.ROOT));
             }
 
-            // I call itemSearch method at every changed update.
             @Override
             public void changedUpdate(final DocumentEvent doc) {
                 itemSearch(searchItemField.getText().trim().toLowerCase(Locale.ROOT));
             }
         });
 
-        // Aggiunto il listener per il pulsante "Back"
         toMenu.addActionListener(e -> {
             if (toConfirm("Do you want to come back to the menu?", "Back to menu")) {
                 exitSettings();
-                searchItemField.setText("");
-                contr.filterCategory(ITEMTYPE_ALL);
-                itemSearch("");
                 contr.setStage(Stage.MENU);
             }
         });
-
+        
         bottomPan.add(toMenu);
         bottomPan.add(lupinoCash);
         marketPanel.add(bottomPan, BorderLayout.SOUTH);
@@ -202,11 +193,9 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     }
 
     /**
-     * This method reads from my StoreSubControllerImpl a list of purchasableItems.
+     * This method reads a list of purchasableItems, read using ItemReaderImpl.
      * For every item I read, I create a nel panel, with three labels (item name,
-     * item type,
-     * item price) and a button to buy it
-     * The purchasableItems are read using ItemReaderImpl.
+     * item type, item price) and a button to buy it.
      * When I buy an item, if the item is a powerup, the item is cancelled in the
      * market.
      */
@@ -218,9 +207,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
             final JLabel itemLabel = new JLabel(contr.getItemName(purchItem));
             final JLabel typeLabel = new JLabel(contr.getTypeName(purchItem));
             final JLabel priceButton = new JLabel(contr.getItemPrice(purchItem) + "$");
-
-            // Layout per ogni singolo item: 3 label e un bottone su ogni riga
-            final JPanel itemPanel = new JPanel(new GridLayout(1, 4, GAP, GAP)); // 1 riga, 4 colonne
+            final JPanel itemPanel = new JPanel(new GridLayout(1, 4, GAP, GAP));
             itemPanel.add(itemLabel);
             itemPanel.add(typeLabel);
             itemPanel.add(priceButton);
@@ -229,7 +216,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
             purchItemPanel.add(itemPanel);
 
             buyItem.addActionListener(e -> {
-                if (toConfirm("Vuoi davvero acquistare?", "Compra") && contr.buyItem(purchItem)) {
+                if (toConfirm("Do you really want to buy?", "Buy") && contr.buyItem(purchItem)) {
                     if (purchItem.getType().equals(ItemType.POWERUP)) {
                         contr.getModel().getMarket().getPurchItems().remove(purchItem);
                         purchItemPanel.remove(itemPanel);

@@ -9,21 +9,21 @@ import it.unibo.artrat.controller.impl.MainControllerImpl;
 import it.unibo.artrat.model.api.missioncenter.Mission;
 
 /**
- * 
+ * MissionSubController implementation class.
  */
-public class MissionSubControllerImpl extends AbstractSubController implements MissionSubController{
+public class MissionSubControllerImpl extends AbstractSubController implements MissionSubController {
     private List<Mission> currentMissionsList = new ArrayList<>();
 
     /**
-     * 
+     * MissionSubController constructor.
      * @param mainController
      */
     public MissionSubControllerImpl(final MainControllerImpl mainController) {
         super(mainController);
     }
-    
+
     /**
-     * 
+     * {@inheritDoc}
      */
     @Override
     public void initMissionList() {
@@ -31,7 +31,7 @@ public class MissionSubControllerImpl extends AbstractSubController implements M
     }
 
     /**
-     * 
+     * {@inheritDoc}
      */
     @Override
     public List<Mission> redeemableMissions() {
@@ -39,14 +39,14 @@ public class MissionSubControllerImpl extends AbstractSubController implements M
     }
 
     /**
-     * 
+     * {@inheritDoc}
      */
     @Override
     public boolean redeemMission(final Mission missionToRedeem) { 
         return missionToRedeem.isMissionDone(this.getModel().getPlayer());
     }
 
-        /**
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -63,8 +63,8 @@ public class MissionSubControllerImpl extends AbstractSubController implements M
     @Override
     public String showDescr(final Mission passedMission) {
         return this.currentMissionsList.stream()
-                .filter(m -> m.equals(passedMission))
-                .map(Mission::getText)
-                .findAny().get().toString();
+            .filter(m -> m.equals(passedMission))
+            .map(Mission::getText)
+            .findAny().get().toString();
     }
 }

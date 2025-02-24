@@ -19,15 +19,14 @@ public class ItemManagerImpl implements ItemManager {
 
     /**
      * Item Manager constructor.
-     * @param passedItemList a list of items read
+     * @param passedItemList a list of items read.
      */
     public ItemManagerImpl(final List<Item> passedItemList) {
         this.itemList = new ArrayList<>(passedItemList);
     }
 
     /**
-     * s.
-     * {@InheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public List<Item> sortItemPrice(final int dir) {
@@ -41,8 +40,7 @@ public class ItemManagerImpl implements ItemManager {
     }
 
     /**
-     * s.
-     * {@InheritDoc}
+     * {@inheritDoc}
      */
     @Override
     public List<Item> filterItems(final ItemType itemType) {
@@ -51,7 +49,7 @@ public class ItemManagerImpl implements ItemManager {
     }
 
     /**
-     * s.
+     * {@inheritDoc}
      */
     @Override
     public List<Item> searchItem(final String nameToSearch) {
@@ -60,13 +58,16 @@ public class ItemManagerImpl implements ItemManager {
     }
 
     /**
-     * @param passedList list which updated itemList.
+     * {@inheritDoc}
      */
     @Override
     public void updateItemList(final List<Item> passedList) {
         this.itemList = new ArrayList<>(passedList);
     }
 
+    /*
+     * 
+     */
     private List<Item> filter(final List<Item> passedList) {
         if (currenType == null) {
             return new ArrayList<>(passedList.stream().collect(Collectors.toList()));
@@ -76,6 +77,9 @@ public class ItemManagerImpl implements ItemManager {
             .collect(Collectors.toList()));
     }
 
+    /*
+     * 
+     */
     private List<Item> search(final List<Item> passedList) {
         return new ArrayList<>(passedList.stream()
             .filter(it -> it.getClass().getSimpleName().toLowerCase(Locale.getDefault())

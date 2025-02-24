@@ -12,7 +12,7 @@ public class MissionReaderImpl extends AbstractReader implements MissionReader {
      * {@inheritDoc}
      */
     @Override
-    public String getName(String nameOfMission) {
+    public String getName(final String nameOfMission) {
         return super.getSpecificFiled(nameOfMission, "name");
     }
 
@@ -20,7 +20,7 @@ public class MissionReaderImpl extends AbstractReader implements MissionReader {
      * {@inheritDoc}
      */
     @Override
-    public String getDescription(String nameOfMission) {
+    public String getDescription(final String nameOfMission) {
         return super.getSpecificFiled(nameOfMission, "desc");
     }
 

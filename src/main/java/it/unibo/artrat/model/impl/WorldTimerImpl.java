@@ -6,17 +6,17 @@ import java.util.TimerTask;
 import it.unibo.artrat.model.api.WorldTimer;
 
 /**
- * WorldTimerImpl class.
+ * WorldTimer implementation class.
  * 
  * @author Manuel Benagli
  */
 public class WorldTimerImpl implements WorldTimer {
-    private static final int DEFAULT_TIMER_SETUP = 120000;
+    private static final int DEFAULT_TIMER_SETUP = 120_000;
     private static final int ONE_SECOND = 1000;
     private final Timer timer;
     private boolean outOfTime;
     private int countdown;
-    private int remainingTime; // il Tempo rimanente e che poi uso per gettarlo ogni volta
+    private int remainingTime;
     private TimerTask currentTask;
 
     /**
@@ -31,7 +31,7 @@ public class WorldTimerImpl implements WorldTimer {
 
     /**
      * WorldTimerImpl constructor.
-     * @param settedCountdown the new countdown is initialize with settedCountdown
+     * @param settedCountdown the new countdown is initialized with settedCountdown
      */
     public WorldTimerImpl(final int settedCountdown) {
         this.countdown = settedCountdown;
@@ -40,16 +40,13 @@ public class WorldTimerImpl implements WorldTimer {
     }
 
     /**
-     *
+     * {@inheritDoc}
      */
     @Override
     public void startTimer() {
         outOfTime = false;
         currentTask = new TimerTask() {
-
-            /*
-             * la logica di timer e game over quando il timer finisce
-             */
+            
             @Override
             public void run() {
                 if (remainingTime > ONE_SECOND) {
@@ -65,7 +62,7 @@ public class WorldTimerImpl implements WorldTimer {
     }
 
     /**
-     * 
+     * {@inheritDoc}
      */
     @Override
     public int getCurrentTime() {
@@ -78,7 +75,7 @@ public class WorldTimerImpl implements WorldTimer {
     @Override
     public void resetTimer() {
         if (currentTask != null) {
-            currentTask.cancel();       
+            currentTask.cancel();
             /*mi cancello il task , (quella cosa che ho rimosso il timer cancel perchè poi ho 
             l'ho inizializzato nel maincontroller che per mio ragionamento è ultra performante sium)
             */

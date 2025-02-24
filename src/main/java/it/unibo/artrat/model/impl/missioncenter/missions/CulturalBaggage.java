@@ -6,13 +6,15 @@ import it.unibo.artrat.model.api.characters.Player;
 
 
 /**
+ * CulturalBaggage mission.
+ * 
  * @author Manuel Benagli
  */
 public class CulturalBaggage extends AbstractMission {
 
     /**
-     * @param name
-     * @param desc
+     * @param name mission's name.
+     * @param desc missions's goal to achieve.
      */
     public CulturalBaggage(final String name, final String descr) {
         super(name, descr);
@@ -22,7 +24,7 @@ public class CulturalBaggage extends AbstractMission {
      * {@inheritDoc}
      */
     @Override
-    public boolean isMissionDone(Player passedPlayer) {
+    public boolean isMissionDone(final Player passedPlayer) {
         if (passedPlayer.getInventory().getStoredItem().size() >= 4) {
             return true;
         }

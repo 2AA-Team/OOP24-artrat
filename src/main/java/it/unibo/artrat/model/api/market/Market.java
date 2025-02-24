@@ -12,15 +12,15 @@ public interface Market {
 
     /**
      * 
-     * @return a list of all the purchasable items
+     * @return a list of all the purchasable items.
      */
     List<Item> getPurchItems();
 
     /**
-     * 
+     * Update my list of items, it's essential for ItemManager.
      * @param items items
      */
-    void setPurchItems(List<Item> items);   //la uso per modificare la mia lista di elementi se il filtro è attivo
+    void setPurchItems(List<Item> items);
 
     /**
      * 

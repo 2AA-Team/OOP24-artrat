@@ -5,14 +5,16 @@ import it.unibo.artrat.model.impl.missioncenter.AbstractMission;
 
 
 /**
+ * Houdini mission.
+ * 
  * @author Manuel Benagli
  */
 public class Houdini extends AbstractMission {
     private static final double COINS = 10;
 
     /**
-     * @param name
-     * @param descr
+     * @param name mission's name.
+     * @param descr mission's goal to achieve.
      */
     public Houdini(final String name, final String descr) {
         super(name, descr);
@@ -22,8 +24,8 @@ public class Houdini extends AbstractMission {
      * {@inheritDoc}
      */
     @Override
-    public boolean isMissionDone(Player passedPlayer) {
-        if(passedPlayer.getCoin().getCurrentAmount() > COINS ) {
+    public boolean isMissionDone(final Player passedPlayer) {
+        if (passedPlayer.getCoin().getCurrentAmount() > COINS ) {
             return true;
         }
         return false;

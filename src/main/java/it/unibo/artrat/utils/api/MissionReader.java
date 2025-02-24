@@ -25,5 +25,5 @@ public interface MissionReader extends Reader {
      * 
      * @return the names of all missions.
      */
-    Set<String> getAllMissionName();    
+    Set<String> getAllMissionName();
 }
