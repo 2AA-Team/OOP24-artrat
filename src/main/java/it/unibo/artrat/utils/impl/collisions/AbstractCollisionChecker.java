@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.Model;
@@ -35,6 +36,7 @@ public abstract class AbstractCollisionChecker {
      * @param renderDistance of the map
      * @param mainController main controller
      */
+    @SuppressFBWarnings("EI2")
     public AbstractCollisionChecker(final double renderDistance, final MainController mainController) {
         this.renderDistance = renderDistance;
         this.mainController = mainController;
@@ -47,8 +49,9 @@ public abstract class AbstractCollisionChecker {
      * @param cmd            command executed
      * @param delta          delta time
      */
+    @SuppressFBWarnings("EI2")
     public void updateAndCheck(final MainController mainController, final Command cmd, final long delta) {
-        this.mainController = mainController.clone();
+        this.mainController = Objects.requireNonNull(mainController);
         this.model = this.mainController.getModel();
         this.floor = model.getFloor();
         this.player = model.getPlayer();
@@ -109,7 +112,7 @@ public abstract class AbstractCollisionChecker {
      * @return main controller
      */
     public MainController getMainController() {
-        return this.mainController.clone();
+        return Objects.requireNonNull(this.mainController);
     }
 
     /**
@@ -117,8 +120,9 @@ public abstract class AbstractCollisionChecker {
      * 
      * @param controller updated main controller
      */
+    @SuppressFBWarnings("EI2")
     public void setMainController(final MainController controller) {
-        this.mainController = controller.clone();
+        this.mainController = Objects.requireNonNull(controller);
     }
 
     /**
