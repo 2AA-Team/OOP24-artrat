@@ -1,5 +1,6 @@
 package it.unibo.artrat.view.impl;
 
+import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -79,8 +80,8 @@ public class MainViewImpl implements MainView {
         final double width = resourceLoader.getConfig(controller.getStage().toString() + "_WIDTH");
         final double height = resourceLoader.getConfig(controller.getStage().toString()
                 + "_HEIGHT");
-        frame.setSize((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),
-                (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * height));
+        frame.setPreferredSize(new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),
+                (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * height)));
         frame.setContentPane(subPanel.getPanel());
         frame.revalidate();
         frame.repaint();
