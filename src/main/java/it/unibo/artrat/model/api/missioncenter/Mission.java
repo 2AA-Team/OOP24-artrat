@@ -20,6 +20,18 @@ public interface Mission {
     String getText();
 
     /**
+     * 
+     * @return true if the mission is done, false otherwise.
+     */
+    boolean getStatus();
+
+    /**
+     * 
+     * @param stat a boolean (true, if the mission is done).
+     */
+    void setStatus(boolean stat);
+
+    /**
      * @param passedPlayer the player and everything connected to him (for example coins and inventory).
      * @return true if the mission is achieved.
      */

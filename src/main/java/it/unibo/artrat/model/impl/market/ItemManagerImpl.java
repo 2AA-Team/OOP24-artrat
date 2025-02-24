@@ -66,7 +66,9 @@ public class ItemManagerImpl implements ItemManager {
     }
 
     /*
-     * 
+     * This private method is used to coordinate filter and search. 
+     * When I have to filter an item, I apply this method first with search private method of
+     * the passedList as parameter.
      */
     private List<Item> filter(final List<Item> passedList) {
         if (currenType == null) {
@@ -78,7 +80,9 @@ public class ItemManagerImpl implements ItemManager {
     }
 
     /*
-     * 
+     * This private method is used to coordinate filter and search.
+     * When I have to search an item, I apply this method first with filter private method of
+     * the passedList as parameter.
      */
     private List<Item> search(final List<Item> passedList) {
         return new ArrayList<>(passedList.stream()

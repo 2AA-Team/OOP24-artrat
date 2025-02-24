@@ -15,9 +15,10 @@ public class CulturalBaggage extends AbstractMission {
     /**
      * @param name mission's name.
      * @param desc missions's goal to achieve.
+     * @param status
      */
-    public CulturalBaggage(final String name, final String descr) {
-        super(name, descr);
+    public CulturalBaggage(final String name, final String desc, final boolean status) {
+        super(name, desc, status);
     }
 
     /**
@@ -25,9 +26,11 @@ public class CulturalBaggage extends AbstractMission {
      */
     @Override
     public boolean isMissionDone(final Player passedPlayer) {
-        if (passedPlayer.getInventory().getStoredItem().size() >= 4) {
-            return true;
+        if (!this.getStatus()) {
+            if (passedPlayer.getInventory().getStoredItem().size() >= 4) {
+                setStatus(true);
+            }
         }
-        return false;
+        return getStatus();
     }
 }

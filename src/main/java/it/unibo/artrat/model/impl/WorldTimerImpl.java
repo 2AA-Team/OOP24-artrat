@@ -46,7 +46,7 @@ public class WorldTimerImpl implements WorldTimer {
     public void startTimer() {
         outOfTime = false;
         currentTask = new TimerTask() {
-            
+
             @Override
             public void run() {
                 if (remainingTime > ONE_SECOND) {

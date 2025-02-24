@@ -78,7 +78,7 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
         final Market market = model.getMarket();
         final Inventory inventory = player.getInventory();
 
-        if (market.buyItem(itemToBuy) && player.getCoin().getCurrentAmount() >= itemToBuy.getPrice()) {
+        if (market.buyItem(itemToBuy)) {
             player.spendCoins(itemToBuy.getPrice());
             inventory.addItem(itemToBuy); // Adding the items in the inventory.
             player.setInventory(inventory);

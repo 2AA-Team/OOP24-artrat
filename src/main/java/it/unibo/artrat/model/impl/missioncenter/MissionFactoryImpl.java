@@ -10,7 +10,8 @@ import org.slf4j.LoggerFactory;
 import it.unibo.artrat.model.api.missioncenter.Mission;
 import it.unibo.artrat.model.api.missioncenter.MissionFactory;
 import it.unibo.artrat.model.impl.missioncenter.missions.CulturalBaggage;
-import it.unibo.artrat.model.impl.missioncenter.missions.Houdini;
+import it.unibo.artrat.model.impl.missioncenter.missions.RatRace;
+import it.unibo.artrat.model.impl.missioncenter.missions.TheRatOfWallStreet;
 import it.unibo.artrat.utils.api.MissionReader;
 import it.unibo.artrat.utils.impl.MissionReaderImpl;
 
@@ -18,8 +19,9 @@ import it.unibo.artrat.utils.impl.MissionReaderImpl;
  * MissionFactory implementation class.
  */
 public class MissionFactoryImpl implements MissionFactory {
-    private static final String HOUDINI = "HOUDINI";
+    private static final String THERATOFWALLSTREET = "THERATOFWALLSTREET";
     private static final String CULTURAL_BAGGAGE = "CULTURALBAGGAGE";
+    private static final String RATRACE = "RATRACE";
     private static final Logger LOGGER = LoggerFactory.getLogger(MissionFactoryImpl.class);
 
     private final URL missionPath = Thread.currentThread().getContextClassLoader().getResource(
@@ -31,7 +33,7 @@ public class MissionFactoryImpl implements MissionFactory {
      * MissionFactory constructor.
      */
     public MissionFactoryImpl() {
-        this.missionReader = new MissionReaderImpl();    
+        this.missionReader = new MissionReaderImpl();
     }
 
     /**
@@ -50,9 +52,10 @@ public class MissionFactoryImpl implements MissionFactory {
      * {@inheritDoc}
      */
     @Override
-    public Mission houdini() {
-        return new Houdini(missionReader.getName(HOUDINI),
-            missionReader.getDescription(HOUDINI));
+    public Mission theRatOfWallStreet() {
+        return new TheRatOfWallStreet(missionReader.getName(THERATOFWALLSTREET),
+            missionReader.getDescription(THERATOFWALLSTREET),
+            false);
     }
 
     /**
@@ -61,6 +64,15 @@ public class MissionFactoryImpl implements MissionFactory {
     @Override
     public Mission culturalBaggage() {
         return new CulturalBaggage(missionReader.getName(CULTURAL_BAGGAGE),
-            missionReader.getDescription(CULTURAL_BAGGAGE));
+            missionReader.getDescription(CULTURAL_BAGGAGE), false);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Mission ratRace() {
+        return new RatRace(missionReader.getName(RATRACE),
+            missionReader.getDescription(RATRACE), false);
     }
 }

@@ -19,27 +19,26 @@ public interface MissionSubController extends SubController {
      * 
      * @return a list of all the missions to achieve.
      */
-    List<Mission> redeemableMissions();
+    List<Mission> MissionList();
 
     /**
      * 
      * @param missionToRedeem mission to redeem.
      * @return true if the mission is completed, false otherwise.
      */
-    boolean redeemMission(final Mission missionToRedeem);
+    boolean isMissionDone(Mission missionToRedeem);
 
     /**
      * 
      * @param passedMission the passed mission.
      * @return a Stirng which shows the passed mission's name.
      */
-    String getMissionName(final Mission passedMission);
-    
+    String getMissionName(Mission passedMission);
+
     /**
      * 
      * @param passedMission the passed mission.
      * @return a String which shows the passed mission's description.
      */
-    String showDescr(final Mission passedMission);
+    String showDescr(Mission passedMission);
 }
-

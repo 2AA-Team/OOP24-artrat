@@ -1,8 +1,10 @@
 package it.unibo.artrat.model.api;
 
+import java.util.List;
+
 import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.market.Market;
-import it.unibo.artrat.model.api.missioncenter.MissionCenter;
+import it.unibo.artrat.model.api.missioncenter.Mission;
 import it.unibo.artrat.model.api.world.Floor;
 
 /**
@@ -43,7 +45,7 @@ public interface Model {
      * 
      * @return a copy of the current mission center.
      */
-    MissionCenter getMissionCenter();
+    List<Mission> getMissions();
 
     /**
      * A method that permit to obtain a copy of the current floor.
@@ -58,4 +60,11 @@ public interface Model {
      * @param floor the passed floor.
      */
     void setFloor(Floor floor);
+
+    /**
+     * A method that permits to change the current list of missions istance with the new passed.
+     * 
+     * @param passedMissions the new list of missions.
+     */
+    void setMissions(List<Mission> passedMissions);
 }

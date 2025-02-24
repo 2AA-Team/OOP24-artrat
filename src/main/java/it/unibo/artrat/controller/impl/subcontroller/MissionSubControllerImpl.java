@@ -6,6 +6,7 @@ import java.util.List;
 import it.unibo.artrat.controller.api.subcontroller.MissionSubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
+import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.api.missioncenter.Mission;
 
 /**
@@ -27,14 +28,14 @@ public class MissionSubControllerImpl extends AbstractSubController implements M
      */
     @Override
     public void initMissionList() {
-        this.currentMissionsList = new ArrayList<>(this.getModel().getMissionCenter().getMissionList());
+        this.currentMissionsList = new ArrayList<>(this.getModel().getMissions());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<Mission> redeemableMissions() {
+    public List<Mission> MissionList() {
         return new ArrayList<>(currentMissionsList);
     }
 
@@ -42,8 +43,12 @@ public class MissionSubControllerImpl extends AbstractSubController implements M
      * {@inheritDoc}
      */
     @Override
-    public boolean redeemMission(final Mission missionToRedeem) { 
-        return missionToRedeem.isMissionDone(this.getModel().getPlayer());
+    public boolean isMissionDone(final Mission missionToRedeem) {
+        boolean check = missionToRedeem.isMissionDone(this.getModel().getPlayer());
+        Model model = this.getModel();
+        model.setMissions(new ArrayList<>(currentMissionsList));
+        this.updateCentralizeModel(model);
+        return check;
     }
 
     /**
@@ -54,7 +59,7 @@ public class MissionSubControllerImpl extends AbstractSubController implements M
         return this.currentMissionsList.stream()
             .filter(m -> m.equals(passedMission))
             .map(Mission::getName)
-            .findAny().get().toString();
+            .findAny().get();
     }
 
     /**
@@ -65,6 +70,6 @@ public class MissionSubControllerImpl extends AbstractSubController implements M
         return this.currentMissionsList.stream()
             .filter(m -> m.equals(passedMission))
             .map(Mission::getText)
-            .findAny().get().toString();
+            .findAny().get();
     }
 }

@@ -24,7 +24,7 @@ public class MissionCenterImpl implements MissionCenter {
             "missions" + File.separator + "missions.yaml");
 
     private final MissionFactory missionFactory;
-    private List<Mission> missionsToRedeem;
+    private final List<Mission> missionsToRedeem;
     private static final Logger LOGGER = LoggerFactory.getLogger(MissionCenterImpl.class);
 
     /**
@@ -34,7 +34,7 @@ public class MissionCenterImpl implements MissionCenter {
         this.missionsToRedeem = new ArrayList<>();
         this.missionFactory = new MissionFactoryImpl();
     }
-    
+
     /**
      * MissionCenter constructor.
      * @param missionCenter MissionCenter interface.
@@ -78,10 +78,12 @@ public class MissionCenterImpl implements MissionCenter {
     */
     private Mission createMission(final String missionName) {
         switch (missionName) {
-            case "HOUDINI":
-                return missionFactory.houdini();
+            case "THERATOFWALLSTREET":
+                return missionFactory.theRatOfWallStreet();
             case "CULTURALBAGGAGE":
                 return missionFactory.culturalBaggage();
+            case "RATRACE":
+                return missionFactory.ratRace();
             default:
                 break;
         }

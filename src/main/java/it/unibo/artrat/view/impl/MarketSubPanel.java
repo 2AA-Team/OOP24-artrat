@@ -1,7 +1,6 @@
 package it.unibo.artrat.view.impl;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -102,12 +101,12 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
 
     // this private method updates the coin label every time I buy a new item.
     private void updateCoinLabel() {
-        lupinoCash.setText(String.valueOf(contr.getModel().getPlayer().getCoin().getCurrentAmount()));
+        lupinoCash.setText("COINS: " + String.valueOf(contr.getModel().getPlayer().getCoin().getCurrentAmount()) + " $");
     }
 
     private void setShop() {
         final JButton sortButton = new JButton("Sort");
-        final JPanel bottomPan = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        final JPanel bottomPan = new JPanel(new BorderLayout());
         final JPanel upperJPanel = new JPanel(new GridBagLayout());
         final JButton toMenu = new JButton("BACK");
 
@@ -139,9 +138,13 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
             forceRedraw();
         });
 
+        /*
+         *If I exit from YesNoOption, there will be a creasing sorting.
+         *That's because we already clicked for sorting, and usually people sorts from lowest.
+         */
         sortButton.addActionListener(e -> {
             final int choice = JOptionPane.showConfirmDialog(null, 
-                "creasing sorting = NO, decreasing = YES",
+                "decreasing sorting = YES, creasing sorting = NO",
                     "Price sorting", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             contr.sorting(choice);
             forceRedraw();
@@ -170,14 +173,12 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         });
 
         toMenu.addActionListener(e -> {
-            if (toConfirm("Do you want to come back to the menu?", "Back to menu")) {
-                exitSettings();
-                contr.setStage(Stage.MENU);
-            }
+            exitSettings();
+            contr.setStage(Stage.MENU);
         });
-        
-        bottomPan.add(toMenu);
-        bottomPan.add(lupinoCash);
+
+        bottomPan.add(toMenu, BorderLayout.EAST);
+        bottomPan.add(lupinoCash, BorderLayout.WEST);
         marketPanel.add(bottomPan, BorderLayout.SOUTH);
     }
 
@@ -186,7 +187,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         forceRedraw();
     }
 
-    private void exitSettings(){
+    private void exitSettings() {
         searchItemField.setText("");
         contr.filterCategory(ITEMTYPE_ALL);
         itemSearch("");
@@ -216,10 +217,15 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
             purchItemPanel.add(itemPanel);
 
             buyItem.addActionListener(e -> {
-                if (toConfirm("Do you really want to buy?", "Buy") && contr.buyItem(purchItem)) {
-                    if (purchItem.getType().equals(ItemType.POWERUP)) {
-                        contr.getModel().getMarket().getPurchItems().remove(purchItem);
-                        purchItemPanel.remove(itemPanel);
+                if (toConfirm("Do you really want to buy?", "Buy")) {
+                    if(contr.getModel().getPlayer().getCoin().getCurrentAmount() >= contr.getItemPrice(purchItem) && contr.buyItem(purchItem)) {
+                        if (purchItem.getType().equals(ItemType.POWERUP)) {
+                            contr.getModel().getMarket().getPurchItems().remove(purchItem);
+                            purchItemPanel.remove(itemPanel);
+                        }
+                    }
+                    else {
+                        showMessage("Not enough money", "Purchase denied");
                     }
                     itemSearch(searchItemField.getText().trim().toLowerCase(Locale.ROOT));
                     forceRedraw();
