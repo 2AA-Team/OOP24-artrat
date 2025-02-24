@@ -29,7 +29,7 @@ public abstract class AbstractEnemy extends AbstractEntity implements Enemy {
     public AbstractEnemy(final Point center, final double width, final double height, final Set<Vector2d> v) {
         super(center, width, height, v);
         this.fieldOfView = new BoundingBoxImpl(center, width * FOV_SCALE, height * FOV_SCALE);
-        setVelocity(VEL);
+        super.setVelocity(VEL);
     }
 
     /**
@@ -43,7 +43,7 @@ public abstract class AbstractEnemy extends AbstractEntity implements Enemy {
         final BoundingBox tmp = new BoundingBoxImpl(topLeft, bottomRight);
         this.fieldOfView = new BoundingBoxImpl(tmp.getCenter(), tmp.getWidth() * FOV_SCALE,
                 tmp.getHeight() * FOV_SCALE);
-        setVelocity(VEL);
+        super.setVelocity(VEL);
     }
 
     /**
@@ -58,7 +58,7 @@ public abstract class AbstractEnemy extends AbstractEntity implements Enemy {
         final BoundingBox tmp = new BoundingBoxImpl(topLeft, bottomRight);
         this.fieldOfView = new BoundingBoxImpl(tmp.getCenter(), tmp.getWidth() * FOV_SCALE,
                 tmp.getHeight() * FOV_SCALE);
-        setVelocity(VEL);
+        super.setVelocity(VEL);
     }
 
     /**
