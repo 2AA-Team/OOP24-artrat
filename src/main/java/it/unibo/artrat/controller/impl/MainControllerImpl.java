@@ -162,7 +162,7 @@ public class MainControllerImpl implements MainController {
         return timer.getCurrentTime();
     }
 
-    private void gameExit(Player passedPlayer) {
+    private void gameExit(final Player passedPlayer) {
         model.setPlayer(passedPlayer.copyPlayer());
         resetTimerMainController();
         setStage(Stage.MENU);
@@ -173,14 +173,14 @@ public class MainControllerImpl implements MainController {
      */
     @Override
     public void winGame() {
-        Player player = getModel().getPlayer();
+        final Player player = getModel().getPlayer();
         view.showGameVictory(player.obtainCollectable(), "VICTORY");
         gameExit(player);
     }
 
     @Override
     public void loseGame() {
-        Player player = model.getPlayer();
+        final Player player = model.getPlayer();
         player.setColletableList(new ArrayList<>());
         view.showGameVictory(0.0, "LOOSE");
         gameExit(player);

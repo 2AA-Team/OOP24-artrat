@@ -80,7 +80,7 @@ public class MainViewImpl implements MainView {
         final double width = resourceLoader.getConfig(controller.getStage().toString() + "_WIDTH");
         final double height = resourceLoader.getConfig(controller.getStage().toString()
                 + "_HEIGHT");
-        frame.setPreferredSize(new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),
+        frame.setMinimumSize(new Dimension((int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * width),
                 (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() * height)));
         frame.setContentPane(subPanel.getPanel());
         frame.revalidate();
