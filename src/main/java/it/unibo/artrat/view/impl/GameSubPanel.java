@@ -15,6 +15,7 @@ import java.util.Set;
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -141,13 +142,14 @@ public class GameSubPanel extends AbstractSubPanel {
     public void initComponents() {
         final JPanel tmp = new JPanel();
         final JPanel southJPanel = new JPanel();
+        final int verticalGap = 5;
 
         tmp.setLayout(new BorderLayout());
         tmp.add(this.mapPanel, BorderLayout.CENTER);
 
         final JLabel timerJLabel = new JLabel("TIMER");
         final JLabel pictureCounterLabel = new JLabel("Collectable: ");
-        southJPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 5)); // 50px tra i due gruppi
+        southJPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 100, verticalGap)); // 50px tra i due gruppi
 
         final JPanel timerPanel = new JPanel();
         timerPanel.add(timerJLabel);
@@ -202,7 +204,6 @@ public class GameSubPanel extends AbstractSubPanel {
      */
     @Override
     public void forceRedraw() {
-        gameSubController.isTimeOutSubController();
-
+        SwingUtilities.invokeLater(gameSubController::isTimeOutSubController);
     }
 }

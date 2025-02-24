@@ -174,8 +174,9 @@ public class MainControllerImpl implements MainController {
     @Override
     public void winGame() {
         final Player player = getModel().getPlayer();
-        view.showGameVictory(player.obtainCollectable(), "VICTORY");
+        final double obtainedCoins = player.obtainCollectable();
         gameExit(player);
+        view.showGameResult(obtainedCoins, "VICTORY");
     }
 
     /**
@@ -185,8 +186,8 @@ public class MainControllerImpl implements MainController {
     public void loseGame() {
         final Player player = model.getPlayer();
         player.setColletableList(new ArrayList<>());
-        view.showGameVictory(0.0, "LOOSE");
         gameExit(player);
+        view.showGameResult(0.0, "LOOSE");
     }
 
     /**

@@ -64,6 +64,10 @@ public interface GameSubController extends SubController {
      */
     double getAngleCompass();
 
+    /**
+     * Retrieve the number of collectibles stolen by the player at that moment.
+     * @return the number of collectibles stolen by the player at that moment.
+     */
     int getStolenCollectable();
 
 }

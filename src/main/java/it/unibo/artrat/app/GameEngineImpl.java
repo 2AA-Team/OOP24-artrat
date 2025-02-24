@@ -54,8 +54,8 @@ public final class GameEngineImpl implements GameEngine {
         final double renderDistance = resourceLoader.getConfig("RENDER_DISTANCE");
         final double renderDistanceLowBound = 20;
         if (renderDistance > renderDistanceLowBound) {
-            collisionChecker = new BaseCollisionChecker(renderDistance);
             mainController = new MainControllerImpl(this);
+            collisionChecker = new BaseCollisionChecker(renderDistance, this.mainController);
         } else {
             LOGGER.warn("RENDER DISTANCE must be > 20.");
             throw new IOException("RENDER DISTANCE TOO LOW");
@@ -159,7 +159,7 @@ public final class GameEngineImpl implements GameEngine {
                 mainLoop();
             } catch (IOException e) {
                 LOGGER.error("FPS too low", e);
-                System.exit(1);
+                Runtime.getRuntime().exit(0);
             }
         }, "GameLoopThread").start();
     }

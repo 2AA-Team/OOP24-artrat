@@ -7,7 +7,6 @@ import java.net.URI;
  * An interface that models a reader allowing data to be loaded from a file.
  */
 public interface Reader {
-    
     /**
      * Method that load all itemPath data.
      * 

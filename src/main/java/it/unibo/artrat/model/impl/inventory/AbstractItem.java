@@ -15,7 +15,8 @@ public abstract class AbstractItem implements Item {
     private final ItemType itemType;
 
     /**
-     * A constructor that initialize a new istance of Item with passed variable.
+     * A constructor that initialize a new istance of Item with passed variables.
+     * @param name the name of new iten.
      * @param desc the description of new item.
      * @param price the price of new item.
      * @param itemType the itemtype of new item.

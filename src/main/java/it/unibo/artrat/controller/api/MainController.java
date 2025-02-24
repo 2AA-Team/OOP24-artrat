@@ -102,19 +102,19 @@ public interface MainController {
     boolean isTimeOutMainController();
 
     /**
-     * manage the win of the game.
+     * Method to handle all the logic related to victory.
      */
     void winGame();
 
     /**
-     * manage the lose of the game.
+     * Method to handle all the logic related to defeat.
      */
     void loseGame();
 
     /**
      * clone method.
      * 
-     * @return a copy of this main controller
+     * @return a copy of this main contreller.
      */
     MainController clone();
 }

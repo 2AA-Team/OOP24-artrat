@@ -35,5 +35,10 @@ public interface MainView {
      */
     void reconduceFromStage();
 
-    void showGameVictory(double point, String state);
+    /**
+     * Displays in the view where the player is located the match result and the points obtained.
+     * @param point The final points obtained.
+     * @param state The final result of the game.
+     */
+    void showGameResult(double point, String state);
 }

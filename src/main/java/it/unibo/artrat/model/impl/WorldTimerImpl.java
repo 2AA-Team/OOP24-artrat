@@ -11,7 +11,7 @@ import it.unibo.artrat.model.api.WorldTimer;
  * @author Manuel Benagli
  */
 public class WorldTimerImpl implements WorldTimer {
-    private static final int DEFAULT_TIMER_SETUP = 120000; // Tempo iniziale
+    private static final int DEFAULT_TIMER_SETUP = 120_000; // Tempo iniziale
     private static final int ONE_SECOND = 1000;
     private final Timer timer;
     private boolean outOfTime;
@@ -53,7 +53,6 @@ public class WorldTimerImpl implements WorldTimer {
                 // La logica del game over quando il timer finisce
                 if (remainingTime > ONE_SECOND) {
                     remainingTime -= ONE_SECOND;
-                    getCurrentTime();
                 } else {
                     outOfTime = true;
                     resetTimer();
@@ -88,6 +87,8 @@ public class WorldTimerImpl implements WorldTimer {
      */
     @Override
     public boolean isTimeOut() {
-        return outOfTime;
+        final boolean tmp = outOfTime;
+        outOfTime = false;
+        return tmp;
     }
 }
