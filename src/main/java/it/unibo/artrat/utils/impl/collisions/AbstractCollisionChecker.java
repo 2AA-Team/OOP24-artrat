@@ -1,16 +1,11 @@
 package it.unibo.artrat.utils.impl.collisions;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import it.unibo.artrat.app.GameEngineImpl;
 import it.unibo.artrat.controller.api.MainController;
-import it.unibo.artrat.controller.impl.MainControllerImpl;
+
 import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.api.characters.Player;
@@ -34,20 +29,15 @@ public abstract class AbstractCollisionChecker {
     private Player player = new Lupino(new Point(), new Point());
     private BoundingBox renderBB = new BoundingBoxImpl(new Point(), new Point());
     private List<BoundingBox> wallRendered;
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractCollisionChecker.class);
 
     /**
      * Collision manager contructor.
      * 
      * @param renderDistance of the map
      */
-    public AbstractCollisionChecker(final double renderDistance) {
+    public AbstractCollisionChecker(final double renderDistance, final MainController mainController) {
         this.renderDistance = renderDistance;
-        try {
-            this.mainController = new MainControllerImpl(new GameEngineImpl());
-        } catch (IOException e) {
-            LOGGER.error(e.getMessage(), e);
-        }
+        this.mainController = mainController;
     }
 
     /**

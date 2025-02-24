@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.model.api.Collectable;
 import it.unibo.artrat.model.api.characters.Enemy;
 import it.unibo.artrat.model.api.characters.Entity;
@@ -22,8 +23,8 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
      * 
      * @param renderDistance render distance
      */
-    public BaseCollisionChecker(final double renderDistance) {
-        super(renderDistance);
+    public BaseCollisionChecker(final double renderDistance, final MainController mainController) {
+        super(renderDistance, mainController);
     }
 
     /**
