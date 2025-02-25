@@ -1,19 +1,37 @@
 package it.unibo.artrat.controller.api;
 
 import it.unibo.artrat.model.api.Model;
-import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.utils.api.commands.Command;
 
 /**
  * interface to describe basic subController.
  */
 public interface SubController {
+
     /**
-     * method to set the frame stage.
-     * 
-     * @param newStage new stage to set
+     * go to menu.
      */
-    void setStage(Stage newStage);
+    void goToMenu();
+
+    /**
+     * go to game.
+     */
+    void goToGame();
+
+    /**
+     * go to shop.
+     */
+    void goToShop();
+
+    /**
+     * go to mission.
+     */
+    void goToMission();
+
+    /**
+     * go to inventory.
+     */
+    void gotToInventory();
 
     /**
      * Gracefully quits from the application.
