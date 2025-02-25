@@ -27,10 +27,10 @@ import it.unibo.artrat.utils.impl.commands.MoveDown;
 import it.unibo.artrat.utils.impl.commands.MoveLeft;
 import it.unibo.artrat.utils.impl.commands.MoveRight;
 import it.unibo.artrat.utils.impl.commands.MoveUp;
-import it.unibo.artrat.utils.impl.commands.StopMovingDown;
-import it.unibo.artrat.utils.impl.commands.StopMovingLeft;
-import it.unibo.artrat.utils.impl.commands.StopMovingRight;
-import it.unibo.artrat.utils.impl.commands.StopMovingUp;
+import it.unibo.artrat.utils.impl.commands.StopDown;
+import it.unibo.artrat.utils.impl.commands.StopLeft;
+import it.unibo.artrat.utils.impl.commands.StopRight;
+import it.unibo.artrat.utils.impl.commands.StopUp;
 
 /**
  * game sub panel class.
@@ -193,10 +193,10 @@ public class GameSubPanel extends AbstractSubPanel {
             public void keyReleased(final KeyEvent e) {
                 if (isMovementCommand(e)) {
                     switch (e.getKeyCode()) {
-                        case UP -> gameSubController.inputMainController(new StopMovingUp());
-                        case DOWN -> gameSubController.inputMainController(new StopMovingDown());
-                        case RIGHT -> gameSubController.inputMainController(new StopMovingRight());
-                        case LEFT -> gameSubController.inputMainController(new StopMovingLeft());
+                        case UP -> gameSubController.inputMainController(new StopUp());
+                        case DOWN -> gameSubController.inputMainController(new StopDown());
+                        case RIGHT -> gameSubController.inputMainController(new StopRight());
+                        case LEFT -> gameSubController.inputMainController(new StopLeft());
                         default -> LOGGER.info("Tasto premuto non gestito: " + e.getKeyCode());
                     }
                 }
