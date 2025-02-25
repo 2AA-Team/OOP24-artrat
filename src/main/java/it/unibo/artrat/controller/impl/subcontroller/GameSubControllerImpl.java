@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import it.unibo.artrat.controller.api.subcontroller.GameSubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
+import it.unibo.artrat.model.api.Compass;
 import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.api.characters.Player;
@@ -30,7 +31,7 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
     private static final Logger LOGGER = LoggerFactory.getLogger(GameSubControllerImpl.class);
     private final Floor floor;
     private final double renderDistance;
-    private CompassNearest compass;
+    private Compass compass;
 
     /**
      * constructor to initialize mainController.

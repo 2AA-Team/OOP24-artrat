@@ -1,11 +1,12 @@
 package it.unibo.artrat.model.impl;
 
+import it.unibo.artrat.model.api.Compass;
 import it.unibo.artrat.utils.impl.Point;
 
 /**
  * abstract compass.
  */
-public abstract class AbstractCompass {
+public abstract class AbstractCompass implements Compass {
 
     /**
      * take the point to aim.
@@ -22,10 +23,9 @@ public abstract class AbstractCompass {
     abstract Point getCenter();
 
     /**
-     * calculate the angle of the compass.
-     * 
-     * @return the angle as a double
+     * {@inheritDoc}
      */
+    @Override
     public double calculateAngle() {
         return Math.atan2(getNorth().getY() - getCenter().getY(), getNorth().getX() - getCenter().getX());
     }
