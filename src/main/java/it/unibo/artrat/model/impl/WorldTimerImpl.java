@@ -6,17 +6,17 @@ import java.util.TimerTask;
 import it.unibo.artrat.model.api.WorldTimer;
 
 /**
- * An implementation of WorldTimer interface.
+ * WorldTimer implementation class.
  * 
  * @author Manuel Benagli
  */
 public class WorldTimerImpl implements WorldTimer {
-    private static final int DEFAULT_TIMER_SETUP = 120000; // Tempo iniziale
+    private static final int DEFAULT_TIMER_SETUP = 120_000; // Tempo iniziale
     private static final int ONE_SECOND = 1000;
     private final Timer timer;
     private boolean outOfTime;
     private int countdown;
-    private int remainingTime; // Tempo rimanente che si aggiorna ogni secondo
+    private int remainingTime;
     private TimerTask currentTask;
 
     /**
@@ -26,21 +26,11 @@ public class WorldTimerImpl implements WorldTimer {
     public WorldTimerImpl() {
         this.countdown = DEFAULT_TIMER_SETUP;
         this.timer = new Timer("WorldTimer");
-        this.remainingTime = countdown; // Il tempo rimanente è uguale al tempo iniziale
+        this.remainingTime = this.countdown; // Il tempo rimanente è uguale al tempo iniziale
     }
 
     /**
-     * WorldTimerImpl constructor.
-     * @param settedCountdown the new countdown is initialize with settedCountdown
-     */
-    public WorldTimerImpl(final int settedCountdown) {
-        this.countdown = settedCountdown;
-        this.timer = new Timer("WorldTimer");
-        this.remainingTime = countdown;
-    }
-
-    /**
-     *
+     * {@inheritDoc}
      */
     @Override
     public void startTimer() {
@@ -49,10 +39,8 @@ public class WorldTimerImpl implements WorldTimer {
 
             @Override
             public void run() {
-                // La logica del game over quando il timer finisce
                 if (remainingTime > ONE_SECOND) {
                     remainingTime -= ONE_SECOND;
-                    getCurrentTime();
                 } else {
                     outOfTime = true;
                     resetTimer();
@@ -63,7 +51,7 @@ public class WorldTimerImpl implements WorldTimer {
     }
 
     /**
-     * 
+     * {@inheritDoc}
      */
     @Override
     public int getCurrentTime() {
@@ -76,10 +64,10 @@ public class WorldTimerImpl implements WorldTimer {
     @Override
     public void resetTimer() {
         if (currentTask != null) {
-            currentTask.cancel(); // Annulla il task corrente
+            currentTask.cancel();
         }
-        countdown = DEFAULT_TIMER_SETUP; // Ripristina il countdown iniziale
-        remainingTime = countdown; // Ripristina il tempo rimanente
+        this.countdown = DEFAULT_TIMER_SETUP;
+        remainingTime = countdown; 
     }
 
     /**

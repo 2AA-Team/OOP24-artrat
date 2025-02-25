@@ -75,7 +75,7 @@ public final class GameEngineImpl implements GameEngine {
      */
     @Override
     public void run() {
-        final MainViewImpl mv = new MainViewImpl(resourceLoader);
+        final MainViewImpl mv = new MainViewImpl(resourceLoader, mainController);
         mainController.addMainView(mv);
     }
 

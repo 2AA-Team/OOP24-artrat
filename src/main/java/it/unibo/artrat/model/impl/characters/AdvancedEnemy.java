@@ -10,7 +10,8 @@ import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;
 
 /**
- * New hypothetical enemies.
+ * An enemy that chases the player when too close and dosen't move when
+ * the player is not in its field of view .
  * 
  * @author Samuele Trapani
  */

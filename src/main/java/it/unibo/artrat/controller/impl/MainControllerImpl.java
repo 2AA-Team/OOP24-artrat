@@ -3,6 +3,7 @@ package it.unibo.artrat.controller.impl;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.artrat.app.api.GameEngine;
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.controller.api.SubControllerManager;
@@ -48,10 +49,10 @@ public class MainControllerImpl implements MainController {
     /**
      * {@inheritDoc}
      */
+    @SuppressFBWarnings("EI2")
     @Override
     public void addMainView(final MainView newView) {
         this.view = newView;
-        newView.setController(this);
         newView.setStage(currentStage);
     }
 
@@ -190,11 +191,4 @@ public class MainControllerImpl implements MainController {
         view.showGameResult(0.0, "LOOSE");
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public MainController clone() {
-        return this;
-    }
 }

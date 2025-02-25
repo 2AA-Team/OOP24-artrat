@@ -11,7 +11,7 @@ import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;
 
 /**
- * Standard Enemy class.
+ * A base enemy that always moves randomly.
  * 
  * @author Samuele Trapani
  */

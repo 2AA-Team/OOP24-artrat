@@ -19,7 +19,7 @@ import it.unibo.artrat.view.api.MarketView;
 import it.unibo.artrat.view.impl.MarketSubPanel;
 
 /**
- * implementation of the sub controller for the store.
+ * Implementation of the SubStoreController for the market(store).
  * 
  * @author Manuel Benagli
  */
@@ -29,10 +29,10 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     private List<Item> currenItems = new ArrayList<>();
 
     /**
-     * constructor to initialize mainController.
+     * Constructor to initialize mainController.
      * itemMan will be used to connect this controller into ItemManagerImpl.
      * 
-     * @param mainController main controller
+     * @param mainController the main controller.
      */
     public StoreSubControllerImpl(final MainControllerImpl mainController) {
         super(mainController);
@@ -61,8 +61,7 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
      * the MarketSubPanel.
      * This method is called every time I call filterCategory and searchItem.
      * Considering that searchItem is called with with every character inserted or
-     * removed,
-     * BUT ALSO WITH EVERY GENERAL MODIFICATION (changedUpdate method),
+     * removed, but also with every general modification (changedUpdate method),
      * the update performs at its maximum
      */
     private void updateCurrentItem() {
@@ -73,15 +72,15 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
      * {@inheritDoc}
      */
     @Override
-    public boolean buyItem(final Item itemToBuy) { // moementaneo, mi serve il read per capire meglio
+    public boolean buyItem(final Item itemToBuy) {
         final Model model = this.getModel();
         final Player player = model.getPlayer();
         final Market market = model.getMarket();
         final Inventory inventory = player.getInventory();
 
-        if (market.buyItem(itemToBuy) && player.getCoin().getCurrentAmount() >= itemToBuy.getPrice()) {
+        if (market.buyItem(itemToBuy)) {
             player.spendCoins(itemToBuy.getPrice());
-            inventory.addItem(itemToBuy); // aggiungo l'item all'inventario
+            inventory.addItem(itemToBuy); // Adding the items in the inventory.
             player.setInventory(inventory);
             model.setMarket(market);
             model.setPlayer(player.copyPlayer());
@@ -136,9 +135,9 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     @Override
     public void showDescription(final Item passedItem) {
         marketView.showMessage(this.purchasableItems().stream()
-                .filter(it -> it.equals(passedItem))
-                .map(Item::getDescription)
-                .findAny().get(), "Descrizione oggetto acquistabile");
+            .filter(it -> it.equals(passedItem))
+            .map(Item::getDescription)
+            .findAny().get(), "Purchasable item's description");
     }
 
     /**
@@ -147,9 +146,9 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     @Override
     public String getTypeName(final Item passedItem) {
         return this.getModel().getMarket().getPurchItems().stream()
-                .filter(it -> it.equals(passedItem))
-                .map(Item::getType)
-                .findAny().get().toString();
+            .filter(it -> it.equals(passedItem))
+            .map(Item::getType)
+            .findAny().get().toString();
     }
 
     /**
@@ -158,8 +157,8 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     @Override
     public double getItemPrice(final Item passedItem) {
         return this.getModel().getMarket().getPurchItems().stream()
-                .filter(it -> it.equals(passedItem))
-                .map(Item::getPrice)
-                .findAny().get();
+            .filter(it -> it.equals(passedItem))
+            .map(Item::getPrice)
+            .findAny().get();
     }
 }

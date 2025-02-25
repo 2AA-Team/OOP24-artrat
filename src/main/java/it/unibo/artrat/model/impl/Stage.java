@@ -21,5 +21,10 @@ public enum Stage {
     /**
      * inventory of the player.
      */
-    INVENTORY
+    INVENTORY,
+
+    /**
+     * mission center.
+     */
+    MISSIONS
 }

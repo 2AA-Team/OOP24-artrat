@@ -1,7 +1,6 @@
 package it.unibo.artrat.utils.impl;
 
 import java.util.Set;
-
 import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.utils.api.ItemReader;
 

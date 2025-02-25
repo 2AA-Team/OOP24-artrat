@@ -6,6 +6,7 @@ import java.util.Random;
 
 import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.inventory.ItemType;
+
 /**
  * A specific item, which each time it is used, increases the player's current multiplier 
  * up to a maximum of MAX_MULTIPLIER_INCREASE.
@@ -18,10 +19,11 @@ public class MultiplierBooster extends AbstractItem {
 
     /**
      * A constructor to initialize the new item Multiplier Booster.
-     * @param name the name of Multiplier Booster.
-     * @param desc the description of Multiplier Booster
+     * 
+     * @param name  the name of Multiplier Booster.
+     * @param desc  the description of Multiplier Booster
      * @param price the price of Multiplier Booster
-     * @param type the item type of Multiplier Booster
+     * @param type  the item type of Multiplier Booster
      */
     public MultiplierBooster(final String name, final String desc, final double price, final ItemType type) {
         super(name, desc, price, type);
@@ -33,7 +35,8 @@ public class MultiplierBooster extends AbstractItem {
      */
     @Override
     public Player consume(final Player player) {
-        player.increaseMultiplier(1.0 + rd.nextInt(MAX_MULTIPLIER_INCREASE));
+        player.increaseMultiplier(
+                1.0 + player.getMultiplier().getCurrentMultiplier() + rd.nextInt(MAX_MULTIPLIER_INCREASE));
         return player.copyPlayer();
     }
 }

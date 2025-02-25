@@ -1,11 +1,17 @@
 package it.unibo.artrat.model.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.market.Market;
+import it.unibo.artrat.model.api.missioncenter.MissionCenter;
 import it.unibo.artrat.model.api.world.Floor;
 import it.unibo.artrat.model.impl.characters.Lupino;
 import it.unibo.artrat.model.impl.market.MarketImpl;
+import it.unibo.artrat.model.impl.missioncenter.MissionCenterImpl;
+import it.unibo.artrat.model.api.missioncenter.Mission;
 import it.unibo.artrat.model.impl.world.FloorImpl;
 import it.unibo.artrat.utils.impl.Point;
 
@@ -15,6 +21,7 @@ import it.unibo.artrat.utils.impl.Point;
 public class ModelImpl implements Model {
     private Player player;
     private Market market;
+    private List<Mission> missions;
     private Floor floor;
 
     /**
@@ -23,8 +30,11 @@ public class ModelImpl implements Model {
     public ModelImpl() {
         this.player = new Lupino(new Point(), new Point());
         this.market = new MarketImpl();
+        final MissionCenter missionCenter = new MissionCenterImpl();
         this.floor = new FloorImpl();
         this.market.initMarket();
+        missionCenter.initMissionCenter();
+        missions = missionCenter.getMissionList();
 
     }
 
@@ -36,6 +46,7 @@ public class ModelImpl implements Model {
     public ModelImpl(final Model m) {
         this.player = m.getPlayer();
         this.market = m.getMarket();
+        this.missions = m.getMissions();
         this.floor = m.getFloor();
     }
 
@@ -56,7 +67,7 @@ public class ModelImpl implements Model {
     }
 
     /**
-     * s.
+     * {@inheritDoc}
      */
     @Override
     public Market getMarket() {
@@ -64,11 +75,19 @@ public class ModelImpl implements Model {
     }
 
     /**
-     * s.
+     * {@inheritDoc}
      */
     @Override
     public void setMarket(final Market market) {
         this.market = new MarketImpl(market);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Mission> getMissions() {
+        return new ArrayList<>(this.missions);
     }
 
     /**
@@ -87,4 +106,11 @@ public class ModelImpl implements Model {
         this.floor = passedFloor.copyFloor();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setMissions(final List<Mission> passedMissions) {
+        this.missions = new ArrayList<>(passedMissions);
+    }
 }

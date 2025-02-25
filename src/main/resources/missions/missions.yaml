@@ -1,2 +1,9 @@
-HOUDINI: ["What an art rat! You survived this theft and you escaped!", "200.00","TIMECHALLENGE"]
-CULTURALBAGGAGE : ["What a businessman! You reached 9999$", "9999.00","SCORE"]
+THERATOFWALLSTREET:
+  name: "The Rat of Wall Street"
+  desc: "Accumulate 10$ in your wallet"
+CULTURALBAGGAGE: 
+  name: "Cultural Baggage"
+  desc: "Become the most well known art ratter! Collect at least 4 items in your inventory"
+RATRACE:
+ name: "Rat Race"
+ desc: "Don't end up like a rat in a trap, increase your speed to maximum."
