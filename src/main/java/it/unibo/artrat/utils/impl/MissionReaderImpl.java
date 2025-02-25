@@ -4,7 +4,7 @@ import java.util.Set;
 import it.unibo.artrat.utils.api.MissionReader;
 
 /**
- * 
+ * MissionReader utils implementation class.
  */
 public class MissionReaderImpl extends AbstractReader implements MissionReader {
 

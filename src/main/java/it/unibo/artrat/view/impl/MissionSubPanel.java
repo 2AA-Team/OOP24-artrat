@@ -15,6 +15,7 @@ import it.unibo.artrat.model.impl.Stage;
 
 /**
  * MissionSubPanel, the MissionCenter to read and achieve goals.
+ * You need to enter in MissionCenter to claim rewards.
  */
 public class MissionSubPanel extends AbstractSubPanel {
     private static final int GAP = 5;

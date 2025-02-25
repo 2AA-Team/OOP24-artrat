@@ -1,10 +1,7 @@
 package it.unibo.artrat.model.impl.market;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
-import java.util.stream.Collectors;
 import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.model.api.market.ItemManager;
@@ -16,13 +13,27 @@ public class ItemManagerImpl implements ItemManager {
     private List<Item> itemList;
     private ItemType currenType;
     private String currentSearch = "";
+    private final SortItemStrategy sortStrategy;
+    private final FilterItemStrategy filterItemStrategy;
+    private final SearchItemStrategy searchItemStrategy;
 
     /**
-     * Item Manager constructor.
-     * @param passedItemList a list of items read.
+     * Constructor for initializing the ItemManagerImpl with a list of items and strategies 
+     * for sorting, filtering, and searching.
+     * 
+     * @param passedItemList the list of items to manage.
+     * @param sortStrategy the strategy for sorting the items.
+     * @param filterItemStrategy the strategy for filtering the items by type.
+     * @param searchItemStrategy the strategy for searching items by name.
      */
-    public ItemManagerImpl(final List<Item> passedItemList) {
+    public ItemManagerImpl(final List<Item> passedItemList,
+                            final SortItemStrategy sortStrategy,
+                            final FilterItemStrategy filterItemStrategy,
+                            final SearchItemStrategy searchItemStrategy) {
         this.itemList = new ArrayList<>(passedItemList);
+        this.sortStrategy = sortStrategy;
+        this.filterItemStrategy = filterItemStrategy;
+        this.searchItemStrategy = searchItemStrategy;
     }
 
     /**
@@ -30,13 +41,7 @@ public class ItemManagerImpl implements ItemManager {
      */
     @Override
     public List<Item> sortItemPrice(final int dir) {
-        Comparator<Item> sortingDir = Comparator.comparing(Item::getPrice);
-        if (dir == 0) {
-            sortingDir = sortingDir.reversed();
-        }
-        return itemList.stream()
-            .sorted(sortingDir)
-            .collect(Collectors.toList());
+        return this.sortStrategy.sortStrategy(itemList, dir);
     }
 
     /**
@@ -45,7 +50,8 @@ public class ItemManagerImpl implements ItemManager {
     @Override
     public List<Item> filterItems(final ItemType itemType) {
         this.currenType = itemType;
-        return filter(search(itemList));
+        final List<Item> filteredList = filterItemStrategy.filterStrategy(itemList, currenType);
+        return this.searchItemStrategy.searchStrategy(filteredList, currentSearch);
     }
 
     /**
@@ -54,7 +60,8 @@ public class ItemManagerImpl implements ItemManager {
     @Override
     public List<Item> searchItem(final String nameToSearch) {
         currentSearch = nameToSearch;
-        return search(filter(itemList));
+        final List<Item> searchedList = searchItemStrategy.searchStrategy(itemList, currentSearch);
+        return this.filterItemStrategy.filterStrategy(searchedList, this.currenType);
     }
 
     /**
@@ -63,31 +70,5 @@ public class ItemManagerImpl implements ItemManager {
     @Override
     public void updateItemList(final List<Item> passedList) {
         this.itemList = new ArrayList<>(passedList);
-    }
-
-    /*
-     * This private method is used to coordinate filter and search. 
-     * When I have to filter an item, I apply this method first with search private method of
-     * the passedList as parameter.
-     */
-    private List<Item> filter(final List<Item> passedList) {
-        if (currenType == null) {
-            return new ArrayList<>(passedList.stream().collect(Collectors.toList()));
-        }
-        return new ArrayList<>(passedList.stream()
-            .filter(it -> it.getType().equals(currenType))
-            .collect(Collectors.toList()));
-    }
-
-    /*
-     * This private method is used to coordinate filter and search.
-     * When I have to search an item, I apply this method first with filter private method of
-     * the passedList as parameter.
-     */
-    private List<Item> search(final List<Item> passedList) {
-        return new ArrayList<>(passedList.stream()
-            .filter(it -> it.getClass().getSimpleName().toLowerCase(Locale.getDefault())
-            .startsWith(currentSearch.trim().toLowerCase(Locale.getDefault())))
-            .collect(Collectors.toList()));
     }
 }
