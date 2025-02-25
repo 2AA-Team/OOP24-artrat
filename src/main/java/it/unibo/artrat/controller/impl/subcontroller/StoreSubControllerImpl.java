@@ -166,4 +166,12 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
             .map(Item::getPrice)
             .findAny().get();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getCurrentAmount() {
+        return this.getModel().getPlayer().getCoin().getCurrentAmount();
+    }
 }

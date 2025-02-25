@@ -19,6 +19,8 @@ import it.unibo.artrat.utils.impl.Point;
 
 /**
  * Test the consume of all the item in the game.
+ * 
+ * @author Cristian Di Donato.
  */
 class ItemsTest {
     private final ItemFactory itemFactory = new ItemFactoryImpl();

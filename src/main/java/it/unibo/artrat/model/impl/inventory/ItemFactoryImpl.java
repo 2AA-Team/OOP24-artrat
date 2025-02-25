@@ -19,7 +19,8 @@ import it.unibo.artrat.utils.api.ItemReader;
 import it.unibo.artrat.utils.impl.ItemReaderImpl;
 
 /**
- * An implementation of ItemFactory.
+ * An implementation of ItemFactory interface.
+ * @author Cristian Di Donato.
  */
 public class ItemFactoryImpl implements ItemFactory {
 
@@ -31,7 +32,6 @@ public class ItemFactoryImpl implements ItemFactory {
     private final URL itemPath = Thread.currentThread().getContextClassLoader().getResource(
             "items" + File.separator
                     + "items.yaml");
-
     private final ItemReader itemReader;
     private static final Logger LOGGER = LoggerFactory.getLogger(ItemFactoryImpl.class);
 

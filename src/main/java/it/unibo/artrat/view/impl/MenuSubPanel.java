@@ -1,14 +1,13 @@
 package it.unibo.artrat.view.impl;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import it.unibo.artrat.controller.api.subcontroller.MenuSubController;
-import it.unibo.artrat.model.impl.Stage;
-
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 
 /**
  * panel for the initial Menu.
@@ -47,28 +46,28 @@ public class MenuSubPanel extends AbstractSubPanel {
         panel.repaint();
         final JButton jbGame = new JButton("Game");
         jbGame.addActionListener((e) -> {
-            menuSubController.setStage(Stage.GAME);
+            menuSubController.goToGame();
         });
         panel.add(jbGame, gbc);
 
         gbc.gridy = 1;
         final JButton jbShop = new JButton("Shop");
         jbShop.addActionListener((e) -> {
-            menuSubController.setStage(Stage.STORE);
+            menuSubController.goToShop();
         });
         panel.add(jbShop, gbc);
 
         gbc.gridy = 2;
         final JButton jbInvetory = new JButton("Inventory");
         jbInvetory.addActionListener((e) -> {
-            menuSubController.setStage(Stage.INVENTORY);
+            menuSubController.gotToInventory();
         });
         panel.add(jbInvetory, gbc);
 
         gbc.gridy = 3;
         final JButton jbMissions = new JButton("Missions");
         jbMissions.addActionListener((e) -> {
-            menuSubController.setStage(Stage.MISSIONS);
+            menuSubController.goToMission();
         });
         panel.add(jbMissions, gbc);
 

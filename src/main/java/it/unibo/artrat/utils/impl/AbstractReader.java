@@ -18,6 +18,7 @@ import it.unibo.artrat.utils.api.Reader;
 /**
  * An abstract reader of the reader interface that handles the logic of
  * loading from the file and leaves the casting policies to the extensions.
+ * @author Cristian Di Donato.
  */
 public abstract class AbstractReader implements Reader {
 

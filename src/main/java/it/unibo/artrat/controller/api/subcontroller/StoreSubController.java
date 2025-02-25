@@ -77,4 +77,9 @@ public interface StoreSubController extends SubController {
      */
     void initItemList();
 
+    /**
+     * 
+     * @return the player's current amount.
+     */
+    double getCurrentAmount();
 }

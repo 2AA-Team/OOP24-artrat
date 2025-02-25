@@ -1,6 +1,7 @@
 package it.unibo.artrat.controller.impl.subcontroller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,10 +11,12 @@ import org.slf4j.LoggerFactory;
 import it.unibo.artrat.controller.api.subcontroller.GameSubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
+import it.unibo.artrat.model.api.Compass;
 import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.world.Floor;
+import it.unibo.artrat.model.impl.CompassNearest;
 import it.unibo.artrat.model.impl.world.FloorImpl;
 import it.unibo.artrat.utils.api.BoundingBox;
 import it.unibo.artrat.utils.api.ResourceLoader;
@@ -28,6 +31,7 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
     private static final Logger LOGGER = LoggerFactory.getLogger(GameSubControllerImpl.class);
     private final Floor floor;
     private final double renderDistance;
+    private Compass compass;
 
     /**
      * constructor to initialize mainController.
@@ -41,7 +45,6 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
         super(mainController);
         this.renderDistance = rl.getConfig("RENDER_DISTANCE");
         this.floor = new FloorImpl(rl);
-
     }
 
     /**
@@ -115,6 +118,9 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
         player.setSpeed(new Vector2d());
         model.setPlayer(player);
         this.updateCentralizeModel(model);
+        this.compass = new CompassNearest(
+                this::getPlayerPos,
+                () -> new ArrayList<>(getExitPos()));
 
     }
 
@@ -123,12 +129,7 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
      */
     @Override
     public double getAngleCompass() {
-        final Model model = getModel();
-        final Point player = model.getPlayer().getPosition();
-        final Point exit = model.getFloor().getExit().stream().map(GameObject::getPosition).min((a, b) -> {
-            return Double.compare(a.getEuclideanDistance(player), b.getEuclideanDistance(player));
-        }).orElseGet(() -> new Point());
-        return Math.atan2(exit.getY() - player.getY(), exit.getX() - player.getX());
+        return this.compass.calculateAngle();
     }
 
     /**

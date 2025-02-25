@@ -1,20 +1,20 @@
 package it.unibo.artrat.utils.impl.commands;
 
 import it.unibo.artrat.model.api.characters.Player;
-import it.unibo.artrat.utils.api.commands.Command;
-import it.unibo.artrat.utils.impl.Vector2d;
+import it.unibo.artrat.utils.api.Directions;
+import it.unibo.artrat.utils.api.commands.CommandStop;
 
 /**
  * Stop move right command for entity movement.
  */
-public class StopMovingRight implements Command {
+public class StopRight implements CommandStop {
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void execute(final Player p) {
-        p.removeDirection(new Vector2d(1, 0));
+        p.removeDirection(Directions.RIGHT.vector());
     }
 
 }

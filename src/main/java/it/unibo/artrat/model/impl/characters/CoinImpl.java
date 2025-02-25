@@ -6,39 +6,26 @@ import java.math.RoundingMode;
 import it.unibo.artrat.model.api.characters.Coin;
 
 /**
- * An implementation of Coin.
+ * A base coin implementation.
  * 
  * @author Cristian Di Donato.
  */
-public class CoinImpl implements Coin {
-
-    private static final double RESET_AMOUNT = 0.0;
-    private double amount;
-
+public class CoinImpl extends AbstractCoin {
     /**
-     * A constructor that initializes the current funds to zero and instantiates a
-     * new money multiplier.
+     * A constructor that initializes the current funds to the default_amount.
      */
     public CoinImpl() {
-        this.amount = RESET_AMOUNT;
+        super();
     }
 
     /**
-     * A constructor that initializes the current funds and money multiplier from a
+     * A constructor that initializes the current funds from a
      * passed Coin instance.
      * 
      * @param coin the Coin to copy.
      */
     public CoinImpl(final Coin coin) {
-        this.amount = coin.getCurrentAmount();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public double getCurrentAmount() {
-        return this.amount;
+        super(coin);
     }
 
     /**
@@ -47,9 +34,11 @@ public class CoinImpl implements Coin {
     @Override
     public void addCoins(final double coins) {
         if (coins >= 0.0) {
+            double amount = getCurrentAmount();
             amount =  BigDecimal.valueOf(amount + coins)
                                 .setScale(2, RoundingMode.UP)
                                 .doubleValue();
+            setAmount(amount);
         } else {
             throw new IllegalArgumentException();
         }
@@ -60,10 +49,12 @@ public class CoinImpl implements Coin {
      */
     @Override
     public void spendCoins(final double coins) {
-        if (coins > 0.0 && coins <= amount) {
+        if (coins > 0.0 && coins <= getCurrentAmount()) {
+            double amount = getCurrentAmount();
             amount = BigDecimal.valueOf(amount - coins)
                                 .setScale(2, RoundingMode.HALF_UP)
                                 .doubleValue();
+            setAmount(amount);
         } else {
             throw new IllegalArgumentException();
         }

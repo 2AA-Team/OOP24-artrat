@@ -5,6 +5,7 @@ import java.net.URI;
 
 /**
  * An interface that models a reader allowing data to be loaded from a file.
+ * @author Cristian Di Donato.
  */
 public interface Reader {
     /**

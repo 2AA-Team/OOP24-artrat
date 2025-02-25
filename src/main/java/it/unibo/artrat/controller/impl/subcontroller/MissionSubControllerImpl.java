@@ -7,6 +7,7 @@ import it.unibo.artrat.controller.api.subcontroller.MissionSubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
 import it.unibo.artrat.model.api.Model;
+import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.missioncenter.Mission;
 
 /**
@@ -71,5 +72,10 @@ public class MissionSubControllerImpl extends AbstractSubController implements M
             .filter(m -> m.equals(passedMission))
             .map(Mission::getText)
             .findAny().get();
+    }
+
+    @Override
+    public Player getPlayer() {
+        return this.getModel().getPlayer();
     }
 }

@@ -7,21 +7,20 @@ package it.unibo.artrat.model.api.characters;
  */
 public interface Multiplier {
     /**
-     * 
+     * Method for obtaining the player's current multiplier.
      * @return the current value of multiplier.
      */
     double getCurrentMultiplier();
     /**
-     * 
+     * Method that allows past money to be multiplied by the player's current multiplier.
      * @param coins the coins that player get at the end of the game.
      * @return the trasformed coin, after the multiplication.
      */
     double multipleTheCoins(double coins);
 
     /**
-     * 
-     * Change the current multiplier.
-     * @param multipler is the new multiplier.
+     * Method for change the player's current multiplier to the past one.
+     * @param multipler is new multiplier.
      */
     void changeCurrentMultiplier(double multipler);
 

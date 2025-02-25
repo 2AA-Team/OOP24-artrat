@@ -3,6 +3,7 @@ package it.unibo.artrat.model.api.inventory;
 import java.io.IOException;
 /**
  * Factory to create items.
+ * @author Cristian Di Donato.
 */
 public interface ItemFactory {
     /**

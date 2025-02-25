@@ -18,7 +18,6 @@ import javax.swing.event.DocumentListener;
 
 import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
 import it.unibo.artrat.model.api.inventory.ItemType;
-import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.view.api.MarketView;
 
 /**
@@ -137,21 +136,24 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         });
 
         /*
-         *If I exit from YesNoOption, there will be a creasing sorting.
-         *That's because we already clicked for sorting, and usually people sorts from lowest.
+         * If I exit from YesNoOption, there will be a creasing sorting.
+         * That's because we already clicked for sorting, and usually people sorts from
+         * lowest.
          */
         sortButton.addActionListener(e -> {
-            final int choice = JOptionPane.showConfirmDialog(null, 
-                "decreasing sorting = YES, creasing sorting = NO",
+            final int choice = JOptionPane.showConfirmDialog(null,
+                    "decreasing sorting = YES, creasing sorting = NO",
                     "Price sorting", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             contr.sorting(choice);
             forceRedraw();
         });
 
         /*
-         * I call itemSearch method at every character inserted or removed into the search field.
-         * itemSearch is also called with changedUpdate method, at every changed update in the view.
-        */
+         * I call itemSearch method at every character inserted or removed into the
+         * search field.
+         * itemSearch is also called with changedUpdate method, at every changed update
+         * in the view.
+         */
         searchItemField.getDocument().addDocumentListener(new DocumentListener() {
 
             @Override
@@ -172,7 +174,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
 
         toMenu.addActionListener(e -> {
             exitSettings();
-            contr.setStage(Stage.MENU);
+            contr.goToMenu();
         });
 
         bottomPan.add(toMenu, BorderLayout.EAST);
@@ -216,7 +218,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
 
             buyItem.addActionListener(e -> {
                 if (toConfirm("Do you really want to buy?", "Buy")) {
-                    if (contr.getModel().getPlayer().getCoin().getCurrentAmount() >= contr.getItemPrice(purchItem) 
+                    if (contr.getCurrentAmount() >= contr.getItemPrice(purchItem)
                             && contr.buyItem(purchItem)) {
                         if (purchItem.getType().equals(ItemType.POWERUP)) {
                             contr.getModel().getMarket().getPurchItems().remove(purchItem);

@@ -7,14 +7,15 @@ import java.util.Random;
 import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.inventory.ItemType;
 /**
- * A specific Item.
+ * A specific item that allows to win and add up to the MAX_WIN to the player's money.
+ * @author Cristian Di Donato.
  */
 public class LuckyTicket extends AbstractItem {
 
     private final Random rd;
     private static final int MAX_WIN = 1000;
 
-     /**
+    /**
      * A constructor to initialize the new item Lucky Ticket.
      * @param name the name of Lucky Ticket.
      * @param desc the description of Lucky Ticket.

@@ -7,13 +7,15 @@ import it.unibo.artrat.model.impl.inventory.AbstractItem;
 import it.unibo.artrat.model.impl.inventory.InventoryImpl;
 
 /**
- * A specific item.
+ * A specific item, which each time it is used, adds a copy of every item in your inventory 
+ * to your inventory (doubles your inventory).
+ * @author Cristian Di Donato.
  */
 public class MysteriousWand extends AbstractItem {
 
     private final String nameOfItem;
 
-     /**
+    /**
      * A constructor to initialize the new item Mysterious Staff.
      * @param name the name of Mysterious Staff.
      * @param desc the description of Mysterious Staff.

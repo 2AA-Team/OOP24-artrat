@@ -5,7 +5,10 @@ import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.inventory.Item;
 
 /**
- * An abstract class that will be the base class for implementing other objects and consumables.
+ * An abstract object for the item interface 
+ * that manages the logic for obtaining the various fields of the item, 
+ * and leaves the management of the method consume to the various extensions.
+ * @author Cristian Di Donato.
  */
 public abstract class AbstractItem implements Item {
 

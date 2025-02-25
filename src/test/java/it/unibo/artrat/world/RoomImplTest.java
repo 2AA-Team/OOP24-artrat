@@ -26,7 +26,7 @@ class RoomImplTest {
 
     @BeforeEach
     void setUp() {
-        room = new RoomImpl.RoomBuilder()
+        room = new RoomImpl.RoomBuilderImpl()
                 .insertRoomSize(SIZE)
                 .insertGenerationStrategy(new RoomGenerationEmpty())
                 .insertInsertionStrategyEnemy(new ObjectInsertionRandom<>())
@@ -66,26 +66,26 @@ class RoomImplTest {
     @Test
     void testInvalidValue() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new RoomImpl.RoomBuilder().insertRoomSize(2).build();
+            new RoomImpl.RoomBuilderImpl().insertRoomSize(2).build();
         }, "Should throw an exception when the room size is too small");
         assertThrows(IllegalArgumentException.class, () -> {
-            new RoomImpl.RoomBuilder().insertNumberOfEnemy(-1).build();
+            new RoomImpl.RoomBuilderImpl().insertNumberOfEnemy(-1).build();
         }, "Should throw an exception when the number of enemies is negative");
         assertThrows(IllegalArgumentException.class, () -> {
-            new RoomImpl.RoomBuilder().insertNumberOfValues(-1).build();
+            new RoomImpl.RoomBuilderImpl().insertNumberOfValues(-1).build();
         }, "Should throw an exception when the number of values is negative");
     }
 
     @Test
     void testNullGenerationStrategy() {
         assertThrows(IllegalArgumentException.class, () -> {
-            new RoomImpl.RoomBuilder().insertGenerationStrategy(null).build();
+            new RoomImpl.RoomBuilderImpl().insertGenerationStrategy(null).build();
         }, "Should throw an exception when the generation strategy is null");
         assertThrows(IllegalArgumentException.class, () -> {
-            new RoomImpl.RoomBuilder().insertInsertionStrategyEnemy(null).build();
+            new RoomImpl.RoomBuilderImpl().insertInsertionStrategyEnemy(null).build();
         }, "Should throw an exception when the enemy insertion strategy is null");
         assertThrows(IllegalArgumentException.class, () -> {
-            new RoomImpl.RoomBuilder().insertInsertionStrategyValue(null).build();
+            new RoomImpl.RoomBuilderImpl().insertInsertionStrategyValue(null).build();
         }, "Should throw an exception when the value insertion strategy is null");
     }
 }
