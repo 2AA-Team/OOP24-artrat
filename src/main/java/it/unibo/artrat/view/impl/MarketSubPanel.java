@@ -99,7 +99,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     }
 
     private void updateCoinLabel() {
-        lupinoCash.setText("COINS: " + contr.getModel().getPlayer().getCoin().getCurrentAmount() + " $");
+        lupinoCash.setText("COINS: " + contr.getCurrentAmount() + " $");
     }
 
     private void setShop() {
@@ -206,7 +206,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         for (final var purchItem : contr.purchasableItems()) {
             final JButton buyItem = new JButton("Buy");
             final JLabel itemLabel = new JLabel(contr.getItemName(purchItem));
-            final JLabel typeLabel = new JLabel(contr.getTypeName(purchItem));
+            final JLabel typeLabel = new JLabel(contr.getItemType(purchItem).toString());
             final JLabel priceButton = new JLabel(contr.getItemPrice(purchItem) + "$");
             final JPanel itemPanel = new JPanel(new GridLayout(1, 4, GAP, GAP));
             itemPanel.add(itemLabel);
@@ -218,12 +218,11 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
 
             buyItem.addActionListener(e -> {
                 if (toConfirm("Do you really want to buy?", "Buy")) {
-                    if (contr.getCurrentAmount() >= contr.getItemPrice(purchItem)
-                            && contr.buyItem(purchItem)) {
-                        if (purchItem.getType().equals(ItemType.POWERUP)) {
-                            contr.getModel().getMarket().getPurchItems().remove(purchItem);
+                    if (contr.getCurrentAmount() >= contr.getItemPrice(purchItem)) {
+                        if(contr.getItemType(purchItem).equals(ItemType.POWERUP)){
                             purchItemPanel.remove(itemPanel);
                         }
+                        contr.buyItem(purchItem);  
                     } else {
                         showMessage("Not enough money", "Purchase denied");
                     }

@@ -77,7 +77,7 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
      * {@inheritDoc}
      */
     @Override
-    public boolean buyItem(final Item itemToBuy) {
+    public void buyItem(final Item itemToBuy) {
         final Model model = this.getModel();
         final Player player = model.getPlayer();
         final Market market = model.getMarket();
@@ -87,12 +87,13 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
             player.spendCoins(itemToBuy.getPrice());
             inventory.addItem(itemToBuy); // Adding the items in the inventory.
             player.setInventory(inventory);
+            if (itemToBuy.getType().equals(ItemType.POWERUP)) {
+                getModel().getMarket().getPurchItems().remove(itemToBuy);
+            }
             model.setMarket(market);
             model.setPlayer(player.copyPlayer());
             this.updateCentralizeModel(new ModelImpl(model));
-            return true;
         }
-        return false;
     }
 
     /**
@@ -149,11 +150,11 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
      * {@inheritDoc}
      */
     @Override
-    public String getTypeName(final Item passedItem) {
+    public ItemType getItemType(final Item passedItem) {
         return this.getModel().getMarket().getPurchItems().stream()
             .filter(it -> it.equals(passedItem))
             .map(Item::getType)
-            .findAny().get().toString();
+            .findAny().get();
     }
 
     /**

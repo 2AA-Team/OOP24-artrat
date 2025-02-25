@@ -23,9 +23,8 @@ public interface StoreSubController extends SubController {
     /**
      *
      * @param itemToBuy the item we want to buy 
-     * @return true if the player can afford the item and it's avaiable, false otherwise.
      */
-    boolean buyItem(Item itemToBuy);
+    void buyItem(Item itemToBuy);
 
     /**
      * 
@@ -46,7 +45,7 @@ public interface StoreSubController extends SubController {
      * @param passedItem the item passed.
      * @return the item's category (POWERUP or CONSUMABLE).
      */
-    String getTypeName(Item passedItem);
+    ItemType getItemType(Item passedItem);
 
     /**
      * 

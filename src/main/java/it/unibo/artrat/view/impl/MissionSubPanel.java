@@ -57,7 +57,7 @@ public class MissionSubPanel extends AbstractSubPanel {
 
             final JPanel missPanel = new JPanel(new GridLayout(1, 2, GAP, GAP));
             missPanel.add(missionLabel);
-            if (mission.isMissionDone(missionControl.getPlayer())) {
+            if (missionControl.isMissionDone(mission)) {
                 missionLabel.setOpaque(true);
                 missionLabel.setBackground(Color.GREEN);
             }

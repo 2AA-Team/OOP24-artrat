@@ -15,7 +15,7 @@ public interface SearchStrategy<X, T> {
      * 
      * @param passedList a list of generic. 
      * @param currentSearch a generic currentSearch.
-     * @return a list of generic,
+     * @return a list of generic.
      */
     List<X> searchStrategy(List<X> passedList, T currentSearch);
 }
