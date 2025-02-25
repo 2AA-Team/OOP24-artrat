@@ -219,10 +219,10 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
             buyItem.addActionListener(e -> {
                 if (toConfirm("Do you really want to buy?", "Buy")) {
                     if (contr.getCurrentAmount() >= contr.getItemPrice(purchItem)) {
-                        if(contr.getItemType(purchItem).equals(ItemType.POWERUP)){
+                        if (contr.getItemType(purchItem).equals(ItemType.POWERUP)) {
                             purchItemPanel.remove(itemPanel);
                         }
-                        contr.buyItem(purchItem);  
+                        contr.buyItem(purchItem);
                     } else {
                         showMessage("Not enough money", "Purchase denied");
                     }
