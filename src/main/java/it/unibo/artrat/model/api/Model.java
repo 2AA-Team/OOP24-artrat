@@ -43,7 +43,7 @@ public interface Model {
     /**
      * A method that obtains a copy of the current state of mision center.
      * 
-     * @return a copy of the current mission center.
+     * @return a list of missions, which will be used in MissionCenter.
      */
     List<Mission> getMissions();
 
