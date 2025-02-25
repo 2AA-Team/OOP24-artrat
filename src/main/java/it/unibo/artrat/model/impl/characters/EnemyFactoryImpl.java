@@ -1,5 +1,6 @@
 package it.unibo.artrat.model.impl.characters;
 
+import it.unibo.artrat.model.api.characters.Enemy;
 import it.unibo.artrat.model.api.characters.EnemyFactory;
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;
@@ -13,7 +14,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
      * {@inheritDoc}
      */
     @Override
-    public BaseEnemy createBaseEnemy(final Point topLeft, final Point bottomRight, final Vector2d v) {
+    public Enemy createBaseEnemy(final Point topLeft, final Point bottomRight, final Vector2d v) {
         return new BaseEnemy(topLeft, bottomRight);
     }
 
@@ -21,7 +22,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
      * {@inheritDoc}
      */
     @Override
-    public AdvancedEnemy createAdvancedEnemy(final Point topLeft, final Point bottomRight, final Vector2d v) {
+    public Enemy createAdvancedEnemy(final Point topLeft, final Point bottomRight, final Vector2d v) {
         return new AdvancedEnemy(topLeft, bottomRight);
     }
 
@@ -29,7 +30,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
      * {@inheritDoc}
      */
     @Override
-    public AdvancedEnemy createAdvancedEnemy(final Point center, final double width, final double height) {
+    public Enemy createAdvancedEnemy(final Point center, final double width, final double height) {
         return new AdvancedEnemy(center, width, height);
     }
 
@@ -37,7 +38,7 @@ public class EnemyFactoryImpl implements EnemyFactory {
      * {@inheritDoc}
      */
     @Override
-    public BaseEnemy createBaseEnemy(final Point center, final double width, final double height) {
+    public Enemy createBaseEnemy(final Point center, final double width, final double height) {
         return new BaseEnemy(center, width, height);
     }
 
