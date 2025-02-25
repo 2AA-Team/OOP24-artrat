@@ -14,6 +14,7 @@ import it.unibo.artrat.controller.api.subcontroller.MissionSubController;
 
 /**
  * MissionSubPanel, the MissionCenter to read and achieve goals.
+ * You need to enter in MissionCenter to claim rewards.
  */
 public class MissionSubPanel extends AbstractSubPanel {
     private static final int GAP = 5;

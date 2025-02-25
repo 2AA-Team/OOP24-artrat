@@ -14,7 +14,10 @@ import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.model.api.market.ItemManager;
 import it.unibo.artrat.model.api.market.Market;
 import it.unibo.artrat.model.impl.ModelImpl;
+import it.unibo.artrat.model.impl.market.FilterItemStrategy;
 import it.unibo.artrat.model.impl.market.ItemManagerImpl;
+import it.unibo.artrat.model.impl.market.SearchItemStrategy;
+import it.unibo.artrat.model.impl.market.SortItemStrategy;
 import it.unibo.artrat.view.api.MarketView;
 import it.unibo.artrat.view.impl.MarketSubPanel;
 
@@ -37,7 +40,9 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     public StoreSubControllerImpl(final MainControllerImpl mainController) {
         super(mainController);
         this.marketView = new MarketSubPanel(this);
-        this.itemMan = new ItemManagerImpl(currenItems);
+        this.itemMan = new ItemManagerImpl(currenItems, new SortItemStrategy(), new FilterItemStrategy(), 
+        new SearchItemStrategy());
+
     }
 
     /**
@@ -62,7 +67,7 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
      * This method is called every time I call filterCategory and searchItem.
      * Considering that searchItem is called with with every character inserted or
      * removed, but also with every general modification (changedUpdate method),
-     * the update performs at its maximum
+     * the update performs at its maximum.
      */
     private void updateCurrentItem() {
         this.currenItems = new ArrayList<>(this.getModel().getMarket().getPurchItems());

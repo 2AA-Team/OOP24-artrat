@@ -3,7 +3,7 @@ package it.unibo.artrat.utils.api;
 import java.util.Set;
 
 /**
- * 
+ * MissionReader base interface.
  */
 public interface MissionReader extends Reader {
 
