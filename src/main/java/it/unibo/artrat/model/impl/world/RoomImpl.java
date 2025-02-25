@@ -27,7 +27,7 @@ public final class RoomImpl implements Room {
 
     private final Set<GameObject> roomStructure = new HashSet<>();
     private final Set<Enemy> roomEnemies = new HashSet<>();
-    private final Set<Collectable> roomValues = new HashSet<>();
+    private final Set<Collectable> roomCollectables = new HashSet<>();
 
     /**
      * constructor using the builder.
@@ -38,17 +38,17 @@ public final class RoomImpl implements Room {
         final GameObjectFactory factory = new GameObjectFactoryImpl();
         roomStructure.addAll(builder.generationStrat.generateRoomSet(builder.size));
         roomEnemies.addAll(builder.enemyStrat.insertMultipleObject(
-                Stream.concat(roomStructure.stream(), roomValues.stream())
+                Stream.concat(roomStructure.stream(), roomCollectables.stream())
                         .collect(Collectors.toSet()),
                 builder.size,
                 builder.numEnemies,
                 factory::getRandomEnemy));
-        roomValues.addAll(builder.valuableStrat.insertMultipleObject(
+        roomCollectables.addAll(builder.collectableStrat.insertMultipleObject(
                 Stream.concat(roomStructure.stream(), roomEnemies.stream())
                         .collect(Collectors.toSet()),
                 builder.size,
-                builder.numValues,
-                factory::getPicture));
+                builder.numCollectables,
+                factory::getCollectable));
         this.createPassage(builder);
     }
 
@@ -89,9 +89,9 @@ public final class RoomImpl implements Room {
 
         private RoomGenerationStrategy generationStrat;
         private ObjectInsertionStrategy<Enemy> enemyStrat;
-        private ObjectInsertionStrategy<Collectable> valuableStrat;
+        private ObjectInsertionStrategy<Collectable> collectableStrat;
         private int numEnemies;
-        private int numValues;
+        private int numCollectables;
         private int size;
         private boolean upPassage;
         private boolean rightPassage;
@@ -104,9 +104,9 @@ public final class RoomImpl implements Room {
         public RoomBuilderImpl() {
             generationStrat = new RoomGenerationEmpty();
             enemyStrat = new ObjectInsertionRandom<>();
-            valuableStrat = new ObjectInsertionRandom<>();
+            collectableStrat = new ObjectInsertionRandom<>();
             numEnemies = 0;
-            numValues = 0;
+            numCollectables = 0;
             size = 4;
         }
 
@@ -150,11 +150,11 @@ public final class RoomImpl implements Room {
          * {@inheritDoc}
          */
         @Override
-        public RoomBuilder insertNumberOfValues(final int numValues) {
-            if (numValues < 0) {
-                throw new IllegalArgumentException("Number of values not valid: " + numValues);
+        public RoomBuilder insertNumberOfCollectables(final int numCollectables) {
+            if (numCollectables < 0) {
+                throw new IllegalArgumentException("Number of collectables not valid: " + numCollectables);
             }
-            this.numValues = numValues;
+            this.numCollectables = numCollectables;
             return this;
         }
 
@@ -162,11 +162,11 @@ public final class RoomImpl implements Room {
          * {@inheritDoc}
          */
         @Override
-        public RoomBuilder insertInsertionStrategyValue(final ObjectInsertionStrategy<Collectable> insertStrat) {
+        public RoomBuilder insertInsertionStrategyCollectables(final ObjectInsertionStrategy<Collectable> insertStrat) {
             if (insertStrat == null) {
                 throw new IllegalArgumentException("Insertion strategy cannot be null.");
             }
-            this.valuableStrat = insertStrat.cloneStrategy();
+            this.collectableStrat = insertStrat.cloneStrategy();
             return this;
         }
 
@@ -226,8 +226,8 @@ public final class RoomImpl implements Room {
      * {@inheritDoc}
      */
     @Override
-    public Set<Collectable> getValues() {
-        return new HashSet<>(this.roomValues);
+    public Set<Collectable> getCollectables() {
+        return new HashSet<>(this.roomCollectables);
     }
 
 }

@@ -38,10 +38,10 @@ public interface RoomBuilder {
     /**
      * set the number of valuable object to add.
      * 
-     * @param numValues number of valuable object
+     * @param numCollectables number of valuable object
      * @return this room builder
      */
-    RoomBuilder insertNumberOfValues(int numValues);
+    RoomBuilder insertNumberOfCollectables(int numCollectables);
 
     /**
      * set the insertion strategy for all the valuable objects.
@@ -49,7 +49,7 @@ public interface RoomBuilder {
      * @param insertStrat insertion strategy class
      * @return this room builder
      */
-    RoomBuilder insertInsertionStrategyValue(ObjectInsertionStrategy<Collectable> insertStrat);
+    RoomBuilder insertInsertionStrategyCollectables(ObjectInsertionStrategy<Collectable> insertStrat);
 
     /**
      * set the insertion strategy for all the enemies in the room.

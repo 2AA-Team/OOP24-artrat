@@ -48,11 +48,11 @@ public interface GameSubController extends SubController {
     Set<Point> getExitPos();
 
     /**
-     * getter for all the visible paintings position.
+     * getter for all the visible collectables position.
      * 
      * @return a set of points
      */
-    Set<Point> getVisiblePaintings();
+    Set<Point> getVisibleCollectables();
 
     /**
      * Initialize the game resources.

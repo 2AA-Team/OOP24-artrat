@@ -27,7 +27,7 @@ public interface Floor {
      * 
      * @return a set of AbstractGameObject
      */
-    Set<Collectable> getValues();
+    Set<Collectable> getCollectables();
 
     /**
      * getter for all walls.
@@ -100,9 +100,9 @@ public interface Floor {
     void setEnemies(Set<Enemy> enemies);
 
     /**
-     * setter for all values.
+     * setter for all collectables.
      * 
-     * @param passedValues set of values
+     * @param passedCollectables set of collectables
      */
-    void setValues(Set<Collectable> passedValues);
+    void setCollectables(Set<Collectable> passedCollectables);
 }

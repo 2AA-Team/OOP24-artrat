@@ -40,7 +40,7 @@ class FloorImplTest {
         assertDoesNotThrow(floor::generateFloorSet, "Generating the floor should not throw exceptions");
         assertNotNull(floor.getWalls(), "Walls should not be null");
         assertNotNull(floor.getEnemies(), "Enemies should not be null");
-        assertNotNull(floor.getValues(), "Values should not be null");
+        assertNotNull(floor.getCollectables(), "Collectables should not be null");
         assertFalse(floor.getWalls().isEmpty(), "Walls should be present in the floor structure");
     }
 

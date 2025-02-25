@@ -89,9 +89,9 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
      * {@inheritDoc}
      */
     @Override
-    public Set<Point> getVisiblePaintings() {
+    public Set<Point> getVisibleCollectables() {
         final BoundingBox bb = new BoundingBoxImpl(getPlayerPos(), renderDistance, renderDistance);
-        return this.getModel().getFloor().getValues().stream().filter(x -> bb.isColliding(x.getBoundingBox()))
+        return this.getModel().getFloor().getCollectables().stream().filter(x -> bb.isColliding(x.getBoundingBox()))
                 .map(GameObject::getPosition).collect(Collectors.toSet());
     }
 

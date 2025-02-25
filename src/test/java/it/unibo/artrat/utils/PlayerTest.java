@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.impl.characters.Lupino;
-import it.unibo.artrat.model.impl.world.Picture;
+import it.unibo.artrat.model.impl.world.Painting;
 import it.unibo.artrat.utils.impl.Point;
 
 /**
@@ -23,11 +23,11 @@ class PlayerTest {
         final Player playerTest = new Lupino(new Point(), new HashSet<>());
         playerTest.obtainCollectable();
         assertEquals(0.0, playerTest.getCoin().getCurrentAmount());
-        playerTest.addCollectable(new Picture(0, 0, 1));
+        playerTest.addCollectable(new Painting(0, 0, 1));
         playerTest.obtainCollectable();
         assertEquals(1, playerTest.getCoin().getCurrentAmount());
-        playerTest.addCollectable(new Picture(0, 0, 1));
-        playerTest.addCollectable(new Picture(0, 0, 1));
+        playerTest.addCollectable(new Painting(0, 0, 1));
+        playerTest.addCollectable(new Painting(0, 0, 1));
         playerTest.obtainCollectable();
         assertEquals(3, playerTest.getCoin().getCurrentAmount());
     }

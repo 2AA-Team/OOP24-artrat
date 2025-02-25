@@ -25,6 +25,7 @@ import it.unibo.artrat.view.impl.MainViewImpl;
 /**
  * Implement game engine.
  * 
+ * @author Matteo Tonelli
  */
 public final class GameEngineImpl implements GameEngine {
     private final BlockingQueue<Command> commands = new LinkedBlockingDeque<>();

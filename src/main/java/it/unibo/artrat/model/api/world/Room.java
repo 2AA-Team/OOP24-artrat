@@ -32,6 +32,6 @@ public interface Room {
      * 
      * @return set of gameobject
      */
-    Set<Collectable> getValues();
+    Set<Collectable> getCollectables();
 
 }

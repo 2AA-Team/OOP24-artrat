@@ -61,7 +61,7 @@ public abstract class AbstractCollisionChecker {
                 .filter(x -> x.isColliding(renderTmp)).toList();
 
         updateAndCheckPlayer(cmd, delta);
-        updateAndCheckPaintings();
+        updateAndCheckCollectables();
 
         model.setFloor(floor);
         upPlayer();
@@ -90,9 +90,9 @@ public abstract class AbstractCollisionChecker {
     public abstract void updateAndCheckPlayer(Command cmd, long delta);
 
     /**
-     * Painting claiming management.
+     * Collectables claiming management.
      */
-    public abstract void updateAndCheckPaintings();
+    public abstract void updateAndCheckCollectables();
 
     /**
      * Game exit collsion management.

@@ -17,7 +17,7 @@ public enum RoomSymbols {
     /**
      * base valuable object.
      */
-    VALUE('V'),
+    COLLECTABLE('V'),
     /**
      * exit.
      */

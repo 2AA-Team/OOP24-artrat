@@ -12,7 +12,7 @@ import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.impl.characters.EnemyFactoryImpl;
 import it.unibo.artrat.model.impl.characters.Lupino;
 import it.unibo.artrat.model.impl.world.Exit;
-import it.unibo.artrat.model.impl.world.Picture;
+import it.unibo.artrat.model.impl.world.Painting;
 import it.unibo.artrat.model.impl.world.Wall;
 import it.unibo.artrat.utils.impl.Point;
 
@@ -59,9 +59,9 @@ public class GameObjectFactoryImpl implements GameObjectFactory {
      * {@inheritDoc}
      */
     @Override
-    public Collectable getPicture(final int x, final int y) {
+    public Collectable getCollectable(final int x, final int y) {
         final double priceMax = 10;
-        return new Picture(x, y, RANDOM.nextDouble(priceMax));
+        return new Painting(x, y, RANDOM.nextDouble(priceMax));
     }
 
     /**
