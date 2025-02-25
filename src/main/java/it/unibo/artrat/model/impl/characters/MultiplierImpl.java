@@ -6,21 +6,17 @@ import java.math.RoundingMode;
 import it.unibo.artrat.model.api.characters.Multiplier;
 
 /**
- * An implementation of Multiplier.
+ * A base multiplier implementation.
  * 
  * @author Cristian Di Donato.
  */
-public class MultiplierImpl implements Multiplier {
-
-    private static final double DEFAULT_MULTIPLIER = 1.0;
-    private double multipler;
-
+public class MultiplierImpl extends AbstractMultiplier {
     /**
      * A constructor that initialize a new istance of multiplier with the default
      * value.
      */
     public MultiplierImpl() {
-        this.multipler = DEFAULT_MULTIPLIER;
+        super();
     }
 
     /**
@@ -29,7 +25,7 @@ public class MultiplierImpl implements Multiplier {
      * @param mpd the passed Multiplier.
      */
     public MultiplierImpl(final Multiplier mpd) {
-        this.multipler = mpd.getCurrentMultiplier();
+        super(mpd);
     }
 
     /**
@@ -38,31 +34,11 @@ public class MultiplierImpl implements Multiplier {
     @Override
     public double multipleTheCoins(final double coins) {
         if (coins >= 0.0) {
-            return BigDecimal.valueOf(coins * multipler)
+            return BigDecimal.valueOf(coins * getCurrentMultiplier())
                             .setScale(2, RoundingMode.UP)
                             .doubleValue();
         } else {
             throw new IllegalArgumentException();
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void changeCurrentMultiplier(final double multipler) {
-        if (multipler > 0.0) {
-            this.multipler = multipler;
-        } else {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public double getCurrentMultiplier() {
-        return this.multipler;
     }
 }

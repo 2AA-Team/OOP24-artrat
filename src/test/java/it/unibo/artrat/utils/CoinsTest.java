@@ -11,6 +11,8 @@ import it.unibo.artrat.model.impl.characters.CoinImpl;
 
 /**
  * Test for the Coins.
+ * 
+ * @author Cristian Di Donato.
  */
 class CoinsTest {
     @Test

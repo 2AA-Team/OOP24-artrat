@@ -4,7 +4,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import it.unibo.artrat.controller.api.subcontroller.MenuSubController;
-import it.unibo.artrat.model.impl.Stage;
 
 /**
  * empty sub panel for test purpose.
@@ -37,7 +36,7 @@ public class EmptySubPanel extends AbstractSubPanel {
         final JPanel panel = new JPanel();
         final JButton btn = new JButton();
         btn.addActionListener((e) -> {
-            this.menuSubController.setStage(Stage.MENU);
+            this.menuSubController.goToMenu();
         });
         panel.add(btn);
         setPanel(panel);

@@ -5,7 +5,9 @@ import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.model.impl.inventory.AbstractItem;
 
 /**
- * An implementation of WingedBoots item.
+ * A specific object, which every time it is used until 
+ * it reaches a certain limit i.e. MAX_BOOST, increases the player's speed.
+ * @author Cristian Di Donato.
  */
 public class WingedBoots extends AbstractItem {
 

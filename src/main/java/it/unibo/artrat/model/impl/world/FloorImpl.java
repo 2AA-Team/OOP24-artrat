@@ -18,9 +18,10 @@ import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.characters.Enemy;
 import it.unibo.artrat.model.api.world.Floor;
 import it.unibo.artrat.model.api.world.Room;
+import it.unibo.artrat.model.api.world.RoomBuilder;
 import it.unibo.artrat.model.api.world.floorstructure.FloorStructureGenerationStrategy;
 import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;
-import it.unibo.artrat.model.impl.world.RoomImpl.RoomBuilder;
+import it.unibo.artrat.model.impl.world.RoomImpl.RoomBuilderImpl;
 import it.unibo.artrat.model.impl.world.floorstructure.FloorStructureGenerationRandomWalk;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationEmpty;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationFile;
@@ -191,7 +192,7 @@ public class FloorImpl implements Floor {
         } catch (IOException | URISyntaxException e) {
             LOGGER.warn("Room generations method failed to build.");
         }
-        RoomBuilder builder = new RoomBuilder();
+        RoomBuilder builder = new RoomBuilderImpl();
         builder = builder.insertRoomSize(roomSize);
         for (int i = 0; i < floorMap.size(); i++) {
             for (int j = 0; j < floorMap.size(); j++) {

@@ -23,7 +23,7 @@ abstract class AbstractSubPanel {
     }
 
     /**
-     * method to set the master frame dimension.
+     * Method to set the master frame dimension.
      * 
      * @param frameDim dimension of the frame
      */
@@ -31,12 +31,16 @@ abstract class AbstractSubPanel {
         this.frameDimension = frameDim;
     }
 
+    /**
+     * A method to obtain the current dimension of the frame.
+     * @return the dimension of the frame.
+     */
     protected Dimension getFrameDimension() {
         return this.frameDimension;
     }
 
     /**
-     * getter for the jpanel.
+     * Getter for the jpanel.
      * 
      * @return his own starter panel.
      */

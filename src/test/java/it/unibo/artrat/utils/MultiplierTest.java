@@ -11,6 +11,8 @@ import it.unibo.artrat.model.impl.characters.MultiplierImpl;
 
 /**
  * Test the function of the Multiplier.
+ * 
+ * @author Cristian Di Donato.
  */
 class MultiplierTest {
     @Test

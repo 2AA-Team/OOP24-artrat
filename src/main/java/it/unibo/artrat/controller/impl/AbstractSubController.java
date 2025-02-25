@@ -25,14 +25,6 @@ public abstract class AbstractSubController implements SubController {
      * {@inheritDoc}
      */
     @Override
-    public void setStage(final Stage newStage) {
-        mainController.setStage(newStage);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public Model getModel() {
         return new ModelImpl(this.mainController.getModel());
     }
@@ -93,5 +85,45 @@ public abstract class AbstractSubController implements SubController {
     @Override
     public int getCurrentTimeController() {
         return this.mainController.getCurrentTimeMainController();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void goToMenu() {
+        this.mainController.setStage(Stage.MENU);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void goToGame() {
+        this.mainController.setStage(Stage.GAME);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void goToShop() {
+        this.mainController.setStage(Stage.STORE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void goToMission() {
+        this.mainController.setStage(Stage.MISSIONS);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void gotToInventory() {
+        this.mainController.setStage(Stage.INVENTORY);
     }
 }

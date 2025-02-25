@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import it.unibo.artrat.controller.api.subcontroller.MissionSubController;
-import it.unibo.artrat.model.impl.Stage;
 
 /**
  * MissionSubPanel, the MissionCenter to read and achieve goals.
@@ -36,7 +35,7 @@ public class MissionSubPanel extends AbstractSubPanel {
     /**
      * {@inheritDoc}
      */
-   @Override
+    @Override
     public void initComponents() {
         missionCenterPanel.setLayout(new BorderLayout(GAP, GAP));
         scrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -45,14 +44,14 @@ public class MissionSubPanel extends AbstractSubPanel {
 
         this.missionToClaimPanel = new JPanel(new GridLayout(0, 1, GAP, GAP));
         setMissionCenter();
-        allMissionsSetup(); 
+        allMissionsSetup();
         forceRedraw();
         setPanel(contMissionPane);
     }
 
     private void allMissionsSetup() {
         for (final var mission : missionControl.missionList()) {
-            final JLabel missionLabel = new JLabel(missionControl.getMissionName(mission) + ": " 
+            final JLabel missionLabel = new JLabel(missionControl.getMissionName(mission) + ": "
                     + missionControl.showDescr(mission));
 
             final JPanel missPanel = new JPanel(new GridLayout(1, 2, GAP, GAP));
@@ -73,7 +72,7 @@ public class MissionSubPanel extends AbstractSubPanel {
         final JLabel missJLabel = new JLabel("MISSION CENTER, BECOME AN ART RATTER!");
 
         toMenu.addActionListener(e -> {
-            missionControl.setStage(Stage.MENU);
+            missionControl.goToMenu();
         });
 
         uppJPanel.add(missJLabel);
