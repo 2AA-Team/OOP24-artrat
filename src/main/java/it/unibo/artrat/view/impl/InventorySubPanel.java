@@ -1,18 +1,17 @@
 package it.unibo.artrat.view.impl;
 
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import it.unibo.artrat.controller.api.subcontroller.InventorySubController;
-import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.view.api.InventoryView;
 
 /**
@@ -64,8 +63,8 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
     private void fillWithItems() {
         myJPanel.removeAll();
 
-        for (final var item : controller.getStoredItem()) { 
-            final JPanel itemPanel = new JPanel(new GridLayout(1, 2, 5, 0)); 
+        for (final var item : controller.getStoredItem()) {
+            final JPanel itemPanel = new JPanel(new GridLayout(1, 2, 5, 0));
 
             final JButton itemButton = new JButton(controller.getItemName(item));
             final JButton useButton = new JButton("Use");
@@ -94,7 +93,7 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
 
         final JButton closeButton = new JButton("Close inventory");
         closeButton.addActionListener(e -> {
-            controller.setStage(Stage.MENU); 
+            controller.goToMenu();
         });
 
         final JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
@@ -108,7 +107,7 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
     @Override
     public void initComponents() {
         final int gap = 5;
-        myJPanel.setLayout(new GridLayout(0, 1, gap, gap)); 
+        myJPanel.setLayout(new GridLayout(0, 1, gap, gap));
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         containerPanel.add(scrollPane, BorderLayout.CENTER);
