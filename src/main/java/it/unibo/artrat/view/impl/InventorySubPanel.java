@@ -94,10 +94,7 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
 
         final JButton closeButton = new JButton("Close inventory");
         closeButton.addActionListener(e -> {
-            if (confirmDialog("Do you really want to close LuPino's bag and continue your adventures?",
-                    "Close inventory")) {
-                controller.setStage(Stage.MENU); 
-            }
+            controller.setStage(Stage.MENU); 
         });
 
         final JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));

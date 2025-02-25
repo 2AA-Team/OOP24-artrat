@@ -54,7 +54,7 @@ public interface Player extends Entity {
     void spendCoins(double coins);
 
     /**
-     * 
+     * A method that permit to get the current Multiplier of player.
      * @return the current multiplier that player have.
      */
     Multiplier getMultiplier();
@@ -67,7 +67,7 @@ public interface Player extends Entity {
     void setMultipler(Multiplier multipler);
 
     /**
-     * 
+     * A method that permit to get the current list of collectable of player.
      * @return the current Collectable list.
      */
     List<Collectable> getColletableList();
@@ -85,18 +85,17 @@ public interface Player extends Entity {
     void addCollectable(Collectable passedCollectable);
 
     /**
-     * A method that increase the current coin multiplier, by multiplie the current
-     * multiplier.
-     * with the passed one.
+     * A method that increase the current multiplier, by multiplie the current
+     * multiplier with the passed one.
      * 
-     * @param multiple
+     * @param multiple he value by which to multiply the current multiplier.
      */
     void increaseMultiplier(double multiple);
 
     /**
-     * A method that permit to copy a passed player.
+     * A method that permit to copy player.
      * 
-     * @return a copy of passed Player.
+     * @return a copy of Player.
      */
     Player copyPlayer();
 

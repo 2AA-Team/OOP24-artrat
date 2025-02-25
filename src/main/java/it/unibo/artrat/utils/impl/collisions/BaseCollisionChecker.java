@@ -22,6 +22,7 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
      * Collsion manager constructor.
      * 
      * @param renderDistance render distance
+     * @param mainController the current mainController.
      */
     public BaseCollisionChecker(final double renderDistance, final MainController mainController) {
         super(renderDistance, mainController);

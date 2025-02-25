@@ -11,13 +11,15 @@ import it.unibo.artrat.model.impl.characters.CoinImpl;
 
 /**
  * Test for the Coins.
+ * 
+ * @author Cristian Di Donato.
  */
-public class CoinsTest {
+class CoinsTest {
     @Test
     void testAddCoins() {
         final Coin coinsTest = new CoinImpl();
         assertThrows(IllegalArgumentException.class, () -> coinsTest.addCoins(-1.0));
-        double lastCoins = coinsTest.getCurrentAmount();
+        final double lastCoins = coinsTest.getCurrentAmount();
         coinsTest.addCoins(0.0);
         assertEquals(lastCoins, coinsTest.getCurrentAmount());
         coinsTest.addCoins(1.0);

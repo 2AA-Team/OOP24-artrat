@@ -27,15 +27,13 @@ public interface Model {
      * Method which obtains a copy of the current state of the market.
      * 
      * @return a copy of the current market
-     * @autor Manuel Benagli
      */
     Market getMarket();
 
     /**
      * Method which updaets the current market instance with the new passed.
      * 
-     * @param market
-     * @autor Manuel Benagli
+     * @param market the passed market.
      */
     void setMarket(Market market);
 

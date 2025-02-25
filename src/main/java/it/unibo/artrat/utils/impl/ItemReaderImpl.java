@@ -6,7 +6,8 @@ import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.utils.api.ItemReader;
 
 /**
- * An implementation of ItemReader.
+ * An implementation of ItemReader interface.
+ * @author Cristian Di Donato.
  */
 public class ItemReaderImpl extends AbstractReader implements ItemReader {
     /**

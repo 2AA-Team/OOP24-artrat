@@ -11,7 +11,7 @@ public interface InventorySubController extends SubController {
 
     /**
      * 
-     * @return to the view a list of all element that player have.
+     * @return the list of all element that player have.
      */
     List<Item> getStoredItem();
 
@@ -22,19 +22,16 @@ public interface InventorySubController extends SubController {
      */
     boolean useItem(Item passedItem);
 
-       /**
-     * 
-     * @param passedItem the item that we want the name.
-     * @return the name of desired item.
-     */
+      /**
+       * 
+       * @param passedItem the element whose name we want.
+       * @return the name of desired item.
+       */
     String getItemName(Item passedItem);
 
-       /**
-     * 
-     * @param passedItem the item that we want the typeName.
-     */
+      /**
+       * 
+       * @param passedItem the element whose description we want.
+       */
     void obtainDescription(Item passedItem);
-
-    //void quit();
-
 }

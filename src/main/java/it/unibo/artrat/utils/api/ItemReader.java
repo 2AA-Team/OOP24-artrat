@@ -7,6 +7,7 @@ import it.unibo.artrat.model.api.inventory.ItemType;
 /**
  * An interface that represents a reader for all types of Items present in
  * ArtRat, from a Yaml file.
+ * @author Cristian Di Donato.
  */
 public interface ItemReader extends Reader {
 

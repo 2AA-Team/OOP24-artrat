@@ -6,7 +6,7 @@ import java.util.TimerTask;
 import it.unibo.artrat.model.api.WorldTimer;
 
 /**
- * WorldTimerImpl class.
+ * An implementation of WorldTimer interface.
  * 
  * @author Manuel Benagli
  */

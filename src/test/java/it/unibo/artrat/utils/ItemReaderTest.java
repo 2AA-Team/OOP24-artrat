@@ -16,9 +16,11 @@ import it.unibo.artrat.utils.api.ItemReader;
 import it.unibo.artrat.utils.impl.ItemReaderImpl;
 
 /**
-* Tester for the class ItemReader.
-* (Yaml reading about item)
-*/
+ * Tester for the class ItemReader.
+ * (Yaml reading about item)
+ *
+ * @author Cristian Di Donato.
+ */
 class ItemReaderTest {
 
     private static final String TEST_FILE_NAME = "ItemReaderTest.yaml";
@@ -27,9 +29,9 @@ class ItemReaderTest {
     private static final String ZAINO = "Zaino";
     private static final String INEXISTES_ITEM = "Siummete";
 
-/**
-* test loading item path.
-*/
+    /**
+     * Test loading item path.
+     */
     @Test
     void testLoading() {
         final ItemReader itemReader = new ItemReaderImpl();

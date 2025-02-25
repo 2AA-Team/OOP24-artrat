@@ -18,6 +18,7 @@ import it.unibo.artrat.utils.api.Reader;
 /**
  * An abstract reader of the reader interface that handles the logic of 
  * loading from the file and leaves the casting policies to the extensions.
+ * @author Cristian Di Donato.
  */
 public abstract class AbstractReader implements Reader {
 
@@ -41,7 +42,7 @@ public abstract class AbstractReader implements Reader {
             throw new IllegalArgumentException(conf + " is null and not a valid map.");
         }
 
-        Map<?, ?> list = (Map<?, ?>) ob;
+        final Map<?, ?> list = (Map<?, ?>) ob;
         try {
             return list.get(field);
         } catch (IndexOutOfBoundsException e) {
@@ -51,6 +52,7 @@ public abstract class AbstractReader implements Reader {
     }
 
     /**
+     * Method to get the desired field in the yaml.
      * @param conf the desidered conf in yaml.
      * @param field the desidered field for the passed conf
      * @return the desidered field.

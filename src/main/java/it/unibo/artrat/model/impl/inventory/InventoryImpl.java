@@ -8,7 +8,7 @@ import it.unibo.artrat.model.api.inventory.Inventory;
 import it.unibo.artrat.model.api.inventory.Item;
 
 /**
- * An implementation of Inventory.
+ * An implementation of Inventory interface.
  * 
  * @author Cristian Di Donato
  */

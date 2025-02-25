@@ -7,7 +7,8 @@ import it.unibo.artrat.model.impl.inventory.AbstractItem;
 import it.unibo.artrat.model.impl.inventory.InventoryImpl;
 
 /**
- * A specific item.
+ * A specific item that completely clears the player's inventory once used.
+ * @author Cristian Di Donato.
  */
 public class MagicBackpack extends AbstractItem {
 

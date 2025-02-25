@@ -34,6 +34,7 @@ public abstract class AbstractCollisionChecker {
      * Collision manager contructor.
      * 
      * @param renderDistance of the map
+     * @param mainController the current maincontroller.
      */
     public AbstractCollisionChecker(final double renderDistance, final MainController mainController) {
         this.renderDistance = renderDistance;
