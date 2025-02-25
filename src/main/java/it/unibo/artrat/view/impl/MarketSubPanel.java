@@ -99,7 +99,6 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         marketPanel.repaint();
     }
 
-    // this private method updates the coin label every time I buy a new item.
     private void updateCoinLabel() {
         lupinoCash.setText("COINS: " + contr.getModel().getPlayer().getCoin().getCurrentAmount() + " $");
     }
