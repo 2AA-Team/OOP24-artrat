@@ -95,9 +95,16 @@ public class GameSubPanel extends AbstractSubPanel {
         }
 
         private void printCompass(final Graphics g, final double angle) {
+            final int compassBorder = 10;
             final Graphics2D g2 = (Graphics2D) g;
-            g2.rotate(angle, resizedX, resizedY);
-            g2.drawImage(COMPASS, 0, 0, resizedX * 2, resizedY * 2, null);
+            g2.rotate(angle, resizedX + compassBorder, resizedY + compassBorder);
+            g2.drawImage(
+                    COMPASS,
+                    compassBorder,
+                    compassBorder,
+                    resizedX * 2,
+                    resizedY * 2,
+                    null);
         }
 
         private void printObject(final Graphics g, final Point center, final Point playerPos,
