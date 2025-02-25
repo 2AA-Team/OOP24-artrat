@@ -20,6 +20,8 @@ import it.unibo.artrat.utils.impl.Point;
 
 /**
  * class that implements room interface to rapresent a square room.
+ * 
+ * @author Matteo Tonelli
  */
 public final class RoomImpl implements Room {
 

@@ -34,6 +34,8 @@ import it.unibo.artrat.utils.impl.commands.StopMovingUp;
 
 /**
  * game sub panel class.
+ * 
+ * @author Matteo Tonelli
  */
 public class GameSubPanel extends AbstractSubPanel {
     private static final int ONE_SECOND = 1000;

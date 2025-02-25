@@ -16,6 +16,8 @@ import it.unibo.artrat.utils.api.ResourceLoader;
 
 /**
  * class to load room from json file.
+ * 
+ * @author Matteo Tonelli
  */
 public class RoomsLoader implements ResourceLoader<Integer, char[][]> {
 

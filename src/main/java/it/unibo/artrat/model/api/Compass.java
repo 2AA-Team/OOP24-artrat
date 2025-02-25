@@ -2,6 +2,8 @@ package it.unibo.artrat.model.api;
 
 /**
  * compass interface.
+ * 
+ * @author Matteo Tonelli
  */
 public interface Compass {
 

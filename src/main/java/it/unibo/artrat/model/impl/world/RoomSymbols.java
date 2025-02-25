@@ -2,6 +2,8 @@ package it.unibo.artrat.model.impl.world;
 
 /**
  * enum that describe room objects.
+ * 
+ * @author Matteo Tonelli
  */
 public enum RoomSymbols {
     /**

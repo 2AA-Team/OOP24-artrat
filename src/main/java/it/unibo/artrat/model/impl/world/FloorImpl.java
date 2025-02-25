@@ -32,6 +32,8 @@ import it.unibo.artrat.utils.impl.Point;
 
 /**
  * implementation of interface floor.
+ * 
+ * @author Matteo Tonelli
  */
 public class FloorImpl implements Floor {
 

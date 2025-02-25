@@ -7,6 +7,8 @@ import it.unibo.artrat.utils.impl.Point;
 
 /**
  * compass to aim at the nearest point.
+ * 
+ * @author Matteo Tonelli
  */
 public class CompassNearest extends AbstractCompass {
 

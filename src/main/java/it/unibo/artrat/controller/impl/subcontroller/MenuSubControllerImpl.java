@@ -6,6 +6,8 @@ import it.unibo.artrat.controller.impl.MainControllerImpl;
 
 /**
  * implementation of the sub controller for the menu.
+ * 
+ * @author Matteo Tonelli
  */
 public class MenuSubControllerImpl extends AbstractSubController implements MenuSubController {
 

@@ -7,6 +7,8 @@ import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;
 
 /**
  * Room Builder Interface.
+ * 
+ * @author Matteo Tonelli
  */
 public interface RoomBuilder {
     /**

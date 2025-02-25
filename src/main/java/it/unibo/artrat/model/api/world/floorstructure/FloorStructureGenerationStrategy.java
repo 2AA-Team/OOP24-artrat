@@ -4,6 +4,8 @@ import java.util.List;
 
 /**
  * strategy to describe floor strutcure of rooms generation.
+ * 
+ * @author Matteo Tonelli
  */
 public interface FloorStructureGenerationStrategy {
 

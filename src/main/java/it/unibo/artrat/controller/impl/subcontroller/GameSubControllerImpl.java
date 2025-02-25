@@ -26,6 +26,8 @@ import it.unibo.artrat.utils.impl.Vector2d;
 
 /**
  * sub controller for the game.
+ * 
+ * @author Matteo Tonelli
  */
 public class GameSubControllerImpl extends AbstractSubController implements GameSubController {
     private static final Logger LOGGER = LoggerFactory.getLogger(GameSubControllerImpl.class);

@@ -10,6 +10,8 @@ import it.unibo.artrat.utils.impl.Point;
 
 /**
  * interface for the floor.
+ * 
+ * @author Matteo Tonelli
  */
 public interface Floor {
 

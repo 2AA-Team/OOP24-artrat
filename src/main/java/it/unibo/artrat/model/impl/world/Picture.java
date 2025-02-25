@@ -6,6 +6,8 @@ import it.unibo.artrat.utils.impl.Point;
 
 /**
  * game object to represents picture.
+ * 
+ * @author Matteo Tonelli
  */
 public class Picture extends AbstractGameObject implements Collectable {
 

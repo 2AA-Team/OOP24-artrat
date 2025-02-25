@@ -5,6 +5,8 @@ import it.unibo.artrat.utils.impl.Point;
 
 /**
  * class to represent exit door.
+ * 
+ * @author Matteo Tonelli
  */
 public class Exit extends AbstractGameObject {
 

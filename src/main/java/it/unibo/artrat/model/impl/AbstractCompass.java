@@ -5,6 +5,8 @@ import it.unibo.artrat.utils.impl.Point;
 
 /**
  * abstract compass.
+ * 
+ * @author Matteo Tonelli
  */
 public abstract class AbstractCompass implements Compass {
 

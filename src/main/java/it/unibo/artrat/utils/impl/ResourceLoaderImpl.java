@@ -17,6 +17,7 @@ import it.unibo.artrat.utils.api.ResourceLoader;
  * 
  * @param <I> input type
  * @param <O> output type
+ * @author Matteo Tonelli
  */
 public final class ResourceLoaderImpl<I, O> implements ResourceLoader<I, O> {
 

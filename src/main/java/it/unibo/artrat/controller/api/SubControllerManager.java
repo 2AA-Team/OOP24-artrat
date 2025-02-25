@@ -8,6 +8,8 @@ import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
 
 /**
  * interface for a class that manage all subcontroller.
+ * 
+ * @author Matteo Tonelli
  */
 public interface SubControllerManager {
     /**
@@ -40,6 +42,7 @@ public interface SubControllerManager {
 
     /**
      * return controller fot the seguent model: Missions.
+     * 
      * @return subController for the Missions panel.
      */
     MissionSubController getMissionsSubController();
