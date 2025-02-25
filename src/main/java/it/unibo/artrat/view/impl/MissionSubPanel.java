@@ -46,7 +46,7 @@ public class MissionSubPanel extends AbstractSubPanel {
 
         this.missionToClaimPanel = new JPanel(new GridLayout(0, 1, GAP, GAP));
         setMissionCenter();
-        allMissionsSetup(); 
+        allMissionsSetup();
         forceRedraw();
         setPanel(contMissionPane);
     }
