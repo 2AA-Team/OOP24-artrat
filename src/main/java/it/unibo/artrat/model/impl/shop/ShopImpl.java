@@ -1,4 +1,4 @@
-package it.unibo.artrat.model.impl.market;
+package it.unibo.artrat.model.impl.shop;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.api.inventory.ItemType;
-import it.unibo.artrat.model.api.market.Market;
+import it.unibo.artrat.model.api.shop.Shop;
 import it.unibo.artrat.model.impl.inventory.ItemFactoryImpl;
 import it.unibo.artrat.utils.api.ItemReader;
 import it.unibo.artrat.utils.impl.ItemReaderImpl;
@@ -22,19 +22,19 @@ import it.unibo.artrat.utils.impl.ItemReaderImpl;
  * 
  * @author Manuel Benagli
  */
-public class MarketImpl implements Market {
+public class ShopImpl implements Shop {
     private final URL itemPath = Thread.currentThread().getContextClassLoader().getResource(
             "items" + File.separator
                     + "items.yaml");
 
     private List<Item> itemsToBuy;
     private final ItemFactoryImpl itemFactory;
-    private static final Logger LOGGER = LoggerFactory.getLogger(MarketImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ShopImpl.class);
 
     /**
      * Shop default constructor.
      */
-    public MarketImpl() {
+    public ShopImpl() {
         this.itemsToBuy = new ArrayList<>();
         this.itemFactory = new ItemFactoryImpl();
     }
@@ -44,9 +44,9 @@ public class MarketImpl implements Market {
      * 
      * @param mark a shop object
      */
-    public MarketImpl(final Market mark) {
+    public ShopImpl(final Shop shop) {
         this.itemsToBuy = new ArrayList<>();
-        this.itemsToBuy.addAll(mark.getPurchItems());
+        this.itemsToBuy.addAll(shop.getPurchItems());
         this.itemFactory = new ItemFactoryImpl();
     }
 
@@ -54,7 +54,7 @@ public class MarketImpl implements Market {
      * {@inheritDoc}
      */
     @Override
-    public void initMarket() {
+    public void initShop() {
         final ItemReader itemReader = new ItemReaderImpl();
         try {
             itemReader.setPath(itemPath.toURI());

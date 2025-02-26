@@ -108,7 +108,7 @@ public abstract class AbstractSubController implements SubController {
      */
     @Override
     public void goToShop() {
-        this.mainController.setStage(Stage.STORE);
+        this.mainController.setStage(Stage.SHOP);
     }
 
     /**

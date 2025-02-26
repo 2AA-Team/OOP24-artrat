@@ -1,10 +1,10 @@
-package it.unibo.artrat.model.impl.market;
+package it.unibo.artrat.model.impl.shop;
 
 import java.util.ArrayList;
 import java.util.List;
 import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.api.inventory.ItemType;
-import it.unibo.artrat.model.api.market.ItemManager;
+import it.unibo.artrat.model.api.shop.ItemManager;
 
 /**
  *  The model implementation of ItemManager.

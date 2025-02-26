@@ -4,7 +4,7 @@ import it.unibo.artrat.controller.api.subcontroller.GameSubController;
 import it.unibo.artrat.controller.api.subcontroller.InventorySubController;
 import it.unibo.artrat.controller.api.subcontroller.MenuSubController;
 import it.unibo.artrat.controller.api.subcontroller.MissionSubController;
-import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
+import it.unibo.artrat.controller.api.subcontroller.ShopSubController;
 
 /**
  * interface for a class that manage all subcontroller.
@@ -32,11 +32,11 @@ public interface SubControllerManager {
     InventorySubController getInventorySubController();
 
     /**
-     * return controller for the seguent model: Store.
+     * return controller for the seguent model: Shop.
      * 
-     * @return subController for the Store
+     * @return subController for the Shop
      */
-    StoreSubController getStoreSubController();
+    ShopSubController getShopSubController();
 
     /**
      * return controller fot the seguent model: Missions.

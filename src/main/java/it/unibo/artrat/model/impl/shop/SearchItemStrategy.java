@@ -1,4 +1,4 @@
-package it.unibo.artrat.model.impl.market;
+package it.unibo.artrat.model.impl.shop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 import it.unibo.artrat.model.api.inventory.Item;
-import it.unibo.artrat.model.api.market.SearchStrategy;
+import it.unibo.artrat.model.api.shop.SearchStrategy;
 
 /**
  * SearchItemStrategy class, using items and a String of character to search.

@@ -6,14 +6,14 @@ import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.api.inventory.ItemType;
 
 /**
- * ShopSubController for the seguent model: store (market).
+ * ShopSubController for the seguent model: shop.
  * getTypeName, getDescription, getItemName are they are reported in the market controller as well as in the inventory,
- * the difference is that they will be used with getMarket(), as the shop is detached from the player and the inventory,
+ * the difference is that they will be used with getShop(), as the shop is detached from the player and the inventory,
  * as can be seen from the UML scheme.
  * 
  * @author Manuel Benagli
  */
-public interface StoreSubController extends SubController {
+public interface ShopSubController extends SubController {
 
     /**
      * A list of all the purchasable items in the Shop.

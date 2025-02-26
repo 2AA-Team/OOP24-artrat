@@ -3,8 +3,8 @@ package it.unibo.artrat.model.api;
 import java.util.List;
 
 import it.unibo.artrat.model.api.characters.Player;
-import it.unibo.artrat.model.api.market.Market;
 import it.unibo.artrat.model.api.missioncenter.Mission;
+import it.unibo.artrat.model.api.shop.Shop;
 import it.unibo.artrat.model.api.world.Floor;
 
 /**
@@ -27,18 +27,18 @@ public interface Model {
     void setPlayer(Player player);
 
     /**
-     * Method which obtains a copy of the current state of the market.
+     * Method which obtains a copy of the current state of the shop.
      * 
-     * @return a copy of the current market
+     * @return a copy of the current shop.
      */
-    Market getMarket();
+    Shop getShop();
 
     /**
-     * Method which updaets the current market instance with the new passed.
+     * Method which updaets the current shop instance with the new passed.
      * 
-     * @param market the passed market.
+     * @param shop the passed shop.
      */
-    void setMarket(Market market);
+    void setShop(Shop shop);
 
     /**
      * A method that obtains a copy of the current state of mision center.

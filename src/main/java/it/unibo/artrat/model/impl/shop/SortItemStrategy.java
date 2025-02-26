@@ -1,10 +1,10 @@
-package it.unibo.artrat.model.impl.market;
+package it.unibo.artrat.model.impl.shop;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import it.unibo.artrat.model.api.inventory.Item;
-import it.unibo.artrat.model.api.market.SortStrategy;
+import it.unibo.artrat.model.api.shop.SortStrategy;
 
 /**
  * SortItemStrategy class, which implements SortStrategy to sort items based on specific criteria.

@@ -97,8 +97,8 @@ public class MainViewImpl implements MainView {
             case GAME:
                 subPanel = new GameSubPanel(controller.getControllerManager().getGameSubController());
                 break;
-            case STORE:
-                subPanel = new MarketSubPanel(controller.getControllerManager().getStoreSubController());
+            case SHOP:
+                subPanel = new ShopSubPanel(controller.getControllerManager().getShopSubController());
                 break;
             case INVENTORY:
                 subPanel = new InventorySubPanel(controller.getControllerManager().getInventorySubController());

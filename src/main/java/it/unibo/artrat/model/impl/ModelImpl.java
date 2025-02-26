@@ -5,12 +5,12 @@ import java.util.List;
 
 import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.api.characters.Player;
-import it.unibo.artrat.model.api.market.Market;
 import it.unibo.artrat.model.api.missioncenter.MissionCenter;
+import it.unibo.artrat.model.api.shop.Shop;
 import it.unibo.artrat.model.api.world.Floor;
 import it.unibo.artrat.model.impl.characters.Lupino;
-import it.unibo.artrat.model.impl.market.MarketImpl;
 import it.unibo.artrat.model.impl.missioncenter.MissionCenterImpl;
+import it.unibo.artrat.model.impl.shop.ShopImpl;
 import it.unibo.artrat.model.api.missioncenter.Mission;
 import it.unibo.artrat.model.impl.world.FloorImpl;
 import it.unibo.artrat.utils.impl.Point;
@@ -20,7 +20,7 @@ import it.unibo.artrat.utils.impl.Point;
  */
 public class ModelImpl implements Model {
     private Player player;
-    private Market market;
+    private Shop shop;
     private List<Mission> missions;
     private Floor floor;
 
@@ -29,10 +29,10 @@ public class ModelImpl implements Model {
      */
     public ModelImpl() {
         this.player = new Lupino(new Point(), new Point());
-        this.market = new MarketImpl();
+        this.shop = new ShopImpl();
         final MissionCenter missionCenter = new MissionCenterImpl();
         this.floor = new FloorImpl();
-        this.market.initMarket();
+        this.shop.initShop();
         missionCenter.initMissionCenter();
         missions = missionCenter.getMissionList();
 
@@ -45,7 +45,7 @@ public class ModelImpl implements Model {
      */
     public ModelImpl(final Model m) {
         this.player = m.getPlayer();
-        this.market = m.getMarket();
+        this.shop = m.getShop();
         this.missions = m.getMissions();
         this.floor = m.getFloor();
     }
@@ -70,16 +70,16 @@ public class ModelImpl implements Model {
      * {@inheritDoc}
      */
     @Override
-    public Market getMarket() {
-        return new MarketImpl(market);
+    public Shop getShop() {
+        return new ShopImpl(shop);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setMarket(final Market market) {
-        this.market = new MarketImpl(market);
+    public void setShop(final Shop shop) {
+        this.shop = new ShopImpl(shop);
     }
 
     /**

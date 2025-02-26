@@ -9,12 +9,12 @@ import it.unibo.artrat.controller.api.subcontroller.GameSubController;
 import it.unibo.artrat.controller.api.subcontroller.InventorySubController;
 import it.unibo.artrat.controller.api.subcontroller.MenuSubController;
 import it.unibo.artrat.controller.api.subcontroller.MissionSubController;
-import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
+import it.unibo.artrat.controller.api.subcontroller.ShopSubController;
 import it.unibo.artrat.controller.impl.subcontroller.GameSubControllerImpl;
 import it.unibo.artrat.controller.impl.subcontroller.InventorySubControllerImpl;
 import it.unibo.artrat.controller.impl.subcontroller.MenuSubControllerImpl;
 import it.unibo.artrat.controller.impl.subcontroller.MissionSubControllerImpl;
-import it.unibo.artrat.controller.impl.subcontroller.StoreSubControllerImpl;
+import it.unibo.artrat.controller.impl.subcontroller.ShopSubControllerImpl;
 import it.unibo.artrat.utils.api.ResourceLoader;
 
 /**
@@ -24,7 +24,7 @@ public class SubControllerManagerImpl implements SubControllerManager {
     private final MenuSubController menuSubController;
     private final GameSubController gameSubController;
     private final InventorySubController inventorySubController;
-    private final StoreSubController storeSubController;
+    private final ShopSubController shopSubController;
     private final MissionSubController missionSubController;
 
     /**
@@ -39,7 +39,7 @@ public class SubControllerManagerImpl implements SubControllerManager {
         this.gameSubController = new GameSubControllerImpl(mainController, rl);
         this.menuSubController = new MenuSubControllerImpl(mainController);
         this.inventorySubController = new InventorySubControllerImpl(mainController);
-        this.storeSubController = new StoreSubControllerImpl(mainController);
+        this.shopSubController = new ShopSubControllerImpl(mainController);
         this.missionSubController = new MissionSubControllerImpl(mainController);
     }
 
@@ -74,8 +74,8 @@ public class SubControllerManagerImpl implements SubControllerManager {
      * {@inheritDoc}
      */
     @Override
-    public StoreSubController getStoreSubController() {
-        return Objects.requireNonNull(this.storeSubController);
+    public ShopSubController getShopSubController() {
+        return Objects.requireNonNull(this.shopSubController);
     }
 
     /**

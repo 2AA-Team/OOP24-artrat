@@ -1,4 +1,4 @@
-package it.unibo.artrat.model.impl.market;
+package it.unibo.artrat.model.impl.shop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.api.inventory.ItemType;
-import it.unibo.artrat.model.api.market.FilterStrategy;
+import it.unibo.artrat.model.api.shop.FilterStrategy;
 
 /**
  * FilterItemStrategy class for items (using itemType).

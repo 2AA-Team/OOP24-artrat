@@ -1,4 +1,4 @@
-package it.unibo.artrat.model.api.market;
+package it.unibo.artrat.model.api.shop;
 
 import java.util.List;
 import it.unibo.artrat.model.api.inventory.Item;

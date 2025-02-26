@@ -16,9 +16,9 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
+import it.unibo.artrat.controller.api.subcontroller.ShopSubController;
 import it.unibo.artrat.model.api.inventory.ItemType;
-import it.unibo.artrat.view.api.MarketView;
+import it.unibo.artrat.view.api.ShopView;
 
 /**
  * Here I see the collection of all the items I can purchase, and different
@@ -27,14 +27,14 @@ import it.unibo.artrat.view.api.MarketView;
  * 
  * @author Manuel Benagli
  */
-public class MarketSubPanel extends AbstractSubPanel implements MarketView {
+public class ShopSubPanel extends AbstractSubPanel implements ShopView {
     private static final ItemType ITEMTYPE_ALL = null;
     private static final int SEARCH_TEXT_FIELD = 12;
     private static final int GAP = 5;
-    private final StoreSubController contr;
-    private final JPanel marketPanel = new JPanel();
+    private final ShopSubController contr;
+    private final JPanel shopPanel = new JPanel();
     private final JPanel contPane = new JPanel(new BorderLayout());
-    private final JScrollPane scrollPanel = new JScrollPane(marketPanel);
+    private final JScrollPane scrollPanel = new JScrollPane(shopPanel);
     private final JLabel lupinoCash = new JLabel();
     private JPanel purchItemPanel = new JPanel();
     private final JTextField searchItemField = new JTextField(SEARCH_TEXT_FIELD);
@@ -44,7 +44,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
      * 
      * @param contr ShopSubController.
      */
-    public MarketSubPanel(final StoreSubController contr) {
+    public ShopSubPanel(final ShopSubController contr) {
         this.contr = contr;
     }
 
@@ -52,7 +52,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
      * return a confirm message when it's needed.
      */
     private boolean toConfirm(final String text, final String name) {
-        return JOptionPane.showConfirmDialog(marketPanel, text, name,
+        return JOptionPane.showConfirmDialog(shopPanel, text, name,
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
     }
 
@@ -61,9 +61,9 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
      */
     @Override
     public void showMessage(final String message, final String name) {
-        JOptionPane.showMessageDialog(marketPanel, message, name, JOptionPane.INFORMATION_MESSAGE);
-        marketPanel.revalidate();
-        marketPanel.repaint();
+        JOptionPane.showMessageDialog(shopPanel, message, name, JOptionPane.INFORMATION_MESSAGE);
+        shopPanel.revalidate();
+        shopPanel.repaint();
     }
 
     /**
@@ -71,7 +71,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
      */
     @Override
     public void initComponents() {
-        marketPanel.setLayout(new BorderLayout(GAP, GAP));
+        shopPanel.setLayout(new BorderLayout(GAP, GAP));
         scrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         contPane.add(scrollPanel, BorderLayout.CENTER);
         scrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -92,8 +92,8 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     @Override
     protected void forceRedraw() {
         allItemsSetup();
-        marketPanel.revalidate();
-        marketPanel.repaint();
+        shopPanel.revalidate();
+        shopPanel.repaint();
     }
 
     private void updateCoinLabel() {
@@ -125,7 +125,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         gbc.gridx = 2;
         upperJPanel.add(searchItemField, gbc);
 
-        marketPanel.add(upperJPanel, BorderLayout.NORTH);
+        shopPanel.add(upperJPanel, BorderLayout.NORTH);
 
         filterComboBox.addActionListener(e -> {
             final ItemType selectedType = (ItemType) filterComboBox.getSelectedItem();
@@ -177,7 +177,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
 
         bottomPan.add(toMenu, BorderLayout.EAST);
         bottomPan.add(lupinoCash, BorderLayout.WEST);
-        marketPanel.add(bottomPan, BorderLayout.SOUTH);
+        shopPanel.add(bottomPan, BorderLayout.SOUTH);
     }
 
     private void itemSearch(final String searchText) {
@@ -230,6 +230,6 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
                 }
             });
         }
-        marketPanel.add(purchItemPanel, BorderLayout.CENTER);
+        shopPanel.add(purchItemPanel, BorderLayout.CENTER);
     }
 }

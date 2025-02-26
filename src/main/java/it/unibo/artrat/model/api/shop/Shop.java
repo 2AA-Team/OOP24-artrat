@@ -1,4 +1,4 @@
-package it.unibo.artrat.model.api.market;
+package it.unibo.artrat.model.api.shop;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,7 +10,7 @@ import it.unibo.artrat.model.api.inventory.Item;
  * 
  * @author Manuel Benagli
  */
-public interface Market {
+public interface Shop {
 
     /**
      * this method gets a list of all the purchasable items.
@@ -40,5 +40,5 @@ public interface Market {
      * It adds my items (created using the private method createItem) in my list.
      * @throws IOException IOException
      */
-    void initMarket();
+    void initShop();
 }
