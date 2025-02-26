@@ -19,7 +19,7 @@ import it.unibo.artrat.model.impl.world.RoomImpl;
 import it.unibo.artrat.model.impl.world.roomgeneration.ObjectInsertionRandom;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationEmpty;
 
-class RoomImplTest {
+class RoomTest {
 
     private Room room;
     private static final int SIZE = 5;

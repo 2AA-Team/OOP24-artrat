@@ -10,6 +10,7 @@ import java.util.function.Supplier;
 
 import org.junit.jupiter.api.Test;
 
+import it.unibo.artrat.model.api.Compass;
 import it.unibo.artrat.model.impl.CompassNearestExit;
 import it.unibo.artrat.utils.impl.Point;
 
@@ -19,7 +20,7 @@ class CompassNearestTest {
     void testCompassFullList() {
         final double delta = 0.001;
         final double expected = 0.785;
-        CompassNearestExit compass;
+        Compass compass;
         Supplier<List<Point>> north = () -> Arrays.asList(
                 new Point(1, 1),
                 new Point(2, 2),
@@ -39,13 +40,13 @@ class CompassNearestTest {
 
     @Test
     void testGetEmptySupplier() {
-        final CompassNearestExit compass;
+        final Compass compass;
         final Supplier<List<Point>> north = Arrays::asList;
         Supplier<Point> center = () -> new Point();
         compass = new CompassNearestExit(center, north);
         assertEquals(0, compass.calculateAngle());
         center = () -> null;
-        final CompassNearestExit compass2 = new CompassNearestExit(center, north);
+        final Compass compass2 = new CompassNearestExit(center, north);
         assertThrows(NullPointerException.class, () -> {
             compass2.calculateAngle();
         });
