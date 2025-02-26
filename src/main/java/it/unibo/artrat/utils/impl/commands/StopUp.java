@@ -2,12 +2,12 @@ package it.unibo.artrat.utils.impl.commands;
 
 import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.utils.api.Directions;
-import it.unibo.artrat.utils.api.commands.CommandStop;
+import it.unibo.artrat.utils.api.commands.Command;
 
 /**
  * Stop move up command for entity movement.
  */
-public class StopUp implements CommandStop {
+public class StopUp implements Command {
 
     /**
      * {@inheritDoc}
