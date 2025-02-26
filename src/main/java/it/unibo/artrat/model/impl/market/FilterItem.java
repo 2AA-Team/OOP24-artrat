@@ -20,7 +20,7 @@ public class FilterItem implements GenericFilter<Item, ItemType> {
      * {@inheritDoc}
      */
     @Override
-    public List<Item> filterStrategy(final List<Item> passedList, final ItemType currenType) {
+    public List<Item> genericFilter(final List<Item> passedList, final ItemType currenType) {
         if (currenType == null) {
             return new ArrayList<>(passedList.stream().collect(Collectors.toList()));
         }

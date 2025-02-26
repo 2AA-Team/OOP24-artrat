@@ -21,5 +21,5 @@ public interface GenericSort<X> {
      * @param dir the sorting direction (creasing or decreasing).
      * @return a list of generic creased or decreased in base of direction.
      */
-    List<X> sortStrategy(List<X> passedList, int dir);
+    List<X> genericSort(List<X> passedList, int dir);
 }

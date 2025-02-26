@@ -42,7 +42,7 @@ public class ItemManagerImpl implements ItemManager {
      */
     @Override
     public List<Item> sortItemPrice(final int dir) {
-        return this.sortStrategy.sortStrategy(itemList, dir);
+        return this.sortStrategy.genericSort(itemList, dir);
     }
 
     /**
@@ -51,8 +51,8 @@ public class ItemManagerImpl implements ItemManager {
     @Override
     public List<Item> filterItems(final ItemType itemType) {
         this.currenType = itemType;
-        final List<Item> filteredList = filterItemStrategy.filterStrategy(itemList, currenType);
-        return this.searchItemStrategy.searchStrategy(filteredList, currentSearch);
+        final List<Item> filteredList = filterItemStrategy.genericFilter(itemList, currenType);
+        return this.searchItemStrategy.genericSearch(filteredList, currentSearch);
     }
 
     /**
@@ -61,8 +61,8 @@ public class ItemManagerImpl implements ItemManager {
     @Override
     public List<Item> searchItem(final String nameToSearch) {
         currentSearch = nameToSearch;
-        final List<Item> searchedList = searchItemStrategy.searchStrategy(itemList, currentSearch);
-        return this.filterItemStrategy.filterStrategy(searchedList, this.currenType);
+        final List<Item> searchedList = searchItemStrategy.genericSearch(itemList, currentSearch);
+        return this.filterItemStrategy.genericFilter(searchedList, this.currenType);
     }
 
     /**

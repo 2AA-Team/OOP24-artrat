@@ -17,7 +17,7 @@ public class SortItem implements GenericSort<Item> {
      * {@inheritDoc}
      */
     @Override
-    public List<Item> sortStrategy(final List<Item> passedList, final int dir) {
+    public List<Item> genericSort(final List<Item> passedList, final int dir) {
         Comparator<Item> sortingDir = Comparator.comparing(Item::getPrice);
         if (dir == 0) {
             sortingDir = sortingDir.reversed();

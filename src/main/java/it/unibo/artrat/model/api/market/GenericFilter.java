@@ -19,5 +19,5 @@ public interface GenericFilter<X, T> {
      * @param currenType the type of the passedList
      * @return a list of generics filtered by currenType.
      */
-    List<X> filterStrategy(List<X> passedList, T currenType);
+    List<X> genericFilter(List<X> passedList, T currenType);
 }

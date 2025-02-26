@@ -19,7 +19,7 @@ public class SearchItem implements GenericSearch<Item, String> {
      * {@inheritDoc}
      */
     @Override
-    public List<Item> searchStrategy(final List<Item> passedList, final String currentSearch) {
+    public List<Item> genericSearch(final List<Item> passedList, final String currentSearch) {
         return new ArrayList<>(passedList.stream()
             .filter(it -> it.getClass().getSimpleName().toLowerCase(Locale.getDefault())
             .startsWith(currentSearch.trim().toLowerCase(Locale.getDefault())))
