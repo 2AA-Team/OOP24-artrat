@@ -45,7 +45,7 @@ public final class GameEngineImpl implements GameEngine {
     /**
      * Game engine constructor.
      * 
-     * @throws IOException
+     * @throws IOException if render distance is too low
      */
     public GameEngineImpl() throws IOException {
         this.status = GameStatus.STOPPED;

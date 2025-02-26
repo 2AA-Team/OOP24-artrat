@@ -199,24 +199,27 @@ public class FloorImpl implements Floor {
             for (int j = 0; j < floorMap.size(); j++) {
                 if (isARoom(j, i)) {
                     if (isStartRoom(j, i)) {
-                        builder = builder.insertGenerationStrategy(new RoomGenerationEmpty());
-                        builder = builder.insertNumberOfEnemy(0);
-                        builder = builder.insertNumberOfCollectables(0);
+                        builder = builder.insertGenerationStrategy(new RoomGenerationEmpty())
+                                .insertNumberOfEnemy(0)
+                                .insertNumberOfCollectables(0)
+                                .insertPassages(
+                                        isARoom(j, i - 1),
+                                        isARoom(j + 1, i),
+                                        true, // passage for the exit
+                                        isARoom(j - 1, i));
                         setStartPosition(j, i, roomSize);
                         setExitPosition(j, i, roomSize);
-                        builder = builder.insertPassages(isARoom(j, i - 1), isARoom(j + 1, i), true,
-                                isARoom(j - 1, i));
                     } else {
                         builder = builder.insertGenerationStrategy(
-                                this.generationsStrategy.get(RANDOM.nextInt(this.generationsStrategy.size())));
-                        builder = builder.insertNumberOfEnemy(RANDOM.nextInt(minEnemyInARoom, maxEnemyInARoom));
-                        builder = builder.insertNumberOfCollectables(
-                                RANDOM.nextInt(minCollectablesInARoom, maxCollectablesInARoom));
-                        builder = builder.insertPassages(
-                                isARoom(j, i - 1),
-                                isARoom(j + 1, i),
-                                isARoom(j, i + 1),
-                                isARoom(j - 1, i));
+                                this.generationsStrategy.get(RANDOM.nextInt(this.generationsStrategy.size())))
+                                .insertNumberOfEnemy(RANDOM.nextInt(minEnemyInARoom, maxEnemyInARoom))
+                                .insertNumberOfCollectables(
+                                        RANDOM.nextInt(minCollectablesInARoom, maxCollectablesInARoom))
+                                .insertPassages(
+                                        isARoom(j, i - 1),
+                                        isARoom(j + 1, i),
+                                        isARoom(j, i + 1),
+                                        isARoom(j - 1, i));
                     }
                     addNewRoom(builder.build(), j, i, roomSize);
                 }

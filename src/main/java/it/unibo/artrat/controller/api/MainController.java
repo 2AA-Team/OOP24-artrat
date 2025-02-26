@@ -68,7 +68,7 @@ public interface MainController {
     /**
      * sends to engine the command.
      * 
-     * @param cmd
+     * @param cmd command
      */
     void input(Command cmd);
 
