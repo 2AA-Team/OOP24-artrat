@@ -2,18 +2,13 @@ package it.unibo.artrat.model.impl.world;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import it.unibo.artrat.model.api.Collectable;
 import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.world.Floor;

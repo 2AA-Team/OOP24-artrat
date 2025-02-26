@@ -2,7 +2,6 @@ package it.unibo.artrat.utils.api;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
 
 /**
  * ResourceLoader is responsible for fetching and loading data.

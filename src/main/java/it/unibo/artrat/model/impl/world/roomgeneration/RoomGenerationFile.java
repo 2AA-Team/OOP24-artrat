@@ -2,7 +2,6 @@ package it.unibo.artrat.model.impl.world.roomgeneration;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
