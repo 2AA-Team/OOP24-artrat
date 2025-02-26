@@ -12,7 +12,6 @@ import it.unibo.artrat.model.api.inventory.ItemType;
  * @author Manuel Benagli
  */
 public interface ItemManager {
-
     /**
      * this method sorts item's price using SortItemStrategy.
      * 
@@ -27,7 +26,7 @@ public interface ItemManager {
      * the passedList as parameter.
      * 
      * @param itemType the type of item (POWERUP or CONSUMABLE).
-     * @return A List of POWERUP or CONSUMABLE items.
+     * @return A List of POWERUP or CONSUMABLE items .
      */
     List<Item> filterItems(ItemType itemType);
 
@@ -37,7 +36,6 @@ public interface ItemManager {
      * the passedList as parameter.
      * The search is based character by character starting from the beginning.
      * There are no spaces and uppercase and lowercase letters don't matter.
-     * 
      * @param nameToSearch the name of the item to search.
      * @return A List of items with characters corresponding to those typed.
      */

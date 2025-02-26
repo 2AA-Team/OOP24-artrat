@@ -34,6 +34,8 @@ import it.unibo.artrat.utils.impl.commands.StopUp;
 
 /**
  * game sub panel class.
+ * 
+ * @author Matteo Tonelli
  */
 public class GameSubPanel extends AbstractSubPanel {
     private static final int ONE_SECOND = 1000;
@@ -53,7 +55,7 @@ public class GameSubPanel extends AbstractSubPanel {
     private static final Map<RoomSymbols, Image> MAPSYMBOLS = Map.of(
             RoomSymbols.ENEMY, getObjectImage("enemy.png"),
             RoomSymbols.WALL, getObjectImage("wall.png"),
-            RoomSymbols.VALUE, getObjectImage("picture.png"),
+            RoomSymbols.COLLECTABLE, getObjectImage("painting.png"),
             RoomSymbols.EXIT, getObjectImage("exit.png"),
             RoomSymbols.PLAYER, getObjectImage("player.png"));
     private static final Image COMPASS = getObjectImage("compass.png");
@@ -83,7 +85,7 @@ public class GameSubPanel extends AbstractSubPanel {
             final Point playerPos = gameSubController.getPlayerPos();
             printObject(g, center, playerPos, RoomSymbols.WALL, gameSubController.getVisibleWallPositions());
             printObject(g, center, playerPos, RoomSymbols.EXIT, gameSubController.getExitPos());
-            printObject(g, center, playerPos, RoomSymbols.VALUE, gameSubController.getVisiblePaintings());
+            printObject(g, center, playerPos, RoomSymbols.COLLECTABLE, gameSubController.getVisibleCollectables());
             printObject(g, center, playerPos, RoomSymbols.ENEMY, gameSubController.getVisibleEnemyPositions());
             printPlayer(g, center);
 
@@ -95,13 +97,12 @@ public class GameSubPanel extends AbstractSubPanel {
         }
 
         private void printCompass(final Graphics g, final double angle) {
-            final int compassBorder = 10;
             final Graphics2D g2 = (Graphics2D) g;
-            g2.rotate(angle, resizedX + compassBorder, resizedY + compassBorder);
+            g2.rotate(angle, resizedX + resizedX, resizedY + resizedX);
             g2.drawImage(
                     COMPASS,
-                    compassBorder,
-                    compassBorder,
+                    resizedX,
+                    resizedX,
                     resizedX * 2,
                     resizedY * 2,
                     null);
@@ -155,19 +156,19 @@ public class GameSubPanel extends AbstractSubPanel {
         tmp.add(this.mapPanel, BorderLayout.CENTER);
 
         final JLabel timerJLabel = new JLabel("TIMER");
-        final JLabel pictureCounterLabel = new JLabel("Collectable: ");
+        final JLabel collectableCounterLabel = new JLabel("Collectable: ");
         southJPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 100, verticalGap)); // 50px tra i due gruppi
 
         final JPanel timerPanel = new JPanel();
         timerPanel.add(timerJLabel);
         timerPanel.add(timerCountdown);
 
-        final JPanel picturePanel = new JPanel();
-        picturePanel.add(pictureCounterLabel);
-        picturePanel.add(counterColletable);
+        final JPanel collectableLabel = new JPanel();
+        collectableLabel.add(collectableCounterLabel);
+        collectableLabel.add(counterColletable);
 
         southJPanel.add(timerPanel);
-        southJPanel.add(picturePanel);
+        southJPanel.add(collectableLabel);
         tmp.add(southJPanel, BorderLayout.SOUTH);
 
         tmp.addKeyListener(new KeyListener() {

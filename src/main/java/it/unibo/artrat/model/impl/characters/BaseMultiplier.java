@@ -10,12 +10,12 @@ import it.unibo.artrat.model.api.characters.Multiplier;
  * 
  * @author Cristian Di Donato.
  */
-public class MultiplierImpl extends AbstractMultiplier {
+public class BaseMultiplier extends AbstractMultiplier {
     /**
      * A constructor that initialize a new istance of multiplier with the default
      * value.
      */
-    public MultiplierImpl() {
+    public BaseMultiplier() {
         super();
     }
 
@@ -24,7 +24,7 @@ public class MultiplierImpl extends AbstractMultiplier {
      * 
      * @param mpd the passed Multiplier.
      */
-    public MultiplierImpl(final Multiplier mpd) {
+    public BaseMultiplier(final Multiplier mpd) {
         super(mpd);
     }
 

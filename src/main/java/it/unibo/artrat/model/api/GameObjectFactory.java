@@ -36,13 +36,13 @@ public interface GameObjectFactory {
     Enemy getRandomEnemy(int x, int y);
 
     /**
-     * create a new valuable object game object.
+     * create a new collectable object game object.
      * 
      * @param x x position
      * @param y y position
-     * @return the game object for the valuable object
+     * @return the game object for the collectable object
      */
-    Collectable getPicture(int x, int y);
+    Collectable getCollectable(int x, int y);
 
     /**
      * create a new exit.

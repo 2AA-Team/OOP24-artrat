@@ -5,6 +5,8 @@ import it.unibo.artrat.utils.impl.Point;
 
 /**
  * class that represents wall gameobject.
+ * 
+ * @author Matteo Tonelli
  */
 public class Wall extends AbstractGameObject {
 

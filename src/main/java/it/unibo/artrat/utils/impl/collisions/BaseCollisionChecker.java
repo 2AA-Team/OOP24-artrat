@@ -111,21 +111,21 @@ public class BaseCollisionChecker extends AbstractCollisionChecker {
      * {@inheritDoc}
      */
     @Override
-    public void updateAndCheckPaintings() {
+    public void updateAndCheckCollectables() {
         final BoundingBox bbPlayer = this.getPlayer().getBoundingBox();
         final Set<Collectable> updated = new HashSet<>();
         final Player p = this.getPlayer();
         final Floor floor = this.getFloor();
 
-        for (final Collectable value : this.getFloor().getValues()) {
-            if (!value.getBoundingBox().isColliding(bbPlayer)) {
-                updated.add(value);
+        for (final Collectable collectable : this.getFloor().getCollectables()) {
+            if (!collectable.getBoundingBox().isColliding(bbPlayer)) {
+                updated.add(collectable);
             } else {
-                p.addCollectable(value);
+                p.addCollectable(collectable);
             }
         }
         this.setPlayer(p);
-        floor.setValues(updated);
+        floor.setCollectables(updated);
         this.setFloor(floor);
     }
 

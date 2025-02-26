@@ -16,7 +16,7 @@ import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.world.Floor;
-import it.unibo.artrat.model.impl.CompassNearest;
+import it.unibo.artrat.model.impl.CompassNearestExit;
 import it.unibo.artrat.model.impl.world.FloorImpl;
 import it.unibo.artrat.utils.api.BoundingBox;
 import it.unibo.artrat.utils.api.ResourceLoader;
@@ -26,6 +26,8 @@ import it.unibo.artrat.utils.impl.Vector2d;
 
 /**
  * sub controller for the game.
+ * 
+ * @author Matteo Tonelli
  */
 public class GameSubControllerImpl extends AbstractSubController implements GameSubController {
     private static final Logger LOGGER = LoggerFactory.getLogger(GameSubControllerImpl.class);
@@ -87,9 +89,9 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
      * {@inheritDoc}
      */
     @Override
-    public Set<Point> getVisiblePaintings() {
+    public Set<Point> getVisibleCollectables() {
         final BoundingBox bb = new BoundingBoxImpl(getPlayerPos(), renderDistance, renderDistance);
-        return this.getModel().getFloor().getValues().stream().filter(x -> bb.isColliding(x.getBoundingBox()))
+        return this.getModel().getFloor().getCollectables().stream().filter(x -> bb.isColliding(x.getBoundingBox()))
                 .map(GameObject::getPosition).collect(Collectors.toSet());
     }
 
@@ -118,7 +120,7 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
         player.setSpeed(new Vector2d());
         model.setPlayer(player);
         this.updateCentralizeModel(model);
-        this.compass = new CompassNearest(
+        this.compass = new CompassNearestExit(
                 this::getPlayerPos,
                 () -> new ArrayList<>(getExitPos()));
 

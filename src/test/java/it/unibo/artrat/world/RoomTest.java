@@ -19,7 +19,7 @@ import it.unibo.artrat.model.impl.world.RoomImpl;
 import it.unibo.artrat.model.impl.world.roomgeneration.ObjectInsertionRandom;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationEmpty;
 
-class RoomImplTest {
+class RoomTest {
 
     private Room room;
     private static final int SIZE = 5;
@@ -30,9 +30,9 @@ class RoomImplTest {
                 .insertRoomSize(SIZE)
                 .insertGenerationStrategy(new RoomGenerationEmpty())
                 .insertInsertionStrategyEnemy(new ObjectInsertionRandom<>())
-                .insertInsertionStrategyValue(new ObjectInsertionRandom<>())
+                .insertInsertionStrategyCollectables(new ObjectInsertionRandom<>())
                 .insertNumberOfEnemy(2)
-                .insertNumberOfValues(3)
+                .insertNumberOfCollectables(3)
                 .insertPassages(true, true, false, false)
                 .build();
     }
@@ -44,9 +44,9 @@ class RoomImplTest {
         final Set<Enemy> enemies = room.getEnemies();
         assertNotNull(enemies, "Room enemies set should not be null");
         assertEquals(2, enemies.size(), "The number of enemies should be as set in the builder");
-        final Set<Collectable> values = room.getValues();
-        assertNotNull(values, "Room values set should not be null");
-        assertEquals(3, values.size(), "The number of values should match what was set in the builder");
+        final Set<Collectable> collectables = room.getCollectables();
+        assertNotNull(collectables, "Room collectables set should not be null");
+        assertEquals(3, collectables.size(), "The number of collectables should match what was set in the builder");
     }
 
     @Test
@@ -72,8 +72,8 @@ class RoomImplTest {
             new RoomImpl.RoomBuilderImpl().insertNumberOfEnemy(-1).build();
         }, "Should throw an exception when the number of enemies is negative");
         assertThrows(IllegalArgumentException.class, () -> {
-            new RoomImpl.RoomBuilderImpl().insertNumberOfValues(-1).build();
-        }, "Should throw an exception when the number of values is negative");
+            new RoomImpl.RoomBuilderImpl().insertNumberOfCollectables(-1).build();
+        }, "Should throw an exception when the number of collectables is negative");
     }
 
     @Test
@@ -85,7 +85,7 @@ class RoomImplTest {
             new RoomImpl.RoomBuilderImpl().insertInsertionStrategyEnemy(null).build();
         }, "Should throw an exception when the enemy insertion strategy is null");
         assertThrows(IllegalArgumentException.class, () -> {
-            new RoomImpl.RoomBuilderImpl().insertInsertionStrategyValue(null).build();
-        }, "Should throw an exception when the value insertion strategy is null");
+            new RoomImpl.RoomBuilderImpl().insertInsertionStrategyCollectables(null).build();
+        }, "Should throw an exception when the collectables insertion strategy is null");
     }
 }

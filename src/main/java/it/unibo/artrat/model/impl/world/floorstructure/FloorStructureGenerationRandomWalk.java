@@ -10,6 +10,8 @@ import it.unibo.artrat.utils.impl.Point;
 
 /**
  * floor structure generation based on a random walk.
+ * 
+ * @author Matteo Tonelli
  */
 public class FloorStructureGenerationRandomWalk implements FloorStructureGenerationStrategy {
 

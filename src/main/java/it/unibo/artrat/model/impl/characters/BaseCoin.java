@@ -10,11 +10,11 @@ import it.unibo.artrat.model.api.characters.Coin;
  * 
  * @author Cristian Di Donato.
  */
-public class CoinImpl extends AbstractCoin {
+public class BaseCoin extends AbstractCoin {
     /**
      * A constructor that initializes the current funds to the default_amount.
      */
-    public CoinImpl() {
+    public BaseCoin() {
         super();
     }
 
@@ -24,7 +24,7 @@ public class CoinImpl extends AbstractCoin {
      * 
      * @param coin the Coin to copy.
      */
-    public CoinImpl(final Coin coin) {
+    public BaseCoin(final Coin coin) {
         super(coin);
     }
 

@@ -32,6 +32,8 @@ import it.unibo.artrat.utils.impl.Point;
 
 /**
  * implementation of interface floor.
+ * 
+ * @author Matteo Tonelli
  */
 public class FloorImpl implements Floor {
 
@@ -39,7 +41,7 @@ public class FloorImpl implements Floor {
     private static final Random RANDOM = new Random();
     private Set<GameObject> floorStructure = new HashSet<>();
     private Set<Enemy> floorEnemies = new HashSet<>();
-    private Set<Collectable> floorValues = new HashSet<>();
+    private Set<Collectable> floorCollectables = new HashSet<>();
     private List<List<Boolean>> floorMap;
     private final double maxFloorSize;
     private final double maxRoomSize;
@@ -65,7 +67,7 @@ public class FloorImpl implements Floor {
 
     /**
      * constructor that set the configuration file path.
-     * config file is used to get stantard values.
+     * config file is used to get stantard collectables.
      * 
      * @param rl resource loader
      * @throws IOException caused by generation from file
@@ -79,7 +81,7 @@ public class FloorImpl implements Floor {
     }
 
     private FloorImpl(final Floor passedFloor) {
-        this.floorValues = passedFloor.getValues();
+        this.floorCollectables = passedFloor.getCollectables();
         this.floorEnemies = passedFloor.getEnemies();
         this.floorStructure = passedFloor.getWalls();
         this.startPosition = passedFloor.getStartPosition();
@@ -137,8 +139,8 @@ public class FloorImpl implements Floor {
      * {@inheritDoc}
      */
     @Override
-    public Set<Collectable> getValues() {
-        return new HashSet<>(floorValues);
+    public Set<Collectable> getCollectables() {
+        return new HashSet<>(floorCollectables);
     }
 
     /**
@@ -149,7 +151,7 @@ public class FloorImpl implements Floor {
         this.validateFloorAndRoomSizes();
         floorStructure = new HashSet<>();
         floorEnemies = new HashSet<>();
-        floorValues = new HashSet<>();
+        floorCollectables = new HashSet<>();
         final int floorSize = RANDOM.nextInt((int) this.minFloorSize, (int) this.maxFloorSize);
         final int roomSize = RANDOM.nextInt((int) this.minRoomSize, (int) this.maxRoomSize);
         this.generateFloorStructure(floorSize);
@@ -180,8 +182,8 @@ public class FloorImpl implements Floor {
     private void generateEffectiveRooms(final int roomSize) throws IOException {
         final int maxEnemyInARoom = 2;
         final int minEnemyInARoom = 1;
-        final int maxPaintingsInARoom = 3;
-        final int minPaintingsInARoom = 1;
+        final int maxCollectablesInARoom = 3;
+        final int minCollectablesInARoom = 1;
         List<RoomGenerationStrategy> generations = List.of();
         try {
             generations = List.of(
@@ -200,7 +202,7 @@ public class FloorImpl implements Floor {
                     if (isStartRoom(j, i)) {
                         builder = builder.insertGenerationStrategy(new RoomGenerationEmpty());
                         builder = builder.insertNumberOfEnemy(0);
-                        builder = builder.insertNumberOfValues(0);
+                        builder = builder.insertNumberOfCollectables(0);
                         setStartPosition(j, i, roomSize);
                         setExitPosition(j, i, roomSize);
                         builder = builder.insertPassages(isARoom(j, i - 1), isARoom(j + 1, i), true,
@@ -208,9 +210,12 @@ public class FloorImpl implements Floor {
                     } else {
                         builder = builder.insertGenerationStrategy(generations.get(RANDOM.nextInt(generations.size())));
                         builder = builder.insertNumberOfEnemy(RANDOM.nextInt(minEnemyInARoom, maxEnemyInARoom));
-                        builder = builder
-                                .insertNumberOfValues(RANDOM.nextInt(minPaintingsInARoom, maxPaintingsInARoom));
-                        builder = builder.insertPassages(isARoom(j, i - 1), isARoom(j + 1, i), isARoom(j, i + 1),
+                        builder = builder.insertNumberOfCollectables(
+                                RANDOM.nextInt(minCollectablesInARoom, maxCollectablesInARoom));
+                        builder = builder.insertPassages(
+                                isARoom(j, i - 1),
+                                isARoom(j + 1, i),
+                                isARoom(j, i + 1),
                                 isARoom(j - 1, i));
                     }
                     addNewRoom(builder.build(), j, i, roomSize);
@@ -287,10 +292,10 @@ public class FloorImpl implements Floor {
                 w.getPosition().getY() + roomY * roomSize)));
         this.floorStructure.addAll(tmpStruct);
 
-        final Set<Collectable> tmpValues = room.getValues();
-        tmpValues.forEach((w) -> w.setPosition(new Point(w.getPosition().getX() + roomX * roomSize,
+        final Set<Collectable> tmpCollectables = room.getCollectables();
+        tmpCollectables.forEach((w) -> w.setPosition(new Point(w.getPosition().getX() + roomX * roomSize,
                 w.getPosition().getY() + roomY * roomSize)));
-        this.floorValues.addAll(tmpValues);
+        this.floorCollectables.addAll(tmpCollectables);
 
         final Set<Enemy> tmpEnemies = room.getEnemies();
         tmpEnemies.forEach((w) -> w.setPosition(new Point(w.getPosition().getX() + roomX * roomSize,
@@ -366,7 +371,7 @@ public class FloorImpl implements Floor {
      * {@inheritDoc}
      */
     @Override
-    public void setValues(final Set<Collectable> passedValues) {
-        this.floorValues = new HashSet<>(passedValues);
+    public void setCollectables(final Set<Collectable> passedCollectables) {
+        this.floorCollectables = new HashSet<>(passedCollectables);
     }
 }

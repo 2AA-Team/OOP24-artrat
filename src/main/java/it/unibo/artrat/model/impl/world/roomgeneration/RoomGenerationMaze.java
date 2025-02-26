@@ -33,37 +33,34 @@ public class RoomGenerationMaze implements RoomGenerationStrategy {
         maze = allFilledSet.stream()
                 .filter(x -> x.getPosition().getX() % 2 == 0 || x.getPosition().getY() % 2 == 0)
                 .collect(Collectors.toSet());
-        final List<Point> visited = allFilledSet.stream()
+        final List<Point> toVisit = allFilledSet.stream()
                 .filter(x -> !maze.contains(x))
                 .map(GameObject::getPosition)
                 .collect(Collectors.toList());
-        if (!visited.isEmpty()) {
-            final Point currentPoint = visited.get(RANDOM.nextInt(visited.size()));
-            createMaze(visited, currentPoint);
+        if (!toVisit.isEmpty()) {
+            final Point currentPoint = toVisit.get(RANDOM.nextInt(toVisit.size()));
+            createMaze(toVisit, currentPoint);
         }
         return Stream.concat(maze.stream(), border.stream()).collect(Collectors.toSet());
     }
 
-    private void createMaze(final List<Point> visited, final Point currentPoint) {
-        if (visited.isEmpty()) {
-            return;
-        }
+    private void createMaze(final List<Point> toVisit, final Point currentPoint) {
         Point currentPointcopy = currentPoint;
         if (currentPointcopy == null) {
-            currentPointcopy = visited.remove(RANDOM.nextInt(visited.size()));
+            currentPointcopy = toVisit.remove(RANDOM.nextInt(toVisit.size()));
         }
         final List<Point> stack = new java.util.ArrayList<>();
         stack.add(currentPointcopy);
         while (!stack.isEmpty()) {
             final Point tmp = stack.get(stack.size() - 1);
-            final List<Point> neighbours = visited.stream()
+            final List<Point> neighbours = toVisit.stream()
                     .filter(p -> p.getEuclideanDistance(tmp) == 2)
                     .collect(Collectors.toList());
             if (neighbours.isEmpty()) {
                 stack.remove(stack.size() - 1);
             } else {
                 final Point next = neighbours.get(RANDOM.nextInt(neighbours.size()));
-                visited.remove(next);
+                toVisit.remove(next);
                 final int midX = (int) (next.getX() + tmp.getX()) / 2;
                 final int midY = (int) (next.getY() + tmp.getY()) / 2;
                 maze.removeIf(x -> x.getPosition().equals(new Point(midX, midY)));

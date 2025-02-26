@@ -8,6 +8,8 @@ import it.unibo.artrat.model.api.characters.Enemy;
 
 /**
  * interface that describes the room.
+ * 
+ * @author Matteo Tonelli
  */
 public interface Room {
 
@@ -30,6 +32,6 @@ public interface Room {
      * 
      * @return set of gameobject
      */
-    Set<Collectable> getValues();
+    Set<Collectable> getCollectables();
 
 }

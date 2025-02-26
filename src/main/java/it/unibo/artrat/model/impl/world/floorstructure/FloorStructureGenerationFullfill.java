@@ -8,6 +8,8 @@ import it.unibo.artrat.model.api.world.floorstructure.FloorStructureGenerationSt
 
 /**
  * strategy that fullfill the floor matrix.
+ * 
+ * @author Matteo Tonelli
  */
 public class FloorStructureGenerationFullfill implements FloorStructureGenerationStrategy {
 

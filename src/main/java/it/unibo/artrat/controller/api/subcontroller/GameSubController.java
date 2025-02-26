@@ -7,6 +7,8 @@ import it.unibo.artrat.utils.impl.Point;
 
 /**
  * controller for the effective game.
+ * 
+ * @author Matteo Tonelli
  */
 public interface GameSubController extends SubController {
 
@@ -46,11 +48,11 @@ public interface GameSubController extends SubController {
     Set<Point> getExitPos();
 
     /**
-     * getter for all the visible paintings position.
+     * getter for all the visible collectables position.
      * 
      * @return a set of points
      */
-    Set<Point> getVisiblePaintings();
+    Set<Point> getVisibleCollectables();
 
     /**
      * Initialize the game resources.
@@ -66,6 +68,7 @@ public interface GameSubController extends SubController {
 
     /**
      * Retrieve the number of collectibles stolen by the player at that moment.
+     * 
      * @return the number of collectibles stolen by the player at that moment.
      */
     int getStolenCollectable();

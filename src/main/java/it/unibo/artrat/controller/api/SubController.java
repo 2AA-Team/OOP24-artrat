@@ -5,6 +5,8 @@ import it.unibo.artrat.utils.api.commands.Command;
 
 /**
  * interface to describe basic subController.
+ * 
+ * @author Matteo Tonelli
  */
 public interface SubController {
 
