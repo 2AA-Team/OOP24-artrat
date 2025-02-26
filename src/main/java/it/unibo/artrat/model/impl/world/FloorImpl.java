@@ -210,10 +210,12 @@ public class FloorImpl implements Floor {
                     } else {
                         builder = builder.insertGenerationStrategy(generations.get(RANDOM.nextInt(generations.size())));
                         builder = builder.insertNumberOfEnemy(RANDOM.nextInt(minEnemyInARoom, maxEnemyInARoom));
-                        builder = builder
-                                .insertNumberOfCollectables(
-                                        RANDOM.nextInt(minCollectablesInARoom, maxCollectablesInARoom));
-                        builder = builder.insertPassages(isARoom(j, i - 1), isARoom(j + 1, i), isARoom(j, i + 1),
+                        builder = builder.insertNumberOfCollectables(
+                                RANDOM.nextInt(minCollectablesInARoom, maxCollectablesInARoom));
+                        builder = builder.insertPassages(
+                                isARoom(j, i - 1),
+                                isARoom(j + 1, i),
+                                isARoom(j, i + 1),
                                 isARoom(j - 1, i));
                     }
                     addNewRoom(builder.build(), j, i, roomSize);
