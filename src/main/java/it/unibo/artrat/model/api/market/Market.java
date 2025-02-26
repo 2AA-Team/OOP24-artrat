@@ -6,7 +6,7 @@ import java.util.List;
 import it.unibo.artrat.model.api.inventory.Item;
 
 /**
- * Market interface.
+ * Shop interface.
  * 
  * @author Manuel Benagli
  */

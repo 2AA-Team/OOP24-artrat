@@ -8,7 +8,7 @@ import it.unibo.artrat.model.api.inventory.ItemType;
 /**
  * ShopSubController for the seguent model: store (market).
  * getTypeName, getDescription, getItemName are they are reported in the market controller as well as in the inventory,
- * the difference is that they will be used with getMarket(), as the market is detached from the player and the inventory,
+ * the difference is that they will be used with getMarket(), as the shop is detached from the player and the inventory,
  * as can be seen from the UML scheme.
  * 
  * @author Manuel Benagli
@@ -20,7 +20,7 @@ public interface StoreSubController extends SubController {
      * This list can be sorted, filtered (and filtered with search).
      * If a powerup is bought, the item will be removed from the list.
      * 
-     * @return all the game items we can buy in the market view.
+     * @return all the game items we can buy in the ShopSubPanel.
      */
     List<Item> purchasableItems();
 
@@ -85,7 +85,7 @@ public interface StoreSubController extends SubController {
     void searchItem(String nameToSearch);
 
     /**
-     * Method which initializes the itemList in the "market".
+     * Method which initializes the itemList in the ShopSubPanel.
      */
     void initItemList();
 

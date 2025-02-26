@@ -28,7 +28,7 @@ public interface Mission {
      * 
      * @return true if the mission is done, false otherwise.
      */
-    boolean getStatus();
+    boolean isStatusDone();
 
     /**
      * This method sets mission's status to false to true.

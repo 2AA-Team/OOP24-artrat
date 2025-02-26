@@ -28,9 +28,9 @@ public class RatRace extends AbstractMission {
      */
     @Override
     public boolean isMissionDone(final Player passedPlayer) {
-        if (!this.getStatus() && (Math.abs(MAX_SPEED - passedPlayer.getVelocity()) < EPSILON)) {
+        if (!this.isStatusDone() && (Math.abs(MAX_SPEED - passedPlayer.getVelocity()) < EPSILON)) {
             this.setStatus(true);
         }
-        return getStatus();
+        return isStatusDone();
     }
 }

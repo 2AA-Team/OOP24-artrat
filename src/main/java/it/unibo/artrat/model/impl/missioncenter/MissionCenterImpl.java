@@ -78,7 +78,7 @@ public class MissionCenterImpl implements MissionCenter {
     *
     * @param missionName mission's name.
     * @return a mission using MissionFactory.
-    * @throws an IllegalArgumentException if the passed missionName is not compatible.
+    * @throws IllegalArgumentException if the passed missionName is not compatible.
     */
     private Mission createMission(final String missionName) {
         switch (missionName) {

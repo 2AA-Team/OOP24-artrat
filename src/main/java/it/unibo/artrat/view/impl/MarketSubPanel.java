@@ -40,9 +40,9 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     private final JTextField searchItemField = new JTextField(SEARCH_TEXT_FIELD);
 
     /**
-     * MarketSubPanel constructor.
+     * ShopSubPanel constructor.
      * 
-     * @param contr StoreSubController.
+     * @param contr ShopSubController.
      */
     public MarketSubPanel(final StoreSubController contr) {
         this.contr = contr;
@@ -196,7 +196,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
      * For every item I read, I create a nel panel, with three labels (item name,
      * item type, item price) and a button to buy it.
      * When I buy an item, if the item is a powerup, the item is cancelled in the
-     * market.
+     * shop.
      */
     private void allItemsSetup() {
         purchItemPanel.removeAll();
