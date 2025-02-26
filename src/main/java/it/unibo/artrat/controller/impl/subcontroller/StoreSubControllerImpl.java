@@ -7,13 +7,13 @@ import it.unibo.artrat.controller.api.subcontroller.StoreSubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
 import it.unibo.artrat.model.api.Model;
-import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.inventory.Inventory;
 import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.model.api.market.ItemManager;
 import it.unibo.artrat.model.api.market.Market;
 import it.unibo.artrat.model.impl.ModelImpl;
+import it.unibo.artrat.model.impl.characters.characters.Player;
 import it.unibo.artrat.model.impl.market.FilterItem;
 import it.unibo.artrat.model.impl.market.ItemManagerImpl;
 import it.unibo.artrat.model.impl.market.SearchItem;
@@ -40,8 +40,8 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     public StoreSubControllerImpl(final MainControllerImpl mainController) {
         super(mainController);
         this.marketView = new MarketSubPanel(this);
-        this.itemMan = new ItemManagerImpl(currenItems, new SortItem(), new FilterItem(), 
-        new SearchItem());
+        this.itemMan = new ItemManagerImpl(currenItems, new SortItem(), new FilterItem(),
+                new SearchItem());
 
     }
 
@@ -138,9 +138,9 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     @Override
     public void showDescription(final Item passedItem) {
         marketView.showMessage(this.purchasableItems().stream()
-            .filter(it -> it.equals(passedItem))
-            .map(Item::getDescription)
-            .findAny().get(), "Purchasable item's description");
+                .filter(it -> it.equals(passedItem))
+                .map(Item::getDescription)
+                .findAny().get(), "Purchasable item's description");
     }
 
     /**
@@ -149,9 +149,9 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     @Override
     public ItemType getItemType(final Item passedItem) {
         return this.getModel().getMarket().getPurchItems().stream()
-            .filter(it -> it.equals(passedItem))
-            .map(Item::getType)
-            .findAny().get();
+                .filter(it -> it.equals(passedItem))
+                .map(Item::getType)
+                .findAny().get();
     }
 
     /**
@@ -160,9 +160,9 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     @Override
     public double getItemPrice(final Item passedItem) {
         return this.getModel().getMarket().getPurchItems().stream()
-            .filter(it -> it.equals(passedItem))
-            .map(Item::getPrice)
-            .findAny().get();
+                .filter(it -> it.equals(passedItem))
+                .map(Item::getPrice)
+                .findAny().get();
     }
 
     /**

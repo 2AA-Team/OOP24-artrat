@@ -1,4 +1,4 @@
-package it.unibo.artrat.model.api.characters;
+package it.unibo.artrat.model.impl.characters.characters;
 
 import java.util.List;
 
@@ -55,6 +55,7 @@ public interface Player extends Entity {
 
     /**
      * A method that permit to get the current Multiplier of player.
+     * 
      * @return the current multiplier that player have.
      */
     Multiplier getMultiplier();
@@ -62,24 +63,28 @@ public interface Player extends Entity {
     /**
      * 
      * Change the current multipler of player with the passed one.
+     * 
      * @param multipler the new multiplier.
      */
     void setMultipler(Multiplier multipler);
 
     /**
      * A method that permit to get the current list of collectable of player.
+     * 
      * @return the current Collectable list.
      */
     List<Collectable> getColletableList();
 
     /**
      * A method that change the current collectable list with the passed one.
+     * 
      * @param passedCollecatble
      */
     void setColletableList(List<Collectable> passedCollecatble);
 
     /**
      * A method that add a new collectable .
+     * 
      * @param passedCollectable the collectable to add
      */
     void addCollectable(Collectable passedCollectable);
@@ -101,6 +106,7 @@ public interface Player extends Entity {
 
     /**
      * Adding to the player the value obtained from all stolen collectibles.
+     * 
      * @return the total loot value.
      */
     double obtainCollectable();

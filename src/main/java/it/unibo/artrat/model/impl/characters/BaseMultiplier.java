@@ -3,7 +3,7 @@ package it.unibo.artrat.model.impl.characters;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import it.unibo.artrat.model.api.characters.Multiplier;
+import it.unibo.artrat.model.impl.characters.characters.Multiplier;
 
 /**
  * A base multiplier implementation.
@@ -35,8 +35,8 @@ public class BaseMultiplier extends AbstractMultiplier {
     public double multipleTheCoins(final double coins) {
         if (coins >= 0.0) {
             return BigDecimal.valueOf(coins * getCurrentMultiplier())
-                            .setScale(2, RoundingMode.UP)
-                            .doubleValue();
+                    .setScale(2, RoundingMode.UP)
+                    .doubleValue();
         } else {
             throw new IllegalArgumentException();
         }

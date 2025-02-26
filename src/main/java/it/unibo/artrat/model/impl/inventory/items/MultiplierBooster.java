@@ -1,15 +1,17 @@
 package it.unibo.artrat.model.impl.inventory.items;
 
+import it.unibo.artrat.model.impl.characters.characters.Player;
 import it.unibo.artrat.model.impl.inventory.AbstractItem;
 
 import java.util.Random;
 
-import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.inventory.ItemType;
 
 /**
- * A specific item, which each time it is used, increases the player's current multiplier 
+ * A specific item, which each time it is used, increases the player's current
+ * multiplier
  * up to a maximum of MAX_MULTIPLIER_INCREASE.
+ * 
  * @author Cristian Di Donato.
  */
 public class MultiplierBooster extends AbstractItem {

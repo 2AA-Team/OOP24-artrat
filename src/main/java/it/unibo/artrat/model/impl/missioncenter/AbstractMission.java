@@ -1,7 +1,7 @@
 package it.unibo.artrat.model.impl.missioncenter;
 
-import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.missioncenter.Mission;
+import it.unibo.artrat.model.impl.characters.characters.Player;
 
 /**
  * Abstract mission class.
@@ -16,9 +16,9 @@ public abstract class AbstractMission implements Mission {
     /**
      * AbstractMission constructor.
      * 
-     * @param name mission's name.
+     * @param name        mission's name.
      * @param missionText mission's task to accomplish.
-     * @param status true if mission's done, false otherwise.
+     * @param status      true if mission's done, false otherwise.
      */
     protected AbstractMission(final String name, final String missionText, final boolean status) {
         this.name = name;

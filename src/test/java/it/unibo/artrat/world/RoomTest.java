@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Test;
 
 import it.unibo.artrat.model.api.Collectable;
 import it.unibo.artrat.model.api.GameObject;
-import it.unibo.artrat.model.api.characters.Enemy;
 import it.unibo.artrat.model.api.world.Room;
+import it.unibo.artrat.model.impl.characters.characters.Enemy;
 import it.unibo.artrat.model.impl.world.RoomImpl;
 import it.unibo.artrat.model.impl.world.roomgeneration.ObjectInsertionRandom;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationEmpty;

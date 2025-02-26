@@ -1,6 +1,6 @@
 package it.unibo.artrat.model.impl.missioncenter.missions;
 
-import it.unibo.artrat.model.api.characters.Player;
+import it.unibo.artrat.model.impl.characters.characters.Player;
 import it.unibo.artrat.model.impl.missioncenter.AbstractMission;
 
 /**
@@ -14,8 +14,8 @@ public class TheRatOfWallStreet extends AbstractMission {
     /**
      * TheRatOfWallStreet constructor.
      * 
-     * @param name mission's name.
-     * @param desc mission's goal to achieve.
+     * @param name   mission's name.
+     * @param desc   mission's goal to achieve.
      * @param status true if the mission's done, false otherwise.
      */
     public TheRatOfWallStreet(final String name, final String desc, final boolean status) {

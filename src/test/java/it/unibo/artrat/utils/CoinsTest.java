@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import it.unibo.artrat.model.api.characters.Coin;
 import it.unibo.artrat.model.impl.characters.BaseCoin;
+import it.unibo.artrat.model.impl.characters.characters.Coin;
 
 /**
  * Test for the Coins.

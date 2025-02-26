@@ -15,12 +15,12 @@ import org.slf4j.LoggerFactory;
 
 import it.unibo.artrat.model.api.Collectable;
 import it.unibo.artrat.model.api.GameObject;
-import it.unibo.artrat.model.api.characters.Enemy;
 import it.unibo.artrat.model.api.world.Floor;
 import it.unibo.artrat.model.api.world.Room;
 import it.unibo.artrat.model.api.world.RoomBuilder;
 import it.unibo.artrat.model.api.world.floorstructure.FloorStructureGenerationStrategy;
 import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;
+import it.unibo.artrat.model.impl.characters.characters.Enemy;
 import it.unibo.artrat.model.impl.world.RoomImpl.RoomBuilderImpl;
 import it.unibo.artrat.model.impl.world.floorstructure.FloorStructureGenerationRandomWalk;
 import it.unibo.artrat.model.impl.world.roomgeneration.RoomGenerationEmpty;

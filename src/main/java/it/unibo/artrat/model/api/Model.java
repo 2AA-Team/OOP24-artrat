@@ -2,10 +2,10 @@ package it.unibo.artrat.model.api;
 
 import java.util.List;
 
-import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.market.Market;
 import it.unibo.artrat.model.api.missioncenter.Mission;
 import it.unibo.artrat.model.api.world.Floor;
+import it.unibo.artrat.model.impl.characters.characters.Player;
 
 /**
  * An interface to rapresent the model.
@@ -55,14 +55,16 @@ public interface Model {
     Floor getFloor();
 
     /**
-     * A method that permits to change the current floor istance with the new passed.
+     * A method that permits to change the current floor istance with the new
+     * passed.
      * 
      * @param floor the passed floor.
      */
     void setFloor(Floor floor);
 
     /**
-     * A method that permits to change the current list of missions istance with the new passed.
+     * A method that permits to change the current list of missions istance with the
+     * new passed.
      * 
      * @param passedMissions the new list of missions.
      */

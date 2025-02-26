@@ -1,10 +1,12 @@
 package it.unibo.artrat.model.impl.characters;
 
-import it.unibo.artrat.model.api.characters.Multiplier;
+import it.unibo.artrat.model.impl.characters.characters.Multiplier;
 
 /**
- * An abstract multiplier for the multiplier interface that handles the logic for getting 
- * and changing the current multiplier and leaves that for coin multiplication to extensions.
+ * An abstract multiplier for the multiplier interface that handles the logic
+ * for getting
+ * and changing the current multiplier and leaves that for coin multiplication
+ * to extensions.
  * 
  * @author Cristian Di Donato.
  */
@@ -49,7 +51,7 @@ public abstract class AbstractMultiplier implements Multiplier {
         return this.multipler;
     }
 
-      /**
+    /**
      * {@inheritDoc}
      */
     @Override

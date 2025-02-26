@@ -1,4 +1,4 @@
-package it.unibo.artrat.model.api.characters;
+package it.unibo.artrat.model.impl.characters.characters;
 
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;

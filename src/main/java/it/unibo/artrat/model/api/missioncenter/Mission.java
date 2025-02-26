@@ -1,6 +1,6 @@
 package it.unibo.artrat.model.api.missioncenter;
 
-import it.unibo.artrat.model.api.characters.Player;
+import it.unibo.artrat.model.impl.characters.characters.Player;
 
 /**
  * Mission base interface.
@@ -40,7 +40,8 @@ public interface Mission {
     /**
      * This method is used to check mission's status.
      * 
-     * @param passedPlayer the player and everything connected to him (for example coins and inventory).
+     * @param passedPlayer the player and everything connected to him (for example
+     *                     coins and inventory).
      * @return true if the mission is achieved, false otherwise.
      */
     boolean isMissionDone(Player passedPlayer);

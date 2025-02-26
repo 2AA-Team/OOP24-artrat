@@ -1,12 +1,13 @@
 package it.unibo.artrat.model.impl.inventory.items;
 
-import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.inventory.ItemType;
+import it.unibo.artrat.model.impl.characters.characters.Player;
 import it.unibo.artrat.model.impl.inventory.AbstractItem;
 
 /**
- * A specific object, which every time it is used until 
+ * A specific object, which every time it is used until
  * it reaches a certain limit i.e. MAX_BOOST, increases the player's speed.
+ * 
  * @author Cristian Di Donato.
  */
 public class WingedBoots extends AbstractItem {
@@ -16,9 +17,10 @@ public class WingedBoots extends AbstractItem {
 
     /**
      * A constructor to initialize the new item Winged Boots.
-     * @param name the name of Winged Boots
-     * @param desc the description of Winged Boots
-     * @param price the price of Winged Boots
+     * 
+     * @param name     the name of Winged Boots
+     * @param desc     the description of Winged Boots
+     * @param price    the price of Winged Boots
      * @param itemType the item type of Winged Boots
      */
     public WingedBoots(final String name, final String desc, final double price, final ItemType itemType) {

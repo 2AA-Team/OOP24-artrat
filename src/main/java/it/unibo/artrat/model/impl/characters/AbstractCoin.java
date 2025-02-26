@@ -1,9 +1,10 @@
 package it.unibo.artrat.model.impl.characters;
 
-import it.unibo.artrat.model.api.characters.Coin;
+import it.unibo.artrat.model.impl.characters.characters.Coin;
 
 /**
- * An abstract coin for the coin interface that handles the logic for getting and setting the current amount
+ * An abstract coin for the coin interface that handles the logic for getting
+ * and setting the current amount
  * and leaves the logic for spending and adding it to its extensions.
  * 
  * @author Cristian Di Donato.
@@ -38,7 +39,9 @@ public abstract class AbstractCoin implements Coin {
     }
 
     /**
-     * An extensions-only method to set the current money after adding or spending money.
+     * An extensions-only method to set the current money after adding or spending
+     * money.
+     * 
      * @param passedAmount the new amount.
      */
     protected void setAmount(final double passedAmount) {

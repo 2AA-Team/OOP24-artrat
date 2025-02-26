@@ -1,9 +1,7 @@
 package it.unibo.artrat.model.impl.missioncenter.missions;
 
+import it.unibo.artrat.model.impl.characters.characters.Player;
 import it.unibo.artrat.model.impl.missioncenter.AbstractMission;
-
-import it.unibo.artrat.model.api.characters.Player;
-
 
 /**
  * CulturalBaggage mission.
@@ -15,8 +13,8 @@ public class CulturalBaggage extends AbstractMission {
     /**
      * CulturalBaggage constructor.
      * 
-     * @param name mission's name.
-     * @param desc missions's goal to achieve.
+     * @param name   mission's name.
+     * @param desc   missions's goal to achieve.
      * @param status mission's status (true if done, false otherwise).
      */
     public CulturalBaggage(final String name, final String desc, final boolean status) {

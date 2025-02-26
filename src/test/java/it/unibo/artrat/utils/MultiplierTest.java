@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import it.unibo.artrat.model.api.characters.Multiplier;
 import it.unibo.artrat.model.impl.characters.BaseMultiplier;
+import it.unibo.artrat.model.impl.characters.characters.Multiplier;
 
 /**
  * Test the function of the Multiplier.

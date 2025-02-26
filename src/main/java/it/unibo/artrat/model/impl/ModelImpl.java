@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.unibo.artrat.model.api.Model;
-import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.market.Market;
 import it.unibo.artrat.model.api.missioncenter.MissionCenter;
 import it.unibo.artrat.model.api.world.Floor;
 import it.unibo.artrat.model.impl.characters.Lupino;
+import it.unibo.artrat.model.impl.characters.characters.Player;
 import it.unibo.artrat.model.impl.market.MarketImpl;
 import it.unibo.artrat.model.impl.missioncenter.MissionCenterImpl;
 import it.unibo.artrat.model.api.missioncenter.Mission;
