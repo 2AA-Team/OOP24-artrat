@@ -12,7 +12,6 @@ import it.unibo.artrat.model.api.world.Floor;
 import it.unibo.artrat.model.impl.ModelImpl;
 import it.unibo.artrat.model.impl.characters.Lupino;
 import it.unibo.artrat.model.impl.characters.characters.Player;
-import it.unibo.artrat.model.impl.world.FloorImpl;
 import it.unibo.artrat.utils.api.BoundingBox;
 import it.unibo.artrat.utils.api.commands.Command;
 import it.unibo.artrat.utils.impl.BoundingBoxImpl;
@@ -24,8 +23,8 @@ import it.unibo.artrat.utils.impl.Point;
 public abstract class AbstractCollisionChecker {
     private MainController mainController;
     private final double renderDistance;
-    private Model model = new ModelImpl();
-    private Floor floor = new FloorImpl();
+    private Model model = null;
+    private Floor floor = null;
     private Player player = new Lupino(new Point(), new Point());
     private BoundingBox renderBB = new BoundingBoxImpl(new Point(), new Point());
     private List<BoundingBox> wallRendered;

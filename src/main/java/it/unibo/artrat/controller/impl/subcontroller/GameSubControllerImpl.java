@@ -17,7 +17,6 @@ import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.api.world.Floor;
 import it.unibo.artrat.model.impl.CompassNearestExit;
 import it.unibo.artrat.model.impl.characters.characters.Player;
-import it.unibo.artrat.model.impl.world.FloorImpl;
 import it.unibo.artrat.utils.api.BoundingBox;
 import it.unibo.artrat.utils.api.ResourceLoader;
 import it.unibo.artrat.utils.impl.BoundingBoxImpl;
@@ -46,7 +45,8 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
             throws IOException {
         super(mainController);
         this.renderDistance = rl.getConfig("RENDER_DISTANCE");
-        this.floor = new FloorImpl(rl);
+        this.floor = mainController.getModel().getFloor();
+        this.floor.generateFloorSet();
     }
 
     /**

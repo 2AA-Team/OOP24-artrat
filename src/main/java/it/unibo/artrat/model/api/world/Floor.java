@@ -1,10 +1,12 @@
 package it.unibo.artrat.model.api.world;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 import it.unibo.artrat.model.api.Collectable;
 import it.unibo.artrat.model.api.GameObject;
+import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;
 import it.unibo.artrat.model.impl.characters.characters.Enemy;
 import it.unibo.artrat.utils.impl.Point;
 
@@ -105,4 +107,6 @@ public interface Floor {
      * @param passedCollectables set of collectables
      */
     void setCollectables(Set<Collectable> passedCollectables);
+
+    List<RoomGenerationStrategy> getGenerationsStrategy();
 }

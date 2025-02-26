@@ -41,7 +41,7 @@ public class MainControllerImpl implements MainController {
         this.currentStage = Stage.MENU;
         this.engine = engine;
         this.view = null;
-        this.model = new ModelImpl();
+        this.model = new ModelImpl(engine.getResourceLoader());
         this.subControllerManager = new SubControllerManagerImpl(this, engine.getResourceLoader());
         this.timer = new WorldTimerImpl();
     }

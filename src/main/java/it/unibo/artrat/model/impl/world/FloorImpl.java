@@ -2,6 +2,8 @@ package it.unibo.artrat.model.impl.world;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -35,6 +37,7 @@ public class FloorImpl implements Floor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FloorImpl.class);
     private static final Random RANDOM = new Random();
+    private List<RoomGenerationStrategy> generationsStrategy = new ArrayList<>();
     private Set<GameObject> floorStructure = new HashSet<>();
     private Set<Enemy> floorEnemies = new HashSet<>();
     private Set<Collectable> floorCollectables = new HashSet<>();
@@ -46,7 +49,8 @@ public class FloorImpl implements Floor {
     private Point startPosition;
     private Set<GameObject> exit;
 
-    private final String roomPath = "premademaze" + File.separator + "rooms.json";
+    private final InputStream roomPath = Thread.currentThread()
+            .getContextClassLoader().getResourceAsStream("premademaze" + File.separator + "rooms.json");
 
     /**
      * constructor that set the configuration to base state.
@@ -73,6 +77,15 @@ public class FloorImpl implements Floor {
         minFloorSize = rl.getConfig("MIN_FLOOR_SIZE");
         minRoomSize = rl.getConfig("MIN_ROOM_SIZE");
         validateFloorAndRoomSizes();
+        try {
+            this.generationsStrategy = List.of(
+                    new RoomGenerationEmpty(),
+                    new RoomGenerationFile(roomPath),
+                    new RoomGenerationMatrix(),
+                    new RoomGenerationMaze());
+        } catch (IOException e) {
+            LOGGER.warn("Room generations method failed to build.");
+        }
     }
 
     private FloorImpl(final Floor passedFloor) {
@@ -85,6 +98,7 @@ public class FloorImpl implements Floor {
         this.minFloorSize = passedFloor.getMinFloorSize();
         this.maxRoomSize = passedFloor.getMaxRoomSize();
         this.minRoomSize = passedFloor.getMinRoomSize();
+        this.generationsStrategy = passedFloor.getGenerationsStrategy();
     }
 
     /**
@@ -179,17 +193,6 @@ public class FloorImpl implements Floor {
         final int minEnemyInARoom = 1;
         final int maxCollectablesInARoom = 3;
         final int minCollectablesInARoom = 1;
-        List<RoomGenerationStrategy> generations = List.of();
-        try {
-            generations = List.of(
-                    new RoomGenerationEmpty(),
-                    new RoomGenerationFile(Thread.currentThread()
-                            .getContextClassLoader().getResourceAsStream(roomPath)),
-                    new RoomGenerationMatrix(),
-                    new RoomGenerationMaze());
-        } catch (IOException e) {
-            LOGGER.warn("Room generations method failed to build.");
-        }
         RoomBuilder builder = new RoomBuilderImpl();
         builder = builder.insertRoomSize(roomSize);
         for (int i = 0; i < floorMap.size(); i++) {
@@ -204,7 +207,8 @@ public class FloorImpl implements Floor {
                         builder = builder.insertPassages(isARoom(j, i - 1), isARoom(j + 1, i), true,
                                 isARoom(j - 1, i));
                     } else {
-                        builder = builder.insertGenerationStrategy(generations.get(RANDOM.nextInt(generations.size())));
+                        builder = builder.insertGenerationStrategy(
+                                this.generationsStrategy.get(RANDOM.nextInt(this.generationsStrategy.size())));
                         builder = builder.insertNumberOfEnemy(RANDOM.nextInt(minEnemyInARoom, maxEnemyInARoom));
                         builder = builder.insertNumberOfCollectables(
                                 RANDOM.nextInt(minCollectablesInARoom, maxCollectablesInARoom));
@@ -369,5 +373,10 @@ public class FloorImpl implements Floor {
     @Override
     public void setCollectables(final Set<Collectable> passedCollectables) {
         this.floorCollectables = new HashSet<>(passedCollectables);
+    }
+
+    @Override
+    public List<RoomGenerationStrategy> getGenerationsStrategy() {
+        return new ArrayList<>(this.generationsStrategy);
     }
 }

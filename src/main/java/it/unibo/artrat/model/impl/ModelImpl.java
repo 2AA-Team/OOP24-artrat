@@ -1,5 +1,6 @@
 package it.unibo.artrat.model.impl;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import it.unibo.artrat.model.impl.market.MarketImpl;
 import it.unibo.artrat.model.impl.missioncenter.MissionCenterImpl;
 import it.unibo.artrat.model.api.missioncenter.Mission;
 import it.unibo.artrat.model.impl.world.FloorImpl;
+import it.unibo.artrat.utils.api.ResourceLoader;
 import it.unibo.artrat.utils.impl.Point;
 
 /**
@@ -27,11 +29,17 @@ public class ModelImpl implements Model {
     /**
      * Permit to create a new istance of Model.
      */
-    public ModelImpl() {
+    public ModelImpl(ResourceLoader<String, Double> rl) {
         this.player = new Lupino(new Point(), new Point());
         this.market = new MarketImpl();
         final MissionCenter missionCenter = new MissionCenterImpl();
-        this.floor = new FloorImpl();
+        try {
+            this.floor = new FloorImpl(rl);
+            this.floor.generateFloorSet();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         this.market.initMarket();
         missionCenter.initMissionCenter();
         missions = missionCenter.getMissionList();
