@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import it.unibo.artrat.app.ArtRat;
 import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.api.market.Market;
 import it.unibo.artrat.model.api.missioncenter.MissionCenter;
@@ -21,6 +25,8 @@ import it.unibo.artrat.utils.impl.Point;
  * An implementation of model interface.
  */
 public class ModelImpl implements Model {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ArtRat.class);
     private Player player;
     private Market market;
     private List<Mission> missions;
@@ -28,8 +34,10 @@ public class ModelImpl implements Model {
 
     /**
      * Permit to create a new istance of Model.
+     * 
+     * @param rl resource loader for config file
      */
-    public ModelImpl(ResourceLoader<String, Double> rl) {
+    public ModelImpl(final ResourceLoader<String, Double> rl) {
         this.player = new Lupino(new Point(), new Point());
         this.market = new MarketImpl();
         final MissionCenter missionCenter = new MissionCenterImpl();
@@ -37,8 +45,7 @@ public class ModelImpl implements Model {
             this.floor = new FloorImpl(rl);
             this.floor.generateFloorSet();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOGGER.warn("Error in the floor generation.");
         }
         this.market.initMarket();
         missionCenter.initMissionCenter();
@@ -52,10 +59,12 @@ public class ModelImpl implements Model {
      * @param m the passed Model.
      */
     public ModelImpl(final Model m) {
-        this.player = m.getPlayer();
-        this.market = m.getMarket();
-        this.missions = m.getMissions();
-        this.floor = m.getFloor();
+        if (m != null) {
+            this.player = m.getPlayer();
+            this.market = m.getMarket();
+            this.missions = m.getMissions();
+            this.floor = m.getFloor();
+        }
     }
 
     /**

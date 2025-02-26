@@ -375,6 +375,9 @@ public class FloorImpl implements Floor {
         this.floorCollectables = new HashSet<>(passedCollectables);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<RoomGenerationStrategy> getGenerationsStrategy() {
         return new ArrayList<>(this.generationsStrategy);

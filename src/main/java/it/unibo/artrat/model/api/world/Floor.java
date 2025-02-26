@@ -108,5 +108,10 @@ public interface Floor {
      */
     void setCollectables(Set<Collectable> passedCollectables);
 
+    /**
+     * getter for all generation strategies.
+     * 
+     * @return a list of generation strategy
+     */
     List<RoomGenerationStrategy> getGenerationsStrategy();
 }
