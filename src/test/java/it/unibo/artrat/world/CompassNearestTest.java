@@ -28,13 +28,17 @@ class CompassNearestTest {
                 new Point(0, 3));
         final Supplier<Point> center = () -> new Point();
         compass = new CompassNearestExit(center, north);
-        assertEquals(expected, compass.calculateAngle(), delta); // angle to (1,1)
+        assertEquals(expected, compass.calculateAngle(), delta, "The angle must be calculate from 0,0 to 1,1."); // angle
+                                                                                                                 // to
+                                                                                                                 // (1,1)
         north = () -> Arrays.asList(
                 new Point(-1, -1),
                 new Point(2, 2),
                 new Point(0, 3));
         compass = new CompassNearestExit(center, north);
-        assertNotEquals(expected, compass.calculateAngle(), delta); // angle to (-1,-1)
+        assertNotEquals(expected, compass.calculateAngle(), delta, "The angle must be calculate from 0,0 to -1,-1."); // angle
+                                                                                                                      // to
+                                                                                                                      // (-1,-1)
 
     }
 
@@ -44,7 +48,7 @@ class CompassNearestTest {
         final Supplier<List<Point>> north = Arrays::asList;
         Supplier<Point> center = () -> new Point();
         compass = new CompassNearestExit(center, north);
-        assertEquals(0, compass.calculateAngle());
+        assertEquals(0, compass.calculateAngle(), "When there is no north the angle must be 0.");
         center = () -> null;
         final Compass compass2 = new CompassNearestExit(center, north);
         assertThrows(NullPointerException.class, () -> {
