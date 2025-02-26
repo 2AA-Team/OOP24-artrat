@@ -10,7 +10,7 @@ import java.util.List;
  * 
  * @author Manuel Benagli
  */
-public interface SearchStrategy<X, T> {
+public interface GenericSearch<X, T> {
 
     /**
      * searchStrategy method, it will be used in itemManager with items.

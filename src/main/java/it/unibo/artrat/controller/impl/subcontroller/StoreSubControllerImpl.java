@@ -14,10 +14,10 @@ import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.model.api.market.ItemManager;
 import it.unibo.artrat.model.api.market.Market;
 import it.unibo.artrat.model.impl.ModelImpl;
-import it.unibo.artrat.model.impl.market.FilterItemStrategy;
+import it.unibo.artrat.model.impl.market.FilterItem;
 import it.unibo.artrat.model.impl.market.ItemManagerImpl;
-import it.unibo.artrat.model.impl.market.SearchItemStrategy;
-import it.unibo.artrat.model.impl.market.SortItemStrategy;
+import it.unibo.artrat.model.impl.market.SearchItem;
+import it.unibo.artrat.model.impl.market.SortItem;
 import it.unibo.artrat.view.api.MarketView;
 import it.unibo.artrat.view.impl.MarketSubPanel;
 
@@ -40,8 +40,8 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     public StoreSubControllerImpl(final MainControllerImpl mainController) {
         super(mainController);
         this.marketView = new MarketSubPanel(this);
-        this.itemMan = new ItemManagerImpl(currenItems, new SortItemStrategy(), new FilterItemStrategy(), 
-        new SearchItemStrategy());
+        this.itemMan = new ItemManagerImpl(currenItems, new SortItem(), new FilterItem(), 
+        new SearchItem());
 
     }
 

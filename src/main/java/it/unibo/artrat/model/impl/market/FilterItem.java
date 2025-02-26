@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.api.inventory.ItemType;
-import it.unibo.artrat.model.api.market.FilterStrategy;
+import it.unibo.artrat.model.api.market.GenericFilter;
 
 /**
  * FilterItemStrategy class for items (using itemType).
@@ -14,7 +14,7 @@ import it.unibo.artrat.model.api.market.FilterStrategy;
  * 
  * @author Manuel Benagli
  */
-public class FilterItemStrategy implements FilterStrategy<Item, ItemType> {
+public class FilterItem implements GenericFilter<Item, ItemType> {
 
     /**
      * {@inheritDoc}

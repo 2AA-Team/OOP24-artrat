@@ -10,7 +10,7 @@ import java.util.List;
  * 
  * @author Manuel Benagli
  */
-public interface FilterStrategy<X, T> {
+public interface GenericFilter<X, T> {
 
     /**
      * filterStrategy method.

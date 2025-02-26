@@ -4,14 +4,14 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import it.unibo.artrat.model.api.inventory.Item;
-import it.unibo.artrat.model.api.market.SortStrategy;
+import it.unibo.artrat.model.api.market.GenericSort;
 
 /**
  * SortItemStrategy class, which implements SortStrategy to sort items based on specific criteria.
  * 
  * @author Manuel Benagli.
  */
-public class SortItemStrategy implements SortStrategy<Item> {
+public class SortItem implements GenericSort<Item> {
 
     /**
      * {@inheritDoc}

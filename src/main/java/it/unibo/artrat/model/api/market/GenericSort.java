@@ -12,7 +12,7 @@ import java.util.List;
  * 
  * @author Manuel Benagli
  */
-public interface SortStrategy<X> {
+public interface GenericSort<X> {
 
     /**
      * sortStrategy method.

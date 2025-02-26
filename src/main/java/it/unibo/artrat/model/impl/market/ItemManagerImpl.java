@@ -14,9 +14,9 @@ public class ItemManagerImpl implements ItemManager {
     private List<Item> itemList;
     private ItemType currenType;
     private String currentSearch = "";
-    private final SortItemStrategy sortStrategy;
-    private final FilterItemStrategy filterItemStrategy;
-    private final SearchItemStrategy searchItemStrategy;
+    private final SortItem sortStrategy;
+    private final FilterItem filterItemStrategy;
+    private final SearchItem searchItemStrategy;
 
     /**
      * Constructor for initializing the ItemManagerImpl with a list of items and strategies 
@@ -28,9 +28,9 @@ public class ItemManagerImpl implements ItemManager {
      * @param searchItemStrategy the strategy for searching items by name.
      */
     public ItemManagerImpl(final List<Item> passedItemList,
-                            final SortItemStrategy sortStrategy,
-                            final FilterItemStrategy filterItemStrategy,
-                            final SearchItemStrategy searchItemStrategy) {
+                            final SortItem sortStrategy,
+                            final FilterItem filterItemStrategy,
+                            final SearchItem searchItemStrategy) {
         this.itemList = new ArrayList<>(passedItemList);
         this.sortStrategy = sortStrategy;
         this.filterItemStrategy = filterItemStrategy;
