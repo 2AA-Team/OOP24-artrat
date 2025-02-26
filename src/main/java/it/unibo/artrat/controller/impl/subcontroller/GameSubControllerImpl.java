@@ -16,7 +16,7 @@ import it.unibo.artrat.model.api.GameObject;
 import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.world.Floor;
-import it.unibo.artrat.model.impl.CompassNearest;
+import it.unibo.artrat.model.impl.CompassNearestExit;
 import it.unibo.artrat.model.impl.world.FloorImpl;
 import it.unibo.artrat.utils.api.BoundingBox;
 import it.unibo.artrat.utils.api.ResourceLoader;
@@ -120,7 +120,7 @@ public class GameSubControllerImpl extends AbstractSubController implements Game
         player.setSpeed(new Vector2d());
         model.setPlayer(player);
         this.updateCentralizeModel(model);
-        this.compass = new CompassNearest(
+        this.compass = new CompassNearestExit(
                 this::getPlayerPos,
                 () -> new ArrayList<>(getExitPos()));
 

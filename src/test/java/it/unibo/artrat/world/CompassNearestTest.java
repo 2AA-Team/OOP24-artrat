@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 
 import org.junit.jupiter.api.Test;
 
-import it.unibo.artrat.model.impl.CompassNearest;
+import it.unibo.artrat.model.impl.CompassNearestExit;
 import it.unibo.artrat.utils.impl.Point;
 
 class CompassNearestTest {
@@ -19,33 +19,33 @@ class CompassNearestTest {
     void testCompassFullList() {
         final double delta = 0.001;
         final double expected = 0.785;
-        CompassNearest compass;
+        CompassNearestExit compass;
         Supplier<List<Point>> north = () -> Arrays.asList(
                 new Point(1, 1),
                 new Point(2, 2),
                 new Point(-1, -1),
                 new Point(0, 3));
         final Supplier<Point> center = () -> new Point();
-        compass = new CompassNearest(center, north);
+        compass = new CompassNearestExit(center, north);
         assertEquals(expected, compass.calculateAngle(), delta); // angle to (1,1)
         north = () -> Arrays.asList(
                 new Point(-1, -1),
                 new Point(2, 2),
                 new Point(0, 3));
-        compass = new CompassNearest(center, north);
+        compass = new CompassNearestExit(center, north);
         assertNotEquals(expected, compass.calculateAngle(), delta); // angle to (-1,-1)
 
     }
 
     @Test
     void testGetEmptySupplier() {
-        final CompassNearest compass;
+        final CompassNearestExit compass;
         final Supplier<List<Point>> north = Arrays::asList;
         Supplier<Point> center = () -> new Point();
-        compass = new CompassNearest(center, north);
+        compass = new CompassNearestExit(center, north);
         assertEquals(0, compass.calculateAngle());
         center = () -> null;
-        final CompassNearest compass2 = new CompassNearest(center, north);
+        final CompassNearestExit compass2 = new CompassNearestExit(center, north);
         assertThrows(NullPointerException.class, () -> {
             compass2.calculateAngle();
         });

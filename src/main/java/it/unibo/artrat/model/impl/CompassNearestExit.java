@@ -10,7 +10,7 @@ import it.unibo.artrat.utils.impl.Point;
  * 
  * @author Matteo Tonelli
  */
-public class CompassNearest extends AbstractCompass {
+public class CompassNearestExit extends AbstractCompass {
 
     private final Supplier<Point> center;
     private final Supplier<List<Point>> north;
@@ -21,7 +21,7 @@ public class CompassNearest extends AbstractCompass {
      * @param center supplier to get center of rotation
      * @param north  supplier to get north
      */
-    public CompassNearest(final Supplier<Point> center, final Supplier<List<Point>> north) {
+    public CompassNearestExit(final Supplier<Point> center, final Supplier<List<Point>> north) {
         this.north = north;
         this.center = center;
     }
