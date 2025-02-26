@@ -2,6 +2,8 @@ package it.unibo.artrat.model.impl.missioncenter;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ import it.unibo.artrat.utils.impl.MissionReaderImpl;
  * @author Manuel Benagli.
  */
 public class MissionCenterImpl implements MissionCenter {
-    private final URL missionPath = Thread.currentThread().getContextClassLoader().getResource(
+    private final InputStream missionPath = Thread.currentThread().getContextClassLoader().getResourceAsStream(
             "missions" + File.separator + "missions.yaml");
 
     private final MissionFactory missionFactory;
@@ -65,9 +67,9 @@ public class MissionCenterImpl implements MissionCenter {
     @Override
     public void initMissionCenter() {
         try {
-            missionReader.setPath(missionPath.toURI());
+            missionReader.setPath(missionPath);
             this.missionFactory.initialize();
-        } catch (IOException | URISyntaxException err) {
+        } catch (IOException err) {
             LOGGER.error("MissionCenterImpl class thrown an error : ", err);
         }
         for (final String mission : missionReader.getAllMissionName()) {
@@ -75,13 +77,13 @@ public class MissionCenterImpl implements MissionCenter {
         }
     }
 
-   /**
-    * This private method has made to create my missions using missionFactory.
-    *
-    * @param missionName mission's name.
-    * @return a mission using MissionFactory.
-    * @throws IllegalArgumentException if the passed missionName is not compatible.
-    */
+    /**
+     * This private method has made to create my missions using missionFactory.
+     *
+     * @param missionName mission's name.
+     * @return a mission using MissionFactory.
+     * @throws IllegalArgumentException if the passed missionName is not compatible.
+     */
     private Mission createMission(final String missionName) {
         switch (missionName) {
             case "THERATOFWALLSTREET":

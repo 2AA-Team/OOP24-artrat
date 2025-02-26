@@ -38,9 +38,9 @@ public final class ResourceLoaderImpl<I, O> implements ResourceLoader<I, O> {
      * {@inheritDoc}
      */
     @Override
-    public void setConfigPath(final URI configPath) throws IOException {
+    public void setConfigPath(final InputStream configPath) throws IOException {
         final Yaml yaml = new Yaml();
-        final InputStream inputStream = new FileInputStream(new File(configPath));
+        final InputStream inputStream = configPath;
         this.obj = Map.copyOf(yaml.load(inputStream));
         inputStream.close();
     }

@@ -2,6 +2,7 @@ package it.unibo.artrat.app;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Objects;
@@ -36,7 +37,7 @@ public final class GameEngineImpl implements GameEngine {
         STOPPED, RUNNING
     }
 
-    private final URL configPath = Thread.currentThread().getContextClassLoader().getResource(
+    private final InputStream configPath = Thread.currentThread().getContextClassLoader().getResourceAsStream(
             "config" + File.separator
                     + "config.yaml");
     private volatile GameStatus status;
@@ -124,9 +125,9 @@ public final class GameEngineImpl implements GameEngine {
      */
     private boolean initiateResources() {
         try {
-            resourceLoader.setConfigPath(configPath.toURI());
+            resourceLoader.setConfigPath(configPath);
             return true;
-        } catch (IOException | URISyntaxException e) {
+        } catch (IOException e) {
             return false;
         }
     }

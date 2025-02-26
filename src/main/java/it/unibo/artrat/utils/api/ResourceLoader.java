@@ -1,6 +1,7 @@
 package it.unibo.artrat.utils.api;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 
 /**
@@ -25,7 +26,7 @@ public interface ResourceLoader<I, O> {
      * @param configPath path of the config file
      * @throws IOException if configPath not represent anything
      */
-    void setConfigPath(URI configPath) throws IOException;
+    void setConfigPath(InputStream configPath) throws IOException;
 
     /**
      * get the clone of resource loader.

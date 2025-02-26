@@ -2,6 +2,7 @@ package it.unibo.artrat.model.impl.missioncenter;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import org.slf4j.Logger;
@@ -26,7 +27,7 @@ public class MissionFactoryImpl implements MissionFactory {
     private static final String RATRACE = "RATRACE";
     private static final Logger LOGGER = LoggerFactory.getLogger(MissionFactoryImpl.class);
 
-    private final URL missionPath = Thread.currentThread().getContextClassLoader().getResource(
+    private final InputStream missionPath = Thread.currentThread().getContextClassLoader().getResourceAsStream(
             "missions" + File.separator + "missions.yaml");
 
     private final MissionReader missionReader;
@@ -44,8 +45,8 @@ public class MissionFactoryImpl implements MissionFactory {
     @Override
     public void initialize() {
         try {
-            this.missionReader.setPath(missionPath.toURI());
-        } catch (IOException | URISyntaxException err) {
+            this.missionReader.setPath(missionPath);
+        } catch (IOException err) {
             LOGGER.error("Error from Mission Reader", err);
         }
     }
@@ -56,8 +57,8 @@ public class MissionFactoryImpl implements MissionFactory {
     @Override
     public Mission theRatOfWallStreet() {
         return new TheRatOfWallStreet(missionReader.getName(THERATOFWALLSTREET),
-            missionReader.getDescription(THERATOFWALLSTREET),
-            false);
+                missionReader.getDescription(THERATOFWALLSTREET),
+                false);
     }
 
     /**
@@ -66,7 +67,7 @@ public class MissionFactoryImpl implements MissionFactory {
     @Override
     public Mission culturalBaggage() {
         return new CulturalBaggage(missionReader.getName(CULTURAL_BAGGAGE),
-            missionReader.getDescription(CULTURAL_BAGGAGE), false);
+                missionReader.getDescription(CULTURAL_BAGGAGE), false);
     }
 
     /**
@@ -75,6 +76,6 @@ public class MissionFactoryImpl implements MissionFactory {
     @Override
     public Mission ratRace() {
         return new RatRace(missionReader.getName(RATRACE),
-            missionReader.getDescription(RATRACE), false);
+                missionReader.getDescription(RATRACE), false);
     }
 }
