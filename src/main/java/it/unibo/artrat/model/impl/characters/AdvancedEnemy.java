@@ -56,8 +56,8 @@ public final class AdvancedEnemy extends AbstractEnemy {
                 .min((a, b) -> {
                     final Point playerPos = p.getPosition();
                     return Double.compare(
-                            playerPos.getEuclideanDistance(this.getPosition().sum(a)),
-                            playerPos.getEuclideanDistance(this.getPosition().sum(b)));
+                            playerPos.getManhattanDistance(this.getPosition().sum(a)),
+                            playerPos.getManhattanDistance(this.getPosition().sum(b)));
                 })
                 .orElse(new Vector2d());
 
