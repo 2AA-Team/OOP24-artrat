@@ -28,6 +28,7 @@ public class MissionCenterImpl implements MissionCenter {
     private final MissionFactory missionFactory;
     private final List<Mission> missionsToRedeem;
     private static final Logger LOGGER = LoggerFactory.getLogger(MissionCenterImpl.class);
+    private final MissionReader missionReader;
 
     /**
      * MissionCenter defualt constructor.
@@ -35,6 +36,7 @@ public class MissionCenterImpl implements MissionCenter {
     public MissionCenterImpl() {
         this.missionsToRedeem = new ArrayList<>();
         this.missionFactory = new MissionFactoryImpl();
+        this.missionReader = new MissionReaderImpl();
     }
 
     /**
@@ -46,6 +48,7 @@ public class MissionCenterImpl implements MissionCenter {
         this.missionsToRedeem = new ArrayList<>();
         this.missionsToRedeem.addAll(missionCenter.getMissionList());
         this.missionFactory = new MissionFactoryImpl();
+        this.missionReader = new MissionReaderImpl();
     }
 
     /**
@@ -61,7 +64,6 @@ public class MissionCenterImpl implements MissionCenter {
      */
     @Override
     public void initMissionCenter() {
-        final MissionReader missionReader = new MissionReaderImpl();
         try {
             missionReader.setPath(missionPath.toURI());
             this.missionFactory.initialize();
