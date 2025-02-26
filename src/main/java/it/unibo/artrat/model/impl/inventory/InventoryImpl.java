@@ -34,7 +34,7 @@ public class InventoryImpl implements Inventory {
 
     private List<Item> sortItems() {
         return new ArrayList<>(storedItem.stream()
-                        .sorted((x, y) -> x.getClass().getSimpleName().compareTo(y.getClass().getSimpleName()))
+                        .sorted((x, y) -> x.getName().trim().compareTo(y.getName().trim()))
                         .collect(Collectors.toList()));
     }
 
