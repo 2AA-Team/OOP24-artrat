@@ -17,6 +17,8 @@ import it.unibo.artrat.utils.impl.MissionReaderImpl;
 
 /**
  * MissionFactory implementation class.
+ * 
+ * @author Manuel Benagli.
  */
 public class MissionFactoryImpl implements MissionFactory {
     private static final String THERATOFWALLSTREET = "THERATOFWALLSTREET";

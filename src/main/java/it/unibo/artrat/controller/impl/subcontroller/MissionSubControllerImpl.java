@@ -11,6 +11,8 @@ import it.unibo.artrat.model.api.missioncenter.Mission;
 
 /**
  * MissionSubController implementation class.
+ * 
+ * @author Manuel Benagli
  */
 public class MissionSubControllerImpl extends AbstractSubController implements MissionSubController {
     private List<Mission> currentMissionsList = new ArrayList<>();
@@ -66,7 +68,7 @@ public class MissionSubControllerImpl extends AbstractSubController implements M
      * {@inheritDoc}
      */
     @Override
-    public String showDescr(final Mission passedMission) {
+    public String getMissionDescr(final Mission passedMission) {
         return this.currentMissionsList.stream()
             .filter(m -> m.equals(passedMission))
             .map(Mission::getText)

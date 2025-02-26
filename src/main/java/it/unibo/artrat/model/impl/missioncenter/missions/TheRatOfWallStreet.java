@@ -12,6 +12,8 @@ public class TheRatOfWallStreet extends AbstractMission {
     private static final double COINS = 10.00;
 
     /**
+     * TheRatOfWallStreet constructor.
+     * 
      * @param name mission's name.
      * @param desc mission's goal to achieve.
      * @param status true if the mission's done, false otherwise.

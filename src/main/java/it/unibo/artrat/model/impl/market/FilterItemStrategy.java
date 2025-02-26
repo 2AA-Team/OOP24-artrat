@@ -9,8 +9,10 @@ import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.model.api.market.FilterStrategy;
 
 /**
- * FilterItemStrategy class for items and itemType.
+ * FilterItemStrategy class for items (using itemType).
+ * I chose to use a inline condition ItemType for a better readability.
  * 
+ * @author Manuel Benagli
  */
 public class FilterItemStrategy implements FilterStrategy<Item, ItemType> {
 

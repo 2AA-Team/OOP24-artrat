@@ -7,6 +7,8 @@ import java.util.List;
  * 
  * @param <X> the type of generic to be filtered.
  * @param <T> the type of the filtering criteria.
+ * 
+ * @author Manuel Benagli
  */
 public interface FilterStrategy<X, T> {
 

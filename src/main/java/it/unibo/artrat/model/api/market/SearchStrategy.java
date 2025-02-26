@@ -7,6 +7,8 @@ import java.util.List;
  * 
  * @param <X> the type of generic to search (e.g Item).
  * @param <T> the type of the search term (e.g., String).
+ * 
+ * @author Manuel Benagli
  */
 public interface SearchStrategy<X, T> {
 
@@ -15,7 +17,7 @@ public interface SearchStrategy<X, T> {
      * 
      * @param passedList a list of generic. 
      * @param currentSearch a generic currentSearch.
-     * @return a list of generic,
+     * @return a list of generic.
      */
     List<X> searchStrategy(List<X> passedList, T currentSearch);
 }

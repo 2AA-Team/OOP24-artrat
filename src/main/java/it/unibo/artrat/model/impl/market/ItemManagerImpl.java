@@ -8,6 +8,7 @@ import it.unibo.artrat.model.api.market.ItemManager;
 
 /**
  *  The model implementation of ItemManager.
+ * @author Manuel Benagli.
  */
 public class ItemManagerImpl implements ItemManager {
     private List<Item> itemList;

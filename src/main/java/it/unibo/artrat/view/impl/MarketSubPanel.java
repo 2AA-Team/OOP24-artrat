@@ -40,18 +40,16 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     private final JTextField searchItemField = new JTextField(SEARCH_TEXT_FIELD);
 
     /**
-     * MarketSubPanel constructor.
+     * ShopSubPanel constructor.
      * 
-     * @param contr StoreSubController.
+     * @param contr ShopSubController.
      */
     public MarketSubPanel(final StoreSubController contr) {
         this.contr = contr;
     }
 
-    /**
-     * @param text message text.
-     * @param name name of text.
-     * @return a confirm message when it's needed.
+    /*
+     * return a confirm message when it's needed.
      */
     private boolean toConfirm(final String text, final String name) {
         return JOptionPane.showConfirmDialog(marketPanel, text, name,
@@ -59,7 +57,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     }
 
     /**
-     * this method is called by toConfirm, it shows my message and update the view.
+     * {@inheritDoc}
      */
     @Override
     public void showMessage(final String message, final String name) {
@@ -98,9 +96,8 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         marketPanel.repaint();
     }
 
-    // this private method updates the coin label every time I buy a new item.
     private void updateCoinLabel() {
-        lupinoCash.setText("COINS: " + contr.getModel().getPlayer().getCoin().getCurrentAmount() + " $");
+        lupinoCash.setText("COINS: " + contr.getCurrentAmount() + " $");
     }
 
     private void setShop() {
@@ -199,7 +196,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
      * For every item I read, I create a nel panel, with three labels (item name,
      * item type, item price) and a button to buy it.
      * When I buy an item, if the item is a powerup, the item is cancelled in the
-     * market.
+     * shop.
      */
     private void allItemsSetup() {
         purchItemPanel.removeAll();
@@ -207,7 +204,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         for (final var purchItem : contr.purchasableItems()) {
             final JButton buyItem = new JButton("Buy");
             final JLabel itemLabel = new JLabel(contr.getItemName(purchItem));
-            final JLabel typeLabel = new JLabel(contr.getTypeName(purchItem));
+            final JLabel typeLabel = new JLabel(contr.getItemType(purchItem).toString());
             final JLabel priceButton = new JLabel(contr.getItemPrice(purchItem) + "$");
             final JPanel itemPanel = new JPanel(new GridLayout(1, 4, GAP, GAP));
             itemPanel.add(itemLabel);
@@ -219,12 +216,11 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
 
             buyItem.addActionListener(e -> {
                 if (toConfirm("Do you really want to buy?", "Buy")) {
-                    if (contr.getModel().getPlayer().getCoin().getCurrentAmount() >= contr.getItemPrice(purchItem)
-                            && contr.buyItem(purchItem)) {
-                        if (purchItem.getType().equals(ItemType.POWERUP)) {
-                            contr.getModel().getMarket().getPurchItems().remove(purchItem);
+                    if (contr.getCurrentAmount() >= contr.getItemPrice(purchItem)) {
+                        if (contr.getItemType(purchItem).equals(ItemType.POWERUP)) {
                             purchItemPanel.remove(itemPanel);
                         }
+                        contr.buyItem(purchItem);
                     } else {
                         showMessage("Not enough money", "Purchase denied");
                     }

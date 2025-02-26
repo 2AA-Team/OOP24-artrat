@@ -11,6 +11,7 @@ import it.unibo.artrat.model.api.market.SearchStrategy;
 /**
  * SearchItemStrategy class, using items and a String of character to search.
  * 
+ * @author Manuel Benagli
  */
 public class SearchItemStrategy implements SearchStrategy<Item, String> {
 
