@@ -15,6 +15,8 @@ import it.unibo.artrat.controller.api.subcontroller.MissionSubController;
 /**
  * MissionSubPanel, the MissionCenter to read and achieve goals.
  * You need to enter in MissionCenter to claim rewards.
+ * 
+ * @author Manuel Benagli
  */
 public class MissionSubPanel extends AbstractSubPanel {
     private static final int GAP = 5;
@@ -53,7 +55,7 @@ public class MissionSubPanel extends AbstractSubPanel {
     private void allMissionsSetup() {
         for (final var mission : missionControl.missionList()) {
             final JLabel missionLabel = new JLabel(missionControl.getMissionName(mission) + ": "
-                    + missionControl.showDescr(mission));
+                    + missionControl.getMissionDescr(mission));
 
             final JPanel missPanel = new JPanel(new GridLayout(1, 2, GAP, GAP));
             missPanel.add(missionLabel);

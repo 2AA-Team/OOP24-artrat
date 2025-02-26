@@ -87,9 +87,6 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
             player.spendCoins(itemToBuy.getPrice());
             inventory.addItem(itemToBuy); // Adding the items in the inventory.
             player.setInventory(inventory);
-            if (itemToBuy.getType().equals(ItemType.POWERUP)) {
-                getModel().getMarket().getPurchItems().remove(itemToBuy);
-            }
             model.setMarket(market);
             model.setPlayer(player.copyPlayer());
             this.updateCentralizeModel(new ModelImpl(model));

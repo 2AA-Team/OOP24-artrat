@@ -18,7 +18,9 @@ import it.unibo.artrat.utils.api.ItemReader;
 import it.unibo.artrat.utils.impl.ItemReaderImpl;
 
 /**
- * Market implementation model class.
+ * Shop implementation model class.
+ * 
+ * @author Manuel Benagli
  */
 public class MarketImpl implements Market {
     private final URL itemPath = Thread.currentThread().getContextClassLoader().getResource(
@@ -30,7 +32,7 @@ public class MarketImpl implements Market {
     private static final Logger LOGGER = LoggerFactory.getLogger(MarketImpl.class);
 
     /**
-     * Market default constructor.
+     * Shop default constructor.
      */
     public MarketImpl() {
         this.itemsToBuy = new ArrayList<>();
@@ -38,8 +40,9 @@ public class MarketImpl implements Market {
     }
 
     /**
-     * Market constructor.
-     * @param mark a market object
+     * Shop constructor.
+     * 
+     * @param mark a shop object
      */
     public MarketImpl(final Market mark) {
         this.itemsToBuy = new ArrayList<>();
@@ -95,7 +98,7 @@ public class MarketImpl implements Market {
     }
 
     /**
-     * This private method has made to create my items and testing if I am correctly reading from my items.yaml file.
+     * This private method has made to create my items using itemFactory.
      * 
      * @param nameItem the name of the item which it has to be created
      * @return the item created using itemFactory

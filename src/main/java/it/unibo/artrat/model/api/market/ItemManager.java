@@ -7,12 +7,14 @@ import it.unibo.artrat.model.api.inventory.ItemType;
 /**
  * ItemManager interface, manages the list of game items.
  * Game items are read by the item reader.
- *
  * SortItemPrice, searchItems and filterItems are dependent one another.
+ * 
+ * @author Manuel Benagli
  */
 public interface ItemManager {
 
     /**
+     * this method sorts item's price using SortItemStrategy.
      * 
      * @param dir sets creasing and reversing sorting.
      * @return a list of items sorted by price.
@@ -20,7 +22,7 @@ public interface ItemManager {
     List<Item> sortItemPrice(int dir);
 
     /**
-     * This private method is used to coordinate filter and search. 
+     * This method is used to coordinate filter and search. 
      * When I have to filter an item, I apply this method first with search private method of
      * the passedList as parameter.
      * 
@@ -30,7 +32,7 @@ public interface ItemManager {
     List<Item> filterItems(ItemType itemType);
 
     /**
-     * This private method is used to coordinate filter and search.
+     * This method is used to coordinate filter and search.
      * When I have to search an item, I apply this method first with filter private method of
      * the passedList as parameter.
      * The search is based character by character starting from the beginning.
@@ -42,6 +44,8 @@ public interface ItemManager {
     List<Item> searchItem(String nameToSearch); 
 
     /**
+     * updateItemList method.
+     * 
      * @param passedList the list which will be updated.
      */
     void updateItemList(List<Item> passedList);

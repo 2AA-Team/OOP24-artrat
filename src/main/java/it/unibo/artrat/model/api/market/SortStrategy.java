@@ -9,11 +9,14 @@ import java.util.List;
  * This design pattern ensures flexibility and extensibility for potential future sorting options.
  * 
  * @param <X> the type of generic to sort.
+ * 
+ * @author Manuel Benagli
  */
 public interface SortStrategy<X> {
 
     /**
      * sortStrategy method.
+     * 
      * @param passedList a list of passed items.
      * @param dir the sorting direction (creasing or decreasing).
      * @return a list of generic creased or decreased in base of direction.

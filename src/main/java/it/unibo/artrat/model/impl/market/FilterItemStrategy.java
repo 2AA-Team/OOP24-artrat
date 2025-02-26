@@ -9,8 +9,9 @@ import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.model.api.market.FilterStrategy;
 
 /**
- * FilterItemStrategy class for items and itemType.
+ * FilterItemStrategy class for items (using itemType).
  * 
+ * @author Manuel Benagli
  */
 public class FilterItemStrategy implements FilterStrategy<Item, ItemType> {
 

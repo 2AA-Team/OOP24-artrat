@@ -5,6 +5,8 @@ import it.unibo.artrat.utils.api.MissionReader;
 
 /**
  * MissionReader utils implementation class.
+ * 
+ * @author Manuel Benagli
  */
 public class MissionReaderImpl extends AbstractReader implements MissionReader {
 

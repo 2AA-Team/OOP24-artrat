@@ -18,6 +18,8 @@ import it.unibo.artrat.utils.impl.MissionReaderImpl;
 
 /**
  * MissionCenter implementation class.
+ * 
+ * @author Manuel Benagli.
  */
 public class MissionCenterImpl implements MissionCenter {
     private final URL missionPath = Thread.currentThread().getContextClassLoader().getResource(
@@ -37,6 +39,7 @@ public class MissionCenterImpl implements MissionCenter {
 
     /**
      * MissionCenter constructor.
+     * 
      * @param missionCenter MissionCenter interface.
      */
     public MissionCenterImpl(final MissionCenter missionCenter) {
@@ -71,7 +74,8 @@ public class MissionCenterImpl implements MissionCenter {
     }
 
    /**
-    * 
+    * This private method has made to create my missions using missionFactory.
+    *
     * @param missionName mission's name.
     * @return a mission using MissionFactory.
     * @throws an IllegalArgumentException if the passed missionName is not compatible.

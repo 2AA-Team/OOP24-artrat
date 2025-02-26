@@ -4,10 +4,14 @@ import java.util.List;
 
 /**
  * MissionCenter interface.
+ * 
+ * @author Manuel Benagli
  */
 public interface MissionCenter {
 
     /**
+     * A list of missions read by MissionReader and created usin MissionFactory.
+     * 
      * @return a list of all the missions.
      */
     List<Mission> getMissionList();

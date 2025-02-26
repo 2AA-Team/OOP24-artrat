@@ -1,14 +1,15 @@
 package it.unibo.artrat.view.api;
 
 /**
- * A MarketView interface, which will be connected with controller.
+ * ShopView interface, connected with ShopSubcontroller and used in ShopSubPanel.
  */
 public interface MarketView {
 
     /**
      * It will be called when a message or event will pass to the controller.
-     * @param message
-     * @param name
+     * 
+     * @param message a String which represent a message.
+     * @param name the name of message.
      */
     void showMessage(String message, String name);
 }

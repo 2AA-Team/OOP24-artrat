@@ -13,9 +13,11 @@ import it.unibo.artrat.model.api.characters.Player;
 public class CulturalBaggage extends AbstractMission {
 
     /**
+     * CulturalBaggage constructor.
+     * 
      * @param name mission's name.
      * @param desc missions's goal to achieve.
-     * @param status
+     * @param status mission's status (true if done, false otherwise).
      */
     public CulturalBaggage(final String name, final String desc, final boolean status) {
         super(name, desc, status);
@@ -26,9 +28,9 @@ public class CulturalBaggage extends AbstractMission {
      */
     @Override
     public boolean isMissionDone(final Player passedPlayer) {
-        if (!this.isStatusDone() && passedPlayer.getInventory().getStoredItem().size() >= 4) {
+        if (!this.getStatus() && passedPlayer.getInventory().getStoredItem().size() >= 4) {
             setStatus(true);
         }
-        return isStatusDone();
+        return getStatus();
     }
 }

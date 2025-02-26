@@ -9,6 +9,7 @@ import it.unibo.artrat.model.api.market.SortStrategy;
 /**
  * SortItemStrategy class, which implements SortStrategy to sort items based on specific criteria.
  * 
+ * @author Manuel Benagli.
  */
 public class SortItemStrategy implements SortStrategy<Item> {
 

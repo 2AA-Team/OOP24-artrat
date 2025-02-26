@@ -12,6 +12,8 @@ public class TheRatOfWallStreet extends AbstractMission {
     private static final double COINS = 10.00;
 
     /**
+     * TheRatOfWallStreet constructor.
+     * 
      * @param name mission's name.
      * @param desc mission's goal to achieve.
      * @param status true if the mission's done, false otherwise.
@@ -25,9 +27,9 @@ public class TheRatOfWallStreet extends AbstractMission {
      */
     @Override
     public boolean isMissionDone(final Player passedPlayer) {
-        if (!this.isStatusDone() && passedPlayer.getCoin().getCurrentAmount() >= COINS) {
+        if (!this.getStatus() && passedPlayer.getCoin().getCurrentAmount() >= COINS) {
             this.setStatus(true);
         }
-        return isStatusDone();
+        return getStatus();
     }
 }

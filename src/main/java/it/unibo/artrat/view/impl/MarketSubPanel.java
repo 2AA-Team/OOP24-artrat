@@ -48,10 +48,8 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
         this.contr = contr;
     }
 
-    /**
-     * @param text message text.
-     * @param name name of text.
-     * @return a confirm message when it's needed.
+    /*
+     * return a confirm message when it's needed.
      */
     private boolean toConfirm(final String text, final String name) {
         return JOptionPane.showConfirmDialog(marketPanel, text, name,
@@ -59,7 +57,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
     }
 
     /**
-     * this method is called by toConfirm, it shows my message and update the view.
+     * {@inheritDoc}
      */
     @Override
     public void showMessage(final String message, final String name) {
