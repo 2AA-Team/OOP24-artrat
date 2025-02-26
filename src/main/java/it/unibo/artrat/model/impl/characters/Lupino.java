@@ -36,8 +36,8 @@ public class Lupino extends AbstractEntity implements Player {
     public Lupino(final Point topLeft, final Point bottomRight) {
         this(topLeft, bottomRight, new HashSet<>());
         this.inventory = new InventoryImpl();
-        this.multiplier = new MultiplierImpl();
-        this.coins = new CoinImpl();
+        this.multiplier = new BaseMultiplier();
+        this.coins = new BaseCoin();
         this.collectabels = new ArrayList<>();
     }
 
@@ -51,8 +51,8 @@ public class Lupino extends AbstractEntity implements Player {
     public Lupino(final Point topLeft, final Point bottomRight, final Set<Vector2d> v) {
         super(topLeft, bottomRight, v);
         this.inventory = new InventoryImpl();
-        this.coins = new CoinImpl();
-        this.multiplier = new MultiplierImpl();
+        this.coins = new BaseCoin();
+        this.multiplier = new BaseMultiplier();
         this.collectabels = new ArrayList<>();
     }
 
@@ -67,8 +67,8 @@ public class Lupino extends AbstractEntity implements Player {
     public Lupino(final Point center, final double width, final double height, final Set<Vector2d> speed) {
         super(center, width, height, speed);
         this.inventory = new InventoryImpl();
-        this.coins = new CoinImpl();
-        this.multiplier = new MultiplierImpl();
+        this.coins = new BaseCoin();
+        this.multiplier = new BaseMultiplier();
         this.collectabels = new ArrayList<>();
     }
 
@@ -81,8 +81,8 @@ public class Lupino extends AbstractEntity implements Player {
     public Lupino(final Point center, final Set<Vector2d> speed) {
         super(center, speed);
         this.inventory = new InventoryImpl();
-        this.coins = new CoinImpl();
-        this.multiplier = new MultiplierImpl();
+        this.coins = new BaseCoin();
+        this.multiplier = new BaseMultiplier();
         this.collectabels = new ArrayList<>();
     }
 
@@ -107,7 +107,7 @@ public class Lupino extends AbstractEntity implements Player {
      */
     @Override
     public Coin getCoin() {
-        return new CoinImpl(this.coins);
+        return new BaseCoin(this.coins);
     }
 
     /**
@@ -115,7 +115,7 @@ public class Lupino extends AbstractEntity implements Player {
      */
     @Override
     public void setCoin(final Coin coins) {
-        this.coins = new CoinImpl(coins);
+        this.coins = new BaseCoin(coins);
     }
 
     /**
@@ -139,7 +139,7 @@ public class Lupino extends AbstractEntity implements Player {
      */
     @Override
     public Multiplier getMultiplier() {
-        return new MultiplierImpl(this.multiplier);
+        return new BaseMultiplier(this.multiplier);
     }
 
     /**
@@ -148,7 +148,7 @@ public class Lupino extends AbstractEntity implements Player {
     @Override
     public void setMultipler(final Multiplier multipler) {
         if (multipler.getCurrentMultiplier() >= 0.0) {
-            this.multiplier = new MultiplierImpl(multipler);
+            this.multiplier = new BaseMultiplier(multipler);
         } else {
             throw new IllegalArgumentException();
         }

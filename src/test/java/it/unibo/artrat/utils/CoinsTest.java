@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.artrat.model.api.characters.Coin;
-import it.unibo.artrat.model.impl.characters.CoinImpl;
+import it.unibo.artrat.model.impl.characters.BaseCoin;
 
 /**
  * Test for the Coins.
@@ -17,7 +17,7 @@ import it.unibo.artrat.model.impl.characters.CoinImpl;
 class CoinsTest {
     @Test
     void testAddCoins() {
-        final Coin coinsTest = new CoinImpl();
+        final Coin coinsTest = new BaseCoin();
         assertThrows(IllegalArgumentException.class, () -> coinsTest.addCoins(-1.0));
         final double lastCoins = coinsTest.getCurrentAmount();
         coinsTest.addCoins(0.0);
@@ -28,7 +28,7 @@ class CoinsTest {
 
     @Test
     void testSpendCoins() {
-        final Coin coinsTest = new CoinImpl();
+        final Coin coinsTest = new BaseCoin();
         assertThrows(IllegalArgumentException.class, () -> coinsTest.spendCoins(0.0));
         assertThrows(IllegalArgumentException.class, () -> coinsTest.spendCoins(-1.0));
         assertThrows(IllegalArgumentException.class, () -> coinsTest.spendCoins(1.0));

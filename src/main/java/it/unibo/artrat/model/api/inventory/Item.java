@@ -38,6 +38,4 @@ public interface Item {
      * @return A new player with the applied modifications from using the current item.
      */
     Player consume(Player player);
-
-
 }
