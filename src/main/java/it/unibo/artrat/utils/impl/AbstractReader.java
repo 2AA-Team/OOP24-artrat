@@ -1,10 +1,7 @@
 package it.unibo.artrat.utils.impl;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -18,6 +15,7 @@ import it.unibo.artrat.utils.api.Reader;
 /**
  * An abstract reader of the reader interface that handles the logic of
  * loading from the file and leaves the casting policies to the extensions.
+ * 
  * @author Cristian Di Donato.
  */
 public abstract class AbstractReader implements Reader {
@@ -29,11 +27,10 @@ public abstract class AbstractReader implements Reader {
      * {@inheritDoc}
      */
     @Override
-    public void setPath(final URI configPath) throws IOException {
+    public void setPath(final InputStream configPath) throws IOException {
         final Yaml yaml = new Yaml();
-        final InputStream inputStream = new FileInputStream(new File(configPath));
-        this.obj = Map.copyOf(yaml.load(inputStream));
-        inputStream.close();
+        this.obj = Map.copyOf(yaml.load(configPath));
+        configPath.close();
     }
 
     private Object getConfig(final String conf, final String field) {

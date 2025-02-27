@@ -1,10 +1,11 @@
 package it.unibo.artrat.utils.api;
 
 import java.io.IOException;
-import java.net.URI;
+import java.io.InputStream;
 
 /**
  * An interface that models a reader allowing data to be loaded from a file.
+ * 
  * @author Cristian Di Donato.
  */
 public interface Reader {
@@ -14,5 +15,5 @@ public interface Reader {
      * @param itemPath file that contains all item.
      * @throws IOException if configPath not represent anything:
      */
-    void setPath(URI itemPath) throws IOException;
+    void setPath(InputStream itemPath) throws IOException;
 }

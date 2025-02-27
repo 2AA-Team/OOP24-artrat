@@ -2,8 +2,7 @@ package it.unibo.artrat.model.impl.world;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -50,7 +49,7 @@ public class FloorImpl implements Floor {
     private Point startPosition;
     private Set<GameObject> exit;
 
-    private final URL roomPath = Thread.currentThread().getContextClassLoader().getResource(
+    private final InputStream roomPath = Thread.currentThread().getContextClassLoader().getResourceAsStream(
             "premademaze" + File.separator + "rooms.json");
 
     /**
@@ -188,12 +187,13 @@ public class FloorImpl implements Floor {
         try {
             generations = List.of(
                     new RoomGenerationEmpty(),
-                    new RoomGenerationFile(roomPath.toURI()),
+                    new RoomGenerationFile(roomPath),
                     new RoomGenerationMatrix(),
                     new RoomGenerationMaze());
-        } catch (IOException | URISyntaxException e) {
+        } catch (IOException e) {
             LOGGER.warn("Room generations method failed to build.");
         }
+        roomPath.close();
         RoomBuilder builder = new RoomBuilderImpl();
         builder = builder.insertRoomSize(roomSize);
         for (int i = 0; i < floorMap.size(); i++) {

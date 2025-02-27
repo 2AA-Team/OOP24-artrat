@@ -2,8 +2,7 @@ package it.unibo.artrat.model.impl.inventory;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.io.InputStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +19,7 @@ import it.unibo.artrat.utils.impl.ItemReaderImpl;
 
 /**
  * An implementation of ItemFactory interface.
+ * 
  * @author Cristian Di Donato.
  */
 public class ItemFactoryImpl implements ItemFactory {
@@ -29,7 +29,7 @@ public class ItemFactoryImpl implements ItemFactory {
     private static final String MAGIC_BACKPACK = "MAGICBACKPACK";
     private static final String MYSTERIOUS_WAND = "MYSTERIOUSWAND";
     private static final String WINGED_BOOTS = "WINGEDBOOTS";
-    private final URL itemPath = Thread.currentThread().getContextClassLoader().getResource(
+    private final InputStream itemPath = Thread.currentThread().getContextClassLoader().getResourceAsStream(
             "items" + File.separator
                     + "items.yaml");
     private final ItemReader itemReader;
@@ -47,11 +47,11 @@ public class ItemFactoryImpl implements ItemFactory {
      */
     @Override
     public void initialize() {
-            try {
-                this.itemReader.setPath(itemPath.toURI());
-            } catch (IOException | URISyntaxException e) {
-                LOGGER.error("Item reader thown an error : ", e);
-            }
+        try {
+            this.itemReader.setPath(itemPath);
+        } catch (IOException e) {
+            LOGGER.error("Item reader thown an error : ", e);
+        }
     }
 
     /**
@@ -71,9 +71,9 @@ public class ItemFactoryImpl implements ItemFactory {
     @Override
     public Item luckyTicket() {
         return new LuckyTicket(itemReader.getName(LUCKY_TICKET),
-            itemReader.getDescription(LUCKY_TICKET),
-            itemReader.getPrice(LUCKY_TICKET),
-            itemReader.getItemType(LUCKY_TICKET));
+                itemReader.getDescription(LUCKY_TICKET),
+                itemReader.getPrice(LUCKY_TICKET),
+                itemReader.getItemType(LUCKY_TICKET));
     }
 
     /**
@@ -82,9 +82,9 @@ public class ItemFactoryImpl implements ItemFactory {
     @Override
     public Item magicbackpack() {
         return new MagicBackpack(itemReader.getName(MAGIC_BACKPACK),
-            itemReader.getDescription(MAGIC_BACKPACK),
-            itemReader.getPrice(MAGIC_BACKPACK),
-            itemReader.getItemType(MAGIC_BACKPACK));
+                itemReader.getDescription(MAGIC_BACKPACK),
+                itemReader.getPrice(MAGIC_BACKPACK),
+                itemReader.getItemType(MAGIC_BACKPACK));
     }
 
     /**
@@ -92,10 +92,10 @@ public class ItemFactoryImpl implements ItemFactory {
      */
     @Override
     public Item mysteriouswand() {
-        return new MysteriousWand(itemReader.getName(MYSTERIOUS_WAND), 
-            itemReader.getDescription(MYSTERIOUS_WAND), 
-            itemReader.getPrice(MYSTERIOUS_WAND), 
-            itemReader.getItemType(MYSTERIOUS_WAND));
+        return new MysteriousWand(itemReader.getName(MYSTERIOUS_WAND),
+                itemReader.getDescription(MYSTERIOUS_WAND),
+                itemReader.getPrice(MYSTERIOUS_WAND),
+                itemReader.getItemType(MYSTERIOUS_WAND));
     }
 
     /**
@@ -103,9 +103,9 @@ public class ItemFactoryImpl implements ItemFactory {
      */
     @Override
     public Item wingedboots() {
-        return new WingedBoots(itemReader.getName(WINGED_BOOTS), 
-            itemReader.getDescription(WINGED_BOOTS), 
-            itemReader.getPrice(WINGED_BOOTS), 
-            itemReader.getItemType(WINGED_BOOTS));
+        return new WingedBoots(itemReader.getName(WINGED_BOOTS),
+                itemReader.getDescription(WINGED_BOOTS),
+                itemReader.getPrice(WINGED_BOOTS),
+                itemReader.getItemType(WINGED_BOOTS));
     }
 }

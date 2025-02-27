@@ -1,8 +1,7 @@
 package it.unibo.artrat.utils.impl;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URI;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,10 +57,10 @@ public class RoomsLoader implements ResourceLoader<Integer, char[][]> {
      */
     @SuppressWarnings("unchecked")
     @Override
-    public void setConfigPath(final URI configPath) throws IOException {
+    public void setConfigPath(final InputStream configPath) throws IOException {
         final ObjectMapper objectMapper = new ObjectMapper();
         final Map<String, List<Map<String, Object>>> jsonMap = objectMapper.readValue(
-                new File(configPath), new TypeReference<>() {
+                configPath, new TypeReference<>() {
                 });
         this.roomsMap = new HashMap<>();
         final List<Map<String, Object>> rooms = jsonMap.get("rooms");

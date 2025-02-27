@@ -2,8 +2,7 @@ package it.unibo.artrat.model.impl.market;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +22,7 @@ import it.unibo.artrat.utils.impl.ItemReaderImpl;
  * @author Manuel Benagli
  */
 public class MarketImpl implements Market {
-    private final URL itemPath = Thread.currentThread().getContextClassLoader().getResource(
+    private final InputStream itemPath = Thread.currentThread().getContextClassLoader().getResourceAsStream(
             "items" + File.separator
                     + "items.yaml");
 
@@ -57,9 +56,9 @@ public class MarketImpl implements Market {
     public void initMarket() {
         final ItemReader itemReader = new ItemReaderImpl();
         try {
-            itemReader.setPath(itemPath.toURI());
+            itemReader.setPath(itemPath);
             this.itemFactory.initialize();
-        } catch (IOException | URISyntaxException e) {
+        } catch (IOException e) {
             LOGGER.error("MarketImpl class thrown an error : ", e);
         }
         for (final String it : itemReader.getAllItemsName()) {

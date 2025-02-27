@@ -1,7 +1,7 @@
 package it.unibo.artrat.model.impl.world.roomgeneration;
 
 import java.io.IOException;
-import java.net.URI;
+import java.io.InputStream;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -26,7 +26,7 @@ public class RoomGenerationFile implements RoomGenerationStrategy {
      * @param filePath path to the file containing the default mazes
      * @throws IOException if the file has any loading problem
      */
-    public RoomGenerationFile(final URI filePath) throws IOException {
+    public RoomGenerationFile(final InputStream filePath) throws IOException {
         rl.setConfigPath(filePath);
     }
 
