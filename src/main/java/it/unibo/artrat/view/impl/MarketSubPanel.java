@@ -91,7 +91,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
      * a powerup).
      */
     @Override
-    protected void forceRedraw() {
+    public void forceRedraw() {
         allItemsSetup();
         marketPanel.revalidate();
         marketPanel.repaint();
@@ -141,15 +141,14 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
          */
         sortButton.addActionListener(e -> {
             int choice = JOptionPane.showOptionDialog(
-            null,
-            "Choose your sorting preference:",
-            "Price Sorting",
-            JOptionPane.DEFAULT_OPTION,
-            JOptionPane.QUESTION_MESSAGE,
-            null,
-            List.of("Decreasing","Increasing").toArray(),
-            "Increasing"
-        );
+                    null,
+                    "Choose your sorting preference:",
+                    "Price Sorting",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    List.of("Decreasing", "Increasing").toArray(),
+                    "Increasing");
             contr.sorting(choice);
             forceRedraw();
         });

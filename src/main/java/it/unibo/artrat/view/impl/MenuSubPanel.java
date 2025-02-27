@@ -80,11 +80,4 @@ public class MenuSubPanel extends AbstractSubPanel {
         setPanel(panel);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void forceRedraw() {
-    }
-
 }

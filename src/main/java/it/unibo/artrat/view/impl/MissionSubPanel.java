@@ -88,7 +88,7 @@ public class MissionSubPanel extends AbstractSubPanel {
      * {@inheritDoc}
      */
     @Override
-    protected void forceRedraw() {
+    public void forceRedraw() {
         missionCenterPanel.revalidate();
         missionCenterPanel.repaint();
     }

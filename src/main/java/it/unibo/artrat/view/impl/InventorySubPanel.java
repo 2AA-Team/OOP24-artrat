@@ -39,7 +39,7 @@ public class InventorySubPanel extends AbstractSubPanel implements InventoryView
      * {@inheritDoc}
      */
     @Override
-    protected void forceRedraw() {
+    public void forceRedraw() {
         fillWithItems();
         myJPanel.revalidate();
         myJPanel.repaint();

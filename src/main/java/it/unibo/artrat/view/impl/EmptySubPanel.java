@@ -42,11 +42,4 @@ public class EmptySubPanel extends AbstractSubPanel {
         setPanel(panel);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void forceRedraw() {
-    }
-
 }

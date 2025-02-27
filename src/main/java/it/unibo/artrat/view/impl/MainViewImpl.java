@@ -13,6 +13,7 @@ import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.utils.api.ResourceLoader;
 import it.unibo.artrat.view.api.MainView;
+import it.unibo.artrat.view.api.SubPanel;
 
 /**
  * implementation of class mainView.
@@ -22,7 +23,7 @@ import it.unibo.artrat.view.api.MainView;
 public class MainViewImpl implements MainView {
 
     private final MainController controller;
-    private AbstractSubPanel subPanel;
+    private SubPanel subPanel;
     private final ResourceLoader<String, Double> resourceLoader;
     private final JFrame frame = new JFrame();
 

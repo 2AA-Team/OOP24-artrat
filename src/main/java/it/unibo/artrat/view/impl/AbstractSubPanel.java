@@ -4,67 +4,69 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
+import it.unibo.artrat.view.api.SubPanel;
+
 /**
  * abstract class to make panel.
  * each stage have his own panel.
  * 
  * @author Matteo Tonelli
  */
-abstract class AbstractSubPanel {
+abstract class AbstractSubPanel implements SubPanel {
     private JPanel panel;
     private Dimension frameDimension;
 
     /**
-     * abstract view constructor.
-     * initialize the panel
+     * {@inheritDoc}
      */
     AbstractSubPanel() {
         panel = new JPanel();
     }
 
     /**
-     * Method to set the master frame dimension.
-     * 
-     * @param frameDim dimension of the frame
+     * {@inheritDoc}
      */
+    @Override
     public void setFrameDimension(final Dimension frameDim) {
         this.frameDimension = frameDim;
     }
 
     /**
-     * A method to obtain the current dimension of the frame.
-     * @return the dimension of the frame.
+     * {@inheritDoc}
      */
-    protected Dimension getFrameDimension() {
+    @Override
+    public Dimension getFrameDimension() {
         return this.frameDimension;
     }
 
     /**
-     * Getter for the jpanel.
-     * 
-     * @return his own starter panel.
+     * {@inheritDoc}
      */
+    @Override
     public JPanel getPanel() {
         return panel;
     }
 
     /**
-     * set a new Jpanel.
-     * 
-     * @param newPanel panel to set
+     * {@inheritDoc}
      */
-    protected void setPanel(final JPanel newPanel) {
+    @Override
+    public void setPanel(final JPanel newPanel) {
         this.panel = newPanel;
     }
 
     /**
-     * initializes the panel components.
+     * {@inheritDoc}
      */
+    @Override
     public abstract void initComponents();
 
     /**
-     * force to update all his component.
+     * {@inheritDoc}
      */
-    protected abstract void forceRedraw();
+    @Override
+    public void forceRedraw() {
+
+    }
 
 }
