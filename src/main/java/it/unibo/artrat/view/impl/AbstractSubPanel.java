@@ -17,7 +17,7 @@ abstract class AbstractSubPanel implements SubPanel {
     private Dimension frameDimension;
 
     /**
-     * {@inheritDoc}
+     * abstract sub panel constructor.
      */
     AbstractSubPanel() {
         panel = new JPanel();

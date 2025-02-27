@@ -140,7 +140,7 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
          * lowest.
          */
         sortButton.addActionListener(e -> {
-            int choice = JOptionPane.showOptionDialog(
+            final int choice = JOptionPane.showOptionDialog(
                     null,
                     "Choose your sorting preference:",
                     "Price Sorting",

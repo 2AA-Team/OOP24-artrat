@@ -11,7 +11,7 @@ import it.unibo.artrat.model.api.WorldTimer;
  * @author Manuel Benagli
  */
 public class WorldTimerImpl implements WorldTimer {
-    private static final int DEFAULT_TIMER_SETUP = 120_000;
+    private static final int DEFAULT_TIMER_SETUP = 35_000;
     private static final int ONE_SECOND = 1000;
     private final Timer timer;
     private boolean outOfTime;
@@ -64,7 +64,7 @@ public class WorldTimerImpl implements WorldTimer {
         if (currentTask != null) {
             currentTask.cancel();
         }
-        remainingTime = DEFAULT_TIMER_SETUP; 
+        remainingTime = DEFAULT_TIMER_SETUP;
     }
 
     /**

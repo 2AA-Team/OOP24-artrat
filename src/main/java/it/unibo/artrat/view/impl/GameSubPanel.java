@@ -1,7 +1,9 @@
 package it.unibo.artrat.view.impl;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -48,6 +50,8 @@ public class GameSubPanel extends AbstractSubPanel {
     private static final int DOWN = KeyEvent.VK_S;
     private static final int LEFT = KeyEvent.VK_A;
     private static final int RIGHT = KeyEvent.VK_D;
+    private static final int ALERT = 30;
+    private static final int PULSE_VALUE = 5;
 
     private final JLabel timerCountdown = new JLabel();
     private final JLabel counterColletable = new JLabel();
@@ -88,8 +92,18 @@ public class GameSubPanel extends AbstractSubPanel {
             printObject(g, center, playerPos, RoomSymbols.COLLECTABLE, gameSubController.getVisibleCollectables());
             printObject(g, center, playerPos, RoomSymbols.ENEMY, gameSubController.getVisibleEnemyPositions());
             printPlayer(g, center);
+            final int timer = gameSubController.getCurrentTimeController() / ONE_SECOND;
+            if (timer <= ALERT) {
+                int pulse = 0;
+                if (timer % 2 == 0) {
+                    pulse = PULSE_VALUE;
+                }
+                timerCountdown.setFont(new Font(getFont().getFontName(), getFont().getStyle(),
+                        getFont().getSize() + pulse));
 
-            timerCountdown.setText(Integer.toString(gameSubController.getCurrentTimeController() / ONE_SECOND));
+                timerCountdown.setForeground(Color.RED);
+            }
+            timerCountdown.setText(Integer.toString(timer));
             counterColletable.setText(Integer.toString(gameSubController.getStolenCollectable()));
             forceRedraw();
 
