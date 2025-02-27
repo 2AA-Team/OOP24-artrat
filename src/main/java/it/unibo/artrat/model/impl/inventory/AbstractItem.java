@@ -1,8 +1,8 @@
 package it.unibo.artrat.model.impl.inventory;
 
-import it.unibo.artrat.model.api.inventory.ItemType;
-import it.unibo.artrat.model.impl.characters.characters.Player;
+import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.inventory.Item;
+import it.unibo.artrat.model.api.inventory.ItemType;
 
 /**
  * An abstract object for the item interface

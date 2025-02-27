@@ -1,8 +1,10 @@
-package it.unibo.artrat.model.impl.characters.characters;
+package it.unibo.artrat.model.impl.characters;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import it.unibo.artrat.model.api.characters.Enemy;
+import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.utils.api.BoundingBox;
 import it.unibo.artrat.utils.impl.BoundingBoxImpl;
 import it.unibo.artrat.utils.impl.Point;

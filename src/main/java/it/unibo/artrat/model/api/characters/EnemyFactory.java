@@ -1,4 +1,4 @@
-package it.unibo.artrat.model.impl.characters.characters;
+package it.unibo.artrat.model.api.characters;
 
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;
@@ -15,8 +15,8 @@ public interface EnemyFactory {
      * 
      * @param topLeft     top left corner of the bounding box
      * @param bottomRight bottom right corner the bounding box
-     * @param v           enemy vector
-     * @return created enemy
+     * @param v           Enemy vector
+     * @return created Enemy
      */
     Enemy createBaseEnemy(Point topLeft, Point bottomRight, Vector2d v);
 
@@ -25,8 +25,8 @@ public interface EnemyFactory {
      * 
      * @param topLeft     top left corner of the bounding box
      * @param bottomRight bottom right corner the bounding box
-     * @param v           enemy vector
-     * @return created enemy
+     * @param v           Enemy vector
+     * @return created Enemy
      */
     Enemy createAdvancedEnemy(Point topLeft, Point bottomRight, Vector2d v);
 
@@ -36,7 +36,7 @@ public interface EnemyFactory {
      * @param center center of the bounding box
      * @param width  width of the bounding box
      * @param height height of the bounding box
-     * @return created enemy
+     * @return created Enemy
      */
     Enemy createAdvancedEnemy(Point center, double width, double height);
 
@@ -46,7 +46,7 @@ public interface EnemyFactory {
      * @param center center of the bounding box
      * @param width  width of the bounding box
      * @param height height of the bounding box
-     * @return created enemy
+     * @return created Enemy
      */
     Enemy createBaseEnemy(Point center, double width, double height);
 

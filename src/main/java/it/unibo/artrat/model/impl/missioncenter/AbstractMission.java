@@ -1,7 +1,7 @@
 package it.unibo.artrat.model.impl.missioncenter;
 
+import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.missioncenter.Mission;
-import it.unibo.artrat.model.impl.characters.characters.Player;
 
 /**
  * Abstract mission class.

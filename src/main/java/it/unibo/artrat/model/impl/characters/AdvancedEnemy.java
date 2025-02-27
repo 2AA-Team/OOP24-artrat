@@ -3,8 +3,7 @@ package it.unibo.artrat.model.impl.characters;
 import java.util.HashSet;
 import java.util.Set;
 
-import it.unibo.artrat.model.impl.characters.characters.AbstractEnemy;
-import it.unibo.artrat.model.impl.characters.characters.Player;
+import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.utils.api.Directions;
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;

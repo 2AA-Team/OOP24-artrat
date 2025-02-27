@@ -6,10 +6,10 @@ import java.util.Set;
 
 import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.model.api.Collectable;
+import it.unibo.artrat.model.api.characters.Enemy;
+import it.unibo.artrat.model.api.characters.Entity;
+import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.world.Floor;
-import it.unibo.artrat.model.impl.characters.characters.Enemy;
-import it.unibo.artrat.model.impl.characters.characters.Entity;
-import it.unibo.artrat.model.impl.characters.characters.Player;
 import it.unibo.artrat.utils.api.BoundingBox;
 import it.unibo.artrat.utils.api.commands.Command;
 import it.unibo.artrat.utils.impl.Vector2d;

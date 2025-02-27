@@ -9,10 +9,10 @@ import it.unibo.artrat.controller.api.MainController;
 import it.unibo.artrat.controller.api.SubControllerManager;
 import it.unibo.artrat.model.api.Model;
 import it.unibo.artrat.model.api.WorldTimer;
+import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.impl.ModelImpl;
 import it.unibo.artrat.model.impl.Stage;
 import it.unibo.artrat.model.impl.WorldTimerImpl;
-import it.unibo.artrat.model.impl.characters.characters.Player;
 import it.unibo.artrat.utils.api.commands.Command;
 import it.unibo.artrat.view.api.MainView;
 

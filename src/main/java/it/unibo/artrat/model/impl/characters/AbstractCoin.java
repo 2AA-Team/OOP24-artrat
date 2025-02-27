@@ -1,6 +1,6 @@
 package it.unibo.artrat.model.impl.characters;
 
-import it.unibo.artrat.model.impl.characters.characters.Coin;
+import it.unibo.artrat.model.api.characters.Coin;
 
 /**
  * An abstract coin for the coin interface that handles the logic for getting

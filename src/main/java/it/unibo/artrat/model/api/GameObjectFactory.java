@@ -1,7 +1,7 @@
 package it.unibo.artrat.model.api;
 
-import it.unibo.artrat.model.impl.characters.characters.Enemy;
-import it.unibo.artrat.model.impl.characters.characters.Player;
+import it.unibo.artrat.model.api.characters.Enemy;
+import it.unibo.artrat.model.api.characters.Player;
 
 /**
  * interface for the game object factory.

@@ -2,10 +2,10 @@ package it.unibo.artrat.model.api;
 
 import java.util.List;
 
+import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.market.Market;
 import it.unibo.artrat.model.api.missioncenter.Mission;
 import it.unibo.artrat.model.api.world.Floor;
-import it.unibo.artrat.model.impl.characters.characters.Player;
 
 /**
  * An interface to rapresent the model.

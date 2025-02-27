@@ -1,8 +1,8 @@
 package it.unibo.artrat.model.impl.inventory.items;
 
+import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.inventory.Inventory;
 import it.unibo.artrat.model.api.inventory.ItemType;
-import it.unibo.artrat.model.impl.characters.characters.Player;
 import it.unibo.artrat.model.impl.inventory.AbstractItem;
 import it.unibo.artrat.model.impl.inventory.InventoryImpl;
 

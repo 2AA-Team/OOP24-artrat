@@ -1,6 +1,6 @@
 package it.unibo.artrat.model.impl.missioncenter.missions;
 
-import it.unibo.artrat.model.impl.characters.characters.Player;
+import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.impl.missioncenter.AbstractMission;
 
 /**

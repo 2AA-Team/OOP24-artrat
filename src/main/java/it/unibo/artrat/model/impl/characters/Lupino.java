@@ -6,11 +6,10 @@ import java.util.List;
 import java.util.Set;
 
 import it.unibo.artrat.model.api.Collectable;
+import it.unibo.artrat.model.api.characters.Coin;
+import it.unibo.artrat.model.api.characters.Multiplier;
+import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.inventory.Inventory;
-import it.unibo.artrat.model.impl.characters.characters.AbstractEntity;
-import it.unibo.artrat.model.impl.characters.characters.Coin;
-import it.unibo.artrat.model.impl.characters.characters.Multiplier;
-import it.unibo.artrat.model.impl.characters.characters.Player;
 import it.unibo.artrat.model.impl.inventory.InventoryImpl;
 import it.unibo.artrat.utils.impl.Point;
 import it.unibo.artrat.utils.impl.Vector2d;

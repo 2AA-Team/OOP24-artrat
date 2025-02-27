@@ -7,8 +7,8 @@ import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
+import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.impl.characters.Lupino;
-import it.unibo.artrat.model.impl.characters.characters.Player;
 import it.unibo.artrat.model.impl.world.Painting;
 import it.unibo.artrat.utils.impl.Point;
 

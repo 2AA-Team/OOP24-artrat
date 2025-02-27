@@ -1,11 +1,10 @@
 package it.unibo.artrat.model.impl.inventory.items;
 
-import it.unibo.artrat.model.impl.characters.characters.Player;
-import it.unibo.artrat.model.impl.inventory.AbstractItem;
-
 import java.util.Random;
 
+import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.inventory.ItemType;
+import it.unibo.artrat.model.impl.inventory.AbstractItem;
 
 /**
  * A specific item that allows to win and add up to the MAX_WIN to the player's

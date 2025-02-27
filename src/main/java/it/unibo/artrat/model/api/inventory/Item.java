@@ -1,6 +1,6 @@
 package it.unibo.artrat.model.api.inventory;
 
-import it.unibo.artrat.model.impl.characters.characters.Player;
+import it.unibo.artrat.model.api.characters.Player;
 
 /**
  * Class that rappresents shop/inventory item.

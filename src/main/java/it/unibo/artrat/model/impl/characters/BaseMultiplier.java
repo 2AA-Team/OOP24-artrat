@@ -3,7 +3,7 @@ package it.unibo.artrat.model.impl.characters;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import it.unibo.artrat.model.impl.characters.characters.Multiplier;
+import it.unibo.artrat.model.api.characters.Multiplier;
 
 /**
  * A base multiplier implementation.

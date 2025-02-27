@@ -4,7 +4,7 @@ import java.util.Set;
 
 import it.unibo.artrat.model.api.Collectable;
 import it.unibo.artrat.model.api.GameObject;
-import it.unibo.artrat.model.impl.characters.characters.Enemy;
+import it.unibo.artrat.model.api.characters.Enemy;
 
 /**
  * interface that describes the room.

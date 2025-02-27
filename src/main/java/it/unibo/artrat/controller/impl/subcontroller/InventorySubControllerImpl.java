@@ -7,10 +7,10 @@ import it.unibo.artrat.controller.api.subcontroller.InventorySubController;
 import it.unibo.artrat.controller.impl.AbstractSubController;
 import it.unibo.artrat.controller.impl.MainControllerImpl;
 import it.unibo.artrat.model.api.Model;
+import it.unibo.artrat.model.api.characters.Player;
 import it.unibo.artrat.model.api.inventory.Inventory;
 import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.impl.ModelImpl;
-import it.unibo.artrat.model.impl.characters.characters.Player;
 import it.unibo.artrat.view.api.InventoryView;
 import it.unibo.artrat.view.impl.InventorySubPanel;
 

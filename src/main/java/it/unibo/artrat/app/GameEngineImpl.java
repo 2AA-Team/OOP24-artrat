@@ -96,9 +96,7 @@ public final class GameEngineImpl implements GameEngine {
             long lastTime;
             while (status.equals(GameStatus.RUNNING)) {
                 lastTime = System.currentTimeMillis();
-                if (delta > drawInterval * 4) {
-                    throw new IllegalStateException("disconnected due to excessive delay");
-                }
+
                 this.update(delta);
                 this.redraw();
                 delta = updateDeltaTime(lastTime, drawInterval);

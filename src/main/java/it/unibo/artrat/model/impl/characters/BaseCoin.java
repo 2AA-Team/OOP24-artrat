@@ -3,7 +3,7 @@ package it.unibo.artrat.model.impl.characters;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import it.unibo.artrat.model.impl.characters.characters.Coin;
+import it.unibo.artrat.model.api.characters.Coin;
 
 /**
  * A base coin implementation.

@@ -1,9 +1,9 @@
 package it.unibo.artrat.model.api.world;
 
 import it.unibo.artrat.model.api.Collectable;
+import it.unibo.artrat.model.api.characters.Enemy;
 import it.unibo.artrat.model.api.world.roomgeneration.ObjectInsertionStrategy;
 import it.unibo.artrat.model.api.world.roomgeneration.RoomGenerationStrategy;
-import it.unibo.artrat.model.impl.characters.characters.Enemy;
 
 /**
  * Room Builder Interface.

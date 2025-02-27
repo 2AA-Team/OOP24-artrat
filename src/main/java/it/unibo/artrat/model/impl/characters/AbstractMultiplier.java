@@ -1,6 +1,6 @@
 package it.unibo.artrat.model.impl.characters;
 
-import it.unibo.artrat.model.impl.characters.characters.Multiplier;
+import it.unibo.artrat.model.api.characters.Multiplier;
 
 /**
  * An abstract multiplier for the multiplier interface that handles the logic

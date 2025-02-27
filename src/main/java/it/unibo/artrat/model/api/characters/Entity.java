@@ -1,4 +1,4 @@
-package it.unibo.artrat.model.impl.characters.characters;
+package it.unibo.artrat.model.api.characters;
 
 import java.util.Set;
 
