@@ -9,7 +9,6 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
@@ -67,7 +66,7 @@ public class GameSubPanel extends AbstractSubPanel {
     private static Image getObjectImage(final String image) {
         try {
             return ImageIO.read(Thread.currentThread().getContextClassLoader().getResource(
-                    "gameobjects/"+ image));
+                    "gameobjects/" + image));
         } catch (IOException e) {
             LOGGER.error("Try to get a not existing image.");
             return null;

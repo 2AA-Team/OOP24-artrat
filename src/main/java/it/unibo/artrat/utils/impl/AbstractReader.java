@@ -27,10 +27,14 @@ public abstract class AbstractReader implements Reader {
      * {@inheritDoc}
      */
     @Override
-    public void setPath(final InputStream configPath) throws IOException {
-        final Yaml yaml = new Yaml();
-        this.obj = Map.copyOf(yaml.load(configPath));
-        configPath.close();
+    public void setPath(final InputStream configPath) {
+        try (configPath) {
+            final Yaml yaml = new Yaml();
+            this.obj = Map.copyOf(yaml.load(configPath));
+        } catch (IOException e) {
+            LOGGER.error("AbstractReader threw an error: ", e);
+            throw new IllegalStateException("the given path is invalid", e);
+        }
     }
 
     private Object getConfig(final String conf, final String field) {
@@ -43,7 +47,7 @@ public abstract class AbstractReader implements Reader {
         try {
             return list.get(field);
         } catch (IndexOutOfBoundsException e) {
-            LOGGER.error("ItemReaderImpl threw an error: ", e);
+            LOGGER.error("AbstractReader threw an error: ", e);
         }
         throw new IllegalArgumentException("Error retrieving field: " + field);
     }
