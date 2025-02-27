@@ -7,7 +7,7 @@ import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.api.market.GenericSort;
 
 /**
- * SortItemStrategy class, which implements SortStrategy to sort items based on specific criteria.
+ * SortItem class.
  * 
  * @author Manuel Benagli.
  */

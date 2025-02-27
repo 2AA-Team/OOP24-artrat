@@ -9,7 +9,7 @@ import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.api.market.GenericSearch;
 
 /**
- * SearchItemStrategy class, using items and a String of character to search.
+ * SearchItem class, using items and a String of character to search.
  * 
  * @author Manuel Benagli
  */

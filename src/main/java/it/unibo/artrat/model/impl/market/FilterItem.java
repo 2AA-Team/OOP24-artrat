@@ -9,7 +9,7 @@ import it.unibo.artrat.model.api.inventory.ItemType;
 import it.unibo.artrat.model.api.market.GenericFilter;
 
 /**
- * FilterItemStrategy class for items (using itemType).
+ * FilterItem class for items (using itemType).
  * I chose to use a inline condition ItemType for a better readability.
  * 
  * @author Manuel Benagli

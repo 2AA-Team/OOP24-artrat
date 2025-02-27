@@ -3,10 +3,7 @@ package it.unibo.artrat.model.api.market;
 import java.util.List;
 
 /**
- * SortStrategy interface.
- * I am using the Strategy pattern to allow for sorting by different parameters, 
- * such as price, name, or any other future criteria.
- * This design pattern ensures flexibility and extensibility for potential future sorting options.
+ * GenericSort interface.
  * 
  * @param <X> the type of generic to sort.
  * 
@@ -15,7 +12,7 @@ import java.util.List;
 public interface GenericSort<X> {
 
     /**
-     * sortStrategy method.
+     * genericSort method.
      * 
      * @param passedList a list of passed items.
      * @param dir the sorting direction (creasing or decreasing).

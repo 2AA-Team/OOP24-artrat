@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.util.List;
 import java.util.Locale;
 
 import javax.swing.JButton;
@@ -139,9 +140,16 @@ public class MarketSubPanel extends AbstractSubPanel implements MarketView {
          * lowest.
          */
         sortButton.addActionListener(e -> {
-            final int choice = JOptionPane.showConfirmDialog(null,
-                    "decreasing sorting = YES, creasing sorting = NO",
-                    "Price sorting", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            int choice = JOptionPane.showOptionDialog(
+            null,
+            "Choose your sorting preference:",
+            "Price Sorting",
+            JOptionPane.DEFAULT_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            List.of("Decreasing","Increasing").toArray(),
+            "Increasing"
+        );
             contr.sorting(choice);
             forceRedraw();
         });

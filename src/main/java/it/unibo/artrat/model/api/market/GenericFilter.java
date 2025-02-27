@@ -3,7 +3,7 @@ package it.unibo.artrat.model.api.market;
 import java.util.List;
 
 /**
- * FilterStrategy interface used in ItemManager to define filtering behavior for items.
+ * GenericFilter interface used in ItemManager to define filtering behavior for items.
  * 
  * @param <X> the type of generic to be filtered.
  * @param <T> the type of the filtering criteria.
@@ -13,7 +13,7 @@ import java.util.List;
 public interface GenericFilter<X, T> {
 
     /**
-     * filterStrategy method.
+     * genericFilter method.
      * 
      * @param passedList the passed list.
      * @param currenType the type of the passedList
