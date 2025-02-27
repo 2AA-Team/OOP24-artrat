@@ -177,7 +177,7 @@ public class MainControllerImpl implements MainController {
         final Player player = getModel().getPlayer();
         final double obtainedCoins = player.obtainCollectable();
         gameExit(player);
-        view.showGameResult(obtainedCoins, "VICTORY");
+        view.showGameResult(obtainedCoins, "YOU WON");
     }
 
     /**
@@ -188,7 +188,7 @@ public class MainControllerImpl implements MainController {
         final Player player = model.getPlayer();
         player.setColletableList(new ArrayList<>());
         gameExit(player);
-        view.showGameResult(0.0, "LOOSE");
+        view.showGameResult(0.0, "YOU LOST");
     }
 
 }
