@@ -44,7 +44,7 @@ public interface MainController {
     Model getModel();
 
     /**
-     * A method that permit to re-set the current istance of Model with a new one,
+     * A method that permit to reset the current istance of Model with a new one,
      * passed.
      * 
      * @param model the new Model istance to set.

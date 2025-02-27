@@ -41,9 +41,9 @@ public interface GameSubController extends SubController {
     int getRenderDistance();
 
     /**
-     * method to get the position of the exit.
+     * method to get all the exits.
      * 
-     * @return the position as a point
+     * @return the positions as a set of points
      */
     Set<Point> getExitPos();
 
