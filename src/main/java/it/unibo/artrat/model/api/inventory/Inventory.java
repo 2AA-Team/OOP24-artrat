@@ -30,8 +30,6 @@ public interface Inventory {
 
     /**
      * Returns the maximum acceptable size of inventory. 
-     * Method useful only in tests 
-     * (when the values ​​change the tests always check with the current maximum).
      * @return the maximum acceptable size of inventory.
      */
     int getMaxSize();

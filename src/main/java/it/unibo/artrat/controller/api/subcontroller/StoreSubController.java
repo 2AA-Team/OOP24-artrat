@@ -95,4 +95,16 @@ public interface StoreSubController extends SubController {
      * @return the player's current amount.
      */
     double getCurrentAmount();
+
+    /**
+     * Method to obtain the current number of items in the player's inventory.
+     * @return the current number of items in the player's inventory.
+     */
+    int getInvetorySize();
+
+    /**
+     * Method to obtain the maximum number of items that can be carried in the inventory.
+     * @return obtain the maximum number of items that can be carried in the inventory.
+     */
+    int getMaxSize();
 }

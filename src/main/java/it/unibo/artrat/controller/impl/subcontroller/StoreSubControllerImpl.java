@@ -172,4 +172,20 @@ public class StoreSubControllerImpl extends AbstractSubController implements Sto
     public double getCurrentAmount() {
         return this.getModel().getPlayer().getCoin().getCurrentAmount();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getInvetorySize() {
+        return this.getModel().getPlayer().getInventory().getStoredItem().size();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getMaxSize() {
+        return this.getModel().getPlayer().getInventory().getMaxSize();
+    }
 }
