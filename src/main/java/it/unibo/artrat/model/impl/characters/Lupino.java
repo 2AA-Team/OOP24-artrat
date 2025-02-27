@@ -208,6 +208,9 @@ public class Lupino extends AbstractEntity implements Player {
         double coinsToAdd = collectabels.stream().mapToDouble(Collectable::getPrice).sum();
         coinsToAdd = multiplier.multipleTheCoins(coinsToAdd);
         this.coins.addCoins(coinsToAdd);
+        if (coinsToAdd > this.coins.getMaxCoin()) {
+            coinsToAdd = this.coins.getMaxCoin();
+        }
         this.collectabels.clear();
         return coinsToAdd;
     }

@@ -15,6 +15,7 @@ import it.unibo.artrat.model.api.inventory.Item;
 public class InventoryImpl implements Inventory {
 
     private final List<Item> storedItem;
+    private static final int MAX_SIZE = 20;
 
     /**
      * A constructor that initializes an instance of an empty list of items.
@@ -51,7 +52,7 @@ public class InventoryImpl implements Inventory {
      */
     @Override
     public boolean addItem(final Item newItem) {
-        return storedItem.add(newItem);
+        return storedItem.size() < MAX_SIZE && storedItem.add(newItem);
     }
 
     /**
@@ -64,5 +65,13 @@ public class InventoryImpl implements Inventory {
             return true;
         }
         return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getMaxSize() {
+        return MAX_SIZE;
     }
 }

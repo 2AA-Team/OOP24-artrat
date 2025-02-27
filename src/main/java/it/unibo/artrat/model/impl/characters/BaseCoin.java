@@ -38,6 +38,9 @@ public class BaseCoin extends AbstractCoin {
             amount =  BigDecimal.valueOf(amount + coins)
                                 .setScale(2, RoundingMode.UP)
                                 .doubleValue();
+            if (amount > getMaxCoin()) {
+                amount = getMaxCoin();
+            }
             setAmount(amount);
         } else {
             throw new IllegalArgumentException();

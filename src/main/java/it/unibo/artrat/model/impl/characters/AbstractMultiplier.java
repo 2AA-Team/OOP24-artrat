@@ -10,6 +10,7 @@ import it.unibo.artrat.model.api.characters.Multiplier;
  */
 public abstract class AbstractMultiplier implements Multiplier {
     private static final double DEFAULT_MULTIPLIER = 1.0;
+    private static final double MAX_MULTIPLIER = 10.0;
     private double multipler;
 
     /**
@@ -35,7 +36,11 @@ public abstract class AbstractMultiplier implements Multiplier {
     @Override
     public void changeCurrentMultiplier(final double multipler) {
         if (multipler > 0.0) {
-            this.multipler = multipler;
+            if (multipler > MAX_MULTIPLIER) {
+                this.multipler = MAX_MULTIPLIER;
+            } else {
+                this.multipler = multipler;
+            }
         } else {
             throw new IllegalArgumentException();
         }
@@ -49,7 +54,15 @@ public abstract class AbstractMultiplier implements Multiplier {
         return this.multipler;
     }
 
-      /**
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getMaxMultiplier() {
+        return MAX_MULTIPLIER;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

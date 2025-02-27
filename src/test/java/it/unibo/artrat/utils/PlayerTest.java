@@ -37,6 +37,7 @@ class PlayerTest {
         final Player playerTest = new Lupino(new Point(), new HashSet<>());
         assertThrows(IllegalArgumentException.class, () -> playerTest.increaseMultiplier(0.0));
         assertThrows(IllegalArgumentException.class, () -> playerTest.increaseMultiplier(-1.0));
+        assertEquals(playerTest, playerTest);
     }
 
     @Test

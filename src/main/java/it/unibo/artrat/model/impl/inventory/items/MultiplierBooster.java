@@ -14,7 +14,7 @@ import it.unibo.artrat.model.api.inventory.ItemType;
  */
 public class MultiplierBooster extends AbstractItem {
 
-    private static final int MAX_MULTIPLIER_INCREASE = 5;
+    private static final int MAX_MULTIPLIER_INCREASE = 3;
     private final Random rd;
 
     /**

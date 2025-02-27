@@ -1,11 +1,11 @@
 MULTIPLIERBOOSTER:
   name: "Multiplier Booster"
-  description: "This consumable will allow you to gain a boost to your current multiplier."
+  description: "This consumable will allow you to gain a boost to your current multiplier. \nRemember that the multiplier has a maximum limit"
   price: 10.57
   itemType: POWERUP
 LUCKYTICKET: 
   name: "Lucky Ticket"
-  description: "This is a winning lottery ticket, what is it doing here? Scratch to win up to many coins!!"
+  description: "This is a winning lottery ticket, what is it doing here? Scratch to win up to many coins!! \nRemember that there is a limit to the maximum money you can have"
   price: 5.57
   itemType: POWERUP
 WINGEDBOOTS : 

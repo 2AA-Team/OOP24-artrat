@@ -11,6 +11,7 @@ import java.util.HashSet;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.artrat.model.api.characters.Player;
+import it.unibo.artrat.model.api.inventory.Inventory;
 import it.unibo.artrat.model.api.inventory.Item;
 import it.unibo.artrat.model.api.inventory.ItemFactory;
 import it.unibo.artrat.model.impl.characters.Lupino;
@@ -80,6 +81,10 @@ class ItemsTest {
         try {
             itemFactory.initialize();
             final Item mb = itemFactory.magicbackpack();
+            final Inventory invPlayer = playerTest.getInventory();
+            invPlayer.addItem(itemFactory.luckyTicket());
+            invPlayer.addItem(itemFactory.multiplierBooster());
+            playerTest.setInventory(invPlayer);
             mb.consume(playerTest);
             assertEquals(0, playerTest.getInventory().getStoredItem().size());
         } catch (IOException e) {
@@ -93,6 +98,10 @@ class ItemsTest {
         try {
             itemFactory.initialize();
             final Item mw = itemFactory.mysteriouswand();
+            final Inventory invPlayer = playerTest.getInventory();
+            invPlayer.addItem(itemFactory.luckyTicket());
+            invPlayer.addItem(itemFactory.multiplierBooster());
+            playerTest.setInventory(invPlayer);
             final int lastInvetorySize = playerTest.getInventory().getStoredItem().size();
             mw.consume(playerTest);
             assertEquals(lastInvetorySize * 2, playerTest.getInventory().getStoredItem().size());

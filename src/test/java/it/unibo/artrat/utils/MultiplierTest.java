@@ -20,6 +20,8 @@ class MultiplierTest {
         final Multiplier multiplierTest = new BaseMultiplier();
         assertThrows(IllegalArgumentException.class, () -> multiplierTest.changeCurrentMultiplier(0.0));
         assertThrows(IllegalArgumentException.class, () -> multiplierTest.changeCurrentMultiplier(-1.0));
+        multiplierTest.changeCurrentMultiplier(multiplierTest.getMaxMultiplier() * 2);
+        assertEquals(multiplierTest.getMaxMultiplier(), multiplierTest.getCurrentMultiplier());
     }
 
     @Test

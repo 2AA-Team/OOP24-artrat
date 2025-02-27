@@ -10,6 +10,7 @@ import it.unibo.artrat.model.api.characters.Coin;
  */
 public abstract class AbstractCoin implements Coin {
     private static final double RESET_AMOUNT = 0.0;
+    private static final double MAX_COINS = 9999.99;
     private double amount;
 
     /**
@@ -43,6 +44,14 @@ public abstract class AbstractCoin implements Coin {
      */
     protected void setAmount(final double passedAmount) {
         this.amount = passedAmount;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double getMaxCoin() {
+        return MAX_COINS;
     }
 
     /**

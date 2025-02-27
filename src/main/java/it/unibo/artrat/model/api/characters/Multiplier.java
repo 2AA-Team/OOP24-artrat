@@ -19,6 +19,14 @@ public interface Multiplier {
     double multipleTheCoins(double coins);
 
     /**
+     * Returns the maximum acceptable multiplier value. 
+     * Method useful only in tests 
+     * (when the values ​​change the tests always check with the current maximum).
+     * @return the maximum acceptable multiplier value.
+     */
+    double getMaxMultiplier();
+
+    /**
      * Method for change the player's current multiplier to the past one.
      * @param multipler is new multiplier.
      */

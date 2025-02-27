@@ -22,4 +22,10 @@ public interface Coin {
      * @param coins the coins to remove (spend).
      */
     void spendCoins(double coins);
+
+    /**
+     * Returns the maximum acceptable coin value.
+     * @return the maximum acceptable coin value.
+     */
+    double getMaxCoin();
 }

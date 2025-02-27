@@ -24,6 +24,8 @@ class CoinsTest {
         assertEquals(lastCoins, coinsTest.getCurrentAmount());
         coinsTest.addCoins(1.0);
         assertTrue(coinsTest.getCurrentAmount() > lastCoins);
+        coinsTest.addCoins(coinsTest.getMaxCoin() * 2);
+        assertEquals(coinsTest.getMaxCoin(), coinsTest.getCurrentAmount());
     }
 
     @Test
