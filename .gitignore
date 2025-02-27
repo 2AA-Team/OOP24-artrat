@@ -12,3 +12,6 @@ bin/
 .project
 .settings/
 .classpath
+
+.vscode/
+.DS_Store
