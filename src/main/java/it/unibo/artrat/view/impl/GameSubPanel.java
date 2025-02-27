@@ -67,7 +67,7 @@ public class GameSubPanel extends AbstractSubPanel {
     private static Image getObjectImage(final String image) {
         try {
             return ImageIO.read(Thread.currentThread().getContextClassLoader().getResource(
-                    "gameobjects" + File.separator + image));
+                    "gameobjects/"+ image));
         } catch (IOException e) {
             LOGGER.error("Try to get a not existing image.");
             return null;

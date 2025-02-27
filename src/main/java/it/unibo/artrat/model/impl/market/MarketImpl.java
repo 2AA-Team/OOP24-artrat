@@ -23,8 +23,7 @@ import it.unibo.artrat.utils.impl.ItemReaderImpl;
  */
 public class MarketImpl implements Market {
     private final InputStream itemPath = Thread.currentThread().getContextClassLoader().getResourceAsStream(
-            "items" + File.separator
-                    + "items.yaml");
+            "items/items.yaml");
 
     private List<Item> itemsToBuy;
     private final ItemFactoryImpl itemFactory;

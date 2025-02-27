@@ -30,8 +30,7 @@ public class ItemFactoryImpl implements ItemFactory {
     private static final String MYSTERIOUS_WAND = "MYSTERIOUSWAND";
     private static final String WINGED_BOOTS = "WINGEDBOOTS";
     private final InputStream itemPath = Thread.currentThread().getContextClassLoader().getResourceAsStream(
-            "items" + File.separator
-                    + "items.yaml");
+            "items/items.yaml");
     private final ItemReader itemReader;
     private static final Logger LOGGER = LoggerFactory.getLogger(ItemFactoryImpl.class);
 

@@ -36,9 +36,13 @@ public final class ResourceLoaderImpl<I, O> implements ResourceLoader<I, O> {
      */
     @Override
     public void setConfigPath(final InputStream configPath) throws IOException {
-        final Yaml yaml = new Yaml();
-        this.obj = Map.copyOf(yaml.load(configPath));
-        configPath.close();
+        try (configPath) {
+            final Yaml yaml = new Yaml();
+            this.obj = Map.copyOf(yaml.load(configPath));
+            System.out.println(obj);
+        } catch (Exception e) {
+            throw new IllegalStateException("the given path is invalid");
+        }
     }
 
     /**

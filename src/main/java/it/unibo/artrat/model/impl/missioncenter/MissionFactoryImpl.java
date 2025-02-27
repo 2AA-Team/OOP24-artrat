@@ -27,7 +27,7 @@ public class MissionFactoryImpl implements MissionFactory {
     private static final Logger LOGGER = LoggerFactory.getLogger(MissionFactoryImpl.class);
 
     private final InputStream missionPath = Thread.currentThread().getContextClassLoader().getResourceAsStream(
-            "missions" + File.separator + "missions.yaml");
+            "missions/missions.yaml");
 
     private final MissionReader missionReader;
 

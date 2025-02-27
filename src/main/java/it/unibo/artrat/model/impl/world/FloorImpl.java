@@ -48,7 +48,7 @@ public class FloorImpl implements Floor {
     private List<RoomGenerationStrategy> generations = new ArrayList<>();
 
     private final InputStream roomPath = Thread.currentThread().getContextClassLoader().getResourceAsStream(
-            "premademaze" + File.separator + "rooms.json");
+            "premademaze/rooms.json");
 
     /**
      * constructor that set the configuration to base state.

@@ -36,8 +36,7 @@ public final class GameEngineImpl implements GameEngine {
     }
 
     private final InputStream configPath = Thread.currentThread().getContextClassLoader().getResourceAsStream(
-            "config" + File.separator
-                    + "config.yaml");
+            "config/config.yaml");
     private volatile GameStatus status;
     private final ResourceLoader<String, Double> resourceLoader;
     private final MainController mainController;

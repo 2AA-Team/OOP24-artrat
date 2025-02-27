@@ -22,7 +22,7 @@ import it.unibo.artrat.utils.impl.MissionReaderImpl;
  */
 public class MissionCenterImpl implements MissionCenter {
     private final InputStream missionPath = Thread.currentThread().getContextClassLoader().getResourceAsStream(
-            "missions" + File.separator + "missions.yaml");
+            "missions/missions.yaml");
 
     private final MissionFactory missionFactory;
     private final List<Mission> missionsToRedeem;
