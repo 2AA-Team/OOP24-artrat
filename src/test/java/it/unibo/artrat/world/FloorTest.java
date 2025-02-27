@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
-import java.net.URI;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -23,11 +23,12 @@ class FloorTest {
 
     @BeforeEach
     void setUp() throws IOException, URISyntaxException {
-        final URI uri = Thread.currentThread().getContextClassLoader().getResource("floorImplTest.yaml").toURI();
+        final InputStream inputStream = Thread.currentThread().getContextClassLoader()
+                .getResourceAsStream("floorImplTest.yaml");
 
         final ResourceLoader<String, Double> resourceLoader;
         resourceLoader = new ResourceLoaderImpl<>();
-        resourceLoader.setConfigPath(uri);
+        resourceLoader.setConfigPath(inputStream);
         floor = new FloorImpl(resourceLoader);
     }
 
@@ -47,10 +48,10 @@ class FloorTest {
 
     @Test
     void testInvalidConfig() throws IOException, URISyntaxException {
-        final URI uri = Thread.currentThread().getContextClassLoader().getResource("floorImplTestNeg.yaml")
-                .toURI();
+        final InputStream inputStream = Thread.currentThread().getContextClassLoader()
+                .getResourceAsStream("floorImplTestNeg.yaml");
         final ResourceLoader<String, Double> invalidLoader = new ResourceLoaderImpl<>();
-        invalidLoader.setConfigPath(uri);
+        invalidLoader.setConfigPath(inputStream);
         assertThrows(IllegalStateException.class, () -> new FloorImpl(invalidLoader),
                 "Should throw an exception if configuration values are invalid");
     }
